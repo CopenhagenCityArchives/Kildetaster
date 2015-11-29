@@ -1,2 +1,2 @@
 # Kildetaster
-Frontend for crowdsourcing archival material
+Frontend for indexing archival material
