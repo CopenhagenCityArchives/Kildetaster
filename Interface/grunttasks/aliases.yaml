@@ -2,7 +2,7 @@ prototype:
     - 'clean:prototype'
     - 'copy:prototype'
     - 'sass:prototype'
-    - 'autoprefixer:prototype'
+    - 'postcss:prototype'
     - 'preprocess:prototype'
     - 'express:prototype'
     - 'open'
@@ -12,7 +12,7 @@ dev:
     - 'copy:development'
     - 'requirejs:development'
     - 'sass:development'
-    - 'autoprefixer:production'
+    - 'postcss:development'
     - 'watchDevelopment'
 
 build:
@@ -20,7 +20,7 @@ build:
     - 'copy:production'
     - 'imagemin:production'
     - 'sass:production'
-    - 'autoprefixer:production'
+    - 'postcss:production'
     - 'requirejs:production'
 
 optimize:

@@ -22,7 +22,7 @@ module.exports = {
     production: {
         options:{
             sourceMap: false,
-            outputStyle: 'compressed',
+            outputStyle: 'nested', //compressed
             imagePath: '<%= package.buildresources %>/images'
         },
         files: {
