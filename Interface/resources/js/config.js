@@ -4,7 +4,7 @@ requirejs.config({
     baseUrl: '/resources/js',
     paths: {
         
-        'almond'                : 'libs/almond.0.2.5',
+        'almond'                : 'libs/almond.0.3.1',
         
         //Libs
         'jquery'                : 'libs/jquery-1.11.3.min',
