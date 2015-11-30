@@ -1,2 +1,2 @@
-København Stadsarkiv - Kildetaster
-==================================
+# Kildetaster
+Frontend for indexing archival material
