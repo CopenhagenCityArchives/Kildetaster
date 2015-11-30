@@ -7,7 +7,6 @@ requirejs.config({
         'almond'            : '../libs/almond.0.2.5',
         //Libs
         'jquery'            : '../libs/jquery-1.11.3.min',
-        'selectivizr'       : '../libs/selectivizr-min',
         'jquery.cookie'            : '../libs/jquery.cookie',
 
         //Plugins
@@ -17,5 +16,5 @@ requirejs.config({
     shim: {
         
     },
-    deps: ['main', 'selectivizr', 'mouse-detect']
+    deps: ['main', 'mouse-detect']
 });
