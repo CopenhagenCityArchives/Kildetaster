@@ -1,0 +1,42 @@
+prototype:
+    - 'clean:prototype'
+    - 'copy:prototype'
+    - 'sass:prototype'
+    - 'autoprefixer:prototype'
+    - 'preprocess:prototype'
+    - 'express:prototype'
+    - 'open'
+    - 'watchPrototype'
+dev:
+    - 'clean:development'
+    - 'copy:development'
+    - 'requirejs:development'
+    - 'sass:development'
+    - 'autoprefixer:production'
+    - 'watchDevelopment'
+
+build:
+    - 'clean:production'
+    - 'copy:production'
+    - 'imagemin:production'
+    - 'sass:production'
+    - 'autoprefixer:production'
+    - 'requirejs:production'
+
+optimize:
+    - 'imagemin:originals'
+
+staticsite:
+    - 'clean:production'
+    - 'copy:production'
+    - 'imagemin:production'
+    - 'sass:production'
+    - 'requirejs:production'
+    - 'preprocess:production'
+    - 'processhtml:production'
+    - 'express:staticsite'
+    - 'open'
+    - 'express-keepalive'
+
+default:
+    - 'build'
