@@ -3,7 +3,7 @@
 requirejs([
     
     'jquery',
-    'module-example'
+    'modules/module-example'
 
 ], function ($) {
     

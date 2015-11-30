@@ -1,16 +1,17 @@
 /*globals requirejs:false */
 
 requirejs.config({
-    baseUrl: '/resources/js/modules',
+    baseUrl: '/resources/js',
     paths: {
-        'main'              : '../main',
-        'almond'            : '../libs/almond.0.2.5',
+        
+        'almond'                : 'libs/almond.0.2.5',
+        
         //Libs
-        'jquery'            : '../libs/jquery-1.11.3.min',
-        'jquery.cookie'            : '../libs/jquery.cookie',
+        'jquery'                : 'libs/jquery-1.11.3.min',
+        'jquery.cookie'         : 'libs/jquery.cookie',
 
         //Plugins
-        'mouse-detect'            : '../plugins/mouse-detect',
+        'mouse-detect'          : 'plugins/mouse-detect',
 
     },
     shim: {
