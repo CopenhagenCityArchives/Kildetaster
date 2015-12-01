@@ -11,7 +11,8 @@ module.exports = {
 			//Javascript
 			expand: true,
 			cwd: '<%= package.resources %>/js/',
-			src: ['**/*.js'],
+			//All javascript files, except the test files
+			src: ['**/*.js', '!test/**/*.js'],
 			dest: '<%= package.prototyperesources %>/js'
 		}, {
 			//Images
@@ -34,7 +35,8 @@ module.exports = {
 			//Javascript
 			expand: true,
 			cwd: '<%= package.resources %>/js/standalone/',
-			src: ['**/*.js'],
+			//All javascript files, except the test files
+			src: ['**/*.js', '!test/**/*.js'],
 			dest: '<%= package.buildresources %>/js/standalone'
 		}, {
 			//Images
@@ -57,7 +59,8 @@ module.exports = {
 			//Javascript
 			expand: true,
 			cwd: '<%= package.resources %>/js/standalone/',
-			src: ['**/*.js'],
+			//All javascript files, except the test files
+			src: ['**/*.js', '!test/**/*.js'],
 			dest: '<%= package.buildresources %>/js/standalone'
 		}, {
 			//Images

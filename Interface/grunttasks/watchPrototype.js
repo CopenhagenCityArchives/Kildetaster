@@ -27,7 +27,7 @@ module.exports = function(grunt) {
             },
 			js: {
 				files: ['<%= package.resources %>/js/**/*.js'],
-				tasks: ['newer:copy:prototype'],
+				tasks: ['newer:copy:prototype', 'karma:prototype:run'],
 				options: {
 					livereload: true
 				}

@@ -2,11 +2,11 @@
 
 requirejs([
     
-    //'jquery',
-    //'modules/module-example'
+    'jquery',
+
     'app/demo/demo'
 
-], function (demoApp) {
+], function ($, demoApp) {
     
     'use strict';
 

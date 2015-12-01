@@ -3,9 +3,11 @@ prototype:
     - 'copy:prototype'
     - 'sass:prototype'
     - 'bake:prototype'
+    - 'karma:prototype'
     - 'express:prototype'
-    - 'open'
+    - 'open'    
     - 'watchPrototype'
+
 dev:
     - 'clean:development'
     - 'copy:development'

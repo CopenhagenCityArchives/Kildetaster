@@ -20,7 +20,10 @@ requirejs.config({
 
     },
     shim: {
-        'angular': ['jquery'],
+        'angular': {
+            deps: ['jquery'],
+            exports: 'angular'
+        },
         'bootstrap': ['jquery']
     },
     deps: ['main', 'bootstrap', 'mouse-detect']

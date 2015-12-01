@@ -23,12 +23,21 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-csscomb": "^3.1.0",
     "grunt-express": "^1.4.1",
+    "grunt-karma": "^0.12.1",
     "grunt-newer": "^1.1.1",
     "grunt-open": "^0.2.3",
     "grunt-postcss": "^0.7.1",
     "grunt-sass": "^1.1.0-beta",
+    "jasmine-core": "^2.3.4",
     "jit-grunt": "^0.9.1",
+    "karma": "^0.13.15",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-jasmine": "^0.3.6",
+    "karma-phantomjs-launcher": "^0.2.1",
+    "karma-requirejs": "^0.2.2",
     "load-grunt-config": "^0.17.2",
+    "phantomjs": "^1.9.19",
+    "requirejs": "^2.1.22",
     "time-grunt": "^1.2.1"
   }
 }
