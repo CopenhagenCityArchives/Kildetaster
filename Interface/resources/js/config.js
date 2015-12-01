@@ -8,11 +8,12 @@ requirejs.config({
         
         'almond'                : '../bower_components/almond/almond',
 
-        'bootstrap'             : '../bower_components/bootstrap-sass/assets/javascripts/bootstrap.min',
-
         'angular'               : '../bower_components/angular/angular.min',
         'angular-animate'       : '../bower_components/angular-animate/angular-animate.min',
+        'angular-bootstrap'     : '../bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
 
+        'angular-ui-router'     : '../bower_components/angular-ui-router/release/angular-ui-router.min',
+        
         'openseadragon'         : '../bower_components/openseadragon/built-openseadragon/openseadragon/openseadragon.min',
 
         //Libs
@@ -22,13 +23,17 @@ requirejs.config({
     },
 
     shim: {
+
         'angular': {
             deps: ['jquery'],
             exports: 'angular'
         },
-        'bootstrap': ['jquery']
+
+        'bootstrap': ['jquery'],
+        'angular-bootstrap': ['angular'],
+        'angular-ui-router': ['angular']
     },
     
-    deps: ['main', 'bootstrap']
+    deps: ['main']
 
 });

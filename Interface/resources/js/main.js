@@ -4,9 +4,10 @@ requirejs([
     
     'jquery',
 
+    'app/editor/editor',
     'app/demo/demo'
 
-], function ($, demoApp) {
+], function ($, editorApp, demoApp) {
     
     'use strict';
 

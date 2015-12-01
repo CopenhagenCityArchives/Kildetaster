@@ -1,7 +1,7 @@
 module.exports = {
     
     options: {
-        base: 'Interface/resources/js/',
+        base: 'Interface/resources/js/app',
         module: 'templates',
         amd: true,
         // rename: function(moduleName) {            

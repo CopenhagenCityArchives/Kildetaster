@@ -1,0 +1,25 @@
+<header ng-controller="headerController" class="row">
+
+    <div class="col-sm-4">
+        <h1>Københavns Stadsarkiv</h1>
+        <p>{{protocol}}</p>
+        <uib-pager total-items="totalPages" ng-model="currentPage"></uib-pager>
+    </div>
+
+    <div class="col-sm-2">
+        10 sider tilbage af protocol
+        <uib-progressbar animate="'true'" value="progress" type="success"><b>{{progress}}%</b></uib-progressbar>
+    </div>
+
+    <div class="col-sm-4">
+        Andre brugere i denne protokol lige nu:
+
+        <user username="'Jens Jensen'"></user>
+    </div>
+
+    <div class="col-sm-2">
+        DONUT
+        <a href>Min side</a>
+    </div>
+
+</header>

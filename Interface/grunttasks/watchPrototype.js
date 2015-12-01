@@ -33,6 +33,14 @@ module.exports = function(grunt) {
 				}
 			},
 
+			angulartemplates: {
+				files: ['<%= package.resources %>/js/**/*.tpl.html'],
+				tasks: ['html2js:prototype'],
+				options: {
+					livereload: true
+				}
+			},
+
 			fonts: {
 				files: ['<%= package.resources %>/fonts/**'],
 				tasks: ['newer:copy:prototype'],

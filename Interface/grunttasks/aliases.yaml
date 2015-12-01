@@ -12,6 +12,7 @@ prototype:
 dev:
     - 'clean:development'
     - 'copy:development'
+    - 'html2js:development'
     - 'requirejs:development'
     - 'uglify:development'
     - 'sass:development'
