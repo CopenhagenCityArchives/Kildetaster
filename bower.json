@@ -27,6 +27,7 @@
     "jquery": "1.11.3",
     "bootstrap-sass": "bootstrap-sass-official#~3.3.6",
     "angular-mocks": "~1.4.8",
-    "openseadragon": "~2.1.0"
+    "openseadragon": "~2.1.0",
+    "almond": "~0.3.1"
   }
 }

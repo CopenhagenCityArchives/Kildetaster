@@ -6,7 +6,7 @@ requirejs.config({
 
     paths: {
         
-        'almond'                : 'libs/almond.0.3.1',
+        'almond'                : '../bower_components/almond/almond',
 
         'bootstrap'             : '../bower_components/bootstrap-sass/assets/javascripts/bootstrap.min',
 
@@ -19,9 +19,6 @@ requirejs.config({
         'jquery'                : '../bower_components/jquery/dist/jquery.min',
         'jquery.cookie'         : 'libs/jquery.cookie',
 
-        //Plugins
-        'mouse-detect'          : 'plugins/mouse-detect',
-
     },
 
     shim: {
@@ -32,6 +29,6 @@ requirejs.config({
         'bootstrap': ['jquery']
     },
     
-    deps: ['main', 'bootstrap', 'mouse-detect']
+    deps: ['main', 'bootstrap']
 
 });
