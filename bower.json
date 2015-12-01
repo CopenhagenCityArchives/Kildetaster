@@ -1,0 +1,32 @@
+{
+  "name": "Kildetaster",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Sune Radich Vestergaard <srv@1508.dk>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/CopenhagenCityArchives/Kildetaster",
+  "moduleType": [
+    "amd"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "Interface/resources/js/libs/bower"
+  ],
+  "dependencies": {
+    "jquery": "1.11.3"
+  },
+  "devDependencies": {
+    "angular": "~1.4.8",
+    "angular-animate": "~1.4.8",
+    "jquery": "1.11.3",
+    "bootstrap-sass": "bootstrap-sass-official#~3.3.6",
+    "angular-mocks": "~1.4.8",
+    "openseadragon": "~2.1.0"
+  }
+}

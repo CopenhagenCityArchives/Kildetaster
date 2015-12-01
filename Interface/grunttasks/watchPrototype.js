@@ -43,7 +43,7 @@ module.exports = function(grunt) {
 
 			preprocess: {
 				files: ['<%= package.html %>/**/*.html'],
-				tasks: ['preprocess'],
+				tasks: ['bake:prototype'],
 			},
 
 			prototypeLiveReload: {

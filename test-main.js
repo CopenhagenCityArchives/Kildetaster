@@ -13,18 +13,22 @@ Object.keys(window.__karma__.files).forEach(function(file) {
 });
 
 require.config({
+    
     // Karma serves files under /base, which is the basePath from your config file
     baseUrl: '/base',
 
-
     paths: {
-      'angular'       : 'libs/angular.1.5.0.b2.min',
-      'angular-mocks' : 'libs/angular-mocks.1.5.0.b2'
+        'jquery'        : 'bower_components/jquery/dist/jquery.min',
+        'angular'       : 'bower_components/angular/angular.min',
+        'angular-mocks' : 'bower_components/angular-mocks/angular-mocks'
     },
 
-
     shim: {
-      'angular-mocks': ['angular']
+        'angular': {
+            deps: ['jquery'],
+            exports: 'angular'
+        },
+        'angular-mocks': ['angular']
     },
 
     // dynamically load all test files

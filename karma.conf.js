@@ -5,30 +5,37 @@ module.exports = function(config) {
     config.set({
 
         // base path that will be used to resolve all patterns (eg. files, exclude)
-        basePath: 'Interface/resources/js/',
+        basePath: 'Interface/resources/',
 
 
         // frameworks to use
         // available frameworks: https://npmjs.org/browse/keyword/karma-adapter
         frameworks: ['jasmine', 'requirejs'],
 
-
         // list of files / patterns to load in the browser
         files: [
-            'libs/jquery-1.11.3.min.js',
-            //'libs/angular.1.5.0.b2.min.js',
-            //'libs/angular-mocks.1.5.0.b2.js',
+            'bower_components/jquery/dist/jquery.min.js',
+            //'bower_components/angular/angular.min.js',
+            //'bower_components/angular-mocks/angular-mocks.js',
             {
-                pattern: 'libs/**/*.js',
+                pattern: 'bower_components/**/*.js',
+                included: false
+            }, 
+            //Include map files
+            {
+                pattern: 'bower_components/**/*.map',
                 included: false
             }, {
-                pattern: 'app/**/*.js',
+                pattern: 'js/libs/**/*.js',
                 included: false
             }, {
-                pattern: 'test/**/*.js',
+                pattern: 'js/app/**/*.js',
+                included: false
+            }, {
+                pattern: 'js/test/**/*.js',
                 included: false
             },
-            '../../../test-main.js',
+            '../../test-main.js',
         ],
 
 

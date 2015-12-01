@@ -6,7 +6,7 @@ module.exports = {
 
     prototype: {
         options: {
-            browsers: ['PhantomJS'],
+            browsers: ['Chrome'],
             background: true,
             singleRun: false
         }

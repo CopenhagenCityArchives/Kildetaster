@@ -1,10 +1,12 @@
 define([
     
+    'jquery',
+    'angular',
     'angular-mocks',
-    'app/demo/demo'
+    
+    'js/app/demo/demo'
 
 ], function(demoApp) {
-
 
     describe('demo controller', function() {
         

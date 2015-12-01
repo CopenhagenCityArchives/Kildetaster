@@ -1,8 +1,8 @@
 @import "core/variables";
 
 //Bootstrap
-@import "scaffolding/bootstrap";
+@import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 
 @import "core/core";
 
-@import "modules/modules";
+@import "modules/modules";
