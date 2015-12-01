@@ -1,4 +1,6 @@
 node_modules/
 _prototype/
 dist/
+kbh/
 Interface/resources/bower_components/
+Interface/resources/js/app/shared/templates.js

@@ -40,13 +40,6 @@ module.exports = {
 			src: '**',
 			dest: '<%= package.buildresources %>/fonts'
 		}, {
-			//Javascript
-			expand: true,
-			cwd: '<%= package.resources %>/js/standalone/',
-			//All javascript files, except the test files
-			src: ['**/*.{js,map}', '!test/**/*.js'],
-			dest: '<%= package.buildresources %>/js/standalone'
-		}, {
 			//Images
 			expand: true,
 			cwd: '<%= package.resources %>/images/',

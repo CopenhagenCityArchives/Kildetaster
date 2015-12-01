@@ -1,31 +1,32 @@
 module.exports = {
-            
+
+    options: {
+        //Use <% and %>
+        parsePattern: /\<\%\s?([\.\-\w]*)\s?\%\>/g
+    },
+
     prototype: {
-        
-        options: {           
-            //Use <% and %>
-            parsePattern: /\<\%\s?([\.\-\w]*)\s?\%\>/g
-        },
+
+        options: {},
 
         files: [{
-             expand: true,
-             cwd: '<%= package.html %>/',
-             src: ['*.html'],
-             dest: '<%= package.prototype %>',
-             ext: '.html'
+            expand: true,
+            cwd: '<%= package.html %>/',
+            src: ['*.html'],
+            dest: '<%= package.prototype %>',
+            ext: '.html'
         }]
     },
 
-    // development: {
+    development: {
 
-    //     options: {
-    //     },
+        options: {},
 
-    //     files: [{
-    //         src: '<%= package.html %>/index_development.html',
-    //         dest: '<%= package.prototype %>/index.html'    
-    //     }]
-    // },
+        files: [{
+            src: '<%= package.html %>/index_development.html',
+            dest: '<%= package.build %>/index.html'
+        }]
+    },
 
     // production: {
 

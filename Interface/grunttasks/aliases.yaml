@@ -1,5 +1,6 @@
 prototype:
     - 'clean:prototype'
+    - 'html2js:prototype'
     - 'copy:prototype'
     - 'sass:prototype'
     - 'bake:prototype'
@@ -12,7 +13,9 @@ dev:
     - 'clean:development'
     - 'copy:development'
     - 'requirejs:development'
+    - 'uglify:development'
     - 'sass:development'
+    - 'bake:development'
     - 'postcss:development'
     - 'watchDevelopment'
 
