@@ -4,8 +4,13 @@ define([
     'app/shared/shared',
     'angular-bootstrap',
     'angular-ui-router',
+
+    'app/editor/editor.config',
+
     'app/editor/header.controller',
-    'app/editor/editor.config'
+    'app/editor/editor.controller',
+    'app/editor/wizard.controller',
+    
 
 ], function(
     
@@ -13,9 +18,13 @@ define([
     shared,
     angBootstrap,
     uiRouter,
-    headerController,
-    editorConfig
 
+    editorConfig,
+    
+    headerController,
+    editorController,
+    wizardController
+    
     ) {
 
     var editorApp = angular.module('editor', ['shared', 'ui.bootstrap', 'ui.router']);
@@ -23,6 +32,8 @@ define([
     editorApp.config(editorConfig);
 
     editorApp.controller('headerController', headerController);
+    editorApp.controller('editorController', editorController);
+    editorApp.controller('wizardController', wizardController);
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-editor-app]'), ['editor']);

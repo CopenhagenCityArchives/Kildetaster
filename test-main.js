@@ -20,7 +20,8 @@ require.config({
     paths: {
         'jquery'        : 'bower_components/jquery/dist/jquery.min',
         'angular'       : 'bower_components/angular/angular.min',
-        'angular-mocks' : 'bower_components/angular-mocks/angular-mocks'
+        'angular-mocks' : 'bower_components/angular-mocks/angular-mocks',
+        'openseadragon' : 'bower_components/openseadragon/built-openseadragon/openseadragon/openseadragon.min'
     },
 
     shim: {

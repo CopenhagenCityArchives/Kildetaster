@@ -1,0 +1,22 @@
+.imageViewer {
+    &__done {
+        overflow: hidden;
+
+        background-color: $green;
+        &:before {
+            font-size: 20px;
+
+            display: block;
+
+            content: "Udfyldt";
+            transform: rotate(-45deg);
+
+            color: $white;
+        }
+    }
+
+    &__progress {
+        opacity: 0.5;
+        background-color: $gray-lighter;
+    }
+}

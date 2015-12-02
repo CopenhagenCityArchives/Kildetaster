@@ -4,26 +4,25 @@ define([
 
 ], function(ang) {
 
-    var userDirective = function userDirective() {
+    var stepOfDirective = function stepOfDirective() {
 
         return {
 
             restrict: 'E',
 
             scope: {
-                username: '='
+                current: '=',
+                total: '='
             },
 
-            templateUrl: 'shared/directives/user.directive.tpl.html',
+            templateUrl: 'shared/directives/stepOf.directive.tpl.html',
             
             link: function(scope, element, attrs) {
 
-                console.log('user.directive')
-
             }
-        }
+        };
     };
 
-    return userDirective;
+    return stepOfDirective;
 
 });

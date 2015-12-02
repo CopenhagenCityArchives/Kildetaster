@@ -31,7 +31,11 @@ requirejs.config({
 
         'bootstrap': ['jquery'],
         'angular-bootstrap': ['angular'],
-        'angular-ui-router': ['angular']
+        'angular-ui-router': ['angular'],
+
+        'libs/openseadragonselection': ['openseadragon'],
+        'libs/openseadragon-filtering': ['openseadragon']
+
     },
     
     deps: ['main']

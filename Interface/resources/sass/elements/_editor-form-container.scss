@@ -1,0 +1,24 @@
+.editor-form-container {
+    position: absolute;
+    z-index: 100;
+    right: 20px;
+    bottom: 20px;
+
+    width: 20%;
+    min-width: 300px;
+    height: 100%;
+    padding: 6px 10px;
+
+    border: 1px solid darken($white, 10%);
+    background-color: $white;
+
+    .row {
+        margin-bottom: 10px;
+
+        .form-control {
+            display: inline-block;
+
+            width: calc(100% - 25px);
+        }
+    }
+}

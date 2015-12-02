@@ -1,0 +1,55 @@
+<div class="row">
+    <div class="col-sm-12">
+        <h3>Udfyld kilde</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi repudiandae, distinctio magni perferendis, accusantium officia!</p>
+    </div>
+</div>
+
+
+<div class="row" ng-if="formData.currentStep === 1">
+    <div class="col-sm-12">
+        <step-of total="formData.stepsTotal" current="formData.currentStep"></step-of>
+        <p>Vælg indførelsesområdet. Brug mus til at markere området</p>
+        
+        <p class="text-center" ng-click="enableSelection()">
+            <span class="glyphicon glyphicon-resize-full"></span>
+        </p>
+        
+    </div>
+</div>
+
+<div class="row" ng-if="formData.currentStep > 1">
+    <div class="col-sm-12">
+        <step-of total="formData.stepsTotal" current="formData.currentStep"></step-of>
+        <div class="form-group" ng-class="{ 'has-error': field.errorText }" ng-repeat="field in formData.fields">
+            <label class="control-label" for="field_{{$index}}">{{field.labelText}}</label>
+            <input type="{{field.type}}" class="form-control" id="field_{{$index}}" name="field_{{$index}}" ng-model="field.value" />
+            <span class="glyphicon glyphicon-question-sign" uib-tooltip="{{field.helpText}}" tooltip-placement="left"></span>
+            <div class="help-block" ng-if="field.errorText">{{field.errorText}}</div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <button type="button" class="btn btn-default btn-block" ng-show="formData.currentStep > 1" ng-click="prevStep()">Forrige</button>
+    </div>
+    <div class="col-sm-6">
+        <button type="button" class="btn btn-primary btn-block" ng-click="nextStep()">Næste</button>
+    </div>
+</div>
+
+<div class="row">
+
+    <div class="col-sm-12">
+        
+        <step-indicator total="formData.stepsTotal" current="formData.currentStep"></step-indicator>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+        <h3>Udfyldt</h3>
+        <a href>Udsnit placeret <span class="glyphicon glyphicon-pencil"></span></a>
+    </div>
+</div>

@@ -5,4 +5,12 @@
 
 @import "core/core";
 
-@import "modules/modules";
+@import "modules/modules";
+
+
+@import "components/editor";
+
+//elements
+@import "elements/editor-form-container";
+@import "elements/image-viewer";
+@import "elements/step-indicator";
