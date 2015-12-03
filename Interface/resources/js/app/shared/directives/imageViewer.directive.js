@@ -18,8 +18,6 @@ define([
 
             restrict: "E",
 
-            //replace: true,
-
             scope: {
                 options: "=",
                 name: "=",
@@ -38,7 +36,7 @@ define([
                 //Openhttps://github.com/openseadragon/openseadragon/issues/759
 
                 $scope.$on('selectionEnabled', function() {
-                    console.log('selection is enabled');
+                    //console.log('selection is enabled');
                     viewer.zoomsPerClick = 1;
                     viewer.navigatorPosition = 'TOP_LEFT';
                 });
@@ -51,7 +49,7 @@ define([
 
                     return angular.extend({}, $scope.options, {
                         showNavigator: true,
-                        //navigatorPosition: "BOTTOM_LEFT",
+                        navigatorPosition: "BOTTOM_LEFT",
                         element: angular.element('.target')[0],
 
                         zoomInButton: "zoom-in",
@@ -72,22 +70,29 @@ define([
                         zoomPerScroll: 1.0,
 
                         overlays: [{
-                            px: 500,
-                            py: 100,
-                            width: 125,
-                            height: 125,
+                            px: 280,
+                            py: 79,
+                            width: 693,
+                            height: 746,
                             className: 'imageViewer__done'
-                        }]
+                        },
+                        {
+                            px: 976,
+                            py: 83,
+                            width: 711,
+                            height: 746,
+                            className: 'imageViewer__done'
+                        }
+                        ]
                     });
                 }
                 
 
                 $scope.$watchCollection('options', function(newVal, oldVal) {
-                    console.log('watching options', newVal);
+                    //console.log('watching options', newVal);
                     if (newVal !== oldVal && newVal !== null) {
                         rebuildOptions();
                     }
-                    console.log(viewer);
                 });
 
 
@@ -110,13 +115,14 @@ define([
 
                         //https://github.com/picturae/openseadragonselection/issues/7
                         var converted = viewer.viewport.imageToViewportRectangle(rect);
-
+console.log('c', rect, converted);
                         viewer.addOverlay({
                             element: $('<div class="imageViewer__progress"></div>')[0],
                             //location: new OpenSeadragon.Rect(rect.x, rect.y, rect.width, rect.height, rect.rotation)
                             location: converted
                         });
 
+                        //Zoom viewer to the selected area
                         viewer.viewport.fitBounds(converted, true);
                     },
                     //Initial selection

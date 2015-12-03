@@ -10,6 +10,7 @@ define([
         
         // Now set up the states
         $stateProvider
+
             .state('editor', {
                 
                 url: "/",
@@ -29,8 +30,9 @@ define([
             })
             .state('editor.wizard', {
                 
-                url: '',
-
+                url: '?{stepId:int}',
+                reloadOnSearch: false,
+                
                 views: {
                     '': {
                         templateUrl: 'editor/wizard.tpl.html',

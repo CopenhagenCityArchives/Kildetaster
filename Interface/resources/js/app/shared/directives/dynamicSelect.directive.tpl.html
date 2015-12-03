@@ -1,7 +1,10 @@
 
 <div class="form-group" ng-class="{ 'has-error': errorText }">
     
-    <label>{{field.labelText}}</label>
+    <label class="control-label">
+        {{field.labelText}}
+        <span class="glyphicon glyphicon-question-sign" uib-tooltip="{{field.helpText}}" tooltip-placement="top"></span>
+    </label>
 
     <ui-select ng-model="field.value">
         <ui-select-match>
@@ -11,6 +14,6 @@
             <span ng-bind="option.name"></span>
         </ui-select-choices>
     </ui-select>
-    <span class="glyphicon glyphicon-question-sign" uib-tooltip="{{field.helpText}}" tooltip-placement="left"></span>
+    
 
 </div>

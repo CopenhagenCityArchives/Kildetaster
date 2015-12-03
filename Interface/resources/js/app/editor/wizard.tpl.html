@@ -1,55 +1,92 @@
 <div class="row">
     <div class="col-sm-12">
-        <h3>Udfyld kilde</h3>
+        <h2>Udfyld kilde</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi repudiandae, distinctio magni perferendis, accusantium officia!</p>
     </div>
 </div>
 
-
-<div class="row" ng-if="formData.currentStep === 1">
+<div class="row" ng-if="currentStep == 1">
     <div class="col-sm-12">
-        <step-of total="formData.stepsTotal" current="formData.currentStep"></step-of>
-        <p>Vælg indførelsesområdet. Brug mus til at markere området</p>
+
+        <h3>{{currentStepData.title}}</h3>
+        <p>{{currentStepData.description}}</p>
         
+        <step-of total="numSteps" current="currentStep"></step-of>
+        
+        <p>Vælg indførelsesområdet. Brug mus til at markere området</p>
         <p class="text-center" ng-click="enableSelection()">
             <span class="glyphicon glyphicon-resize-full"></span>
         </p>
-        
     </div>
 </div>
 
-<div class="row" ng-if="formData.currentStep > 1">
+<div class="row" ng-if="currentStep > 1 && !isResult()">
     <div class="col-sm-12">
-        <step-of total="formData.stepsTotal" current="formData.currentStep"></step-of>
-        <div class="form-group" ng-class="{ 'has-error': field.errorText }" ng-repeat="field in formData.fields">
-            <label class="control-label" for="field_{{$index}}">{{field.labelText}}</label>
-            <input type="{{field.type}}" class="form-control" id="field_{{$index}}" name="field_{{$index}}" ng-model="field.value" />
-            <span class="glyphicon glyphicon-question-sign" uib-tooltip="{{field.helpText}}" tooltip-placement="left"></span>
-            <div class="help-block" ng-if="field.errorText">{{field.errorText}}</div>
+        
+        <h3>{{currentStepData.title}}</h3>
+        <p>{{currentStepData.description}}</p>
+        
+        <step-of total="numSteps" current="currentStep"></step-of>
+        
+        <div ng-repeat="field in currentStepData.fields">
+            <div ng-switch="field.type">
+                <div ng-switch-when="text">
+                    <dynamic-input field-data="field"></dynamic-input>
+                </div>
+                <div ng-switch-when="select">
+                    <dynamic-select field-data="field"></dynamic-select>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<div class="row">
+<!-- Directive ?? -->
+<div class="row" ng-if="!isResult()">
     <div class="col-sm-6">
-        <button type="button" class="btn btn-default btn-block" ng-show="formData.currentStep > 1" ng-click="prevStep()">Forrige</button>
+        <button type="button" class="btn btn-default btn-block" ng-show="currentStep > 1" ng-click="prevStep()">Forrige</button>
     </div>
     <div class="col-sm-6">
-        <button type="button" class="btn btn-primary btn-block" ng-click="nextStep()">Næste</button>
+        <button type="button" class="btn btn-primary btn-block" ng-click="validateStep()">Næste</button>
     </div>
 </div>
 
-<div class="row">
-
+<div class="row" ng-if="!isResult()">
     <div class="col-sm-12">
-        
-        <step-indicator total="formData.stepsTotal" current="formData.currentStep"></step-indicator>
+        <step-indicator total="numSteps" current="currentStep"></step-indicator>
     </div>
 </div>
 
-<div class="row">
+<div class="row" ng-if="completedSteps.length > 0">
     <div class="col-sm-12">
         <h3>Udfyldt</h3>
-        <a href>Udsnit placeret <span class="glyphicon glyphicon-pencil"></span></a>
+        <ul>
+            <li ng-repeat="step in completedSteps">
+                <a href ui-sref=".({ stepId: $index + 1})">{{step.title}} <span class="glyphicon glyphicon-pencil"></span></a>
+            </li>
+        </ul>
     </div>
+</div>
+
+<div ng-if="isResult()">
+<div class="row">
+    <div class="col-sm-12">
+        
+        <a href ng-click="toggleComment()" ng-show="!showComment">Tilføj bemærkninger</a>
+        
+        <div class="form-group" ng-show="showComment">
+            <label class="control-label">
+                Tilføj bemærkning
+            </label>
+            <textarea class="form-control" ng-trim="true" ng-model="comment"></textarea>
+        </div>
+       
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-12">
+         <button type="button" class="btn btn-primary">Gem indtastning</button>
+    </div>
+</div>
 </div>

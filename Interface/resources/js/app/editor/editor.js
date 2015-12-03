@@ -4,6 +4,8 @@ define([
     'app/shared/shared',
     'angular-bootstrap',
     'angular-ui-router',
+    'angular-ui-select',
+    'angular-sanitize',
 
     'app/editor/editor.config',
 
@@ -18,6 +20,8 @@ define([
     shared,
     angBootstrap,
     uiRouter,
+    uiSelect,
+    ngSanitize,
 
     editorConfig,
     
@@ -27,7 +31,7 @@ define([
     
     ) {
 
-    var editorApp = angular.module('editor', ['shared', 'ui.bootstrap', 'ui.router']);
+    var editorApp = angular.module('editor', ['shared', 'ui.bootstrap', 'ui.router', 'ui.select', 'ngSanitize']);
 
     editorApp.config(editorConfig);
 
