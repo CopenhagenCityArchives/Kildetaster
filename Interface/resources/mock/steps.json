@@ -1,0 +1,79 @@
+[{
+    "id": 1,
+    "title": "Navne",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit dignissimos laudantium praesentium.",
+    "fields": [{
+        "field": "firstname",
+        "labelText": "Fornavn(e)",
+        "type": "text",
+        "value": "",
+        "helpText": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+        "errorText": ""
+    }, {
+        "field": "lastname",
+        "labelText": "Efternavn",
+        "type": "text",
+        "value": "",
+        "helpText": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+        "errorText": ""
+    }]
+}, {
+    "id": 2,
+    "title": "Fødselsoplysninger",
+    "description": "Ipsum dolor sit amet, consectetur adipisicing elit. Tempora sapiente, veritatis consequuntur.",
+    "fields": [{
+        "field": "birthday",
+        "labelText": "Fødselsdag",
+        "type": "text",
+        "value": "",
+        "helpText": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
+        "errorText": ""
+    }, {
+        "field": "birthplace",
+        "labelText": "Fødested",
+        "type": "select",
+        "options": [{
+            "id": 1,
+            "name": "Horsens"
+        }, {
+            "id": 2,
+            "name": "København"
+        }, {
+            "id": 3,
+            "name": "Odense"
+        }, {
+            "id": 4,
+            "name": "Frederiksværk"
+        }, {
+            "id": 5,
+            "name": "Ringe"
+        }],
+        "value": "",
+        "helpText": "Amet, consectetur adipisicing elit. Error, consequuntur nihil quis!"
+    }]
+}, {
+    "id": 3,
+    "title": "Døsoplysninger",
+    "description": "Dolor sit amet, consectetur adipisicing elit. Tempora sapiente, veritatis consequuntur.",
+    "fields": [{
+        "field": "deathday",
+        "labelText": "Dødsdag",
+        "type": "text",
+        "value": "",
+        "helpText": "Sit amet, consectetur adipisicing elit.",
+        "errorText": ""
+    }, {
+        "field": "deathcause",
+        "labelText": "Dødsårsag",
+        "type": "select",
+        "options": [{
+            "id": 1,
+            "name": "Ulykke"
+        }, {
+            "id": 2,
+            "name": "Sygdom"
+        }],
+        "value": "",
+        "helpText": "Amet, consectetur adipisicing elit. Error, consequuntur nihil quis!"
+    }]
+}]

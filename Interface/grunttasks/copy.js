@@ -28,6 +28,13 @@ module.exports = {
 			src: ['**/*.*'],
 			dest: '<%= package.prototyperesources %>/bower_components'
 
+		},
+		{
+			//Mock data
+			expand: true,
+			cwd: '<%= package.resources %>/mock/',
+			src: ['**/*.json'],
+			dest: '<%= package.prototyperesources %>/mock'
 		}
 		]
 	},
