@@ -3,7 +3,10 @@
 //Bootstrap
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 
+@import "../bower_components/ui-select/dist/select";
+
 @import "core/core";
+@import "core/mixins";
 
 @import "modules/modules";
 
