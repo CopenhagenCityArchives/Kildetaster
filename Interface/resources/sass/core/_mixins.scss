@@ -1,0 +1,7 @@
+
+/**
+* Common way to do border radius, with easy to change default
+*/
+@mixin border-radius($radius: 4px) {
+    border-radius: $radius;
+}
