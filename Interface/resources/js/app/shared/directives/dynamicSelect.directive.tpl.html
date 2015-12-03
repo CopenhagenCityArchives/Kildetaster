@@ -1,0 +1,16 @@
+
+<div class="form-group" ng-class="{ 'has-error': errorText }">
+    
+    <label>{{field.labelText}}</label>
+
+    <ui-select ng-model="field.value">
+        <ui-select-match>
+            <span ng-bind="$select.selected.name"></span>
+        </ui-select-match>
+        <ui-select-choices repeat="option in (field.options | filter: $select.search) track by option.id">
+            <span ng-bind="option.name"></span>
+        </ui-select-choices>
+    </ui-select>
+    <span class="glyphicon glyphicon-question-sign" uib-tooltip="{{field.helpText}}" tooltip-placement="left"></span>
+
+</div>

@@ -1,0 +1,12 @@
+
+<div class="form-group" ng-class="{ 'has-error': field.errorText }">
+    
+    <label class="control-label">{{field.labelText}}</label>
+    
+    <input type="{{field.type}}" class="form-control" ng-model="field.value" />
+    
+    <div class="help-block" ng-if="field.errorText">{{field.errorText}}</div>
+    
+    <span class="glyphicon glyphicon-question-sign" uib-tooltip="{{field.helpText}}" tooltip-placement="left"></span>
+
+</div>

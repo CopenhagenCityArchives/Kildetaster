@@ -6,6 +6,9 @@ define([
     'app/shared/directives/imageViewer.directive',
     'app/shared/directives/stepOf.directive',
     'app/shared/directives/stepIndicator.directive',
+    
+    'app/shared/directives/dynamicInput.directive',
+    'app/shared/directives/dynamicSelect.directive',
 
     'app/shared/services/step.service'
 
@@ -18,6 +21,9 @@ define([
     stepOfDirective,
     stepIndicatorDirective,
 
+    dynamicInputDirective,
+    dynamicSelectDirective,
+
     stepService
 
     ) {
@@ -28,8 +34,11 @@ define([
     sharedApp.directive('imageViewer', imageViewerDirective);
     sharedApp.directive('stepOf', stepOfDirective);
     sharedApp.directive('stepIndicator', stepIndicatorDirective);
+    
+    sharedApp.directive('dynamicInput', dynamicInputDirective);
+    sharedApp.directive('dynamicSelect', dynamicSelectDirective);
 
-    sharedApp.factory('step', stepService);
+    sharedApp.factory('stepService', stepService);
 
     return sharedApp;
 
