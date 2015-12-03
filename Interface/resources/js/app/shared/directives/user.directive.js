@@ -18,8 +18,6 @@ define([
             
             link: function(scope, element, attrs) {
 
-                console.log('user.directive')
-
             }
         }
     };
