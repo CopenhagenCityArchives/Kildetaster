@@ -33,6 +33,14 @@ module.exports = function(grunt) {
 				}
 			},
 
+			mock: {
+				files: ['<%= package.resources %>/mock/**/*.js'],
+				tasks: ['newer:copy:prototype'],
+				options: {
+					livereload: true
+				}
+			},
+
 			angulartemplates: {
 				files: ['<%= package.resources %>/js/**/*.tpl.html'],
 				tasks: ['html2js:prototype'],
