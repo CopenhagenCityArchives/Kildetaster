@@ -4,30 +4,18 @@ define([
 
 ], function() {
 
-    var editorController = function editorController($scope) {
-
-        $scope.image = '/resources/images/temporary/page_01.jpg';
-        
-
-            
-
+    var editorController = function editorController($scope, projectData) {
 
         $scope.options = {
 
             tileSources: {
                 type: 'image',
-                url: $scope.image,
+                url: projectData.imageUrl,
                 navigatorPosition: 'TOP_LEFT'
             }
 
         };
-
-        $scope.$on('selectionEnabled', function() {
-            console.log('setting position')
-            $scope.options.navigatorPosition = 'BOTTOM_RIGHT';
-            $scope.options.url = '/resources/images/temporary/page_02.jpg';
-        })
-
+        
     };
 
     return editorController;

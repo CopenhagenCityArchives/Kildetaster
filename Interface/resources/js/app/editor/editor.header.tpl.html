@@ -1,9 +1,11 @@
-<header ng-controller="headerController" class="row">
+<header class="row">
 
     <div class="col-sm-4">
         <h1>Københavns Stadsarkiv</h1>
         <p>{{protocol}}</p>
-        <uib-pager total-items="totalPages" ng-model="currentPage"></uib-pager>
+
+        <button type="button" class="btn btn-default" ui-sref=".({ id: prevPageId })" ng-if="prevPageId">Forrige</button>
+        <button type="button" class="btn btn-default" ui-sref=".({ id: nextPageId })" ng-if="nextPageId">Næste</button>
 
         <button type="button">Næste ledige side</button>
     </div>
