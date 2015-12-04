@@ -6,7 +6,8 @@ module.exports = {
             imagePath: '<%= package.prototyperesources %>/images'
         },
         files: {
-            '<%= package.prototyperesources %>/css/styles.css': '<%= package.resources %>/sass/styles.scss'
+            '<%= package.prototyperesources %>/css/styles.css': '<%= package.resources %>/sass/styles.scss',
+            '<%= package.prototyperesources %>/css/api-styles.css': '<%= package.resources %>/sass/api-styles.scss'
         }
     },
     development: {

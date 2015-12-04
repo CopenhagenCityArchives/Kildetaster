@@ -8,6 +8,13 @@ module.exports = {
 			ext: '.html',
 		}]
 	},
+
+	api: {
+		src: '<%= package.html %>index_stadsdump.html',
+		dest: '<%= package.prototype %>'
+
+	},
+
 	production: {
 		files: [{
 			expand: true,

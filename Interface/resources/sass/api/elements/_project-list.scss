@@ -1,0 +1,33 @@
+.project-list {
+    display: table;
+
+    width: 100%;
+
+    table-layout: fixed;
+
+    &.odd {
+        background-color: $gray;
+    }
+
+    &__header {
+        font-weight: bold;
+
+        display: table-cell;
+
+        padding: 6px 10px;
+        padding-bottom: 0;
+
+        border-bottom: 1px solid $gray-dark;
+    }
+
+    &__item {
+        display: table-cell;
+
+        padding: 6px 10px;
+    }
+    &__header, &__item {
+        &:first-child {
+            width: 60%;
+        }
+    }
+}

@@ -9,6 +9,17 @@ prototype:
     - 'open'    
     - 'watchPrototype'
 
+api:
+    - 'clean:prototype'
+    - 'html2js:prototype'
+    - 'copy:api'
+    - 'sass:prototype'
+    - 'bake:api'
+    - 'karma:prototype'
+    - 'express:prototype'
+    - 'open'    
+    - 'watchApi'
+
 dev:
     - 'clean:development'
     - 'copy:development'

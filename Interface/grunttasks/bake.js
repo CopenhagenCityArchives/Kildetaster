@@ -18,6 +18,16 @@ module.exports = {
         }]
     },
 
+    api: {
+
+        options: {},
+
+        files: [{
+            src: '<%= package.html %>/index_stadsdump.html',
+            dest: '<%= package.prototype %>/index.html'
+        }]
+    },
+
     development: {
 
         options: {},
