@@ -28,7 +28,7 @@ define([
             //templateUrl: 'shared/directives/imageViewer.directive.tpl.html',
 
             controller: function($scope, $compile, $templateCache, $element, $rootScope) {
-                
+
 
                 var viewer, opts;
 
@@ -62,22 +62,25 @@ define([
                 function rebuildOptions() {
 
                     return angular.extend({}, $scope.options, {
-                        
+
                         element: angular.element('.target')[0],
-                        
+
                         showNavigator: true,
                         navigatorPosition: "BOTTOM_LEFT",
                         navigatorWidth: 160,
                         navigatorHeight: 160,
 
                         //navigatorSizeRatio: 0.2,
-                        
+
                         zoomInButton: "zoom-in",
                         zoomOutButton: "zoom-out",
                         homeButton: "home",
                         fullPageButton: "full-page",
                         nextButton: "next",
                         previousButton: "previous",
+                        //Prefix for image pathcs
+
+                        prefixUrl: '/resources/bower_components/openseadragon/built-openseadragon/openseadragon/images/',
 
                         toggleButton: 'toggle-selection',
 
@@ -91,7 +94,7 @@ define([
 
                     });
                 }
-                
+
 
                 $scope.$watchCollection('options', function(newVal, oldVal) {
                     //console.log('watching options', newVal);
@@ -120,20 +123,41 @@ define([
 
                         //https://github.com/picturae/openseadragonselection/issues/7
                         var converted = viewer.viewport.imageToViewportRectangle(rect);
-console.log('c', rect, converted);
+
                         viewer.addOverlay({
                             element: $('<div class="imageViewer__progress"></div>')[0],
                             //location: new OpenSeadragon.Rect(rect.x, rect.y, rect.width, rect.height, rect.rotation)
-                            location: converted
+                            location: converted,                            
                         });
 
                         //Zoom viewer to the selected area
                         viewer.viewport.fitBounds(converted, true);
                     },
                     //Initial selection
-                    rect: new OpenSeadragon.SelectionRect(0, 0.75, 0.5, 0.25),
+                    rect: new OpenSeadragon.SelectionRect(0.25, 0.6, 0.5, 0.25),
                     toggleButton: 'toggle-selection',
-                    //showSelectionControl: true
+                    //showSelectionControl: true,
+                    prefixUrl: '/resources/images/',
+                            navImages: { // overwrites OpenSeadragon's options
+                                selection: {
+                                    REST: 'selection_rest.png',
+                                    GROUP: 'selection_grouphover.png',
+                                    HOVER: 'selection_hover.png',
+                                    DOWN: 'selection_pressed.png'
+                                },
+                                selectionConfirm: {
+                                    REST: 'selection_confirm_rest.png',
+                                    GROUP: 'selection_confirm_grouphover.png',
+                                    HOVER: 'selection_confirm_hover.png',
+                                    DOWN: 'selection_confirm_pressed.png'
+                                },
+                                selectionCancel: {
+                                    REST: 'selection_cancel_rest.png',
+                                    GROUP: 'selection_cancel_grouphover.png',
+                                    HOVER: 'selection_cancel_hover.png',
+                                    DOWN: 'selection_cancel_pressed.png'
+                                },
+                            }
                 });
 
 
