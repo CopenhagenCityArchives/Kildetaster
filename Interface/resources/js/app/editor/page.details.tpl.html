@@ -1,0 +1,16 @@
+<div class="row">
+
+    <div class="col-sm-6">
+        <button type="button" class="btn btn-default" ui-sref=".({ pageId: prevPageId })" ng-disabled="!prevPageId">Forrige</button>
+        {{pageNumber}}
+        <button type="button" class="btn btn-default" ui-sref=".({ pageId: nextPageId })" ng-disabled="!nextPageId">Næste</button>
+    </div>
+
+    <div class="col-sm-6 form-inline">
+        <div class="form-group gotopage">
+            <label class="control-label">Gå til side</label>
+            <input type="text" class="form-control" value="" ng-model="goToPageId" ng-keypress="goToPage($event)">
+        </div>
+    </div>
+    
+</div>

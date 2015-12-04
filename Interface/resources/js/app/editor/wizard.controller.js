@@ -2,7 +2,7 @@ define([
 
 ], function() {
     
-    var wizardController = function($scope, $rootScope, stepService, $stateParams, $location) {
+    var wizardController = function($scope, $rootScope, stepService, $stateParams, $location, $state) {
 
         $scope.steps = [];        
 
@@ -28,6 +28,12 @@ define([
 
         $scope.isResult = function isResult() {
             return $scope.currentStep === $scope.numSteps;
+        };
+
+        $scope.save = function save() {
+            console.log('saving');
+
+            $state.go('.done', {}, { reload: true })
         };
 
         /**
@@ -58,16 +64,6 @@ define([
 
 
         $scope.validateStep = function validateStep() {
-
-            //If on first step, just change page for now
-            //TODO: Update logic
-            if ($scope.currentStep === 1) {
-                $scope.nextStep();
-                // $scope.completedSteps.push({
-                //     title: "Udsnit placeret"
-                // });
-                return;
-            }
 
             stepService.validateStep($scope.formData).then(function(response) {
                 if (response.isValid) {

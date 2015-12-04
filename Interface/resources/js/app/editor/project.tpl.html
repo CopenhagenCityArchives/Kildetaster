@@ -4,10 +4,10 @@
         <h1>Københavns Stadsarkiv</h1>
         <p>{{protocol}}</p>
 
-        <button type="button" class="btn btn-default" ui-sref=".({ id: prevPageId })" ng-if="prevPageId">Forrige</button>
-        <button type="button" class="btn btn-default" ui-sref=".({ id: nextPageId })" ng-if="nextPageId">Næste</button>
+        <div ui-view="pageDetails"></div>
+        
+        <button type="button" ng-click="goToNextAvailablePage()">Næste ledige side</button>
 
-        <button type="button">Næste ledige side</button>
     </div>
 
     <div class="col-sm-2">
@@ -27,3 +27,6 @@
     </div>
 
 </header>
+
+
+<section ui-view></section>

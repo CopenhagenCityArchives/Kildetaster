@@ -1,0 +1,34 @@
+[{
+    "id": 1,
+    "pageNumber": 1,
+    "nextPageId": 2,
+    "imageUrl": "/resources/images/temporary/page_01.jpg",
+    "overlays": [{
+        "px": 280,
+        "py": 79,
+        "width": 693,
+        "height": 746
+    }, {
+        "px": 976,
+        "py": 83,
+        "width": 711,
+        "height": 746
+    }]
+}, {
+    "id": 2,
+    "pageNumber": 2,
+    "nextPageId": 3,
+    "prevPageId": 1,
+    "imageUrl": "/resources/images/temporary/page_02.jpg",
+    "overlays": [{
+        "px": 280,
+        "py": 79,
+        "width": 693,
+        "height": 746
+    }]
+}, {
+    "id": 3,
+    "pageNumber": 3,
+    "prevPageId": 2,
+    "imageUrl": "/resources/images/temporary/page_02.jpg"
+}]

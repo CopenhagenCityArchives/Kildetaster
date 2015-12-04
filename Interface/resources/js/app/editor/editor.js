@@ -8,14 +8,16 @@ define([
     'angular-sanitize',
 
     'app/editor/editor.config',
+    'app/editor/editor.run',
 
-    'app/editor/header.controller',
-    'app/editor/editor.controller',
+    'app/editor/project.controller',
+    'app/editor/page.controller',
     'app/editor/wizard.controller',
-    
+    'app/editor/wizard.done.controller',
+
 
 ], function(
-    
+
     ang,
     shared,
     angBootstrap,
@@ -24,24 +26,36 @@ define([
     ngSanitize,
 
     editorConfig,
-    
-    headerController,
-    editorController,
-    wizardController
-    
-    ) {
+    editorRun,
+
+    projectController,
+    pageController,
+    wizardController,
+    wizardDoneController
+
+) {
 
     var editorApp = angular.module('editor', ['shared', 'ui.bootstrap', 'ui.router', 'ui.select', 'ngSanitize']);
 
     editorApp.config(editorConfig);
+    editorApp.run(editorRun);
 
-    editorApp.controller('headerController', headerController);
-    editorApp.controller('editorController', editorController);
+    editorApp.controller('projectController', projectController);
+    editorApp.controller('pageController', pageController);
     editorApp.controller('wizardController', wizardController);
+    editorApp.controller('wizardDoneController', wizardDoneController);
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-editor-app]'), ['editor']);
     });
+
+
+
+
+    //Debugging for ui.router state issues
+    // app.run(($rootScope) => {
+    //     $rootScope.$on("$stateChangeError", console.log.bind(console));
+    // });
 
     return editorApp;
 

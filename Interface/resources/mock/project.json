@@ -1,21 +1,13 @@
-[
-    {
-        "id": 1,
-        "numPages": 10,
-        "imageUrl": "/resources/images/temporary/page_01.jpg",
-        "nextPageId": 2,
-        "prevPageId": null
-    },
-    {
-        "id": 2,
-        "imageUrl": "/resources/images/temporary/page_02.jpg",
-        "nextPageId": 3,
-        "prevPageId": 1
-    },
-    {
-        "id": 3,
-        "imageUrl": "/resources/images/temporary/page_02.jpg",
-        "nextPageId": null,
-        "prevPageId": 2
-    }
-]
+[{
+    "id": 1,
+    "name": "Begravelsesprotocol nr. 132, 1850-1851",
+    "nextAvailablePageId": 2,
+    "pagesTotal": 10,
+    "pagesLeft": 3
+}, {
+    "id": 2,
+    "name": "Begravelsesprotocol nr. 133, 1851-1852",
+    "nextAvailablePageId": 4,
+    "pagesTotal": 5,
+    "pagesLeft": 2
+}]

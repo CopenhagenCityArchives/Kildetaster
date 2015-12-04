@@ -45,13 +45,33 @@ define([
 
                 angular.element($element).replaceWith(template);
 
+
+                function addClassToOverlay(overlayData) {
+
+                    if (!angular.isArray(overlayData)) {
+                        return [];
+                    }
+                    return overlayData.map(function(data) {
+                        data.className = 'imageViewer__done';
+                        return data;
+                    });
+                }
+                //Add class to render overlays correctly
+                $scope.options.tileSources.overlays = addClassToOverlay($scope.options.tileSources.overlays);
+
                 function rebuildOptions() {
 
                     return angular.extend({}, $scope.options, {
+                        
+                        element: angular.element('.target')[0],
+                        
                         showNavigator: true,
                         navigatorPosition: "BOTTOM_LEFT",
-                        element: angular.element('.target')[0],
+                        navigatorWidth: 160,
+                        navigatorHeight: 160,
 
+                        //navigatorSizeRatio: 0.2,
+                        
                         zoomInButton: "zoom-in",
                         zoomOutButton: "zoom-out",
                         homeButton: "home",
@@ -59,31 +79,16 @@ define([
                         nextButton: "next",
                         previousButton: "previous",
 
+                        toggleButton: 'toggle-selection',
+
                         navImages: {},
 
                         debugMode: false,
 
-                        toggleButton: 'toggle-selection',
-                        
                         //The "zoom distance" per mouse scroll or touch pinch. Note: Setting this to 1.0 effectively disables the mouse-wheel zoom feature 
                         //(also see gestureSettings[Mouse|Touch|Pen].scrollToZoom}).
-                        zoomPerScroll: 1.0,
+                        zoomPerScroll: 1.0
 
-                        overlays: [{
-                            px: 280,
-                            py: 79,
-                            width: 693,
-                            height: 746,
-                            className: 'imageViewer__done'
-                        },
-                        {
-                            px: 976,
-                            py: 83,
-                            width: 711,
-                            height: 746,
-                            className: 'imageViewer__done'
-                        }
-                        ]
                     });
                 }
                 

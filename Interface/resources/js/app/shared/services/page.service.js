@@ -3,17 +3,17 @@ define([
 
 ], function() {
 
-    var projectService = function projectService($http, $cacheFactory, $q, $filter) {
+    var pageService = function pageService($http, $cacheFactory, $q, $filter) {
 
         var baseUrl = '/resources/mock/',
-            cache = $cacheFactory('projectCache');
+            cache = $cacheFactory('pageCache');
 
         /**
         * Load all available project details, store in cache for quick retrieval
         */
         function getProjectData() {
 
-            return $http.get(baseUrl + 'project.json').then(function(response) {
+            return $http.get(baseUrl + 'page.json').then(function(response) {
                 cache.put('all', response.data);
                 return response.data;
             });
@@ -27,7 +27,7 @@ define([
             *
             * @return {promise} That resolves with the data for the project
             */
-            getProject: function getProject(id) {
+            getPage: function getPage(id) {
 
                 var deferred = $q.defer(),
                     found;
@@ -39,6 +39,8 @@ define([
                         found = $filter('filter')(response, function(project) {
                             return project.id === id;
                         });
+
+                        console.log(found);
                         deferred.resolve(found[0]);
                     });
                 }
@@ -57,6 +59,6 @@ define([
 
     };
 
-    return projectService;
+    return pageService;
 
 });

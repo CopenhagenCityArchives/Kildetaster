@@ -34,7 +34,7 @@ module.exports = function(grunt) {
 			},
 
 			mock: {
-				files: ['<%= package.resources %>/mock/**/*.js'],
+				files: ['<%= package.resources %>/mock/**/*.json'],
 				tasks: ['newer:copy:prototype'],
 				options: {
 					livereload: true
