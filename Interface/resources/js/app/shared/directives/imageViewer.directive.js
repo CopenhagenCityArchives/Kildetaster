@@ -20,14 +20,13 @@ define([
 
             scope: {
                 options: '=',
-                onSelection: '@'
+                onSelection: '&'
             },
 
             //templateUrl: 'shared/directives/imageViewer.directive.tpl.html',
 
             controller: function($scope, $compile, $templateCache, $element, $rootScope) {
 
-console.log($scope);
                 var viewer, opts;
 
 
@@ -130,6 +129,11 @@ console.log($scope);
 
                         //Zoom viewer to the selected area
                         viewer.viewport.fitBounds(converted, true);
+
+                        //If the given onSelection property is a function, call it
+                        if (angular.isFunction($scope.onSelection)) {
+                            $scope.onSelection();
+                        }
                     },
                     //Initial selection
                     rect: new OpenSeadragon.SelectionRect(0.25, 0.6, 0.5, 0.25),

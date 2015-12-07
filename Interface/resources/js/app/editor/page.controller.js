@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var editorController = function editorController($scope, $state, pageData) {       
+    var editorController = function editorController($scope, $state, pageData, $location, $timeout) {       
 
         $scope.nextPageId = pageData.nextPageId;
         $scope.prevPageId = pageData.prevPageId;
@@ -21,8 +21,15 @@ define([
             
         };
 
+        /**
+        * When area is selected, move wizard to step 2
+        */
         $scope.areaSelected = function areaSelected() {
-            console.log('I have selected');
+            
+            $timeout(function() {
+                $location.search({ stepId: 2 });
+            }, 0);
+            
         };
 
         $scope.options = {
