@@ -50,11 +50,36 @@ define([
                 /**
                  * Load page data and pass it to the controller
                  */
-                pageData: function($stateParams, pageService) {
-                    return pageService.getPage($stateParams.pageId).then(function(response) {
-                        return response;
+                pageData: function($stateParams, pageService, $q) {
+
+                    var deferred = $q.defer();
+                    
+                    pageService.getPage($stateParams.pageId).then(function(response) {
+
+                        if (response) {
+                            deferred.resolve(response);
+                        }
+                        else {
+                            deferred.reject('Error', response);
+                        }
+
                     });
+
+                    return deferred.promise;
+
                 }
+            }
+        })
+
+        .state('editor.page.notfound', {
+            url:'',
+            views: {
+                 '@editor': {
+                    templateUrl: 'editor/page.notfound.tpl.html',
+                    controller: function() {
+                        alert('Page not found');
+                    }
+                },
             }
         })
 
