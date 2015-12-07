@@ -2,13 +2,13 @@ define([
 
 ], function() {
 
-    var mypageController = function mypageController($scope, taskService) {
+    var mypageController = function mypageController($scope, taskService, EDITORURL) {
 
         $scope.loading = true;
         $scope.openProjects = [];
 
         $scope.goToEditor = function goToEditor(taskData) {
-            window.location.href = 'http://localhost:1508/#/task/' + taskData.id + '/page/' + taskData.nextAvailablePageId;
+            window.location.href = EDITORURL + '/#/task/' + taskData.id + '/page/' + taskData.nextAvailablePageId;
         };
 
         $scope.goToStatistics = function goToStatistics(taskData) {

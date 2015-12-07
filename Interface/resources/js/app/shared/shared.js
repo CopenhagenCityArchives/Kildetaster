@@ -2,6 +2,8 @@ define([
 
     'angular',
     'app/shared/templates',
+    'app/shared/constants',
+
     'app/shared/directives/user.directive',
     'app/shared/directives/imageViewer.directive',
     'app/shared/directives/stepOf.directive',
@@ -18,6 +20,8 @@ define([
 
     ang,
     templates,
+    constants,
+
     userDirective,
     imageViewerDirective,
     stepOfDirective,
@@ -32,7 +36,7 @@ define([
 
     ) {
 
-    var sharedApp = angular.module('shared', ['templates']);
+    var sharedApp = angular.module('shared', ['templates', 'constants']);
 
     sharedApp.directive('user', userDirective);
     sharedApp.directive('imageViewer', imageViewerDirective);
