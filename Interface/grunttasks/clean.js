@@ -5,10 +5,10 @@ module.exports = {
     prototype: {
         src: ['<%= package.prototype %>/**'],
     },
+    sdk: {
+      src: ['<%= package.sdk %>/**'],  
+    },
     development: {
         src: ['<%= package.buildresources %>/**'],
-    },
-    staticsite: {
-        src: ['<%= package.staticsite %>/**'],
     }
 };

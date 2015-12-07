@@ -6,10 +6,21 @@ module.exports = {
             imagePath: '<%= package.prototyperesources %>/images'
         },
         files: {
-            '<%= package.prototyperesources %>/css/styles.css': '<%= package.resources %>/sass/styles.scss',
-            '<%= package.prototyperesources %>/css/sdk-styles.css': '<%= package.resources %>/sass/sdk-styles.scss'
+            '<%= package.prototyperesources %>/css/styles.css': '<%= package.resources %>/sass/styles.scss'
         }
     },
+
+    sdk: { 
+        options:{
+            sourceMap: true,
+            outputStyle: 'nested',
+            imagePath: '<%= package.sdkresources %>/images'
+        },
+        files: {
+            '<%= package.sdkresources %>/css/styles.css': '<%= package.resources %>/sass/sdk-styles.scss'
+        }
+    },
+
     development: {
         options:{
             sourceMap: true,

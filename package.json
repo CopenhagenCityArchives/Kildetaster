@@ -8,6 +8,8 @@
   "buildresources": "kbh/resources",
   "prototype": "_prototype",
   "prototyperesources": "_prototype/resources",
+  "sdk": "_sdk",
+  "sdkresources": "_sdk/resources",
   "resources": "Interface/resources",
   "configs": "Interface/configs",
   "html": "Interface/html",

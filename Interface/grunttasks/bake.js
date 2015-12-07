@@ -18,13 +18,13 @@ module.exports = {
         }]
     },
 
-    api: {
+    sdk: {
 
         options: {},
 
         files: [{
             src: '<%= package.html %>/index_stadsdump.html',
-            dest: '<%= package.prototype %>/index.html'
+            dest: '<%= package.sdk %>/index.html'
         }]
     },
 

@@ -37,40 +37,40 @@ module.exports = {
         }]
     },
 
-    api: {
+    sdk: {
         files: [{
             //Javascript
             expand: true,
             cwd: '<%= package.resources %>/js/',
             //All javascript files, except the test files
             src: ['**/*.{js,map}', '!test/**/*.js'],
-            dest: '<%= package.prototyperesources %>/js'
+            dest: '<%= package.sdkresources %>/js'
         }, {
             //Images
             expand: true,
             cwd: '<%= package.resources %>/images/',
             src: ['**/*.{png,jpg,gif,svg}'],
-            dest: '<%= package.prototyperesources %>/images'
+            dest: '<%= package.sdkresources %>/images'
 
         }, {
             //Bower components
             expand: true,
             cwd: '<%= package.resources %>/bower_components/',
             src: ['**/*.*'],
-            dest: '<%= package.prototyperesources %>/bower_components'
+            dest: '<%= package.sdkresources %>/bower_components'
 
         }, {
             //Mock data
             expand: true,
             cwd: '<%= package.resources %>/mock/',
             src: ['**/*.json'],
-            dest: '<%= package.prototyperesources %>/mock'
+            dest: '<%= package.sdkresources %>/mock'
         }, {
         	//dump files
         	expand: true,
         	cwd: '<%= package.html %>/dump/index_files/',
         	src: ['**/*.*'],
-        	dest: '<%= package.prototyperesources %>/dump_files'
+        	dest: '<%= package.sdkresources %>/dump_files'
         }]
     },
 

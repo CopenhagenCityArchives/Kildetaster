@@ -1,17 +1,20 @@
 module.exports = {
+	
+	options: {
+		hostname: '0.0.0.0',
+		livereload: true,
+	},
+
 	prototype: {
 		options: {
 			port: 1508,
-			hostname: "0.0.0.0",
-			bases: ['<%= package.prototype %>'],
-			livereload: true
+			bases: ['<%= package.prototype %>']
 		}
 	},
-	staticsite: {
+	sdk: {
 		options: {
-			port: 1508,
-			hostname: "0.0.0.0",
-			bases: ['<%= package.build %>']
+			port: 1510,
+			bases: ['<%= package.sdk %>']
 		}
-	}	
+	}
 };

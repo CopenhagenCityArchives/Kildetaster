@@ -6,18 +6,19 @@ prototype:
     - 'bake:prototype'
     - 'karma:prototype'
     - 'express:prototype'
-    - 'open'    
+    - 'open:prototype'    
     - 'watchPrototype'
 
 sdk:
-    - 'clean:prototype'
-    - 'html2js:prototype'
-    - 'copy:api'
-    - 'sass:prototype'
-    - 'bake:api'
+    - 'clean:sdk'
+    - 'html2js:sdk'
+    - 'copy:sdk'
+    - 'sass:sdk'
+    - 'bake:sdk'
     - 'karma:prototype'
     - 'express:prototype'
-    - 'open'    
+    - 'express:sdk'
+    - 'open:sdk'  
     - 'watchSdk'
 
 dev:

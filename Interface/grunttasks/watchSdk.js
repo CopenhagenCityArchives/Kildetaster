@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 
             images: {
                 files: ['<%= package.resources %>/images/**/*.{png,jpg,gif,svg}'],
-                tasks: ['newer:copy:prototype'],
+                tasks: ['newer:copy:sdk'],
                 options: {
                     livereload: true
                 },
@@ -13,7 +13,7 @@ module.exports = function(grunt) {
 
             scss: {
                 files: ['<%= package.resources %>/sass/**/*.scss', '<%= package.resources %>/bower_components/**/*.scss'],
-                tasks: ['newer:csscomb', 'sass:prototype'],
+                tasks: ['newer:csscomb', 'sass:sdk'],
                 options: {
                     livereload: false
                 },
@@ -27,7 +27,7 @@ module.exports = function(grunt) {
             },
             js: {
                 files: ['<%= package.resources %>/js/**/*.js'],
-                tasks: ['newer:copy:prototype', 'karma:prototype:run'],
+                tasks: ['newer:copy:sdk', 'karma:prototype:run'],
                 options: {
                     livereload: true
                 }
@@ -35,7 +35,7 @@ module.exports = function(grunt) {
 
             mock: {
                 files: ['<%= package.resources %>/mock/**/*.json'],
-                tasks: ['newer:copy:prototype'],
+                tasks: ['newer:copy:sdk'],
                 options: {
                     livereload: true
                 }
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
 
             angulartemplates: {
                 files: ['<%= package.resources %>/js/**/*.tpl.html'],
-                tasks: ['html2js:prototype'],
+                tasks: ['html2js:sdk'],
                 options: {
                     livereload: true
                 }
@@ -51,7 +51,7 @@ module.exports = function(grunt) {
 
             fonts: {
                 files: ['<%= package.resources %>/fonts/**'],
-                tasks: ['newer:copy:prototype'],
+                tasks: ['newer:copy:sdk'],
                 options: {
                     livereload: true
                 }
@@ -59,11 +59,11 @@ module.exports = function(grunt) {
 
             preprocess: {
                 files: ['<%= package.html %>/**/*.html'],
-                tasks: ['bake:api'],
+                tasks: ['bake:sdk'],
             },
 
             prototypeLiveReload: {
-                files: ['<%= package.prototype %>/*.html'],
+                files: ['<%= package.sdk %>/*.html'],
                 options: {
                     livereload: true,
                 }
