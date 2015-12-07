@@ -1,5 +1,5 @@
 module.exports = function(grunt) {
-    grunt.registerTask('watchApi', function() {
+    grunt.registerTask('watchSdk', function() {
         // Configuration for watch:test tasks.
         var config = {
 
