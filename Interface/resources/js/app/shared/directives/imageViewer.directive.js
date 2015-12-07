@@ -56,9 +56,14 @@ define([
                 //Add class to render overlays correctly
                 $scope.options.tileSources.overlays = addClassToOverlay($scope.options.tileSources.overlays);
 
-                function rebuildOptions() {
+                $scope.$watchCollection('options', function(newVal, oldVal) {
+                    //console.log('watching options', newVal);
+                    if (newVal !== oldVal && newVal !== null) {
+                        rebuildOptions();
+                    }
+                });
 
-                    return angular.extend({}, $scope.options, {
+                opts = angular.extend({}, $scope.options, {
 
                         element: angular.element('.target')[0],
 
@@ -67,16 +72,14 @@ define([
                         navigatorWidth: 160,
                         navigatorHeight: 160,
 
-                        //navigatorSizeRatio: 0.2,
-
                         zoomInButton: "zoom-in",
                         zoomOutButton: "zoom-out",
                         homeButton: "home",
                         fullPageButton: "full-page",
                         nextButton: "next",
                         previousButton: "previous",
-                        //Prefix for image pathcs
-
+                        
+                        //Prefix for image paths
                         prefixUrl: '/resources/bower_components/openseadragon/built-openseadragon/openseadragon/images/',
 
                         toggleButton: 'toggle-selection',
@@ -90,31 +93,13 @@ define([
                         zoomPerScroll: 1.0
 
                     });
-                }
 
-
-                $scope.$watchCollection('options', function(newVal, oldVal) {
-                    //console.log('watching options', newVal);
-                    if (newVal !== oldVal && newVal !== null) {
-                        rebuildOptions();
-                    }
-                });
-
-
-                opts = rebuildOptions();
-
-                //Selection plugin
-                //https://github.com/picturae/openseadragonselection
+                //Initialize the viewer
                 viewer = OpenSeadragon(opts);
 
-                //var sel = new OpenSeadragon.SelectionRect(200, 300, 400, 400, 0);
-
-                //console.log(sel); //388, 442, 800, 700, 0
 
                 //Selection plugin
                 //https://github.com/picturae/openseadragonselection
-
-
                 viewer.selection({
                     onSelection: function(rect) {
 
@@ -124,7 +109,7 @@ define([
                         viewer.addOverlay({
                             element: $('<div class="imageViewer__progress"></div>')[0],
                             //location: new OpenSeadragon.Rect(rect.x, rect.y, rect.width, rect.height, rect.rotation)
-                            location: converted,                            
+                            location: converted,
                         });
 
                         //Zoom viewer to the selected area
@@ -137,29 +122,33 @@ define([
                     },
                     //Initial selection
                     rect: new OpenSeadragon.SelectionRect(0.25, 0.6, 0.5, 0.25),
+                    
                     toggleButton: 'toggle-selection',
+                    
                     //showSelectionControl: true,
+                    
                     prefixUrl: '/resources/images/',
-                            navImages: { // overwrites OpenSeadragon's options
-                                selection: {
-                                    REST: 'selection_rest.png',
-                                    GROUP: 'selection_grouphover.png',
-                                    HOVER: 'selection_hover.png',
-                                    DOWN: 'selection_pressed.png'
-                                },
-                                selectionConfirm: {
-                                    REST: 'selection_confirm_rest.png',
-                                    GROUP: 'selection_confirm_grouphover.png',
-                                    HOVER: 'selection_confirm_hover.png',
-                                    DOWN: 'selection_confirm_pressed.png'
-                                },
-                                selectionCancel: {
-                                    REST: 'selection_cancel_rest.png',
-                                    GROUP: 'selection_cancel_grouphover.png',
-                                    HOVER: 'selection_cancel_hover.png',
-                                    DOWN: 'selection_cancel_pressed.png'
-                                },
-                            }
+                    
+                    navImages: { // overwrites OpenSeadragon's options
+                        selection: {
+                            REST: 'selection_rest.png',
+                            GROUP: 'selection_grouphover.png',
+                            HOVER: 'selection_hover.png',
+                            DOWN: 'selection_pressed.png'
+                        },
+                        selectionConfirm: {
+                            REST: 'selection_confirm_rest.png',
+                            GROUP: 'selection_confirm_grouphover.png',
+                            HOVER: 'selection_confirm_hover.png',
+                            DOWN: 'selection_confirm_pressed.png'
+                        },
+                        selectionCancel: {
+                            REST: 'selection_cancel_rest.png',
+                            GROUP: 'selection_cancel_grouphover.png',
+                            HOVER: 'selection_cancel_hover.png',
+                            DOWN: 'selection_cancel_pressed.png'
+                        },
+                    }
                 });
 
 
@@ -171,157 +160,148 @@ define([
 
             },
 
-            link: function(scope, element, attrs) {
+            // link: function(scope, element, attrs) {
 
-                /*
-                //Ids
-                zoomInButton:   "zoom-in",
-                zoomOutButton:  "zoom-out",
-                homeButton:     "home",
-                fullPageButton: "full-page",
-                nextButton:     "next",
-                previousButton: "previous",
-                */
-                return;
-                //Create options object
-                var opts = angular.extend({}, scope.options, {
-                    id: "openseadragon-" + Math.random(),
-                    //element: element[0],
-                    element: $('div')[0],
-                    //toolbar: toolsDiv
-                });
 
-                if (attrs.tilesource) {
-                    opts.tileSources = [attrs.tilesource];
-                }
+            //     //Create options object
+            //     var opts = angular.extend({}, scope.options, {
+            //         id: "openseadragon-" + Math.random(),
+            //         //element: element[0],
+            //         element: $('div')[0],
+            //         //toolbar: toolsDiv
+            //     });
 
-                if (attrs.prefixUrl) {
-                    opts.prefixUrl = attrs.prefixUrl;
-                }
+            //     if (attrs.tilesource) {
+            //         opts.tileSources = [attrs.tilesource];
+            //     }
 
-                //Create the viewer
-                scope.osd = OpenSeadragon(opts);
+            //     if (attrs.prefixUrl) {
+            //         opts.prefixUrl = attrs.prefixUrl;
+            //     }
 
-                //Create a wrapper
-                var wrapper = {
-                    setFullScreen: function(fullScreen) {
-                        scope.osd.setFullScreen(fullScreen);
-                    },
-                    forceRedraw: function() {
-                        scope.osd.forceRedraw();
-                    },
-                    mouse: {
-                        position: null,
-                        imageCoord: null,
-                        viewportCoord: null,
-                    },
-                    zoom: 0,
-                    viewport: {
-                        bounds: null,
-                        center: null,
-                        rotation: 0,
-                        zoom: 0,
-                    }
-                };
+            //     //Create the viewer
+            //     scope.osd = OpenSeadragon(opts);
 
-                //if @name is set, put the wrapper in the scope and handle the events
-                var zoomHandler = null;
-                var updateViewportHandler = null;
+            //     //Create a wrapper
+            //     var wrapper = {
+            //         setFullScreen: function(fullScreen) {
+            //             scope.osd.setFullScreen(fullScreen);
+            //         },
+            //         forceRedraw: function() {
+            //             scope.osd.forceRedraw();
+            //         },
+            //         mouse: {
+            //             position: null,
+            //             imageCoord: null,
+            //             viewportCoord: null,
+            //         },
+            //         zoom: 0,
+            //         viewport: {
+            //             bounds: null,
+            //             center: null,
+            //             rotation: 0,
+            //             zoom: 0,
+            //         }
+            //     };
 
-                if (attrs.name) {
+            //     //if @name is set, put the wrapper in the scope and handle the events
+            //     var zoomHandler = null;
+            //     var updateViewportHandler = null;
 
-                    //Make the OSD available to parent scope
-                    scope.$parent[attrs.name] = wrapper;
+            //     if (attrs.name) {
 
-                    //Define event handlers
-                    zoomHandler = function(e) {
-                        scope.$apply(function() {
-                            wrapper.zoom = e.zoom;
-                        });
-                    };
+            //         //Make the OSD available to parent scope
+            //         scope.$parent[attrs.name] = wrapper;
 
-                    updateViewportHandler = function(e) {
-                        scope.$apply(function() {
-                            wrapper.viewport = {
-                                bounds: scope.osd.viewport.getBounds(false),
-                                center: scope.osd.viewport.getCenter(false),
-                                rotation: scope.osd.viewport.getRotation(),
-                                zoom: scope.osd.viewport.getZoom(false),
-                            };
-                        });
-                    };
+            //         //Define event handlers
+            //         zoomHandler = function(e) {
+            //             scope.$apply(function() {
+            //                 wrapper.zoom = e.zoom;
+            //             });
+            //         };
 
-                    //Assign event handlers
-                    scope.osd.addHandler("zoom", zoomHandler);
-                    scope.osd.addHandler("update-viewport", updateViewportHandler);
+            //         updateViewportHandler = function(e) {
+            //             scope.$apply(function() {
+            //                 wrapper.viewport = {
+            //                     bounds: scope.osd.viewport.getBounds(false),
+            //                     center: scope.osd.viewport.getCenter(false),
+            //                     rotation: scope.osd.viewport.getRotation(),
+            //                     zoom: scope.osd.viewport.getZoom(false),
+            //                 };
+            //             });
+            //         };
 
-                    //Add a mouse handler
-                    scope.mouse = new OpenSeadragon.MouseTracker({
+            //         //Assign event handlers
+            //         scope.osd.addHandler("zoom", zoomHandler);
+            //         scope.osd.addHandler("update-viewport", updateViewportHandler);
 
-                        element: scope.osd.canvas,
+            //         //Add a mouse handler
+            //         scope.mouse = new OpenSeadragon.MouseTracker({
 
-                        enterHandler: function(e) {
-                            if (scope.osd.viewport) {
-                                var coord = OpenSeadragon.getElementPosition(scope.osd.canvas);
-                                var pos = e.position.plus(coord);
-                                var mouse = {
-                                    position: pos,
-                                    imageCoord: scope.osd.viewport.windowToImageCoordinates(pos),
-                                    viewportCoord: scope.osd.viewport.windowToViewportCoordinates(pos),
-                                };
-                                scope.$apply(function() {
-                                    wrapper.mouse = mouse;
-                                });
-                            }
-                        },
+            //             element: scope.osd.canvas,
 
-                        moveHandler: function(e) {
-                            if (scope.osd.viewport) {
-                                var coord = OpenSeadragon.getElementPosition(scope.osd.canvas);
-                                var pos = e.position.plus(coord);
-                                var mouse = {
-                                    position: pos,
-                                    imageCoord: scope.osd.viewport.windowToImageCoordinates(pos),
-                                    viewportCoord: scope.osd.viewport.windowToViewportCoordinates(pos),
-                                };
-                                scope.$apply(function() {
-                                    wrapper.mouse = mouse;
-                                });
-                            }
-                        },
+            //             enterHandler: function(e) {
+            //                 if (scope.osd.viewport) {
+            //                     var coord = OpenSeadragon.getElementPosition(scope.osd.canvas);
+            //                     var pos = e.position.plus(coord);
+            //                     var mouse = {
+            //                         position: pos,
+            //                         imageCoord: scope.osd.viewport.windowToImageCoordinates(pos),
+            //                         viewportCoord: scope.osd.viewport.windowToViewportCoordinates(pos),
+            //                     };
+            //                     scope.$apply(function() {
+            //                         wrapper.mouse = mouse;
+            //                     });
+            //                 }
+            //             },
 
-                        exitHandler: function(e) {
-                            scope.$apply(function() {
-                                wrapper.mouse.position = null;
-                                wrapper.mouse.imageCoord = null;
-                                wrapper.mouse.viewportCoord = null;
-                            });
-                        },
-                    });
+            //             moveHandler: function(e) {
+            //                 if (scope.osd.viewport) {
+            //                     var coord = OpenSeadragon.getElementPosition(scope.osd.canvas);
+            //                     var pos = e.position.plus(coord);
+            //                     var mouse = {
+            //                         position: pos,
+            //                         imageCoord: scope.osd.viewport.windowToImageCoordinates(pos),
+            //                         viewportCoord: scope.osd.viewport.windowToViewportCoordinates(pos),
+            //                     };
+            //                     scope.$apply(function() {
+            //                         wrapper.mouse = mouse;
+            //                     });
+            //                 }
+            //             },
 
-                    scope.mouse.setTracking(true);
-                }
+            //             exitHandler: function(e) {
+            //                 scope.$apply(function() {
+            //                     wrapper.mouse.position = null;
+            //                     wrapper.mouse.imageCoord = null;
+            //                     wrapper.mouse.viewportCoord = null;
+            //                 });
+            //             },
+            //         });
 
-                //When element is destroyed, destroy the viewer
-                element.on('$destroy', function() {
+            //         scope.mouse.setTracking(true);
+            //     }
 
-                    //if @nam eis set, remove it from parent scope, and remove event handlers
-                    if (attrs.name) {
-                        //Remove from parent scope
-                        scope.$parent[attrs.name] = null;
+            //     //When element is destroyed, destroy the viewer
+            //     element.on('$destroy', function() {
 
-                        //Destroy mouse handler
-                        scope.mouse.destroy();
+            //         //if @nam eis set, remove it from parent scope, and remove event handlers
+            //         if (attrs.name) {
+            //             //Remove from parent scope
+            //             scope.$parent[attrs.name] = null;
 
-                        //Remove event handlers
-                        scope.osd.removeHandler("zoom", zoomHandler);
-                        scope.osd.removeHandler("update-viewport", updateViewportHandler);
-                    }
+            //             //Destroy mouse handler
+            //             scope.mouse.destroy();
 
-                    //Destroy the viewer
-                    scope.osd.destroy();
-                });
-            },
+            //             //Remove event handlers
+            //             scope.osd.removeHandler("zoom", zoomHandler);
+            //             scope.osd.removeHandler("update-viewport", updateViewportHandler);
+            //         }
+
+            //         //Destroy the viewer
+            //         scope.osd.destroy();
+            //     });
+            // },
         };
     };
 
