@@ -15,7 +15,7 @@ define([
             //Enter key
             if ($event.charCode === 13) {
                 //Redirect to given page number
-                //TODO Handle conversion of page number and page id (if nessesary)
+                //TODO, request to get page details based on page number
                 $state.go('.', { pageId: $event.target.value});
             }
             
