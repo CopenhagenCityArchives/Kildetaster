@@ -24,7 +24,7 @@ define([
                 /**
                  * Load project data and pass it to the controller
                  */
-                projectData: function($stateParams, taskService) {
+                taskData: function($stateParams, taskService) {
                     return taskService.getTask($stateParams.taskId).then(function(response) {
                         return response;
                     });
