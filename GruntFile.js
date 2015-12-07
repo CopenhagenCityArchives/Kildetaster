@@ -6,7 +6,11 @@ module.exports = function(grunt) {
 
     // load grunt config
     require('load-grunt-config')(grunt, {
-    	jitGrunt: true,
+    	jitGrunt: {
+             staticMappings: {
+                ngconstant: 'grunt-ng-constant'
+            }
+        },
         configPath: path.join(process.cwd(), 'Interface/grunttasks')
     });
 };

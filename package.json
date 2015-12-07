@@ -30,6 +30,7 @@
     "grunt-karma": "^0.12.1",
     "grunt-newer": "^1.1.1",
     "grunt-ng-annotate": "^1.0.1",
+    "grunt-ng-constant": "^1.1.0",
     "grunt-open": "^0.2.3",
     "grunt-postcss": "^0.7.1",
     "grunt-sass": "^1.1.0-beta",
