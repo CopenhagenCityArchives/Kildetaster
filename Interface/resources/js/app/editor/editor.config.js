@@ -11,13 +11,13 @@ define([
         $stateProvider
 
             .state('editor', {
-            url: '/project/{projectId:int}',
+            url: '/task/{taskId:int}',
             abstract: true,
             views: {
 
                 '': {
-                    templateUrl: 'editor/project.tpl.html',
-                    controller: 'projectController'
+                    templateUrl: 'editor/task.tpl.html',
+                    controller: 'taskController'
                 }
             },
             resolve: {
@@ -25,7 +25,7 @@ define([
                  * Load project data and pass it to the controller
                  */
                 projectData: function($stateParams, projectService) {
-                    return projectService.getProject($stateParams.projectId).then(function(response) {
+                    return projectService.getProject($stateParams.taskId).then(function(response) {
                         return response;
                     });
                 }

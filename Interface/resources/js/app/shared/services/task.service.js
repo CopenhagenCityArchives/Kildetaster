@@ -13,7 +13,7 @@ define([
          */
         function getProjectData() {
 
-            return $http.get(baseUrl + 'project.json').then(function(response) {
+            return $http.get(baseUrl + 'tasks.json').then(function(response) {
                 cache.put('all', response.data);
                 return response.data;
             });

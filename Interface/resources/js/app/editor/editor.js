@@ -10,7 +10,7 @@ define([
     'app/editor/editor.config',
     'app/editor/editor.run',
 
-    'app/editor/project.controller',
+    'app/editor/task.controller',
     'app/editor/page.controller',
     'app/editor/wizard.controller',
     'app/editor/wizard.done.controller',
@@ -28,7 +28,7 @@ define([
     editorConfig,
     editorRun,
 
-    projectController,
+    taskController,
     pageController,
     wizardController,
     wizardDoneController
@@ -40,7 +40,7 @@ define([
     editorApp.config(editorConfig);
     editorApp.run(editorRun);
 
-    editorApp.controller('projectController', projectController);
+    editorApp.controller('taskController', taskController);
     editorApp.controller('pageController', pageController);
     editorApp.controller('wizardController', wizardController);
     editorApp.controller('wizardDoneController', wizardDoneController);
