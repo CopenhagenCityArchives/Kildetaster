@@ -33,9 +33,11 @@ requirejs.config({
 
         'bootstrap': ['jquery'],
         'angular-bootstrap': ['angular'],
+        
         'angular-ui-router': ['angular'],
         'angular-ui-select': ['angular'],
         'angular-sanitize': ['angular'],
+        'angular-animate': ['angular'],
 
         'app/shared/constants': ['angular'],
 

@@ -6,6 +6,7 @@ define([
     'angular-ui-router',
     'angular-ui-select',
     'angular-sanitize',
+    'angular-animate',
 
     'app/editor/editor.config',
     'app/editor/editor.run',
@@ -24,6 +25,7 @@ define([
     uiRouter,
     uiSelect,
     ngSanitize,
+    ngAnimate,
 
     editorConfig,
     editorRun,
@@ -35,7 +37,7 @@ define([
 
 ) {
 
-    var editorApp = angular.module('editor', ['shared', 'ui.bootstrap', 'ui.router', 'ui.select', 'ngSanitize']);
+    var editorApp = angular.module('editor', ['shared', 'ui.bootstrap', 'ui.router', 'ui.select', 'ngSanitize', 'ngAnimate']);
 
     editorApp.config(editorConfig);
     editorApp.run(editorRun);
@@ -48,8 +50,6 @@ define([
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-editor-app]'), ['editor']);
     });
-
-
 
 
     //Debugging for ui.router state issues
