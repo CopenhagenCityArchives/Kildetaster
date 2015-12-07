@@ -4,9 +4,17 @@
         <h1>Københavns Stadsarkiv</h1>
         <p>{{protocol}}</p>
 
-        <div ui-view="pageDetails"></div>
+        <div class="row">
+            <div class="col-sm-8">
+                <div ui-view="pageDetails"></div>
+            </div>
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-default" ng-click="goToNextAvailablePage()">Næste ledige side</button>
+            </div>
+        </div>
         
-        <button type="button" class="btn btn-default" ng-click="goToNextAvailablePage()">Næste ledige side</button>
+        
+        
 
     </div>
 
