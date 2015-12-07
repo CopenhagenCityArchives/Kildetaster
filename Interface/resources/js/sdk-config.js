@@ -37,6 +37,8 @@ requirejs.config({
         'angular-ui-select': ['angular'],
         'angular-sanitize': ['angular'],
 
+        'app/shared/constants': ['angular'],
+
         'libs/openseadragonselection': ['openseadragon'],
         'libs/openseadragon-filtering': ['openseadragon']
 
