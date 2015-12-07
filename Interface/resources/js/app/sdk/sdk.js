@@ -2,20 +2,29 @@ define([
 
     'angular',
     'app/shared/shared',
+    'app/shared/sdk-templates',
 
-    'app/sdk/controllers/mypage.controller'
+    'angular-bootstrap',
+
+    'app/sdk/controllers/mypage.controller',
+    'app/sdk/controllers/opentasks.controller'
 
 ], function(
 
     ang,
     shared,
+    sdkTemplates,
 
-    mypageController
+    angularBootstrap,
+
+    mypageController,
+    opentasksController
 ) {
 
-    var sdkApp = angular.module('sdk', ['shared']);
+    var sdkApp = angular.module('sdk', ['shared', 'sdk-templates', 'ui.bootstrap']);
 
     sdkApp.controller('mypageController', mypageController);
+    sdkApp.controller('opentasksController', opentasksController);
 
 
     angular.element(document).ready(function() {

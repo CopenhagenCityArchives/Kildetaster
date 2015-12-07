@@ -7,13 +7,13 @@
     <div class="row-fluid">
         <div class="span12">
             <h2>Mine indtastninger</h2>
-            <ul class="unstyled">
-                <li class="task-list">
+            <ul class="unstyled task-list">
+                <li>
                     <div class="task-list__header">Protokol / kilde</div>
                     <div class="task-list__header">Nået til</div>
                     <div class="task-list__header"></div>
                 </li>
-                <li class="task-list" ng-repeat="task in openTasks" ng-class="{ odd: $odd }">
+                <li ng-repeat="task in openTasks" ng-class="{ odd: $odd }">
                     <div class="task-list__item">
                         {{task.name}}
                     </div>
@@ -38,7 +38,7 @@
     </div>
 </div>
 
-<div ng-controller="feedbackController">
+<!-- <div ng-controller="feedbackController">
     <div class="row-fluid">
         <div class="span12">
             <h2>Feedback</h2>
@@ -65,4 +65,4 @@
         </div>
     </div>
 
-</div>
+</div> -->

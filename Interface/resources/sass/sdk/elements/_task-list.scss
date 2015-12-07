@@ -5,7 +5,11 @@
 
     table-layout: fixed;
 
-    &.odd {
+    li {
+        display: table-row;
+    }
+
+    li.odd {
         background-color: $gray;
     }
 
@@ -24,6 +28,12 @@
         display: table-cell;
 
         padding: 6px 10px;
+
+        vertical-align: top;
+
+        > span {
+            display: block;
+        }
     }
     &__header, &__item {
         &:first-child {
