@@ -40,7 +40,6 @@ define([
                             return project.id === id;
                         });
 
-                        console.log(found);
                         deferred.resolve(found[0]);
                     });
                 }
