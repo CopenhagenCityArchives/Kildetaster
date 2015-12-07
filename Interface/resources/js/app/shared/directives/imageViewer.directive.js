@@ -27,7 +27,7 @@ define([
 
             controller: function($scope, $compile, $templateCache, $element, $rootScope) {
 
-
+console.log($scope);
                 var viewer, opts;
 
 
