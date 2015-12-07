@@ -19,10 +19,8 @@ define([
             restrict: "E",
 
             scope: {
-                options: "=",
-                name: "=",
-                tilesource: "@",
-                prefixUrl: "@"
+                options: '=',
+                onSelection: '@'
             },
 
             //templateUrl: 'shared/directives/imageViewer.directive.tpl.html',

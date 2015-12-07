@@ -3,7 +3,7 @@ define([
     'angular',
     'app/shared/shared',
 
-    'app/api/controllers/mypage.controller'
+    'app/sdk/controllers/mypage.controller'
 
 ], function(
 
@@ -13,14 +13,13 @@ define([
     mypageController
 ) {
 
-    var apiApp = angular.module('api', ['shared']);
+    var sdkApp = angular.module('sdk', ['shared']);
 
-    apiApp.controller('mypageController', mypageController);
-    
+    sdkApp.controller('mypageController', mypageController);
 
 
     angular.element(document).ready(function() {
-        angular.bootstrap(angular.element('[data-api-app]'), ['api']);
+        angular.bootstrap(angular.element('[data-sdk-app]'), ['sdk']);
     });
 
 
@@ -29,6 +28,6 @@ define([
     //     $rootScope.$on("$stateChangeError", console.log.bind(console));
     // });
 
-    return apiApp;
+    return sdkApp;
 
 });

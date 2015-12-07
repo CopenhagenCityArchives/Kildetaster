@@ -7,7 +7,7 @@ module.exports = {
         },
         files: {
             '<%= package.prototyperesources %>/css/styles.css': '<%= package.resources %>/sass/styles.scss',
-            '<%= package.prototyperesources %>/css/api-styles.css': '<%= package.resources %>/sass/api-styles.scss'
+            '<%= package.prototyperesources %>/css/sdk-styles.css': '<%= package.resources %>/sass/sdk-styles.scss'
         }
     },
     development: {

@@ -42,6 +42,6 @@ requirejs.config({
 
     },
     
-    deps: ['api-main']
+    deps: ['sdk-main']
 
 });

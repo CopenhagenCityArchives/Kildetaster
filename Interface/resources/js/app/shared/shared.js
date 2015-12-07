@@ -11,7 +11,7 @@ define([
     'app/shared/directives/dynamicSelect.directive',
 
     'app/shared/services/step.service',
-    'app/shared/services/project.service',
+    'app/shared/services/task.service',
     'app/shared/services/page.service'
 
 ], function(
@@ -27,7 +27,7 @@ define([
     dynamicSelectDirective,
 
     stepService,
-    projectService,
+    taskService,
     pageService
 
     ) {
@@ -43,7 +43,7 @@ define([
     sharedApp.directive('dynamicSelect', dynamicSelectDirective);
 
     sharedApp.factory('stepService', stepService);
-    sharedApp.factory('projectService', projectService);
+    sharedApp.factory('taskService', taskService);
     sharedApp.factory('pageService', pageService);
 
     return sharedApp;

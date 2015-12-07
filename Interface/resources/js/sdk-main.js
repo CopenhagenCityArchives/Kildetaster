@@ -4,7 +4,7 @@ requirejs([
     
     'jquery',
 
-    'app/api/api'
+    'app/sdk/sdk'
 
 ], function ($, editorApp, apiApp) {
     

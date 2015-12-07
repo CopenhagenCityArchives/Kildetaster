@@ -21,6 +21,10 @@ define([
             
         };
 
+        $scope.areaSelected = function areaSelected() {
+            console.log('I have selected');
+        };
+
         $scope.options = {
 
             tileSources: {
