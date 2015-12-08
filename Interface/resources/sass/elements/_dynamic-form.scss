@@ -1,0 +1,15 @@
+.dynamic-form {
+    &__adjust {
+        position: relative;
+
+        padding-right: 20px;
+
+        .glyphicon {
+            position: absolute;
+            top: 50%;
+            right: 0;
+
+            transform: translateY(-50%);
+        }
+    }
+}

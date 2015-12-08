@@ -1,6 +1,7 @@
 <header class="row">
 
     <div class="col-sm-4">
+
         <h1>Københavns Stadsarkiv</h1>
         <p>{{protocol}}</p>
 
@@ -9,32 +10,31 @@
                 <div ui-view="pageDetails"></div>
             </div>
             <div class="col-sm-4">
-                <button type="button" class="btn btn-default" ng-click="goToNextAvailablePage()">Næste ledige side</button>
+                <button type="button" class="btn btn-default" ng-click="goToNextAvailablePage()">{{TEXT.PAGE_NEXTAVAILABLE}}</button>
             </div>
         </div>
-        
-        
-        
 
     </div>
 
     <div class="col-sm-2">
-        10 sider tilbage af protocol
+        10 {{TEXT.PAGESLEFTONTASK}}
         <uib-progressbar animate="'true'" value="progress" type="success"><b>{{progress}}%</b></uib-progressbar>
     </div>
 
     <div class="col-sm-4">
-        Andre brugere i denne protokol lige nu:
 
-        <user username="'Jens Jensen'"></user>
+        {{TEXT.USER_OTHERSONSAMETASK}}:
+
+        <ul class="list-inline">
+            <li><user username="'Jens Jensen'"></user></li>
+        </ul>
+
     </div>
 
     <div class="col-sm-2">
-        DONUT
         <a href>Min side</a>
     </div>
 
 </header>
-
 
 <section ui-view></section>

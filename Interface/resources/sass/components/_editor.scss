@@ -6,7 +6,7 @@
     &__tools {
         position: absolute;
         z-index: 500;
-        right: 10px;
-        bottom: 10px;
+        right: $gutter / 2;
+        bottom: $gutter / 2;
     }
 }

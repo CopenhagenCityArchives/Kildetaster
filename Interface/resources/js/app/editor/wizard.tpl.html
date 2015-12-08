@@ -44,10 +44,10 @@
 <!-- Directive ?? -->
 <div class="row" ng-if="!isResult()">
     <div class="col-sm-6">
-        <button type="button" class="btn btn-default btn-block" ng-show="currentStep > 1" ng-click="prevStep()">Forrige</button>
+        <button type="button" class="btn btn-default btn-block" ng-show="currentStep > 1" ng-click="prevStep()">{{TEXT.BUTTON.PREV}}</button>
     </div>
     <div class="col-sm-6">
-        <button type="button" class="btn btn-primary btn-block" ng-click="validateStep()">Næste</button>
+        <button type="button" class="btn btn-primary btn-block" ng-click="validateStep()">{{TEXT.BUTTON.NEXT}}</button>
     </div>
 </div>
 
@@ -60,7 +60,7 @@
 <div class="row" ng-if="completedSteps.length > 0">
     <div class="col-sm-12">
         <h3>Udfyldt</h3>
-        <ul>
+        <ul class="list-unstyled">
             <li ng-repeat="step in completedSteps">
                 <a href ui-sref=".({ stepId: $index + 1})">{{step.title}} <span class="glyphicon glyphicon-pencil"></span></a>
             </li>
@@ -86,7 +86,7 @@
 
 <div class="row">
     <div class="col-sm-12">
-         <button type="button" class="btn btn-primary" ng-click="save()">Gem indtastning</button>
+         <button type="button" class="btn btn-primary" ng-click="save()">{{TEXT.BUTTON.SAVE}}</button>
     </div>
 </div>
 </div>

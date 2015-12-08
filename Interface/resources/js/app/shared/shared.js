@@ -14,7 +14,9 @@ define([
 
     'app/shared/services/step.service',
     'app/shared/services/task.service',
-    'app/shared/services/page.service'
+    'app/shared/services/page.service',
+
+    'app/shared/constants/text.constant'
 
 ], function(
 
@@ -32,7 +34,9 @@ define([
 
     stepService,
     taskService,
-    pageService
+    pageService,
+
+    textConstant
 
     ) {
 
@@ -49,6 +53,13 @@ define([
     sharedApp.factory('stepService', stepService);
     sharedApp.factory('taskService', taskService);
     sharedApp.factory('pageService', pageService);
+
+
+    sharedApp.constant('TEXT', textConstant);
+
+    sharedApp.run(function ($rootScope, TEXT) {
+        $rootScope.TEXT = TEXT;
+    });
 
     return sharedApp;
 

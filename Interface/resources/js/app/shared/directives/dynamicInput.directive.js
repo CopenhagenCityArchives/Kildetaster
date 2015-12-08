@@ -4,7 +4,7 @@ define([
 
 ], function(ang) {
 
-    var dynamicInputDirective = function dynamicInputDirective() {
+    var dynamicInputDirective = function dynamicInputDirective($rootScope) {
 
         return {
 
@@ -20,11 +20,15 @@ define([
             
             link: function(scope, element, attrs) {
 
-            //http://blog.backand.com/build-dynamic-forms/
-           //      if (!scope.value.val){
-           //    scope.value.val = scope.field.defaultValue;
-           // };
+                //Make rootScope TEXT constant available in local scope
+                scope.TEXT = $rootScope.TEXT;
 
+                scope.toggleUnreadable = function toggleUnreadable() {
+
+                    var prop = scope.field.unreadable;
+
+                    scope.field.unreadable = prop ? false : true;
+                };
 
             }
         };

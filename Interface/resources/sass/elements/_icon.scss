@@ -1,0 +1,9 @@
+.icon {
+    color: inherit;
+
+    &:hover, &:active, &:focus {
+        text-decoration: none;
+
+        color: inherit;
+    }
+}

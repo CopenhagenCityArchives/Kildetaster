@@ -3,12 +3,12 @@
     
     <label class="control-label">
         {{field.labelText}}
-        <span class="glyphicon glyphicon-question-sign" uib-tooltip="{{field.helpText}}" tooltip-placement="top"></span>
+        <span class="icon glyphicon glyphicon-question-sign" uib-tooltip="{{field.helpText}}" tooltip-placement="top"></span>
     </label>
     
     <div class="dynamic-form__adjust">
-        <input type="{{field.type}}" class="form-control" ng-model="field.value" />
-        <span class="glyphicon glyphicon-info-sign"></span>
+        <input type="{{field.type}}" class="form-control" ng-model="field.value" ng-disabled="field.unreadable" />
+        <a href class="icon glyphicon glyphicon-info-sign" uib-tooltip="{{TEXT.FIELD_UNREADABLE}}" tooltip-placement="left" ng-click="toggleUnreadable()"></a>
     </div>
 
     <div class="help-block" ng-if="field.errorText">{{field.errorText}}</div>   

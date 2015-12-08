@@ -1,10 +1,10 @@
 <div class="form-group" ng-class="{ 'has-error': errorText }">
     <label class="control-label">
         {{field.labelText}}
-        <span class="glyphicon glyphicon-question-sign" uib-tooltip="{{field.helpText}}" tooltip-placement="top"></span>
+        <span class="icon glyphicon glyphicon-question-sign" uib-tooltip="{{field.helpText}}" tooltip-placement="top"></span>
     </label>
     <div class="dynamic-form__adjust">
-        <ui-select ng-model="field.value">
+        <ui-select ng-model="field.value" ng-disabled="field.unreadable">
             <ui-select-match>
                 <span ng-bind="$select.selected.name"></span>
             </ui-select-match>
@@ -12,6 +12,6 @@
                 <span ng-bind="option.name"></span>
             </ui-select-choices>
         </ui-select>
-        <span class="glyphicon glyphicon-info-sign"></span>
+        <span class="icon glyphicon glyphicon-info-sign" uib-tooltip="{{TEXT.FIELD_UNREADABLE}}" tooltip-placement="left" ng-click="toggleUnreadable()"></span>
     </div>
 </div>

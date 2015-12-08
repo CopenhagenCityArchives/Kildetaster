@@ -12,11 +12,14 @@
 
 @import "modules/modules";
 
-
+//Components
 @import "components/editor";
+@import "components/header";
 
 //elements
+@import "elements/dynamic-form";
 @import "elements/editor-form-container";
 @import "elements/gotopage";
+@import "elements/icon";
 @import "elements/image-viewer";
 @import "elements/step-indicator";
