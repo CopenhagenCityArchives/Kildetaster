@@ -31,6 +31,9 @@ define([
             });
         }, 7000);
 
+        /**
+        * Cleanup 
+        */
         $scope.$on('$destroy', function() {
             $interval.cancel(userRandom);
         });
