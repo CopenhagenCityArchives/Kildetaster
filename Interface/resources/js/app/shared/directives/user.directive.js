@@ -11,12 +11,15 @@ define([
             restrict: 'E',
 
             scope: {
-                username: '='
+                data: '='
             },
 
             templateUrl: 'shared/directives/user.directive.tpl.html',
             
             link: function(scope, element, attrs) {
+
+                scope.username = scope.data.username;
+                scope.link = "someurl/" + scope.data.id;
 
             }
         }
