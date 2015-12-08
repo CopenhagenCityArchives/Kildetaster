@@ -31,10 +31,10 @@
         <div ng-repeat="field in currentStepData.fields">
             <div ng-switch="field.type">
                 <div ng-switch-when="text">
-                    <dynamic-input field-data="field"></dynamic-input>
+                    <dynamic-input field-data="field" autofocus="$index === 0"></dynamic-input>
                 </div>
                 <div ng-switch-when="select">
-                    <dynamic-select field-data="field"></dynamic-select>
+                    <dynamic-select field-data="field" autofocus="$index === 0"></dynamic-select>
                 </div>
             </div>
         </div>

@@ -13,7 +13,8 @@ define([
             replace: true,
 
             scope: {
-                field: '=fieldData'
+                field: '=fieldData',
+                autofocus: '='
             },
 
             templateUrl: 'shared/directives/dynamicInput.directive.tpl.html',
@@ -29,6 +30,12 @@ define([
 
                     scope.field.unreadable = prop ? false : true;
                 };
+
+                //If we are supposed to set autofocus to the field
+                if (scope.autofocus) {
+                    //Do so
+                    $(element[0]).find('input').focus();
+                }
 
             }
         };
