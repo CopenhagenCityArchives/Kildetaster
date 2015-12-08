@@ -1,0 +1,21 @@
+<div class="form-group dynamic-form" ng-class="{ 'has-error': field.errorText }">
+    <label class="control-label">
+        {{field.labelText}}
+        <span class="icon glyphicon glyphicon-question-sign" uib-tooltip="{{field.helpText}}" tooltip-placement="top"></span>
+    </label>
+    <div class="dynamic-form__adjust">
+        
+        <input 
+            type="text" 
+            class="form-control" 
+            ng-model="field.value" 
+            ng-disabled="field.unreadable" 
+            placeholder="Opholdssted" 
+            uib-typeahead="option as option.name for option in field.options | filter:{name:$viewValue}"
+        />
+
+        <a href class="icon glyphicon glyphicon-info-sign" uib-tooltip="{{TEXT.FIELD_UNREADABLE}}" tooltip-placement="left" ng-click="toggleUnreadable()"></a>
+    </div>
+    <div class="help-block" ng-if="field.errorText">{{field.errorText}}</div>
+
+</div>

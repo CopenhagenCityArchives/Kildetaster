@@ -9,6 +9,26 @@
         "value": "",
         "helpText": "Lorem ipsum dolor sit amet, consectetur adipisicing elit.",
         "errorText": ""
+    }, 
+    {
+        "field": "place",
+        "labelText": "Opholdssted",
+        "type": "typeahead",
+        "options": [{
+            "id": 1,
+            "name": "Anholt"
+        }, {
+            "id": 2,
+            "name": "Bornholm"
+        }, {
+            "id": 3,
+            "name": "Fyn"
+        }, {
+            "id": 4,
+            "name": "Sjælland"
+        }],
+        "value": "",
+        "helpText": "Amet, consectetur adipisicing elit. Error, consequuntur nihil quis!"
     }, {
         "field": "lastname",
         "labelText": "Efternavn",

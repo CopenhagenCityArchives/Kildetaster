@@ -4,30 +4,22 @@
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi repudiandae, distinctio magni perferendis, accusantium officia!</p>
     </div>
 </div>
-
 <div class="row" ng-if="currentStep == 1">
     <div class="col-sm-12">
-
         <h3>{{currentStepData.title}}</h3>
         <p>{{currentStepData.description}}</p>
-        
         <step-of total="numSteps" current="currentStep"></step-of>
-        
         <p>Vælg indførelsesområdet. Brug mus til at markere området</p>
         <p class="text-center" ng-click="enableSelection()">
             <span class="glyphicon glyphicon-resize-full"></span>
         </p>
     </div>
 </div>
-
 <div class="row" ng-if="currentStep > 1 && !isResult()">
     <div class="col-sm-12">
-        
         <h3>{{currentStepData.title}}</h3>
         <p>{{currentStepData.description}}</p>
-        
         <step-of total="numSteps" current="currentStep"></step-of>
-        
         <div ng-repeat="field in currentStepData.fields">
             <div ng-switch="field.type">
                 <div ng-switch-when="text">
@@ -36,12 +28,16 @@
                 <div ng-switch-when="select">
                     <dynamic-select field-data="field" autofocus="$index === 0"></dynamic-select>
                 </div>
+                <div ng-switch-when="typeahead">
+                    <dynamic-typeahead field-data="field" autofocus="$index === 0"></dynamic-typeahead>
+                </div>
             </div>
         </div>
+
+
+        
     </div>
 </div>
-
-<!-- Directive ?? -->
 <div class="row" ng-if="!isResult()">
     <div class="col-sm-6">
         <button type="button" class="btn btn-default btn-block" ng-show="currentStep > 1" ng-click="prevStep()">{{TEXT.BUTTON.PREV}}</button>
@@ -50,43 +46,36 @@
         <button type="button" class="btn btn-primary btn-block" ng-click="validateStep()">{{TEXT.BUTTON.NEXT}}</button>
     </div>
 </div>
-
 <div class="row" ng-if="!isResult()">
     <div class="col-sm-12">
         <step-indicator total="numSteps" current="currentStep"></step-indicator>
     </div>
 </div>
-
 <div class="row" ng-if="completedSteps.length > 0">
     <div class="col-sm-12">
         <h3>Udfyldt</h3>
         <ul class="list-unstyled">
             <li ng-repeat="step in completedSteps">
-                <a href ui-sref=".({ stepId: $index + 1})">{{step.title}} <span class="glyphicon glyphicon-pencil"></span></a>
+                <a href ui-sref=".({ stepId: $index + 1})">{{step.title}} <span class="icon glyphicon glyphicon-pencil"></span></a>
             </li>
         </ul>
     </div>
 </div>
-
 <div ng-if="isResult()">
-<div class="row">
-    <div class="col-sm-12">
-        
-        <a href ng-click="toggleComment()" ng-show="!showComment">Tilføj bemærkninger</a>
-        
-        <div class="form-group" ng-show="showComment">
-            <label class="control-label">
-                Tilføj bemærkning
-            </label>
-            <textarea class="form-control" ng-trim="true" ng-model="comment"></textarea>
+    <div class="row">
+        <div class="col-sm-12">
+            <a href ng-click="toggleComment()" ng-show="!showComment">Tilføj bemærkninger</a>
+            <div class="form-group" ng-show="showComment">
+                <label class="control-label">
+                    Tilføj bemærkning
+                </label>
+                <textarea class="form-control" ng-trim="true" ng-model="comment"></textarea>
+            </div>
         </div>
-       
     </div>
-</div>
-
-<div class="row">
-    <div class="col-sm-12">
-         <button type="button" class="btn btn-primary" ng-click="save()">{{TEXT.BUTTON.SAVE}}</button>
+    <div class="row">
+        <div class="col-sm-12">
+            <button type="button" class="btn btn-primary" ng-click="save()">{{TEXT.BUTTON.SAVE}}</button>
+        </div>
     </div>
-</div>
 </div>

@@ -11,6 +11,7 @@ define([
     
     'app/shared/directives/dynamicInput.directive',
     'app/shared/directives/dynamicSelect.directive',
+    'app/shared/directives/dynamicTypeahead.directive',
 
     'app/shared/services/step.service',
     'app/shared/services/task.service',
@@ -31,6 +32,7 @@ define([
 
     dynamicInputDirective,
     dynamicSelectDirective,
+    dynamicTypeaheadDirective,
 
     stepService,
     taskService,
@@ -49,6 +51,7 @@ define([
     
     sharedApp.directive('dynamicInput', dynamicInputDirective);
     sharedApp.directive('dynamicSelect', dynamicSelectDirective);
+    sharedApp.directive('dynamicTypeahead', dynamicTypeaheadDirective);
 
     sharedApp.factory('stepService', stepService);
     sharedApp.factory('taskService', taskService);
