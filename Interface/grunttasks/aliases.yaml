@@ -1,6 +1,7 @@
 prototype:
     - 'clean:prototype'
     - 'html2js:prototype'
+    - 'ngconstant:prototype'
     - 'copy:prototype'
     - 'sass:prototype'
     - 'bake:prototype'
@@ -12,6 +13,7 @@ prototype:
 sdk:
     - 'clean:sdk'
     - 'html2js:sdk'
+    - 'ngconstant:prototype'
     - 'copy:sdk'
     - 'sass:sdk'
     - 'bake:sdk'
@@ -39,6 +41,11 @@ build:
     - 'sass:production'
     - 'postcss:production'
     - 'requirejs:production'
+
+travis: 
+    - 'html2js:prototype'
+    - 'html2js:sdk'
+    - 'ngconstant:prototype'
 
 optimize:
     - 'imagemin:originals'
