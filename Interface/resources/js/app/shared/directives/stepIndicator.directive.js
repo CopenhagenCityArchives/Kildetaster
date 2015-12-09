@@ -4,7 +4,7 @@ define([
 
 ], function(ang) {
 
-    var stepIndicatorDirective = function stepIndicatorDirective() {
+    var stepIndicatorDirective = function stepIndicatorDirective($location) {
 
         return {
 
@@ -29,6 +29,12 @@ define([
 
                 scope.hasPrevious = function(index) {
                     return index < scope.current;
+                };
+
+                scope.handleClick = function handleClick(index) {
+                    if (scope.hasPrevious(index)) {
+                        $location.search({ stepId: index + 1});
+                    }
                 };
 
 
