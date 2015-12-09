@@ -18,10 +18,23 @@ require.config({
     baseUrl: '/base',
 
     paths: {
-        'jquery'        : 'bower_components/jquery/dist/jquery.min',
-        'angular'       : 'bower_components/angular/angular.min',
-        'angular-mocks' : 'bower_components/angular-mocks/angular-mocks',
-        'openseadragon' : 'bower_components/openseadragon/built-openseadragon/openseadragon/openseadragon.min'
+        //Overall path to make paths from the application work in the test invironment
+        'app'                   : 'js/app',
+        'libs'                   : 'js/libs',
+    
+        'jquery'                : 'bower_components/jquery/dist/jquery.min',
+        'angular'               : 'bower_components/angular/angular.min',
+        'angular-mocks'         : 'bower_components/angular-mocks/angular-mocks',       
+        'angular-animate'       : 'bower_components/angular-animate/angular-animate.min',
+        'angular-bootstrap'     : 'bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
+        'angular-sanitize'      : 'bower_components/angular-sanitize/angular-sanitize.min',
+
+        'angular-ui-router'     : 'bower_components/angular-ui-router/release/angular-ui-router.min',
+        'angular-ui-select'     : 'bower_components/ui-select/dist/select.min',
+
+
+        'openseadragon'         : 'bower_components/openseadragon/built-openseadragon/openseadragon/openseadragon.min',
+        
     },
 
     shim: {
@@ -29,7 +42,21 @@ require.config({
             deps: ['jquery'],
             exports: 'angular'
         },
-        'angular-mocks': ['angular']
+        'angular-mocks': ['angular'],
+
+        'angular-ui-router': ['angular'],
+        'angular-ui-select': ['angular'],
+        'angular-sanitize': ['angular'],
+        'angular-animate': ['angular'],
+        
+        'app/shared/constants': ['angular'],
+
+        'bootstrap': ['jquery'],
+        'angular-bootstrap': ['angular'],
+
+        'libs/openseadragonselection': ['openseadragon'],
+        'libs/openseadragon-filtering': ['openseadragon']
+
     },
 
     // dynamically load all test files

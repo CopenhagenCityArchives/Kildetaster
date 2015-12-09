@@ -1,7 +1,6 @@
 define([
 
-    'angular',
-    'openseadragon'
+    'angular'
 
 ], function() {
 

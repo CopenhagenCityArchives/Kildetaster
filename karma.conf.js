@@ -14,9 +14,8 @@ module.exports = function(config) {
 
         // list of files / patterns to load in the browser
         files: [
+
             'bower_components/jquery/dist/jquery.min.js',
-            //'bower_components/angular/angular.min.js',
-            //'bower_components/angular-mocks/angular-mocks.js',
             {
                 pattern: 'bower_components/**/*.js',
                 included: false
@@ -85,5 +84,5 @@ module.exports = function(config) {
         // Concurrency level
         // how many browser should be started simultanous
         concurrency: Infinity
-    })
-}
+    });
+};

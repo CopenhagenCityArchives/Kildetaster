@@ -1,6 +1,6 @@
 define([
 
-    'angular'
+    'angular',
 
 ], function(ang) {
 
@@ -37,6 +37,12 @@ define([
                     $(element[0]).find('input').focus();
                 }
 
+                //Listen for changes to autofocus property
+                scope.$watch('autofocus', function(newVal, oldVal) {
+                    if (newVal !== oldVal && newVal === true) {
+                        $(element[0]).find('input').focus();
+                    }
+                });
             }
         };
     };
