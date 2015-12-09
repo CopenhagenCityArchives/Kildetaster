@@ -4,7 +4,7 @@ define([
     'angular',
     'angular-mocks',
     
-    'js/app/demo/demo'
+    'app/demo/demo'
 
 ], function(demoApp) {
 
