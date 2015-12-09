@@ -1,6 +1,7 @@
 language: node_js
 node_js:
   - '0.12'
+script: node_modules/karma/bin/karma start test/karma.conf.js --single-run --browsers PhantomJS
 before_script:
   - 'npm install -g grunt-cli'
   - 'npm install -g bower'
