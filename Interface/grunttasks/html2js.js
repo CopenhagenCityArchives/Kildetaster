@@ -27,4 +27,4 @@ module.exports = {
         src: ['<%= package.resources %>/**/*.tpl.html'],
         dest: '<%= package.resources %>/js/app/shared/templates.js'  
     }
-}
+};
