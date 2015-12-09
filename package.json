@@ -1,10 +1,7 @@
 {
   "name": "Kildetaster",
   "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "test": "./node_modules/.bin/karma start --single-run --browsers PhantomJS"
-  },  
+  "private": true,  
   "siteName": "kbh",
   "root": ".",
   "build": "kbh",
@@ -48,5 +45,8 @@
     "phantomjs": "^1.9.19",
     "requirejs": "^2.1.22",
     "time-grunt": "^1.2.1"
+  },
+  "scripts": {
+    "test": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
   }
 }
