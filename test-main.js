@@ -1,3 +1,9 @@
+/**
+*
+* This file contains the RequireJS setup for require when running karma 
+*
+**/
+
 var allTestFiles = [];
 var TEST_REGEXP = /(spec|test)\.js$/i;
 
