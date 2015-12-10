@@ -77,6 +77,9 @@ define([
             expect(element.focus).toHaveBeenCalled();
         });
 
+        it('should fail', function() {
+            expect(true).toBe(false);
+        });
     });
 
 });
