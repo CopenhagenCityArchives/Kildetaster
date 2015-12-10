@@ -7,7 +7,8 @@ module.exports = {
             expand: true,
             filter: 'isFile',
             cwd: '<%= package.resources %>/sass',
-            src: '**/*.scss',
+
+            src: ['**/*.scss', '!**/_bootstrap-variables.scss'],
             dest: '<%= package.resources %>/sass'
         }]
     }
