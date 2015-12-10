@@ -54,8 +54,7 @@ build:
     
     - 'ngAnnotate:production'
     - 'uglify:production'
-    - 'bake:prototype'
-    - 'bake:sdk'
+    - 'bake:production'
     - 'sass:production'
     - 'postcss:production'
     

@@ -38,6 +38,16 @@ module.exports = {
         }]
     },
 
+    production: {
+
+        options: {},
+
+        files: [{
+            src: '<%= package.html %>/index_development.html',
+            dest: '<%= package.build %>/index.html'
+        }]
+    },
+
     // production: {
 
     //     options: {
