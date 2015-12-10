@@ -1,7 +1,7 @@
 {
   "name": "Kildetaster",
   "version": "0.0.1",
-  "private": true,  
+  "private": true,
   "siteName": "kbh",
   "root": ".",
   "build": "kbh",
@@ -41,6 +41,7 @@
     "karma-jasmine": "^0.3.6",
     "karma-phantomjs-launcher": "^0.2.1",
     "karma-requirejs": "^0.2.2",
+    "karma-teamcity-reporter": "^0.2.1",
     "load-grunt-config": "^0.17.2",
     "phantomjs": "^1.9.19",
     "requirejs": "^2.1.22",

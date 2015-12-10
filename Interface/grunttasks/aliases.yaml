@@ -58,6 +58,9 @@ build:
     - 'bake:sdk'
     - 'sass:production'
     - 'postcss:production'
+    
+    #Run unittests    
+    - 'karma:production'
 
 travis: 
     - 'html2js:prototype'

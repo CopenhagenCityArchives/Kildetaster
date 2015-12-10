@@ -10,6 +10,14 @@ module.exports = {
             background: true,
             singleRun: false
         }
+    },
+
+    production: {
+        options: {
+            browsers: ['PhantomJS'],
+            singleRun: true,
+            reporters: ['teamcity']
+        }
     }
 
-}
+};
