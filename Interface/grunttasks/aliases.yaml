@@ -28,6 +28,7 @@ dev:
     - 'clean:development'
     - 'html2js:editor'
     - 'html2js:sdk'
+    - 'ngconstant:development'
     - 'copy:development'
     # bundle up files
     - 'requirejs:development'
@@ -45,6 +46,7 @@ build:
     - 'clean:production'
     - 'html2js:editor'
     - 'html2js:sdk'
+    - 'ngconstant:production'
     - 'copy:production'
     - 'imagemin:production'
     
