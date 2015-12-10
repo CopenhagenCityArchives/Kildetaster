@@ -63,7 +63,7 @@ build:
     - 'karma:production'
 
 travis: 
-    - 'html2js:prototype'
+    - 'html2js:editor'
     - 'html2js:sdk'
     - 'ngconstant:prototype'
 
