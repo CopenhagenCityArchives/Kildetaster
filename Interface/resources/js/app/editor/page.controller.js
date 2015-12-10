@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var editorController = function editorController($scope, $state, pageData, $location, $timeout) {       
+    var editorController = /*@ngInject*/ function editorController($scope, $state, pageData, $location, $timeout, $rootScope) {       
 
         $scope.nextPageId = pageData.nextPageId;
         $scope.prevPageId = pageData.prevPageId;
@@ -26,6 +26,8 @@ define([
         * When area is selected, move wizard to step 2
         */
         $scope.areaSelected = function areaSelected() {
+
+            $rootScope.$broadcast('areaSelected');
             
             $timeout(function() {
                 $location.search({ stepId: 2 });

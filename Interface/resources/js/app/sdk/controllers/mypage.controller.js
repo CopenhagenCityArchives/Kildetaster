@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var mypageController = function mypageController($scope, taskService, EDITORURL) {
+    var mypageController = /*@ngInject*/ function mypageController($scope, taskService, EDITORURL) {
 
         $scope.loading = true;
         $scope.openProjects = [];

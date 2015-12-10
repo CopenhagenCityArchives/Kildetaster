@@ -4,7 +4,7 @@ define([
 
 ], function(ang) {
 
-    var stepIndicatorDirective = function stepIndicatorDirective($location) {
+    var stepIndicatorDirective = /*@ngInject*/ function stepIndicatorDirective($location) {
 
         return {
 

@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var pageService = function pageService($http, $cacheFactory, $q, $filter) {
+    var pageService = /*@ngInject*/ function pageService($http, $cacheFactory, $q, $filter) {
 
         var baseUrl = '/resources/mock/',
             cache = $cacheFactory('pageCache');

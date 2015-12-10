@@ -4,7 +4,7 @@ define([
 
 ], function(ang) {
 
-    var dynamicSelectDirective = function dynamicSelectDirective($rootScope) {
+    var dynamicSelectDirective = /*@ngInject*/ function dynamicSelectDirective($rootScope) {
 
         return {
 

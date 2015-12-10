@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var stepService = function($timeout, $q, $http) {
+    var stepService = /*@ngInject*/ function($timeout, $q, $http) {
 
         var basePath = '/resources/mock';
 

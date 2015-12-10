@@ -4,7 +4,7 @@ define([
 
 ], function() {
 
-    var opentasksController = function opentasksController($scope, taskService) {
+    var opentasksController = /*@ngInject*/ function opentasksController($scope, taskService) {
 
         $scope.loading = false;
         $scope.tasks = [];

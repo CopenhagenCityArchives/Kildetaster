@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var wizardDoneController = function wizardDoneController($scope, $state, $stateParams) {
+    var wizardDoneController = /*@ngInject*/ function wizardDoneController($scope, $state, $stateParams) {
 
         $scope.startNewOnSamePage = function startNewOnSamePage() {
             //Go to page for same project and page

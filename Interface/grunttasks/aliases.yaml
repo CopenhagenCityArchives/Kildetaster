@@ -1,6 +1,7 @@
 prototype:
+
     - 'clean:prototype'
-    - 'html2js:prototype'
+    - 'html2js:editor'
     - 'ngconstant:prototype'
     - 'copy:prototype'
     - 'sass:prototype'
@@ -25,22 +26,36 @@ sdk:
 
 dev:
     - 'clean:development'
+    - 'html2js:editor'
+    - 'html2js:sdk'
     - 'copy:development'
-    - 'html2js:development'
+    # bundle up files
     - 'requirejs:development'
+    
+    # Add angular annotations
+    - 'ngAnnotate:development'
+    
     - 'uglify:development'
+    - 'bake:prototype'
     - 'sass:development'
-    - 'bake:development'
     - 'postcss:development'
     - 'watchDevelopment'
 
 build:
     - 'clean:production'
+    - 'html2js:editor'
+    - 'html2js:sdk'
     - 'copy:production'
     - 'imagemin:production'
+    
+    - 'requirejs:production'
+    
+    - 'ngAnnotate:production'
+    - 'uglify:production'
+    - 'bake:prototype'
+    - 'bake:sdk'
     - 'sass:production'
     - 'postcss:production'
-    - 'requirejs:production'
 
 travis: 
     - 'html2js:prototype'

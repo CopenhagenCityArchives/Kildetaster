@@ -1,7 +1,5 @@
 module.exports = {
-    production: {
-        src: ['<%= package.buildresources %>/**'],
-    },
+    
     prototype: {
         src: ['<%= package.prototype %>/**'],
     },
@@ -9,6 +7,9 @@ module.exports = {
       src: ['<%= package.sdk %>/**'],  
     },
     development: {
+        src: ['<%= package.buildresources %>/**'],
+    },
+    production: {
         src: ['<%= package.buildresources %>/**'],
     }
 };

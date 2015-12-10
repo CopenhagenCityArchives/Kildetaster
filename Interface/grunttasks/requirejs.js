@@ -20,7 +20,7 @@ module.exports = {
             baseUrl: "<%= package.resources %>/js",
             mainConfigFile: "<%= package.resources %>/js/config.js",
             out: "<%= package.buildresources %>/js/script.js",
-            optimize: "uglify2"
+            optimize: "none"
         }
     }
 };

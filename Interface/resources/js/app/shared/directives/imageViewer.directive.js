@@ -12,7 +12,7 @@ define([
     /**
      * Based on https://github.com/MaitreDede/angular-openseadragon
      */
-    var openseadragonDirective = function openseadragonDirective() {
+    var openseadragonDirective = /*@ngInject*/ function openseadragonDirective() {
 
         return {
 
@@ -25,19 +25,12 @@ define([
 
             //templateUrl: 'shared/directives/imageViewer.directive.tpl.html',
 
-            controller: function($scope, $compile, $templateCache, $element, $rootScope) {
+            controller: /*@ngInject*/ function($scope, $compile, $templateCache, $element, $rootScope) {
 
                 var viewer, opts;
 
-
                 //Openhttps://github.com/openseadragon/openseadragon/issues/759
-
-                $scope.$on('selectionEnabled', function() {
-                    //console.log('selection is enabled');
-                    viewer.zoomsPerClick = 1;
-                    viewer.navigatorPosition = 'TOP_LEFT';
-                });
-
+                
                 var template = $compile($templateCache.get('shared/directives/imageViewer.directive.tpl.html'))($scope);
 
                 angular.element($element).replaceWith(template);
@@ -65,42 +58,42 @@ define([
 
                 opts = angular.extend({}, $scope.options, {
 
-                        element: angular.element('.target')[0],
+                    element: angular.element('.target')[0],
 
-                        showNavigator: true,
-                        navigatorPosition: "BOTTOM_LEFT",
-                        navigatorWidth: 160,
-                        navigatorHeight: 160,
+                    showNavigator: true,
+                    navigatorPosition: "BOTTOM_LEFT",
+                    navigatorWidth: 160,
+                    navigatorHeight: 160,
 
-                        zoomInButton: "zoom-in",
-                        zoomOutButton: "zoom-out",
-                        homeButton: "home",
-                        fullPageButton: "full-page",
-                        nextButton: "next",
-                        previousButton: "previous",
-                        
-                        //Prefix for image paths
-                        prefixUrl: '/resources/bower_components/openseadragon/built-openseadragon/openseadragon/images/',
+                    zoomInButton: "zoom-in",
+                    zoomOutButton: "zoom-out",
+                    homeButton: "home",
+                    fullPageButton: "full-page",
+                    nextButton: "next",
+                    previousButton: "previous",
 
-                        toggleButton: 'toggle-selection',
+                    //Prefix for image paths
+                    prefixUrl: '/resources/bower_components/openseadragon/built-openseadragon/openseadragon/images/',
 
-                        navImages: {},
+                    toggleButton: 'toggle-selection',
 
-                        debugMode: false,
+                    navImages: {},
 
-                        //The "zoom distance" per mouse scroll or touch pinch. Note: Setting this to 1.0 effectively disables the mouse-wheel zoom feature 
-                        //(also see gestureSettings[Mouse|Touch|Pen].scrollToZoom}).
-                        zoomPerScroll: 1.0
+                    debugMode: false,
 
-                    });
+                    //The "zoom distance" per mouse scroll or touch pinch. Note: Setting this to 1.0 effectively disables the mouse-wheel zoom feature 
+                    //(also see gestureSettings[Mouse|Touch|Pen].scrollToZoom}).
+                    zoomPerScroll: 1.0
+
+                });
 
                 //Initialize the viewer
                 viewer = OpenSeadragon(opts);
 
-
                 //Selection plugin
                 //https://github.com/picturae/openseadragonselection
                 viewer.selection({
+
                     onSelection: function(rect) {
 
                         //https://github.com/picturae/openseadragonselection/issues/7
@@ -151,10 +144,17 @@ define([
                     }
                 });
 
+            
+                $('.editor').on('dblclick', '.imageViewer__progress', function(e){
+                    console.log('convert-to-selection');
+                });
+            
 
                 //Cleanup
                 $scope.$on('destroy', function() {
                     viewer.destroy();
+                    $('.editor').off('dblclick');
+
                 });
 
 

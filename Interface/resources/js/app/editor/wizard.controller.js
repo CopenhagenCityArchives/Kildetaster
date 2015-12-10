@@ -1,9 +1,30 @@
 define([
-
+    
 ], function() {
     
-    var wizardController = function($scope, $rootScope, stepService, $stateParams, $location, $state) {
+    var wizardController = /*@ngInject*/ function($scope, $rootScope, stepService, $stateParams, $location, $state) {
 
+        /**
+        * When area is selected in the directive controlling openseadragon, and we are on the first step
+        * go to the next step.
+        */
+        $scope.$on('areaSelected', function() {
+
+            if ($scope.currentStep === 1) {
+                $scope.completedSteps.push($scope.currentStepData);
+                $scope.nextStep();
+            }
+        });
+
+        /**
+        * Because we do not trigger the ui.route logic (see.editor.config.js), 
+        * listen for changes to the location.search
+        */
+        $rootScope.$on('$locationChangeSuccess', function(event){
+            $scope.currentStep = $location.search().stepId;
+            $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
+        });
+        
         $scope.steps = [];        
 
         $scope.numSteps = null;
@@ -13,9 +34,11 @@ define([
         $scope.completedSteps = [];
 
         $scope.comment = '';
-
         $scope.showComment = false;
 
+        /**
+        * Toggle wether or not to show the comment text area
+        */
         $scope.toggleComment = function toggleComment(force) {
 
             if (force) {
@@ -31,18 +54,18 @@ define([
         };
 
         $scope.save = function save() {
-            console.log('saving');
+            
+            alert('Saving entry');
 
-            $state.go('.done', {}, { reload: true })
+            $scope.prepareData();
+
+            $state.go('.done', {}, { reload: true });
         };
 
-        /**
-        * Because we do not trigger the ui.route logic, listen for changes to the location.search
-        */
-        $rootScope.$on('$locationChangeSuccess', function(event){
-            $scope.currentStep = $location.search().stepId;
-            $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
-        });
+        //Loop over all fields and build json response for backend to save data
+        $scope.prepareData = function prepareData() {    
+
+        };
 
         stepService.getData().then(function(response) {
             $scope.steps = response;
@@ -59,15 +82,22 @@ define([
         };
 
         $scope.prevStep = function prevStep() {
-            $location.search({ stepId: parseInt($scope.currentStep) - 1 })
+            $location.search({ stepId: parseInt($scope.currentStep) - 1 });
         };
 
 
         $scope.validateStep = function validateStep() {
 
             stepService.validateStep($scope.formData).then(function(response) {
+                //We have a valid step
                 if (response.isValid) {
-                    $scope.completedSteps.push($scope.currentStepData);
+                    
+                    //Have we validated this step before?
+                    if ($scope.completedSteps.indexOf($scope.currentStepData) === -1) {
+                        //If not, add the step to completed steps
+                        $scope.completedSteps.push($scope.currentStepData);
+                    }
+                    //And move to the next step
                     $scope.nextStep();
                 }
                 else {

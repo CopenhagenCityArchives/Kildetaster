@@ -4,7 +4,7 @@ define([
 
 ], function(ang) {
 
-    var dynamicTypeaheadDirective = function dynamicTypeaheadDirective($rootScope) {
+    var dynamicTypeaheadDirective = /*@ngInject*/ function dynamicTypeaheadDirective($rootScope) {
 
         return {
 

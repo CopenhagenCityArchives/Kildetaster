@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var taskService = function taskService($http, $cacheFactory, $q, $filter) {
+    var taskService = /*@ngInject*/ function taskService($http, $cacheFactory, $q, $filter) {
 
         var baseUrl = '/resources/mock/',
             cache = $cacheFactory('taskCache');

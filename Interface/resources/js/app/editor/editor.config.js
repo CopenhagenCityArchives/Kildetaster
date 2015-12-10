@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var editorConfig = function editorConfig($stateProvider, $urlRouterProvider) {
+    var editorConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider) {
 
         // For any unmatched url, redirect to /
         $urlRouterProvider.otherwise('/error');
@@ -53,13 +53,12 @@ define([
                 pageData: function($stateParams, pageService, $q) {
 
                     var deferred = $q.defer();
-                    
+
                     pageService.getPage($stateParams.pageId).then(function(response) {
 
                         if (response) {
                             deferred.resolve(response);
-                        }
-                        else {
+                        } else {
                             deferred.reject('Error', response);
                         }
 
@@ -72,9 +71,9 @@ define([
         })
 
         .state('editor.page.notfound', {
-            url:'',
+            url: '',
             views: {
-                 '@editor': {
+                '@editor': {
                     templateUrl: 'editor/page.notfound.tpl.html',
                     controller: function() {
                         alert('Page not found');
@@ -90,7 +89,25 @@ define([
             reloadOnSearch: false,
 
             templateUrl: 'editor/wizard.tpl.html',
-            controller: 'wizardController'
+            controller: 'wizardController',
+            resolve: {
+
+                /**
+                * Test if we are starting from stepId == 1, and if not redirect to stepId = 1
+                * We can do this because the route is set to not to reload on search. The changes
+                * are instead handled via a watcher in the wizardController
+                */
+                fromStart: function($q, $stateParams, $location) {
+                    var deferred = $q.defer();
+
+                    if ($stateParams.stepId !== 1) {
+                        $location.search({ stepId: 1 });
+                    }
+                    deferred.resolve();
+
+                    return deferred.promise;
+                }
+            }
         })
 
         .state('editor.page.wizard.done', {
@@ -102,8 +119,17 @@ define([
                     controller: 'wizardDoneController'
                 }
 
-            }            
+            }
         })
+
+
+        .state('feedback', {
+
+            url: '/feedback/{feedbackId:int}',
+            templateUrl: 'editor/feedback/feedback.tpl.html',
+            controller: 'feedbackController'
+        })
+
 
         .state('error', {
             url: '/error',

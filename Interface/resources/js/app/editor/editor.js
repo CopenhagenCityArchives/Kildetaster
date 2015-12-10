@@ -16,6 +16,8 @@ define([
     'app/editor/wizard.controller',
     'app/editor/wizard.done.controller',
 
+    'app/editor/feedback/feedback.controller'
+
 
 ], function(
 
@@ -33,7 +35,9 @@ define([
     taskController,
     pageController,
     wizardController,
-    wizardDoneController
+    wizardDoneController,
+
+    feedbackController
 
 ) {
 
@@ -46,16 +50,11 @@ define([
     editorApp.controller('pageController', pageController);
     editorApp.controller('wizardController', wizardController);
     editorApp.controller('wizardDoneController', wizardDoneController);
+    editorApp.controller('feedbackController', feedbackController);
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-editor-app]'), ['editor']);
     });
-
-
-    //Debugging for ui.router state issues
-    // app.run(($rootScope) => {
-    //     $rootScope.$on("$stateChangeError", console.log.bind(console));
-    // });
 
     return editorApp;
 

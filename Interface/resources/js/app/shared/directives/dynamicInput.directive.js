@@ -4,7 +4,7 @@ define([
 
 ], function(ang) {
 
-    var dynamicInputDirective = function dynamicInputDirective($rootScope) {
+    var dynamicInputDirective = /*@ngInject*/ function dynamicInputDirective($rootScope) {
 
         return {
 

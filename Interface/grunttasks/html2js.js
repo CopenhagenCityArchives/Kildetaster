@@ -10,7 +10,7 @@ module.exports = {
         
     },
 
-    prototype: {
+    editor: {
         src: ['<%= package.resources %>/**/*.tpl.html', '!<%= package.resources %>/js/app/sdk/**/*.tpl.html'],
         dest: '<%= package.resources %>/js/app/shared/templates.js'
     },
@@ -21,10 +21,6 @@ module.exports = {
         },
         src: ['<%= package.resources %>/js/app/shared/**/*.tpl.html', '<%= package.resources %>/js/app/sdk/**/*.tpl.html'],
         dest: '<%= package.sdkresources %>/js/app/shared/sdk-templates.js'
-    },
-
-    production: {
-        src: ['<%= package.resources %>/**/*.tpl.html'],
-        dest: '<%= package.resources %>/js/app/shared/templates.js'  
     }
+    
 };

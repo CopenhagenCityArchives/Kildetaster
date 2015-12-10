@@ -10,7 +10,7 @@ define([
         beforeEach(module('editor'));
 
         it('should have a headerController', function() {
-            
+            expect(true).toBe(true);
 
         });
 

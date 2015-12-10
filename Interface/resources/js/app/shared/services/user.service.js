@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var userService = function taskService($http) {
+    var userService = /*@ngInject*/ function taskService($http) {
 
         var baseUrl = '/resources/mock/';
 

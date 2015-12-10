@@ -28,6 +28,7 @@
 
         opacity: 0.5;
         border: 2px solid $gray;
-        box-shadow: 2px 3px 10px #000000, -2px -3px 10px #000000;
+        //Add dropshadow to the marked area, with a shade so big it
+        box-shadow: 0 0 100px 2000px #000000;
     }
 }

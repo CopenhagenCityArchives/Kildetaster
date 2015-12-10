@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var editorRun = function editorRun($rootScope, $state) {
+    var editorRun = /*@ngInject*/ function editorRun($rootScope, $state) {
 
         /**
          * Listen for changes to a state with a redirectTo property
@@ -16,15 +16,20 @@ define([
             }
         });
 
-
         /**
          * If state change, show page not found error
          */
         $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error) {
+            console.log(toState);
             //console.log('editor.run:', error);
-            $state.go('^.notfound');
+            
+
+            //$state.go('editor.page.notfound');
 
         });
+
+        //Route debugging
+        $rootScope.$on("$stateChangeError", console.log.bind(console));
 
     };
 
