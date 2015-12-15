@@ -45,6 +45,10 @@ define([
             }
 
         };
+
+        if (pageData.editArea) {
+            $scope.editArea = pageData.editArea;
+        }
         
     };
 

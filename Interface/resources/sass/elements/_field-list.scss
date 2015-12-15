@@ -1,0 +1,14 @@
+.field-list {
+    &__item {
+        padding-bottom: 6px;
+    }
+
+    &__highlight {
+        margin-right: -5px;
+        margin-bottom: $gutter / 2;
+        margin-left: -5px;
+        padding: 5px 5px;
+
+        background-color: $yellow;
+    }
+}

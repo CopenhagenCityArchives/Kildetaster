@@ -10,11 +10,11 @@
             class="form-control" 
             ng-model="field.value" 
             ng-disabled="field.unreadable" 
-            placeholder="Opholdssted" 
             uib-typeahead="option as option.name for option in field.options | filter:{name:$viewValue}"
+            typeahead-append-to-body="true"
         />
 
-        <a href class="icon glyphicon glyphicon-info-sign" uib-tooltip="{{TEXT.FIELD_UNREADABLE}}" tooltip-placement="left" ng-click="toggleUnreadable()"></a>
+        <a href tabindex="-1" class="icon glyphicon glyphicon-info-sign" uib-tooltip="{{TEXT.FIELD_UNREADABLE}}" tooltip-placement="left" ng-click="toggleUnreadable()"></a>
     </div>
     <div class="help-block" ng-if="field.errorText">{{field.errorText}}</div>
 

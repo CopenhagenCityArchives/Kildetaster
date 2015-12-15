@@ -30,14 +30,7 @@ define([
                 scope.hasPrevious = function(index) {
                     return index < scope.current;
                 };
-
-                scope.handleClick = function handleClick(index) {
-                    if (scope.hasPrevious(index)) {
-                        $location.search({ stepId: index + 1});
-                    }
-                };
-
-
+                
             }
         };
     };

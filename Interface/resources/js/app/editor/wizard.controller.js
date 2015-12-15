@@ -9,9 +9,7 @@ define([
         * go to the next step.
         */
         $scope.$on('areaSelected', function() {
-
             if ($scope.currentStep === 1) {
-                $scope.completedSteps.push($scope.currentStepData);
                 $scope.nextStep();
             }
         });
@@ -25,13 +23,24 @@ define([
             $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
         });
         
-        $scope.steps = [];        
+        $scope.steps = [];
+
+        //http://stackoverflow.com/questions/24081004/angularjs-ng-repeat-filter-when-value-is-greater-than
+        //predicate for filter in template
+        $scope.hasValue = function hasValue(prop) {
+            return function(item) {
+                return item[prop] !== undefined && item[prop] !== ''
+            };
+        };
+
+        //Toggle wether or not we should show edit field for a given field config
+        $scope.toggleEditExistingValue = function toggleEditExistingValue(item) {
+            item.isEditing = !item.isEditing;
+        };
 
         $scope.numSteps = null;
 
         $scope.currentStep = $stateParams.stepId || 1;
-
-        $scope.completedSteps = [];
 
         $scope.comment = '';
         $scope.showComment = false;
@@ -92,11 +101,6 @@ define([
                 //We have a valid step
                 if (response.isValid) {
                     
-                    //Have we validated this step before?
-                    if ($scope.completedSteps.indexOf($scope.currentStepData) === -1) {
-                        //If not, add the step to completed steps
-                        $scope.completedSteps.push($scope.currentStepData);
-                    }
                     //And move to the next step
                     $scope.nextStep();
                 }

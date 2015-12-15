@@ -1,12 +1,13 @@
-<div class="row">
+<!-- <div class="row">
     <div class="col-sm-12">
         <h2>Udfyld kilde</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi repudiandae, distinctio magni perferendis, accusantium officia!</p>
     </div>
-</div>
+</div> -->
+
 <div class="row" ng-if="currentStep == 1">
     <div class="col-sm-12">
-        <h3>{{currentStepData.title}}</h3>
+        <h2>{{currentStepData.title}}</h2>
         <p>{{currentStepData.description}}</p>
         <step-of total="numSteps" current="currentStep"></step-of>
         <p>Vælg indførelsesområdet. Brug mus til at markere området</p>
@@ -18,7 +19,7 @@
 <div class="row" ng-if="currentStep > 1 && !isResult()">
     <div class="col-sm-12">
         
-        <h3>{{currentStepData.title}}</h3>
+        <h2>{{currentStepData.title}}</h2>
         <p>{{currentStepData.description}}</p>
         
         <step-of total="numSteps" current="currentStep"></step-of>
@@ -55,14 +56,36 @@
     </div>
 </div>
 
-<div class="row" ng-if="completedSteps.length > 0">
+<div class="row" ng-if="currentStep > 1 && !isResult()">
+    
     <div class="col-sm-12">
         <h3>Udfyldt</h3>
-        <ul class="list-unstyled">
-            <li ng-repeat="step in completedSteps">
-                <a href ui-sref=".({ stepId: $index + 1})">{{step.title}} <span class="icon glyphicon glyphicon-pencil"></span></a>
+        
+        <ul class="list-unstyled field-list" ng-repeat="step in steps" ng-hide="step.fields.length === 0">
+            
+            <li class="field-list__item" ng-repeat="field in step.fields | filter: hasValue('value')">
+                <a href ng-click="toggleEditExistingValue(field)">{{field.labelText}} <span class="icon glyphicon glyphicon-pencil"></span></a>
+                <div class="row" ng-switch="field.type" ng-if="field.isEditing">
+                    <div class="col-sm-12">
+                        <div ng-switch-when="text">
+                            <dynamic-input field-data="field" autofocus="$index === 0"></dynamic-input>
+                        </div>
+                        <div ng-switch-when="select">
+                            <dynamic-select field-data="field" autofocus="$index === 0"></dynamic-select>
+                        </div>
+                        <div ng-switch-when="typeahead">
+                            <dynamic-typeahead field-data="field" autofocus="$index === 0"></dynamic-typeahead>
+                        </div>
+                    </div>
+                    <!-- Kommentar ved fejlrettelse -->
+                    <div class="col-sm-12 text-right">
+                        <button type="button" class="btn btn-default" ng-click="toggleEditExistingValue(field)">{{TEXT.BUTTON.OK}}</button>
+                    </div>
+                </div>
             </li>
+
         </ul>
+
     </div>
 </div>
 

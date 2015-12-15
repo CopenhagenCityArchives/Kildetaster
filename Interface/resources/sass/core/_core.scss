@@ -14,3 +14,7 @@ h3 {
     margin-top: 0;
     margin-bottom: 3px;
 }
+
+ul.list-unstyled + ul.list-unstyled {
+    margin-top: -$gutter / 2;
+}

@@ -44,7 +44,7 @@ define([
                         isValid: !forceInvalid
                     });
 
-                }, 500);
+                }, 300);
 
                 return deferred.promise;
 

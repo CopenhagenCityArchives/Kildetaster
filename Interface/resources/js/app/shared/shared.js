@@ -17,6 +17,7 @@ define([
     'app/shared/services/task.service',
     'app/shared/services/page.service',
     'app/shared/services/user.service',
+    'app/shared/services/update.service',
 
     'app/shared/constants/text.constant'
 
@@ -39,6 +40,7 @@ define([
     taskService,
     pageService,
     userService,
+    updateService,
 
     textConstant
 
@@ -59,6 +61,7 @@ define([
     sharedApp.factory('taskService', taskService);
     sharedApp.factory('pageService', pageService);
     sharedApp.factory('userService', userService);
+    sharedApp.factory('updateService', updateService);
 
     sharedApp.constant('TEXT', textConstant);
 

@@ -1,0 +1,2261 @@
+[{
+    "id": 1,
+    "title": "Indtast navn og alder",
+    "description": "Indtast personens fulde navn og alder. Navnet er delt op i fornavn (inklusiv mellemnavne) og efternavnet.",
+    "fields": [{
+        "field": "firstname",
+        "labelText": "Fornavn(e)",
+        "type": "text",
+        "value": "",
+        "helpText": "Alle personens for- og mellemnavne. Disse findes efter teksten ”…begraves” i kilden",
+        "errorText": ""
+    }, {
+        "field": "lastname",
+        "labelText": "Efternavn",
+        "type": "text",
+        "value": "",
+        "helpText": "Personens efternavn. Èt navn - eventuelt to, hvis de er separeret af en bindestreg. Findes efter for- og mellemnavne i kilden.",
+        "errorText": ""
+    }, {
+        "field": "age",
+        "labelText": "Alder",
+        "type": "text",
+        "value": "",
+        "helpText": "Her skrives personens alder ved dødsdagen. Alderen findes lige før teksten ”Aar gl.” i teksten.",
+        "errorText": ""
+    }]
+}, {
+    "id": 2,
+    "title": "Indtast bopæl",
+    "description": "”Bopæl” i kilden er her delt op i to felter – vejnavn og nummer.",
+    "fields": [{
+        "field": "address",
+        "labelText": "Vejnavn",
+        "type": "select",
+        "options": [{
+            "id": 1,
+            "name": "Rosenborggade"
+        }, {
+            "id": 2,
+            "name": "Blaagardsgade"
+        }, {
+            "id": 3,
+            "name": "Blaagardsvej"
+        }, {
+            "id": 4,
+            "name": "Blaagards Brovej"
+        }, {
+            "id": 5,
+            "name": "Thorupgade"
+        }, {
+            "id": 6,
+            "name": "Thorups Allé"
+        }, {
+            "id": 7,
+            "name": "Thorupgaard Allé"
+        }, {
+            "id": 8,
+            "name": "Kronborggade"
+        }, {
+            "id": 9,
+            "name": "Kronprinsessegade"
+        }, {
+            "id": 10,
+            "name": "Amaliegade"
+        }, {
+            "id": 11,
+            "name": "Amalienborg Slotsplads"
+        }, {
+            "id": 12,
+            "name": "Amalie Skrams Allé"
+        }],
+        "value": "",
+        "helpText": "Navnet på gaden/vejen hvor personen boede på ved sin død. Findes efter teksten ”Bopæl” i kilden.)"
+    }, {
+        "field": "number",
+        "labelText": "Nummer",
+        "type": "text",
+        "value": "",
+        "helpText": "Husnummeret – kommer lige efter vejnavnet under ”Bopæl”-indførslen. Hvis der er indført et interval skrives det første nummer.",
+        "errorText": ""
+    }]
+}, {
+    "id": 3,
+    "title": "Indtast dødsdato og dødsårsag",
+    "description": "Dødsdagen skrives med tal (dd.mm.åååå) og dødsårsagen skrives som i kilden, selvom der f.eks. findes en dansk betegnelse.",
+    "fields": [{
+        "field": "deathday",
+        "labelText": "Dødsdag",
+        "type": "text",
+        "value": "",
+        "helpText": "Dagen hvor personen døde. Den findes efter teksten ”…död d.”. Årstal findes under navnet på kilden.",
+        "errorText": ""
+    }, {
+        "field": "deathcause",
+        "labelText": "Dødsårsag",
+        "type": "typeahead",
+        "options": [{
+            "id": 1,
+            "name": "Abort"
+        }, {
+            "id": 2,
+            "name": "Abscessus"
+        }, {
+            "id": 3,
+            "name": "Abscessus cerebri post fracturam cranii"
+        }, {
+            "id": 4,
+            "name": "Abscessus prostatae"
+        }, {
+            "id": 5,
+            "name": "Acut gastro-intestinal Catarrh"
+        }, {
+            "id": 6,
+            "name": "Acut Mave-Tarmcatarrh"
+        }, {
+            "id": 7,
+            "name": "Adams-Stokes syndrom"
+        }, {
+            "id": 8,
+            "name": "Adenocarcinoma"
+        }, {
+            "id": 9,
+            "name": "Afkræftelse"
+        }, {
+            "id": 10,
+            "name": "Akut Melankoli"
+        }, {
+            "id": 11,
+            "name": "Akut Sindssyge"
+        }, {
+            "id": 12,
+            "name": "Alcoholismus"
+        }, {
+            "id": 13,
+            "name": "Alcoholismus chronicus (Alcoholismus chr.)"
+        }, {
+            "id": 14,
+            "name": "Alderdom"
+        }, {
+            "id": 15,
+            "name": "Alderdomssvaghed (Alderdoms Svaghed)"
+        }, {
+            "id": 16,
+            "name": "Alderdomssvækkelse (Alderdoms Svækkelse)"
+        }, {
+            "id": 17,
+            "name": "Alm. Svækkelse"
+        }, {
+            "id": 18,
+            "name": "Almindelig Lamhed (Alm. Lamhed)"
+        }, {
+            "id": 19,
+            "name": "Ambustio"
+        }, {
+            "id": 20,
+            "name": "Ambustiones variae"
+        }, {
+            "id": 21,
+            "name": "Anaemia"
+        }, {
+            "id": 22,
+            "name": "Anaemia gravis"
+        }, {
+            "id": 23,
+            "name": "Anaemia perniciosa"
+        }, {
+            "id": 24,
+            "name": "Aneurysma aortæ"
+        }, {
+            "id": 25,
+            "name": "Angina pectoris"
+        }, {
+            "id": 26,
+            "name": "Ansigtsrosen"
+        }, {
+            "id": 27,
+            "name": "Ante tempus nat. (Ante temp. nat.)"
+        }, {
+            "id": 28,
+            "name": "Anuria (Anuri)"
+        }, {
+            "id": 29,
+            "name": "Anæmi, se Anaemia"
+        }, {
+            "id": 30,
+            "name": "Apopleksi"
+        }, {
+            "id": 31,
+            "name": "Apoplektisk Tilfælde"
+        }, {
+            "id": 32,
+            "name": "Apoplexia"
+        }, {
+            "id": 33,
+            "name": "Apoplexia cerebri (Apop. cerebri)"
+        }, {
+            "id": 34,
+            "name": "Appendicitis"
+        }, {
+            "id": 35,
+            "name": "Appendicitis acuta gangraenosa (App. acuta gang.)"
+        }, {
+            "id": 36,
+            "name": "Appendicitis gangraenosa"
+        }, {
+            "id": 37,
+            "name": "Appendicitis m. peritonitis"
+        }, {
+            "id": 38,
+            "name": "Arrhytmia perpetua"
+        }, {
+            "id": 39,
+            "name": "Arteriosclerosis"
+        }, {
+            "id": 40,
+            "name": "Arteriosclerosis cerebri"
+        }, {
+            "id": 41,
+            "name": "Arteriosclerosis universalis"
+        }, {
+            "id": 42,
+            "name": "Arthritis anomala"
+        }, {
+            "id": 43,
+            "name": "Arthrocace"
+        }, {
+            "id": 44,
+            "name": "Arthroitis (Arthritis)"
+        }, {
+            "id": 45,
+            "name": "Ascites"
+        }, {
+            "id": 46,
+            "name": "Asphyxia (Asfyxia)"
+        }, {
+            "id": 47,
+            "name": "Asthma bronchiale"
+        }, {
+            "id": 48,
+            "name": "Astma"
+        }, {
+            "id": 49,
+            "name": "Ataxia"
+        }, {
+            "id": 50,
+            "name": "Atelectasis pulmonum (Atelectasis pulm.)"
+        }, {
+            "id": 51,
+            "name": "Atrophia (Atrofi)"
+        }, {
+            "id": 52,
+            "name": "Atrophia infantilis (Atrophia infant.)"
+        }, {
+            "id": 53,
+            "name": "Barselfeber"
+        }, {
+            "id": 54,
+            "name": "Barselseng"
+        }, {
+            "id": 55,
+            "name": "Betændelse i Galdevejene"
+        }, {
+            "id": 56,
+            "name": "Betændelse i Hjertet"
+        }, {
+            "id": 57,
+            "name": "Betændelse i Luftrøret"
+        }, {
+            "id": 58,
+            "name": "Betændelsesfeber"
+        }, {
+            "id": 59,
+            "name": "Blindtarmsbet. med Bughindebet."
+        }, {
+            "id": 60,
+            "name": "Blodbrok"
+        }, {
+            "id": 61,
+            "name": "Blodbrækning"
+        }, {
+            "id": 62,
+            "name": "Blodforgiftning"
+        }, {
+            "id": 63,
+            "name": "Blodgang"
+        }, {
+            "id": 64,
+            "name": "Blodopkastning"
+        }, {
+            "id": 65,
+            "name": "Blodprop"
+        }, {
+            "id": 66,
+            "name": "Blodprop v. kranspulsåre"
+        }, {
+            "id": 67,
+            "name": "Blodspytning"
+        }, {
+            "id": 68,
+            "name": "Blodstyrtning"
+        }, {
+            "id": 69,
+            "name": "Blærekræft"
+        }, {
+            "id": 70,
+            "name": "Blaasot"
+        }, {
+            "id": 71,
+            "name": "Brandbyld"
+        }, {
+            "id": 72,
+            "name": "Bristet Mavesæk"
+        }, {
+            "id": 73,
+            "name": "Brok"
+        }, {
+            "id": 74,
+            "name": "Bronchiectasia (Bronchiektasia)"
+        }, {
+            "id": 75,
+            "name": "Bronchit. capill. post morbill."
+        }, {
+            "id": 76,
+            "name": "Bronchitis"
+        }, {
+            "id": 77,
+            "name": "Bronchitis acuta"
+        }, {
+            "id": 78,
+            "name": "Bronchitis capillaris (Bronchitis capill., Bronchit. capill.)"
+        }, {
+            "id": 79,
+            "name": "Bronchitis capillaris dupl."
+        }, {
+            "id": 80,
+            "name": "Bronchitis catarrhalis"
+        }, {
+            "id": 81,
+            "name": "Bronchitis chron."
+        }, {
+            "id": 82,
+            "name": "Bronchopneum. acuta"
+        }, {
+            "id": 83,
+            "name": "Bronchopneumonia (Bronchopneum., Bron. pneum.)"
+        }, {
+            "id": 84,
+            "name": "Bronchopneumonia acuta"
+        }, {
+            "id": 85,
+            "name": "Bronchopneumonia bilat."
+        }, {
+            "id": 86,
+            "name": "Bronchopneumonia disper."
+        }, {
+            "id": 87,
+            "name": "Bronchopneumonia duplex"
+        }, {
+            "id": 88,
+            "name": "Bronchopneumonia dx."
+        }, {
+            "id": 89,
+            "name": "Bronchopneumonia hypostatica"
+        }, {
+            "id": 90,
+            "name": "Brystaffection"
+        }, {
+            "id": 91,
+            "name": "Brystaffection under Tandudbrud"
+        }, {
+            "id": 92,
+            "name": "Brystaffection Følge af Mæslinger"
+        }, {
+            "id": 93,
+            "name": "Brystbetændelse"
+        }, {
+            "id": 94,
+            "name": "Brystkatarrh"
+        }, {
+            "id": 95,
+            "name": "Brystkrampe"
+        }, {
+            "id": 96,
+            "name": "Brystkræft"
+        }, {
+            "id": 97,
+            "name": "Brystsvaghed"
+        }, {
+            "id": 98,
+            "name": "Brystsygdom"
+        }, {
+            "id": 99,
+            "name": "Brystsyge"
+        }, {
+            "id": 100,
+            "name": "Brysttæring"
+        }, {
+            "id": 101,
+            "name": "Brystvattersot"
+        }, {
+            "id": 102,
+            "name": "Brændevinssygdom"
+        }, {
+            "id": 103,
+            "name": "Bughindebetændelse"
+        }, {
+            "id": 104,
+            "name": "Bugvatttersot"
+        }, {
+            "id": 105,
+            "name": "Bulbærparalyse"
+        }, {
+            "id": 106,
+            "name": "Byld i Lungen"
+        }, {
+            "id": 107,
+            "name": "C. met. ad cerebrum"
+        }, {
+            "id": 108,
+            "name": "C. metast. ad hepar et lymfonodi"
+        }, {
+            "id": 109,
+            "name": "C. renis sin. c. metastatibus ad ossium"
+        }, {
+            "id": 110,
+            "name": "Cachexia (Kakexia)"
+        }, {
+            "id": 111,
+            "name": "Cancer"
+        }, {
+            "id": 112,
+            "name": "Cancer abdominis (C. abdominis)"
+        }, {
+            "id": 113,
+            "name": "Cancer coli"
+        }, {
+            "id": 114,
+            "name": "Cancer colli uteri (C. colli uteri)"
+        }, {
+            "id": 115,
+            "name": "Cancer corporis uteri"
+        }, {
+            "id": 116,
+            "name": "Cancer gland. colli"
+        }, {
+            "id": 117,
+            "name": "Cancer hepatis"
+        }, {
+            "id": 118,
+            "name": "Cancer intestini (Cancer intest.)"
+        }, {
+            "id": 119,
+            "name": "Cancer laryngis"
+        }, {
+            "id": 120,
+            "name": "Cancer linguae (C. linguae)"
+        }, {
+            "id": 121,
+            "name": "Cancer mammae"
+        }, {
+            "id": 122,
+            "name": "Cancer mammae c. metast."
+        }, {
+            "id": 123,
+            "name": "Cancer mammae dxt."
+        }, {
+            "id": 124,
+            "name": "Cancer mammae et abdominis"
+        }, {
+            "id": 125,
+            "name": "Cancer metastaticus"
+        }, {
+            "id": 126,
+            "name": "Cancer metastaticus pulm."
+        }, {
+            "id": 127,
+            "name": "Cancer oesophagi"
+        }, {
+            "id": 128,
+            "name": "Cancer ovarii"
+        }, {
+            "id": 129,
+            "name": "Cancer pancreatis (C. pancreatis)"
+        }, {
+            "id": 130,
+            "name": "Cancer pelvis"
+        }, {
+            "id": 131,
+            "name": "Cancer pharyngis"
+        }, {
+            "id": 132,
+            "name": "Cancer prostatae"
+        }, {
+            "id": 133,
+            "name": "Cancer pulmonis (C. pulm.)"
+        }, {
+            "id": 134,
+            "name": "Cancer recti"
+        }, {
+            "id": 135,
+            "name": "Cancer renis"
+        }, {
+            "id": 136,
+            "name": "Cancer testis"
+        }, {
+            "id": 137,
+            "name": "Cancer testis cum metastatibus"
+        }, {
+            "id": 138,
+            "name": "Cancer tonsillae dext."
+        }, {
+            "id": 139,
+            "name": "Cancer uteri"
+        }, {
+            "id": 140,
+            "name": "Cancer ventriculi (c. ventr.)"
+        }, {
+            "id": 141,
+            "name": "Cancer vesicae urinariae"
+        }, {
+            "id": 142,
+            "name": "Capillær Bronchitis"
+        }, {
+            "id": 143,
+            "name": "Carcinoma gl. thyr."
+        }, {
+            "id": 144,
+            "name": "Carcinomatosis"
+        }, {
+            "id": 145,
+            "name": "Carcinomatosis peritonei"
+        }, {
+            "id": 146,
+            "name": "Carcinose"
+        }, {
+            "id": 147,
+            "name": "Carcinosis peritonei"
+        }, {
+            "id": 148,
+            "name": "Caries ossium"
+        }, {
+            "id": 149,
+            "name": "Catarrhus intestinalis (Catarrh. intest.)"
+        }, {
+            "id": 150,
+            "name": "Catharrus gastrointestinalis"
+        }, {
+            "id": 151,
+            "name": "Catharrus gastrointestinalis acutus"
+        }, {
+            "id": 152,
+            "name": "Catharrus intestinalis acutus (Cath. intest. acut.)"
+        }, {
+            "id": 153,
+            "name": "Catharrus intestinalis chronicus"
+        }, {
+            "id": 154,
+            "name": "Catharrus vesicae"
+        }, {
+            "id": 155,
+            "name": "Causa mortis non indicata"
+        }, {
+            "id": 156,
+            "name": "Cerebral Typhus"
+        }, {
+            "id": 157,
+            "name": "Cholecystitis"
+        }, {
+            "id": 158,
+            "name": "Cholelithiasis"
+        }, {
+            "id": 159,
+            "name": "Cholera"
+        }, {
+            "id": 160,
+            "name": "Cholera asiatica"
+        }, {
+            "id": 161,
+            "name": "Cholera epidemica"
+        }, {
+            "id": 162,
+            "name": "Cholera infantum"
+        }, {
+            "id": 163,
+            "name": "Cholerine (Kolerine)"
+        }, {
+            "id": 164,
+            "name": "Chr. se Chronisk"
+        }, {
+            "id": 165,
+            "name": "Chronisk Bronchitis"
+        }, {
+            "id": 166,
+            "name": "Chronisk Alkoholisme"
+        }, {
+            "id": 167,
+            "name": "Chronisk Brystbetændelse"
+        }, {
+            "id": 168,
+            "name": "Chronisk Brystsvaghed"
+        }, {
+            "id": 169,
+            "name": "Chronisk Brystsygdom"
+        }, {
+            "id": 170,
+            "name": "Chronisk Brystsyge"
+        }, {
+            "id": 171,
+            "name": "Chronisk Hjernebetændelse"
+        }, {
+            "id": 172,
+            "name": "Chronisk Hjertesygdom"
+        }, {
+            "id": 173,
+            "name": "Chronisk Leverlidelse"
+        }, {
+            "id": 174,
+            "name": "Chronisk Leversygdom"
+        }, {
+            "id": 175,
+            "name": "Chronisk Nyresygdom"
+        }, {
+            "id": 176,
+            "name": "Cirrhosis hepatis"
+        }, {
+            "id": 177,
+            "name": "Colitis"
+        }, {
+            "id": 178,
+            "name": "Coma"
+        }, {
+            "id": 179,
+            "name": "Coma diabeticum"
+        }, {
+            "id": 180,
+            "name": "Coma hepaticum"
+        }, {
+            "id": 181,
+            "name": "Congestio cerebri"
+        }, {
+            "id": 182,
+            "name": "Contusio"
+        }, {
+            "id": 183,
+            "name": "Contusio capitis"
+        }, {
+            "id": 184,
+            "name": "Contusio cerebri (Contus. cerebri)"
+        }, {
+            "id": 185,
+            "name": "Convulsioner"
+        }, {
+            "id": 186,
+            "name": "Convulsiones"
+        }, {
+            "id": 187,
+            "name": "Coronar thrombose"
+        }, {
+            "id": 188,
+            "name": "Coxitis"
+        }, {
+            "id": 189,
+            "name": "Croup"
+        }, {
+            "id": 190,
+            "name": "Cyanosis"
+        }, {
+            "id": 191,
+            "name": "Cystitis"
+        }, {
+            "id": 192,
+            "name": "Cystopyelitis"
+        }, {
+            "id": 193,
+            "name": "Debilitas"
+        }, {
+            "id": 194,
+            "name": "Debilitas congenita (Debilitas cong.)"
+        }, {
+            "id": 195,
+            "name": "Debilitas senilis"
+        }, {
+            "id": 196,
+            "name": "Decubitus"
+        }, {
+            "id": 197,
+            "name": "Degeneratio cordis (Degen. cordis, Deg. cordis)"
+        }, {
+            "id": 198,
+            "name": "Degeneratio myocardii (Deg. myocardii)"
+        }, {
+            "id": 199,
+            "name": "Degeneratio myocardii senilis"
+        }, {
+            "id": 200,
+            "name": "Delirium"
+        }, {
+            "id": 201,
+            "name": "Delirium tremens (Delir. tremens, Del. tremens)"
+        }, {
+            "id": 202,
+            "name": "Dementia paralytica"
+        }, {
+            "id": 203,
+            "name": "Dementia senilis"
+        }, {
+            "id": 204,
+            "name": "Diabetes mellitus"
+        }, {
+            "id": 205,
+            "name": "Diarrhoea (Diarrhé, Diarré)"
+        }, {
+            "id": 206,
+            "name": "Diarrhoea acuta"
+        }, {
+            "id": 207,
+            "name": "Diathesis haemorrhagica"
+        }, {
+            "id": 208,
+            "name": "Diphteria (Diphteritis)"
+        }, {
+            "id": 209,
+            "name": "Diphteria faucium"
+        }, {
+            "id": 210,
+            "name": "Diphteria laryngis"
+        }, {
+            "id": 211,
+            "name": "Drab"
+        }, {
+            "id": 212,
+            "name": "Drankergalskab"
+        }, {
+            "id": 213,
+            "name": "Drukning"
+        }, {
+            "id": 214,
+            "name": "Dysenteria"
+        }, {
+            "id": 215,
+            "name": "Dyspepsia"
+        }, {
+            "id": 216,
+            "name": "Død lige efter Fødslen"
+        }, {
+            "id": 217,
+            "name": "Død pludselig"
+        }, {
+            "id": 218,
+            "name": "Dødfødt"
+        }, {
+            "id": 219,
+            "name": "Dødsaarsag ukendt"
+        }, {
+            "id": 220,
+            "name": "Eclampsia"
+        }, {
+            "id": 221,
+            "name": "Eclampsia parturientium"
+        }, {
+            "id": 222,
+            "name": "Efter Barnefødsel"
+        }, {
+            "id": 223,
+            "name": "Emboli"
+        }, {
+            "id": 224,
+            "name": "Embolia a. axillaris dxt."
+        }, {
+            "id": 225,
+            "name": "Embolia art. pulm. (Embolia a. pulm.)"
+        }, {
+            "id": 226,
+            "name": "Embolia cerebri"
+        }, {
+            "id": 227,
+            "name": "Embolia et thrombosis cerebri"
+        }, {
+            "id": 228,
+            "name": "Embolia pulm."
+        }, {
+            "id": 229,
+            "name": "Embolia pulm. o.p."
+        }, {
+            "id": 230,
+            "name": "Embolus"
+        }, {
+            "id": 231,
+            "name": "Emollitio cerebri"
+        }, {
+            "id": 232,
+            "name": "Emphysema pulm. acut."
+        }, {
+            "id": 233,
+            "name": "Empyema"
+        }, {
+            "id": 234,
+            "name": "Empyema pleurae dxt."
+        }, {
+            "id": 235,
+            "name": "Encephalitis"
+        }, {
+            "id": 236,
+            "name": "Encephalitis acuta"
+        }, {
+            "id": 237,
+            "name": "Encephalitis syphilitica"
+        }, {
+            "id": 238,
+            "name": "Encephalopathia"
+        }, {
+            "id": 239,
+            "name": "Encephalopathia arteriosclerotica"
+        }, {
+            "id": 240,
+            "name": "Encephalopathia chron."
+        }, {
+            "id": 241,
+            "name": "Endocarditis"
+        }, {
+            "id": 242,
+            "name": "Endocarditis ulcerosa (Endocard. ulc.)"
+        }, {
+            "id": 243,
+            "name": "Enteritis"
+        }, {
+            "id": 244,
+            "name": "Enteritis acuta"
+        }, {
+            "id": 245,
+            "name": "Enterocolitis"
+        }, {
+            "id": 246,
+            "name": "Enterophthisis"
+        }, {
+            "id": 247,
+            "name": "Epilepsia"
+        }, {
+            "id": 248,
+            "name": "Epileptisk Anfald"
+        }, {
+            "id": 249,
+            "name": "Erysipelas"
+        }, {
+            "id": 250,
+            "name": "Exanimus natus"
+        }, {
+            "id": 251,
+            "name": "Exhaustio virium"
+        }, {
+            "id": 252,
+            "name": "Fald"
+        }, {
+            "id": 253,
+            "name": "Faldt om og døde pludselig"
+        }, {
+            "id": 254,
+            "name": "Fb., se Febris"
+        }, {
+            "id": 255,
+            "name": "Feber efter Barselseng"
+        }, {
+            "id": 256,
+            "name": "Febertilfælde"
+        }, {
+            "id": 257,
+            "name": "Febris hectica"
+        }, {
+            "id": 258,
+            "name": "Febris intermittens"
+        }, {
+            "id": 259,
+            "name": "Febris nervosa"
+        }, {
+            "id": 260,
+            "name": "Febris paratyphoidea (Fb. paratyph.)"
+        }, {
+            "id": 261,
+            "name": "Febris puerperalis"
+        }, {
+            "id": 262,
+            "name": "Febris rheumatica (Fb. rheumatica)"
+        }, {
+            "id": 263,
+            "name": "Febris typhoidea (Fb. typhoidea, Febr. typh.)"
+        }, {
+            "id": 264,
+            "name": "Fibroma uteri"
+        }, {
+            "id": 265,
+            "name": "Fibrosis myocardii"
+        }, {
+            "id": 266,
+            "name": "For tidlig Fødsel"
+        }, {
+            "id": 267,
+            "name": "For tidligt født"
+        }, {
+            "id": 268,
+            "name": "Forbrænding"
+        }, {
+            "id": 269,
+            "name": "Forgiftning"
+        }, {
+            "id": 270,
+            "name": "Forhærdelse i Underlivet"
+        }, {
+            "id": 271,
+            "name": "Forkjølelse"
+        }, {
+            "id": 272,
+            "name": "Formentlig Drukning"
+        }, {
+            "id": 273,
+            "name": "Formentlig naturlig Død"
+        }, {
+            "id": 274,
+            "name": "Formentlig Suicidium"
+        }, {
+            "id": 275,
+            "name": "Formentlig Ulykkestilfælde"
+        }, {
+            "id": 276,
+            "name": "Fractura baseos cranii"
+        }, {
+            "id": 277,
+            "name": "Fractura colli femoris"
+        }, {
+            "id": 278,
+            "name": "Fractura cranii"
+        }, {
+            "id": 279,
+            "name": "Fractura cranii complic."
+        }, {
+            "id": 280,
+            "name": "Funden druknet"
+        }, {
+            "id": 281,
+            "name": "Fundet død"
+        }, {
+            "id": 282,
+            "name": "Furunculus"
+        }, {
+            "id": 283,
+            "name": "Født for tidlig"
+        }, {
+            "id": 284,
+            "name": "Følger af Benbrud"
+        }, {
+            "id": 285,
+            "name": "Følger efter Ulykkestilfælde"
+        }, {
+            "id": 286,
+            "name": "Følgerne af et uheldigt Fald"
+        }, {
+            "id": 287,
+            "name": "Galdefeber"
+        }, {
+            "id": 288,
+            "name": "Gangraena"
+        }, {
+            "id": 289,
+            "name": "Gangraena coli ascendentis"
+        }, {
+            "id": 290,
+            "name": "Gangraena pulmonis (Gangraena pulm.)"
+        }, {
+            "id": 291,
+            "name": "Gangraena pulmonum"
+        }, {
+            "id": 292,
+            "name": "Gangraena senilis"
+        }, {
+            "id": 293,
+            "name": "Gastrisk Feber"
+        }, {
+            "id": 294,
+            "name": "Gastritis chron."
+        }, {
+            "id": 295,
+            "name": "Gastroenteritis"
+        }, {
+            "id": 296,
+            "name": "Gastroenteritis ac. c. intoxicatione"
+        }, {
+            "id": 297,
+            "name": "Gastroenteritis acuta"
+        }, {
+            "id": 298,
+            "name": "Gigtfeber"
+        }, {
+            "id": 299,
+            "name": "Graviditas extrauterina rupta"
+        }, {
+            "id": 300,
+            "name": "Grippe"
+        }, {
+            "id": 301,
+            "name": "Haematemesis"
+        }, {
+            "id": 302,
+            "name": "Haematemesis et melaena"
+        }, {
+            "id": 303,
+            "name": "Haematoma subdurale"
+        }, {
+            "id": 304,
+            "name": "Haemorrhagia"
+        }, {
+            "id": 305,
+            "name": "Haemorrhagia cerebri"
+        }, {
+            "id": 306,
+            "name": "Halsbetændelse"
+        }, {
+            "id": 307,
+            "name": "Halssyge"
+        }, {
+            "id": 308,
+            "name": "Hastig Død"
+        }, {
+            "id": 309,
+            "name": "Hedeslag"
+        }, {
+            "id": 310,
+            "name": "Hektik"
+        }, {
+            "id": 311,
+            "name": "Hernia incarcerata (Hernia incar.)"
+        }, {
+            "id": 312,
+            "name": "Hidsig Feber"
+        }, {
+            "id": 313,
+            "name": "Hjerneapoplexi"
+        }, {
+            "id": 314,
+            "name": "Hjerneatrophie (Hjerneatrofi)"
+        }, {
+            "id": 315,
+            "name": "Hjernebetændelse"
+        }, {
+            "id": 316,
+            "name": "Hjerneblødhed"
+        }, {
+            "id": 317,
+            "name": "Hjerneblødning"
+        }, {
+            "id": 318,
+            "name": "Hjernelidelse"
+        }, {
+            "id": 319,
+            "name": "Hjerneoedem"
+        }, {
+            "id": 320,
+            "name": "Hjerneparalysis"
+        }, {
+            "id": 321,
+            "name": "Hjertefejl"
+        }, {
+            "id": 322,
+            "name": "Hjerteforkalkning"
+        }, {
+            "id": 323,
+            "name": "Hjertehypertrophi"
+        }, {
+            "id": 324,
+            "name": "Hjertelidelse"
+        }, {
+            "id": 325,
+            "name": "Hjerteparese"
+        }, {
+            "id": 326,
+            "name": "Hjertesvækkelse"
+        }, {
+            "id": 327,
+            "name": "Hjertesygdom"
+        }, {
+            "id": 328,
+            "name": "Homicidium"
+        }, {
+            "id": 329,
+            "name": "Hydrocephalus"
+        }, {
+            "id": 330,
+            "name": "Hydrocephalus acutus"
+        }, {
+            "id": 331,
+            "name": "Hydrocephalus m.gr."
+        }, {
+            "id": 332,
+            "name": "Hydrops ovarii"
+        }, {
+            "id": 333,
+            "name": "Hyperinsulinismus"
+        }, {
+            "id": 334,
+            "name": "Hypernephroma"
+        }, {
+            "id": 335,
+            "name": "Hyperpyrexia"
+        }, {
+            "id": 336,
+            "name": "Hyperthermia"
+        }, {
+            "id": 337,
+            "name": "Hypertrofi"
+        }, {
+            "id": 338,
+            "name": "Hypertrophia cordis"
+        }, {
+            "id": 339,
+            "name": "Hypertrophia hepatis"
+        }, {
+            "id": 340,
+            "name": "Hypertrophia prostatæ"
+        }, {
+            "id": 341,
+            "name": "Hypertrophia ventr. sin. cordis"
+        }, {
+            "id": 342,
+            "name": "Hæmoptysis"
+        }, {
+            "id": 343,
+            "name": "Hæmoptysis m.gr."
+        }, {
+            "id": 344,
+            "name": "Hæmorrhagia cerebri"
+        }, {
+            "id": 345,
+            "name": "Hængning"
+        }, {
+            "id": 346,
+            "name": "Hængt sig"
+        }, {
+            "id": 347,
+            "name": "Icterus"
+        }, {
+            "id": 348,
+            "name": "Icterus neonatorum"
+        }, {
+            "id": 349,
+            "name": "Ildebefindende"
+        }, {
+            "id": 350,
+            "name": "Ileus"
+        }, {
+            "id": 351,
+            "name": "Ileus paralyticus"
+        }, {
+            "id": 352,
+            "name": "In partu mortua"
+        }, {
+            "id": 353,
+            "name": "Incompensatio cordis (Incomp. cordis)"
+        }, {
+            "id": 354,
+            "name": "Indbragt død"
+        }, {
+            "id": 355,
+            "name": "Indbragt død paa Hospitalet"
+        }, {
+            "id": 356,
+            "name": "Indeklemt Brok"
+        }, {
+            "id": 357,
+            "name": "Indvendig Blødning"
+        }, {
+            "id": 358,
+            "name": "Indvendig Gigt"
+        }, {
+            "id": 359,
+            "name": "Indvortes Krampe (Indv. Krampe)"
+        }, {
+            "id": 360,
+            "name": "Indvortes Kræft (Indv. Kræft)"
+        }, {
+            "id": 361,
+            "name": "Indvortes Svaghed (Indv. Svaghed)"
+        }, {
+            "id": 362,
+            "name": "Inflammationsfeber"
+        }, {
+            "id": 363,
+            "name": "Influenza"
+        }, {
+            "id": 364,
+            "name": "Insufficientia cordis"
+        }, {
+            "id": 365,
+            "name": "Kakexia"
+        }, {
+            "id": 366,
+            "name": "Kighoste"
+        }, {
+            "id": 367,
+            "name": "Kighoste m. Krampeanfald"
+        }, {
+            "id": 368,
+            "name": "Kirtelsvaghed"
+        }, {
+            "id": 369,
+            "name": "Kirtelsyge"
+        }, {
+            "id": 370,
+            "name": "Kirteltæring"
+        }, {
+            "id": 371,
+            "name": "Klappefejl i Hjertet"
+        }, {
+            "id": 372,
+            "name": "Knusning"
+        }, {
+            "id": 373,
+            "name": "Koldbrand"
+        }, {
+            "id": 374,
+            "name": "Koldesyge"
+        }, {
+            "id": 375,
+            "name": "Koldfeber"
+        }, {
+            "id": 376,
+            "name": "Kolera"
+        }, {
+            "id": 377,
+            "name": "Kolerine"
+        }, {
+            "id": 378,
+            "name": "Kopper"
+        }, {
+            "id": 379,
+            "name": "Krampe"
+        }, {
+            "id": 380,
+            "name": "Krampeslag"
+        }, {
+            "id": 381,
+            "name": "Krampetilfælde"
+        }, {
+            "id": 382,
+            "name": "Kraniebrud"
+        }, {
+            "id": 383,
+            "name": "Kronisk hjerte- lungesygdom"
+        }, {
+            "id": 384,
+            "name": "Kræft"
+        }, {
+            "id": 385,
+            "name": "Kræft i Brystet"
+        }, {
+            "id": 386,
+            "name": "Kræft i Endetarmen"
+        }, {
+            "id": 387,
+            "name": "Kræft i Galdeblæren"
+        }, {
+            "id": 388,
+            "name": "Kræft i Mavesækken"
+        }, {
+            "id": 389,
+            "name": "Kræft i Spiserøret"
+        }, {
+            "id": 390,
+            "name": "Kræft i Svælget"
+        }, {
+            "id": 391,
+            "name": "Kræft i Underlivet"
+        }, {
+            "id": 392,
+            "name": "Kulilteforgiftning"
+        }, {
+            "id": 393,
+            "name": "Kvælning"
+        }, {
+            "id": 394,
+            "name": "Laesiones intra partum"
+        }, {
+            "id": 395,
+            "name": "Langvarig Krampesygdom"
+        }, {
+            "id": 396,
+            "name": "Langvarig Tabes dorsalis"
+        }, {
+            "id": 397,
+            "name": "Laryngitis"
+        }, {
+            "id": 398,
+            "name": "Laryngitis crouposa"
+        }, {
+            "id": 399,
+            "name": "Leuchaemia (Leukaemia)"
+        }, {
+            "id": 400,
+            "name": "Leukaemia lymphatica"
+        }, {
+            "id": 401,
+            "name": "Leukosis myeloides"
+        }, {
+            "id": 402,
+            "name": "Leverbetændelse"
+        }, {
+            "id": 403,
+            "name": "Leverkræft"
+        }, {
+            "id": 404,
+            "name": "Leversyge"
+        }, {
+            "id": 405,
+            "name": "Leversygdom"
+        }, {
+            "id": 406,
+            "name": "Lithiasis renalis"
+        }, {
+            "id": 407,
+            "name": "Lithiasis vesicalis"
+        }, {
+            "id": 408,
+            "name": "Livmoderkræft"
+        }, {
+            "id": 409,
+            "name": "Livssvag"
+        }, {
+            "id": 410,
+            "name": "Lues congenita (Lues cong.)"
+        }, {
+            "id": 411,
+            "name": "Lungebetændelse"
+        }, {
+            "id": 412,
+            "name": "Lungebyld"
+        }, {
+            "id": 413,
+            "name": "Lungekoldbrand"
+        }, {
+            "id": 414,
+            "name": "Lungeoedem"
+        }, {
+            "id": 415,
+            "name": "Lungesvindsot"
+        }, {
+            "id": 416,
+            "name": "Lungetuberkulose (Lungetub.)"
+        }, {
+            "id": 417,
+            "name": "Lungetæring"
+        }, {
+            "id": 418,
+            "name": "Lungevandsot"
+        }, {
+            "id": 419,
+            "name": "Lymphogranolumatosis maligna"
+        }, {
+            "id": 420,
+            "name": "Marasmus senilis"
+        }, {
+            "id": 421,
+            "name": "Mavebetændelse"
+        }, {
+            "id": 422,
+            "name": "Mavekræft"
+        }, {
+            "id": 423,
+            "name": "Mavesmerter"
+        }, {
+            "id": 424,
+            "name": "Mavesygdom"
+        }, {
+            "id": 425,
+            "name": "Mavesaar"
+        }, {
+            "id": 426,
+            "name": "Mavetarmcatarrh"
+        }, {
+            "id": 427,
+            "name": "Mb., se Morbus"
+        }, {
+            "id": 428,
+            "name": "Medfødt Legemsfejl"
+        }, {
+            "id": 429,
+            "name": "Medfødt Svaghed"
+        }, {
+            "id": 430,
+            "name": "Melanoma metastatica"
+        }, {
+            "id": 431,
+            "name": "Meningeoma regio frontalis"
+        }, {
+            "id": 432,
+            "name": "Meningitis"
+        }, {
+            "id": 433,
+            "name": "Meningitis cerebralis"
+        }, {
+            "id": 434,
+            "name": "Meningitis ex oti. media"
+        }, {
+            "id": 435,
+            "name": "Meningitis spinalis"
+        }, {
+            "id": 436,
+            "name": "Meningitis tubercul. cerebri"
+        }, {
+            "id": 437,
+            "name": "Meningitis tuberculosa (Meningitis tubercul., Meningitis tb.)"
+        }, {
+            "id": 438,
+            "name": "Meningitis tubercul. cerebri"
+        }, {
+            "id": 439,
+            "name": "Metastases ad cerebrum"
+        }, {
+            "id": 440,
+            "name": "Metastases ad hepar (Metastases ad hep.)"
+        }, {
+            "id": 441,
+            "name": "Metastases ad organorum"
+        }, {
+            "id": 442,
+            "name": "Metastases cancrosae pulmorum"
+        }, {
+            "id": 443,
+            "name": "Metastases carcinomatosae"
+        }, {
+            "id": 444,
+            "name": "Miliær Tuberkulose"
+        }, {
+            "id": 445,
+            "name": "Moderbristning"
+        }, {
+            "id": 446,
+            "name": "Mollities cerebri"
+        }, {
+            "id": 447,
+            "name": "Morbilli"
+        }, {
+            "id": 448,
+            "name": "Morbilli in tuberculosi"
+        }, {
+            "id": 449,
+            "name": "Morbus Brightii (Mb. Brightii)"
+        }, {
+            "id": 450,
+            "name": "Morbus cerebri (Mb. cerebri)"
+        }, {
+            "id": 451,
+            "name": "Morbus cordis (Mb. cordis, Morb.cord.)"
+        }, {
+            "id": 452,
+            "name": "Morbus cordis arterioscleroticus"
+        }, {
+            "id": 453,
+            "name": "Morbus cordis chron. (Mb. cord. chron.)"
+        }, {
+            "id": 454,
+            "name": "Morbus cordis congenitus (Mb. cordis cong.)"
+        }, {
+            "id": 455,
+            "name": "Morbus cordis cum ascites"
+        }, {
+            "id": 456,
+            "name": "Morbus cordis incompensatus (Mb. cordis incompens.)"
+        }, {
+            "id": 457,
+            "name": "Morbus mentalis (Mb. mentalis)"
+        }, {
+            "id": 458,
+            "name": "Morbus Pick-Alzheimer"
+        }, {
+            "id": 459,
+            "name": "Morbus ventriculi"
+        }, {
+            "id": 460,
+            "name": "Mors in ebrietate"
+        }, {
+            "id": 461,
+            "name": "Mors repentina"
+        }, {
+            "id": 462,
+            "name": "Mors repentina sine nota causa"
+        }, {
+            "id": 463,
+            "name": "Mors subita"
+        }, {
+            "id": 464,
+            "name": "Mundklemme"
+        }, {
+            "id": 465,
+            "name": "Mundkrampe"
+        }, {
+            "id": 466,
+            "name": "Myelitis"
+        }, {
+            "id": 467,
+            "name": "Myelitis chron."
+        }, {
+            "id": 468,
+            "name": "Myelomatosis"
+        }, {
+            "id": 469,
+            "name": "Myelopathia"
+        }, {
+            "id": 470,
+            "name": "Myocarditis"
+        }, {
+            "id": 471,
+            "name": "Mæslinger"
+        }, {
+            "id": 472,
+            "name": "Mæslinger med Lungebetændelse"
+        }, {
+            "id": 473,
+            "name": "Naturlig død"
+        }, {
+            "id": 474,
+            "name": "Naturlig død?"
+        }, {
+            "id": 475,
+            "name": "Necrosis ossium"
+        }, {
+            "id": 476,
+            "name": "Nedstyrtning"
+        }, {
+            "id": 477,
+            "name": "Neoplasma"
+        }, {
+            "id": 478,
+            "name": "Neoplasma malign."
+        }, {
+            "id": 479,
+            "name": "Neoplasma malign. hepatis"
+        }, {
+            "id": 480,
+            "name": "Neoplasma malign. ventriculi"
+        }, {
+            "id": 481,
+            "name": "Neoplasma metastaticum ossium"
+        }, {
+            "id": 482,
+            "name": "Neoplasma ovarii"
+        }, {
+            "id": 483,
+            "name": "Nephritis"
+        }, {
+            "id": 484,
+            "name": "Nephritis acuta"
+        }, {
+            "id": 485,
+            "name": "Nephritis chronica (Nephritis chron.)"
+        }, {
+            "id": 486,
+            "name": "Nephropatia"
+        }, {
+            "id": 487,
+            "name": "Nephropatia chr."
+        }, {
+            "id": 488,
+            "name": "Neurasthenia"
+        }, {
+            "id": 489,
+            "name": "Nyre- & Bækkenbetændelse"
+        }, {
+            "id": 490,
+            "name": "Nyrebetændelse"
+        }, {
+            "id": 491,
+            "name": "Nyresten"
+        }, {
+            "id": 492,
+            "name": "Nyresygdom"
+        }, {
+            "id": 493,
+            "name": "Occlusio art. coron. cordis (Occlusio a. coron. cord.)"
+        }, {
+            "id": 494,
+            "name": "Occlusio coronariae (Occl. coron.)"
+        }, {
+            "id": 495,
+            "name": "Oedema cerebri"
+        }, {
+            "id": 496,
+            "name": "Oedema pulm. (Ødema pulm.)"
+        }, {
+            "id": 497,
+            "name": "Oedema pulm. embolia"
+        }, {
+            "id": 498,
+            "name": "Oedema pulmonum acut. (Oedema pulm. ac.)"
+        }, {
+            "id": 499,
+            "name": "Ondartet Halsbetændelse"
+        }, {
+            "id": 500,
+            "name": "Ondt for Tænder"
+        }, {
+            "id": 501,
+            "name": "Ophør af Puls og Respiration"
+        }, {
+            "id": 502,
+            "name": "Opkastning"
+        }, {
+            "id": 503,
+            "name": "Organisk Hjerne- og Hjertesygdom"
+        }, {
+            "id": 504,
+            "name": "Organisk Hjertesygdom"
+        }, {
+            "id": 505,
+            "name": "Organisk Underlivssygdom"
+        }, {
+            "id": 506,
+            "name": "Orm"
+        }, {
+            "id": 507,
+            "name": "Osteitis pelvis (Ostitis pelvis)"
+        }, {
+            "id": 508,
+            "name": "Osteomyelitis radii"
+        }, {
+            "id": 509,
+            "name": "Otitis media"
+        }, {
+            "id": 510,
+            "name": "Otitis media cum complicat. (Otitis c. complicat.)"
+        }, {
+            "id": 511,
+            "name": "Pancreatitis"
+        }, {
+            "id": 512,
+            "name": "Paralysis"
+        }, {
+            "id": 513,
+            "name": "Paralysis cordis"
+        }, {
+            "id": 514,
+            "name": "Paralysis generalis"
+        }, {
+            "id": 515,
+            "name": "Paralysis infantilis"
+        }, {
+            "id": 516,
+            "name": "Paralysis universalis"
+        }, {
+            "id": 517,
+            "name": "Paresis cordis"
+        }, {
+            "id": 518,
+            "name": "Parotitis"
+        }, {
+            "id": 519,
+            "name": "Partus praematurus"
+        }, {
+            "id": 520,
+            "name": "Pemphigus"
+        }, {
+            "id": 521,
+            "name": "Pericarditis"
+        }, {
+            "id": 522,
+            "name": "Pericarditis adhaesiva"
+        }, {
+            "id": 523,
+            "name": "Peritonitis"
+        }, {
+            "id": 524,
+            "name": "Peritonitis diffusa"
+        }, {
+            "id": 525,
+            "name": "Peritonitis puerperalis"
+        }, {
+            "id": 526,
+            "name": "Peritonitis universalis"
+        }, {
+            "id": 527,
+            "name": "Perityphlitis"
+        }, {
+            "id": 528,
+            "name": "Pertussis"
+        }, {
+            "id": 529,
+            "name": "Phlebitis"
+        }, {
+            "id": 530,
+            "name": "Phlegmone"
+        }, {
+            "id": 531,
+            "name": "Phlegmone axillaris"
+        }, {
+            "id": 532,
+            "name": "Phlegmone colli"
+        }, {
+            "id": 533,
+            "name": "Phthisis"
+        }, {
+            "id": 534,
+            "name": "Phthisis cavernosa"
+        }, {
+            "id": 535,
+            "name": "Phthisis cavernosa dupl."
+        }, {
+            "id": 536,
+            "name": "Phthisis florida"
+        }, {
+            "id": 537,
+            "name": "Phtisis laryngis"
+        }, {
+            "id": 538,
+            "name": "Phthisis pulm. duplex"
+        }, {
+            "id": 539,
+            "name": "Phthisis pulmonum (Phthisis pulm.)"
+        }, {
+            "id": 540,
+            "name": "Phthisis tuberculosa"
+        }, {
+            "id": 541,
+            "name": "Pleuritis"
+        }, {
+            "id": 542,
+            "name": "Pleuritis dextra"
+        }, {
+            "id": 543,
+            "name": "Pleuritis duplex"
+        }, {
+            "id": 544,
+            "name": "Pleuritis sinistra"
+        }, {
+            "id": 545,
+            "name": "Pleuropneumonia"
+        }, {
+            "id": 546,
+            "name": "Pleuropneumonia dupl."
+        }, {
+            "id": 547,
+            "name": "Pludselig død"
+        }, {
+            "id": 548,
+            "name": "Pludselig død uden (be)kjendt Aarsag"
+        }, {
+            "id": 549,
+            "name": "Pludseligt Dødsfald"
+        }, {
+            "id": 550,
+            "name": "Pneumonia"
+        }, {
+            "id": 551,
+            "name": "Pneumonia biliosa"
+        }, {
+            "id": 552,
+            "name": "Pneumonia bronchialis"
+        }, {
+            "id": 553,
+            "name": "Pneumonia catarrhalis (Pneumonia cath.)"
+        }, {
+            "id": 554,
+            "name": "Pneumonia crouposa (Pneumonia croup., Pneum. croup.)"
+        }, {
+            "id": 555,
+            "name": "Pneumonia crouposa pulm."
+        }, {
+            "id": 556,
+            "name": "Pneumonia duplex"
+        }, {
+            "id": 557,
+            "name": "Pneumonia hypostatica (Pneumonia hypostat.)"
+        }, {
+            "id": 558,
+            "name": "Pneumonia in Morbilli"
+        }, {
+            "id": 559,
+            "name": "Pneumonia sub finem"
+        }, {
+            "id": 560,
+            "name": "Polio"
+        }, {
+            "id": 561,
+            "name": "Poliomyelitis"
+        }, {
+            "id": 562,
+            "name": "Poliomyelitis anterior acuta (Poliomyelitis a.a.)"
+        }, {
+            "id": 563,
+            "name": "Polyarthritis chron."
+        }, {
+            "id": 564,
+            "name": "Præcipitatio"
+        }, {
+            "id": 565,
+            "name": "Pyaemia"
+        }, {
+            "id": 566,
+            "name": "Pyelitis"
+        }, {
+            "id": 567,
+            "name": "Pyelonephritis"
+        }, {
+            "id": 568,
+            "name": "Pyonephrosis"
+        }, {
+            "id": 569,
+            "name": "Rachitis (Rakitis)"
+        }, {
+            "id": 570,
+            "name": "Rhachitis"
+        }, {
+            "id": 571,
+            "name": "Rheumatisk Feber"
+        }, {
+            "id": 572,
+            "name": "Rheumatisme"
+        }, {
+            "id": 573,
+            "name": "Rheumatismus chron."
+        }, {
+            "id": 574,
+            "name": "Rosen"
+        }, {
+            "id": 575,
+            "name": "Rosenfeber"
+        }, {
+            "id": 576,
+            "name": "Ruptura aortae"
+        }, {
+            "id": 577,
+            "name": "Ruptura cordis"
+        }, {
+            "id": 578,
+            "name": "Rygmarvsbetændelse"
+        }, {
+            "id": 579,
+            "name": "Rygmarvssygdom"
+        }, {
+            "id": 580,
+            "name": "Rygmarvstæring"
+        }, {
+            "id": 581,
+            "name": "Sarcoma abdominis"
+        }, {
+            "id": 582,
+            "name": "Sarcomatosis (Sarkomatosis)"
+        }, {
+            "id": 583,
+            "name": "Sarkoma"
+        }, {
+            "id": 584,
+            "name": "Scarlatina"
+        }, {
+            "id": 585,
+            "name": "Sclerosis amyotrophica lateralis"
+        }, {
+            "id": 586,
+            "name": "Sclerosis art. coron."
+        }, {
+            "id": 587,
+            "name": "Sclerosis cerebri"
+        }, {
+            "id": 588,
+            "name": "Scorbutus"
+        }, {
+            "id": 589,
+            "name": "Scrophulosis"
+        }, {
+            "id": 590,
+            "name": "Selvmord"
+        }, {
+            "id": 591,
+            "name": "Selvmord?"
+        }, {
+            "id": 592,
+            "name": "Selvmord ved Gasforgiftning"
+        }, {
+            "id": 593,
+            "name": "Selvmord ved Gift"
+        }, {
+            "id": 594,
+            "name": "Selvmord ved hængning"
+        }, {
+            "id": 595,
+            "name": "Selvmord ved nedstyrtning"
+        }, {
+            "id": 596,
+            "name": "Selvmord ved skydning"
+        }, {
+            "id": 597,
+            "name": "Senilitas"
+        }, {
+            "id": 598,
+            "name": "Sepsis"
+        }, {
+            "id": 599,
+            "name": "Septichæmia"
+        }, {
+            "id": 600,
+            "name": "Septisk shock"
+        }, {
+            "id": 601,
+            "name": "Sequelae apoplexiae cerebri"
+        }, {
+            "id": 602,
+            "name": "Sequelae dentitionis"
+        }, {
+            "id": 603,
+            "name": "Shock"
+        }, {
+            "id": 604,
+            "name": "Sindsforvirring"
+        }, {
+            "id": 605,
+            "name": "Sindssvaghed"
+        }, {
+            "id": 606,
+            "name": "Sindssygdom"
+        }, {
+            "id": 607,
+            "name": "Skarlagensfeber"
+        }, {
+            "id": 608,
+            "name": "Skudsaar"
+        }, {
+            "id": 609,
+            "name": "Skudsaar i Hovedet"
+        }, {
+            "id": 610,
+            "name": "Skydning"
+        }, {
+            "id": 611,
+            "name": "Slag"
+        }, {
+            "id": 612,
+            "name": "Slimfeber"
+        }, {
+            "id": 613,
+            "name": "Snive"
+        }, {
+            "id": 614,
+            "name": "Spasmus"
+        }, {
+            "id": 615,
+            "name": "Spina bifida"
+        }, {
+            "id": 616,
+            "name": "Spondylitis"
+        }, {
+            "id": 617,
+            "name": "Spondylitis lumb."
+        }, {
+            "id": 618,
+            "name": "Stasis hepatis"
+        }, {
+            "id": 619,
+            "name": "Stasis org. et oedema pulm. mag. gr."
+        }, {
+            "id": 620,
+            "name": "Stasis organorum m. gr."
+        }, {
+            "id": 621,
+            "name": "Status epilepticus"
+        }, {
+            "id": 622,
+            "name": "Stenosis aortae"
+        }, {
+            "id": 623,
+            "name": "Stivkrampe"
+        }, {
+            "id": 624,
+            "name": "Strangulatio (Strangulation)"
+        }, {
+            "id": 625,
+            "name": "Strubebetændelse"
+        }, {
+            "id": 626,
+            "name": "Strubehoste"
+        }, {
+            "id": 627,
+            "name": "Strubekramper"
+        }, {
+            "id": 628,
+            "name": "Strubekræft"
+        }, {
+            "id": 629,
+            "name": "Subileus"
+        }, {
+            "id": 630,
+            "name": "Submersio"
+        }, {
+            "id": 631,
+            "name": "Suffocatio"
+        }, {
+            "id": 632,
+            "name": "Suicidium"
+        }, {
+            "id": 633,
+            "name": "Suicidium?"
+        }, {
+            "id": 634,
+            "name": "Sukkersyge"
+        }, {
+            "id": 635,
+            "name": "Svindsot"
+        }, {
+            "id": 636,
+            "name": "Svulst i Hjernen"
+        }, {
+            "id": 637,
+            "name": "Svulst i Spiserøret"
+        }, {
+            "id": 638,
+            "name": "Svulst i Tyktarmen"
+        }, {
+            "id": 639,
+            "name": "Symphysis pericardii"
+        }, {
+            "id": 640,
+            "name": "Syphilis (Syfilis)"
+        }, {
+            "id": 641,
+            "name": "Syphilis acquisita"
+        }, {
+            "id": 642,
+            "name": "Syphilis aphta"
+        }, {
+            "id": 643,
+            "name": "Syphilis congenita"
+        }, {
+            "id": 644,
+            "name": "Saar i Maven"
+        }, {
+            "id": 645,
+            "name": "Tabes dorsalis"
+        }, {
+            "id": 646,
+            "name": "Tandbrud-Krampe"
+        }, {
+            "id": 647,
+            "name": "Tandkrampe"
+        }, {
+            "id": 648,
+            "name": "Tarmbetændelse"
+        }, {
+            "id": 649,
+            "name": "Tarm-Indkrængning"
+        }, {
+            "id": 650,
+            "name": "Tarmkatar"
+        }, {
+            "id": 651,
+            "name": "Tarmperforation"
+        }, {
+            "id": 652,
+            "name": "Tarmslyng (Tarmslyngning)"
+        }, {
+            "id": 653,
+            "name": "Tarmsygdom"
+        }, {
+            "id": 654,
+            "name": "Tertiær Syphilis"
+        }, {
+            "id": 655,
+            "name": "Tetania"
+        }, {
+            "id": 656,
+            "name": "Tetanus"
+        }, {
+            "id": 657,
+            "name": "Tetanus neonatorum (Tetanus neonat.)"
+        }, {
+            "id": 658,
+            "name": "Thromb. a. cor."
+        }, {
+            "id": 659,
+            "name": "Thrombosis aa. coron."
+        }, {
+            "id": 660,
+            "name": "Thrombosis art. cerebri"
+        }, {
+            "id": 661,
+            "name": "Thrombosis arteriae coronariae (Thrombosis art. coron., Thrombosis a. coron.)"
+        }, {
+            "id": 662,
+            "name": "Thrombosis cerebri"
+        }, {
+            "id": 663,
+            "name": "Tracheobronchitis pulm."
+        }, {
+            "id": 664,
+            "name": "Trafikulykke"
+        }, {
+            "id": 665,
+            "name": "Trismus"
+        }, {
+            "id": 666,
+            "name": "Trismus neonatorum"
+        }, {
+            "id": 667,
+            "name": "Tub., se Tuberculosis"
+        }, {
+            "id": 668,
+            "name": "Tub. pulm."
+        }, {
+            "id": 669,
+            "name": "Tub. pulm. dext."
+        }, {
+            "id": 670,
+            "name": "Tuberculosis"
+        }, {
+            "id": 671,
+            "name": "Tuberculosis acuta"
+        }, {
+            "id": 672,
+            "name": "Tuberculosis laryngis (Tub. laryng.)"
+        }, {
+            "id": 673,
+            "name": "Tuberculosis miliaris"
+        }, {
+            "id": 674,
+            "name": "Tuberculosis peritonei"
+        }, {
+            "id": 675,
+            "name": "Tuberculosis pulmorum (Tubercul. pulm., Tub. pulm.)"
+        }, {
+            "id": 676,
+            "name": "Tuberculosis universalis"
+        }, {
+            "id": 677,
+            "name": "Tuberkulose"
+        }, {
+            "id": 678,
+            "name": "Tuberkuløs Diarrhé"
+        }, {
+            "id": 679,
+            "name": "Tumor abdominis"
+        }, {
+            "id": 680,
+            "name": "Tumor intracranialis"
+        }, {
+            "id": 681,
+            "name": "Tumor intract."
+        }, {
+            "id": 682,
+            "name": "Tumor ovarii"
+        }, {
+            "id": 683,
+            "name": "Tumor pulm."
+        }, {
+            "id": 684,
+            "name": "Tumores haemorrhoidales"
+        }, {
+            "id": 685,
+            "name": "Tussis"
+        }, {
+            "id": 686,
+            "name": "Tussis convulsiva"
+        }, {
+            "id": 687,
+            "name": "Tyktarmsbetændelse"
+        }, {
+            "id": 688,
+            "name": "Typhlitis"
+        }, {
+            "id": 689,
+            "name": "Typhoid Feber"
+        }, {
+            "id": 690,
+            "name": "Typhus (Tyfus)"
+        }, {
+            "id": 691,
+            "name": "Typhus exanthematicus"
+        }, {
+            "id": 692,
+            "name": "Typhøs Feber"
+        }, {
+            "id": 693,
+            "name": "Tæring"
+        }, {
+            "id": 694,
+            "name": "Uangiven Sygdom (Uang. Sygdom)"
+        }, {
+            "id": 695,
+            "name": "Ubekjendt"
+        }, {
+            "id": 696,
+            "name": "Ubekjendt Dødsaarsag"
+        }, {
+            "id": 697,
+            "name": "Ubekjendt Aarsag"
+        }, {
+            "id": 698,
+            "name": "Udtømmelse af Livskræfter"
+        }, {
+            "id": 699,
+            "name": "Ukendt"
+        }, {
+            "id": 700,
+            "name": "Ulcus perforans ventriculi"
+        }, {
+            "id": 701,
+            "name": "Ulcus ventriculi (Ulcus vent.)"
+        }, {
+            "id": 702,
+            "name": "Ulykkelig Hændelse"
+        }, {
+            "id": 703,
+            "name": "Ulykkestilfælde"
+        }, {
+            "id": 704,
+            "name": "Underlivs Vattersot"
+        }, {
+            "id": 705,
+            "name": "Underlivsbetændelse"
+        }, {
+            "id": 706,
+            "name": "Underlivskræft"
+        }, {
+            "id": 707,
+            "name": "Underlivssygdom"
+        }, {
+            "id": 708,
+            "name": "Underlivstæring"
+        }, {
+            "id": 709,
+            "name": "Uraemia (Uræmi)"
+        }, {
+            "id": 710,
+            "name": "Uræmia vera"
+        }, {
+            "id": 711,
+            "name": "Vandsot"
+        }, {
+            "id": 712,
+            "name": "Variolae"
+        }, {
+            "id": 713,
+            "name": "Vattersot"
+        }, {
+            "id": 714,
+            "name": "Veneficium"
+        }, {
+            "id": 715,
+            "name": "Veneficium carbon. monoxydi"
+        }, {
+            "id": 716,
+            "name": "Vomitus"
+        }, {
+            "id": 717,
+            "name": "Vulnus contus. capitis"
+        }, {
+            "id": 718,
+            "name": "Aandelig og legemlig Svækkelse"
+        }, {
+            "id": 719,
+            "name": "Aarebetændelse"
+        }, {
+            "id": 720,
+            "name": "Aareforkalkning"
+        }],
+        "value": "",
+        "helpText": "Årsagen til personens død. Kan findes efter teksten ”..af…” i kilden. Skrives som i kilden.)"
+    }]
+}]

@@ -7,8 +7,8 @@
     </label>
     
     <div class="dynamic-form__adjust">
-        <input type="{{field.type}}" class="form-control" ng-model="field.value" ng-disabled="field.unreadable" />
-        <a href class="icon glyphicon glyphicon-info-sign" uib-tooltip="{{TEXT.FIELD_UNREADABLE}}" tooltip-placement="left" ng-click="toggleUnreadable()"></a>
+        <input type="{{field.type}}" class="form-control" ng-model="field.value" ng-model-options="{ updateOn: 'blur' }" ng-disabled="field.unreadable" />
+        <a href tabindex="-1" class="icon glyphicon glyphicon-info-sign" uib-tooltip="{{TEXT.FIELD_UNREADABLE}}" tooltip-placement="left" ng-click="toggleUnreadable()"></a>
     </div>
 
     <div class="help-block" ng-if="field.errorText">{{field.errorText}}</div>   

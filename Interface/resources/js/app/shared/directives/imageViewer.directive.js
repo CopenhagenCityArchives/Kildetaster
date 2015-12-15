@@ -20,22 +20,27 @@ define([
 
             scope: {
                 options: '=',
-                onSelection: '&'
+                onSelection: '&',
+                editArea: '='
             },
 
             //templateUrl: 'shared/directives/imageViewer.directive.tpl.html',
 
             controller: /*@ngInject*/ function($scope, $compile, $templateCache, $element, $rootScope) {
 
-                var viewer, opts;
+                var viewer, opts, selectionOverlay, selection, tracker;
 
                 //Openhttps://github.com/openseadragon/openseadragon/issues/759
-                
+
+                //Prepare the template
                 var template = $compile($templateCache.get('shared/directives/imageViewer.directive.tpl.html'))($scope);
 
+                //Add template to the dom
                 angular.element($element).replaceWith(template);
 
-
+                /**
+                 * Helper function to add a specific css class to each overlay
+                 */
                 function addClassToOverlay(overlayData) {
 
                     if (!angular.isArray(overlayData)) {
@@ -46,17 +51,11 @@ define([
                         return data;
                     });
                 }
-                //Add class to render overlays correctly
+
+                //Add class all given overlays to render them as existing
                 $scope.options.tileSources.overlays = addClassToOverlay($scope.options.tileSources.overlays);
 
-                $scope.$watchCollection('options', function(newVal, oldVal) {
-                    //console.log('watching options', newVal);
-                    if (newVal !== oldVal && newVal !== null) {
-                        rebuildOptions();
-                    }
-                });
-
-                opts = angular.extend({}, $scope.options, {
+                opts = angular.extend({}, {
 
                     element: angular.element('.target')[0],
 
@@ -85,14 +84,44 @@ define([
                     //(also see gestureSettings[Mouse|Touch|Pen].scrollToZoom}).
                     zoomPerScroll: 1.0
 
-                });
+                }, $scope.options);
 
                 //Initialize the viewer
                 viewer = OpenSeadragon(opts);
 
+                viewer.addHandler('add-overlay', function(overlay) {
+
+                    if (overlay.element) {
+                        selectionOverlay = overlay;
+                    }
+
+                });
+
+                var rect = null;
+
+                //Area we supposed to show an overlay with an area being edited?
+                if ($scope.editArea) {
+                    
+                    var editAreaOverlay = new OpenSeadragon.Rect($scope.editArea.x, $scope.editArea.y, $scope.editArea.width, $scope.editArea.height);
+                    
+                    viewer.addOverlay({
+                        element: $('<div class="imageViewer__progress"></div>')[0],
+                        location: editAreaOverlay
+                    });
+                    
+                    var conv = viewer.viewport.imageToViewportRectangle(editAreaOverlay);
+                    viewer.viewport.fitBounds(conv, true);
+
+                }
+                //Else prepare a new rect object with initial selection
+                else {
+                    rect = new OpenSeadragon.SelectionRect(0.25, 0.6, 0.5, 0.25);
+
+                }
+
                 //Selection plugin
                 //https://github.com/picturae/openseadragonselection
-                viewer.selection({
+                selection = viewer.selection({
 
                     onSelection: function(rect) {
 
@@ -101,27 +130,36 @@ define([
 
                         viewer.addOverlay({
                             element: $('<div class="imageViewer__progress"></div>')[0],
-                            //location: new OpenSeadragon.Rect(rect.x, rect.y, rect.width, rect.height, rect.rotation)
                             location: converted,
                         });
 
                         //Zoom viewer to the selected area
                         viewer.viewport.fitBounds(converted, true);
 
+                        if (tracker instanceof OpenSeadragon.MouseTracker) {
+                            tracker.destroy();
+                        }
+
                         //If the given onSelection property is a function, call it
                         if (angular.isFunction($scope.onSelection)) {
                             $scope.onSelection();
                         }
+
                     },
                     //Initial selection
-                    rect: new OpenSeadragon.SelectionRect(0.25, 0.6, 0.5, 0.25),
-                    
+                    rect: rect,
+
                     toggleButton: 'toggle-selection',
-                    
+
+                    showConfirmDenyButtons: true,
+
+                    //Center buttons?
+                    styleConfirmDenyButtons: true,
+
                     //showSelectionControl: true,
-                    
+
                     prefixUrl: '/resources/images/',
-                    
+
                     navImages: { // overwrites OpenSeadragon's options
                         selection: {
                             REST: 'selection_rest.png',
@@ -144,11 +182,68 @@ define([
                     }
                 });
 
-            
-                $('.editor').on('dblclick', '.imageViewer__progress', function(e){
-                    console.log('convert-to-selection');
+                //TODO do in viewer context and not jQuery
+                $('.editor').on('dblclick', '.imageViewer__progress', function(event) {
+
+                    viewer.removeOverlay(selectionOverlay.element);
+
+                    var x = selectionOverlay.location.x;
+                    var y = selectionOverlay.location.y;
+                    var height = selectionOverlay.location.height;
+                    var width = selectionOverlay.location.width;
+
+                    var selectionRect = new OpenSeadragon.SelectionRect(x, y, width, height);
+
+                    selection.rect = selectionRect;
+                    selection.draw();
+
+                    
+
+                    //viewer.innerTracker.keyDownHandler = null;
+                    // tracker = new OpenSeadragon.MouseTracker({
+
+                    //     element: viewer.canvas,
+
+                    //     keyDownHandler: function(event) {
+                            
+                    //         event.preventDefaultAction = true;
+
+                    //         if (event.shift) {
+
+                    //             switch (event.keyCode) {
+                    //                 //left
+                    //                 case 37:
+                    //                     selection.rect.x = selection.rect.x -= 0.005;
+                    //                     selection.draw();
+                    //                     break;
+                    //                     //right
+                    //                 case 39:
+                    //                     selection.rect.x = selection.rect.x += 0.005;
+                    //                     selection.draw();
+                    //                     break;
+                    //                     //up
+                    //                 case 38:
+                    //                     selection.rect.y = selection.rect.y -= 0.005;
+                    //                     selection.draw();
+                    //                     break;
+                    //                     //down
+                    //                 case 40:
+                    //                     selection.rect.y = selection.rect.y += 0.005;
+                    //                     selection.draw();
+                    //                     break;
+                    //                 default:
+                    //                     //Do nothing
+                    //                     break;
+                    //             }
+
+                    //             return false;
+                    //         }
+
+                    //     }
+                    // });
+
                 });
-            
+
 
                 //Cleanup
                 $scope.$on('destroy', function() {
@@ -156,152 +251,7 @@ define([
                     $('.editor').off('dblclick');
 
                 });
-
-
-            },
-
-            // link: function(scope, element, attrs) {
-
-
-            //     //Create options object
-            //     var opts = angular.extend({}, scope.options, {
-            //         id: "openseadragon-" + Math.random(),
-            //         //element: element[0],
-            //         element: $('div')[0],
-            //         //toolbar: toolsDiv
-            //     });
-
-            //     if (attrs.tilesource) {
-            //         opts.tileSources = [attrs.tilesource];
-            //     }
-
-            //     if (attrs.prefixUrl) {
-            //         opts.prefixUrl = attrs.prefixUrl;
-            //     }
-
-            //     //Create the viewer
-            //     scope.osd = OpenSeadragon(opts);
-
-            //     //Create a wrapper
-            //     var wrapper = {
-            //         setFullScreen: function(fullScreen) {
-            //             scope.osd.setFullScreen(fullScreen);
-            //         },
-            //         forceRedraw: function() {
-            //             scope.osd.forceRedraw();
-            //         },
-            //         mouse: {
-            //             position: null,
-            //             imageCoord: null,
-            //             viewportCoord: null,
-            //         },
-            //         zoom: 0,
-            //         viewport: {
-            //             bounds: null,
-            //             center: null,
-            //             rotation: 0,
-            //             zoom: 0,
-            //         }
-            //     };
-
-            //     //if @name is set, put the wrapper in the scope and handle the events
-            //     var zoomHandler = null;
-            //     var updateViewportHandler = null;
-
-            //     if (attrs.name) {
-
-            //         //Make the OSD available to parent scope
-            //         scope.$parent[attrs.name] = wrapper;
-
-            //         //Define event handlers
-            //         zoomHandler = function(e) {
-            //             scope.$apply(function() {
-            //                 wrapper.zoom = e.zoom;
-            //             });
-            //         };
-
-            //         updateViewportHandler = function(e) {
-            //             scope.$apply(function() {
-            //                 wrapper.viewport = {
-            //                     bounds: scope.osd.viewport.getBounds(false),
-            //                     center: scope.osd.viewport.getCenter(false),
-            //                     rotation: scope.osd.viewport.getRotation(),
-            //                     zoom: scope.osd.viewport.getZoom(false),
-            //                 };
-            //             });
-            //         };
-
-            //         //Assign event handlers
-            //         scope.osd.addHandler("zoom", zoomHandler);
-            //         scope.osd.addHandler("update-viewport", updateViewportHandler);
-
-            //         //Add a mouse handler
-            //         scope.mouse = new OpenSeadragon.MouseTracker({
-
-            //             element: scope.osd.canvas,
-
-            //             enterHandler: function(e) {
-            //                 if (scope.osd.viewport) {
-            //                     var coord = OpenSeadragon.getElementPosition(scope.osd.canvas);
-            //                     var pos = e.position.plus(coord);
-            //                     var mouse = {
-            //                         position: pos,
-            //                         imageCoord: scope.osd.viewport.windowToImageCoordinates(pos),
-            //                         viewportCoord: scope.osd.viewport.windowToViewportCoordinates(pos),
-            //                     };
-            //                     scope.$apply(function() {
-            //                         wrapper.mouse = mouse;
-            //                     });
-            //                 }
-            //             },
-
-            //             moveHandler: function(e) {
-            //                 if (scope.osd.viewport) {
-            //                     var coord = OpenSeadragon.getElementPosition(scope.osd.canvas);
-            //                     var pos = e.position.plus(coord);
-            //                     var mouse = {
-            //                         position: pos,
-            //                         imageCoord: scope.osd.viewport.windowToImageCoordinates(pos),
-            //                         viewportCoord: scope.osd.viewport.windowToViewportCoordinates(pos),
-            //                     };
-            //                     scope.$apply(function() {
-            //                         wrapper.mouse = mouse;
-            //                     });
-            //                 }
-            //             },
-
-            //             exitHandler: function(e) {
-            //                 scope.$apply(function() {
-            //                     wrapper.mouse.position = null;
-            //                     wrapper.mouse.imageCoord = null;
-            //                     wrapper.mouse.viewportCoord = null;
-            //                 });
-            //             },
-            //         });
-
-            //         scope.mouse.setTracking(true);
-            //     }
-
-            //     //When element is destroyed, destroy the viewer
-            //     element.on('$destroy', function() {
-
-            //         //if @nam eis set, remove it from parent scope, and remove event handlers
-            //         if (attrs.name) {
-            //             //Remove from parent scope
-            //             scope.$parent[attrs.name] = null;
-
-            //             //Destroy mouse handler
-            //             scope.mouse.destroy();
-
-            //             //Remove event handlers
-            //             scope.osd.removeHandler("zoom", zoomHandler);
-            //             scope.osd.removeHandler("update-viewport", updateViewportHandler);
-            //         }
-
-            //         //Destroy the viewer
-            //         scope.osd.destroy();
-            //     });
-            // },
+            }
         };
     };
 
