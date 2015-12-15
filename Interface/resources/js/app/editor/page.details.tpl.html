@@ -1,16 +1,16 @@
-<div class="row">
+<ul class="list-inline">
+<li>
 
-    <div class="col-sm-6">
-        <button type="button" class="btn btn-default" ui-sref=".({ pageId: prevPageId })" ng-disabled="!prevPageId"><</button>
+        <button type="button" class="btn btn-default btn-xs" ui-sref=".({ pageId: prevPageId })" ng-disabled="!prevPageId"><</button>
         {{pageNumber}}
-        <button type="button" class="btn btn-default" ui-sref=".({ pageId: nextPageId })" ng-disabled="!nextPageId">></button>
-    </div>
+        <button type="button" class="btn btn-default btn-xs" ui-sref=".({ pageId: nextPageId })" ng-disabled="!nextPageId">></button>
+    </li>
 
-    <div class="col-sm-6 form-inline">
+    <li class="form-inline">
         <div class="form-group gotopage">
             <label class="control-label">{{TEXT.PAGE_GOTO}}</label>
             <input type="text" class="form-control" value="" ng-model="goToPageId" ng-keypress="goToPage($event)">
         </div>
-    </div>
+    </li>
     
-</div>
+</ul>

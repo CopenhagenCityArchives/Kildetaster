@@ -56,7 +56,7 @@
     </div>
 </div>
 
-<div class="row" ng-if="currentStep > 1 && !isResult()">
+<div class="row" ng-if="currentStep > 1">
     
     <div class="col-sm-12">
         <h3>Udfyldt</h3>
@@ -64,7 +64,11 @@
         <ul class="list-unstyled field-list" ng-repeat="step in steps" ng-hide="step.fields.length === 0">
             
             <li class="field-list__item" ng-repeat="field in step.fields | filter: hasValue('value')">
-                <a href ng-click="toggleEditExistingValue(field)">{{field.labelText}} <span class="icon glyphicon glyphicon-pencil"></span></a>
+                
+                <a href ng-click="toggleEditExistingValue(field)">
+                    {{field.labelText}}: {{field.value | nameFromObject }} <span class="icon glyphicon glyphicon-pencil"></span>
+                </a>
+                
                 <div class="row" ng-switch="field.type" ng-if="field.isEditing">
                     <div class="col-sm-12">
                         <div ng-switch-when="text">
@@ -77,7 +81,7 @@
                             <dynamic-typeahead field-data="field" autofocus="$index === 0"></dynamic-typeahead>
                         </div>
                     </div>
-                    <!-- Kommentar ved fejlrettelse -->
+
                     <div class="col-sm-12 text-right">
                         <button type="button" class="btn btn-default" ng-click="toggleEditExistingValue(field)">{{TEXT.BUTTON.OK}}</button>
                     </div>

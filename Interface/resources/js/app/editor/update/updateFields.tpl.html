@@ -11,7 +11,9 @@
             
             <li class="field-list__item" ng-repeat="field in step.fields" ng-class="{ 'field-list__highlight': field.highlight}">
                 
-                <a href ng-click="toggleEditExistingValue(field)">{{field.labelText}} <span class="icon glyphicon glyphicon-pencil"></span></a>
+                <a href ng-click="toggleEditExistingValue(field)" ng-if="!field.isEditing && !field.highlight">
+                    {{field.labelText}}: {{field.value | nameFromObject }} <span class="icon glyphicon glyphicon-pencil"></span>
+                </a>
                 
                 <div class="row" ng-switch="field.type" ng-if="field.isEditing || field.highlight">
                     <div class="col-sm-12">

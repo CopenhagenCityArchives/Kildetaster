@@ -19,6 +19,8 @@ define([
     'app/shared/services/user.service',
     'app/shared/services/update.service',
 
+    'app/shared/filters/nameFromObject.filter',
+
     'app/shared/constants/text.constant'
 
 ], function(
@@ -42,6 +44,8 @@ define([
     userService,
     updateService,
 
+    nameFromObjectFilter,
+
     textConstant
 
     ) {
@@ -62,6 +66,8 @@ define([
     sharedApp.factory('pageService', pageService);
     sharedApp.factory('userService', userService);
     sharedApp.factory('updateService', updateService);
+
+    sharedApp.filter('nameFromObject', nameFromObjectFilter);
 
     sharedApp.constant('TEXT', textConstant);
 
