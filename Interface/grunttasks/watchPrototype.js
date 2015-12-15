@@ -43,7 +43,7 @@ module.exports = function(grunt) {
 
 			angulartemplates: {
 				files: ['<%= package.resources %>/js/**/*.tpl.html'],
-				tasks: ['html2js:prototype'],
+				tasks: ['html2js:editor'],
 				options: {
 					livereload: true
 				}
