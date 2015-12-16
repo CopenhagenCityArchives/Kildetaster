@@ -209,19 +209,19 @@ define([
                 });
 
                 //TODO do in viewer context and not jQuery
-                $('.editor').on('dblclick', '.imageViewer__progress', function(event) {
+                //$('.editor').on('dblclick', '.imageViewer__progress', function(event) {
 
-                    viewer.removeOverlay(selectionOverlay.element);
+                    // viewer.removeOverlay(selectionOverlay.element);
 
-                    var x = selectionOverlay.location.x;
-                    var y = selectionOverlay.location.y;
-                    var height = selectionOverlay.location.height;
-                    var width = selectionOverlay.location.width;
+                    // var x = selectionOverlay.location.x;
+                    // var y = selectionOverlay.location.y;
+                    // var height = selectionOverlay.location.height;
+                    // var width = selectionOverlay.location.width;
 
-                    var selectionRect = new OpenSeadragon.SelectionRect(x, y, width, height);
+                    // var selectionRect = new OpenSeadragon.SelectionRect(x, y, width, height);
 
-                    selection.rect = selectionRect;
-                    selection.draw();
+                    // selection.rect = selectionRect;
+                    // selection.draw();
 
                     
 
@@ -268,7 +268,7 @@ define([
                     //     }
                     // });
 
-                });
+                //});
 
 
                 //Cleanup
