@@ -1,5 +1,7 @@
 /*globals requirejs:false, window:false */
 
+define('jquery', function() { return jQuery; });
+
 requirejs([
     
     'jquery',
