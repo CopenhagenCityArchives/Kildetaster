@@ -15,14 +15,14 @@ module.exports = {
 
     development: {
         constants: {
-            EDITORURL: 'DEVTODO',
+            EDITORURL: 'http://localhost:1508',
             JSONURL: '/resources/mock/'
         }
     },
 
     production: {
         constants: {
-            EDITORURL: 'PRODTODO',
+            EDITORURL: 'http://kildetaster.dev9.1508test.dk',
             JSONURL: 'http://kildetaster.dev9.1508test.dk/resources/mock/'
         }
     }
