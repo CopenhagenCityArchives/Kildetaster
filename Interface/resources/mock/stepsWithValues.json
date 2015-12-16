@@ -31,7 +31,7 @@
     "fields": [{
         "field": "address",
         "labelText": "Vejnavn",
-        "type": "select",
+        "type": "typeahead",
         "options": [{
             "id": 1,
             "name": "Rosenborggade"

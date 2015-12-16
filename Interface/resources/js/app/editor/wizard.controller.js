@@ -14,12 +14,18 @@ define([
             }
         });
 
+
+        $scope.acceptArea = function acceptArea() {
+            $rootScope.$broadcast('areaAccepted');
+        };
+
         /**
         * Because we do not trigger the ui.route logic (see.editor.config.js), 
         * listen for changes to the location.search
         */
         $rootScope.$on('$locationChangeSuccess', function(event){
-            $scope.currentStep = $location.search().stepId;
+            //Make sure we treat currentStep value as an integer
+            $scope.currentStep = parseInt($location.search().stepId);
             $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
         });
         
@@ -29,14 +35,14 @@ define([
         //predicate for filter in template
         $scope.hasValue = function hasValue(prop) {
             return function(item) {
-                return item[prop] !== undefined && item[prop] !== ''
+                return item[prop] !== undefined && item[prop] !== '';
             };
         };
 
         //Toggle wether or not we should show edit field for a given field config
         $scope.toggleEditExistingValue = function toggleEditExistingValue(item) {
             item.isEditing = !item.isEditing;
-        };
+        };       
 
         $scope.numSteps = null;
 
@@ -62,18 +68,8 @@ define([
             return $scope.currentStep === $scope.numSteps;
         };
 
-        $scope.save = function save() {
-            
-            alert('Saving entry');
-
-            $scope.prepareData();
-
+        $scope.save = function save() {           
             $state.go('.done', {}, { reload: true });
-        };
-
-        //Loop over all fields and build json response for backend to save data
-        $scope.prepareData = function prepareData() {    
-
         };
 
         stepService.getData().then(function(response) {
@@ -91,7 +87,21 @@ define([
         };
 
         $scope.prevStep = function prevStep() {
+            if ($scope.currentStep == 2) {
+                $rootScope.$broadcast('makeSelectable');
+            }
             $location.search({ stepId: parseInt($scope.currentStep) - 1 });
+        };
+
+
+        /**
+        * Tell the app that we want to place/replace the area
+        */
+        $scope.placeArea = function placeArea() {
+            //Broadcast taht we want to make area selectable
+            $rootScope.$broadcast('makeSelectable');
+            //Show the wizard on step 1
+            $location.search({ stepId: 1 });
         };
 
 

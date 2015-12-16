@@ -12,13 +12,11 @@ define([
             getData: function getData() {
 
                 var firstStep = {
-                    "title": "Vælg udsnit",
-                    "description": "Lorem ipsum dolor sit amet, consectetur."
+                    "title": "Vælg udsnit"
                 };
 
                 var resultStep = {
-                    "title": "Udfyldt",
-                    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi."
+                    "title": "Udfyldt"
                 };
                 
                 return $http.get(basePath + '/steps.json')

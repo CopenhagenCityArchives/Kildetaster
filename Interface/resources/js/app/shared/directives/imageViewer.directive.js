@@ -156,7 +156,7 @@ define([
 
                     toggleButton: 'toggle-selection',
 
-                    showConfirmDenyButtons: true,
+                    showConfirmDenyButtons: false,
 
                     //Center buttons?
                     styleConfirmDenyButtons: true,
@@ -185,6 +185,27 @@ define([
                             DOWN: 'selection_cancel_pressed.png'
                         },
                     }
+                });
+
+                $scope.$on('areaAccepted', function() {
+                    selection.confirm();
+                });
+
+                $scope.$on('makeSelectable', function() {
+                    //TODO fix the duped code into more manageble functions
+                    viewer.removeOverlay(selectionOverlay.element);
+
+                    var x = selectionOverlay.location.x;
+                    var y = selectionOverlay.location.y;
+                    var height = selectionOverlay.location.height;
+                    var width = selectionOverlay.location.width;
+
+                    var selectionRect = new OpenSeadragon.SelectionRect(x, y, width, height);
+
+                    selection.rect = selectionRect;
+                    selection.draw();
+
+                    viewer.viewport.fitVertically(true);
                 });
 
                 //TODO do in viewer context and not jQuery

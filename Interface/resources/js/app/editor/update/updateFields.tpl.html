@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-sm-12">
         <h2>Ret fejl i kilde</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio repellat doloremque molestias?</p>
+        <p>Herunder er de fejlmeldte indtastninger markeret med gult. Ret fejlene i felterne og klik ”ok”.</p>
     </div>    
     <div class="col-sm-12">
         <h3>Udfyldt</h3>
@@ -44,9 +44,15 @@
 
     <div class="col-sm-12"><hr></div>
 
-    <div class="col-sm-12">
+    <div class="col-sm-12" ng-if="!readyToSave">
         <button class="btn btn-default btn-block">Spring over</button>
         <button class="btn btn-default btn-block">Send til superbruger</button>
         <button class="btn btn-default btn-block">Læg på forum</button>
+    </div>
+
+    <div class="col-sm-12" ng-if="readyToSave">
+        <button class="btn btn-default btn-block" ng-click="save()">Gem og luk</button>
+        <!-- <button class="btn btn-default btn-block">Gem og næste</button> -->
+        
     </div>
 </div>

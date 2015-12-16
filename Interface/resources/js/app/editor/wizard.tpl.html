@@ -1,21 +1,28 @@
-<!-- <div class="row">
-    <div class="col-sm-12">
-        <h2>Udfyld kilde</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi repudiandae, distinctio magni perferendis, accusantium officia!</p>
-    </div>
-</div> -->
-
+<pre>
+Numsteps: {{numSteps}}
+cur: {{currentStep}}
+</pre>
 <div class="row" ng-if="currentStep == 1">
     <div class="col-sm-12">
         <h2>{{currentStepData.title}}</h2>
         <p>{{currentStepData.description}}</p>
         <step-of total="numSteps" current="currentStep"></step-of>
-        <p>Vælg indførelsesområdet. Brug mus til at markere området</p>
+        <p>Vælg området for den person, du vil indtaste. Brug musen til at flytte området eller ændre dets størrelse,
+         så alle informationer er inden for det markerede.</p>
         <p class="text-center" ng-click="enableSelection()">
-            <span class="glyphicon glyphicon-resize-full"></span>
+            <br>
+            <img src="/resources/images/Cursor-Select-512.png" alt="Vælg område" width="50px">
+            <br>
         </p>
     </div>
+
+    <div class="col-sm-6"></div>
+    
+    <div class="col-sm-6">
+        <button type="button" class="btn btn-primary btn-block" ng-click="acceptArea()">{{TEXT.BUTTON.NEXT}}</button>
+    </div>
 </div>
+
 <div class="row" ng-if="currentStep > 1 && !isResult()">
     <div class="col-sm-12">
         
@@ -39,9 +46,7 @@
         </div>
         
     </div>
-</div>
 
-<div class="row" ng-if="!isResult()">
     <div class="col-sm-6">
         <button type="button" class="btn btn-default btn-block" ng-show="currentStep > 1" ng-click="prevStep()">{{TEXT.BUTTON.PREV}}</button>
     </div>
@@ -60,9 +65,16 @@
     
     <div class="col-sm-12">
         <h3>Udfyldt</h3>
-        
+
+        <ul class="list-unstyled field-list">
+            <li class="field-list__item">
+                <a href ng-click="placeArea()">Udsnit placeret <span class="icon glyphicon glyphicon-pencil"></span></a>
+            </li>        
+        </ul>
         <ul class="list-unstyled field-list" ng-repeat="step in steps" ng-hide="step.fields.length === 0">
             
+
+
             <li class="field-list__item" ng-repeat="field in step.fields | filter: hasValue('value')">
                 
                 <a href ng-click="toggleEditExistingValue(field)">
