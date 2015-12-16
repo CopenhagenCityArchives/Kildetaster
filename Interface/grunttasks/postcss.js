@@ -45,6 +45,20 @@ module.exports = {
         dest: '<%= package.prototyperesources %>/css/styles.css'
     },
 
+    sdk: {
+        options: {
+            processors: [
+                // add vendor prefixes
+                require('autoprefixer')({
+                    browsers: 'last 2 versions'
+                }),
+                // minify the result
+                require('cssnano')() 
+            ]
+        },
+        src: '<%= package.sdkresources %>/css/styles.css',
+        dest: '<%= package.sdkresources %>/css/styles.css'
+    },
 
     production: {
         options: {
@@ -60,4 +74,4 @@ module.exports = {
         src: '<%= package.buildresources %>/css/styles.css',
         dest: '<%= package.buildresources %>/css/styles.css'
     }
-}
+};

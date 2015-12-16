@@ -1,0 +1,42 @@
+<div ng-controller="errorsController">
+    
+    <div class="row-fluid">
+        <div class="span12">
+            <h2>Mine fejlmeldinger</h2>
+            <ul class="unstyled task-list">
+                <li>
+                    <div class="task-list__header">Kilde</div>
+                    <div class="task-list__header">Felt(er)</div>
+                    <div class="task-list__header" style="width: 25%">Overgår til superbruger om</div>
+                    <div class="task-list__header"></div>
+                </li>
+                <li ng-repeat="error in errorList" ng-class="{ odd: $odd }">
+
+                    <div class="task-list__item">
+                        {{error.name}}
+                    </div>
+                    <div class="task-list__item">
+                        <div ng-repeat="field in error.fields">
+                            {{field.labelText}}
+                        </div>
+                    </div>
+                    <div class="task-list__item">
+                        <div ng-if="error.timeleft">{{error.timeleft}}</div>
+                        <div ng-if="error.corrected">Rettet af {{error.corrected.user.name}}</div>
+                    </div>
+                    <div class="task-list__item text-right">
+                        <a ng-href="{{error.url}}" ng-if="error.timeleft" class="btn btn-default" ng-click="goToEditor(task)">Ret</a>
+                        <div ng-if="error.corrected">{{error.corrected.date}}</div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="row-fluid">
+            <div class="span12 text-center">
+                <a href>Se flere</a>
+            </div>
+        </div>
+    </div>
+</div>

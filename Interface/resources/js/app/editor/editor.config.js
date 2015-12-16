@@ -82,7 +82,11 @@ define([
                     '': {
                         templateUrl: 'editor/update/page.tpl.html',
                         controller: 'pageController'
+                    },
 
+                    'pageDetails': {
+                        templateUrl: 'editor/page.details.tpl.html',
+                        controller: 'pageController'
                     }
                 },
                

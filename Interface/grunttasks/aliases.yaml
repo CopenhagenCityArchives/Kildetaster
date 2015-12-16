@@ -51,11 +51,14 @@ build:
     - 'imagemin:production'
     
     - 'requirejs:production'
+    - 'requirejs:sdk'
     
     - 'ngAnnotate:production'
     - 'uglify:production'
     - 'bake:production'
+    
     - 'sass:production'
+    - 'sass:sdk'
     - 'postcss:production'
     
     #Run unittests    

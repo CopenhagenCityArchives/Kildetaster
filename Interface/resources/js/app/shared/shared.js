@@ -18,6 +18,7 @@ define([
     'app/shared/services/page.service',
     'app/shared/services/user.service',
     'app/shared/services/update.service',
+    'app/shared/services/error.service',
 
     'app/shared/filters/nameFromObject.filter',
 
@@ -43,6 +44,7 @@ define([
     pageService,
     userService,
     updateService,
+    errorService,
 
     nameFromObjectFilter,
 
@@ -66,6 +68,7 @@ define([
     sharedApp.factory('pageService', pageService);
     sharedApp.factory('userService', userService);
     sharedApp.factory('updateService', updateService);
+    sharedApp.factory('errorService', errorService);
 
     sharedApp.filter('nameFromObject', nameFromObjectFilter);
 

@@ -22,7 +22,7 @@ define([
                 scope.link = "someurl/" + scope.data.id;
 
             }
-        }
+        };
     };
 
     return userDirective;
