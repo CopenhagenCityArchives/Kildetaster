@@ -3,9 +3,9 @@ define([
 
 ], function() {
 
-    var userService = /*@ngInject*/ function taskService($http) {
+    var userService = /*@ngInject*/ function taskService($http, JSONURL) {
 
-        var baseUrl = '/resources/mock/';
+        
 
         /**
          * Randomize array element order in-place.
@@ -29,9 +29,9 @@ define([
              *
              * @return {promise} That resolves with the data for the task
              */
-            getUsers: function getProject(id) {
+            getUsers: function getProject(id, baseUrl) {
 
-                return $http.get(baseUrl + 'users-online.json').then(function(response) {
+                return $http.get(JSONURL + 'users-online.json').then(function(response) {
                     return shuffleArray(response.data);
                 });
 

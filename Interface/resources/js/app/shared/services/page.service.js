@@ -3,17 +3,16 @@ define([
 
 ], function() {
 
-    var pageService = /*@ngInject*/ function pageService($http, $cacheFactory, $q, $filter) {
+    var pageService = /*@ngInject*/ function pageService($http, $cacheFactory, $q, $filter, JSONURL) {
 
-        var baseUrl = '/resources/mock/',
-            cache = $cacheFactory('pageCache');
+        var cache = $cacheFactory('pageCache');
 
         /**
         * Load all available project details, store in cache for quick retrieval
         */
         function getProjectData() {
 
-            return $http.get(baseUrl + 'page.json').then(function(response) {
+            return $http.get(JSONURL + 'page.json').then(function(response) {
                 cache.put('all', response.data);
                 return response.data;
             });
@@ -54,12 +53,12 @@ define([
 
             },
 
-            getPageUpdate: function getPage(id) {
+            getPageUpdate: function getPage(id, baseUrl) {
 
                 var deferred = $q.defer(),
                     found;
 
-                $http.get(baseUrl + 'pageEditArea.json').then(function(response) {
+                $http.get(JSONURL + 'pageEditArea.json').then(function(response) {
                     found = $filter('filter')(response.data, function(project) {
                             return project.id === id;
                         });

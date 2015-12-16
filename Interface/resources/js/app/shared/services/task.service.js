@@ -3,17 +3,16 @@ define([
 
 ], function() {
 
-    var taskService = /*@ngInject*/ function taskService($http, $cacheFactory, $q, $filter) {
+    var taskService = /*@ngInject*/ function taskService($http, $cacheFactory, $q, $filter, JSONURL) {
 
-        var baseUrl = '/resources/mock/',
-            cache = $cacheFactory('taskCache');
+        var cache = $cacheFactory('taskCache');
 
         /**
          * Load all available task details, store in cache for quick retrieval
          */
         function getTaskData() {
 
-            return $http.get(baseUrl + 'tasks.json').then(function(response) {
+            return $http.get(JSONURL + 'tasks.json').then(function(response) {
                 cache.put('all', response.data);
                 return response.data;
             });

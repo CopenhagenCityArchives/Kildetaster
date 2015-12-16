@@ -8,19 +8,22 @@ module.exports = {
 
     prototype: {
         constants: {
-            EDITORURL: 'http://localhost:1508'
+            EDITORURL: 'http://localhost:1508',
+            JSONURL: '/resources/mock/'
         }
     },
 
     development: {
         constants: {
-            EDITORURL: 'DEVTODO'
+            EDITORURL: 'DEVTODO',
+            JSONURL: '/resources/mock/'
         }
     },
 
     production: {
         constants: {
-            EDITORURL: 'PRODTODO'
+            EDITORURL: 'PRODTODO',
+            JSONURL: 'http://kildetaster.dev9.1508test.dk/resources/mock/'
         }
     }
 };

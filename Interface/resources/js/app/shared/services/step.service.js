@@ -3,9 +3,7 @@ define([
 
 ], function() {
 
-    var stepService = /*@ngInject*/ function($timeout, $q, $http) {
-
-        var basePath = '/resources/mock';
+    var stepService = /*@ngInject*/ function stepService($timeout, $q, $http, JSONURL) {
 
         return {
 
@@ -19,7 +17,7 @@ define([
                     "title": "Udfyldt"
                 };
                 
-                return $http.get(basePath + '/steps.json')
+                return $http.get(JSONURL + '/steps.json')
                     .then(function(response) {
                         response.data.unshift(firstStep);
                         response.data.push(resultStep);

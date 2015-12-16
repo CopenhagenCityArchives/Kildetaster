@@ -3,15 +3,13 @@ define([
 
 ], function() {
 
-    var updateService = /*@ngInject*/ function updateService($http, $q, $filter) {
-
-        var baseUrl = '/resources/mock/';
+    var updateService = /*@ngInject*/ function updateService($http, $q, $filter, JSONURL) {
 
         return {
 
-            getData: function getData() {
+            getData: function getData(baseUrl) {
    
-                return $http.get(baseUrl + '/stepsWithValues.json')
+                return $http.get(JSONURL + '/stepsWithValues.json')
                     .then(function(response) {
                         return response.data;
                     })
