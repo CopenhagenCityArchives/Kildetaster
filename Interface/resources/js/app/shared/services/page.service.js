@@ -52,7 +52,25 @@ define([
 
                 return deferred.promise;
 
+            },
+
+            getPageUpdate: function getPage(id) {
+
+                var deferred = $q.defer(),
+                    found;
+
+                $http.get(baseUrl + 'pageEditArea.json').then(function(response) {
+                    found = $filter('filter')(response.data, function(project) {
+                            return project.id === id;
+                        });
+
+                    deferred.resolve(found[0]);
+                });
+
+                return deferred.promise;
+
             }
+
 
         };
 

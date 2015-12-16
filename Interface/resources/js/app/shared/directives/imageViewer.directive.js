@@ -12,7 +12,7 @@ define([
     /**
      * Based on https://github.com/MaitreDede/angular-openseadragon
      */
-    var openseadragonDirective = /*@ngInject*/ function openseadragonDirective() {
+    var openseadragonDirective = /*@ngInject*/ function openseadragonDirective($timeout) {
 
         return {
 
@@ -97,20 +97,25 @@ define([
 
                 });
 
+                //If set to a rect object, will show a selection on initilization of the selection plugin
                 var rect = null;
 
                 //Area we supposed to show an overlay with an area being edited?
                 if ($scope.editArea) {
+
+                    //TODO: fitBounds on event instead of a custom timeout
+                    $timeout(function() {
+                   
+                        var editAreaOverlay = new OpenSeadragon.Rect($scope.editArea.x, $scope.editArea.y, $scope.editArea.width, $scope.editArea.height);
                     
-                    var editAreaOverlay = new OpenSeadragon.Rect($scope.editArea.x, $scope.editArea.y, $scope.editArea.width, $scope.editArea.height);
-                    
-                    viewer.addOverlay({
-                        element: $('<div class="imageViewer__progress"></div>')[0],
-                        location: editAreaOverlay
-                    });
-                    
-                    var conv = viewer.viewport.imageToViewportRectangle(editAreaOverlay);
-                    viewer.viewport.fitBounds(conv, true);
+                        viewer.addOverlay({
+                            element: $('<div class="imageViewer__progress"></div>')[0],
+                            location: editAreaOverlay
+                        });
+                                       
+                        viewer.viewport.fitBounds(editAreaOverlay, true);
+
+                }, 1000);
 
                 }
                 //Else prepare a new rect object with initial selection

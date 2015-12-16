@@ -70,25 +70,50 @@ define([
                 }
             })
 
-            .state('editor.page.update', {
+            .state('editor.update', {
 
-                url: '/update/{updateId:int}',
+                url: '/page/{pageId:int}/update/{updateId:int}',
                 
                 views: {
-                    '': {
+                    '@editor.update': {
                         templateUrl: 'editor/update/updateFields.tpl.html',
                         controller: 'updateFieldsController',
+                    },
+                    '': {
+                        templateUrl: 'editor/update/page.tpl.html',
+                        controller: 'pageController'
+
                     }
                 },
                
                 resolve: {
+
+                     /**
+                     * Load page data and pass it to the controller
+                     */
+                    pageData: function($stateParams, pageService, $q) {
+
+                        var deferred = $q.defer();
+
+                        pageService.getPageUpdate($stateParams.pageId).then(function(response) {
+
+                            if (response) {
+                                deferred.resolve(response);
+                            } else {
+                                deferred.reject('Error', response);
+                            }
+
+                        });
+
+                        return deferred.promise;
+
+                    },
                    
                     updateData: function($stateParams, $q, updateService) {
 
                         var deferred = $q.defer();
 
                         updateService.getData().then(function(response) {
-                            console.log(response);
                             deferred.resolve(response);
                         });
 
