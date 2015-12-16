@@ -105,17 +105,17 @@ define([
 
                     //TODO: fitBounds on event instead of a custom timeout
                     $timeout(function() {
-                   
+
                         var editAreaOverlay = new OpenSeadragon.Rect($scope.editArea.x, $scope.editArea.y, $scope.editArea.width, $scope.editArea.height);
-                    
+
                         viewer.addOverlay({
                             element: $('<div class="imageViewer__progress"></div>')[0],
                             location: editAreaOverlay
                         });
-                                       
+
                         viewer.viewport.fitBounds(editAreaOverlay, true);
 
-                }, 1000);
+                    }, 1000);
 
                 }
                 //Else prepare a new rect object with initial selection
@@ -206,67 +206,148 @@ define([
                     selection.draw();
 
                     viewer.viewport.fitVertically(true);
+
+                });
+                
+
+                //Store default keyhandler 
+                var tmp = viewer.innerTracker.keyDownHandler;
+                //Array of pressed keys, indexed on keyCode
+                var map = [];
+               
+                // Based on http://stackoverflow.com/questions/5203407/javascript-multiple-keys-pressed-at-once
+                tracker = new OpenSeadragon.MouseTracker({
+
+                    element: viewer.canvas,
+
+                    keyUpHandler: function(event) {
+                        //When a key is released, set its keyCode to false
+                        map[event.keyCode] = false;
+                    },
+
+                    keyDownHandler: function(event) {
+                        //When key is pressed, set its keycode to true in the array
+                        map[event.keyCode] = true;
+
+                        //q is not pressed
+                        if (!map[81]) {
+                            //Restore the saved default keyhandler
+                            viewer.innerTracker.keyDownHandler = tmp;
+                        }
+                        //q is pressed
+                        if (map[81]) {
+                            //remove default key handler
+                            viewer.innerTracker.keyDownHandler = null;
+                        }
+
+                        //shift
+                        if (map[16]) {
+                            //left
+                            if (map[81] && map[37]) {
+                                selection.rect.width = selection.rect.width -= 0.005;
+                                selection.draw();
+                            }
+                            //right
+                            if (map[81] && map[39]) {
+                                selection.rect.width = selection.rect.width += 0.005;
+                                selection.draw();
+                            }
+                            //up
+                            if (map[81] && map[38]) {
+                                selection.rect.height = selection.rect.height -= 0.005;
+                                selection.draw();
+                            }
+                            //down
+                            if (map[81] && map[40]) {
+                                selection.rect.height = selection.rect.height += 0.005;
+                                selection.draw();
+                            }
+
+                        } else {
+                            //left
+                            if (map[81] && map[37]) {
+                                selection.rect.x = selection.rect.x -= 0.005;
+                                selection.draw();
+                            }
+                            //right
+                            if (map[81] && map[39]) {
+                                selection.rect.x = selection.rect.x += 0.005;
+                                selection.draw();
+                            }
+                            //up
+                            if (map[81] && map[38]) {
+                                selection.rect.y = selection.rect.y -= 0.005;
+                                selection.draw();
+                            }
+                            //down
+                            if (map[81] && map[40]) {
+                                selection.rect.y = selection.rect.y += 0.005;
+                                selection.draw();
+                            }
+                        }
+
+                    }
                 });
 
                 //TODO do in viewer context and not jQuery
                 //$('.editor').on('dblclick', '.imageViewer__progress', function(event) {
 
-                    // viewer.removeOverlay(selectionOverlay.element);
+                // viewer.removeOverlay(selectionOverlay.element);
 
-                    // var x = selectionOverlay.location.x;
-                    // var y = selectionOverlay.location.y;
-                    // var height = selectionOverlay.location.height;
-                    // var width = selectionOverlay.location.width;
+                // var x = selectionOverlay.location.x;
+                // var y = selectionOverlay.location.y;
+                // var height = selectionOverlay.location.height;
+                // var width = selectionOverlay.location.width;
 
-                    // var selectionRect = new OpenSeadragon.SelectionRect(x, y, width, height);
+                // var selectionRect = new OpenSeadragon.SelectionRect(x, y, width, height);
 
-                    // selection.rect = selectionRect;
-                    // selection.draw();
+                // selection.rect = selectionRect;
+                // selection.draw();
 
-                    
 
-                    //viewer.innerTracker.keyDownHandler = null;
-                    // tracker = new OpenSeadragon.MouseTracker({
 
-                    //     element: viewer.canvas,
+                //viewer.innerTracker.keyDownHandler = null;
+                // tracker = new OpenSeadragon.MouseTracker({
 
-                    //     keyDownHandler: function(event) {
-                            
-                    //         event.preventDefaultAction = true;
+                //     element: viewer.canvas,
 
-                    //         if (event.shift) {
+                //     keyDownHandler: function(event) {
 
-                    //             switch (event.keyCode) {
-                    //                 //left
-                    //                 case 37:
-                    //                     selection.rect.x = selection.rect.x -= 0.005;
-                    //                     selection.draw();
-                    //                     break;
-                    //                     //right
-                    //                 case 39:
-                    //                     selection.rect.x = selection.rect.x += 0.005;
-                    //                     selection.draw();
-                    //                     break;
-                    //                     //up
-                    //                 case 38:
-                    //                     selection.rect.y = selection.rect.y -= 0.005;
-                    //                     selection.draw();
-                    //                     break;
-                    //                     //down
-                    //                 case 40:
-                    //                     selection.rect.y = selection.rect.y += 0.005;
-                    //                     selection.draw();
-                    //                     break;
-                    //                 default:
-                    //                     //Do nothing
-                    //                     break;
-                    //             }
+                //         event.preventDefaultAction = true;
 
-                    //             return false;
-                    //         }
+                //         if (event.shift) {
 
-                    //     }
-                    // });
+                //             switch (event.keyCode) {
+                //                 //left
+                //                 case 37:
+                //                     selection.rect.x = selection.rect.x -= 0.005;
+                //                     selection.draw();
+                //                     break;
+                //                     //right
+                //                 case 39:
+                //                     selection.rect.x = selection.rect.x += 0.005;
+                //                     selection.draw();
+                //                     break;
+                //                     //up
+                //                 case 38:
+                //                     selection.rect.y = selection.rect.y -= 0.005;
+                //                     selection.draw();
+                //                     break;
+                //                     //down
+                //                 case 40:
+                //                     selection.rect.y = selection.rect.y += 0.005;
+                //                     selection.draw();
+                //                     break;
+                //                 default:
+                //                     //Do nothing
+                //                     break;
+                //             }
+
+                //             return false;
+                //         }
+
+                //     }
+                // });
 
                 //});
 
