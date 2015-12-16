@@ -98,7 +98,13 @@ module.exports = {
     },
 
     production: {
+
         files: [{
+            //webconfig - to force cross origin setup on DEV9
+            src: 'web.config',
+            dest: '<%= package.build %>/web.config'
+        },
+        {
             //Fonts
             expand: true,
             cwd: '<%= package.resources %>/fonts/',
