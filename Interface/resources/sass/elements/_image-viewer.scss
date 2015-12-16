@@ -32,3 +32,9 @@
         box-shadow: 0 0 100px 2000px #000000;
     }
 }
+
+// Hack to force handles to be bigger and easier to drag, should be updated in the openseadragon lib and not with !important styling
+.border-0-handle, .border-1-handle, .border-2-handle, .border-3-handle, .corner-0-handle, .corner-1-handle, .corner-2-handle, .corner-3-handle {
+    width: 10px !important;
+    height: 10px !important;
+}
