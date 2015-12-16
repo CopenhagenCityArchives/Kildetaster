@@ -6,21 +6,21 @@
         "field": "firstname",
         "labelText": "Fornavn(e)",
         "type": "text",
-        "value": "Hans",
+        "value": "Per Gustav",
         "helpText": "Alle personens for- og mellemnavne. Disse findes efter teksten ”…begraves” i kilden",
         "errorText": ""
     }, {
         "field": "lastname",
         "labelText": "Efternavn",
         "type": "text",
-        "value": "Kristensen",
+        "value": "Viekelsen",
         "helpText": "Personens efternavn. Èt navn - eventuelt to, hvis de er separeret af en bindestreg. Findes efter for- og mellemnavne i kilden.",
         "errorText": ""
     }, {
         "field": "age",
         "labelText": "Alder",
         "type": "text",
-        "value": "54",
+        "value": "1/2",
         "helpText": "Her skrives personens alder ved dødsdagen. Alderen findes lige før teksten ”Aar gl.” i teksten.",
         "errorText": ""
     }]
@@ -2261,11 +2261,14 @@
         }, {
             "id": 720,
             "name": "Aareforkalkning"
-        }],
+        }, {
+            "id": 721,
+            "name": "Ceraberia"
+            }],
         "value": {
-            "id": 17,
-            "name": "Alm. Svækkelse"
-        },
+            "id": 721,
+            "name": "Ceraberia"
+            },
         "helpText": "Årsagen til personens død. Kan findes efter teksten ”..af…” i kilden. Skrives som i kilden.)"
     }]
 }]
