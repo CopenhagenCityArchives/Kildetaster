@@ -1,7 +1,12 @@
 <div class="form-group dynamic-form" ng-class="{ 'has-error': field.errorText }">
     <label class="control-label">
         {{field.labelText}}
-        <span class="icon glyphicon glyphicon-question-sign" uib-tooltip="{{field.helpText}}" tooltip-placement="top"></span>
+        <span 
+            class="icon glyphicon glyphicon-question-sign" 
+            uib-tooltip="{{field.helpText}}" 
+            tooltip-placement="top"
+            tooltip-append-to-body="true"
+        ></span>
     </label>
     <div class="dynamic-form__adjust">
         
