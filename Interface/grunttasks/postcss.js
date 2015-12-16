@@ -38,7 +38,7 @@ module.exports = {
                     browsers: 'last 2 versions'
                 }),
                 // minify the result
-                require('cssnano')() 
+                require('cssnano')()
             ]
         },
         src: '<%= package.prototyperesources %>/css/styles.css',
@@ -53,7 +53,7 @@ module.exports = {
                     browsers: 'last 2 versions'
                 }),
                 // minify the result
-                require('cssnano')() 
+                require('cssnano')()
             ]
         },
         src: '<%= package.sdkresources %>/css/styles.css',
@@ -68,10 +68,16 @@ module.exports = {
                     browsers: 'last 2 versions'
                 }),
                 // minify the result
-                require('cssnano')() 
+                require('cssnano')()
             ]
         },
-        src: '<%= package.buildresources %>/css/styles.css',
-        dest: '<%= package.buildresources %>/css/styles.css'
+        files: [{
+            src: '<%= package.buildresources %>/css/styles.css',
+            dest: '<%= package.buildresources %>/css/styles.css'
+        }, {
+            src: '<%= package.buildresources %>/css/sdk.css',
+            dest: '<%= package.buildresources %>/css/sdk.css'
+        }]
+
     }
 };
