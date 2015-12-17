@@ -63,11 +63,13 @@
         <h3>Udfyldt</h3>
 
         <ul class="list-unstyled field-list">
-            <li class="field-list__item">
-                <a href ng-click="placeArea()">Udsnit placeret <span class="icon glyphicon glyphicon-pencil"></span></a>
+            <li class="field-list__item" ng-class="{ 'field-list__active': showSelectionControls }">
+                
+                <a href ng-click="placeArea()" ng-hide="showSelectionControls">Udsnit placeret <span class="icon glyphicon glyphicon-pencil"></span></a>
+                
                 <div class="row" ng-if="showSelectionControls">
                     <div class="col-sm-12">
-                        <p>Juster udsnittet</p>
+                        <p>Ret udsnittet i kilden.</p>
                     </div>
                     <div class="col-sm-12 text-right">
                         <button class="btn btn-default" ng-click="acceptArea()">Ok</button>
@@ -78,9 +80,12 @@
         </ul>
         <ul class="list-unstyled field-list" ng-repeat="step in steps" ng-hide="step.fields.length === 0">
 
-            <li class="field-list__item" ng-repeat="field in step.fields | filter: hasValue('value')">
+            <li class="field-list__item" 
+                ng-repeat="field in step.fields | filter: hasValue('value')" 
+                ng-class="{ 'field-list__active': field.isEditing }"
+            >
                 
-                <a href ng-click="toggleEditExistingValue(field)">
+                <a href ng-click="toggleEditExistingValue(field)" ng-hide="field.isEditing">
                     {{field.labelText}}: {{field.value | nameFromObject }} <span class="icon glyphicon glyphicon-pencil"></span>
                 </a>
                 

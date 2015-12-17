@@ -3,6 +3,19 @@
         padding-bottom: 6px;
     }
 
+    &__active {
+        margin-right: -5px;
+        margin-bottom: 15px;
+        margin-left: -5px;
+        padding: 5px 5px;
+
+        background-color: $blue;
+
+        .row {
+            margin-bottom: 0;
+        }
+    }
+
     &__highlight {
         margin-right: -5px;
         margin-bottom: 15px;
