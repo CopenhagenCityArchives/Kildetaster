@@ -9,7 +9,8 @@ module.exports = {
     production: {
         files: {
             'kbh/resources/js/script.js': ['kbh/resources/js/script.js'],
-            'kbh/resources/js/sdk.js': ['kbh/resources/js/sdk.js']
+            //Removed in order to better debug when sdk is used on KBH site
+            //'kbh/resources/js/sdk.js': ['kbh/resources/js/sdk.js']
         }
     },
 
