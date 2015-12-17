@@ -73,7 +73,7 @@
         "helpText": "Navnet på gaden/vejen hvor personen boede på ved sin død. Findes efter teksten ”Bopæl” i kilden.)"
     }, {
         "field": "number",
-        "labelText": "Nummer",
+        "labelText": "Husnummer",
         "type": "text",
         "value": "",
         "helpText": "Husnummeret – kommer lige efter vejnavnet under ”Bopæl”-indførslen. Hvis der er indført et interval skrives det første nummer.",

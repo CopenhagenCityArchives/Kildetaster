@@ -78,7 +78,7 @@
         "highlight": true
     }, {
         "field": "number",
-        "labelText": "Nummer",
+        "labelText": "Husnummer",
         "type": "text",
         "value": 12,
         "helpText": "Husnummeret – kommer lige efter vejnavnet under ”Bopæl”-indførslen. Hvis der er indført et interval skrives det første nummer.",
