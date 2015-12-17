@@ -104,7 +104,7 @@ define([
                 });
 
                 $scope.$on('makeSelectable', function() {
-                    //TODO fix the duped code into more manageble functions
+                    
                     viewer.removeOverlay(selectionOverlay.element);
 
                     var x = selectionOverlay.location.x;
@@ -172,22 +172,21 @@ define([
 
                         //Zoom viewer to the selected area
                         viewer.viewport.fitBounds(converted, true);
-
                         
+                        //Remove the custom key event handler
                         removeKeyTracker();
 
                     },
-                    //Initial selection
+                    //Initial selection if rect is set
                     rect: rect,
 
                     toggleButton: 'toggle-selection',
 
+                    //Should we show the confirm/cancel buttons in the selection area?
                     showConfirmDenyButtons: false,
 
                     //Center buttons?
                     styleConfirmDenyButtons: true,
-
-                    //showSelectionControl: true,
 
                     prefixUrl: '/resources/images/',
 
@@ -213,10 +212,10 @@ define([
                     }
                 });
 
-                //Store default keyhandler, so that we can reenable it
-                var tmp = viewer.innerTracker.keyDownHandler;
-                //Array of pressed keys, indexed on keyCode
-                var map = [];
+                    //Store default keyhandler, so that we can reenable it
+                var tmp = viewer.innerTracker.keyDownHandler,
+                    //Array of pressed keys, indexed on keyCode
+                    map = [];
 
                 /**
                 * Create a custom tracker for key events, to control moving and resizing the selection area with 
@@ -250,6 +249,7 @@ define([
                                 viewer.innerTracker.keyDownHandler = null;
                             }
 
+                            //Enter key
                             if (map[13]) {
                                 selection.confirm();
                             }
