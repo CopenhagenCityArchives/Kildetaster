@@ -16,7 +16,7 @@ define([
         };
 
         taskService.getTasks().then(function(response) {
-            $scope.openTasks = response;
+            $scope.openProjects = response;
         }).finally(function() {
             $scope.loading = false;
         });

@@ -9,8 +9,6 @@ define([
         $scope.loading = false;
         $scope.tasks = [];
 
-
-
         $scope.calcProgress = function calcProgress(task) {
 
             return Math.round(((task.pagesTotal - task.pagesLeft) / task.pagesTotal) * 100);
@@ -29,10 +27,7 @@ define([
 
         };
 
-
         $scope.init();
-
-
 
     };
 

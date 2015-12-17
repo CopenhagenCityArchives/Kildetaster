@@ -17,7 +17,7 @@ module.exports = {
             imagePath: '<%= package.sdkresources %>/images'
         },
         files: {
-            '<%= package.sdkresources %>/css/styles.css': '<%= package.resources %>/sass/sdk-styles.scss'
+            '<%= package.sdkresources %>/css/sdk.css': '<%= package.resources %>/sass/sdk-styles.scss'
         }
     },
 

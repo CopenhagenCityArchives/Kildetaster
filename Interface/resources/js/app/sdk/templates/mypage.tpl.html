@@ -13,7 +13,7 @@
                     <div class="task-list__header">Nået til</div>
                     <div class="task-list__header"></div>
                 </li>
-                <li ng-repeat="task in openTasks" ng-class="{ odd: $odd }">
+                <li ng-repeat="task in openProjects" ng-class="{ odd: $odd }" ng-show="openProjects.length > 0">
                     <div class="task-list__item">
                         {{task.name}}
                     </div>
@@ -27,6 +27,9 @@
                     </div>
                 </li>
             </ul>
+            <div ng-if="openProjects.length == 0" class="alert text-center">
+                Henter data
+            </div>
 
         </div>
 
@@ -37,32 +40,3 @@
         </div>
     </div>
 </div>
-
-<!-- <div ng-controller="feedbackController">
-    <div class="row-fluid">
-        <div class="span12">
-            <h2>Feedback</h2>
-            <h3>På mine indtastninger</h3>
-
-            <ul class="unstyled">
-                <li class="task-list">
-                    <div class="task-list__header">Kilde</div>
-                    <div class="task-list__header">Status</div>
-                </li>
-                <li class="task-list" ng-repeat="feedback in feedbackList" ng-class="{ odd: $odd }">
-                    <div class="task-list__item">
-                        {{task.name}}
-                        <div class="">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos impedit magni beatae aspernatur facere!
-                        </div>
-                    </div>
-
-                    <div class="task-list__item text-right">
-                        <button type="button" class="btn btn-default">Se feedback</button>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-</div> -->

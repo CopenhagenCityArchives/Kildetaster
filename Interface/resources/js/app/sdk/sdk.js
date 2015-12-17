@@ -10,6 +10,7 @@ define([
     'app/sdk/controllers/opentasks.controller',
     'app/sdk/controllers/errors.controller',
 
+    'app/sdk/sdk.run'
 
 ], function(
 
@@ -21,7 +22,9 @@ define([
 
     mypageController,
     opentasksController,
-    errorsController
+    errorsController,
+
+    run
 ) {
 
     var sdkApp = angular.module('sdk', ['shared', 'sdk-templates', 'ui.bootstrap']);
@@ -30,6 +33,7 @@ define([
     sdkApp.controller('opentasksController', opentasksController);
     sdkApp.controller('errorsController', errorsController);
 
+    sdkApp.run(run);
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-sdk-app]'), ['sdk']);

@@ -10,7 +10,7 @@
                     <div class="task-list__header" style="width: 25%">Overgår til superbruger om</div>
                     <div class="task-list__header"></div>
                 </li>
-                <li ng-repeat="error in errorList" ng-class="{ odd: $odd }">
+                <li ng-repeat="error in errorList" ng-class="{ odd: $odd }" ng-if="errorList.length > 0">
 
                     <div class="task-list__item">
                         {{error.name}}
@@ -30,6 +30,9 @@
                     </div>
                 </li>
             </ul>
+            <div ng-if="errorList.length == 0" class="alert text-center">
+                Henter data
+            </div>
 
         </div>
 

@@ -6,7 +6,6 @@ define([
 
         $scope.loading = true;
         $scope.errorList = [];
-
        
         errorService.getData().then(function(response) {
             $scope.errorList = response;
