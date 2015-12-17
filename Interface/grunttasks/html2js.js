@@ -19,7 +19,7 @@ module.exports = {
         options: {
             module: 'sdk-templates'
         },
-        src: ['<%= package.resources %>/js/app/shared/**/*.tpl.html', '<%= package.resources %>/js/app/sdk/**/*.tpl.html'],
+        src: ['<%= package.resources %>/js/app/sdk/**/*.tpl.html'],
         dest: '<%= package.resources %>/js/app/shared/sdk-templates.js'
     }
     
