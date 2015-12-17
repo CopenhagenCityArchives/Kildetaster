@@ -16,6 +16,7 @@
             ng-model="field.value" 
             ng-disabled="field.unreadable" 
             uib-typeahead="option as option.name for option in field.options | filter:{name:$viewValue} | limitTo: 8"
+            typeahead-focus-first="false"
             typeahead-append-to-body="true"
         />
 
