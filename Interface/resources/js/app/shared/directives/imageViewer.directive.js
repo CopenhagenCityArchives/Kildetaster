@@ -149,7 +149,8 @@ define([
                 }
                 //Else prepare a new rect object with initial selection
                 else {
-                    rect = new OpenSeadragon.SelectionRect(0.25, 0.6, 0.5, 0.25);
+                    rect = new OpenSeadragon.SelectionRect(0.25, 0.6, 0.42, 0.45);
+
                     //When the directive is initialized, make sure we listen for key events on the selection area
                     createKeyTracker();
                     
