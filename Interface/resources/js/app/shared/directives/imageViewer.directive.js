@@ -20,11 +20,8 @@ define([
 
             scope: {
                 options: '=',
-                onSelection: '&',
                 editArea: '='
             },
-
-            //templateUrl: 'shared/directives/imageViewer.directive.tpl.html',
 
             controller: /*@ngInject*/ function($scope, $compile, $templateCache, $element, $rootScope) {
 
@@ -97,6 +94,38 @@ define([
 
                 });
 
+                //Event fired when selection is confirmed
+                viewer.addHandler('selection', function(data) {
+                    $rootScope.$broadcast('areaSelected');
+                });
+
+                $scope.$on('areaAccepted', function() {
+                    selection.confirm();
+                });
+
+                $scope.$on('makeSelectable', function() {
+                    //TODO fix the duped code into more manageble functions
+                    viewer.removeOverlay(selectionOverlay.element);
+
+                    var x = selectionOverlay.location.x;
+                    var y = selectionOverlay.location.y;
+                    var height = selectionOverlay.location.height;
+                    var width = selectionOverlay.location.width;
+
+                    var selectionRect = new OpenSeadragon.SelectionRect(x, y, width, height);
+
+                    selection.rect = selectionRect;
+                    selection.draw();
+
+                    viewer.viewport.fitVertically(true);
+
+                    //Setup custom key tracker for moving/resizing the selection
+                    createKeyTracker();
+
+                    viewer.canvas.focus();
+
+                });
+
                 //If set to a rect object, will show a selection on initilization of the selection plugin
                 var rect = null;
 
@@ -146,11 +175,6 @@ define([
                         
                         removeKeyTracker();
 
-                        //If the given onSelection property is a function, call it
-                        if (angular.isFunction($scope.onSelection)) {
-                            $scope.onSelection();
-                        }
-
                     },
                     //Initial selection
                     rect: rect,
@@ -188,34 +212,6 @@ define([
                     }
                 });
 
-                $scope.$on('areaAccepted', function() {
-                    selection.confirm();
-                });
-
-                $scope.$on('makeSelectable', function() {
-                    //TODO fix the duped code into more manageble functions
-                    viewer.removeOverlay(selectionOverlay.element);
-
-                    var x = selectionOverlay.location.x;
-                    var y = selectionOverlay.location.y;
-                    var height = selectionOverlay.location.height;
-                    var width = selectionOverlay.location.width;
-
-                    var selectionRect = new OpenSeadragon.SelectionRect(x, y, width, height);
-
-                    selection.rect = selectionRect;
-                    selection.draw();
-
-                    viewer.viewport.fitVertically(true);
-
-                    //Setup custom key tracker for moving/resizing the selection
-                    createKeyTracker();
-
-                    $('canvas').focus();
-
-                });
-
-
                 //Store default keyhandler, so that we can reenable it
                 var tmp = viewer.innerTracker.keyDownHandler;
                 //Array of pressed keys, indexed on keyCode
@@ -251,6 +247,10 @@ define([
                             if (map[81]) {
                                 //remove default key handler
                                 viewer.innerTracker.keyDownHandler = null;
+                            }
+
+                            if (map[13]) {
+                                selection.confirm();
                             }
 
                             //shift

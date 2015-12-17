@@ -22,19 +22,6 @@ define([
             
         };
 
-        /**
-        * When area is selected, move wizard to step 2
-        */
-        $scope.areaSelected = function areaSelected() {
-
-            $rootScope.$broadcast('areaSelected');
-            
-            $timeout(function() {
-                $location.search({ stepId: 2 });
-            }, 0);
-            
-        };
-
         $scope.options = {
 
             tileSources: {

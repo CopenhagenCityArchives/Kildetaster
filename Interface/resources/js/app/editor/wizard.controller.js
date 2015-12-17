@@ -2,7 +2,19 @@ define([
     
 ], function() {
     
-    var wizardController = /*@ngInject*/ function($scope, $rootScope, stepService, $stateParams, $location, $state) {
+    var wizardController = /*@ngInject*/ function wizardController($scope, $rootScope, stepService, $stateParams, $location, $state, $timeout) {
+
+        //Indicates if we should show the controls for accepting a new area (used on all other steps than the first)
+        $scope.showSelectionControls = false;
+
+        $scope.steps = [];
+
+        $scope.numSteps = null;
+
+        $scope.currentStep = $stateParams.stepId || 1;
+
+        $scope.comment = '';
+        $scope.showComment = false;
 
         /**
         * When area is selected in the directive controlling openseadragon, and we are on the first step
@@ -12,13 +24,11 @@ define([
             if ($scope.currentStep === 1) {
                 $scope.nextStep();
             }
+            //http://stackoverflow.com/questions/12729122/angularjs-prevent-error-digest-already-in-progress-when-calling-scope-apply
+            $timeout(function() {
+                $scope.showSelectionControls = false;
+            });
         });
-
-
-        $scope.acceptArea = function acceptArea() {
-            $rootScope.$broadcast('areaAccepted');
-            $scope.showSelectionControls = false;
-        };
 
         /**
         * Because we do not trigger the ui.route logic (see.editor.config.js), 
@@ -29,8 +39,12 @@ define([
             $scope.currentStep = parseInt($location.search().stepId);
             $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
         });
-        
-        $scope.steps = [];
+
+        $scope.acceptArea = function acceptArea() {
+            $rootScope.$broadcast('areaAccepted');
+            $scope.showSelectionControls = false;           
+        };
+  
 
         //http://stackoverflow.com/questions/24081004/angularjs-ng-repeat-filter-when-value-is-greater-than
         //predicate for filter in template
@@ -44,13 +58,6 @@ define([
         $scope.toggleEditExistingValue = function toggleEditExistingValue(item) {
             item.isEditing = !item.isEditing;
         };       
-
-        $scope.numSteps = null;
-
-        $scope.currentStep = $stateParams.stepId || 1;
-
-        $scope.comment = '';
-        $scope.showComment = false;
 
         /**
         * Toggle wether or not to show the comment text area
@@ -73,39 +80,34 @@ define([
             $state.go('.done', {}, { reload: true });
         };
 
-        stepService.getData().then(function(response) {
-            $scope.steps = response;
-
-            $scope.numSteps = response.length;
-
-            $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
-
-        });
-
-
+        /**
+        * Move to next step
+        */
         $scope.nextStep = function nextStep() {
-            $location.search({ stepId: parseInt($scope.currentStep) + 1 });
+            $location.search({ stepId: parseInt($scope.currentStep) + 1 });            
         };
 
+        /**
+        * Move to previous step
+        */
         $scope.prevStep = function prevStep() {
+            //If we are moving from step 1, make area selectable (since that is step 1)
             if ($scope.currentStep == 2) {
                 $rootScope.$broadcast('makeSelectable');
             }
+            //Update the search variable
             $location.search({ stepId: parseInt($scope.currentStep) - 1 });
         };
 
-        $scope.showSelectionControls = false;
 
         /**
         * Tell the app that we want to place/replace the area
         */
         $scope.placeArea = function placeArea() {
-            //Broadcast taht we want to make area selectable
+            //Broadcast that we want to make area selectable
             $rootScope.$broadcast('makeSelectable');
-
+            //Show controls to accept new area
             $scope.showSelectionControls = true;
-            //Show the wizard on step 1
-            //$location.search({ stepId: 1 });
         };
 
 
@@ -123,6 +125,15 @@ define([
                 }
             });
         };
+
+        stepService.getData().then(function(response) {
+            $scope.steps = response;
+
+            $scope.numSteps = response.length;
+
+            $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
+
+        });
 
     };
 
