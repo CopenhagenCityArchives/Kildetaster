@@ -30,6 +30,7 @@ define([
 
         /**
         * Mimic activity, by reloading randomzied mock data every 7 seconds
+        * TODO: Remove this
         */
         var userRandom = $interval(function() {
             userService.getUsers().then(function(response) {
