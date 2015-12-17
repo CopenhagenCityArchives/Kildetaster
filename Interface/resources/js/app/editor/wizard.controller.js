@@ -17,6 +17,7 @@ define([
 
         $scope.acceptArea = function acceptArea() {
             $rootScope.$broadcast('areaAccepted');
+            $scope.showSelectionControls = false;
         };
 
         /**
@@ -93,6 +94,7 @@ define([
             $location.search({ stepId: parseInt($scope.currentStep) - 1 });
         };
 
+        $scope.showSelectionControls = false;
 
         /**
         * Tell the app that we want to place/replace the area
@@ -100,8 +102,10 @@ define([
         $scope.placeArea = function placeArea() {
             //Broadcast taht we want to make area selectable
             $rootScope.$broadcast('makeSelectable');
+
+            $scope.showSelectionControls = true;
             //Show the wizard on step 1
-            $location.search({ stepId: 1 });
+            //$location.search({ stepId: 1 });
         };
 
 

@@ -121,7 +121,9 @@ define([
                 //Else prepare a new rect object with initial selection
                 else {
                     rect = new OpenSeadragon.SelectionRect(0.25, 0.6, 0.5, 0.25);
-
+                    //When the directive is initialized, make sure we listen for key events on the selection area
+                    createKeyTracker();
+                    
                 }
 
                 //Selection plugin
@@ -141,9 +143,8 @@ define([
                         //Zoom viewer to the selected area
                         viewer.viewport.fitBounds(converted, true);
 
-                        // if (tracker instanceof OpenSeadragon.MouseTracker) {
-                        //     tracker.destroy();
-                        // }
+                        
+                        removeKeyTracker();
 
                         //If the given onSelection property is a function, call it
                         if (angular.isFunction($scope.onSelection)) {
@@ -207,87 +208,111 @@ define([
 
                     viewer.viewport.fitVertically(true);
 
-                });
-                
+                    //Setup custom key tracker for moving/resizing the selection
+                    createKeyTracker();
 
-                //Store default keyhandler 
+                    $('canvas').focus();
+
+                });
+
+
+                //Store default keyhandler, so that we can reenable it
                 var tmp = viewer.innerTracker.keyDownHandler;
                 //Array of pressed keys, indexed on keyCode
                 var map = [];
-               
-                // Based on http://stackoverflow.com/questions/5203407/javascript-multiple-keys-pressed-at-once
-                tracker = new OpenSeadragon.MouseTracker({
 
-                    element: viewer.canvas,
+                /**
+                * Create a custom tracker for key events, to control moving and resizing the selection area with 
+                * the keyboard
+                */
+                function createKeyTracker() {
 
-                    keyUpHandler: function(event) {
-                        //When a key is released, set its keyCode to false
-                        map[event.keyCode] = false;
-                    },
+                    // Based on http://stackoverflow.com/questions/5203407/javascript-multiple-keys-pressed-at-once
+                    tracker = new OpenSeadragon.MouseTracker({
 
-                    keyDownHandler: function(event) {
-                        //When key is pressed, set its keycode to true in the array
-                        map[event.keyCode] = true;
+                        element: viewer.canvas,
 
-                        //q is not pressed
-                        if (!map[81]) {
-                            //Restore the saved default keyhandler
-                            viewer.innerTracker.keyDownHandler = tmp;
+                        keyUpHandler: function(event) {
+                            //When a key is released, set its keyCode to false
+                            map[event.keyCode] = false;
+                        },
+
+                        keyDownHandler: function(event) {
+                            
+                            //When key is pressed, set its keycode to true in the array
+                            map[event.keyCode] = true;
+                                                        
+                            //q is not pressed
+                            if (!map[81]) {
+                                //Restore the saved default keyhandler
+                                viewer.innerTracker.keyDownHandler = tmp;
+                            }
+                            //q is pressed
+                            if (map[81]) {
+                                //remove default key handler
+                                viewer.innerTracker.keyDownHandler = null;
+                            }
+
+                            //shift
+                            if (map[16]) {
+                                //left
+                                if (map[81] && map[37]) {
+                                    selection.rect.width = selection.rect.width -= 0.005;
+                                    selection.draw();
+                                }
+                                //right
+                                if (map[81] && map[39]) {
+                                    selection.rect.width = selection.rect.width += 0.005;
+                                    selection.draw();
+                                }
+                                //up
+                                if (map[81] && map[38]) {
+                                    selection.rect.height = selection.rect.height -= 0.005;
+                                    selection.draw();
+                                }
+                                //down
+                                if (map[81] && map[40]) {
+                                    selection.rect.height = selection.rect.height += 0.005;
+                                    selection.draw();
+                                }
+
+                            } else {
+                                //left
+                                if (map[81] && map[37]) {
+                                    selection.rect.x = selection.rect.x -= 0.005;
+                                    selection.draw();
+                                }
+                                //right
+                                if (map[81] && map[39]) {
+                                    selection.rect.x = selection.rect.x += 0.005;
+                                    selection.draw();
+                                }
+                                //up
+                                if (map[81] && map[38]) {
+                                    selection.rect.y = selection.rect.y -= 0.005;
+                                    selection.draw();
+                                }
+                                //down
+                                if (map[81] && map[40]) {
+                                    selection.rect.y = selection.rect.y += 0.005;
+                                    selection.draw();
+                                }
+                            }
+
                         }
-                        //q is pressed
-                        if (map[81]) {
-                            //remove default key handler
-                            viewer.innerTracker.keyDownHandler = null;
-                        }
+                    });
 
-                        //shift
-                        if (map[16]) {
-                            //left
-                            if (map[81] && map[37]) {
-                                selection.rect.width = selection.rect.width -= 0.005;
-                                selection.draw();
-                            }
-                            //right
-                            if (map[81] && map[39]) {
-                                selection.rect.width = selection.rect.width += 0.005;
-                                selection.draw();
-                            }
-                            //up
-                            if (map[81] && map[38]) {
-                                selection.rect.height = selection.rect.height -= 0.005;
-                                selection.draw();
-                            }
-                            //down
-                            if (map[81] && map[40]) {
-                                selection.rect.height = selection.rect.height += 0.005;
-                                selection.draw();
-                            }
+                }
 
-                        } else {
-                            //left
-                            if (map[81] && map[37]) {
-                                selection.rect.x = selection.rect.x -= 0.005;
-                                selection.draw();
-                            }
-                            //right
-                            if (map[81] && map[39]) {
-                                selection.rect.x = selection.rect.x += 0.005;
-                                selection.draw();
-                            }
-                            //up
-                            if (map[81] && map[38]) {
-                                selection.rect.y = selection.rect.y -= 0.005;
-                                selection.draw();
-                            }
-                            //down
-                            if (map[81] && map[40]) {
-                                selection.rect.y = selection.rect.y += 0.005;
-                                selection.draw();
-                            }
-                        }
-
+                /**
+                * Remove the custom key tracker and cleanup
+                */
+                function removeKeyTracker () {
+                    if (tracker instanceof OpenSeadragon.MouseTracker) {
+                        tracker.destroy();
                     }
-                });
+                    map = [];
+                }
 
                 //Cleanup
                 $scope.$on('destroy', function() {
