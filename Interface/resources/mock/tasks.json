@@ -1,7 +1,7 @@
 [{
     "id": 1,
     "open": true,
-    "name": "Begravelsesprotocol nr. 132, 1850-1851",
+    "name": "Begravelsesprotokol nr. 132, 1850-1851",
     "nextAvailablePageId": 2,
     "lastCompletedPage": 3,
     "pagesTotal": 10,
@@ -9,7 +9,7 @@
 }, {
     "id": 2,
     "open": true,
-    "name": "Begravelsesprotocol nr. 133, 1851-1852",
+    "name": "Begravelsesprotokol nr. 133, 1851-1852",
     "nextAvailablePageId": 4,
     "lastCompletedPage": 3,
     "pagesTotal": 5,
@@ -18,7 +18,7 @@
 {
     "id": 3,
     "open": false,
-    "name": "Begravelsesprotocol nr. 131, 1848-1849",
+    "name": "Begravelsesprotokol nr. 131, 1848-1849",
     "pagesTotal": 10,
     "pagesLeft": 0
 }]
