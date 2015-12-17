@@ -21,7 +21,9 @@
             <div class="task-list__item">
                 <div class="row">
                     <div class="span8">
-                        <uib-progressbar animate="'true'" value="calcProgress(task)" type="success"><b>{{calcProgress(task)}}%</b></uib-progressbar>
+                        <div class="progress">
+                            <div class="bar" style="width: {{calcProgress(task)}}%;">{{calcProgress(task)}}%</div>
+                        </div>
                     </div>
                     <div class="span4 text-center">
                         <span>{{task.pagesTotal - task.pagesLeft}}/{{task.pagesTotal}}</span>
