@@ -141,9 +141,9 @@ define([
                         //Zoom viewer to the selected area
                         viewer.viewport.fitBounds(converted, true);
 
-                        if (tracker instanceof OpenSeadragon.MouseTracker) {
-                            tracker.destroy();
-                        }
+                        // if (tracker instanceof OpenSeadragon.MouseTracker) {
+                        //     tracker.destroy();
+                        // }
 
                         //If the given onSelection property is a function, call it
                         if (angular.isFunction($scope.onSelection)) {
@@ -289,74 +289,10 @@ define([
                     }
                 });
 
-                //TODO do in viewer context and not jQuery
-                //$('.editor').on('dblclick', '.imageViewer__progress', function(event) {
-
-                // viewer.removeOverlay(selectionOverlay.element);
-
-                // var x = selectionOverlay.location.x;
-                // var y = selectionOverlay.location.y;
-                // var height = selectionOverlay.location.height;
-                // var width = selectionOverlay.location.width;
-
-                // var selectionRect = new OpenSeadragon.SelectionRect(x, y, width, height);
-
-                // selection.rect = selectionRect;
-                // selection.draw();
-
-
-
-                //viewer.innerTracker.keyDownHandler = null;
-                // tracker = new OpenSeadragon.MouseTracker({
-
-                //     element: viewer.canvas,
-
-                //     keyDownHandler: function(event) {
-
-                //         event.preventDefaultAction = true;
-
-                //         if (event.shift) {
-
-                //             switch (event.keyCode) {
-                //                 //left
-                //                 case 37:
-                //                     selection.rect.x = selection.rect.x -= 0.005;
-                //                     selection.draw();
-                //                     break;
-                //                     //right
-                //                 case 39:
-                //                     selection.rect.x = selection.rect.x += 0.005;
-                //                     selection.draw();
-                //                     break;
-                //                     //up
-                //                 case 38:
-                //                     selection.rect.y = selection.rect.y -= 0.005;
-                //                     selection.draw();
-                //                     break;
-                //                     //down
-                //                 case 40:
-                //                     selection.rect.y = selection.rect.y += 0.005;
-                //                     selection.draw();
-                //                     break;
-                //                 default:
-                //                     //Do nothing
-                //                     break;
-                //             }
-
-                //             return false;
-                //         }
-
-                //     }
-                // });
-
-                //});
-
-
                 //Cleanup
                 $scope.$on('destroy', function() {
+                    tracker.destroy();
                     viewer.destroy();
-                    $('.editor').off('dblclick');
-
                 });
             }
         };
