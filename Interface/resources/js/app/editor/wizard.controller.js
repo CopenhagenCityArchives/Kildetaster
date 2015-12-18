@@ -16,6 +16,8 @@ define([
         $scope.comment = '';
         $scope.showComment = false;
 
+        $scope.wantFeedback = false;
+
         /**
         * When area is selected in the directive controlling openseadragon, and we are on the first step
         * go to the next step.

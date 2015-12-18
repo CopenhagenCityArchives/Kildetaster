@@ -87,12 +87,12 @@
 }, {
     "id": 3,
     "title": "Indtast dødsdato og dødsårsag",
-    "description": "Dødsdagen skrives med tal (dd.mm.åååå) og dødsårsagen skrives som i kilden, selvom der f.eks. findes en dansk betegnelse.",
+    "description": "Dødsdagen skrives med tal (dd-mm-åååå) og dødsårsagen skrives som i kilden, selvom der f.eks. findes en dansk betegnelse.",
     "fields": [{
         "field": "deathday",
         "labelText": "Dødsdag",
         "type": "text",
-        "value": "23.06.1851",
+        "value": "23-06-1851",
         "helpText": "Dagen hvor personen døde. Den findes efter teksten ”…död d.”. Årstal findes under navnet på kilden.",
         "errorText": "",
         "comment": "Det er nok januar, der står - ikke juni",

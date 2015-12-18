@@ -18,13 +18,13 @@
                 <div class="row" ng-switch="field.type" ng-if="field.isEditing || field.highlight">
                     <div class="col-sm-12">
                         <div ng-switch-when="text">
-                            <dynamic-input field-data="field" autofocus="$index === 0"></dynamic-input>
+                            <dynamic-input field-data="field" autofocus="field.isEditing"></dynamic-input>
                         </div>
                         <div ng-switch-when="select">
-                            <dynamic-select field-data="field" autofocus="$index === 0"></dynamic-select>
+                            <dynamic-select field-data="field" autofocus="field.isEditing"></dynamic-select>
                         </div>
                         <div ng-switch-when="typeahead">
-                            <dynamic-typeahead field-data="field" autofocus="$index === 0"></dynamic-typeahead>
+                            <dynamic-typeahead field-data="field" autofocus="field.isEditing"></dynamic-typeahead>
                         </div>
                     </div>
                     <div class="col-sm-12" ng-if="field.comment">

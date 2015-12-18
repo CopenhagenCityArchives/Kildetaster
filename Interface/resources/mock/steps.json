@@ -82,7 +82,7 @@
 }, {
     "id": 3,
     "title": "Indtast dødsdato og dødsårsag",
-    "description": "Dødsdagen skrives med tal (dd.mm.åååå) og dødsårsagen skrives som i kilden, selvom der f.eks. findes en dansk betegnelse.",
+    "description": "Dødsdagen skrives med tal (dd-mm-åååå) og dødsårsagen skrives som i kilden, selvom der f.eks. findes en dansk betegnelse.",
     "fields": [{
         "field": "deathday",
         "labelText": "Dødsdag",

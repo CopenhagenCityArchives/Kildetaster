@@ -18,7 +18,8 @@
         "y": 0.47649823736780256,
         "width": 0.4071680376028202,
         "height": 0.4447708578143361
-    }]
+    }],
+    "pageTotal": 12
 }, {
     "id": 2,
     "pageNumber": 2,
@@ -30,10 +31,12 @@
         "y": 0.03315571343990527,
         "width": 0.41622261693309653,
         "height": 0.4452338661930136
-    }]
+    }],
+    "pageTotal": 77
 }, {
     "id": 3,
     "pageNumber": 3,
     "prevPageId": 2,
-    "imageUrl": "/resources/images/temporary/page_02.jpg"
+    "imageUrl": "/resources/images/temporary/page_02.jpg",
+    "pageTotal": 43
 }]

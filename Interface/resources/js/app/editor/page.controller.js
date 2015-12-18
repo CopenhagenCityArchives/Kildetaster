@@ -8,6 +8,7 @@ define([
         $scope.prevPageId = pageData.prevPageId;
 
         $scope.pageNumber = pageData.pageNumber;
+        $scope.pageTotal = pageData.pageTotal;
 
         $scope.goToPageId = null;
         $scope.goToPage = function goToPage($event) {

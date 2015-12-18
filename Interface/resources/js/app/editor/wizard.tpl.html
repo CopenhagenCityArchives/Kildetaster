@@ -3,30 +3,23 @@
         <h2>{{currentStepData.title}}</h2>
         <p>{{currentStepData.description}}</p>
         <step-of total="numSteps" current="currentStep"></step-of>
-        <p>Vælg området for den person, du vil indtaste. Brug musen til at flytte området eller ændre dets størrelse,
-         så alle informationer er inden for det markerede.</p>
+        <p>Vælg området for den person, du vil indtaste. Brug musen til at flytte området eller ændre dets størrelse, så alle informationer er inden for det markerede.</p>
         <p class="text-center" ng-click="enableSelection()">
             <br>
             <img src="/resources/images/Cursor-Select-512.png" alt="Vælg område" width="50px">
             <br>
         </p>
     </div>
-
     <div class="col-sm-6"></div>
-    
     <div class="col-sm-6">
         <button type="button" class="btn btn-primary btn-block" ng-click="acceptArea()">{{TEXT.BUTTON.NEXT}}</button>
     </div>
 </div>
-
 <div class="row" ng-if="currentStep > 1 && !isResult()">
     <div class="col-sm-12">
-        
         <h2>{{currentStepData.title}}</h2>
         <p>{{currentStepData.description}}</p>
-        
         <step-of total="numSteps" current="currentStep"></step-of>
-        
         <div ng-repeat="field in currentStepData.fields">
             <div ng-switch="field.type">
                 <div ng-switch-when="text">
@@ -40,9 +33,7 @@
                 </div>
             </div>
         </div>
-        
     </div>
-
     <div class="col-sm-6">
         <button type="button" class="btn btn-default btn-block" ng-show="currentStep > 1" ng-click="prevStep()">{{TEXT.BUTTON.PREV}}</button>
     </div>
@@ -50,23 +41,17 @@
         <button type="button" class="btn btn-primary btn-block" ng-click="validateStep()">{{TEXT.BUTTON.NEXT}}</button>
     </div>
 </div>
-
 <div class="row" ng-if="!isResult()">
     <div class="col-sm-12">
         <step-indicator total="numSteps" current="currentStep"></step-indicator>
     </div>
 </div>
-
 <div class="row" ng-if="currentStep > 1">
-    
     <div class="col-sm-12">
         <h3>Udfyldt</h3>
-
         <ul class="list-unstyled field-list">
             <li class="field-list__item" ng-class="{ 'field-list__active': showSelectionControls }">
-                
                 <a href ng-click="placeArea()" ng-hide="showSelectionControls">Udsnit placeret <span class="icon glyphicon glyphicon-pencil"></span></a>
-                
                 <div class="row" ng-if="showSelectionControls">
                     <div class="col-sm-12">
                         <p>Ret udsnittet i kilden.</p>
@@ -74,45 +59,36 @@
                     <div class="col-sm-12 text-right">
                         <button class="btn btn-default" ng-click="acceptArea()">Ok</button>
                     </div>
-                    
                 </div>
-            </li>        
+            </li>
         </ul>
         <ul class="list-unstyled field-list" ng-repeat="step in steps" ng-hide="step.fields.length === 0">
-
-            <li class="field-list__item" 
-                ng-repeat="field in step.fields | filter: hasValue('value')" 
-                ng-class="{ 'field-list__active': field.isEditing }"
-            >
-                
+            <li class="field-list__item" ng-repeat="field in step.fields | filter: hasValue('value')" ng-class="{ 'field-list__active': field.isEditing }">
                 <a href ng-click="toggleEditExistingValue(field)" ng-hide="field.isEditing">
                     {{field.labelText}}: {{field.value | nameFromObject }} <span class="icon glyphicon glyphicon-pencil"></span>
                 </a>
-                
                 <div class="row" ng-switch="field.type" ng-if="field.isEditing">
                     <div class="col-sm-12">
                         <div ng-switch-when="text">
-                            <dynamic-input field-data="field" autofocus="$index === 0"></dynamic-input>
+                            <dynamic-input field-data="field" autofocus="field.isEditing"></dynamic-input>
                         </div>
                         <div ng-switch-when="select">
-                            <dynamic-select field-data="field" autofocus="$index === 0"></dynamic-select>
+                            <dynamic-select field-data="field" autofocus="field.isEditing"></dynamic-select>
                         </div>
                         <div ng-switch-when="typeahead">
-                            <dynamic-typeahead field-data="field" autofocus="$index === 0"></dynamic-typeahead>
+                            <dynamic-typeahead field-data="field" autofocus="field.isEditing"></dynamic-typeahead>
                         </div>
                     </div>
-    
                     <div class="col-sm-12 text-right">
-                        <button type="button" class="btn btn-default" ng-click="toggleEditExistingValue(field)">{{TEXT.BUTTON.OK}}</button>
+                        <button type="button" class="btn btn-default" ng-click="toggleEditExistingValue(field)">
+                            {{TEXT.BUTTON.OK}}
+                        </button>
                     </div>
                 </div>
             </li>
-
         </ul>
-
     </div>
 </div>
-
 <div ng-if="isResult()">
     <div class="row">
         <div class="col-sm-12">
@@ -124,11 +100,23 @@
                 <textarea class="form-control" ng-trim="true" ng-model="comment"></textarea>
             </div>
         </div>
+        <div class="col-sm-12">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" ng-model="wantFeedback" value="feedMe">
+                    Jeg ønsker feedback på disse indtastninger
+                </label>
+            </div>
+            <div class="form-group" ng-show="wantFeedback">
+                <label class="control-label">Evt. uddybning af feedback-ønske</label>
+                <textarea class="form-control" ng-trim="true" ng-model="feedback"></textarea>
+            </div>
+        </div>
     </div>
     <div class="row">
-    <div class="col-sm-6">
-        <button type="button" class="btn btn-default btn-block" ng-click="prevStep()">{{TEXT.BUTTON.PREV}}</button>
-    </div>
+        <div class="col-sm-6">
+            <button type="button" class="btn btn-default btn-block" ng-click="prevStep()">{{TEXT.BUTTON.PREV}}</button>
+        </div>
         <div class="col-sm-6">
             <button type="button" class="btn btn-primary" ng-click="save()">{{TEXT.BUTTON.SAVE}}</button>
         </div>

@@ -12,7 +12,7 @@ define([
         };
 
         $scope.goToStatistics = function goToStatistics(taskData) {
-            alert('Open statistics for task with id:' + taskData.id);
+            alert('Statistik er endnu ikke klar');
         };
 
         taskService.getTasks().then(function(response) {

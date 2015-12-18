@@ -6,11 +6,13 @@
         <p>{{protocol}}</p>
 
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-7">
                 <div ui-view="pageDetails"></div>
             </div>
-            <div class="col-sm-6">
-                <button type="button" class="btn btn-default btn-xs" ng-click="goToNextAvailablePage()">{{TEXT.PAGE_NEXTAVAILABLE}}</button>
+            <div class="col-sm-5">
+                <button type="button" class="btn btn-default btn-xs" ng-click="goToNextAvailablePage()">
+                    {{TEXT.PAGE_NEXTAVAILABLE}}
+                </button>
             </div>
         </div>
 
