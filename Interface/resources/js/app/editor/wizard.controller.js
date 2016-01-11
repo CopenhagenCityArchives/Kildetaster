@@ -59,10 +59,13 @@ define([
 
         //http://stackoverflow.com/questions/24081004/angularjs-ng-repeat-filter-when-value-is-greater-than
         //predicate for filter in template
+        // Will return true if the field is either empty/null or is marked unreadable
         $scope.hasValue = function hasValue(prop) {
+
             return function(item) {
-                return item[prop] !== undefined && item[prop] !== '';
+                return (item[prop] !== undefined && item[prop] !== '') || item.unreadable;
             };
+
         };
 
         //Toggle wether or not we should show edit field for a given field config
