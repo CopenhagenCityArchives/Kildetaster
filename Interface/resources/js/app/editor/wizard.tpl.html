@@ -69,6 +69,7 @@
                 </a>
                 <span class="icon glyphicon glyphicon-warning-sign" ng-if="field.unreadable"></span>
                 <div class="row" ng-switch="field.type" ng-if="field.isEditing">
+                    
                     <div class="col-sm-12">
                         <div ng-switch-when="text">
                             <dynamic-input field-data="field" autofocus="field.isEditing"></dynamic-input>
@@ -80,8 +81,9 @@
                             <dynamic-typeahead field-data="field" autofocus="field.isEditing"></dynamic-typeahead>
                         </div>
                     </div>
+                        
                     <div class="col-sm-12 text-right">
-                        <button tabindex="1" type="button" class="btn btn-default" ng-click="toggleEditExistingValue(field)">
+                        <button tabindex="1" type="button" class="btn btn-primary" ng-click="toggleEditExistingValue(field)">
                             {{TEXT.BUTTON.SAVE}}
                         </button>
                     </div>

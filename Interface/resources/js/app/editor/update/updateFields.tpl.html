@@ -31,8 +31,24 @@
                         <h5>Kommentar til fejl</h5>
                         <p>{{field.comment}}</p>
                     </div>
-                    <div class="col-sm-12 text-right">
-                        <button tabindex="1" type="button" class="btn btn-default" ng-click="fakeValidation(field)">{{TEXT.BUTTON.SAVE}}</button>
+                    <div class="col-sm-8">
+
+                        <ul class="list-unstyled">
+                            <li>
+                                <a href tabindex="1">
+                                    {{TEXT.BUTTON.SENDSUPERUSER}}
+                                </a>
+                            </li>
+                            <li>
+                                <a href>
+                                    {{TEXT.BUTTON.SENDFORUM}}
+                                </a>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <div class="col-sm-4 text-right">
+                        <button tabindex="1" type="button" class="btn btn-primary" ng-click="fakeValidation(field)">{{TEXT.BUTTON.SAVE}}</button>
                     </div>
                 </div>
 
