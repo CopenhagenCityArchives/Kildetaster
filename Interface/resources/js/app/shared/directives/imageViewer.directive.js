@@ -68,6 +68,8 @@ define([
                     nextButton: "next",
                     previousButton: "previous",
 
+                    maxZoomPixelRatio: 4,
+
                     //Prefix for image paths
                     prefixUrl: '/resources/bower_components/openseadragon/built-openseadragon/openseadragon/images/',
 
