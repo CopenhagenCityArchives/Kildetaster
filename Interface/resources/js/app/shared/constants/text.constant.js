@@ -7,8 +7,8 @@ define([
         "BUTTON": {
             "NEXT": "Næste",
             "PREV": "Forrige",     
-            "SAVE": "Gem indtastning",
-            "OK"  : "Ok"
+            "SAVEPOST": "Gem indtastning",
+            "SAVE"  : "Gem"
         },
 
         "PAGE_GOTO": "Gå til side",
