@@ -11,7 +11,7 @@
             
             <li class="field-list__item" ng-repeat="field in step.fields" ng-class="{ 'field-list__highlight': field.highlight}">
                 
-                <a href ng-click="toggleEditExistingValue(field)" ng-if="!field.isEditing && !field.highlight">
+                <a href ng-click="toggleEditExistingValue(field)" tabindex="1" ng-if="!field.isEditing && !field.highlight">
                     {{field.labelText}}: {{field.value | nameFromObject }} <span class="icon glyphicon glyphicon-pencil"></span>
                 </a>
                 
@@ -32,7 +32,7 @@
                         <p>{{field.comment}}</p>
                     </div>
                     <div class="col-sm-12 text-right">
-                        <button type="button" class="btn btn-default" ng-click="fakeValidation(field)">{{TEXT.BUTTON.OK}}</button>
+                        <button tabindex="1" type="button" class="btn btn-default" ng-click="fakeValidation(field)">{{TEXT.BUTTON.OK}}</button>
                     </div>
                 </div>
 
@@ -51,7 +51,7 @@
     </div>
 
     <div class="col-sm-12" ng-if="readyToSave">
-        <button class="btn btn-primary btn-block" ng-click="save()">Gem og luk</button>
+        <button tabindex="1" class="btn btn-primary btn-block" ng-click="save()">Gem og luk</button>
         <!-- <button class="btn btn-default btn-block">Gem og næste</button> -->
         
     </div>

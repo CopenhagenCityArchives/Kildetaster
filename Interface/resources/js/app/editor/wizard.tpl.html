@@ -12,7 +12,7 @@
     </div>
     <div class="col-sm-6"></div>
     <div class="col-sm-6">
-        <button type="button" class="btn btn-primary btn-block" ng-click="acceptArea()">{{TEXT.BUTTON.NEXT}}</button>
+        <button tabindex="1" type="button" class="btn btn-primary btn-block" ng-click="acceptArea()">{{TEXT.BUTTON.NEXT}}</button>
     </div>
 </div>
 <div class="row" ng-if="currentStep > 1 && !isResult()">
@@ -35,10 +35,10 @@
         </div>
     </div>
     <div class="col-sm-6">
-        <button type="button" class="btn btn-default btn-block" ng-show="currentStep > 1" ng-click="prevStep()">{{TEXT.BUTTON.PREV}}</button>
+        <button tabindex="1" type="button" class="btn btn-default btn-block" ng-show="currentStep > 1" ng-click="prevStep()">{{TEXT.BUTTON.PREV}}</button>
     </div>
     <div class="col-sm-6">
-        <button type="button" class="btn btn-primary btn-block" ng-click="validateStep()">{{TEXT.BUTTON.NEXT}}</button>
+        <button tabindex="1" type="button" class="btn btn-primary btn-block" ng-click="validateStep()">{{TEXT.BUTTON.NEXT}}</button>
     </div>
 </div>
 <div class="row" ng-if="!isResult()">
@@ -51,20 +51,20 @@
         <h3>Udfyldt</h3>
         <ul class="list-unstyled field-list">
             <li class="field-list__item" ng-class="{ 'field-list__active': showSelectionControls }">
-                <a href ng-click="placeArea()" ng-hide="showSelectionControls">Udsnit placeret <span class="icon glyphicon glyphicon-pencil"></span></a>
+                <a href tabindex="1" ng-click="placeArea()" ng-hide="showSelectionControls">Udsnit placeret <span class="icon glyphicon glyphicon-pencil"></span></a>
                 <div class="row" ng-if="showSelectionControls">
                     <div class="col-sm-12">
                         <p>Ret udsnittet i kilden.</p>
                     </div>
                     <div class="col-sm-12 text-right">
-                        <button class="btn btn-default" ng-click="acceptArea()">Ok</button>
+                        <button tabindex="1" class="btn btn-default" ng-click="acceptArea()">Ok</button>
                     </div>
                 </div>
             </li>
         </ul>
         <ul class="list-unstyled field-list" ng-repeat="step in steps" ng-hide="step.fields.length === 0">
             <li class="field-list__item" ng-repeat="field in step.fields | filter: hasValue('value')" ng-class="{ 'field-list__active': field.isEditing }">
-                <a href ng-click="toggleEditExistingValue(field)" ng-hide="field.isEditing">
+                <a tabindex="1" href ng-click="toggleEditExistingValue(field)" ng-hide="field.isEditing">
                     {{field.labelText}}: {{field.value | nameFromObject }} <span class="icon glyphicon glyphicon-pencil"></span>
                 </a>
                 <div class="row" ng-switch="field.type" ng-if="field.isEditing">
@@ -80,7 +80,7 @@
                         </div>
                     </div>
                     <div class="col-sm-12 text-right">
-                        <button type="button" class="btn btn-default" ng-click="toggleEditExistingValue(field)">
+                        <button tabindex="1" type="button" class="btn btn-default" ng-click="toggleEditExistingValue(field)">
                             {{TEXT.BUTTON.OK}}
                         </button>
                     </div>
@@ -92,33 +92,33 @@
 <div ng-if="isResult()">
     <div class="row">
         <div class="col-sm-12">
-            <a href ng-click="toggleComment()" ng-show="!showComment">Tilføj bemærkninger</a>
+            <a href tabindex="1" ng-click="toggleComment()" ng-show="!showComment">Tilføj bemærkninger</a>
             <div class="form-group" ng-show="showComment">
                 <label class="control-label">
                     Tilføj bemærkning
                 </label>
-                <textarea class="form-control" ng-trim="true" ng-model="comment"></textarea>
+                <textarea tabindex="1" class="form-control" ng-trim="true" ng-model="comment"></textarea>
             </div>
         </div>
         <div class="col-sm-12">
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" ng-model="wantFeedback" value="feedMe">
+                    <input tabindex="1" type="checkbox" ng-model="wantFeedback" value="feedMe">
                     Jeg ønsker feedback på disse indtastninger
                 </label>
             </div>
             <div class="form-group" ng-show="wantFeedback">
                 <label class="control-label">Evt. uddybning af feedback-ønske</label>
-                <textarea class="form-control" ng-trim="true" ng-model="feedback"></textarea>
+                <textarea tabindex="1" class="form-control" ng-trim="true" ng-model="feedback"></textarea>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-6">
-            <button type="button" class="btn btn-default btn-block" ng-click="prevStep()">{{TEXT.BUTTON.PREV}}</button>
+            <button tabindex="1" type="button" class="btn btn-default btn-block" ng-click="prevStep()">{{TEXT.BUTTON.PREV}}</button>
         </div>
         <div class="col-sm-6">
-            <button type="button" class="btn btn-primary" ng-click="save()">{{TEXT.BUTTON.SAVE}}</button>
+            <button tabindex="1" type="button" class="btn btn-primary" ng-click="save()">{{TEXT.BUTTON.SAVE}}</button>
         </div>
     </div>
 </div>

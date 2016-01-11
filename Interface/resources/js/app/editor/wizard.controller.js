@@ -40,6 +40,15 @@ define([
             //Make sure we treat currentStep value as an integer
             $scope.currentStep = parseInt($location.search().stepId);
             $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
+
+            //TODO: Remove this!
+            //Hack to force focus on button and no links in header
+            $timeout(function() {
+                if ($scope.currentStep == 5) {
+                    $('.editor-form-container button:first').focus();
+                }
+            });
+            
         });
 
         $scope.acceptArea = function acceptArea() {
