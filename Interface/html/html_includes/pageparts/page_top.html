@@ -13,6 +13,10 @@
     'article aside footer header nav section time'.replace(/\w+/g, function(n) {
         document.createElement(n)
     });
+
+    if (typeof(console.debug) !== 'function') {
+        console.debug = function() {}
+    }
     </script>
     <!-- CSS -->
     <link type="text/css" rel="stylesheet" href="resources/css/styles.css" />
