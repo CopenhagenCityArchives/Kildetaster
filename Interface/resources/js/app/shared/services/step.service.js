@@ -26,26 +26,7 @@ define([
                     .catch(function(err) {
                         throw new Error('stepService:getData: ' + err);
                     });
-            },
-
-            validateStep: function validateStep(data, forceInvalid) {
-                
-                var deferred = $q.defer();
-
-                $timeout(function() {
-
-                    forceInvalid = forceInvalid || false;
-                    
-                    deferred.resolve({
-                        isValid: !forceInvalid
-                    });
-
-                }, 300);
-
-                return deferred.promise;
-
             }
-
 
         };
 

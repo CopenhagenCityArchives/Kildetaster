@@ -8,10 +8,13 @@ define([
     'app/shared/directives/imageViewer.directive',
     'app/shared/directives/stepOf.directive',
     'app/shared/directives/stepIndicator.directive',
-    
+    'app/shared/directives/capitalizeFirst.directive',
+
     'app/shared/directives/dynamicInput.directive',
     'app/shared/directives/dynamicSelect.directive',
     'app/shared/directives/dynamicTypeahead.directive',
+
+    'app/shared/directives/handleSteps.directive',
 
     'app/shared/services/step.service',
     'app/shared/services/task.service',
@@ -34,10 +37,13 @@ define([
     imageViewerDirective,
     stepOfDirective,
     stepIndicatorDirective,
-
+    capitalizeFirst,
+    
     dynamicInputDirective,
     dynamicSelectDirective,
     dynamicTypeaheadDirective,
+
+    handleStepsDirective,    
 
     stepService,
     taskService,
@@ -58,10 +64,14 @@ define([
     sharedApp.directive('imageViewer', imageViewerDirective);
     sharedApp.directive('stepOf', stepOfDirective);
     sharedApp.directive('stepIndicator', stepIndicatorDirective);
+    sharedApp.directive('capitalizeFirst', capitalizeFirst);
     
     sharedApp.directive('dynamicInput', dynamicInputDirective);
     sharedApp.directive('dynamicSelect', dynamicSelectDirective);
     sharedApp.directive('dynamicTypeahead', dynamicTypeaheadDirective);
+    
+    sharedApp.directive('handleSteps', handleStepsDirective);
+    
 
     sharedApp.factory('stepService', stepService);
     sharedApp.factory('taskService', taskService);

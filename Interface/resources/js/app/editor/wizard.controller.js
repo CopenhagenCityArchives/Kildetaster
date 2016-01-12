@@ -124,22 +124,6 @@ define([
             $scope.showSelectionControls = true;
         };
 
-
-        $scope.validateStep = function validateStep() {
-
-            stepService.validateStep($scope.formData).then(function(response) {
-                //We have a valid step
-                if (response.isValid) {
-                    
-                    //And move to the next step
-                    $scope.nextStep();
-                }
-                else {
-                    //update formData with validation issues
-                }
-            });
-        };
-
         stepService.getData().then(function(response) {
             $scope.steps = response;
 

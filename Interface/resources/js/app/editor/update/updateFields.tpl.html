@@ -27,9 +27,9 @@
                             <dynamic-typeahead field-data="field" autofocus="field.isEditing"></dynamic-typeahead>
                         </div>
                     </div>
-                    <div class="col-sm-12" ng-if="field.comment">
+                    <div class="col-sm-12" ng-if="field.error">
                         <h5>Kommentar til fejl</h5>
-                        <p>{{field.comment}}</p>
+                        <p><span>{{field.error.username}}</span>: {{field.error.comment}}</p>
                     </div>
                     <div class="col-sm-8">
 

@@ -8,6 +8,7 @@
             tooltip-append-to-body="true"
         ></span>
     </label>
+
     <div class="dynamic-form__adjust">
         
         <input 
@@ -19,6 +20,7 @@
             uib-typeahead="option as option.name for option in field.options | filter:{name:$viewValue} | limitTo: 8"
             typeahead-focus-first="false"
             typeahead-append-to-body="true"
+            capitalize-first
         />
 
         <a href tabindex="-1" class="icon glyphicon glyphicon-info-sign" uib-tooltip="{{TEXT.FIELD_UNREADABLE}}" tooltip-placement="left" ng-click="toggleUnreadable()"></a>

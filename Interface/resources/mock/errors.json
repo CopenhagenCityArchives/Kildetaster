@@ -3,7 +3,10 @@
     "name": "Begravelsesprotokol nr. 132, 1850-1851",
     "fields": [{
         "labelText": "Vejnavn",
-        "comment": "Jeg mener, at han boede på Rosenborggade - kan der ikke stå det i stedet for Kronborggade?"
+        "error" : {
+            "username": "Kalle",
+            "comment": "Jeg mener, at han boede på Rosenborggade - kan der ikke stå det i stedet for Kronborggade?"
+        }
     },{
         "labelText": "Dødsdag",
         "comment": "Det er nok januar, der står - ikke juni"
@@ -16,14 +19,21 @@
     "name": "Skoleprotokol nr. 5, år 1777 s. 12",
     "fields": [{
         "labelText": "Fornavn",
-        "comment": "Står der ikke Peter?"
+        "error": {
+            "username": "Yngvar",
+            "comment": "Står der ikke Peter?"
+        }
     },{
         "labelText": "Fødeår",
         "comment": "Ligner det ikke der står 1762, og ikke 1768?"
     },
     {
         "labelText": "Fødested",
-        "comment": "Tror du har tastet forkert, det bør være Hundested og ikke Hondested"
+        "error": {
+            "username": "Kalle",
+            "comment": "Tror du har tastet forkert, det bør være Hundested og ikke Hondested"    
+        }
+        
     }],
     "corrected": {
         "date": "21.08.2015",
