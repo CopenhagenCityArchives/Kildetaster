@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var stepService = /*@ngInject*/ function stepService($timeout, $q, $http, JSONURL) {
+    var stepService = /*@ngInject*/ function stepService(Flash, $timeout, $q, $http, JSONURL, $filter) {
 
         return {
 
@@ -24,7 +24,8 @@ define([
                         return response.data;
                     })
                     .catch(function(err) {
-                        throw new Error('stepService:getData: ' + err);
+                        Flash.create('danger', 'stepService:getData: Could not get step data');
+                        return [];
                     });
             }
 

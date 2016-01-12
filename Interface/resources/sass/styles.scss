@@ -8,6 +8,8 @@
 
 @import "../bower_components/ui-select/dist/select";
 
+
+
 @import "core/core";
 @import "core/animations";
 
@@ -26,4 +28,13 @@
 @import "elements/gotopage";
 @import "elements/icon";
 @import "elements/image-viewer";
-@import "elements/step-indicator";
+@import "elements/step-indicator";
+
+@import "../bower_components/angular-flash-alert/dist/angular-flash.css";
+
+.alert {
+    margin-right: -$gutter;
+    margin-left: -$gutter;
+
+    border-radius: 0;
+}

@@ -15,6 +15,8 @@ requirejs.config({
         
         'angular-ui-router'     : '../bower_components/angular-ui-router/release/angular-ui-router.min',
         'angular-ui-select'     : '../bower_components/ui-select/dist/select.min',
+
+        'angular-flash'         : '../bower_components/angular-flash-alert/dist/angular-flash',
                 
         'openseadragon'         : '../bower_components/openseadragon/built-openseadragon/openseadragon/openseadragon.min',
 
@@ -38,6 +40,7 @@ requirejs.config({
         'angular-ui-select': ['angular'],
         'angular-sanitize': ['angular'],
         'angular-animate': ['angular'],
+        'angular-flash': ['angular'],
 
         'app/shared/constants': ['angular'],
 

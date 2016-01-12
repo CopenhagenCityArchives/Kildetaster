@@ -34,6 +34,7 @@ require.config({
         'angular-animate'       : 'bower_components/angular-animate/angular-animate.min',
         'angular-bootstrap'     : 'bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
         'angular-sanitize'      : 'bower_components/angular-sanitize/angular-sanitize.min',
+        'angular-flash'         : 'bower_components/angular-flash-alert/dist/angular-flash',
 
         'angular-ui-router'     : 'bower_components/angular-ui-router/release/angular-ui-router.min',
         'angular-ui-select'     : 'bower_components/ui-select/dist/select.min',
@@ -54,6 +55,7 @@ require.config({
         'angular-ui-select': ['angular'],
         'angular-sanitize': ['angular'],
         'angular-animate': ['angular'],
+        'angular-flash': ['angular'],
         
         'app/shared/constants': ['angular'],
 
