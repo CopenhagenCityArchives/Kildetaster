@@ -17,10 +17,11 @@ define([
                     "title": "Udfyldt"
                 };
                 
-                return $http.get(JSONURL + '/steps.json')
+                return $http.get(JSONURL + '/steps_kbh.json')
                     .then(function(response) {
-                        response.data.unshift(firstStep);
-                        response.data.push(resultStep);
+
+                        response.data.steps.unshift(firstStep);
+                        response.data.steps.push(resultStep);
                         return response.data;
                     })
                     .catch(function(err) {

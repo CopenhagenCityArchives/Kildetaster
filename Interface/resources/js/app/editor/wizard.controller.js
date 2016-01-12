@@ -98,7 +98,7 @@ define([
         * Move to next step
         */
         $scope.nextStep = function nextStep() {
-            $location.search({ stepId: parseInt($scope.currentStep) + 1 });            
+            $location.search({ stepId: parseInt($scope.currentStep) + 1 });
         };
 
         /**
@@ -125,11 +125,19 @@ define([
         };
 
         stepService.getData().then(function(response) {
-            $scope.steps = response;
+            
+            $scope.steps = response.steps;
+            $scope.stepEntityData = response.entities;
 
-            $scope.numSteps = response.length;
+            console.log($scope.stepEntityData);
+
+
+
+
+            $scope.numSteps = response.steps.length;
 
             $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
+            console.log($scope.currentStepData);
 
         });
 

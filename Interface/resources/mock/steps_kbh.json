@@ -1,0 +1,112 @@
+{
+    "steps": [{
+        "id": 1,
+        "title": "Indtast navn, alder og stillinger",
+        "description": "Indtast personens fulde navn og alder. Navnet er delt op i fornavn (inklusiv mellemnavne) og efternavnet."
+    }, {
+        "id": 2,
+        "title": "Indtast bopæl",
+        "description": "”Bopæl” i kilden er her delt op i to felter – vejnavn og nummer."
+    }, {
+        "id": 3,
+        "title": "Indtast dødsdato og dødsårsag",
+        "description": "Dødsdagen skrives med tal (dd.mm.åååå) og dødsårsagen skrives som i kilden, selvom der f.eks. findes en dansk betegnelse."
+    }],
+
+    "entities": [{
+
+            "id": 1,
+            "parent_id": null,
+            "required": 1,
+            "countPerEntry": 1,
+            "guiName": "Begravet person",
+            "task_id": 1,
+            "fields": [{
+                "id": 1,
+                "gui_name": "Fornavn",
+                "formType": "text",
+                "defaultValue": null,
+                "placeholder": "Personens fornavn",
+                "helpText": "Indtast personens første navn her",
+                "fieldName": "firstname",
+                "required": 1,
+                "step": 1,
+                "stepOrder": 1
+            }, {
+                "id": 2,
+                "name": "Efternavn",
+                "formType": "text",
+                "defaultValue": null,
+                "placeholder": "Personens efternavn",
+                "helpText": "Indtast alle andre navne end fornavnet",
+                "required": 1,
+                "step": 1,
+                "stepOrder": 2
+            }, {
+                "id": "3",
+                "name": "Fødselsdato",
+                "formType": "date",
+                "formSource": null,
+                "defaultValue": null,
+                "placeholder": "Personens fødested",
+                "helpText": "Vælg et fødested på listen",
+                "required": 1,
+                "step": 1,
+                "stepOrder": 3
+            }, {
+                "id": "4",
+                "name": "Dødsdato",
+                "formType": "date",
+                "formSource": null,
+                "defaultValue": null,
+                "placeholder": "Datoen for personens død",
+                "helpText": "Skriv datoen",
+                "required": 1,
+                "step": 3,
+                "stepOrder": 1
+            }, {
+                "id": "5",
+                "name": "Bopæl",
+                "formType": "text",
+                "defaultValue": null,
+                "placeholder": "Personens bopæl",
+                "helpText": "Skriv personens bopæl",
+                "required": 1,
+                "step": 2,
+                "stepOrder": 1
+            }, {
+                "id": "6",
+                "name": "Dødsårsag",
+                "formType": "typeahead",
+                "formSource": "http://www.kbhkilder.dk/api/v1/datasource=8",
+                "defaultValue": null,
+                "placeholder": "Årsagen til personens død",
+                "helpText": "Vælg en dødsårsag fra listen",
+                "required": 0,
+                "step": 3,
+                "stepOrder": 2
+            }]
+        },
+
+        {
+            "id": 3,
+            "parent_id": 1,
+            "required": 0,
+            "countPerEntry": "many",
+            "guiName": "Hovedpersonens stillinger",
+            "task_id": 1,
+            "fields": [{
+                "id": 1,
+                "name": "Stilling",
+                "formType": "text",
+                "defaultValue": null,
+                "placeholder": "Personens stilling",
+                "helpText": "Indtast én stilling af gangen",
+                "required": 1,
+                "step": 1,
+                "stepOrder": 4
+            }]
+
+        }
+    ]
+}
