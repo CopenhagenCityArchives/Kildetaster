@@ -26,38 +26,36 @@ define([
                     //Tab
                     if (event.keyCode === 9) {
 
+                        //We are tabbing out of the first input field, and shift is pressed
                         if (event.shiftKey && isFirst) {
                             
+                            //To to the previous page
                             scope.prevFunc();
 
                             //Need a timeout to let the routing system change view
                             time = $timeout(function() {
-                                $(element).find('input:visible:last').focus();
-                            }, 300);
-                            
+                                //Set focus on the last input field
+                                $(element).find('input:last').focus();
+                            }, 0);
 
-                            // scope.$apply(function() {
-                            //     console.log('focusing', $(element).find('input:last'));
-                            //     $(element).find('input:last').focus();
-                            // });
-                            
-                            //timeout required otherwise the change does not kick in until next digest??
-                            // $timeout(function() {
-                            //     //TODO why does this not work?!
-                            //     //This does not set focus
-                            //     $(element).find('input:last').focus();
-                            // }, 0);
+                            //Force Angular to render new state
+                            scope.$apply();
+
+                            //Prevent the default tab+shift behaviour, to prevent focus from going 
+                            //outside of the form. Will break functionality in Chrome without it
+                            event.preventDefault();
                         }
-
+                        //We are on the last input field, and shift is not pressed
                         else if (!event.shiftKey && isLast) {
+                            //To to next page
                             scope.nextFunc();
 
                             $timeout(function() {
+                                //Set focus on the first input field
                                 $(element).find('input:first').focus();
                             }, 0);
                         }
-
-                        return true;
+                        
                     }
                 });
 
