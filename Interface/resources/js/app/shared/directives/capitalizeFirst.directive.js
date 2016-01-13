@@ -15,6 +15,10 @@ define([
                         inputValue = '';
                     }
 
+                    if (typeof(inputValue) !== 'string') {
+                        return;
+                    }
+
                     //When used together with typeahead, the value is an object
                     if (typeof(inputValue) == "object") {
                         inputValue = inputValue.name;
