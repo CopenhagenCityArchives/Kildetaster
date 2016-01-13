@@ -70,6 +70,19 @@ define([
 
                     maxZoomPixelRatio: 4,
 
+                    gestureSettingsMouse: {
+                        scrollToZoom: true,
+                        clickToZoom: true,
+                        pinchToZoom: false
+
+                    },
+
+                    gestureSettingsTouch: {
+                        scrollToZoom: true,
+                        clickToZoom: true,
+                        pinchToZoom: false
+                    },
+
                     //Prefix for image paths
                     prefixUrl: '/resources/bower_components/openseadragon/built-openseadragon/openseadragon/images/',
 
@@ -81,7 +94,7 @@ define([
 
                     //The "zoom distance" per mouse scroll or touch pinch. Note: Setting this to 1.0 effectively disables the mouse-wheel zoom feature 
                     //(also see gestureSettings[Mouse|Touch|Pen].scrollToZoom}).
-                    zoomPerScroll: 1.0
+                    //zoomPerScroll: 1.0
 
                 }, $scope.options);
 

@@ -7,6 +7,7 @@ define([
     'angular-ui-select',
     'angular-sanitize',
     'angular-animate',
+    'angular-flash',
 
     'app/editor/editor.config',
     'app/editor/editor.run',
@@ -29,6 +30,7 @@ define([
     uiSelect,
     ngSanitize,
     ngAnimate,
+    angularFlashAlert,
 
     editorConfig,
     editorRun,
@@ -43,7 +45,15 @@ define([
 
 ) {
 
-    var editorApp = angular.module('editor', ['shared', 'ui.bootstrap', 'ui.router', 'ui.select', 'ngSanitize', 'ngAnimate']);
+    var editorApp = angular.module('editor', [
+        'shared',
+        'ui.bootstrap',
+        'ui.router',
+        'ui.select',
+        'ngSanitize',
+        'ngAnimate',
+        'flash'
+    ]);
 
     editorApp.config(editorConfig);
     editorApp.run(editorRun);

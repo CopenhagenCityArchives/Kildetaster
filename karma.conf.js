@@ -41,6 +41,7 @@ module.exports = function(config) {
         // list of files to exclude
         exclude: [
             //'libs/angular.1.5.0.b2.min.js'
+            'bower_components/**/test/*.*'
         ],
 
         // preprocess matching files before serving them to the browser

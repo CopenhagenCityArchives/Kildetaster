@@ -1,3 +1,3 @@
 <div class="step-indicator">
-    <a class="step-indicator__item" ui-sref=".({ stepId: $index + 1})" ng-class="{ filled: hasPrevious($index), current: isCurrent($index)}" ng-repeat="step in steps(total) track by $index"></a>
+    <a tabindex="-1" class="step-indicator__item" ui-sref=".({ stepId: $index + 1})" ng-class="{ filled: hasPrevious($index), current: isCurrent($index)}" ng-repeat="step in steps(total) track by $index"></a>
 </div>

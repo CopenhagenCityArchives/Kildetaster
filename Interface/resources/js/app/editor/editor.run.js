@@ -29,7 +29,7 @@ define([
         });
 
         //Route debugging
-        $rootScope.$on("$stateChangeError", console.log.bind(console));
+        //$rootScope.$on("$stateChangeError", console.log.bind(console));
 
     };
 
