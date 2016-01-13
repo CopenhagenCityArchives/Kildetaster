@@ -1,3 +1,7 @@
+/**
+* Switch pages in wizard when tabbing or shift-tabbing on the last and first input field 
+* in the forms
+*/
 define([
 
     'jquery'
