@@ -1,7 +1,7 @@
 {
     "steps": [{
         "id": 1,
-        "title": "Indtast navn, alder og stillinger",
+        "title": "Indtast navn og alder",
         "description": "Indtast personens fulde navn og alder. Navnet er delt op i fornavn (inklusiv mellemnavne) og efternavnet."
     }, {
         "id": 2,
@@ -11,6 +11,11 @@
         "id": 3,
         "title": "Indtast dødsdato og dødsårsag",
         "description": "Dødsdagen skrives med tal (dd.mm.åååå) og dødsårsagen skrives som i kilden, selvom der f.eks. findes en dansk betegnelse."
+    },
+    {
+        "id": 4,
+        "title": "Indtast stillinger",
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, cupiditate, repudiandae! Corporis eveniet, distinctio modi! Autem, placeat quam ad temporibus!"
     }],
 
     "entities": [{
@@ -39,13 +44,15 @@
                 "defaultValue": null,
                 "placeholder": "Personens efternavn",
                 "helpText": "Indtast alle andre navne end fornavnet",
+                "fieldName": "lastname",
                 "required": 1,
                 "step": 1,
                 "stepOrder": 2
             }, {
                 "id": "3",
                 "name": "Fødselsdato",
-                "formType": "date",
+                "fieldName": "birthDate",
+                "formType": "text",
                 "formSource": null,
                 "defaultValue": null,
                 "placeholder": "Personens fødested",
@@ -56,7 +63,8 @@
             }, {
                 "id": "4",
                 "name": "Dødsdato",
-                "formType": "date",
+                "fieldName": "deathDate",
+                "formType": "text",
                 "formSource": null,
                 "defaultValue": null,
                 "placeholder": "Datoen for personens død",
@@ -68,6 +76,7 @@
                 "id": "5",
                 "name": "Bopæl",
                 "formType": "text",
+                "fieldName": "residence",
                 "defaultValue": null,
                 "placeholder": "Personens bopæl",
                 "helpText": "Skriv personens bopæl",
@@ -78,7 +87,8 @@
                 "id": "6",
                 "name": "Dødsårsag",
                 "formType": "typeahead",
-                "formSource": "http://www.kbhkilder.dk/api/v1/datasource=8",
+                "fieldName": "deathCause",
+                "formSource": "http://localhost:1508/resources/mock/deathCause.json",
                 "defaultValue": null,
                 "placeholder": "Årsagen til personens død",
                 "helpText": "Vælg en dødsårsag fra listen",
@@ -98,13 +108,26 @@
             "fields": [{
                 "id": 1,
                 "name": "Stilling",
+                "fieldName": "occupation",
                 "formType": "text",
                 "defaultValue": null,
                 "placeholder": "Personens stilling",
                 "helpText": "Indtast én stilling af gangen",
                 "required": 1,
-                "step": 1,
-                "stepOrder": 4
+                "step": 4,
+                "stepOrder": 1
+            },
+            {
+                "id": 1,
+                "name": "Skostørrelse",
+                "fieldName": "shoeSize",
+                "formType": "text",
+                "defaultValue": null,
+                "placeholder": "Personens skostørrelse",
+                "helpText": "Indtast skostørrelse",
+                "required": 1,
+                "step": 4,
+                "stepOrder": 2
             }]
 
         }

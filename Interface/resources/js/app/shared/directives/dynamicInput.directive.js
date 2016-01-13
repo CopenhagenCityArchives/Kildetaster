@@ -14,6 +14,7 @@ define([
 
             scope: {
                 field: '=fieldData',
+                target: '=',
                 autofocus: '='
             },
 

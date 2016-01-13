@@ -4,7 +4,7 @@ define([
 
 ], function(ang) {
 
-    var dynamicTypeaheadDirective = /*@ngInject*/ function dynamicTypeaheadDirective($rootScope) {
+    var dynamicTypeaheadDirective = /*@ngInject*/ function dynamicTypeaheadDirective($rootScope, $http, Flash) {
 
         return {
 
@@ -14,6 +14,7 @@ define([
 
             scope: {
                 field: '=fieldData',
+                target: '=',
                 autofocus: '='
             },
 
@@ -22,6 +23,20 @@ define([
             link: function(scope, element, attrs) {
                 //Make TEXT available in local scope
                 scope.TEXT = $rootScope.TEXT;
+
+                scope.options = [];
+
+                scope.getOptions = function() {
+
+                    return $http.get(scope.field.formSource).then(function(response) {
+                        scope.options = response.data;
+                    }).catch(function(err) {
+                        Flash.create('danger', 'Kunne ikke hente data til: ' + scope.field.fieldName);
+                    });
+
+                };
+
+                scope.getOptions();
 
 
                 scope.toggleUnreadable = function toggleUnreadable() {

@@ -9,7 +9,7 @@
         ></span>
     </label>
     <div class="dynamic-form__adjust">
-        <ui-select ng-model="field.value" ng-disabled="field.unreadable">
+        <ui-select ng-model="target[field.fieldName]" ng-disabled="field.unreadable">
             <ui-select-match>
                 <span ng-bind="$select.selected.name"></span>
             </ui-select-match>

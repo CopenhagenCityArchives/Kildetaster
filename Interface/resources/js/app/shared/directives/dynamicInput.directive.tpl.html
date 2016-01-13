@@ -2,7 +2,7 @@
 <div class="form-group dynamic-form" ng-class="{ 'has-error': field.errorText }">
     
     <label class="control-label">
-        {{field.labelText}}
+        {{field.placeholder}}
         <span 
             class="icon glyphicon glyphicon-question-sign" 
             uib-tooltip="{{field.helpText}}" 
@@ -14,9 +14,9 @@
     <div class="dynamic-form__adjust">
         <input 
                 tabindex="1" 
-                type="{{field.type}}" 
+                type="{{field.formType}}" 
                 class="form-control" 
-                ng-model="field.value" 
+                ng-model="target[field.fieldName]" 
                 ng-model-options="{ updateOn: 'blur' }" 
                 ng-disabled="field.unreadable"
                 capitalize-first />

@@ -1,6 +1,6 @@
 <div class="form-group dynamic-form" ng-class="{ 'has-error': field.errorText }">
     <label class="control-label">
-        {{field.labelText}}
+        {{field.placeholder}}
         <span 
             class="icon glyphicon glyphicon-question-sign" 
             uib-tooltip="{{field.helpText}}" 
@@ -15,9 +15,9 @@
             tabindex="1"
             type="text" 
             class="form-control" 
-            ng-model="field.value" 
+            ng-model="target[field.fieldName]"
             ng-disabled="field.unreadable" 
-            uib-typeahead="option as option.name for option in field.options | filter:{name:$viewValue} | limitTo: 8"
+            uib-typeahead="option as option.name for option in options | filter:{name:$viewValue} | limitTo: 8"
             typeahead-focus-first="false"
             typeahead-append-to-body="true"
             capitalize-first
