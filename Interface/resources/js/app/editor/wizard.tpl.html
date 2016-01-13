@@ -42,14 +42,19 @@
             <button tabindex="1" type="button" class="btn btn-primary btn-block" ng-click="nextStep()">{{TEXT.BUTTON.NEXT}}</button>
         </div>
     </div>
+
     <div class="row" ng-if="!isResult()">
         <div class="col-sm-12">
             <step-indicator total="numSteps" current="currentStep"></step-indicator>
         </div>
     </div>
+
     <div class="row" ng-if="currentStep > 1">
         <div class="col-sm-12">
-            <h3>Udfyldt</h3>
+            <h3>{{currentStepData.title}}</h3>
+
+            <step-of total="numSteps" current="currentStep"></step-of>
+            
             <ul class="list-unstyled field-list">
                 <li class="field-list__item" ng-class="{ 'field-list__active': showSelectionControls }">
                     <a href tabindex="1" ng-click="placeArea()" ng-hide="showSelectionControls">Udsnit placeret <span class="icon glyphicon glyphicon-pencil"></span></a>
@@ -126,8 +131,13 @@
                 <button tabindex="1" type="button" class="btn btn-default btn-block" ng-click="prevStep()">{{TEXT.BUTTON.PREV}}</button>
             </div>
             <div class="col-sm-6">
-                <button tabindex="1" type="button" class="btn btn-primary" ng-click="save()">{{TEXT.BUTTON.SAVEPOST}}</button>
+                <button tabindex="1" type="button" class="btn btn-primary btn-block" ng-click="save()">{{TEXT.BUTTON.SAVEPOST}}</button>
             </div>
         </div>
+        <div class="row">
+        <div class="col-sm-12">
+            <step-indicator total="numSteps" current="currentStep"></step-indicator>
+        </div>
+    </div>
     </div>
 </section>
