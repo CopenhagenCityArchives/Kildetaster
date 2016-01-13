@@ -4,14 +4,6 @@ define([
 
     var updateFieldsController = /*@ngInject*/ function updateFieldsController($scope, updateData, $location, $timeout) {
 
-
-        $scope.tabIndex = 0;
-
-        $scope.getTabindex = function getTabindex() {
-            $scope.tabIndex = $scope.tabIndex + 1;
-            return $scope.tabIndex;
-        };
-
         $scope.steps = updateData;
 
         //Toggle wether or not we should show edit field for a given field config
