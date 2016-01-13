@@ -50,7 +50,7 @@ define([
                             //To to next page
                             scope.nextFunc();
 
-                            $timeout(function() {
+                            time = $timeout(function() {
                                 //Set focus on the first input field
                                 $(element).find('input:first').focus();
                             }, 0);
