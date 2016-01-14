@@ -20,19 +20,36 @@ define([
 
             link: function(scope, element, attrs) {
 
-                $(element).on('keydown', function(event) {
+                //Should we try to set focus automatically?
+                var noAuto = false;                
+                
+                //When we have a location change
+                scope.$on('$locationChangeSuccess', function(event) {                   
 
-                    var target = $(event.target),
-                        isFirst = target.closest('.first').length > 0,
-                        isLast = target.closest('.last').length > 0,
+                    //And we are allowed to automatically set focus
+                    if (!noAuto) {
+
+                        $timeout(function() {
+                            var firstInput = $(element).find('input:first');
+                            firstInput.focus();
+                        }, 0);
+                    }
+
+                });
+
+                $(element).on('keydown', function(event) {                 
+
+                    var firstInput = $(element).find('input:first'),
+                        lastInput = $(element).find('input:last'),
                         time;
 
                     //Tab
                     if (event.keyCode === 9) {
 
                         //We are tabbing out of the first input field, and shift is pressed
-                        if (event.shiftKey && isFirst) {
+                        if (event.shiftKey && $(event.target).is(firstInput)) {
                             
+                            noAuto = true;
                             //To to the previous page
                             scope.prevFunc();
 
@@ -40,6 +57,7 @@ define([
                             time = $timeout(function() {
                                 //Set focus on the last input field
                                 $(element).find('input:last').focus();
+                                noAuto = false;
                             }, 0);
 
                             //Force Angular to render new state
@@ -50,13 +68,17 @@ define([
                             event.preventDefault();
                         }
                         //We are on the last input field, and shift is not pressed
-                        else if (!event.shiftKey && isLast) {
+                        else if (!event.shiftKey && $(event.target).is(lastInput)) {
+                            
+                            noAuto = true;
+
                             //To to next page
                             scope.nextFunc();
 
                             time = $timeout(function() {
                                 //Set focus on the first input field
                                 $(element).find('input:first').focus();
+                                noAuto = false;
                             }, 0);
                         }
                         

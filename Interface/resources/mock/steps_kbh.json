@@ -2,134 +2,68 @@
     "steps": [{
         "id": 1,
         "title": "Indtast navn og alder",
-        "description": "Indtast personens fulde navn og alder. Navnet er delt op i fornavn (inklusiv mellemnavne) og efternavnet."
+        "description": "Indtast personens fulde navn og alder. Navnet er delt op i fornavn (inklusiv mellemnavne) og efternavnet.",
+        "form": ["firstName", "lastName"]
     }, {
         "id": 2,
         "title": "Indtast bopæl",
-        "description": "”Bopæl” i kilden er her delt op i to felter – vejnavn og nummer."
+        "description": "”Bopæl” i kilden er her delt op i to felter – vejnavn og nummer.",
+        "form": ["street", "streetNumber"]
     }, {
         "id": 3,
         "title": "Indtast dødsdato og dødsårsag",
-        "description": "Dødsdagen skrives med tal (dd.mm.åååå) og dødsårsagen skrives som i kilden, selvom der f.eks. findes en dansk betegnelse."
+        "description": "Dødsdagen skrives med tal (dd.mm.åååå) og dødsårsagen skrives som i kilden, selvom der f.eks. findes en dansk betegnelse.",
+        "form": ["deathDate", "deathCause"]   
     },
     {
         "id": 4,
         "title": "Indtast stillinger",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, cupiditate, repudiandae! Corporis eveniet, distinctio modi! Autem, placeat quam ad temporibus!"
+        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, cupiditate, repudiandae! Corporis eveniet, distinctio modi! Autem, placeat quam ad temporibus!",
+        "form": [{
+            "key":"ocupations",
+            "add": "Tilføj stilling",
+            "style": {
+                "add": "btn-default"
+            }
+        }]
     }],
 
-    "entities": [{
-
-            "id": 1,
-            "parent_id": null,
-            "required": 1,
-            "countPerEntry": 1,
-            "guiName": "Begravet person",
-            "task_id": 1,
-            "fields": [{
-                "id": 1,
-                "gui_name": "Fornavn",
-                "formType": "text",
-                "defaultValue": null,
-                "placeholder": "Personens fornavn",
-                "helpText": "Indtast personens første navn her",
-                "fieldName": "firstname",
-                "required": 1,
-                "step": 1,
-                "stepOrder": 1
-            }, {
-                "id": 2,
-                "name": "Efternavn",
-                "formType": "text",
-                "defaultValue": null,
-                "placeholder": "Personens efternavn",
-                "helpText": "Indtast alle andre navne end fornavnet",
-                "fieldName": "lastname",
-                "required": 1,
-                "step": 1,
-                "stepOrder": 2
-            }, {
-                "id": "3",
-                "name": "Fødselsdato",
-                "fieldName": "birthDate",
-                "formType": "text",
-                "formSource": null,
-                "defaultValue": null,
-                "placeholder": "Personens fødested",
-                "helpText": "Vælg et fødested på listen",
-                "required": 1,
-                "step": 1,
-                "stepOrder": 3
-            }, {
-                "id": "4",
-                "name": "Dødsdato",
-                "fieldName": "deathDate",
-                "formType": "text",
-                "formSource": null,
-                "defaultValue": null,
-                "placeholder": "Datoen for personens død",
-                "helpText": "Skriv datoen",
-                "required": 1,
-                "step": 3,
-                "stepOrder": 1
-            }, {
-                "id": "5",
-                "name": "Bopæl",
-                "formType": "text",
-                "fieldName": "residence",
-                "defaultValue": null,
-                "placeholder": "Personens bopæl",
-                "helpText": "Skriv personens bopæl",
-                "required": 1,
-                "step": 2,
-                "stepOrder": 1
-            }, {
-                "id": "6",
-                "name": "Dødsårsag",
-                "formType": "typeahead",
-                "fieldName": "deathCause",
-                "formSource": "http://localhost:1508/resources/mock/deathCause.json",
-                "defaultValue": null,
-                "placeholder": "Årsagen til personens død",
-                "helpText": "Vælg en dødsårsag fra listen",
-                "required": 0,
-                "step": 3,
-                "stepOrder": 2
-            }]
-        },
-
-        {
-            "id": 3,
-            "parent_id": 1,
-            "required": 0,
-            "countPerEntry": "many",
-            "guiName": "Hovedpersonens stillinger",
-            "task_id": 1,
-            "fields": [{
-                "id": 1,
-                "name": "Stilling",
-                "fieldName": "occupation",
-                "formType": "text",
-                "defaultValue": null,
-                "placeholder": "Personens stilling",
-                "helpText": "Indtast én stilling af gangen",
-                "required": 1,
-                "step": 4,
-                "stepOrder": 1
+    "schema": {
+        "type": "object",
+        "title": "Indtast navn og alder",
+        "properties": {
+            "firstName": {
+                "title": "Personens fornavn",
+                "type": "string"
             },
-            {
-                "id": 1,
-                "name": "Skostørrelse",
-                "fieldName": "shoeSize",
-                "formType": "text",
-                "defaultValue": null,
-                "placeholder": "Personens skostørrelse",
-                "helpText": "Indtast skostørrelse",
-                "required": 1,
-                "step": 4,
-                "stepOrder": 2
-            }]
-
+            "lastName": {
+                "title": "Personens efternavn",
+                "type": "string"
+            },
+            "street": {
+                "title": "Vejnavn",
+                "type": "string"
+            },
+            "streetNumber": {
+                "title": "Nummer",
+                "type": "number"
+            },                
+            "deathDate": {
+                "title": "Dødsdag",
+                "type": "string"
+            },
+            "deathCause": {
+                "title": "Dødsårsag",
+                "type": "string"
+            },
+            "ocupations": {
+                "title": "Personens stillinger",
+                "type": "array",
+                "items": {                
+                    "title": "Stilling",
+                    "type": "string"
+                }
+            }
         }
-    ]
+    }
 }

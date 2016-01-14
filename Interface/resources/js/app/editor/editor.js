@@ -9,6 +9,9 @@ define([
     'angular-animate',
     'angular-flash',
 
+    'schemaForm',
+    'angular-schema-form-bootstrap',
+
     'app/editor/editor.config',
     'app/editor/editor.run',
 
@@ -32,6 +35,9 @@ define([
     ngAnimate,
     angularFlashAlert,
 
+    angularSchemaForm,
+    angularSchemaFormBootstrap,
+
     editorConfig,
     editorRun,
 
@@ -52,7 +58,8 @@ define([
         'ui.select',
         'ngSanitize',
         'ngAnimate',
-        'flash'
+        'flash',
+        'schemaForm'
     ]);
 
     editorApp.config(editorConfig);

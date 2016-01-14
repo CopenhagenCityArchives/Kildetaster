@@ -8,7 +8,8 @@ define([
             "NEXT": "Næste",
             "PREV": "Forrige",     
             "SAVEPOST": "Gem indtastning",
-            "SAVE"  : "Gem",
+            "OK": "Ok",
+            "SAVE": "Gem",
             "SENDSUPERUSER": "Send til superbruger",
             "SENDFORUM": "Opret tråd på forum"
         },

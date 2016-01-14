@@ -1,8 +1,7 @@
 <section handle-steps prev="prevStep" next="nextStep">
-<pre>
-{{ currentStepData | json}}
-</pre>
+
     <div class="row" ng-if="currentStep == 1">
+        
         <div class="col-sm-12">
             <h2>{{currentStepData.title}}</h2>
             <p>{{currentStepData.description}}</p>
@@ -16,43 +15,25 @@
                 <br>
             </p>
         </div>
+        
         <div class="col-sm-6"></div>
+        
         <div class="col-sm-6">
             <button tabindex="1" type="button" class="btn btn-primary btn-block" ng-click="acceptArea()">{{TEXT.BUTTON.NEXT}}</button>
         </div>
+
     </div>
-    
+
     <div class="row" ng-if="currentStep > 1 && !isResult()">
         
         <div class="col-sm-12">
             <h2>{{currentStepData.title}}</h2>
             <p>{{currentStepData.description}}</p>
+            
             <step-of total="numSteps" current="currentStep"></step-of>
-
-
-            <div ng-if="currentStepData.repeating">
-                <button class="btn btn-default">Tilføj en til</button>
-            </div>
-
-            <div ng-repeat="field in currentStepData.fields">
-                
-                <div ng-switch="field.formType" ng-class="{ 'first': $first, 'last': $last }">
-                    <div ng-switch-when="text">
-                        <dynamic-input field-data="field" target="values" autofocus="$index === 0"></dynamic-input>
-                    </div>
-                    <div ng-switch-when="select">
-                        <dynamic-select field-data="field" target="values" autofocus="$index === 0"></dynamic-select>
-                    </div>
-                    <div ng-switch-when="typeahead">
-                        <dynamic-typeahead field-data="field" target="values" autofocus="$index === 0"></dynamic-typeahead>
-                    </div>
-                </div>
-            </div>
-
-            <div ng-if="currentStepData.repeating">
-                <button type="button" class="btn btn-default" ng-click="addAnother(currentStepData.fields)">Tilføj en til</button>
-            </div>
-
+            
+            <form sf-schema="schema" sf-form="currentStepData.form" sf-model="values" sf-options="sfDefaults"></form>
+       
         </div>
         
         <div class="col-sm-6">
@@ -84,48 +65,73 @@
                             <p>Ret udsnittet i kilden.</p>
                         </div>
                         <div class="col-sm-12 text-right">
-                            <button tabindex="1" class="btn btn-default" ng-click="acceptArea()">Ok</button>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-
-            <ul class="list-unstyled field-list" ng-repeat="step in steps" ng-hide="step.fields.length === 0">
-                <li 
-                        class="field-list__item" 
-                        ng-repeat="field in step.fields | filter: hasValue('value')" 
-                        ng-class="{ 'field-list__active': field.isEditing }">
-                    
-                    <a tabindex="1" href ng-click="toggleEditExistingValue(field)" ng-hide="field.isEditing">
-                        {{field.placeholder}}: {{field.value | nameFromObject }} <span class="icon glyphicon glyphicon-pencil"></span> 
-                    </a>
-                    
-                    <span class="icon glyphicon glyphicon-warning-sign" ng-if="field.unreadable"></span>
-                    
-                    <div class="row" ng-switch="field.formType" ng-if="field.isEditing">
-                        <div class="col-sm-12">
-                            <div ng-switch-when="text">
-                                <dynamic-input field-data="field" target="values" autofocus="field.isEditing"></dynamic-input>
-                            </div>
-                            <div ng-switch-when="select">
-                                <dynamic-select field-data="field" target="valuesw" autofocus="field.isEditing"></dynamic-select>
-                            </div>
-                            <div ng-switch-when="typeahead">
-                                <dynamic-typeahead field-data="field" target="values" autofocus="field.isEditing"></dynamic-typeahead>
-                            </div>
-                        </div>
-                        <div class="col-sm-12 text-right">
-                            <button tabindex="1" type="button" class="btn btn-primary" ng-click="toggleEditExistingValue(field)">
-                                {{TEXT.BUTTON.SAVE}}
+                            <button tabindex="1" class="btn btn-default" ng-click="acceptArea()">
+                                {{TEXT.BUTTON.OK}}
                             </button>
                         </div>
                     </div>
+                </li>
+            </ul>
+
+            <ul class="list-unstyled field-list" ng-repeat="(key, value) in values">
+                <li class="field-list__item">
+
+                    <span ng-if="schema.properties[key].type !== 'array'">
+
+                        <a tabindex="1" href ng-click="toggleEditExistingValue(key)">
+                            
+                            <span ng-if="schema.properties[key].type !== 'array'">
+                                {{schema.properties[key].title}}: {{value}} <span class="icon glyphicon glyphicon-pencil"></span>                        
+                            </span>
+                        </a>
+                        
+                        <div class="row" ng-if="isEditing(key)">
+                        
+                            <div class="col-sm-12">
+                                <form sf-schema="schema" sf-form="[key]" sf-model="values" sf-options="sfDefaults"></form>
+                            </div>                    
+
+                            <div class="col-sm-12 text-right">
+                                <button tabindex="1" type="button" class="btn btn-default" ng-click="toggleEditExistingValue(key)">
+                                    {{TEXT.BUTTON.OK}}
+                                </button>
+                            </div>
+                        </div>
+                    </span>
+
+                    <span ng-if="schema.properties[key].type == 'array'">
+                        <a tabindex="1" href ng-click="toggleEditExistingValue(key)">
+                            {{schema.properties[key].title}} <span class="icon glyphicon glyphicon-pencil"></span> 
+                        </a>
+                        <ul>
+                            <!-- Filter out null values, ie. items that were added, but never filled out -->
+                            <li ng-repeat="val in values[key] | filter: '!!'">
+                                {{val}}
+                            </li>
+                        </ul>
+                        <div class="row" ng-if="isEditing(key)">
+                        
+                            <div class="col-sm-12">
+                                <form sf-schema="schema" sf-form="[key]" sf-model="values"></form>
+                            </div>                    
+
+                            <div class="col-sm-12 text-right">
+                                <button tabindex="1" type="button" class="btn btn-default" ng-click="toggleEditExistingValue(key)">
+                                    {{TEXT.BUTTON.OK}}
+                                </button>
+                            </div>
+                        </div>
+                                
+                    </span>
 
                 </li>
             </ul>
+
         </div>
     </div>
+    
     <div ng-if="isResult()">
+        
         <div class="row">
             <div class="col-sm-12">
                 <a href tabindex="1" ng-click="toggleComment()" ng-show="!showComment">Tilføj bemærkninger</a>
@@ -148,6 +154,7 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-sm-6">
                 <button tabindex="1" type="button" class="btn btn-default btn-block" ng-click="prevStep()">{{TEXT.BUTTON.PREV}}</button>
@@ -156,10 +163,13 @@
                 <button tabindex="1" type="button" class="btn btn-primary btn-block" ng-click="save()">{{TEXT.BUTTON.SAVEPOST}}</button>
             </div>
         </div>
+
         <div class="row">
-        <div class="col-sm-12">
-            <step-indicator total="numSteps" current="currentStep"></step-indicator>
+            <div class="col-sm-12">
+                <step-indicator total="numSteps" current="currentStep"></step-indicator>
+            </div>
         </div>
+
     </div>
-    </div>
+
 </section>

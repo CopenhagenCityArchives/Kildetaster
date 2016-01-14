@@ -2,7 +2,30 @@ define([
 
 ], function() {
 
-    var editorConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider) {
+    var editorConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider, schemaFormDecoratorsProvider, sfBuilderProvider) {
+
+        // var base = 'directives/decorators/bootstrap/';
+        
+        // schemaFormDecoratorsProvider.defineDecorator('bootstrapDecorator', {
+        //     //textarea: {template: base + 'textarea.html', builder: sfBuilderProvider.stdBuilders},
+        //     //button: {template: base + 'submit.html', builder: sfBuilderProvider.stdBuilders},
+        //     //text: {template: base + 'text.html', builder: sfBuilderProvider.stdBuilders},
+            
+        //     'customType': {template: 'shared/templates/customInput.tpl.html', builder: sfBuilderProvider.stdBuilders},
+        //     // The default is special, if the builder can't find a match it uses the default template.
+        //     'default': {template: 'shared/templates/customInput.tpl.html', builder: sfBuilderProvider.stdBuilders},
+        // }, []);
+
+
+        //console.log(schemaFormDecoratorsProvider.decorator());
+
+        schemaFormDecoratorsProvider.addMapping(
+            'bootstrapDecorator',
+            'custominput',
+            'shared/templates/customInput.tpl.html',
+            sfBuilderProvider.builders.sfField
+        );        
+
 
         // For any unmatched url, redirect to /
         $urlRouterProvider.otherwise('/error');

@@ -18,7 +18,18 @@ define([
 
         $scope.wantFeedback = false;
 
+        //Will hold the inputted values
         $scope.values = {};
+
+        //Default settings for angular-schema-forms
+        $scope.sfDefaults = {
+            formDefaults: { 
+                feedback: false,
+                ngModelOptions: { 
+                    updateOn: 'blur'
+                }
+            }
+        };
 
         /**
          * When area is selected in the directive controlling openseadragon, and we are on the first step
@@ -70,9 +81,20 @@ define([
 
         };
 
-        //Toggle wether or not we should show edit field for a given field config
+        /**
+        * Toggle wether or not we should show edit field for a given field config
+        */
         $scope.toggleEditExistingValue = function toggleEditExistingValue(item) {
-            item.isEditing = !item.isEditing;
+            
+            var field = $scope.schema.properties[item];
+            field.isEditing = !field.isEditing;
+        };
+
+        /**
+        * Ask if a given field is currently being edited
+        */
+        $scope.isEditing = function isEditing(field) {
+            return $scope.schema.properties[field].isEditing;
         };
 
         /**
@@ -92,10 +114,7 @@ define([
         };
 
         $scope.save = function save() {
-
-            console.log($scope.steps);
-
-            //$state.go('.done', {}, { reload: true });
+            $state.go('.done', {}, { reload: true });
         };
 
         /**
@@ -132,72 +151,21 @@ define([
             $scope.showSelectionControls = true;
         };
 
+        /**
+        * Load step data from the server
+        */
         stepService.getData().then(function(response) {
 
-            function groupBy(array, property) {
-                var hash = {};
-                for (var i = 0; i < array.length; i++) {
-                    if (!hash[array[i][property]]) hash[array[i][property]] = [];
-                    hash[array[i][property]].push(array[i]);
-                }
-                return hash;
-            }
+            //The schema setup
+            $scope.schema = response.schema;
 
-            function buildStepData(stepData) {
+            //Stepdata, including form config
+            $scope.steps = response.steps;
 
-                var steps = [],
-                    grouped = [];
-
-                steps[0] = stepData.steps[0];
-
-                stepData.entities.forEach(function(entity) {
-
-                    var id;
-
-                    if (entity.countPerEntry === 1) {
-
-                        var data = groupBy(entity.fields, 'step');
-
-                        for (id in data) {
-                            steps[id] = {
-                                id: stepData.steps[id].id,
-                                title: stepData.steps[id].title,
-                                description: stepData.steps[id].description,
-                                fields: data[id]
-                            };
-                        }
-                    }
-                    else if (entity.countPerEntry === 'many') {
-                        //Since this is a many entity, we know all its fields are to be placed on the same step,
-                        // so grab the step from the first field
-                        id = entity.fields[0].step;
-                        steps[id] = {
-                            id: stepData.steps[id].id,
-                            title: stepData.steps[id].title,
-                            description: stepData.steps[id].description,
-                            //Indicate that the fields can be repeated
-                            repeating: true,
-                            fields: entity.fields
-                        };
-                    }
-
-                });
-
-                steps.push(stepData.steps[stepData.steps.length - 1]);
-
-                return steps;
-
-            }
-
-            $scope.addAnother = function(fieldData) {
-                console.log('field', fieldData);
-
-            };
-
-            $scope.steps = buildStepData(response);
-
+            //Take note of the total number of steps
             $scope.numSteps = $scope.steps.length;
 
+            //Prepare the initial step data, so we can render the current step
             $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
         });
 
