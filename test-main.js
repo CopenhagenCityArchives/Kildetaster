@@ -39,6 +39,11 @@ require.config({
         'angular-ui-router'     : 'bower_components/angular-ui-router/release/angular-ui-router.min',
         'angular-ui-select'     : 'bower_components/ui-select/dist/select.min',
 
+        //Angular json form
+        'tv4'                          : 'bower_components/tv4/tv4',
+        'objectpath'                   : 'bower_components/objectpath/lib/ObjectPath',
+        'schemaForm'                   : 'bower_components/angular-schema-form/dist/schema-form.min',
+        'angular-schema-form-bootstrap': 'bower_components/angular-schema-form/dist/bootstrap-decorator',
 
         'openseadragon'         : 'bower_components/openseadragon/built-openseadragon/openseadragon/openseadragon.min',
         

@@ -1,30 +1,31 @@
 define([
 
+    'app/shared/schemaformAddon/typeahead.addon'
+
 ], function() {
 
-    var editorConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider, schemaFormDecoratorsProvider, sfBuilderProvider) {
-
-        // var base = 'directives/decorators/bootstrap/';
-        
-        // schemaFormDecoratorsProvider.defineDecorator('bootstrapDecorator', {
-        //     //textarea: {template: base + 'textarea.html', builder: sfBuilderProvider.stdBuilders},
-        //     //button: {template: base + 'submit.html', builder: sfBuilderProvider.stdBuilders},
-        //     //text: {template: base + 'text.html', builder: sfBuilderProvider.stdBuilders},
-            
-        //     'customType': {template: 'shared/templates/customInput.tpl.html', builder: sfBuilderProvider.stdBuilders},
-        //     // The default is special, if the builder can't find a match it uses the default template.
-        //     'default': {template: 'shared/templates/customInput.tpl.html', builder: sfBuilderProvider.stdBuilders},
-        // }, []);
-
-
-        //console.log(schemaFormDecoratorsProvider.decorator());
+    var editorConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider, sfPathProvider, schemaFormProvider, schemaFormDecoratorsProvider, sfBuilderProvider) {
 
         schemaFormDecoratorsProvider.addMapping(
             'bootstrapDecorator',
             'custominput',
-            'shared/templates/customInput.tpl.html',
-            sfBuilderProvider.builders.sfField
-        );        
+            'shared/templates/customInput.tpl.html'
+        );
+
+        
+        var custominput = function(name, schema, options) {
+            //Type of string, but without a specific format
+            if (schema.type === 'string' && schema.format === undefined) {
+                var f = schemaFormProvider.stdFormObj(name, schema, options);
+                //f.key = options.path;
+                f.type = 'custominput';
+                options.lookup[sfPathProvider.stringify(options.path)] = f;
+                return f;
+            }
+        };
+
+        // Put it first in the list of functions
+        schemaFormProvider.defaults.string.unshift(custominput);
 
 
         // For any unmatched url, redirect to /

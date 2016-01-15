@@ -3,7 +3,13 @@
         "id": 1,
         "title": "Indtast navn og alder",
         "description": "Indtast personens fulde navn og alder. Navnet er delt op i fornavn (inklusiv mellemnavne) og efternavnet.",
-        "form": ["firstName", "lastName"]
+        "form": [{
+            "key": "firstName",
+            "helpText": "Personens første navn"
+        }, {
+            "key": "lastName",
+            "helpText": "Personens andre navne"
+        }]
     }, {
         "id": 2,
         "title": "Indtast bopæl",
@@ -34,7 +40,8 @@
         "properties": {
             "firstName": {
                 "title": "Personens fornavn",
-                "type": "string"
+                "type": "string",
+                "format": "typeahead"
             },
             "lastName": {
                 "title": "Personens efternavn",

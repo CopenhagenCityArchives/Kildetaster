@@ -1,69 +1,66 @@
-{
-    "steps": [{
-        "id": 1,
-        "title": "Indtast navn og alder",
-        "description": "Indtast personens fulde navn og alder. Navnet er delt op i fornavn (inklusiv mellemnavne) og efternavnet.",
-        "fieldData": [{
-            "type": "field",
-            "formType": "text",
-            "name": "firstName",
-            "label": "Personens fornavn",
-            "helpText": "Indtast personens første navn her"
-        },{
-            "type": "field",
-            "formType": "text",
-            "name": "lastName",
-            "label": "Personens efternavn",
-            "helpText": "Indtast alle andre navne end fornavnet"
-        }]
+[{
+    "id": 1,
+    "title": "Indtast navn og alder",
+    "description": "Indtast personens fulde navn og alder. Navnet er delt op i fornavn (inklusiv mellemnavne) og efternavnet.",
+    "fieldData": [{
+        "type": "field",
+        "formType": "text",
+        "name": "firstName",
+        "placeholder": "Personens fornavn",
+        "helpText": "Indtast personens første navn her"
     }, {
-        "id": 2,
-        "title": "Indtast bopæl",
-        "description": "”Bopæl” i kilden er her delt op i to felter – vejnavn og nummer.",
-        "fieldData": [{
-            "type": "field",
-            "formType": "text",
-            "name": "street",
-            "label": "Vejnavn"
-        },{
-            "type": "field",
-            "formType": "text",
-            "name": "streetnumber",
-            "label": "Nummer"
-        }]
+        "type": "field",
+        "formType": "text",
+        "name": "lastName",
+        "placeholder": "Personens efternavn",
+        "helpText": "Indtast alle andre navne end fornavnet"
+    }]
+}, {
+    "id": 2,
+    "title": "Indtast bopæl",
+    "description": "”Bopæl” i kilden er her delt op i to felter – vejnavn og nummer.",
+    "fieldData": [{
+        "type": "field",
+        "formType": "text",
+        "name": "street",
+        "placeholder": "Vejnavn"
     }, {
-        "id": 3,
-        "title": "Indtast dødsdato og dødsårsag",
-        "description": "Dødsdagen skrives med tal (dd.mm.åååå) og dødsårsagen skrives som i kilden, selvom der f.eks. findes en dansk betegnelse.",        
-        "fieldData": [{
-            "type": "field",
-            "formType": "text",
-            "name": "deathDate",
-            "label": "Dødsdag",
-            "helpText": "Skriv datoen"
-        },{
-            "type": "field",
-            "formType": "typeahead",
-            "name": "deathCause",
-            "formSource": "http://localhost:1508/resources/mock/deathCause.json",
-            "label": "Dødsårsagen",
-            "helpText": "Vælg fra listen eller skriv årsagen"
-        }]
-
+        "type": "field",
+        "formType": "text",
+        "name": "streetnumber",
+        "placeholder": "Nummer"
+    }]
+}, {
+    "id": 3,
+    "title": "Indtast dødsdato og dødsårsag",
+    "description": "Dødsdagen skrives med tal (dd.mm.åååå) og dødsårsagen skrives som i kilden, selvom der f.eks. findes en dansk betegnelse.",
+    "fieldData": [{
+        "type": "field",
+        "formType": "text",
+        "name": "deathDate",
+        "placeholder": "Dødsdag",
+        "helpText": "Skriv datoen"
     }, {
-        "id": 4,
-        "title": "Indtast stillinger",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, cupiditate, repudiandae! Corporis eveniet, distinctio modi! Autem, placeat quam ad temporibus!",
-        "fieldData": [{
-            "type": "group",
-            "fieldData": [{
-                "type": "field",
-                "formType": "text",
-                "name": "occupation",
-                "label": "Personens stilling",
-                "helpText": "Indtast én stilling af gangen"
-            }]
-        }]
+        "type": "field",
+        "formType": "typeahead",
+        "name": "deathCause",
+        "formSource": "http://localhost:1508/resources/mock/deathCause.json",
+        "placeholder": "Dødsårsagen",
+        "helpText": "Vælg fra listen eller skriv årsagen"
     }]
 
-}
+}, {
+    "id": 4,
+    "title": "Indtast stillinger",
+    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, cupiditate, repudiandae! Corporis eveniet, distinctio modi! Autem, placeat quam ad temporibus!",
+    "fieldData": [{
+        "type": "group",
+        "fieldData": [{
+            "type": "field",
+            "formType": "text",
+            "name": "occupation",
+            "placeholder": "Personens stilling",
+            "helpText": "Indtast én stilling af gangen"
+        }]
+    }]
+}]

@@ -1,0 +1,35 @@
+<div ng-controller="sfTypeahead" ng-init="init()">
+<div class="form-group dynamic-form schema-form-{{form.type}} {{form.htmlClass}}" ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess(), 'has-feedback': form.feedback !== false }">
+    <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle()}" for="{{form.key.slice(-1)[0]}}">
+        {{form.title}}
+        <span 
+            class="icon glyphicon glyphicon-question-sign" 
+            uib-tooltip="{{form.helpText}}" 
+            tooltip-placement="top"
+            tooltip-append-to-body="true"
+        ></span>
+    </label>
+
+    <div class="dynamic-form__adjust">
+        
+        <input 
+            tabindex="1"
+            type="text" 
+            class="form-control" 
+            ng-disabled="field.unreadable" 
+            ng-model-options="form.ngModelOptions"
+            ng-model="$$value$$"
+            ng-disabled="form.readonly"
+            schema-validate="form" 
+            uib-typeahead="option as option.name for option in options | filter:{name:$viewValue} | limitTo: 8"
+            typeahead-focus-first="false"
+            typeahead-append-to-body="true"
+            capitalize-first
+        />
+
+        <a href tabindex="-1" class="icon glyphicon glyphicon-info-sign" uib-tooltip="{{TEXT.FIELD_UNREADABLE}}" tooltip-placement="left" ng-click="toggleUnreadable()"></a>
+    </div>
+    <div class="help-block" ng-if="field.errorText">{{field.errorText}}</div>
+
+</div>
+</div>
