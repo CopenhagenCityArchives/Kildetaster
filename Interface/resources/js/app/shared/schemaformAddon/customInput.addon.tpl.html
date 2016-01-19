@@ -1,0 +1,53 @@
+<div 
+    class="form-group dynamic-form schema-form-{{form.type}} {{form.htmlClass}}" 
+    ng-controller="sfCustomInput"
+    ng-class="{
+      'has-error': form.disableErrorState !== true && hasError(),
+      'has-success': form.disableSuccessState !== true && hasSuccess(),
+      'has-feedback': form.feedback !== false }
+    ">
+    
+    <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle()}" for="{{form.key.slice(-1)[0]}}">
+        {{form.title}}
+        <span 
+            class="icon glyphicon glyphicon-question-sign" 
+            uib-tooltip="{{form.description}}" 
+            tooltip-placement="top"
+            tooltip-append-to-body="true"
+        ></span>
+    </label>
+
+    <div class="dynamic-form__adjust">
+
+      <input 
+          ng-if="!form.fieldAddonLeft && !form.fieldAddonRight" 
+          ng-show="form.key" 
+          type="{{form.type}}" 
+          step="any" 
+          sf-changed="form" 
+          placeholder="{{form.placeholder}}" 
+          class="form-control dynamic {{form.fieldHtmlClass}}" 
+          id="{{form.key.slice(-1)[0]}}" 
+          ng-model-options="form.ngModelOptions" 
+          ng-model="$$value$$"
+          ng-disabled="form.readonly || form.unreadable"
+          schema-validate="form" 
+          name="{{form.key.slice(-1)[0]}}" 
+          aria-describedby="{{form.key.slice(-1)[0] + 'Status'}}"
+          tabindex="1"
+          capitalize-first>
+        
+        <a href 
+            tabindex="-1" 
+            class="icon glyphicon glyphicon-info-sign" 
+            uib-tooltip="{{TEXT.FIELD_UNREADABLE}}" 
+            tooltip-placement="left" 
+            ng-click="toggleUnreadable(form)">
+        </a>
+
+
+    </div>
+
+    <div class="help-block" ng-if="hasError()">{{ form.validationMessage }}</div>
+
+</div>

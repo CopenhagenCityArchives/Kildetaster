@@ -20,3 +20,8 @@ h3 {
 ul.list-unstyled + ul.list-unstyled {
     margin-top: -$gutter / 2;
 }
+
+legend {
+    font-size: $font-size-base;
+    line-height: $font-size-base * 2;
+}

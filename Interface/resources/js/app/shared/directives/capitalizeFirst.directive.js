@@ -32,9 +32,14 @@ define([
                     return capitalized;
                 };
 
-                modelCtrl.$parsers.push(capitalize);
+                //Do not try to capitalize a number field
+                if(attrs.type !== 'number') {
+                    modelCtrl.$parsers.push(capitalize);
+                    capitalize($parse(attrs.ngModel)(scope)); // capitalize initial value
+                }
 
-                capitalize($parse(attrs.ngModel)(scope)); // capitalize initial value
+                
+                
             }
         };
     };

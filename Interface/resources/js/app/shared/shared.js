@@ -10,10 +10,6 @@ define([
     'app/shared/directives/stepIndicator.directive',
     'app/shared/directives/capitalizeFirst.directive',
 
-    'app/shared/directives/dynamicInput.directive',
-    'app/shared/directives/dynamicSelect.directive',
-    'app/shared/directives/dynamicTypeahead.directive',
-
     'app/shared/directives/handleSteps.directive',
 
     'app/shared/services/step.service',
@@ -38,10 +34,6 @@ define([
     stepOfDirective,
     stepIndicatorDirective,
     capitalizeFirst,
-    
-    dynamicInputDirective,
-    dynamicSelectDirective,
-    dynamicTypeaheadDirective,
 
     handleStepsDirective,    
 
@@ -65,11 +57,7 @@ define([
     sharedApp.directive('stepOf', stepOfDirective);
     sharedApp.directive('stepIndicator', stepIndicatorDirective);
     sharedApp.directive('capitalizeFirst', capitalizeFirst);
-    
-    sharedApp.directive('dynamicInput', dynamicInputDirective);
-    sharedApp.directive('dynamicSelect', dynamicSelectDirective);
-    sharedApp.directive('dynamicTypeahead', dynamicTypeaheadDirective);
-    
+        
     sharedApp.directive('handleSteps', handleStepsDirective);
     
 

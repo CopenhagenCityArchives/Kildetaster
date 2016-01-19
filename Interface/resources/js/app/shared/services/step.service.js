@@ -17,7 +17,7 @@ define([
                     "title": "Udfyldt"
                 };
                 
-                return $http.get(JSONURL + '/steps_kbh.json')
+                return $http.get(JSONURL + '/steps_kbh2.json')
                     .then(function(response) {
 
                         response.data.steps.unshift(firstStep);

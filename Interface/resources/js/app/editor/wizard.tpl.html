@@ -32,7 +32,7 @@
             
             <step-of total="numSteps" current="currentStep"></step-of>
             
-            <form sf-schema="schema" sf-form="currentStepData.form" sf-model="values" sf-options="sfDefaults"></form>
+            <form sf-schema="schema" sf-form="currentStepData.fields" sf-model="values" sf-options="sfDefaults"></form>
        
         </div>
         
@@ -106,7 +106,9 @@
                         <ul>
                             <!-- Filter out null values, ie. items that were added, but never filled out -->
                             <li ng-repeat="val in values[key] | filter: '!!'">
-                                {{val}}
+                                <span ng-repeat="subVal in val">
+                                    {{subVal}}
+                                </span>
                             </li>
                         </ul>
                         <div class="row" ng-if="isEditing(key)">

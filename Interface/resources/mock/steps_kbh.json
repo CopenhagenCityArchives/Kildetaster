@@ -1,76 +1,132 @@
 {
-    "steps": [{
-        "id": 1,
-        "title": "Indtast navn og alder",
-        "description": "Indtast personens fulde navn og alder. Navnet er delt op i fornavn (inklusiv mellemnavne) og efternavnet.",
-        "form": [{
-            "key": "firstName",
-            "helpText": "Personens første navn"
-        }, {
-            "key": "lastName",
-            "helpText": "Personens andre navne"
-        }]
-    }, {
-        "id": 2,
-        "title": "Indtast bopæl",
-        "description": "”Bopæl” i kilden er her delt op i to felter – vejnavn og nummer.",
-        "form": ["street", "streetNumber"]
-    }, {
-        "id": 3,
-        "title": "Indtast dødsdato og dødsårsag",
-        "description": "Dødsdagen skrives med tal (dd.mm.åååå) og dødsårsagen skrives som i kilden, selvom der f.eks. findes en dansk betegnelse.",
-        "form": ["deathDate", "deathCause"]   
-    },
-    {
-        "id": 4,
-        "title": "Indtast stillinger",
-        "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, cupiditate, repudiandae! Corporis eveniet, distinctio modi! Autem, placeat quam ad temporibus!",
-        "form": [{
-            "key":"ocupations",
-            "add": "Tilføj stilling",
-            "style": {
-                "add": "btn-default"
-            }
-        }]
-    }],
-
+    "id": "1",
+    "name": "Indtastning af begravelsesprotokoller",
+    "description": "Dette er Stadsarkivets første indtastningsprojekt",
+    "collection_id": "1",
     "schema": {
+        "title": "Indtastning af begravelsesprotokoller",
         "type": "object",
-        "title": "Indtast navn og alder",
         "properties": {
-            "firstName": {
-                "title": "Personens fornavn",
-                "type": "string",
-                "format": "typeahead"
+            "1": {
+                "title": "Begravet person",
+                "type": "object",
+                "properties": {
+                    "6": {
+                        "parent_id": null,
+                        "entity_id": "1",
+                        "entity_field_id": "6",
+                        "title": "Alder",
+                        "type": "integer",
+                        "pattern": "/\\d{1,}/",
+                        "description": null,
+                        "validationMessage": "Skal udfyldes",
+                        "default": null
+                    },
+                    "3": {
+                        "parent_id": null,
+                        "entity_id": "1",
+                        "entity_field_id": "3",
+                        "title": "Fødested",
+                        "type": "autocomplete",
+                        "pattern": "",
+                        "description": "Vælg et fødested på listen",
+                        "validationMessage": "Fødested udfyldes",
+                        "default": null
+                    },
+                    "2": {
+                        "parent_id": null,
+                        "entity_id": "1",
+                        "entity_field_id": "2",
+                        "title": "Efternavn",
+                        "type": "string",
+                        "pattern": "",
+                        "description": "Indtast alle andre navne end fornavnet",
+                        "validationMessage": "Efternavn skal udfyldes",
+                        "default": null
+                    },
+                    "1": {
+                        "parent_id": null,
+                        "entity_id": "1",
+                        "entity_field_id": "1",
+                        "title": "Fornavn",
+                        "type": "string",
+                        "pattern": "",
+                        "description": "Indtast personens første navn her",
+                        "validationMessage": "Fornavnet skal udfyldes",
+                        "default": null
+                    }
+                },
+                "required": [
+                    "6",
+                    "3",
+                    "2",
+                    "1"
+                ]
             },
-            "lastName": {
-                "title": "Personens efternavn",
-                "type": "string"
-            },
-            "street": {
-                "title": "Vejnavn",
-                "type": "string"
-            },
-            "streetNumber": {
-                "title": "Nummer",
-                "type": "number"
-            },                
-            "deathDate": {
-                "title": "Dødsdag",
-                "type": "string"
-            },
-            "deathCause": {
-                "title": "Dødsårsag",
-                "type": "string"
-            },
-            "ocupations": {
-                "title": "Personens stillinger",
+            "2": {
+                "title": "Ægtefæller",
                 "type": "array",
-                "items": {                
-                    "title": "Stilling",
-                    "type": "string"
+                "items": [{
+                    "parent_id": null,
+                    "entity_id": "2",
+                    "entity_field_id": "5",
+                    "title": "5",
+                    "type": "object",
+                    "pattern": "",
+                    "description": "Indtast alle andre navne end fornavnet",
+                    "validationMessage": "Efternavn skal udfyldes",
+                    "default": null
+                }, {
+                    "parent_id": null,
+                    "entity_id": "2",
+                    "entity_field_id": "4",
+                    "title": "4",
+                    "type": "object",
+                    "pattern": "",
+                    "description": "Indtast personens første navn her",
+                    "validationMessage": "Fornavnet skal udfyldes",
+                    "default": null
+                }],
+                "required": [
+                    "5",
+                    "4"
+                ]
+            },
+            "3": {
+                "title": "Stillinger",
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "job": {
+                            "title": "7",
+                            "type": "object",
+                            "pattern": "",
+                            "description": null,
+                            "validationMessage": "",
+                            "default": null
+                        }
+                    }
                 }
             }
         }
-    }
+    },
+    "steps": [{
+        "id": "1",
+        "name": "teststep",
+        "description": "første step. Ever.",
+        "fields": [
+            "1",
+            "7"
+        ]
+    }, {
+        "id": "2",
+        "name": "test2",
+        "description": "andet",
+        "fields": [
+            "2",
+            "3",
+            "6"
+        ]
+    }]
 }

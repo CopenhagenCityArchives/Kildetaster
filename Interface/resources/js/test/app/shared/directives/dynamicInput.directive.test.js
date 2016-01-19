@@ -7,6 +7,10 @@ define([
 
 ], function() {
 
+
+
+    return true;
+    
     //Basic object to populate an input
     var fieldData = {
             labelText: "Label",

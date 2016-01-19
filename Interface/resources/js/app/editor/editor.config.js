@@ -1,32 +1,9 @@
 define([
-
-    'app/shared/schemaformAddon/typeahead.addon'
+   
 
 ], function() {
 
     var editorConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider, sfPathProvider, schemaFormProvider, schemaFormDecoratorsProvider, sfBuilderProvider) {
-
-        schemaFormDecoratorsProvider.addMapping(
-            'bootstrapDecorator',
-            'custominput',
-            'shared/templates/customInput.tpl.html'
-        );
-
-        
-        var custominput = function(name, schema, options) {
-            //Type of string, but without a specific format
-            if (schema.type === 'string' && schema.format === undefined) {
-                var f = schemaFormProvider.stdFormObj(name, schema, options);
-                //f.key = options.path;
-                f.type = 'custominput';
-                options.lookup[sfPathProvider.stringify(options.path)] = f;
-                return f;
-            }
-        };
-
-        // Put it first in the list of functions
-        schemaFormProvider.defaults.string.unshift(custominput);
-
 
         // For any unmatched url, redirect to /
         $urlRouterProvider.otherwise('/error');

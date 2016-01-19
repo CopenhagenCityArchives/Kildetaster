@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var wizardController = /*@ngInject*/ function wizardController($scope, $rootScope, stepService, $stateParams, $location, $state, $timeout) {
+    var wizardController = /*@ngInject*/ function wizardController($scope, $rootScope, stepService, $stateParams, $location, $state, $timeout, $http) {
 
         //Indicates if we should show the controls for accepting a new area (used on all other steps than the first)
         $scope.showSelectionControls = false;
@@ -23,9 +23,10 @@ define([
 
         //Default settings for angular-schema-forms
         $scope.sfDefaults = {
-            formDefaults: { 
+            formDefaults: {
                 feedback: false,
-                ngModelOptions: { 
+                supressPropertyTitles: true,
+                ngModelOptions: {
                     updateOn: 'blur'
                 }
             }
@@ -82,17 +83,17 @@ define([
         };
 
         /**
-        * Toggle wether or not we should show edit field for a given field config
-        */
+         * Toggle wether or not we should show edit field for a given field config
+         */
         $scope.toggleEditExistingValue = function toggleEditExistingValue(item) {
-            
+
             var field = $scope.schema.properties[item];
             field.isEditing = !field.isEditing;
         };
 
         /**
-        * Ask if a given field is currently being edited
-        */
+         * Ask if a given field is currently being edited
+         */
         $scope.isEditing = function isEditing(field) {
             return $scope.schema.properties[field].isEditing;
         };
@@ -114,8 +115,44 @@ define([
         };
 
         $scope.save = function save() {
-            $state.go('.done', {}, { reload: true });
+
+            $http.post('endpoint').then(function(response) {
+                console.log('Ok', response)
+            }).catch(function(err) {
+
+                var fake = {
+                    valid: false,
+                    fields: {
+                        2: {
+                            msg: "Ugyldige tegn"
+                        }
+                    }
+                };
+
+                //parseResponse(fake);
+
+                console.log('err', err);
+            });
+
+            //$state.go('.done', {}, { reload: true });
         };
+
+        // function parseResponse(response) {
+
+        //     var err;
+
+        //     for (err in response.fields) {
+
+        //         var errorDetails = response.fields[err];
+        //         var fieldConfig =  $scope.schema.properties[err];
+
+        //        fieldConfig.validationMessage = errorDetails.msg;
+        //        fieldConfig.inError = true;
+
+        //        $scope.$broadcast('schemaFormRedraw');
+        //     }
+        //     console.log($scope.schema.properties["2"]);    
+        // }
 
         /**
          * Move to next step
@@ -152,8 +189,8 @@ define([
         };
 
         /**
-        * Load step data from the server
-        */
+         * Load step data from the server
+         */
         stepService.getData().then(function(response) {
 
             //The schema setup

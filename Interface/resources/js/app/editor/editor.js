@@ -21,7 +21,10 @@ define([
     'app/editor/wizard.done.controller',
 
     'app/editor/feedback/feedback.controller',
-    'app/editor/update/updateFields.controller'
+    'app/editor/update/updateFields.controller',
+
+    'app/shared/schemaformAddon/typeahead.addon',
+    'app/shared/schemaformAddon/customInput.addon'
 
 
 ], function(
@@ -47,7 +50,10 @@ define([
     wizardDoneController,
 
     feedbackController,
-    updateFieldsController
+    updateFieldsController,
+
+    sfTypeaheadAddon,
+    sfCustomInputAddon
 
 ) {
 
