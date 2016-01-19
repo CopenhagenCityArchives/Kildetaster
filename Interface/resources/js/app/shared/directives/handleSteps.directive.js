@@ -21,7 +21,8 @@ define([
             link: function(scope, element, attrs) {
 
                 //Should we try to set focus automatically?
-                var noAuto = false;                
+                var noAuto = false,
+                    time;            
                 
                 //When we have a location change
                 scope.$on('$locationChangeSuccess', function(event) {                   
@@ -40,8 +41,7 @@ define([
                 $(element).on('keydown', function(event) {                 
 
                     var firstInput = $(element).find('input:first'),
-                        lastInput = $(element).find('input:last'),
-                        time;
+                        lastInput = $(element).find('input:last');
 
                     //Tab
                     if (event.keyCode === 9) {
@@ -89,7 +89,11 @@ define([
                 //Cleanup
                 scope.$on('$destroy', function() {
                     $(element).off('keydown');
-                    time.cancel();
+                    
+                    if (time && typeof(time.cancel) === 'function') {
+                        time.cancel();
+                    }
+                    
                 });
 
             }
