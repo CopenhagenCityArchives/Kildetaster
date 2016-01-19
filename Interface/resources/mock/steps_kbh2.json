@@ -1,136 +1,127 @@
 {
-  "id": "1",
-  "name": "Indtastning af begravelsesprotokoller",
-  "description": "Dette er Stadsarkivets første indtastningsprojekt",
-  "collection_id": "1",
-  "schema": {
-    "title": "Indtastning af begravelsesprotokoller",
-    "type": "object",
-    "properties": {
-      "6": {
-        "parent_id": null,
-        "entity_id": "1",
-        "entity_field_id": "6",
-        "title": "Alder",
-        "type": "integer",
-        "pattern": "/\\d{1,}/",
-        "description": null,
-        "validationMessage": "Skal udfyldes",
-        "default": null
-      },
-      "3": {
-        "parent_id": null,
-        "entity_id": "1",
-        "entity_field_id": "3",
-        "title": "Fødested",
-        "type": "string",
-        "format": "typeahead",
-        "pattern": "",
-        "description": "Vælg et fødested på listen",
-        "validationMessage": "Fødested udfyldes",
-        "default": null
-      },
-      "2": {
-        "parent_id": null,
-        "entity_id": "1",
-        "entity_field_id": "2",
-        "title": "Efternavn",
-        "type": "string",
-        "pattern": "",
-        "description": "Indtast alle andre navne end fornavnet",
-        "validationMessage": "Efternavn skal udfyldes",
-        "default": null
-      },
-      "1": {
-        "parent_id": null,
-        "entity_id": "1",
-        "entity_field_id": "1",
-        "title": "Fornavn",
-        "type": "string",
-        "pattern": "",
-        "description": "Indtast personens første navn her",
-        "validationMessage": "Fornavnet skal udfyldes",
-        "default": null
-      },
-      "Ægtefæller": {
-        "title": "Ægtefæller",
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "5": {
-              "parent_id": "1",
-              "entity_id": "2",
-              "entity_field_id": "5",
-              "title": "5",
-              "type": "object",
-              "pattern": "",
-              "description": "Indtast alle andre navne end fornavnet",
-              "validationMessage": "Efternavn skal udfyldes",
-              "default": null
+    "id": "1",
+    "name": "Indtastning af begravelsesprotokoller",
+    "description": "Dette er Stadsarkivets første indtastningsprojekt",
+    "collection_id": "1",
+    "schema": {
+        "title": "Indtastning af begravelsesprotokoller",
+        "type": "object",
+        "properties": {
+            "age": {
+                "title": "Alder",
+                "type": "integer",
+                "pattern": "/\\d{1,}/",
+                "description": null,
+                "validationMessage": "Skal udfyldes"
             },
-            "4": {
-              "parent_id": "1",
-              "entity_id": "2",
-              "entity_field_id": "4",
-              "title": "4",
-              "type": "object",
-              "pattern": "",
-              "description": "Indtast personens første navn her",
-              "validationMessage": "Fornavnet skal udfyldes",
-              "default": null
+            "birthplace": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "name": {
+                        "title": "Fødested",
+                        "type": "string",
+                        "format": "typeahead",
+                        "pattern": "",
+                        "description": "Vælg et fødested på listen",
+                        "validationMessage": "Fødested udfyldes"
+                    }
+                }
+            },
+            "lastname": {
+                "title": "Efternavn",
+                "type": "string",
+                "pattern": "",
+                "description": "Indtast alle andre navne end fornavnet",
+                "validationMessage": "Efternavn skal udfyldes"
+            },
+            "firstname": {
+                "title": "Fornavn",
+                "type": "string",
+                "pattern": "",
+                "description": "Indtast personens første navn her",
+                "validationMessage": "Fornavnet skal udfyldes"
+            },
+            "spouses": {
+                "title": "Ægtefæller",
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "title": "Ægtefælle",
+                    "properties": {
+                        "5": {
+                            "title": "Efternavn",
+                            "type": "string",
+                            "description": "Indtast alle andre navne end fornavnet",
+                            "validationMessage": "Efternavn skal udfyldes"
+                        },
+                        "4": {
+                            "title": "Fornavn",
+                            "type": "string",
+                            "description": "Indtast personens første navn her",
+                            "validationMessage": "Fornavnet skal udfyldes"
+                        }
+                    },
+                    "required": [
+                        "5",
+                        "4"
+                    ]
+                }
+
+            },
+            "obbupations": {
+                "title": "Stillinger",
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "7": {
+                            "title": "7",
+                            "type": "object",
+                            "pattern": "",
+                            "description": null,
+                            "validationMessage": ""
+                        }
+                    },
+                    "required": ["7"]
+                }
+
             }
-          }
         },
         "required": [
-          "5",
-          "4"
+            "age",
+            "birthplace.name",
+            "firstname",
+            "lastname",
+            "spouses",
+            "ocupations"
         ]
-      },
-      "Stillinger": {
-        "title": "Stillinger",
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "7": {
-              "parent_id": "1",
-              "entity_id": "3",
-              "entity_field_id": "7",
-              "title": "7",
-              "type": "object",
-              "pattern": "",
-              "description": null,
-              "validationMessage": "",
-              "default": null
-            }
-          }
-        },
-        "required": []
-      }
-    }
-  },
-  "steps": [{
-
-      "id": "1",
-      "name": "teststep",
-      "description": "første step. Ever.",
-      "fields": [
-        "1",
-        "2",
-        "6",
-        "3"
-      ]
     },
-    {
-      "id": "2",
-      "name": "test2",
-      "description": "andet",
-      "fields": [
-        "1.2",
-        "1.3",
-        "1.6"
-      ]
-    }
-  ]
+    "steps": [{
+
+        "id": "1",
+        "name": "teststep",
+        "description": "første step. Ever.",
+        "fields": [
+            "firstname",
+            "lastname",
+            "age"
+        ]
+    }, {
+        "id": "2",
+        "name": "test2",
+        "description": "andet",
+        "fields": [
+            "birthplace.name"
+        ]
+    }, {
+        "id": "3",
+        "name": "Ægtefæller",
+        "description": "andet",
+        "fields": [
+            "spouses"
+        ]
+    }]
 }

@@ -21,14 +21,50 @@ define([
 
         $scope.toggleUnreadable = function toggleUnreadable(formElement) {
             formElement.unreadable = !formElement.unreadable;
+            //formElement.required = false;
+            
+            console.log(formElement);
         };
 
         $scope.init = function init() {
-
             //Nothing yet
-
         };
 
+    });
+
+
+    schemaForm.directive('handleUnreadable', /*@ngInject*/ function($parse) {
+
+        return {
+
+            require: 'ngModel',
+            restrict: 'A',
+            scope: {
+                ngModel: '='
+            },
+            
+            link: function (scope, element, attrs, modelCtrl) {
+                
+                // modelCtrl.$viewChangeListeners.push(function(){ 
+
+                //     console.log(attrs.ngModel);
+                //     /*Set model value differently based on the viewvalue entered*/
+                //     var a = $parse(attrs.ngModel).assign(scope, { value : 'hans', unreadable: true }); 
+                //     modelCtrl.$setViewValue('hans');
+                //     //&modelCtrl.$render();
+                // });
+
+                scope.$watch(
+                    function () { return element.attr('unreadable'); },
+                    function(newVal) {
+                    
+                        if (newVal) {
+                            scope.ngModel = -1;
+                        }
+                    });
+            }
+
+        };
     });
     
     schemaForm.config( /*@ngInject*/ function(schemaFormProvider, schemaFormDecoratorsProvider, sfPathProvider) {

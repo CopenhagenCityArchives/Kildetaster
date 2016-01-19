@@ -26,6 +26,7 @@ define([
             formDefaults: {
                 feedback: false,
                 supressPropertyTitles: true,
+                disableSuccessState: true,
                 ngModelOptions: {
                     updateOn: 'blur'
                 }
@@ -116,48 +117,33 @@ define([
 
         $scope.save = function save() {
 
-            $http.post('endpoint').then(function(response) {
-                console.log('Ok', response)
-            }).catch(function(err) {
+            //console.log(arguments);
 
-                var fake = {
-                    valid: false,
-                    fields: {
-                        2: {
-                            msg: "Ugyldige tegn"
-                        }
-                    }
-                };
+            return false;
 
-                //parseResponse(fake);
+            var server = 'http://localhost';
 
-                console.log('err', err);
-            });
+            /*
+            id på næste post
+            */
 
-            //$state.go('.done', {}, { reload: true });
+            $state.go('.done', {}, { reload: true });
+
+            // $http.post(server).then(function(response) {
+            //     $state.go('.done', {}, { reload: true });
+            // }).catch(function(err) {
+            //     //TODO FLASH
+            //     console.log('err', err);
+            // });
+
         };
-
-        // function parseResponse(response) {
-
-        //     var err;
-
-        //     for (err in response.fields) {
-
-        //         var errorDetails = response.fields[err];
-        //         var fieldConfig =  $scope.schema.properties[err];
-
-        //        fieldConfig.validationMessage = errorDetails.msg;
-        //        fieldConfig.inError = true;
-
-        //        $scope.$broadcast('schemaFormRedraw');
-        //     }
-        //     console.log($scope.schema.properties["2"]);    
-        // }
 
         /**
          * Move to next step
          */
         $scope.nextStep = function nextStep() {
+            //$scope.$broadcast('schemaFormValidate');
+            //return;
             $location.search({
                 stepId: parseInt($scope.currentStep) + 1
             });
@@ -167,6 +153,7 @@ define([
          * Move to previous step
          */
         $scope.prevStep = function prevStep() {
+            
             //If we are moving from step 1, make area selectable (since that is step 1)
             if ($scope.currentStep == 2) {
                 $rootScope.$broadcast('makeSelectable');
