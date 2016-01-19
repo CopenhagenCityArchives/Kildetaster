@@ -65,6 +65,17 @@ define([
                 }
 
                 return deferred.promise;
+            },
+
+            getNextAvailablePage: function getNextAvailablePage() {
+                var deferred = $q.defer();
+
+                //TODO add correct url
+                deferred.resolve({
+                    pageId: 2
+                });
+
+                return deferred.promise;
             }
 
         };

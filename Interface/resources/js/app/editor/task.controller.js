@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var editorController = /*@ngInject*/ function editorController($scope, $state, taskData, userService, $interval, $location, $timeout) {
+    var editorController = /*@ngInject*/ function editorController($scope, $state, taskData, userService, $interval, $location, $timeout, taskService) {
 
         $scope.protocol = taskData.name;
 
@@ -13,12 +13,16 @@ define([
 
         $scope.goToNextAvailablePage = function goToNextAvailablePage() {
             
-            //TODO: Investigate why this timeout is nessesary to reset stepId ?
-            $timeout(function() {
-                $location.search({ stepId: 1});
-            }, 0);
+            taskService.getNextAvailablePage().then(function(response) {
 
-            $state.go('.', { pageId: taskData.nextAvailablePageId});            
+                //TODO: Investigate why this timeout is nessesary to reset stepId ?
+                $timeout(function() {
+                    $location.search({ stepId: 1});
+                }, 0);
+
+                $state.go('.', { pageId: response.pageId});     
+            });
+                   
         };
 
 
