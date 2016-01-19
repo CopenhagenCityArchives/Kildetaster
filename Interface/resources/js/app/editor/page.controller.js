@@ -2,13 +2,14 @@ define([
 
 ], function() {
 
-    var editorController = /*@ngInject*/ function editorController($scope, $state, pageData, $location, $timeout, $rootScope) {       
+    var editorController = /*@ngInject*/ function editorController($scope, $state, taskData, pageData, $location, $timeout, $rootScope) {       
 
         $scope.nextPageId = pageData.nextPageId;
         $scope.prevPageId = pageData.prevPageId;
 
         $scope.pageNumber = pageData.pageNumber;
-        $scope.pageTotal = pageData.pageTotal;
+
+        $scope.pageTotal = taskData.pagesTotal;
 
         $scope.goToPageId = null;
         $scope.goToPage = function goToPage($event) {
