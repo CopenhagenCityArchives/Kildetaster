@@ -25,14 +25,15 @@ define([
                     time;            
                 
                 //When we have a location change
-                scope.$on('$locationChangeSuccess', function(event) {                   
+                scope.$on('$locationChangeSuccess', function(event) {   
 
                     //And we are allowed to automatically set focus
                     if (!noAuto) {
 
                         $timeout(function() {
-                            var firstInput = $(element).find('input:first');
+                            var firstInput = $(element).find('bootstrap-decorator:first input:first');
                             firstInput.focus();
+
                         }, 0);
                     }
 
@@ -40,8 +41,8 @@ define([
 
                 $(element).on('keydown', function(event) {                 
 
-                    var firstInput = $(element).find('input:first'),
-                        lastInput = $(element).find('input:last');
+                    var firstInput = $(element).find('bootstrap-decorator:first input:first'),
+                        lastInput = $(element).find('bootstrap-decorator:last input:last');
 
                     //Tab
                     if (event.keyCode === 9) {
@@ -56,7 +57,7 @@ define([
                             //Need a timeout to let the routing system change view
                             time = $timeout(function() {
                                 //Set focus on the last input field
-                                $(element).find('input:last').focus();
+                                $(element).find('bootstrap-decorator:last input:last').focus();
                                 noAuto = false;
                             }, 0);
 
@@ -77,7 +78,7 @@ define([
 
                             time = $timeout(function() {
                                 //Set focus on the first input field
-                                $(element).find('input:first').focus();
+                                $(element).find('bootstrap-decorator:first input:first').focus();
                                 noAuto = false;
                             }, 0);
                         }
