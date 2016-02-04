@@ -12,7 +12,20 @@ define([
         */
         function getProjectData() {
 
-            return $http.get(JSONURL + 'page.json').then(function(response) {
+            var useReal = false;
+
+            var endPoint = 'http://kbhkilder.dk/1508/stable/api/units';
+            
+            endPoint = useReal ? endPoint : JSONURL + 'page.json';
+ 
+            return $http({
+                method: 'GET',
+                url: endPoint,
+                params: {
+                    collection_id: 1,
+                    task_id: 1
+                }
+            }).then(function(response) {
                 cache.put('all', response.data);
                 return response.data;
             });

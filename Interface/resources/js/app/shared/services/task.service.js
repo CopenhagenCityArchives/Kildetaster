@@ -11,8 +11,19 @@ define([
          * Load all available task details, store in cache for quick retrieval
          */
         function getTaskData() {
+            
+            var useReal = false;
 
-            return $http.get(JSONURL + 'tasks.json').then(function(response) {
+            var endPoint = useReal ? 'http://kbhkilder.dk/1508/stable/api/tasks': JSONURL + 'tasks.json';
+
+            return $http({
+                method: 'GET',
+                url: endPoint,
+                params: {
+
+                }
+            }).then(function(response) {
+
                 cache.put('all', response.data);
                 return response.data;
             });
@@ -36,9 +47,10 @@ define([
                     getTaskData().then(function(response) {
 
                         found = $filter('filter')(response, function(project) {
-                            return project.id === id;
+                            return project.id == id;
                         });
                         deferred.resolve(found[0]);
+
                     });
                 } else {
                     found = $filter('filter')(cache.get('all'), function(project) {
@@ -56,7 +68,6 @@ define([
                 var deferred = $q.defer();
 
                 if (angular.isUndefined(cache.get('all'))) {
-
                     getTaskData().then(function(response) {
                         deferred.resolve(response);
                     });

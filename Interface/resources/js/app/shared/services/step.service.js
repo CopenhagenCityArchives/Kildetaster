@@ -5,6 +5,8 @@ define([
 
     var stepService = /*@ngInject*/ function stepService(Flash, $timeout, $q, $http, JSONURL, $filter) {
 
+        var useReal = false;
+
         return {
 
             getData: function getData() {
@@ -16,14 +18,19 @@ define([
                 var resultStep = {
                     "title": "Udfyldt"
                 };
+
+                var jsonSource = useReal ? 'http://kbhkilder.dk/1508/stable/api/taskschema/1' : JSONURL + '/steps_kbh2.json';
                 
-                return $http.get(JSONURL + '/steps_kbh2.json')
+                return $http.get(jsonSource)
+
                     .then(function(response) {
 
                         response.data.steps.unshift(firstStep);
                         response.data.steps.push(resultStep);
+
                         return response.data;
                     })
+
                     .catch(function(err) {
                         Flash.create('danger', 'stepService:getData: Could not get step data');
                         return [];
