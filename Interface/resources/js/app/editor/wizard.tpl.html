@@ -8,8 +8,6 @@
             <h2>{{currentStepData.title}}</h2>
             <p>{{currentStepData.description}}</p>
             
-            <step-of total="numSteps" current="currentStep"></step-of>
-            
             <p>Vælg området for den person, du vil indtaste. Brug musen til at flytte området eller ændre dets størrelse, så alle informationer er inden for det markerede.</p>
             <p class="text-center" ng-click="enableSelection()">
                 <br>
@@ -31,8 +29,6 @@
         <div class="col-sm-12">
             <h2>{{currentStepData.title}}</h2>
             <p>{{currentStepData.description}}</p>
-            
-            <step-of total="numSteps" current="currentStep"></step-of>
             
             <form sf-schema="schema" sf-form="currentStepData.fields" sf-model="values" sf-options="sfDefaults"></form>
        
@@ -78,11 +74,12 @@
                 <li class="field-list__item">
 
                     <span ng-if="schema.properties[key].type !== 'array'">
-
                         <a tabindex="1" href ng-click="toggleEditExistingValue(key)">
-                            
-                            <span ng-if="schema.properties[key].type !== 'array'">
-                                {{schema.properties[key].title}}: {{value}} <span class="icon glyphicon glyphicon-pencil"></span>                        
+                            <span class="summary-item" ng-if="schema.properties[key].type !== 'array'">
+                                <span class="summary-item__label">{{schema.properties[key].title}}</span>
+                                <span class="summary-item__field">{{value}}
+                                    <span class="icon glyphicon glyphicon-pencil"></span>                        
+                                 </span>
                             </span>
                         </a>
                         
@@ -101,15 +98,13 @@
                     </span>
 
                     <span ng-if="schema.properties[key].type == 'array'">
-                        <a tabindex="1" href ng-click="toggleEditExistingValue(key)">
-                            {{schema.properties[key].title}} <span class="icon glyphicon glyphicon-pencil"></span> 
-                        </a>
+                    
+                        <span class="summary-item__label">{{schema.properties[key].title}}</span>
+                        
                         <ul>
                             <!-- Filter out null values, ie. items that were added, but never filled out -->
                             <li ng-repeat="val in values[key] | filter: '!!'">
-                                <span ng-repeat="subVal in val">
-                                    {{subVal}}
-                                </span>
+                                <a href ng-click="toggleEditExistingValue(key)">{{val}} <span class="icon glyphicon glyphicon-pencil"></span> </a>
                             </li>
                         </ul>
                         <div class="row" ng-if="isEditing(key)">
