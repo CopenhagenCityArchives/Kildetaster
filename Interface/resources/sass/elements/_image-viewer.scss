@@ -66,23 +66,23 @@
 }
 
 .border-0 {
-    border-top: 2px dotted $white !important;
+    border-top: 2px dotted $black !important;
     &-handle {
         top: -1px !important;
     }
 }
 
 .border-1 {
-    border-right: 2px dotted $white !important;
+    border-right: 2px dotted $black !important;
     &-handle {
         left: 1px !important;
     }
 }
 .border-2 {
-    border-bottom: 2px dotted $white !important;
+    border-bottom: 2px dotted $black !important;
 }
 .border-3 {
-    border-left: 2px dotted $white !important;
+    border-left: 2px dotted $black !important;
     &-handle {
         left: 0 !important;
     }
