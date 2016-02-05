@@ -36,8 +36,11 @@
 @import "../bower_components/angular-flash-alert/dist/angular-flash";
 
 .alert {
-    margin-right: -$gutter;
-    margin-left: -$gutter;
+    position: absolute;
+    z-index: 2000;
+
+    width: 100%;
+    margin-left: -15px;
 
     border-radius: 0;
 }

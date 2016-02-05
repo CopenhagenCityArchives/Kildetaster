@@ -13,7 +13,8 @@ define([
 
             scope: {
                 current: '=',
-                total: '='
+                total: '=',
+                goToStep: '='
             },
 
             templateUrl: 'shared/directives/stepIndicator.directive.tpl.html',

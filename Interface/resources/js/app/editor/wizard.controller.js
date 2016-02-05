@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var wizardController = /*@ngInject*/ function wizardController($scope, $rootScope, stepService, $stateParams, $location, $state, $timeout, $http) {
+    var wizardController = /*@ngInject*/ function wizardController($scope, $rootScope, stepService, $stateParams, $location, $state, $timeout, $http, Flash) {
 
         //Indicates if we should show the controls for accepting a new area (used on all other steps than the first)
         $scope.showSelectionControls = false;
@@ -55,6 +55,11 @@ define([
             //Make sure we treat currentStep value as an integer
             $scope.currentStep = parseInt($location.search().stepId);
             $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
+
+            //If we are showing step 1, enable area selection
+            if ($scope.currentStep === 1) {
+                $scope.makeSelectable();
+            }
 
             //TODO: Remove this!
             //Hack to force focus on button and no links in header
@@ -149,6 +154,10 @@ define([
             });
         };
 
+        $scope.makeSelectable = function makeSelectable() {
+            $rootScope.$broadcast('makeSelectable');
+        };
+
         /**
          * Move to previous step
          */
@@ -156,12 +165,24 @@ define([
             
             //If we are moving from step 1, make area selectable (since that is step 1)
             if ($scope.currentStep == 2) {
-                $rootScope.$broadcast('makeSelectable');
+                $scope.makeSelectable();
             }
             //Update the search variable
             $location.search({
                 stepId: parseInt($scope.currentStep) - 1
             });
+        };
+
+        $scope.goToStep = function goToStep(stepId) {
+
+            if ($scope.currentStep === 1) {
+                Flash.create('warning', 'Du skal vælge et område før du kan gå videre');
+            }
+            else {
+                $state.go('.', { stepId: stepId });
+            }
+            
+
         };
 
 
