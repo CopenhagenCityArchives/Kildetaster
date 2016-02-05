@@ -51,13 +51,13 @@
                     "type": "object",
                     "title": "Ægtefælle",
                     "properties": {
-                        "5": {
+                        "lastName": {
                             "title": "Efternavn",
                             "type": "string",
                             "description": "Indtast alle andre navne end fornavnet",
                             "validationMessage": "Efternavn skal udfyldes"
                         },
-                        "4": {
+                        "firstName": {
                             "title": "Fornavn",
                             "type": "string",
                             "description": "Indtast personens første navn her",
@@ -65,29 +65,23 @@
                         }
                     },
                     "required": [
-                        "5",
-                        "4"
+                        "firstName",
+                        "lastName"
                     ]
                 }
 
             },
-            "obbupations": {
+            "occupations": {
                 "title": "Stillinger",
                 "type": "array",
                 "items": {
-                    "type": "object",
-                    "properties": {
-                        "7": {
-                            "title": "7",
-                            "type": "object",
-                            "pattern": "",
-                            "description": null,
-                            "validationMessage": ""
-                        }
-                    },
-                    "required": ["7"]
-                }
-
+                    "type": "string",
+                    "title": "Stilling",
+                    "pattern": "",
+                    "description": null,
+                    "validationMessage": ""
+                },
+                "required": ["occupation"]
             }
         },
         "required": [
@@ -102,24 +96,25 @@
     "steps": [{
 
         "id": "1",
-        "name": "teststep",
-        "description": "første step. Ever.",
+        "title": "Personens navn",
+        "description": "Beskrivelse af første step",
         "fields": [
             "firstname",
             "lastname",
-            "age"
+            "age",
+            "occupations"
         ]
     }, {
         "id": "2",
-        "name": "test2",
-        "description": "andet",
+        "title": "Personens fødested",
+        "description": "Beskrivelse af andet step",
         "fields": [
             "birthplace.name"
         ]
     }, {
         "id": "3",
-        "name": "Ægtefæller",
-        "description": "andet",
+        "title": "Ægtefæller",
+        "description": "Alle ægtefæller",
         "fields": [
             "spouses"
         ]

@@ -19,8 +19,8 @@ define([
         "USER_OTHERSONSAMETASK": "Andre brugere i denne protokol lige nu",
         "PAGESLEFTONTASK": "sider tilbage af protokol",
         "FIELD_UNREADABLE": "Marker feltet som ulæseligt / Kan ikke udfyldes",
-        "ZOOMIN": "Zoom ind",
-        "ZOOMOUT": "Zoom ud"
+        "ZOOMIN": "+",
+        "ZOOMOUT": "-"
     };
 
 });

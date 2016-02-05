@@ -1,11 +1,36 @@
-header {
+.header {
     position: relative;
     z-index: 1;
 
-    padding-top: $gutter / 2;
-    padding-bottom: $gutter / 2;
+    height: 80px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 70px;
 
     border-bottom: 1px solid $gray;
-    background-color: lighten($black, 20%);
-    box-shadow: 0 0 20px #000000;
+    background-color: $white;
+
+    &__logo {
+        position: absolute;
+        top: 4px;
+        left: -45px;
+
+        display: inline-block;
+    }
+
+    &__item {
+        height: 60px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        border-right: 1px solid $gray;
+
+        &:last-child {
+            border-right: 0;
+        }
+    }
+
+    &__userlist {
+        border-left: 1px solid $gray;
+    }
 }

@@ -9,6 +9,7 @@ define([
         return {
 
             restrict: 'E',
+            replace: true,
 
             scope: {
                 current: '=',

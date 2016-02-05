@@ -42,8 +42,8 @@ define([
                         templateUrl: 'editor/page.tpl.html',
                         controller: 'pageController'
                     },
-                    'pageDetails': {
-                        templateUrl: 'editor/page.details.tpl.html',
+                    'pageFooter': {
+                        templateUrl: 'editor/page.footer.tpl.html',
                         controller: 'pageController'
                     }
                 },

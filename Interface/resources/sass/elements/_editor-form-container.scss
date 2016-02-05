@@ -1,19 +1,24 @@
 .editor-form-container {
     position: absolute;
     z-index: 100;
-    top: $gutter;
-    right: $gutter;
-    bottom: 40px;
-
-    overflow-x: hidden;
-    overflow-y: scroll;
+    top: 0;
+    right: -15px;
+    bottom: 0;
 
     width: 20%;
-    min-width: 300px;
-    padding: 6px 10px;
+    min-width: $editorFormWidth;
+    padding-left: 80px;
 
-    border: 1px solid darken($white, 10%);
-    background-color: $white;
+    border-left: 1px solid $gray;
+    background-color: $light-gray;
+
+    > section {
+        overflow-x: hidden;
+        overflow-y: scroll;
+
+        height: 100%;
+        padding: $gutter;
+    }
 
     .row {
         margin-bottom: 10px;

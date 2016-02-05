@@ -1,3 +1,5 @@
+<step-indicator total="numSteps" current="currentStep"></step-indicator>
+
 <section handle-steps prev="prevStep" next="nextStep">
 
     <div class="row" ng-if="currentStep == 1">
@@ -35,21 +37,20 @@
             <form sf-schema="schema" sf-form="currentStepData.fields" sf-model="values" sf-options="sfDefaults"></form>
        
         </div>
-        
-        <div class="col-sm-6">
-            <button tabindex="1" type="button" class="btn btn-default btn-block" ng-show="currentStep > 1" ng-click="prevStep()">{{TEXT.BUTTON.PREV}}</button>
-        </div>
-        
-        <div class="col-sm-6">
-            <button tabindex="1" type="button" class="btn btn-primary btn-block" ng-click="nextStep()">{{TEXT.BUTTON.NEXT}}</button>
-        </div>
-
     </div>
-
-    <div class="row" ng-if="!isResult()">
+    <div class="row" ng-show="currentStep > 1 && !isResult()">
+        
         <div class="col-sm-12">
-            <step-indicator total="numSteps" current="currentStep"></step-indicator>
+            <div class="btn-group btn-group-justified" role="group" aria-label="Navigation">
+                <div class="btn-group">
+                    <button tabindex="1" type="button" class="btn btn-default" ng-click="prevStep()">{{TEXT.BUTTON.PREV}}</button>
+                </div>
+                <div class="btn-group">
+                    <button tabindex="1" type="button" class="btn btn-primary" ng-click="nextStep()">{{TEXT.BUTTON.NEXT}}</button>
+                </div>
+            </div>
         </div>
+        
     </div>
 
     <div class="row" ng-if="currentStep > 1">
@@ -157,18 +158,12 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-sm-6">
+        <div class="btn-group btn-group-justified" role="group" aria-label="Navigation">
+            <div class="btn-group">
                 <button tabindex="1" type="button" class="btn btn-default btn-block" ng-click="prevStep()">{{TEXT.BUTTON.PREV}}</button>
             </div>
-            <div class="col-sm-6">
+            <div class="btn-group">
                 <button tabindex="1" type="button" class="btn btn-primary btn-block" ng-click="save()">{{TEXT.BUTTON.SAVEPOST}}</button>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12">
-                <step-indicator total="numSteps" current="currentStep"></step-indicator>
             </div>
         </div>
 

@@ -1,10 +1,13 @@
 <div flash-message="5000" ></div> 
 
-<section class="editor">
+<section class="row editor">
 
-    <div id="tools" class="editor__tools">
-        <a id="zoom-in" href>{{TEXT.ZOOMIN}}</a> | <a id="zoom-out" href>{{TEXT.ZOOMOUT}}</a> <!-- | <a id="toggle-selection" href>Toggle selection mode</a> -->
-    </div>
+    <ul id="tools" class="list-unstyled editor__tools">
+        <li><a id="zoom-in" href>{{TEXT.ZOOMIN}}</a></li>
+        <li><a id="zoom-out" href>{{TEXT.ZOOMOUT}}</a></li>
+
+        <!-- <a id="toggle-selection" href>Toggle selection mode</a> -->
+    </ul>
 
     <section class="editor-form-container" ui-view></section>
 

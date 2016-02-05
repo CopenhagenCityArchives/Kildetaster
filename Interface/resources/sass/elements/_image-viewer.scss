@@ -4,8 +4,7 @@
 
         overflow: hidden;
 
-        opacity: 0.5;
-        background-color: $green;
+        background-color: rgba( $green-overlay, 0.15 );
 
         &:before {
             font-size: 20px;
@@ -16,8 +15,8 @@
 
             display: block;
 
-            content: "Udfyldt";
-            transform: translateX(-50%) translateY(-50%) rotate(-45deg);
+            content: "\2713";
+            transform: translateX(-50%) translateY(-50%);
 
             color: $white;
         }
@@ -29,12 +28,24 @@
         opacity: 0.5;
         border: 2px solid $gray;
         //Add dropshadow to the marked area, with a shade so big it
-        box-shadow: 0 0 100px 2000px #000000;
+        box-shadow: 0 0 100px 2000px $black;
     }
 }
 
 // Hack to force handles to be bigger and easier to drag, should be updated in the openseadragon lib and not with !important styling
-.border-0-handle, .border-1-handle, .border-2-handle, .border-3-handle, .corner-0-handle, .corner-1-handle, .corner-2-handle, .corner-3-handle {
+.corner-0-handle, .corner-1-handle, .corner-2-handle, .corner-3-handle {
+    @include border-radius(50%);
+
+    width: 12px !important;
+    height: 12px !important;
+
+    border: 4px solid $black !important;
+    background-color: $white !important;
+}
+
+.border-0-handle, .border-1-handle, .border-2-handle, .border-3-handle {
+    @include border-radius(50%);
+
     width: 10px !important;
     height: 10px !important;
 }

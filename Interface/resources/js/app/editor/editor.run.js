@@ -20,10 +20,9 @@ define([
          * If state change, show page not found error
          */
         $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error) {
-            console.log(toState);
+            console.log("State change error", toState);
             //console.log('editor.run:', error);
             
-
             //$state.go('editor.page.notfound');
 
         });
@@ -34,4 +33,5 @@ define([
     };
 
     return editorRun;
+
 });

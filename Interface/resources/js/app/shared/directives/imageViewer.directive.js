@@ -56,10 +56,8 @@ define([
 
                     element: angular.element('.target')[0],
 
-                    showNavigator: true,
-                    navigatorPosition: "BOTTOM_LEFT",
-                    navigatorWidth: 160,
-                    navigatorHeight: 160,
+                    showNavigator:  true,
+                    navigatorId: 'editor__navigator',
 
                     zoomInButton: "zoom-in",
                     zoomOutButton: "zoom-out",

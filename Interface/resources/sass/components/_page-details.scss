@@ -1,0 +1,22 @@
+.page-details {
+    position: absolute;
+    top: 0;
+    right: $gutter;
+
+    width: 200px;
+
+    input {
+        display: inline-block;
+
+        width: 42px;
+        height: 25px;
+    }
+
+    > div {
+        display: inline;
+
+        + div {
+            margin-left: $gutter;
+        }
+    }
+}

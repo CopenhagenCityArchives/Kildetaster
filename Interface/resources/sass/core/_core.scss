@@ -1,3 +1,7 @@
+body {
+    overflow: hidden;
+}
+
 h1 {
     font-size: 30px;
 
@@ -24,4 +28,8 @@ ul.list-unstyled + ul.list-unstyled {
 legend {
     font-size: $font-size-base;
     line-height: $font-size-base * 2;
+}
+
+.form-control:focus {
+    box-shadow: none;
 }

@@ -37,7 +37,22 @@ define([
              *
              * @return {promise} That resolves with the data for the task
              */
-            getTask: function getProject(id) {
+            getTask: function getTask(id) {
+
+                var deferred = $q.defer(),
+                    url = 'http://kbhkilder.dk/1508/stable/api/tasks/';
+
+                $http.get(url + id).then(function(response) {
+                    deferred.resolve(response.data);
+                });
+
+                return deferred.promise;
+            },           
+
+            /**
+             * Mock response
+             */
+            qgetTask: function getTask(id) {
 
                 var deferred = $q.defer(),
                     found;
@@ -49,6 +64,7 @@ define([
                         found = $filter('filter')(response, function(project) {
                             return project.id == id;
                         });
+                        console.log(found[0]);
                         deferred.resolve(found[0]);
 
                     });

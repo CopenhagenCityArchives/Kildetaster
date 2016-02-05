@@ -1,8 +1,27 @@
-$green: green;
+
 $white: #ffffff;
 $yellow: lighten(yellow, 30%);
 $black: #000000;
 $blue: lighten(#428bca, 30%);
+$red: #e26868;
+$dark-blue: #6697b4;
+
+
+//Tooltips    
+$light-gray: #e8eae9;
+$gray: #dfdfdf;
+$dark-gray: #c3c3c3;
+$darker-gray: #535353;
+
+//body background, set in Bootstrap specifically
+$lighter-gray: #f1f1f1;
+$gray-text: #616161;
+
+//Overlays
+$green-overlay: rgb(58, 226, 107);
+$green: #82d8b0;
+$blue-border: #2094e0;
 
 //Default padding
 $gutter: 20px;
+$editorFormWidth: 420px;

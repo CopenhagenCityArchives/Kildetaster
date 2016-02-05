@@ -1,12 +1,57 @@
 .editor {
     position: relative;
 
-    height: calc(100vh - 130px);
+    height: calc(100vh - 135px);
 
     &__tools {
         position: absolute;
         z-index: 500;
-        right: $gutter / 2;
-        bottom: $gutter / 2;
+        top: $gutter * 2;
+        left: $gutter / 2;
+
+        li {
+            margin-bottom: $gutter / 2;
+        }
+
+        a {
+            @include border-radius(50%);
+
+            font-size: 26px;
+            line-height: 40px;
+
+            display: block;
+
+            width: 43px;
+            height: 43px;
+
+            text-align: center;
+
+            color: $gray;
+            background-color: $white;
+
+            &:hover {
+                text-decoration: none;
+
+                color: $black;
+            }
+        }
     }
+
+    #editor__navigator {
+        position: absolute;
+        top: -120px;
+        left: 20px;
+
+        width: 100px;
+        height: 100px;
+        padding-top: 2px !important;
+        padding-bottom: 2px !important;
+
+        background-color: $white;
+    }
+}
+
+.editor-container {
+    width: calc(100% - #{$editorFormWidth});
+    height: 100%;
 }

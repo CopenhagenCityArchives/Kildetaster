@@ -1,0 +1,37 @@
+.progressbar {
+    font-size: 11px;
+
+    position: relative;
+
+    width: 100%;
+
+
+
+    &__indicator {
+        @include border-radius(7px);
+
+        display: block;
+        overflow: hidden;
+
+        height: 7px;
+        margin-right: 30px;
+
+        background-color: $gray;
+
+        > span {
+            display: block;
+
+            height: 100%;
+
+            background-color: $green;
+        }
+    }
+
+    &__text {
+        font-size: inherit;
+
+        position: absolute;
+        top: -5px;
+        right: 0;
+    }
+}
