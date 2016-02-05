@@ -71,6 +71,31 @@
                 }
 
             },
+            "addresses": {
+                "title": "Adresser",
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "title": "Adresse",
+                    "properties": {
+                        "street": {
+                            "title": "Gade",
+                            "type": "string",
+                            "description": "Indtast gadenavnet",
+                            "validationMessage": "Gaden skal udfyldes"
+                        },
+                        "number": {
+                            "title": "Nummer",
+                            "type": "integer",
+                            "description": "Indtast gadenummer"
+                        }
+                    },
+                    "required": [
+                        "street"
+                    ]
+                }
+
+            },
             "occupations": {
                 "title": "Stillinger",
                 "type": "array",
@@ -109,7 +134,8 @@
         "title": "Personens fødested",
         "description": "Beskrivelse af andet step",
         "fields": [
-            "birthplace.name"
+            "birthplace.name",
+            "addresses"
         ]
     }, {
         "id": "3",
