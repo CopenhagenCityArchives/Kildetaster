@@ -37,6 +37,9 @@
         }
     }
 
+    /**
+    * The navigatoroverview box, custom styled
+    */
     #editor__navigator {
         position: absolute;
         top: -120px;
@@ -52,6 +55,7 @@
 }
 
 .editor-container {
-    width: calc(100% - #{$editorFormWidth});
+    //Width of the editor minus the default row adjustment in Bootstrap
+    width: calc(100% - #{$editorFormWidth - 15});
     height: 100%;
 }
