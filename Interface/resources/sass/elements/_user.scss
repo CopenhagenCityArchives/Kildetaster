@@ -1,5 +1,16 @@
 .user {
+    color: $text-color;
+    &__role {
+        font-size: 12px;
 
-    
+        display: block;
 
+        color: $gray-text;
+    }
+
+    &:hover {
+        text-decoration: none;
+
+        color: $text-color;
+    }
 }
