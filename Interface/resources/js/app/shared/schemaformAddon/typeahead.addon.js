@@ -33,6 +33,28 @@ define([
 
         };
 
+        $scope.blur = function blur(model) {
+
+            model.$parsers.push(function(val) {
+                console.log('hit', arguments);
+
+                return { 
+                    id: undefined, 
+                    name: val
+                };
+            });
+
+            // model.$modelValue = {
+            //     name: "hans"
+            // };
+            // console.log("I am blurred", model.$modelValue);
+            // model.$render();
+        };
+
+        $scope.onSelect = function onSelect($item, $model, $label, $event) {
+            console.log('argu', arguments);
+        };
+
         $scope.getData = function getData() {
 
             var deferred = $q.defer();
@@ -51,7 +73,7 @@ define([
     schemaForm.config( /*@ngInject*/ function(schemaFormProvider, schemaFormDecoratorsProvider, sfPathProvider) {
 
         var typeahead = function(name, schema, options) {
-            if (schema.type === 'typeahead' || (schema.type === 'string' && schema.format === 'typeahead')) {
+            if (schema.type === 'typeahead' || (schema.type === 'object' && schema.format === 'typeahead')) {
                 
                 var f = schemaFormProvider.stdFormObj(name, schema, options);
                 
@@ -64,7 +86,7 @@ define([
             }
         };
 
-        schemaFormProvider.defaults.string.unshift(typeahead);
+        schemaFormProvider.defaults.object.unshift(typeahead);
 
         //Add to the bootstrap directive
         schemaFormDecoratorsProvider.addMapping(

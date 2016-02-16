@@ -1,0 +1,81 @@
+<aside class="span3" id="sidebar1">
+    <div class="module">
+        <div data-sdk-app>
+            <h3>Facets</h3>
+        </div>
+    </div>
+</aside>
+<section class="span9" id="main">
+    <div id="breadcrumbs">
+        <div class="module">
+            <ul class="breadcrumb">
+                <li><span>Breadcrumb</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="sdk-search">
+        <div class="item-page">
+            <div class="row-fluid" ng-repeat="row in config">
+                <div class="span12">
+                    <div class="row-fluid redform-form sdk-search__config">
+                        <div class="span4">
+                            <div class="field">
+                                <label>
+                                    Felt
+                                    <select ng-model="row.field">
+                                        <option value="name">Name</option>
+                                        <option value="age">Age</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="field">
+                                <label>
+                                    Operator
+                                    <select ng-model="row.operator">
+                                        <option value="contains">Indeholder</option>
+                                        <option value="start">Starter med</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="field">
+                                <label>
+                                    Søgeterm
+                                    <input type="text" placeholder="Søgeterm" ng-model="row.term">
+                                </label>
+                            </div>
+                        </div>
+                        <a href class="sdk-search__remove" ng-if="config.length > 1">
+                            <span class="sdk-icon delete" ng-click="removeField($index)"></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <a href class="sdk-search__add" ng-click="addField()">Tilføj et felt</a>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <button type="button" class="sdk-search__button" ng-click="doSearch()" ng-disabled="searching">Søg</button>
+                </div>
+            </div>
+            <hr class="sdk-search__divider">
+            <section ng-if="results.length > 0">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="sdk-search__count">{{results.length}} resultater</div>
+                    </div>
+                </div>
+                <div ng-repeat="result in results">
+                    <search-result result="result"></search-result>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>

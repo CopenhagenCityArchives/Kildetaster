@@ -1,0 +1,10 @@
+.sdk-icon {
+    display: inline-block;
+
+    width: 23px;
+    height: 23px;
+
+    &.delete {
+        content: url("/resources/images/icon_delete.svg");
+    }
+}

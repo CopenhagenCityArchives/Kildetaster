@@ -71,6 +71,14 @@
             </ul>
 
             <ul class="list-unstyled field-list" ng-repeat="(key, value) in values">
+
+<pre>
+value: {{value}}
+key: {{key}}
+values: {{values}}
+
+{{angular.isArray(value)}}
+</pre>
                 <li class="field-list__item">
 
                     <span ng-if="schema.properties[key].type !== 'array'">

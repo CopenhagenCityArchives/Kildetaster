@@ -1,12 +1,38 @@
-<div data-sdk-app>
-    <div ng-include="'sdk/templates/mypage.tpl.html'"></div>
-</div>
+<aside class="span3" id="sidebar1">
+    <div class="module">
 
-<div data-sdk-app>
-    <div ng-include="'sdk/templates/opentasks.tpl.html'"></div>
-</div>
+        <div data-sdk-app>
+            <h3>Sidebar</h3>
+        </div>
+        
+    </div>
+</aside>
 
+<section class="span9" id="main">
+    <div id="breadcrumbs">
+        <div class="module">
+            <ul class="breadcrumb ">
+                <li><span>Breadcrumb</span></li>
+            </ul>
+        </div>
+    </div>
+                
+    <div id="content-wrap">
+        <div class="item-page">
+            
+            <div data-sdk-app>
+                <div ng-include="'sdk/templates/mypage.tpl.html'"></div>
+            </div>
 
-<div data-sdk-app>
-    <div ng-include="'sdk/templates/errors.tpl.html'"></div>
-</div>
+            <div data-sdk-app>
+                <div ng-include="'sdk/templates/opentasks.tpl.html'"></div>
+            </div>
+
+            <div data-sdk-app>
+                <div ng-include="'sdk/templates/errors.tpl.html'"></div>
+            </div>
+
+        </div>
+    </div>
+
+</section>

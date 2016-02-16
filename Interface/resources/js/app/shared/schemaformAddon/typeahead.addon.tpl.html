@@ -25,11 +25,13 @@
             class="form-control" 
             ng-model-options="ngModelOptions"
             ng-model="$$value$$"
+            ng-blur="blur(ngModel)"
             ng-disabled="form.readonly || form.unreadable"
             schema-validate="form"
-            uib-typeahead="option.name as option.name for option in options | filter:{name:$viewValue} | limitTo: 8"
+            uib-typeahead="option as option.name for option in options | filter:{name:$viewValue} | limitTo: 8"
             typeahead-focus-first="false"
             typeahead-append-to-body="true"
+            qqtypeahead-on-select="onSelect($item, $model, $label, form)"
             capitalize-first
         />
 

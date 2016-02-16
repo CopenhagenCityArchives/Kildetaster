@@ -1,3 +1,10 @@
 @import "sdk/variables";
+
+
+//components
+@import "sdk/components/search";
+
 //elements
+@import "sdk/elements/icon";
 @import "sdk/elements/task-list";
+@import "sdk/elements/searchresult";

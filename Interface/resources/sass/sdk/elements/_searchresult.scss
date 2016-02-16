@@ -1,0 +1,28 @@
+.sdk-searchresult {
+    font-size: 12px;
+
+    margin-bottom: 18px;
+    &__image {
+        padding: 10px;
+
+        text-align: center;
+
+        border: 1px solid $light-gray;
+        background-color: $lighter-gray;
+
+        img {
+            width: 82px;
+            height: 111px;
+        }
+    }
+
+    &__name {
+        font-weight: bold;
+
+        margin-top: 10px;
+    }
+
+    &__address {
+        margin-left: 10px;
+    }
+}

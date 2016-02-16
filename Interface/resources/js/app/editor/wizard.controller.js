@@ -122,7 +122,7 @@ define([
 
         $scope.save = function save() {
 
-            //console.log(arguments);
+            console.log($scope.values);
 
             return false;
 
@@ -198,14 +198,23 @@ define([
 
         /**
          * Load step data from the server
+         * TODO: Move to resolve in route config?
          */
         stepService.getData().then(function(response) {
 
             //The schema setup
-            $scope.schema = response.schema;
+            //The property keyName contains the schema.property that contains the schema
+            //it can change from task to task what the main name is, so we use the reference to always
+            //look for the schema in the right place.
+            $scope.schema = response.schema[response.keyName];
+
+            //$scope.schema = response.schema;
+
+            //console.log(response.schema.persons);
 
             //Stepdata, including form config
             $scope.steps = response.steps;
+
 
             //Take note of the total number of steps
             $scope.numSteps = $scope.steps.length;

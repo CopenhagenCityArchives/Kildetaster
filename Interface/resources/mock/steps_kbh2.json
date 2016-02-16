@@ -1,117 +1,118 @@
 {
-    "id": "1",
-    "name": "Indtastning af begravelsesprotokoller",
-    "description": "Dette er Stadsarkivets første indtastningsprojekt",
-    "collection_id": "1",
+    "keyName": "persons",
     "schema": {
-        "title": "Indtastning af begravelsesprotokoller",
         "type": "object",
-        "properties": {
-            "age": {
-                "title": "Alder",
-                "type": "integer",
-                "pattern": "/\\d{1,}/",
-                "description": null,
-                "validationMessage": "Skal udfyldes"
-            },
-            "birthplace": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer"
-                    },
-                    "name": {
-                        "title": "Fødested",
-                        "type": "string",
-                        "format": "typeahead",
-                        "pattern": "",
-                        "description": "Vælg et fødested på listen",
-                        "validationMessage": "Fødested udfyldes"
-                    }
-                }
-            },
-            "lastname": {
-                "title": "Efternavn",
-                "type": "string",
-                "pattern": "",
-                "description": "Indtast alle andre navne end fornavnet",
-                "validationMessage": "Efternavn skal udfyldes"
-            },
-            "firstname": {
-                "title": "Fornavn",
-                "type": "string",
-                "pattern": "",
-                "description": "Indtast personens første navn her",
-                "validationMessage": "Fornavnet skal udfyldes"
-            },
-            "spouses": {
-                "title": "Ægtefæller",
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "title": "Ægtefælle",
-                    "properties": {
-                        "lastName": {
-                            "title": "Efternavn",
-                            "type": "string",
-                            "description": "Indtast alle andre navne end fornavnet",
-                            "validationMessage": "Efternavn skal udfyldes"
-                        },
-                        "firstName": {
-                            "title": "Fornavn",
-                            "type": "string",
-                            "description": "Indtast personens første navn her",
-                            "validationMessage": "Fornavnet skal udfyldes"
-                        }
-                    },
-                    "required": [
-                        "firstName",
-                        "lastName"
-                    ]
-                }
-
-            },
-            "addresses": {
-                "title": "Adresser",
-                "type": "array",
-                "items": {
-                    "type": "object",
-                    "title": "Adresse",
-                    "properties": {
-                        "street": {
-                            "title": "Gade",
-                            "type": "string",
-                            "description": "Indtast gadenavnet",
-                            "validationMessage": "Gaden skal udfyldes"
-                        },
-                        "number": {
-                            "title": "Nummer",
-                            "type": "integer",
-                            "description": "Indtast gadenummer"
-                        }
-                    },
-                    "required": [
-                        "street"
-                    ]
-                }
-
-            },
-            "occupations": {
-                "title": "Stillinger",
-                "type": "array",
-                "items": {
-                    "type": "string",
-                    "title": "Stilling",
-                    "pattern": "",
+        "persons": {
+            "title": "Indtastning af begravelsesprotokoller",
+            "type": "object",
+            "properties": {
+                "age": {
+                    "title": "Alder",
+                    "type": "integer",
+                    "pattern": "/\\d{1,}/",
                     "description": null,
-                    "validationMessage": ""
+                    "validationMessage": "Skal udfyldes"
                 },
-                "required": ["occupation"]
+                "birthplace": {
+                    "type": "object",
+                    "format": "typeahead",
+                    "properties": {
+                        "id": {
+                            "type": "integer"
+                        },
+                        "name": {
+                            "title": "Fødested",
+                            "type": "string",
+                            "dataSource": "",
+                            "pattern": "",
+                            "description": "Vælg et fødested på listen",
+                            "validationMessage": "Fødested udfyldes"
+                        }
+                    }
+                },
+                "lastname": {
+                    "title": "Efternavn",
+                    "type": "string",
+                    "pattern": "",
+                    "description": "Indtast alle andre navne end fornavnet",
+                    "validationMessage": "Efternavn skal udfyldes"
+                },
+                "firstname": {
+                    "title": "Fornavn",
+                    "type": "string",
+                    "pattern": "",
+                    "description": "Indtast personens første navn her",
+                    "validationMessage": "Fornavnet skal udfyldes"
+                },
+                "spouses": {
+                    "title": "Ægtefæller",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "title": "Ægtefælle",
+                        "properties": {
+                            "lastName": {
+                                "title": "Efternavn",
+                                "type": "string",
+                                "description": "Indtast alle andre navne end fornavnet",
+                                "validationMessage": "Efternavn skal udfyldes"
+                            },
+                            "firstName": {
+                                "title": "Fornavn",
+                                "type": "string",
+                                "description": "Indtast personens første navn her",
+                                "validationMessage": "Fornavnet skal udfyldes"
+                            }
+                        },
+                        "required": [
+                            "firstName",
+                            "lastName"
+                        ]
+                    }
+
+                },
+                "addresses": {
+                    "title": "Adresser",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "title": "Adresse",
+                        "properties": {
+                            "street": {
+                                "title": "Gade",
+                                "type": "string",
+                                "description": "Indtast gadenavnet",
+                                "validationMessage": "Gaden skal udfyldes"
+                            },
+                            "number": {
+                                "title": "Nummer",
+                                "type": "integer",
+                                "description": "Indtast gadenummer"
+                            }
+                        },
+                        "required": [
+                            "street"
+                        ]
+                    }
+
+                },
+                "occupations": {
+                    "title": "Stillinger",
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "title": "Stilling",
+                        "pattern": "",
+                        "description": null,
+                        "validationMessage": ""
+                    },
+                    "required": ["occupation"]
+                }
             }
         },
         "required": [
             "age",
-            "birthplace.name",
+            "birthplace",
             "firstname",
             "lastname",
             "spouses",
@@ -127,14 +128,16 @@
             "firstname",
             "lastname",
             "age",
-            "occupations"
+            "persons.occupations"
         ]
     }, {
         "id": "2",
         "title": "Personens fødested",
         "description": "Beskrivelse af andet step",
         "fields": [
-            "birthplace.name",
+            {  
+                "key": "birthplace"
+            },
             "addresses"
         ]
     }, {

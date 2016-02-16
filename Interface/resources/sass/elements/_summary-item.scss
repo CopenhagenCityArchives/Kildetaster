@@ -1,9 +1,10 @@
 .summary-item {
-
     &__label {
         font-size: 10px;
-        color: $gray-text;
+
         display: block;
+
+        color: $gray-text;
     }
 
     &__field {
