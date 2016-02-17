@@ -109,7 +109,11 @@ define([
 
                 //Event fired when selection is confirmed
                 viewer.addHandler('selection', function(data) {
-                    $rootScope.$broadcast('areaSelected');
+        
+                    var convertedRect = viewer.viewport.imageToViewportRectangle(data);
+
+                    //Tell the application about the selected rectangle
+                    $rootScope.$broadcast('areaSelected', { rect: convertedRect });
                 });
 
                 $scope.$on('areaAccepted', function() {

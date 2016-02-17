@@ -21,6 +21,9 @@ define([
         //Will hold the inputted values
         $scope.values = {};
 
+        //Object to keep track of what fields is currently marked as being editied
+        $scope.editingFields = {};
+
         //Default settings for angular-schema-forms
         $scope.sfDefaults = {
             formDefaults: {
@@ -37,7 +40,10 @@ define([
          * When area is selected in the directive controlling openseadragon, and we are on the first step
          * go to the next step.
          */
-        $scope.$on('areaSelected', function() {
+        $scope.$on('areaSelected', function(event, args) {
+
+            $scope.selectedAreaRect = args.rect;
+
             if ($scope.currentStep === 1) {
                 $scope.nextStep();
             }
@@ -92,16 +98,14 @@ define([
          * Toggle wether or not we should show edit field for a given field config
          */
         $scope.toggleEditExistingValue = function toggleEditExistingValue(item) {
-
-            var field = $scope.schema.properties[item];
-            field.isEditing = !field.isEditing;
+            $scope.editingFields[item] = !$scope.editingFields[item];
         };
 
         /**
          * Ask if a given field is currently being edited
          */
         $scope.isEditing = function isEditing(field) {
-            return $scope.schema.properties[field].isEditing;
+            return $scope.editingFields[field];
         };
 
         /**
@@ -122,17 +126,24 @@ define([
 
         $scope.save = function save() {
 
-            //console.log(arguments);
+            var postData = $scope.values;
 
-            return false;
+            postData.page_id = $stateParams.pageId;
+            postData.task_id = $stateParams.taskId;
+            postData.post = $scope.selectedAreaRect;
 
-            var server = 'http://localhost';
+            var server = 'http://kbhkilder.dk/1508/stable/api/entries/';    
 
-            /*
-            id på næste post
-            */
+            $http.post(server, postData).then(function(response) {
+                console.log(response);
+            }).catch(function(err) {
+                console.log('post err', err);
+            }).finally(function() {
+                //console.log('SAVED!');
+            });
 
-            $state.go('.done', {}, { reload: true });
+
+            //$state.go('.done', {}, { reload: true });
 
             // $http.post(server).then(function(response) {
             //     $state.go('.done', {}, { reload: true });
@@ -203,6 +214,8 @@ define([
 
             //The schema setup
             $scope.schema = response.schema;
+
+            $scope.mainProperty = response.keyName;
 
             //Stepdata, including form config
             $scope.steps = response.steps;

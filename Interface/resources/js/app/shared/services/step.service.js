@@ -5,15 +5,11 @@ define([
 
     var stepService = /*@ngInject*/ function stepService(Flash, $timeout, $q, $http, JSONURL, $filter) {
 
-        var useReal = false;
+        var useReal = true;
 
         return {
 
             getData: function getData() {
-
-                var firstStep = {
-                    "title": "Vælg udsnit"
-                };
 
                 var resultStep = {
                     "title": "Udfyldt"
@@ -23,14 +19,13 @@ define([
                 
                 return $http({
                     url: jsonSource,
-                    params: {
+                    params: {   
                         task_id: 1
                     }
                 })
 
                 .then(function(response) {
 
-                    response.data.steps.unshift(firstStep);
                     response.data.steps.push(resultStep);
 
                     return response.data;
