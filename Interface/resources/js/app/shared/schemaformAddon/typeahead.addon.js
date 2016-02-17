@@ -6,11 +6,9 @@ define([
 
 ], function(ang, sfForm, sfBootstrap) {
 
-
     var schemaForm = angular.module('schemaForm');
 
-
-    schemaForm.controller('sfTypeahead', /*@ngInject*/  function($scope, $templateCache, $q, $http) {
+    schemaForm.controller('sfTypeahead', /*@ngInject*/  function($scope, $templateCache, $http, $filter) {
 
         $scope.options = [];
 
@@ -24,25 +22,25 @@ define([
             formElement.unreadable = !formElement.unreadable;
         };
 
-        $scope.init = function init() {
+        $scope.getData = function getData(datasource, term) {
 
-            //TODO handle cache data
-            $scope.getData().then(function(response) {
-                $scope.options = response;
+            //If we do not get any datasourece or a term to search for, do nothing
+            if (!datasource || !term) {
+                //Just return an empty array
+                return [];
+            }
+
+            return $http({
+                url: datasource,
+                method: 'GET',
+                params: {
+                    q: term
+                }
+            }).then(function(response) {
+                //Limit the hits to only contain the first 8 this
+                return response.data.slice(0,8);
             });
 
-        };
-
-        $scope.getData = function getData() {
-
-            var deferred = $q.defer();
-            
-            $http.get('/resources/mock/deathCause.json').then(function(response) {
-                deferred.resolve(response.data);
-            });
-
-            return deferred.promise;
-            
         };
 
     });

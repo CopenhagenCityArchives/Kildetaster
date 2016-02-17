@@ -1,7 +1,6 @@
 <div 
     class="form-group dynamic-form schema-form-{{form.type}} {{form.htmlClass}}" 
     ng-controller="sfTypeahead"
-    ng-init="init()"
     ng-class="{
         'has-error': form.disableErrorState !== true && hasError(), 
         'has-success': form.disableSuccessState !== true && hasSuccess(), 
@@ -27,7 +26,7 @@
             ng-model="$$value$$"
             ng-disabled="form.readonly || form.unreadable"
             schema-validate="form"
-            uib-typeahead="option.name as option.name for option in options | filter:{name:$viewValue} | limitTo: 8"
+            uib-typeahead="option[form.schema.datasourceValueField] for option in getData(form.schema.datasource, $viewValue)"
             typeahead-focus-first="false"
             typeahead-append-to-body="true"
             capitalize-first
@@ -43,6 +42,6 @@
 
    <!--  </div> -->
 
-    <div class="help-block" ng-if="hasError()">{{form.validationMessage}}</div>
+    <div class="help-block" ng-if="hasError()">{{form.schema.validationErrorMessage}}</div>
 
 </div>
