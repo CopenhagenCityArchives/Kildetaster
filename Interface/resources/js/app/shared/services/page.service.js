@@ -10,21 +10,20 @@ define([
         /**
         * Load all available project details, store in cache for quick retrieval
         */
-        function getProjectData() {
+        function getProjectData(params) {
 
-            var useReal = false;
-
-            var endPoint = 'http://kbhkilder.dk/1508/stable/api/units';
+            var useReal = true;
+            
+            var endPoint = 'http://kbhkilder.dk/1508/stable/api/pages';
+            
+            params = params || {};
             
             endPoint = useReal ? endPoint : JSONURL + 'page.json';
  
             return $http({
                 method: 'GET',
                 url: endPoint,
-                params: {
-                    collection_id: 1,
-                    task_id: 1
-                }
+                params: params,
             }).then(function(response) {
                 cache.put('all', response.data);
                 return response.data;
@@ -46,13 +45,21 @@ define([
 
                 if (angular.isUndefined(cache.get('all'))) {
                     
-                    getProjectData().then(function(response) {
+                    //?unit_id=1&page_number=12
+                    getProjectData({
+                        unit_id: 1,
+                        page_number: 12
+                    }).then(function(response) {
 
-                        found = $filter('filter')(response, function(project) {
-                            return project.id === id;
-                        });
+                        console.log("getpage response", response);
 
-                        deferred.resolve(found[0]);
+                        deferred.resolve(response[0]);
+
+                        // found = $filter('filter')(response, function(project) {
+                        //     return project.id === id;
+                        // });
+
+                        // deferred.resolve(found[0]);
                     });
                 }
                 else {

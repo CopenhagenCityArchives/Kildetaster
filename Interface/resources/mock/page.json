@@ -1,8 +1,7 @@
 [{
     "id": 1,
-    "pageNumber": 1,
-    "nextPageId": 2,
-    "imageUrl": "/resources/images/temporary/page_01.jpg",
+    "page_number": 1,
+    "image_url": "/resources/images/temporary/page_01.jpg",
     "overlays": [{
         "x": 0.15689757252812314,
         "y": 0.036116044997039666,
@@ -18,25 +17,19 @@
         "y": 0.47649823736780256,
         "width": 0.4071680376028202,
         "height": 0.4447708578143361
-    }],
-    "pageTotal": 12
+    }]
 }, {
     "id": 2,
-    "pageNumber": 2,
-    "nextPageId": 3,
-    "prevPageId": 1,
-    "imageUrl": "/resources/images/temporary/page_02.jpg",
+    "page_number": 2,
+    "image_url": "/resources/images/temporary/page_02.jpg",
     "overlays": [{
         "x": 0.15097690941385436,
         "y": 0.03315571343990527,
         "width": 0.41622261693309653,
         "height": 0.4452338661930136
-    }],
-    "pageTotal": 77
+    }]
 }, {
     "id": 3,
-    "pageNumber": 3,
-    "prevPageId": 2,
-    "imageUrl": "/resources/images/temporary/page_02.jpg",
-    "pageTotal": 43
+    "page_number": 3,
+    "image_url": "/resources/images/temporary/page_02.jpg",
 }]

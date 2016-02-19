@@ -28,7 +28,7 @@ define([
 
             tileSources: {
                 type: 'image',
-                url: pageData.imageUrl,
+                url: pageData.image_url,
                 navigatorPosition: 'TOP_LEFT',
                 overlays: pageData.overlays
             }
