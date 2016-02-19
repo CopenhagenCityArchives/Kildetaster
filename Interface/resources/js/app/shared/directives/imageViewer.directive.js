@@ -121,8 +121,11 @@ define([
                 });
 
                 $scope.$on('makeSelectable', function() {
-                    
-                    viewer.removeOverlay(selectionOverlay.element);
+
+                    //Try to remove an existing selection overlay
+                    if (selectionOverlay === undefined) {
+                        return;
+                    }
 
                     var x = selectionOverlay.location.x;
                     var y = selectionOverlay.location.y;
