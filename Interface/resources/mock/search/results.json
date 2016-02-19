@@ -1,0 +1,48 @@
+[{
+    "image": "http://placehold.it/188/131",
+    "protocol": "Begravelsesprotokol nr. 132, 1850-1851",
+    "personName": "Jens Peter Jensen",
+    "birthplace": "Dalum",
+    "birthdate": "21-01-1802",
+    "occupations": [{
+        "id": 1,
+        "name": "Bager"
+    }],
+    "addresses": [{
+        "id": 1,
+        "street": "Hamletsgade",
+        "number": "2",
+        "zip": "2200 Købehnavn N"
+    },
+    {
+        "id": 1,
+        "street": "Borsongade",
+        "number": "12",
+        "zip": "2500 Frederiksberg"
+    }],
+    "deathdate": "01-02-1868",
+    "deathcause": "Uheld",
+    "url": "#"
+},{
+    "image": "http://placehold.it/188/131",
+    "protocol": "Begravelsesprotokol nr. 132, 1850-1851",
+    "personName": "Jens Peter Hansen",
+    "birthplace": "Frederiksberg",
+    "birthdate": "13-07-1822",
+    "occupations": [{
+        "id": 1,
+        "name": "Murer"
+    },{
+        "id": 2,
+        "name": "Stik-i-rend-dreng"
+    }],
+    "addresses": [{
+        "id": 1,
+        "street": "Holdnuopgade",
+        "number": "12",
+        "zip": "2200 Købehnavn N"
+    }],
+    "deathdate": "01-05-1853",
+    "deathcause": "Meteoritnedslag",
+    "url": "#"
+}]

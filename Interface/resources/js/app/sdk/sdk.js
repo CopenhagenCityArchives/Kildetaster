@@ -9,9 +9,13 @@ define([
     'app/sdk/controllers/mypage.controller',
     'app/sdk/controllers/opentasks.controller',
     'app/sdk/controllers/errors.controller',
+    'app/sdk/controllers/search.controller',
 
     'app/shared/services/task.service',
     'app/shared/services/error.service',
+    'app/shared/services/search.service',
+
+    'app/sdk/directives/searchresult.directive',
 
     'app/shared/constants'
 
@@ -27,9 +31,13 @@ define([
     mypageController,
     opentasksController,
     errorsController,
+    searchController,
 
     taskService,
     errorService,
+    searchService,
+
+    searchResultDirective,
     
     constants
 ) {
@@ -41,9 +49,13 @@ define([
     sdkApp.controller('mypageController', mypageController);
     sdkApp.controller('opentasksController', opentasksController);
     sdkApp.controller('errorsController', errorsController);
+    sdkApp.controller('searchController', searchController);
 
     sdkApp.service('taskService', taskService);
     sdkApp.service('errorService', errorService);
+    sdkApp.service('searchService', searchService);
+
+    sdkApp.directive('searchResult', searchResultDirective);
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-sdk-app]'), ['sdk']);

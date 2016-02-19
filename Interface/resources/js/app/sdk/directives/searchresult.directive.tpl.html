@@ -1,0 +1,26 @@
+<a ng-href="{{result.url}}">
+    <div class="row-fluid sdk-searchresult">
+
+        <div class="span3">
+            <div class="sdk-searchresult__image">
+                <img ng-src="{{result.image}}" alt="">
+            </div>
+        </div>
+        <div class="span9">
+            <ul class="unstyled">
+                <li>{{result.protocol}}</li>
+                <li class="sdk-searchresult__name">{{result.personName}}</li>
+                <li>Født i {{result.birthplace}} d. {{result.birthdate}}</li>
+                <li>Stilling: <span ng-repeat="occupation in result.occupations">{{occupation.name}}{{$last ? '' : ', '}}</span></li>
+                <li>Addresse: 
+                    <ul class="unstyled">
+                        <li class="sdk-searchresult__address" ng-repeat="address in result.addresses">
+                            {{address.street}} {{address.number}}, {{address.zip}}{{$last ? '' : ', '}}
+                        </li>
+                    </ul>
+                </li>
+                <li>Dødsdag: {{result.deathdate}}, dødsårsag: {{result.deathcause}}</li>
+            </ul>
+        </div>
+    </div>
+</a>

@@ -15,7 +15,7 @@ module.exports = function(grunt) {
                 files: ['<%= package.resources %>/sass/**/*.scss', '<%= package.resources %>/bower_components/**/*.scss'],
                 tasks: ['newer:csscomb', 'sass:sdk'],
                 options: {
-                    livereload: false
+                    livereload: true
                 },
             },
             css: {
