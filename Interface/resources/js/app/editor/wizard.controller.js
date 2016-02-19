@@ -132,10 +132,15 @@ define([
             postData.task_id = $stateParams.taskId;
             postData.post = $scope.selectedAreaRect;
 
-            var server = 'http://kbhkilder.dk/1508/stable/api/entries/';    
-
-            $http.post(server, postData).then(function(response) {
+            $http({
+                method: 'POST',
+                url: 'http://kbhkilder.dk/1508/stable/api/entries/',
+                data: postData
+            }).then(function(response) {
+                
                 console.log(response);
+
+                //$state.go('.done', {}, { reload: true });
             }).catch(function(err) {
                 console.log('post err', err);
             }).finally(function() {
@@ -143,14 +148,7 @@ define([
             });
 
 
-            //$state.go('.done', {}, { reload: true });
 
-            // $http.post(server).then(function(response) {
-            //     $state.go('.done', {}, { reload: true });
-            // }).catch(function(err) {
-            //     //TODO FLASH
-            //     console.log('err', err);
-            // });
 
         };
 
@@ -173,7 +171,7 @@ define([
          * Move to previous step
          */
         $scope.prevStep = function prevStep() {
-            
+
             //If we are moving from step 1, make area selectable (since that is step 1)
             if ($scope.currentStep == 2) {
                 $scope.makeSelectable();
@@ -188,11 +186,10 @@ define([
 
             if ($scope.currentStep === 1) {
                 Flash.create('warning', 'Du skal vælge et område før du kan gå videre');
-            }
-            else {
+            } else {
                 $state.go('.', { stepId: stepId });
             }
-            
+
 
         };
 
