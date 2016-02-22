@@ -51,7 +51,7 @@ build:
     - 'imagemin:production'
     
     - 'requirejs:production'
-    - 'requirejs:sdk'
+    - 'requirejs:sdkProduction'
     
     - 'ngAnnotate:production'
     - 'uglify:production'
