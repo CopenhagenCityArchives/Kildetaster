@@ -1,10 +1,19 @@
 <aside class="span3" id="sidebar1">
     <div class="module">
-        <div data-sdk-app>
-            <h3>Facets</h3>
+        <div>
+            <ul class="unstyled">
+                <li ng-repeat="(key, value) in facetData | groupBy: 'name'">
+                    <h4>{{key}}</h4>
+
+                    <div ng-repeat="facet in value">
+                        {{facet.data}} ({{facet.count}})
+                    </div>
+                </li>
+            </ul>
         </div>
     </div>
 </aside>
+
 <section class="span9" id="main">
     <div id="breadcrumbs">
         <div class="module">
@@ -23,9 +32,7 @@
                             <div class="field">
                                 <label>
                                     Felt
-                                    <select ng-model="row.field">
-                                        <option value="name">Name</option>
-                                        <option value="age">Age</option>
+                                    <select ng-model="row.field" ng-options="field.name for field in fields | filter: {'searchable': '1'}">
                                     </select>
                                 </label>
                             </div>
@@ -36,7 +43,8 @@
                                     Operator
                                     <select ng-model="row.operator">
                                         <option value="contains">Indeholder</option>
-                                        <option value="start">Starter med</option>
+                                        <option value="startsWith">Starter med</option>
+                                        <option value="endsWith">Slutter med</option>
                                     </select>
                                 </label>
                             </div>
@@ -66,14 +74,21 @@
                 </div>
             </div>
             <hr class="sdk-search__divider">
-            <section ng-if="results.length > 0">
+            <section>
                 <div class="row-fluid">
-                    <div class="span12">
-                        <div class="sdk-search__count">{{results.length}} resultater</div>
+                    <div class="span12" ng-if="results.length > 0">
+
+                        <div class="sdk-search__count">
+                            <ng-pluralize count="results.numFound"
+                                when="{'0': 'Ingen resultater',
+                                'one': 'Ét resultat',
+                                'other': '{} resultater'}">
+                            </ng-pluralize>
+                        </div>
                     </div>
                 </div>
-                <div ng-repeat="result in results">
-                    <search-result result="result"></search-result>
+                <div ng-repeat="result in results.docs">
+                    <search-result result="result" config="fields"></search-result>
                 </div>
             </section>
         </div>
