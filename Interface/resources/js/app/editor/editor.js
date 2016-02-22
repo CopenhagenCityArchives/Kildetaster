@@ -24,7 +24,8 @@ define([
     'app/editor/update/updateFields.controller',
 
     'app/shared/schemaformAddon/typeahead.addon',
-    'app/shared/schemaformAddon/customInput.addon'
+    'app/shared/schemaformAddon/customInput.addon',
+    'app/shared/schemaformAddon/customSelect.addon'
 
 
 ], function(
@@ -53,7 +54,8 @@ define([
     updateFieldsController,
 
     sfTypeaheadAddon,
-    sfCustomInputAddon
+    sfCustomInputAddon,
+    sfCustomSelectAddon
 
 ) {
 

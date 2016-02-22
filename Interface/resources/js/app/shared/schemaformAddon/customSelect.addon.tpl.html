@@ -1,0 +1,27 @@
+<div class="form-group {{form.htmlClass}} schema-form-select"
+    ng-controller="sfCustomSelect"
+    ng-class="{'has-error': form.disableErrorState !== true && hasError(), 'has-success': form.disableSuccessState !== true && hasSuccess(), 'has-feedback': form.feedback !== false}">
+
+    <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle()}">
+        {{form.title}}
+        <span 
+            class="icon glyphicon glyphicon-question-sign" 
+            uib-tooltip="{{form.description}}" 
+            tooltip-placement="top"
+            tooltip-append-to-body="true"
+        ></span>
+    </label>
+
+    <select ng-model="$$value$$"
+            ng-model-options="form.ngModelOptions"
+            ng-disabled="form.readonly"
+            sf-changed="form"
+            class="form-control {{form.fieldHtmlClass}}"
+            schema-validate="form"
+            ng-options="item for item in form.schema.enum"
+            name="{{form.key.slice(-1)[0]}}">
+    </select>
+
+  <div class="help-block" ng-if="hasError()">{{ form.schema.validationErrorMessage }}</div>
+
+</div>
