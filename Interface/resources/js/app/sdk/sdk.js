@@ -4,6 +4,8 @@ define([
 
     'app/shared/sdk-templates',
 
+    'angular-filter',
+
     'app/sdk/sdk.run',
 
     'app/sdk/controllers/mypage.controller',
@@ -11,6 +13,7 @@ define([
     'app/sdk/controllers/errors.controller',
     'app/sdk/controllers/search.controller',
 
+    'app/shared/services/page.service',
     'app/shared/services/task.service',
     'app/shared/services/error.service',
     'app/shared/services/search.service',
@@ -24,6 +27,8 @@ define([
 
     ang,
 
+    angularFilter,
+
     sdkTemplates,
     
     run,
@@ -33,6 +38,7 @@ define([
     errorsController,
     searchController,
 
+    pageService,
     taskService,
     errorService,
     searchService,
@@ -42,7 +48,7 @@ define([
     constants
 ) {
 
-    var sdkApp = angular.module('sdk', ['sdk-templates', 'constants']);
+    var sdkApp = angular.module('sdk', ['sdk-templates', 'constants', 'angular.filter']);
 
     sdkApp.run(run);
 
@@ -51,6 +57,7 @@ define([
     sdkApp.controller('errorsController', errorsController);
     sdkApp.controller('searchController', searchController);
 
+    sdkApp.service('pageService', pageService);
     sdkApp.service('taskService', taskService);
     sdkApp.service('errorService', errorService);
     sdkApp.service('searchService', searchService);

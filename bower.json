@@ -34,7 +34,8 @@
     "angular-bootstrap": "~1.1.2",
     "angular-ui-router": "~0.2.15",
     "ui-select": "angular-ui-select#~0.13.2",
-    "angular-sanitize": "~1.4.8"
+    "angular-sanitize": "~1.4.8",
+    "angular-filter": "^0.5.8"
   },
   "resolutions": {
     "angular": "~1.4.8"

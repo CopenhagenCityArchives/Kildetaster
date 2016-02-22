@@ -14,7 +14,9 @@ requirejs.config({
         'angular-sanitize'      : '../bower_components/angular-sanitize/angular-sanitize.min',
         
         'angular-ui-router'     : '../bower_components/angular-ui-router/release/angular-ui-router.min',
-        'angular-ui-select'     : '../bower_components/ui-select/dist/select.min',
+        //'angular-ui-select'     : '../bower_components/ui-select/dist/select.min',
+
+        'angular-filter'        : '../bower_components/angular-filter/dist/angular-filter.min',
                 
         'openseadragon'         : '../bower_components/openseadragon/built-openseadragon/openseadragon/openseadragon.min',
 
@@ -34,9 +36,10 @@ requirejs.config({
         'bootstrap': ['jquery'],
         'angular-bootstrap': ['angular'],
         'angular-ui-router': ['angular'],
-        'angular-ui-select': ['angular'],
+        //'angular-ui-select': ['angular'],
         'angular-sanitize': ['angular'],
         'angular-animate': ['angular'],
+        'angular-filter': ['angular'],
 
         'app/shared/constants': ['angular'],
 
