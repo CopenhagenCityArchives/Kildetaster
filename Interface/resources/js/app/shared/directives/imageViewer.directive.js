@@ -166,14 +166,23 @@ define([
 
                     }, 1000);
 
+
                 }
                 //Else prepare a new rect object with initial selection
                 else {
-                    rect = new OpenSeadragon.SelectionRect(0.25, 0.6, 0.42, 0.45);
+                    //Did we get info from the backend about where to place the next post?
+                    if ($scope.options.next_post) {
+                        var next = $scope.options.next_post;
+                        rect = new OpenSeadragon.SelectionRect(next.x, next.y, next.width, next.height);
+                    }
+                    //If we did not get any information, make a generic area
+                    else {
+                        rect = new OpenSeadragon.SelectionRect(0.25, 0.6, 0.42, 0.45);
+                    }
 
                     //When the directive is initialized, make sure we listen for key events on the selection area
-                    createKeyTracker();
-                    
+                    createKeyTracker();    
+                     
                 }
 
                 //Selection plugin
