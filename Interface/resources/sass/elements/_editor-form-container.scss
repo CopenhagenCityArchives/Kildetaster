@@ -2,11 +2,11 @@
     position: absolute;
     z-index: 100;
     top: 0;
-    right: -15px;
+    right: 0;
     bottom: 0;
 
     width: 20%;
-    min-width: $editorFormWidth;
+    min-width: $editorFormWidth - 15px;
     padding-left: 80px;
 
     border-left: 1px solid $gray;
