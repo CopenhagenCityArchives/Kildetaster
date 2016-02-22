@@ -6,7 +6,6 @@ define([
 
 ], function(ang, sf, sfbootstrap) {
 
-
     var schemaForm = angular.module('schemaForm');
 
     schemaForm.controller('sfCustomInput', /*@ngInject*/  function($scope, $templateCache, $q, $http) {
@@ -73,7 +72,7 @@ define([
         var custominput = function(name, schema, options) {
 
             //Type of string, but without a specific format
-            if (schema.type === 'string' && schema.format === undefined) {
+            if (schema.type === 'string' && schema.format === undefined && schema.enum === undefined) {
 
                 var f = schemaFormProvider.stdFormObj(name, schema, options);
                 f.key = options.path;
@@ -86,7 +85,7 @@ define([
         var customnumber = function(name, schema, options) {
 
             //Type of string, but without a specific format
-            if (schema.type === 'number' && schema.format === undefined) {
+            if (schema.type === 'number' && schema.format === undefined && schema.enum === undefined) {
 
                 var f = schemaFormProvider.stdFormObj(name, schema, options);
                 f.key = options.path;
