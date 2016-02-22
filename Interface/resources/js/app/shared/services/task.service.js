@@ -12,7 +12,7 @@ define([
          */
         function getTaskData() {
             
-            var useReal = false;
+            var useReal = true;
 
             var endPoint = useReal ? 'http://kbhkilder.dk/1508/stable/api/tasks': JSONURL + 'tasks.json';
 
@@ -49,36 +49,6 @@ define([
                 return deferred.promise;
             },           
 
-            /**
-             * Mock response
-             */
-            qgetTask: function getTask(id) {
-
-                var deferred = $q.defer(),
-                    found;
-
-                if (angular.isUndefined(cache.get('all'))) {
-
-                    getTaskData().then(function(response) {
-
-                        found = $filter('filter')(response, function(project) {
-                            return project.id == id;
-                        });
-                        console.log(found[0]);
-                        deferred.resolve(found[0]);
-
-                    });
-                } else {
-                    found = $filter('filter')(cache.get('all'), function(project) {
-                        return project.id === id;
-                    });
-                    deferred.resolve(found[0]);
-                }
-
-                return deferred.promise;
-
-            },
-
             getTasks: function getProjects() {
                 
                 var deferred = $q.defer();
@@ -92,6 +62,28 @@ define([
                 }
 
                 return deferred.promise;
+            },
+
+            getUnits: function getUnits(params) {
+
+                var deferred = $q.defer();
+
+                params.collection_id = 1;
+
+                $http({
+                    url: 'http://kbhkilder.dk/1508/stable/api/units',
+                    method: 'GET',
+                    params: params
+                })
+                .then(function(response) {
+                    deferred.resolve(response.data);
+                })
+                .catch(function(err) {
+                    console.log('Error getting units', err);
+                });
+
+                return deferred.promise;
+
             },
 
             getNextAvailablePage: function getNextAvailablePage() {
