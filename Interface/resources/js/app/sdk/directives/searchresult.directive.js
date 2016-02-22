@@ -1,7 +1,7 @@
 define([
 ], function() {
 
-    var searchDirective = /*@ngInject*/ function() {
+    var searchDirective = /*@ngInject*/ function(API) {
 
         return {
             
@@ -41,6 +41,17 @@ define([
                         return val;
                     }
                 };
+
+                /**
+                * Build the url for the image, based on post_id
+                */
+                scope.getImage = function getImage(resultData) {
+                    return API + '/api/posts/' + resultData.post_id + '/image';
+                };
+
+                scope.$on('$destroy', function() {
+                    console.log('destroyed');
+                });
 
             }
         };

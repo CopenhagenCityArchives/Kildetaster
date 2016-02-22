@@ -1,11 +1,8 @@
 define([
 
-
-
-
 ], function() {
 
-    var searchService = /*@ngInject*/ function stepService($q, $http, JSONURL, $filter) {
+    var searchService = /*@ngInject*/ function stepService($q, $http, API, JSONURL, $filter) {
 
         var useReal = true;
 
@@ -13,7 +10,7 @@ define([
 
             search: function search(query, facets) {
 
-                var jsonSource = useReal ? 'http://kbhkilder.dk/1508/stable/api/search' : JSONURL + '/search/results.json';
+                var jsonSource = useReal ? API + '/search' : JSONURL + '/search/results.json';
                 
                 var params = {
                     'wt': 'json',
@@ -62,7 +59,7 @@ define([
 
             getFields: function getFields() {
 
-                var jsonSource = useReal ? 'http://kbhkilder.dk/1508/stable/api/searchconfig?collection_id=1' : JSONURL + '/search/fields.json';
+                var jsonSource = useReal ? API + '/searchconfig?collection_id=1' : JSONURL + '/search/fields.json';
 
                 return $http({
                     url: jsonSource,
@@ -78,7 +75,6 @@ define([
                     console.log('Error getting search fields', err);
                 });
             }
-
         };
 
     };

@@ -1,8 +1,4 @@
 .sdk-search {
-    //Mimic default Stadsarkiv styling
-    > div {
-        padding: 0 15px 15px 15px;
-    }
 
     select, input {
         font-size: 13px;
@@ -13,14 +9,6 @@
 
         color: $black;
         background-color: $gray;
-    }
-
-    //Custom hack to mimic default Stadsarkiv box styling
-    //Nessesary because they style on a specific structure, and we need to wrap our content in a tag
-    .module > div {
-        padding: 15px;
-
-        background-color: $white;
     }
 
     ::-webkit-input-placeholder {

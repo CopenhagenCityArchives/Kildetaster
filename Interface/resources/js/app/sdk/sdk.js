@@ -12,6 +12,7 @@ define([
     'app/sdk/controllers/opentasks.controller',
     'app/sdk/controllers/errors.controller',
     'app/sdk/controllers/search.controller',
+    'app/sdk/controllers/search.facets.controller',
 
     'app/shared/services/page.service',
     'app/shared/services/task.service',
@@ -37,6 +38,7 @@ define([
     opentasksController,
     errorsController,
     searchController,
+    searchFacetsController,
 
     pageService,
     taskService,
@@ -56,6 +58,7 @@ define([
     sdkApp.controller('opentasksController', opentasksController);
     sdkApp.controller('errorsController', errorsController);
     sdkApp.controller('searchController', searchController);
+    sdkApp.controller('searchFacetsController', searchFacetsController);
 
     sdkApp.service('pageService', pageService);
     sdkApp.service('taskService', taskService);

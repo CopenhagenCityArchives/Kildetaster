@@ -1,3 +1,11 @@
-<div>
-<h3>temp</h3>
+<div ng-controller="searchFacetsController">
+    <ul class="unstyled">
+        <li ng-repeat="(key, value) in facetData | groupBy: 'name'">
+            <h4>{{key}}</h4>
+
+            <div ng-repeat="facet in value">
+                {{facet.data}} ({{facet.count}})
+            </div>
+        </li>
+    </ul>
 </div>

@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var searchController = /*@ngInject*/ function opentasksController($scope, searchService) {
+    var searchController = /*@ngInject*/ function opentasksController($scope, $rootScope, searchService) {
 
         $scope.loading = false;
 
@@ -122,7 +122,9 @@ define([
                 $scope.results = response.response;
                 $scope.facets = response.facet_counts.facet_fields;
                 
-                $scope.facetData = buildFacetData($scope.facets);
+                //$scope.facetData = buildFacetData($scope.facets);
+
+                $rootScope.$broadcast('facetsUpdated', buildFacetData($scope.facets) );
 
             }).catch(function(err) {
                 console.log('Error in search:', err);
