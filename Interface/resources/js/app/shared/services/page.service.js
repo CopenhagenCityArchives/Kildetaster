@@ -3,21 +3,17 @@ define([
 
 ], function() {
 
-    var pageService = /*@ngInject*/ function pageService($http, $cacheFactory, $q, $filter, JSONURL) {
+    var pageService = /*@ngInject*/ function pageService($http, $cacheFactory, $q, $filter, API, JSONURL) {
 
         var cache = $cacheFactory('pageCache');
 
         /**
         * Load all available project details, store in cache for quick retrieval
         */
-        function getProjectData(params) {
-
-            var useReal = true;
+        function getPageData(params) {
             
-            var endPoint = 'http://kbhkilder.dk/1508/stable/api/pages';
+            var endPoint = API + '/pages';
 
-            endPoint = useReal ? endPoint : JSONURL + 'page.json';
- 
             return $http({
                 method: 'GET',
                 url: endPoint,
@@ -39,7 +35,7 @@ define([
             getPageById: function getPage(id) {
 
                 var deferred = $q.defer();
-                getProjectData({
+                getPageData({
                     page_id: id
                 }).then(function(response) {
                     deferred.resolve(response);
@@ -60,11 +56,13 @@ define([
 
                 var deferred = $q.defer();
 
-                getProjectData({
-                    pageNumber: pageNumber,
+                getPageData({
+                    page_number: pageNumber,
                     unit_id: unitId
                 }).then(function(response) {
                     deferred.resolve(response);
+                }).catch(function(err) {
+                    console.log('Error getting page by number', err);
                 });
         
                 return deferred.promise;
@@ -93,7 +91,7 @@ define([
                 var deferred = $q.defer();
 
                 $http({
-                    url: 'http://kbhkilder.dk/1508/stable/api/pages/nextavailable',
+                    url: API + '/pages/nextavailable',
                     params: params
                 })
 
@@ -102,7 +100,7 @@ define([
                 })
                 .catch(function(err) {
                     console.log('Get next page error', err);
-                })
+                });
 
                 return deferred.promise;
             }
