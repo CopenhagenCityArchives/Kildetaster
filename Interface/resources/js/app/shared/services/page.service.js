@@ -92,19 +92,12 @@ define([
 
                 var deferred = $q.defer();
 
-                params = {
-                    task_id: 1,
-                    unit_id: 1, 
-                    current_page_number: 1
-                };
-
                 $http({
                     url: 'http://kbhkilder.dk/1508/stable/api/pages/nextavailable',
                     params: params
                 })
 
                 .then(function(response) {
-                    console.log('Next available', response);
                     deferred.resolve(response);
                 })
                 .catch(function(err) {

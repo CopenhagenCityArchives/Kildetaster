@@ -4,7 +4,7 @@ define([
 
 ], function() {
 
-    var opentasksController = /*@ngInject*/ function opentasksController($scope, $http, taskService, pageService) {
+    var opentasksController = /*@ngInject*/ function opentasksController($scope, $http, taskService, pageService, EDITORURL) {
 
         $scope.loading = false;
 
@@ -20,18 +20,21 @@ define([
                 unit_id: unit.id
             }).then(function(response) {
                 var pageId = response.data[0].pages_id;
-                window.location.href = 'http://localhost/#/task/' + $scope.taskId + '/page/' + pageId;
+                window.location.href = EDITORURL + '/#/task/' + unit.tasks[0].tasks_id + '/page/' + pageId;
 
             });
         };
 
 
-        $scope.init = function init() {
+        $scope.init = function init(taskId) {
+
+            //TODO: Update logic for after beta, to not just use a hardcoded value
+            taskId = taskId || 1;
 
             $scope.loading = true;
 
             taskService.getUnits({
-                taskId: $scope.taskId
+                taskId: taskId
             }).then(function(response) {
                 $scope.units = response;
             })
