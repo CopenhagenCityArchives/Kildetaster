@@ -5,10 +5,28 @@ define([
     var editorController = /*@ngInject*/ function editorController($scope, $state, Flash, pageService, taskData, pageData, $location, $timeout, $rootScope) {       
 
         $scope.pageNumber = pageData.page_number;
+        $scope.totalPages = 'xx';
 
-        $scope.goToPageId = null;
+        /**
+        * Get next available page, based on unitId, taskId and the current page number
+        */
+        $scope.goToNextAvailablePage = function goToNextAvailablePage() {
+            
+            pageService.getNextAvailablePage({
+                task_id: taskData.id,
+                unit_id: pageData.unit_id,
+                current_number: pageData.page_number
 
-        console.log('pageData', taskData);
+            }).then(function(response) {
+
+                $timeout(function() {
+                    $location.search({ stepId: 1});
+                }, 0);
+
+                $state.go('.', { pageId: response.pages_id});     
+            });
+                   
+        };
 
         $scope.goToPage = function goToPage($event) {
            
@@ -31,9 +49,6 @@ define([
                     
                 });
 
-                //Redirect to given page number
-                //TODO, request to get page details based on page number
-                //$state.go('.', { pageId: $event.target.value});
             }
             
         };

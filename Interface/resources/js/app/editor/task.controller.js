@@ -9,24 +9,6 @@ define([
         $scope.progress = Math.round(taskData.pagesLeft / taskData.pagesTotal * 100);
 
         $scope.pagesTotal = taskData.pagesTotal;
-    
-
-        $scope.goToNextAvailablePage = function goToNextAvailablePage() {
-            
-            pageService.getNextAvailablePage({
-
-            }).then(function(response) {
-
-                //TODO: Investigate why this timeout is nessesary to reset stepId ?
-                $timeout(function() {
-                    $location.search({ stepId: 1});
-                }, 0);
-
-                $state.go('.', { pageId: response.pageId});     
-            });
-                   
-        };
-
 
         $scope.activeUsers = [];
 
