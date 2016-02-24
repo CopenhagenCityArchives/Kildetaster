@@ -12,9 +12,8 @@ define([
          */
         function getTaskData() {
             
-            var useReal = true;
 
-            var endPoint = useReal ? 'http://kbhkilder.dk/1508/stable/api/tasks': JSONURL + 'tasks.json';
+            var endPoint = useReal ? API + '/tasks': JSONURL + 'tasks.json';
 
             return $http({
                 method: 'GET',
