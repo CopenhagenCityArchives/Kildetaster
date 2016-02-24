@@ -12,6 +12,7 @@ define([
     'app/shared/services/helpers.service',
 
     'app/sdk/search/search.config',
+    'app/sdk/search/search.run',
 
     'app/sdk/controllers/search.controller',
     'app/sdk/controllers/search.facets.controller',
@@ -38,6 +39,7 @@ define([
     helpersService,
 
     searchConfig,
+    searchRun,
 
     searchController,
     searchFacetsController,
@@ -55,6 +57,7 @@ define([
     var searchApp = angular.module('search', ['sdk-templates', 'constants', 'ui.router', 'angular.filter']);
 
     searchApp.config(searchConfig);
+    searchApp.run(searchRun);
 
     searchApp.service('searchService', searchService);
     searchApp.service('errorService', errorService);
@@ -74,10 +77,12 @@ define([
         angular.bootstrap(angular.element('[data-sdk-search-app]'), ['search']);
     });
 
-    //Debugging for ui.router state issues
-    searchApp.run(($rootScope) => {
-        $rootScope.$on("$stateChangeError", console.log.bind(console));
-    });
+    
+
+    //Debugging for ui.router state issues, fails when Uglifying because of the => operator
+    // searchApp.run(($rootScope) => {
+    //     $rootScope.$on("$stateChangeError", console.log.bind(console));
+    // });
 
     return searchApp;
 });
