@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var searchDirective = /*@ngInject*/ function(API, SEARCHRESULTSERVER, $state, helpers) {
+    var searchDirective = /*@ngInject*/ function(API, $state, helpers) {
 
         return {
             
@@ -57,9 +57,6 @@ define([
                 scope.getImage = function getImage(resultData) {
                     return helpers.getImageUrlByPostId(resultData.post_id);
                 };
-
-
-                scope.href = SEARCHRESULTSERVER + '?postId=' + scope.result.id;
 
                 scope.$on('$destroy', function() {
                     //console.log('destroyed');
