@@ -17,8 +17,6 @@ define([
 
             }).then(function(response) {
 
-                console.log(response.id);
-
                 //TODO: Investigate why this timeout is nessesary to reset stepId ?
                 $timeout(function() {
                     $location.search({ stepId: 1});
