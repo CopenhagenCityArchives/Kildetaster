@@ -80,7 +80,7 @@ define([
 
                         var deferred = $q.defer();
 
-                        searchService.paginatedSearch(searchService.currentSearchConfig.query, $stateParams.index)
+                        searchService.paginatedSearch(searchService.currentSearchConfig.query, $stateParams.index - 1)
                         .then(function(response) {
                             
                             data.numFound = response.response.numFound;
@@ -97,6 +97,7 @@ define([
                             data.post = response.data;
                             data.metadata = response.metadata;
                             data.errorReports = response.error_reports;
+
 
                             deferred.resolve(data);
                             
