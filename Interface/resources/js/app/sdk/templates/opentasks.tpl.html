@@ -15,12 +15,10 @@
             <div class="task-list__item">
                 <div class="row">
                     <div class="span8">
-                        <div class="progress">
-                            <div class="bar" style="width: {{calcProgress(unit)}}%;">{{calcProgress(unit)}}%</div>
-                        </div>
+                        <progress-bar total-pages="unit.pages" done-pages="unit.tasks[0].pages_done"></progress-bar>
                     </div>
                     <div class="span4 text-center">
-                        <span>{{unit.pages - unit.tasks[0].pages_done}}/{{unit.pages}}</span>
+                        <span>{{unit.tasks[0].pages_done}}/{{unit.pages}}</span>
                     </div>
                     <!-- <div class="span12 text-left">
                         <a href>Se statistik</a>

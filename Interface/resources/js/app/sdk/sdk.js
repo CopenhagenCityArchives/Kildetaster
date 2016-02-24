@@ -16,7 +16,7 @@ define([
     'app/shared/services/task.service',
     'app/shared/services/error.service',
 
-    'app/sdk/directives/searchresult.directive',
+    'app/sdk/directives/progressbar.directive',
 
     'app/shared/constants'
 
@@ -38,6 +38,8 @@ define([
     pageService,
     taskService,
     errorService,
+
+    progressbarDirective,
     
     constants
 ) {
@@ -53,6 +55,8 @@ define([
     sdkApp.service('pageService', pageService);
     sdkApp.service('taskService', taskService);
     sdkApp.service('errorService', errorService);
+
+    sdkApp.directive('progressBar', progressbarDirective);
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-sdk-app]'), ['sdk']);

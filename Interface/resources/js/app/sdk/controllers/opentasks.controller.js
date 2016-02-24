@@ -10,22 +10,13 @@ define([
 
         $scope.units = [];
 
-        $scope.taskId = 1;
-
-        /**
-        * Calculate progress in %;
-        */
-        $scope.calcProgress = function calcProgress(unit) {
-            return 100 - Math.round(((unit.pages - unit.tasks[0].pages_done) / unit.pages) * 100);
-        };
-
         /**
         * Get the next available pageId, and redirect the user to that page in the editor
         */
         $scope.goToEditor = function goToEditor(unit) {
 
             pageService.getNextAvailablePage({
-                task_id: $scope.taskId,
+                task_id: unit.tasks[0].tasks_id,
                 unit_id: unit.id
             }).then(function(response) {
                 var pageId = response.data[0].pages_id;
