@@ -15,17 +15,15 @@ define([
             var useReal = true;
             
             var endPoint = 'http://kbhkilder.dk/1508/stable/api/pages';
-            
-            params = params || {};
-            
+
             endPoint = useReal ? endPoint : JSONURL + 'page.json';
  
             return $http({
                 method: 'GET',
                 url: endPoint,
-                params: params,
+                params: params
             }).then(function(response) {
-                cache.put('all', response.data);
+                //cache.put('all', response.data);
                 return response.data;
             });
         }
@@ -38,37 +36,37 @@ define([
             *
             * @return {promise} That resolves with the data for the project
             */
-            getPage: function getPage(id) {
+            getPageById: function getPage(id) {
 
-                var deferred = $q.defer(),
-                    found;
+                var deferred = $q.defer();
+                getProjectData({
+                    page_id: id
+                }).then(function(response) {
+                    deferred.resolve(response);
+                });
 
-                if (angular.isUndefined(cache.get('all'))) {
-                    
-                    //?unit_id=1&page_number=12
-                    getProjectData({
-                        unit_id: 1,
-                        page_number: 12
-                    }).then(function(response) {
+                return deferred.promise;
 
-                        console.log("getpage response", response);
+            },
 
-                        deferred.resolve(response[0]);
+            /**
+            * Lookup a specific project
+            * @param {int} the pageNumber of the page to look up
+            * @param {int} The id of the unit to get the page from
+            *
+            * @return {promise} That resolves with the data for the project
+            */
+            getPageByNumber: function(pageNumber, unitId) {
 
-                        // found = $filter('filter')(response, function(project) {
-                        //     return project.id === id;
-                        // });
+                var deferred = $q.defer();
 
-                        // deferred.resolve(found[0]);
-                    });
-                }
-                else {
-                    found = $filter('filter')(cache.get('all'), function(project) {
-                            return project.id === id;
-                        });
-                    deferred.resolve(found[0]);
-                }
-
+                getProjectData({
+                    pageNumber: pageNumber,
+                    unit_id: unitId
+                }).then(function(response) {
+                    deferred.resolve(response);
+                });
+        
                 return deferred.promise;
 
             },
@@ -88,6 +86,32 @@ define([
 
                 return deferred.promise;
 
+            },
+
+            getNextAvailablePage: function getNextAvailablePage(params) {
+
+                var deferred = $q.defer();
+
+                params = {
+                    task_id: 1,
+                    unit_id: 1, 
+                    current_page_number: 1
+                };
+
+                $http({
+                    url: 'http://kbhkilder.dk/1508/stable/api/pages/nextavailable',
+                    params: params
+                })
+
+                .then(function(response) {
+                    console.log('Next available', response);
+                    deferred.resolve(response);
+                })
+                .catch(function(err) {
+                    console.log('Get next page error', err);
+                })
+
+                return deferred.promise;
             }
 
 

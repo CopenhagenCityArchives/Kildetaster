@@ -64,7 +64,7 @@ module.exports = {
             baseUrl: "<%= package.resources %>/js",
             mainConfigFile: "<%= package.resources %>/js/sdk-config.js",
             out: "<%= package.buildresources %>/js/sdk.js",
-            optimize: "uglify2"
+            optimize: "none"
         }
     }
 

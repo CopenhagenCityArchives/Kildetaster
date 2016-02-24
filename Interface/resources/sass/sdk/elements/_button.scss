@@ -1,0 +1,34 @@
+.button {
+    font-size: 16px;
+    font-weight: normal;
+    line-height: 24px;
+
+    display: inline-block;
+
+    margin-bottom: 0;
+    padding: 4px 20px;
+
+    cursor: pointer;
+    text-align: center;
+    text-transform: uppercase;
+
+    color: $white;
+    border: none;
+    border-radius: 3px;
+    background-color: $blue;
+
+    &:hover {
+        background-color: lighten($blue, 10%);
+    }
+
+    &:disabled {
+        cursor: default;
+
+        color: $gray;
+        background-color: $gray-dark;
+
+        &:hover {
+            background-color: $gray-dark;
+        }
+    }
+}

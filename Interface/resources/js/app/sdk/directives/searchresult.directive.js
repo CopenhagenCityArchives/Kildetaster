@@ -1,7 +1,9 @@
 define([
+
+
 ], function() {
 
-    var searchDirective = /*@ngInject*/ function(API) {
+    var searchDirective = /*@ngInject*/ function(API, SEARCHRESULTSERVER, $state, helpers) {
 
         return {
             
@@ -10,12 +12,19 @@ define([
 
             scope: {
                 result: '=',
-                config: '='
+                config: '=',
+                index: '='
             },
 
             templateUrl: 'sdk/directives/searchresult.directive.tpl.html',
 
             link: function(scope, element, attr) {
+
+                scope.goToPost = function() {
+                    $state.go('.result.page', {
+                        index: scope.index + 1
+                    });
+                };
                
                 scope.lookItUp = function(str) {
 
@@ -46,11 +55,14 @@ define([
                 * Build the url for the image, based on post_id
                 */
                 scope.getImage = function getImage(resultData) {
-                    return API + '/api/posts/' + resultData.post_id + '/image';
+                    return helpers.getImageUrlByPostId(resultData.post_id);
                 };
 
+
+                scope.href = SEARCHRESULTSERVER + '?postId=' + scope.result.id;
+
                 scope.$on('$destroy', function() {
-                    console.log('destroyed');
+                    //console.log('destroyed');
                 });
 
             }

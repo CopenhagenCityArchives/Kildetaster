@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var editorController = /*@ngInject*/ function editorController($scope, $state, taskData, userService, $interval, $location, $timeout, taskService) {
+    var editorController = /*@ngInject*/ function editorController($scope, $state, taskData, userService, $interval, $location, $timeout, taskService, pageService) {
 
         $scope.protocol = taskData.name;
 
@@ -13,7 +13,11 @@ define([
 
         $scope.goToNextAvailablePage = function goToNextAvailablePage() {
             
-            taskService.getNextAvailablePage().then(function(response) {
+            pageService.getNextAvailablePage({
+
+            }).then(function(response) {
+
+                console.log(response.id);
 
                 //TODO: Investigate why this timeout is nessesary to reset stepId ?
                 $timeout(function() {

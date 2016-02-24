@@ -1,9 +1,3 @@
-<h1>Begravelsesprotekoller</h1>
-<p>Tekst fra Joomla</p>
-<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem laudantium unde fuga iusto sit harum autem ab quam sint animi, quis, tempore. Facere, debitis?</p>
-
-<a href>Se vejledning</a>
-
 <div ng-controller="opentasksController">
     <ul class="unstyled task-list">
         <li>
@@ -11,33 +5,33 @@
             <div class="task-list__header">Status</div>
             <div class="task-list__header">Brugere online</div>
         </li>
-        <li ng-repeat="task in tasks" ng-class="{ odd: $odd }" ng-show="tasks.length > 0">
+        <li ng-repeat="unit in units" ng-class="{ odd: $odd }" ng-show="units.length > 0">
             <div class="task-list__item">
-                <span>{{task.name}}</span>
+                <span>{{unit.description}}</span>
                 <span>
-                    <button type="button" class="btn btn-default">Start indtastning</button>
+                    <button type="button" class="btn btn-default" ng-click="goToEditor(unit)">Start indtastning</button>
                 </span>
             </div>
             <div class="task-list__item">
                 <div class="row">
                     <div class="span8">
                         <div class="progress">
-                            <div class="bar" style="width: {{calcProgress(task)}}%;">{{calcProgress(task)}}%</div>
+                            <div class="bar" style="width: {{calcProgress(unit)}}%;">{{calcProgress(unit)}}%</div>
                         </div>
                     </div>
                     <div class="span4 text-center">
-                        <span>{{task.pagesTotal - task.pagesLeft}}/{{task.pagesTotal}}</span>
+                        <span>{{unit.pages - unit.tasks[0].pages_done}}/{{unit.pages}}</span>
                     </div>
-                    <div class="span12 text-left">
+                    <!-- <div class="span12 text-left">
                         <a href>Se statistik</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="task-list__item">
                 <ul class="unstyled">
-                    <li><a href>Jens Jensen</a> s.93</li>
+                    <!-- <li><a href>Jens Jensen</a> s.93</li>
                     <li><a href>Hanne Hansen</a> s.115</li>
-                    <li><a href>+ 5 andre</a></li>
+                    <li><a href>+ 5 andre</a></li> -->
                 </ul>
             </div>
         </li>

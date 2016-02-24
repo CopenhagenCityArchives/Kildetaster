@@ -4,22 +4,45 @@ define([
 
 ], function() {
 
-    var opentasksController = /*@ngInject*/ function opentasksController($scope, taskService) {
+    var opentasksController = /*@ngInject*/ function opentasksController($scope, $http, taskService, pageService) {
 
         $scope.loading = false;
-        $scope.tasks = [];
 
-        $scope.calcProgress = function calcProgress(task) {
+        $scope.units = [];
 
-            return Math.round(((task.pagesTotal - task.pagesLeft) / task.pagesTotal) * 100);
+        $scope.taskId = 1;
+
+        /**
+        * Calculate progress in %;
+        */
+        $scope.calcProgress = function calcProgress(unit) {
+            return 100 - Math.round(((unit.pages - unit.tasks[0].pages_done) / unit.pages) * 100);
+        };
+
+        /**
+        * Get the next available pageId, and redirect the user to that page in the editor
+        */
+        $scope.goToEditor = function goToEditor(unit) {
+
+            pageService.getNextAvailablePage({
+                task_id: $scope.taskId,
+                unit_id: unit.id
+            }).then(function(response) {
+                var pageId = response.data[0].pages_id;
+                window.location.href = 'http://localhost/#/task/' + $scope.taskId + '/page/' + pageId;
+
+            });
         };
 
 
         $scope.init = function init() {
 
             $scope.loading = true;
-            taskService.getTasks().then(function(response) {
-                $scope.tasks = response;
+
+            taskService.getUnits({
+                taskId: $scope.taskId
+            }).then(function(response) {
+                $scope.units = response;
             })
             .finally(function() {
                 $scope.loading = false;

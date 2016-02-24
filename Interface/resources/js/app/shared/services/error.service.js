@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var errorService = /*@ngInject*/ function updateService($http, $q, $filter, JSONURL) {
+    var errorService = /*@ngInject*/ function errorService($http, $q, $filter, API, JSONURL) {
 
         return {
 
@@ -17,6 +17,19 @@ define([
                         throw new Error('errorService:getData: ' + err);
                     });
             },
+
+            createErrorReport: function createErrorReport(data) {
+                return $http({
+                    url: API + '/errorreports',
+                    method: 'POST'
+                })
+                .then(function(response) {
+                    console.log(response);
+                })
+                .catch(function(err) {
+                    console.log('Error creating error report', err);
+                });
+            }
 
         };
 

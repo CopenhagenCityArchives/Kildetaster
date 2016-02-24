@@ -1,12 +1,3 @@
-<aside class="span3" id="sidebar1">
-    <div class="module">
-        <div data-sdk-app ng-include="'sdk/templates/search.facets.tpl.html'" ng-controller="searchFacetsController"></div>       
-    </div>
-</aside>
-
-<section id="main" class="span9">
-    <div id="content-wrap">
-        <div data-sdk-app ng-include="'sdk/templates/search.tpl.html'" ng-controller="searchController" class="sdk-search"></div>
-    </div>
-</section>
-
+<div data-sdk-search-app class="sdk-search">
+    <div ui-view></div>
+</div>

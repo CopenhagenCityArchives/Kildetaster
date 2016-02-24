@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var searchController = /*@ngInject*/ function opentasksController($scope, $rootScope, searchService) {
+    var searchController = /*@ngInject*/ function opentasksController($scope, $rootScope, searchService, availableFields) {
 
         $scope.loading = false;
 
@@ -24,53 +24,6 @@ define([
         $scope.removeField = function removeField(fieldIndex) {
             $scope.config.splice(fieldIndex, 1);
         };
-
-
-        function buildSolrValue(configRow) {
-            var operator;
-
-            switch (configRow.operator) {
-                case 'startsWith':
-                    operator = configRow.term + '*';
-                    break;
-                case 'endsWith':
-                    operator = '*' + configRow.term;
-                    break;
-                case 'contains':
-                    operator = '*' + configRow.term + '*';
-            }
-
-            return operator;
-        }
-
-        /**
-        *
-        * @return {array} A list of the fields that are facetable
-        */
-        function buildFacetsForQuery(config) {
-            var arr = [];
-            config.forEach(function(field) {
-                if (field.facetable === '1') {
-                    arr.push(field.solr_name);
-                }
-            });
-            return arr;
-        }
-
-        /**
-        * Build the string that matches the current query
-        */
-        function buildSolrQuery(arr) {
-            var rtn = [];
-
-            arr.forEach(function(row) {
-                if (row.field !== undefined) {
-                    rtn.push(encodeURIComponent(row.field.solr_name + ':' + buildSolrValue(row)));
-                }
-            });
-
-            return rtn.join(' AND ');
-        }
 
         /**
         * Build data object for facets, based on the facet array given from the backend
@@ -114,11 +67,14 @@ define([
         /**
         * Execute the search
         */
-        $scope.doSearch = function doSearch() {
+        $scope.doSearch = function doSearch(query, facets) {
             
             $scope.searching = true;
+
+            query = query || $scope.config;
+            facets = facets || $scope.fields;
           
-            searchService.search(buildSolrQuery($scope.config), buildFacetsForQuery($scope.fields)).then(function(response) {
+            searchService.search(query, facets).then(function(response) {
                 $scope.results = response.response;
                 $scope.facets = response.facet_counts.facet_fields;
                 
@@ -135,17 +91,19 @@ define([
             
         };
 
+        if (searchService.currentSearchConfig !== null) {
+            $scope.config = searchService.currentSearchConfig.query;
+            $scope.doSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets);
+        }
+
         $scope.init = function init() {
 
-            $scope.loading = true;
+            //Add empty row if no config exist
+            if ($scope.config.length === 0) {
+                $scope.config.push({});
+            }
 
-            $scope.config.push({});
-
-            searchService.getFields().then(function(response) {
-                $scope.fields = response[0].fields;
-            });
-
-            //$scope.doSearch();
+            $scope.fields = availableFields;
             
         };
 

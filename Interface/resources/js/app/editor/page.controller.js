@@ -4,14 +4,10 @@ define([
 
     var editorController = /*@ngInject*/ function editorController($scope, $state, taskData, pageData, $location, $timeout, $rootScope) {       
 
-        $scope.nextPageId = pageData.nextPageId;
-        $scope.prevPageId = pageData.prevPageId;
-
-        $scope.pageNumber = pageData.pageNumber;
-
-        $scope.pageTotal = taskData.pagesTotal;
+        $scope.pageNumber = pageData.page_number;
 
         $scope.goToPageId = null;
+        
         $scope.goToPage = function goToPage($event) {
             
             //Enter key
@@ -30,11 +26,13 @@ define([
                 type: 'image',
                 url: pageData.image_url,
                 navigatorPosition: 'TOP_LEFT',
-                overlays: pageData.overlays
-            }
+                overlays: pageData.posts
+            },
+            next_post: pageData.next_post
 
         };
 
+        //Zooom to given area ?
         if (pageData.editArea) {
             $scope.editArea = pageData.editArea;
         }

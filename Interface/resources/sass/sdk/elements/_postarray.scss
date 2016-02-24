@@ -1,0 +1,16 @@
+.postarray {
+    strong {
+        display: block;
+    }
+
+    li {
+        line-height: 24px;
+
+        padding-right: 4px;
+        padding-left: 4px;
+    }
+
+    li:nth-child(odd) {
+        background-color: $lighter-gray;
+    }
+}

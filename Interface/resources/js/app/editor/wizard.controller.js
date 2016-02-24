@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var wizardController = /*@ngInject*/ function wizardController($scope, $rootScope, stepService, $stateParams, $location, $state, $timeout, $http, Flash) {
+    var wizardController = /*@ngInject*/ function wizardController($scope, $rootScope, stepService, $stateParams, pageData, $location, $state, $timeout, $http, Flash) {
 
         //Indicates if we should show the controls for accepting a new area (used on all other steps than the first)
         $scope.showSelectionControls = false;
@@ -128,7 +128,7 @@ define([
 
             var postData = $scope.values;
 
-            postData.page_id = $stateParams.pageId;
+            postData.page_id = pageData.id;
             postData.task_id = $stateParams.taskId;
             postData.post = $scope.selectedAreaRect;
 

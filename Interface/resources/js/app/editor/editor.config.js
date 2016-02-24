@@ -27,6 +27,7 @@ define([
                      */
                     taskData: function($stateParams, taskService) {
                         return taskService.getTask($stateParams.taskId).then(function(response) {
+                            console.log('TaskData', response);
                             return response;
                         });
                     }
@@ -55,7 +56,7 @@ define([
 
                         var deferred = $q.defer();
 
-                        pageService.getPage($stateParams.pageId).then(function(response) {
+                        pageService.getPageById($stateParams.pageId).then(function(response) {
 
                             if (response) {
                                 deferred.resolve(response);
@@ -86,7 +87,7 @@ define([
                     },
 
                     'pageDetails': {
-                        templateUrl: 'editor/page.details.tpl.html',
+                        templateUrl: 'editor/page.footer.tpl.html',
                         controller: 'pageController'
                     }
                 },
@@ -100,7 +101,7 @@ define([
 
                         var deferred = $q.defer();
 
-                        pageService.getPageUpdate($stateParams.pageId).then(function(response) {
+                        pageService.getPageById($stateParams.pageId).then(function(response) {
 
                             if (response) {
                                 deferred.resolve(response);
