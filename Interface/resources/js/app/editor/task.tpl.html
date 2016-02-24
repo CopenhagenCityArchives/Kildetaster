@@ -37,9 +37,7 @@
 <section ui-view></section>
 
 <footer class="row">
-    <div class="col-sm-12 text-center">
-        <a href ng-click="goToNextAvailablePage()">{{TEXT.PAGE_NEXTAVAILABLE}}</a>
-        
-        <div class="page-details" ui-view="pageFooter"></div>
+    <div class="col-sm-12 text-center">       
+        <div ui-view="pageFooter"></div>
     </div>
 </footer>
