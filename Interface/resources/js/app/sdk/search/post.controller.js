@@ -19,7 +19,6 @@ define([
             $scope.errorReportingEnabled = !$scope.errorReportingEnabled;
         };
 
-        //TODO: Move to helpers
         $scope.getImageUrl = function getImageUrl() {
             return helpers.getImageUrlByPostId(resultData.postId);
         };
