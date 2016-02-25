@@ -23,7 +23,7 @@ define([
                     $location.search({ stepId: 1});
                 }, 0);
 
-                $state.go('.', { pageId: response.pages_id});     
+                $state.go('editor.page', { pageId: response.pages_id});     
             });
                    
         };
@@ -42,7 +42,7 @@ define([
                         Flash.create('warning', 'Siden med nummer ' + pageNumber +  ' findes ikke');
                     }
                     else {
-                        $state.go('.', { 
+                        $state.go('editor.page', { 
                             pageId: response.id
                         });
                     }
@@ -64,7 +64,7 @@ define([
                     Flash.create('warning', 'Siden med nummer ' + pageNumber +  ' findes ikke');
                 }
                 else {
-                    $state.go('.', { 
+                    $state.go('editor.page', { 
                         pageId: response.id
                     });
                 }
@@ -88,7 +88,7 @@ define([
                     Flash.create('warning', 'Siden med nummer ' + pageNumber +  ' findes ikke');
                 }
                 else {
-                    $state.go('.', { 
+                    $state.go('editor.page', { 
                         pageId: response.id
                     });
                 }
