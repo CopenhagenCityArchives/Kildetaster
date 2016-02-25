@@ -12,7 +12,8 @@ define([
             scope: {
                 data: '=',
                 errorReporting: '=',
-                report: '&'
+                report: '&',
+                toEditor: '&'
             },
             
             link: function(scope, element, attr) {
@@ -36,7 +37,17 @@ define([
                         fieldData: field
                     });
 
-                };   
+                    field.showErrorsForm = false;
+
+                };  
+
+                scope.goToEditor = function(group) {
+                    console.log('group', group);
+                    scope.toEditor({ 
+                        field: group
+                    });
+
+                };
 
             }
         };

@@ -80,6 +80,8 @@ define([
 
                         var deferred = $q.defer();
 
+                        var taskId;
+
                         searchService.paginatedSearch(searchService.currentSearchConfig.query, $stateParams.index - 1)
                         .then(function(response) {
                             
@@ -87,6 +89,7 @@ define([
                             data.number = $stateParams.index;
 
                             var postId = response.response.docs[0].post_id;
+                            taskId = response.response.docs[0].task_id;
                             
                             data.postId = postId;
 
@@ -97,14 +100,11 @@ define([
                             data.post = response.data;
                             data.metadata = response.metadata;
                             data.errorReports = response.error_reports;
-
+                            data.taskId = taskId;
 
                             deferred.resolve(data);
                             
-                            return  data;
-                            //$scope.errorReports = response.error_reports;
-                            //$scope.metadata = response.metadata;
-                            //$scope.post = response.data;
+                            return data;
                         });
 
                         return deferred.promise;

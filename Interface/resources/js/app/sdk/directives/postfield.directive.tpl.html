@@ -1,16 +1,27 @@
 <section>
     <h4>{{data.label}}</h4>
 
-    <div class="postfield" ng-repeat="field in data.fields">
+    <button ng-click="goToEditor(data)">Til kildetaster</button>
+
+    <div class="postfield" ng-repeat="field in data.fields" ng-class="{ error: field.error }">
 
         <div ng-if="!isArray(field)">
             <strong>{{field.label}}</strong>
-            <span>{{field.value}}</span> <a href ng-if="errorReporting" ng-click="toggleErrorReporting(field)"><i class="icon-exclamation-sign"></i></a>
+            <span>{{field.value}}</span> 
+            <a href ng-if="errorReporting && !field.error" ng-click="toggleErrorReporting(field)">
+                <i class="icon-exclamation-sign"></i>
+            </a>
+            <span ng-if="field.error">
+                
+                <i class="icon-exclamation-sign" title="{{field.error.comment}}"></i>
+            </span>
         </div>
         
         <div ng-if="isArray(field)">
             {{field[0].value}} <a href ng-if="errorReporting" ng-click="toggleErrorReporting(field)"><i class="icon-exclamation-sign"></i></a>
         </div>
+
+
 
         <div class="error-reporting" ng-if="errorReporting && field.showErrorForm">
             <div class="row-fluid">
