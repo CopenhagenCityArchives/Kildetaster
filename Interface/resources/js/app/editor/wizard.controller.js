@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var wizardController = /*@ngInject*/ function wizardController($scope, $rootScope, stepService, $stateParams, pageData, $location, $state, $timeout, $http, Flash) {
+    var wizardController = /*@ngInject*/ function wizardController($scope, $rootScope, stepService, $stateParams, pageData, $location, $state, $timeout, $http, Flash, API) {
 
         //Indicates if we should show the controls for accepting a new area (used on all other steps than the first)
         $scope.showSelectionControls = false;
@@ -134,17 +134,18 @@ define([
 
             $http({
                 method: 'POST',
-                url: 'http://kbhkilder.dk/1508/stable/api/entries/',
+                url: API + '/entries/',
                 data: postData
             }).then(function(response) {
+                if (response.indexOf('post_id') !== -1) {
+                    $state.go('.done', {}, { reload: true });
+                }
+                else {
+                    Flash.create('danger', response);
+                }
                 
-                console.log(response);
-
-                //$state.go('.done', {}, { reload: true });
             }).catch(function(err) {
-                console.log('post err', err);
-            }).finally(function() {
-                //console.log('SAVED!');
+                Flash.create('danger', err.data);
             });
 
 
