@@ -25,12 +25,11 @@ define([
                     /**
                      * Load project data and pass it to the controller
                      */
-                    taskData: function($stateParams, taskService) {
+                    taskData: ['$stateParams', 'taskService', function($stateParams, taskService) {
                         return taskService.getTask($stateParams.taskId).then(function(response) {
-                            console.log('TaskData', response);
                             return response;
                         });
-                    }
+                    }]
                 }
 
             })
@@ -52,14 +51,24 @@ define([
                     /**
                      * Load page data and pass it to the controller
                      */
-                    pageData: function($stateParams, pageService, $q) {
+                    pageData: ['$stateParams', 'pageService', '$q', '$state', '$timeout', function($stateParams, pageService, $q, $state, $timeout) {
 
                         var deferred = $q.defer();
 
                         pageService.getPageById($stateParams.pageId).then(function(response) {
 
                             if (response) {
+
                                 deferred.resolve(response);
+
+                                //If we do not have a next_post, the page is 'done' and no more posts can be created
+                                if (response.next_post === false) {
+                                    $timeout(function() {
+                                        //Redirect to pageIsDone
+                                        $state.go('editor.page.pageIsDone');
+                                    }, 0);
+                                }
+                                
                             } else {
                                 deferred.reject('Error', response);
                             }
@@ -68,14 +77,12 @@ define([
 
                         return deferred.promise;
 
-                    }
+                    }]
                 }
             })
 
             .state('editor.update', {
-
-                url: '/page/{pageId:int}/update/{updateId:int}',
-                
+                url: '/post/{postId:int}',
                 views: {
                     '@editor.update': {
                         templateUrl: 'editor/update/updateFields.tpl.html',
@@ -83,51 +90,99 @@ define([
                     },
                     '': {
                         templateUrl: 'editor/update/page.tpl.html',
-                        controller: 'pageController'
+                        controller: 'updateController'
+                        
                     },
-
-                    'pageDetails': {
-                        templateUrl: 'editor/page.footer.tpl.html',
-                        controller: 'pageController'
-                    }
+                    // '': {
+                    //     templateUrl: 'editor/update/page.tpl.html',
+                    //     controller: 'pageController'
+                    // }
                 },
-               
                 resolve: {
-
-                     /**
-                     * Load page data and pass it to the controller
-                     */
-                    pageData: function($stateParams, pageService, $q) {
-
+                    
+                    postData: ['$stateParams','$q', 'entryService', 'errorService', function($stateParams, $q, entryService, errorService) {
+                        
                         var deferred = $q.defer();
 
-                        pageService.getPageById($stateParams.pageId).then(function(response) {
+                        var data = {
+                            postId: $stateParams.postId
+                        };
 
-                            if (response) {
-                                deferred.resolve(response);
-                            } else {
-                                deferred.reject('Error', response);
-                            }
-
-                        });
+                        errorService.getErrorReports({
+                            task_id: $stateParams.taskId,
+                            post_id: $stateParams.postId
+                        })
+                        .then(function(response) {
+                            data.errorReports = response;
+                            return entryService.getEntry(12);
+                        })
+                        .then(function(response) {
+                            data.entryData = response;
+                            deferred.resolve(data);
+                        });                        
 
                         return deferred.promise;
 
-                    },
-                   
-                    updateData: function($stateParams, $q, updateService) {
-
-                        var deferred = $q.defer();
-
-                        updateService.getData().then(function(response) {
-                            deferred.resolve(response);
-                        });
-
-                        return deferred.promise;
-
-                    }
-                }
+                    }]
+                }           
             })
+
+            // .state('editor.update', {
+
+            //     url: '/page/{pageId:int}/update/{updateId:int}',
+                
+            //     views: {
+            //         '@editor.update': {
+            //             templateUrl: 'editor/update/updateFields.tpl.html',
+            //             controller: 'updateFieldsController',
+            //         },
+            //         '': {
+            //             templateUrl: 'editor/update/page.tpl.html',
+            //             controller: 'pageController'
+            //         },
+
+            //         'pageDetails': {
+            //             templateUrl: 'editor/page.footer.tpl.html',
+            //             controller: 'pageController'
+            //         }
+            //     },
+               
+            //     resolve: {
+
+            //          /**
+            //          * Load page data and pass it to the controller
+            //          */
+            //         pageData: function($stateParams, pageService, $q) {
+
+            //             var deferred = $q.defer();
+
+            //             pageService.getPageById($stateParams.pageId).then(function(response) {
+
+            //                 if (response) {
+            //                     deferred.resolve(response);
+            //                 } else {
+            //                     deferred.reject('Error', response);
+            //                 }
+
+            //             });
+
+            //             return deferred.promise;
+
+            //         },
+                   
+            //         updateData: function($stateParams, $q, updateService) {
+
+            //             var deferred = $q.defer();
+
+            //             updateService.getData().then(function(response) {
+            //                 deferred.resolve(response);
+            //             });
+
+            //             return deferred.promise;
+
+            //         }
+            //     }
+            // })
 
             .state('editor.page.notfound', {
                 url: '',
@@ -151,20 +206,41 @@ define([
                 controller: 'wizardController',
                 resolve: {
 
+                    isFull: ['$state', '$timeout', 'pageData', function($state, $timeout, pageData) {
+
+                        if (pageData.next_post === false) {
+                            $timeout(function() {
+                                $state.go('editor.page.pageIsDone');
+                            }, 0);
+                        }
+
+                        return true;
+                    }],
+
                     /**
                     * Test if we are starting from stepId == 1, and if not redirect to stepId = 1
                     * We can do this because the route is set to not to reload on search. The changes
                     * are instead handled via a watcher in the wizardController
                     */
-                    fromStart: function($q, $stateParams, $location) {
+                    fromStart: ['$q', '$stateParams', '$location', function($q, $stateParams, $location) {
                         var deferred = $q.defer();
 
                         if ($stateParams.stepId !== 1) {
-                            $location.search({ stepId: 1 });
+                            //$location.search({ stepId: 1 });
                         }
                         deferred.resolve();
 
                         return deferred.promise;
+                    }]
+                }
+            })
+
+            .state('editor.page.pageIsDone', {
+
+                url: '/done',
+                views: {
+                    '': {
+                        templateUrl: 'editor/page.done.tpl.html'
                     }
                 }
             })
