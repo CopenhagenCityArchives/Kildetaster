@@ -21,26 +21,14 @@ module.exports = {
                 // add vendor prefixes
                 require('autoprefixer')({
                     browsers: 'last 2 versions'
+                }),
+                require('postcss-assets')({
+                    loadPaths: ['/resources/images/'],
+                    basePath: '_prototype/'
                 })
             ]
         },
 
-        src: '<%= package.prototyperesources %>/css/styles.css',
-        dest: '<%= package.prototyperesources %>/css/styles.css'
-    },
-
-
-    development: {
-        options: {
-            processors: [
-                // add vendor prefixes
-                require('autoprefixer')({
-                    browsers: 'last 2 versions'
-                }),
-                // minify the result
-                require('cssnano')()
-            ]
-        },
         src: '<%= package.prototyperesources %>/css/styles.css',
         dest: '<%= package.prototyperesources %>/css/styles.css'
     },
@@ -52,12 +40,35 @@ module.exports = {
                 require('autoprefixer')({
                     browsers: 'last 2 versions'
                 }),
+                require('postcss-assets')({
+                    loadPaths: ['/resources/images/'],
+                    basePath: '_sdk/'
+                }),
+                // minify the result
+                //require('cssnano')()
+            ]
+        },
+        src: '<%= package.sdkresources %>/css/sdk.css',
+        dest: '<%= package.sdkresources %>/css/sdk.css'
+    },
+
+    development: {
+        options: {
+            processors: [
+                // add vendor prefixes
+                require('autoprefixer')({
+                    browsers: 'last 2 versions'
+                }),
+                require('postcss-assets')({
+                    loadPaths: ['/resources/images/'],
+                    basePath: 'kbh/'
+                }),
                 // minify the result
                 require('cssnano')()
             ]
         },
-        src: '<%= package.sdkresources %>/css/styles.css',
-        dest: '<%= package.sdkresources %>/css/styles.css'
+        src: '<%= package.prototyperesources %>/css/styles.css',
+        dest: '<%= package.prototyperesources %>/css/styles.css'
     },
 
     production: {
@@ -66,6 +77,10 @@ module.exports = {
                 // add vendor prefixes
                 require('autoprefixer')({
                     browsers: 'last 2 versions'
+                }),
+                require('postcss-assets')({
+                    loadPaths: ['/resources/images/'],
+                    basePath: 'kbh/'
                 }),
                 // minify the result
                 require('cssnano')()

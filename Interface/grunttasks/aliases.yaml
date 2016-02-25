@@ -17,6 +17,7 @@ sdk:
     - 'ngconstant:prototype'
     - 'copy:sdk'
     - 'sass:sdk'
+    - 'postcss:sdk'
     - 'bake:sdk'
     - 'karma:prototype'
     - 'express:prototype'
@@ -54,7 +55,7 @@ build:
     - 'requirejs:sdkProduction'
     
     - 'ngAnnotate:production'
-    - 'uglify:production'
+#    - 'uglify:production'
     - 'bake:production'
     
     - 'sass:production'
