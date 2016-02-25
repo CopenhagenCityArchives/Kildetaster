@@ -77,8 +77,8 @@ define([
             var pageNumber = parseInt(pageData.page_number) - 1,
                 unitId = pageData.unit_id;
 
-            if (pageNumber <= 1) {
-                Flash.create('warning', 'Siden med nummer ' + pageNumber +  ' findes ikke');
+            if (pageNumber === 0) {
+                Flash.create('warning', 'Du er på første side');
                 return;
             }
 
