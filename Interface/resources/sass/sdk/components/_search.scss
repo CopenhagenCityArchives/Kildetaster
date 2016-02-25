@@ -1,4 +1,6 @@
 .sdk-search {
+    margin-top: 40px;
+
     > .row-fluid {
         padding-right: 15px;
         padding-left: 15px;
@@ -60,7 +62,7 @@
             height: 11px;
             margin-right: 10px;
 
-            content: url("/resources/images/icon_plus.svg");
+            content: inline("resources/images/icon_plus.svg");
         }
     }
 
