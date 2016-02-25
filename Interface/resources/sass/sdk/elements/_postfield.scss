@@ -3,4 +3,11 @@
     strong {
         display: block;
     }
+
+    &.error {
+        i {
+            //background-color: yellow;
+            color: red;
+        }
+    }
 }

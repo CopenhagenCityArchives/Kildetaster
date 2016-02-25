@@ -19,9 +19,8 @@ define([
                 task_id: unit.tasks[0].tasks_id,
                 unit_id: unit.id
             }).then(function(response) {
-                var pageId = response.data[0].pages_id;
+                var pageId = response.pages_id;
                 window.location.href = EDITORURL + '/#/task/' + unit.tasks[0].tasks_id + '/page/' + pageId;
-
             });
         };
 
