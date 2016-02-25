@@ -180,6 +180,7 @@ define([
                 })
                 .catch(function(err) {
                     console.log('Error getting post data', err);
+                    alert(err.data);
                 });
             }
         };
