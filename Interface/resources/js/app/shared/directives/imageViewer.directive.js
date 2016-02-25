@@ -45,6 +45,13 @@ define([
                     }
                     return overlayData.map(function(data) {
                         data.className = 'imageViewer__done';
+                        
+                        //TODO remove this when backend is updated to return floats and not string values
+                        data.x = parseFloat(data.x);
+                        data.y = parseFloat(data.y)
+                        data.width = parseFloat(data.width);
+                        data.height = parseFloat(data.height);
+
                         return data;
                     });
                 }
@@ -52,6 +59,7 @@ define([
                 //Add class all given overlays to render them as existing
                 $scope.options.tileSources.overlays = addClassToOverlay($scope.options.tileSources.overlays);
 
+            
                 opts = angular.extend({}, {
 
                     element: angular.element('.target')[0],
@@ -98,6 +106,9 @@ define([
 
                 //Initialize the viewer
                 viewer = OpenSeadragon(opts);
+                //var imagingHelper = viewer.activateImagingHelper();
+
+
 
                 viewer.addHandler('add-overlay', function(overlay) {
 
@@ -127,12 +138,17 @@ define([
                         return;
                     }
 
+                    //Get the settings for the old overlay
                     var x = selectionOverlay.location.x;
                     var y = selectionOverlay.location.y;
                     var height = selectionOverlay.location.height;
                     var width = selectionOverlay.location.width;
 
+                    //Create a selection based on the previous overlay
                     var selectionRect = new OpenSeadragon.SelectionRect(x, y, width, height);
+
+                    //Remove the old selection
+                    viewer.removeOverlay(selectionOverlay.element);
 
                     selection.rect = selectionRect;
                     selection.draw();
@@ -171,23 +187,24 @@ define([
                 //Else prepare a new rect object with initial selection
                 else {
                     //Did we get info from the backend about where to place the next post?
-                    if ($scope.options.next_post) {
+                    if ($scope.options.next_post && $scope.options.next_post !== false) {
                         var next = $scope.options.next_post;
-                        rect = new OpenSeadragon.SelectionRect(next.x, next.y, next.width, next.height);
-                    }
-                    //If we did not get any information, make a generic area
-                    else {
-                        rect = new OpenSeadragon.SelectionRect(0.25, 0.6, 0.42, 0.45);
-                    }
 
-                    //When the directive is initialized, make sure we listen for key events on the selection area
-                    createKeyTracker();    
+                        //Hack, multiply with aproximate aspect ratio on the image, to make up for backend calculation
+                        // @see https://openseadragon.github.io/examples/viewport-coordinates/
+                        var realHeight = 0.33 * 1.4;
+                        
+                        rect = new OpenSeadragon.SelectionRect(next.x, next.y, next.width, realHeight);
+                        //custom default
+                        //     rect = new OpenSeadragon.SelectionRect(0.25, 0.6, 0.42, 0.45);
+
+                        //When the directive is initialized, make sure we listen for key events on the selection area
+                        createKeyTracker();
+                    }                   
                      
                 }
 
-                //Selection plugin
-                //https://github.com/picturae/openseadragonselection
-                selection = viewer.selection({
+                var selectionConfig = {
 
                     onSelection: function(rect) {
 
@@ -239,7 +256,11 @@ define([
                             DOWN: 'selection_cancel_pressed.png'
                         },
                     }
-                });
+                };
+
+                //Selection plugin
+                //https://github.com/picturae/openseadragonselection
+                selection = viewer.selection(selectionConfig);
 
                     //Store default keyhandler, so that we can reenable it
                 var tmp = viewer.innerTracker.keyDownHandler,
@@ -251,7 +272,7 @@ define([
                 * the keyboard
                 */
                 function createKeyTracker() {
-
+                    
                     // Based on http://stackoverflow.com/questions/5203407/javascript-multiple-keys-pressed-at-once
                     tracker = new OpenSeadragon.MouseTracker({
 
@@ -346,7 +367,7 @@ define([
 
                 //Cleanup
                 $scope.$on('destroy', function() {
-                    tracker.destroy();
+                    removeKeyTracker();
                     viewer.destroy();
                 });
             }
