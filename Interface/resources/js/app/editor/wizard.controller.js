@@ -148,9 +148,6 @@ define([
                 Flash.create('danger', err.data);
             });
 
-
-
-
         };
 
         /**
@@ -208,7 +205,7 @@ define([
         /**
          * Load step data from the server
          */
-        stepService.getData().then(function(response) {
+        stepService.getData(1).then(function(response) {
 
             //The schema setup
             $scope.schema = response.schema;

@@ -3,30 +3,30 @@ define([
 
 ], function() {
 
-    var stepService = /*@ngInject*/ function stepService(Flash, $timeout, $q, $http, JSONURL, $filter) {
-
-        var useReal = true;
+    var stepService = /*@ngInject*/ function stepService(Flash, $timeout, $q, $http, API, $filter) {
 
         return {
 
-            getData: function getData() {
+            getData: function getData(taskId) {
 
                 var resultStep = {
                     "title": "Udfyldt"
                 };
 
-                var jsonSource = useReal ? 'http://kbhkilder.dk/1508/stable/api/taskschema/' : JSONURL + '/steps_kbh2.json';
+                var jsonSource = API + '/api/taskschema/';
                 
                 return $http({
                     url: jsonSource,
-                    params: {   
-                        task_id: 1
+                    params: {  
+                        task_id: taskId
                     }
                 })
 
                 .then(function(response) {
 
                     response.data.steps.push(resultStep);
+
+                    console.log('mef', response.data);
 
                     return response.data;
                 })

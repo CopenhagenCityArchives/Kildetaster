@@ -19,7 +19,13 @@ define([
     'app/shared/services/page.service',
     'app/shared/services/user.service',
     'app/shared/services/update.service',
+    
     'app/shared/services/error.service',
+    'app/shared/services/entry.service',
+    
+    'app/shared/services/post.service',
+
+    'app/shared/services/helpers.service',
 
     'app/shared/filters/nameFromObject.filter',
 
@@ -46,7 +52,13 @@ define([
     pageService,
     userService,
     updateService,
+    
     errorService,
+    entryService,
+    
+    postService,
+
+    helpersService,
 
     nameFromObjectFilter,
 
@@ -73,7 +85,11 @@ define([
     sharedApp.factory('userService', userService);
     sharedApp.factory('updateService', updateService);
     sharedApp.factory('errorService', errorService);
+    sharedApp.factory('entryService', entryService);
+    sharedApp.factory('postService', postService);
 
+    sharedApp.factory('helpers', helpersService);
+    
     sharedApp.filter('nameFromObject', nameFromObjectFilter);
 
     sharedApp.constant('TEXT', textConstant);

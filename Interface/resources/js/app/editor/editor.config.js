@@ -81,43 +81,56 @@ define([
                 }
             })
 
-            .state('editor.update', {
+            .state('editor.page.update', {
                 url: '/post/{postId:int}',
                 views: {
-                    '@editor.update': {
+                    '': {
                         templateUrl: 'editor/update/updateFields.tpl.html',
                         controller: 'updateFieldsController',
-                    },
-                    '': {
-                        templateUrl: 'editor/update/page.tpl.html',
-                        controller: 'updateController'
-                        
-                    },
-                    // '': {
-                    //     templateUrl: 'editor/update/page.tpl.html',
-                    //     controller: 'pageController'
-                    // }
+                    }
                 },
                 resolve: {
                     
-                    postData: ['$stateParams','$q', 'entryService', 'errorService', function($stateParams, $q, entryService, errorService) {
+                    postData: ['$stateParams','$q', 'entryService', 'postService', 'errorService', function($stateParams, $q, entryService, postService, errorService) {
                         
-                        var deferred = $q.defer();
+                        var deferred = $q.defer(),
+                            data = {
+                                postId: $stateParams.postId
+                            };                       
 
-                        var data = {
-                            postId: $stateParams.postId
-                        };
+                        postService.getData($stateParams.postId).then(function(response) {
 
-                        errorService.getErrorReports({
-                            task_id: $stateParams.taskId,
-                            post_id: $stateParams.postId
+                            //Get the entry id from the first item in the array
+                            //All items in the array have the same entryId
+                            //TODO: Get an updated api in the backend to retur the entryId in the metadata property instead
+                            data.entryId = response.data[0].entry_id;
+
+                            return entryService.getEntry(data.entryId);
+                            
                         })
                         .then(function(response) {
+
+                            var redo = {};
+
+                            //TODO: Get backend to output correct format
+                            redo.persons = response.persons;
+                            redo.persons.positions = response.positions;
+                            redo.persons.deathcauses = response.deathcauses;
+                            redo.persons.addresses = response.addresses;
+                            redo.persons.burials = response.burials;
+
+                            data.entryData = redo;
+
+                            return errorService.getErrorReports({
+                                task_id: $stateParams.taskId,
+                                post_id: $stateParams.postId
+                            });
+                                                    
+                        })
+                        .then(function(response) {
+
                             data.errorReports = response;
-                            return entryService.getEntry(12);
-                        })
-                        .then(function(response) {
-                            data.entryData = response;
+
                             deferred.resolve(data);
                         });                        
 
@@ -126,63 +139,6 @@ define([
                     }]
                 }           
             })
-
-            // .state('editor.update', {
-
-            //     url: '/page/{pageId:int}/update/{updateId:int}',
-                
-            //     views: {
-            //         '@editor.update': {
-            //             templateUrl: 'editor/update/updateFields.tpl.html',
-            //             controller: 'updateFieldsController',
-            //         },
-            //         '': {
-            //             templateUrl: 'editor/update/page.tpl.html',
-            //             controller: 'pageController'
-            //         },
-
-            //         'pageDetails': {
-            //             templateUrl: 'editor/page.footer.tpl.html',
-            //             controller: 'pageController'
-            //         }
-            //     },
-               
-            //     resolve: {
-
-            //          /**
-            //          * Load page data and pass it to the controller
-            //          */
-            //         pageData: function($stateParams, pageService, $q) {
-
-            //             var deferred = $q.defer();
-
-            //             pageService.getPageById($stateParams.pageId).then(function(response) {
-
-            //                 if (response) {
-            //                     deferred.resolve(response);
-            //                 } else {
-            //                     deferred.reject('Error', response);
-            //                 }
-
-            //             });
-
-            //             return deferred.promise;
-
-            //         },
-                   
-            //         updateData: function($stateParams, $q, updateService) {
-
-            //             var deferred = $q.defer();
-
-            //             updateService.getData().then(function(response) {
-            //                 deferred.resolve(response);
-            //             });
-
-            //             return deferred.promise;
-
-            //         }
-            //     }
-            // })
 
             .state('editor.page.notfound', {
                 url: '',

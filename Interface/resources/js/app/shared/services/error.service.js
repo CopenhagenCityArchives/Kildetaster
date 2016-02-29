@@ -18,16 +18,34 @@ define([
                     });
             },
 
-            createErrorReport: function createErrorReport(data) {
+
+            createErrorReport: function createErrorReport(params) {
+
                 return $http({
                     url: API + '/errorreports',
-                    method: 'POST'
+                    method: 'POST',
+                    data: params
                 })
                 .then(function(response) {
                     console.log(response);
                 })
                 .catch(function(err) {
                     console.log('Error creating error report', err);
+                });
+            },
+
+            getErrorReports: function getErrorReports(params) {
+                
+                return $http({
+                    url: API + '/errorreports',
+                    method: 'GET',
+                    params: params
+                })
+                .then(function(response) {
+                    return response.data;
+                })
+                .catch(function(err) {
+                    console.log('Error getting error reports', err);
                 });
             }
 
