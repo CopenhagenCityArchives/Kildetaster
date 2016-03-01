@@ -15,10 +15,10 @@
             <div class="task-list__item">
                 <div class="row">
                     <div class="span8">
-                        <progress-bar total-pages="unit.pages" done-pages="unit.tasks[0].pages_done"></progress-bar>
+                        <progress-bar total-pages="unit.pages" done-pages="unit.pages_done"></progress-bar>
                     </div>
                     <div class="span4 text-center">
-                        <span>{{unit.tasks[0].pages_done}}/{{unit.pages}}</span>
+                        <span>{{unit.pages_done}}/{{unit.pages}}</span>
                     </div>
                     <!-- <div class="span12 text-left">
                         <a href>Se statistik</a>
@@ -34,7 +34,7 @@
             </div>
         </li>
     </ul>
-    <div ng-if="tasks.length == 0" class="alert text-center">
+    <div ng-if="units.length == 0" class="alert text-center">
         Henter data
     </div>
 </div>
