@@ -101,8 +101,7 @@ define([
     sharedApp.factory('postService', postService);
     
     sharedApp.factory('tokenService', tokenService);
-    //TODO tokenFactory
-
+    sharedApp.factory('tokenFactory', tokenFactory);
 
     sharedApp.factory('helpers', helpersService);
     
@@ -113,6 +112,11 @@ define([
     sharedApp.run(function ($rootScope, TEXT) {
         $rootScope.TEXT = TEXT;
     });
+
+    sharedApp.config(function($httpProvider) {
+        $httpProvider.interceptors.push('tokenFactory');
+    });
+
 
     return sharedApp;
 
