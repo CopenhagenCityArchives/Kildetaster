@@ -52,6 +52,7 @@ define([
 
                 //Add class all given overlays to render them as existing
                 $scope.options.tileSources.overlays = addClassToOverlay($scope.options.tileSources.overlays);
+                
 
             
                 opts = angular.extend({}, {
@@ -100,9 +101,6 @@ define([
 
                 //Initialize the viewer
                 viewer = OpenSeadragon(opts);
-                //var imagingHelper = viewer.activateImagingHelper();
-
-
 
                 viewer.addHandler('add-overlay', function(overlay) {
 
