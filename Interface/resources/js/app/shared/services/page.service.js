@@ -96,7 +96,7 @@ define([
                 })
 
                 .then(function(response) {
-                    deferred.resolve(response.data[0]);
+                    deferred.resolve(response.data);
                 })
                 .catch(function(err) {
                     console.log('Get next page error', err);
