@@ -30,8 +30,11 @@
                     </div>
                 </li>
             </ul>
-            <div ng-if="errorList.length == 0" class="alert text-center">
+            <div ng-if="loading" class="alert text-center">
                 Henter data
+            </div>
+            <div ng-if="errorList.length == 0 && !loading" class="alert text-center">
+                Ingen fejlmeldinger fundet
             </div>
 
         </div>
