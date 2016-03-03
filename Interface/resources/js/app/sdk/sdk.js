@@ -30,7 +30,7 @@ define([
 
     ang,
 
-    angularCookie,
+    ngStorage,
 
     sdkTemplates,
 
@@ -79,11 +79,6 @@ define([
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-sdk-app]'), ['sdk']);
     });
-
-    //Debugging for ui.router state issues
-    // app.run(($rootScope) => {
-    //     $rootScope.$on("$stateChangeError", console.log.bind(console));
-    // });
 
     return sdkApp;
 
