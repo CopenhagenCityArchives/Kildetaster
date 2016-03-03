@@ -21,7 +21,14 @@ define([
                         controller: 'taskController'
                     }
                 },
+
+                
                 resolve: {
+
+                    requestToken: ['$q', 'tokenService', function($q, tokenService) {
+                        return tokenService.requestToken();
+                    }],
+                   
                     /**
                      * Load project data and pass it to the controller
                      */
