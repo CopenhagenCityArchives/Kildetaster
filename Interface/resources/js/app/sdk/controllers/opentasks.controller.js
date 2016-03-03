@@ -4,11 +4,15 @@ define([
 
 ], function() {
 
-    var opentasksController = /*@ngInject*/ function opentasksController($scope, $http, taskService, pageService, EDITORURL) {
+    var opentasksController = /*@ngInject*/ function opentasksController(tokenService, $scope, $http, taskService, pageService, EDITORURL) {
 
         $scope.loading = false;
-
         $scope.units = [];
+
+        tokenService.requestToken().then(function() {
+            $scope.init({ taskId: 1 });
+        });
+        
 
         /**
         * Get the next available pageId, and redirect the user to that page in the editor
@@ -16,11 +20,11 @@ define([
         $scope.goToEditor = function goToEditor(unit) {
 
             pageService.getNextAvailablePage({
-                task_id: unit.tasks[0].tasks_id,
+                task_id: unit.tasks_id,
                 unit_id: unit.id
             }).then(function(response) {
                 var pageId = response.pages_id;
-                window.location.href = EDITORURL + '/#/task/' + unit.tasks[0].tasks_id + '/page/' + pageId;
+                window.location.href = EDITORURL + '/#/task/' + unit.tasks_id + '/page/' + pageId;
             });
         };
 
@@ -42,9 +46,7 @@ define([
             });
 
         };
-
-        $scope.init();
-
+        
     };
 
     return opentasksController;
