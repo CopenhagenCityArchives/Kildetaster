@@ -11,6 +11,19 @@ define([
 
         $scope.results = [];
 
+        $scope.operatorOptions = [
+            {
+                value: 'contains',
+                label: "Indeholder"
+            }, {
+                value: 'startsWith',
+                label: 'Starter med'
+            }, {
+                value: 'endsWith',
+                label: 'Slutter med'
+            }];
+
+
         /**
         * Add new row of config 
         */

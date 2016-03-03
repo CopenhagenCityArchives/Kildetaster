@@ -15,10 +15,10 @@
                     <div class="field">
                         <label>
                             Operator
-                            <select ng-model="row.operator">
-                                <option value="contains">Indeholder</option>
-                                <option value="startsWith">Starter med</option>
-                                <option value="endsWith">Slutter med</option>
+                            <select 
+                                ng-options="operator.value as operator.label for operator in operatorOptions" 
+                                ng-model="row.operator"
+                                ng-init="row.operator = operatorOptions[0].value">
                             </select>
                         </label>
                     </div>
