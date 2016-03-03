@@ -34,6 +34,9 @@ define([
                 });
             },
 
+            /**
+            * Both on a task, but also for a specifik user
+            */
             getErrorReports: function getErrorReports(params) {
                 
                 return $http({
