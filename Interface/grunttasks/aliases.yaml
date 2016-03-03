@@ -41,7 +41,7 @@ dev:
     - 'bake:prototype'
     - 'sass:development'
     - 'postcss:development'
-    - 'watchDevelopment'
+#    - 'watchDevelopment'
 
 build:
     - 'clean:production'
