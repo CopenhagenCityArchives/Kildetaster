@@ -27,12 +27,12 @@
                     <div class="field">
                         <label>
                             Søgeterm
-                            <input type="text" placeholder="Søgeterm" ng-model="row.term">
+                            <input type="text" placeholder="Søgeterm" ng-keypress="submitSearch($event)" ng-model="row.term">
                         </label>
                     </div>
                 </div>
-                <a href class="sdk-search__remove" ng-if="config.length > 1">
-                    <span class="sdk-icon delete" ng-click="removeField($index)"></span>
+                <a href class="sdk-search__remove" ng-click="removeField($index, $event)" ng-if="config.length > 1">
+                    <span class="sdk-icon delete"></span>
                 </a>
             </div>
         </div>

@@ -21,7 +21,8 @@ define([
         /**
         * Remove a given row, based on its index in the array
         */
-        $scope.removeField = function removeField(fieldIndex) {
+        $scope.removeField = function removeField(fieldIndex, event) {
+            event.preventDefault();
             $scope.config.splice(fieldIndex, 1);
         };
 
@@ -63,6 +64,17 @@ define([
 
             return found.name;
         }
+
+
+        //TODO move this to a directive
+        $scope.submitSearch = function submitSearch($event) {
+           
+            //Enter key
+            if ($event.charCode === 13) {
+               $scope.doSearch();
+            }
+            
+        };
 
         /**
         * Execute the search
