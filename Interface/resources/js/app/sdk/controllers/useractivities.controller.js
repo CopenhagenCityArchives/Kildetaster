@@ -16,12 +16,7 @@ define([
             $scope.init();
         });
 
-        /**
-        * Send browser to the editor on the page and task specified in the activity
-        */
-        $scope.goToEditor = function(data) {
-           window.location.href = EDITORURL + '/#/task/' + data.task_id + '/page/' + data.page_id
-        };
+        $scope.EDITORURL = EDITORURL;        
 
         $scope.init = function() {
 
@@ -32,6 +27,7 @@ define([
                 user_id: $scope.userId
             }).then(function(response) {
                 $scope.activities = response;
+
             }).finally(function() {
                 $scope.loading = false;
             });
