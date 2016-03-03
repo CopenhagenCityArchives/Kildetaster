@@ -1,0 +1,40 @@
+<div ng-controller="useractivitiesController">
+    <h3>Not ready yet</h3>
+    <div class="row-fluid">
+        <div class="span12">
+            <h2>Mine indtastninger</h2>
+            <ul class="unstyled task-list">
+                <li>
+                    <div class="task-list__header">Protokol / Kilde</div>
+                    <div class="task-list__header">Nået til</div>
+                    <div class="task-list__header"></div>
+                </li>
+                <li ng-repeat="activity in activities" ng-class="{ odd: $odd }" ng-if="activities.length > 0">
+
+                    <div class="task-list__item">
+                        {{activity.description}}
+                    </div>
+                    <div class="task-list__item">
+                       s. {{activity.page_number}}
+                    </div>
+                    <div class="task-list__item text-right">
+                        <button type="button" ng-click="goToEditor(activity)">Fortsæt</button>
+                    </div>
+                </li>
+            </ul>
+            <div ng-if="loading" class="alert text-center">
+                Henter data
+            </div>
+            <div ng-if="activities.length == 0 && !loading" class="alert text-center">
+                Ingen aktiviteter fundet
+            </div>
+
+        </div>
+
+        <div class="row-fluid" ng-if="false">
+            <div class="span12 text-center">
+                <a href>Se flere</a>
+            </div>
+        </div>
+    </div>
+</div>

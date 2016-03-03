@@ -13,6 +13,7 @@ define([
     'app/sdk/controllers/mypage.controller',
     'app/sdk/controllers/opentasks.controller',
     'app/sdk/controllers/errors.controller',
+    'app/sdk/controllers/useractivities.controller',
 
     'app/shared/services/token.service',
     'app/shared/services/token.factory',
@@ -20,6 +21,7 @@ define([
     'app/shared/services/page.service',
     'app/shared/services/task.service',
     'app/shared/services/error.service',
+    'app/shared/services/user.service',
 
     'app/sdk/directives/progressbar.directive',
 
@@ -41,6 +43,7 @@ define([
     mypageController,
     opentasksController,
     errorsController,
+    useractivitiesController,
 
     tokenService,
     tokenFactory,
@@ -48,6 +51,7 @@ define([
     pageService,
     taskService,
     errorService,
+    userService,
 
     progressbarDirective,
 
@@ -65,6 +69,7 @@ define([
     sdkApp.controller('mypageController', mypageController);
     sdkApp.controller('opentasksController', opentasksController);
     sdkApp.controller('errorsController', errorsController);
+    sdkApp.controller('useractivitiesController', useractivitiesController);
 
     //sdkApp.factory('accessTokenHttpInterceptor', tokenFactory);
     sdkApp.service('tokenService', tokenService);
@@ -73,6 +78,7 @@ define([
     sdkApp.service('pageService', pageService);
     sdkApp.service('taskService', taskService);
     sdkApp.service('errorService', errorService);   
+    sdkApp.service('userService', userService);   
 
     sdkApp.directive('progressBar', progressbarDirective);
 
