@@ -149,7 +149,7 @@ define([
 
             getFields: function getFields() {
 
-                var jsonSource = useReal ? API + '/searchconfig?collection_id=1' : JSONURL + '/search/fields.json';
+                var jsonSource = useReal ? API + '/searchconfig' : JSONURL + '/search/fields.json';
 
                 return $http({
                     url: jsonSource,
