@@ -18,6 +18,43 @@ define([
                     }
                 }
             })
+
+            .state('search.post', {
+                url: 'post/{postId:int}',
+                views: {
+                   '@': {
+                        templateUrl: 'sdk/search/post.tpl.html',
+                        controller: 'postController'
+                    }
+                },
+                resolve: {
+                    resultData: ['searchService', '$stateParams', '$q', function(searchService, $stateParams, $q) {
+
+                        var data = {},
+                            
+                            deferred = $q.defer(),
+
+                            taskId;
+
+                        searchService.getPost($stateParams.postId)
+                        .then(function(response) {
+
+                            data.postId = $stateParams.postId;
+                            data.post = response.data;
+                            data.metadata = response.metadata;
+                            data.errorReports = response.error_reports;
+                            data.taskId = response.metadata.task_id;
+
+                            deferred.resolve(data);
+                            
+                            return data;
+                        });
+
+                        return deferred.promise;
+                    }]
+                }
+            })
+
             .state('search.page', {
                 url: '',
                 views: {
