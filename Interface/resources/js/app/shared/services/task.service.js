@@ -68,8 +68,7 @@ define([
                 var deferred = $q.defer();
 
                 params.index_active = 1;
-                //params.collection_id = 1;
- //http://kbhkilder.dk/1508/stable/api/tasksunits?task_id=1&index_active=1
+                
                 $http({
                     url: API + '/tasksunits',
                     method: 'GET',
