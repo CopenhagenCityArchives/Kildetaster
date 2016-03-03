@@ -1,6 +1,9 @@
 define([
 
     'angular',
+
+    'ngstorage',
+
     'app/shared/templates',
     'app/shared/constants',
 
@@ -25,6 +28,9 @@ define([
     
     'app/shared/services/post.service',
 
+    'app/shared/services/token.service',
+    'app/shared/services/token.factory',
+
     'app/shared/services/helpers.service',
 
     'app/shared/filters/nameFromObject.filter',
@@ -34,6 +40,8 @@ define([
 ], function(
 
     ang,
+
+    ngStorage,
     templates,
     constants,
 
@@ -58,6 +66,9 @@ define([
     
     postService,
 
+    tokenService, 
+    tokenFactory,
+
     helpersService,
 
     nameFromObjectFilter,
@@ -66,7 +77,7 @@ define([
 
     ) {
 
-    var sharedApp = angular.module('shared', ['templates', 'constants']);
+    var sharedApp = angular.module('shared', ['templates', 'constants', 'ngStorage']);
 
     sharedApp.directive('user', userDirective);
     sharedApp.directive('imageViewer', imageViewerDirective);
@@ -86,7 +97,12 @@ define([
     sharedApp.factory('updateService', updateService);
     sharedApp.factory('errorService', errorService);
     sharedApp.factory('entryService', entryService);
+    
     sharedApp.factory('postService', postService);
+    
+    sharedApp.factory('tokenService', tokenService);
+    //TODO tokenFactory
+
 
     sharedApp.factory('helpers', helpersService);
     

@@ -2,6 +2,8 @@ define([
 
     'angular',
 
+    'ngstorage',
+
     'app/shared/sdk-templates',
 
     'app/sdk/sdk.run',
@@ -11,7 +13,10 @@ define([
     'app/sdk/controllers/mypage.controller',
     'app/sdk/controllers/opentasks.controller',
     'app/sdk/controllers/errors.controller',
-    
+
+    'app/shared/services/token.service',
+    'app/shared/services/token.factory',
+
     'app/shared/services/page.service',
     'app/shared/services/task.service',
     'app/shared/services/error.service',
@@ -25,43 +30,55 @@ define([
 
     ang,
 
+    angularCookie,
+
     sdkTemplates,
-    
+
     run,
 
     searchApp,
-    
+
     mypageController,
     opentasksController,
     errorsController,
+
+    tokenService,
+    tokenFactory,
 
     pageService,
     taskService,
     errorService,
 
     progressbarDirective,
-    
+
     constants
 ) {
 
-    var sdkApp = angular.module('sdk', ['sdk-templates', 'search', 'constants']);
+    var sdkApp = angular.module('sdk', ['sdk-templates', 'search', 'constants', 'ngStorage']);
 
     sdkApp.run(run);
+
+    sdkApp.config(function($httpProvider) {
+        $httpProvider.interceptors.push('tokenFactory');
+    });
 
     sdkApp.controller('mypageController', mypageController);
     sdkApp.controller('opentasksController', opentasksController);
     sdkApp.controller('errorsController', errorsController);
 
+    //sdkApp.factory('accessTokenHttpInterceptor', tokenFactory);
+    sdkApp.service('tokenService', tokenService);
+    sdkApp.factory('tokenFactory', tokenFactory);
+
     sdkApp.service('pageService', pageService);
     sdkApp.service('taskService', taskService);
-    sdkApp.service('errorService', errorService);
+    sdkApp.service('errorService', errorService);   
 
     sdkApp.directive('progressBar', progressbarDirective);
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-sdk-app]'), ['sdk']);
     });
-
 
     //Debugging for ui.router state issues
     // app.run(($rootScope) => {
