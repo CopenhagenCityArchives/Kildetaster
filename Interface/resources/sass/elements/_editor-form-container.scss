@@ -33,4 +33,9 @@
     ol.list-group {
         margin-bottom: 0;
     }
+
+    //Hack to hide legend tags in generated array strucures from angular-schema-form
+    legend {
+        display: none;
+    }
 }
