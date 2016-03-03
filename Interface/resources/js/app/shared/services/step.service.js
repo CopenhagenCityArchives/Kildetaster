@@ -26,8 +26,6 @@ define([
 
                     response.data.steps.push(resultStep);
 
-                    console.log('mef', response.data);
-
                     return response.data;
                 })
 
