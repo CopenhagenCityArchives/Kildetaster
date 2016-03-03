@@ -19,7 +19,7 @@ define([
                 unit_id: unit.id
             }).then(function(response) {
                 var pageId = response.pages_id;
-                window.location.href = EDITORURL + '/#/task/' + unit.tasks_id + '/page/' + pageId;
+                window.open(EDITORURL + '/#/task/' + unit.tasks_id + '/page/' + pageId, '_blank');
             });
         };
 
