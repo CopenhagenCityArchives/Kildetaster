@@ -5,8 +5,6 @@ define([
 
     var tokenService = /*@ngInject*/ function tokenService($q, MAINDOMAIN, $http, $sessionStorage) {
 
-        console.log('run')
-
         return {
 
             requestToken: function() {
