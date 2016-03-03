@@ -9,11 +9,6 @@ define([
         $scope.loading = false;
         $scope.units = [];
 
-        tokenService.requestToken().then(function() {
-            $scope.init({ taskId: 1 });
-        });
-        
-
         /**
         * Get the next available pageId, and redirect the user to that page in the editor
         */
@@ -27,7 +22,6 @@ define([
                 window.location.href = EDITORURL + '/#/task/' + unit.tasks_id + '/page/' + pageId;
             });
         };
-
 
         $scope.init = function init(taskId) {
 
@@ -46,6 +40,10 @@ define([
             });
 
         };
+
+        //TODO: Remove hardcoded taskId
+        $scope.init({ taskId: 1 });
+
         
     };
 
