@@ -45,12 +45,6 @@ define([
                     }
                     return overlayData.map(function(data) {
                         data.className = 'imageViewer__done';
-                        
-                        //TODO remove this when backend is updated to return floats and not string values
-                        data.x = parseFloat(data.x);
-                        data.y = parseFloat(data.y)
-                        data.width = parseFloat(data.width);
-                        data.height = parseFloat(data.height);
 
                         return data;
                     });
