@@ -37,6 +37,9 @@ define([
             errorService.createErrorReport(data)
             .then(function(response) {
                 alert('Tak for fejlmeldingen!');
+            })
+            .catch(function(err) {
+                console.log('Fejl i oprettelse af fejlrapport', err);
             });
 
         };
