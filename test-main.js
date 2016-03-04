@@ -35,6 +35,8 @@ require.config({
         'angular-bootstrap'     : 'bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
         'angular-sanitize'      : 'bower_components/angular-sanitize/angular-sanitize.min',
         'angular-flash'         : 'bower_components/angular-flash-alert/dist/angular-flash',
+        'angular-cookies'       : 'bower_components/angular-cookies/angular-cookies.min',
+        'ngstorage'             : 'bower_components/ngstorage/ngStorage.min',
 
         'angular-ui-router'     : 'bower_components/angular-ui-router/release/angular-ui-router.min',
         'angular-ui-select'     : 'bower_components/ui-select/dist/select.min',
@@ -61,6 +63,8 @@ require.config({
         'angular-sanitize': ['angular'],
         'angular-animate': ['angular'],
         'angular-flash': ['angular'],
+        'angular-cookies': ['angular'],
+        'ngstorage': ['angular'],
         
         'app/shared/constants': ['angular'],
 
