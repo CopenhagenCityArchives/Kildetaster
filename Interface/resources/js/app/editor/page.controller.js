@@ -43,7 +43,7 @@ define([
                         Flash.create('warning', 'Siden med nummer ' + pageNumber +  ' findes ikke');
                     }
                     else {
-                        $state.go('editor.page', { 
+                        $state.go('editor.page', {
                             pageId: response.id
                         });
                     }
@@ -96,12 +96,25 @@ define([
                     
             });
         };
+
+        var convertedPosts = [];
             
         //Openseadragon does not like a property called id, as it tries to find the dom node with that id.
         //Hack to rename the property, backend should do this
         pageData.posts.forEach(function(post) {
-            post.postId = post.id;
-            delete post.id;
+
+            var obj = {
+                className: post.className,
+                complete:post.complete,
+                height: post.height,
+                pages_id: post.pages_id,
+                postId: post.id,
+                width: post.width,
+                x: post.x,
+                y: post.y
+            };
+            convertedPosts.push(obj);
+
         });
 
         $scope.options = {
@@ -110,9 +123,10 @@ define([
                 type: 'image',
                 url: pageData.image_url,
                 navigatorPosition: 'TOP_LEFT',
-                overlays: pageData.posts
+                overlays: convertedPosts
             },
-            next_post: pageData.next_post
+            //If the page is marked as done, do not show selection, eventhough next_post might contain a valid position overlay object
+            next_post: pageData.task_page[0].is_done === 1 ? false : pageData.next_post
 
         };
 
