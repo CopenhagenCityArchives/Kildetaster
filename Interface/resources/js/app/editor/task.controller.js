@@ -26,7 +26,7 @@ define([
         };
     }
 
-    var editorController = /*@ngInject*/ function editorController(MAINDOMAIN, $scope, $state, taskData, pageData, requestToken, userService, $interval, $location, $timeout, taskService, pageService) {
+    var editorController = /*@ngInject*/ function editorController(MAINDOMAIN, RESSOURCEURL, $scope, $state, taskData, pageData, requestToken, userService, $interval, $location, $timeout, taskService, pageService) {
 
         $scope.protocol = taskData.name;
 
@@ -43,6 +43,7 @@ define([
         $scope.activeUser = requestToken.tokenData.profile;
 
         $scope.MAINDOMAIN = MAINDOMAIN;
+        $scope.RESSOURCEURL = RESSOURCEURL;
 
         $scope.unit = pageData.unitData;
 

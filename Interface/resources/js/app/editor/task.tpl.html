@@ -1,17 +1,16 @@
 <header class="row header">
     
-    <div class="col-sm-3 header__item">
+    <div class="col-sm-4 header__item">
         <h1 class="header__logo">
-
             <a ng-href="{{MAINDOMAIN}}/min-side">
-                <img ng-src="{{MAINDOMAIN}}/resources/images/ugle.gif">
+                <img ng-src="{{RESSOURCEURL}}/images/ugle.gif" alt="Københavns Stadsarkiv - Kildetaster">
             </a>
         </h1>
         <p>{{protocol}} {{unit.description}}</p>
         <progress-bar pages-total="pagesTotal" pages-done="pagesDone"></progress-bar>
     </div>
 
-    <div class="col-sm-6 col-sm-offset-3">
+    <div class="col-sm-6 col-sm-offset-2">
         
         <div class="col-sm-5 col-sm-offset-3 header__item header__userlist">
             <div>{{activeUsers.length}} aktive indtastere</div>

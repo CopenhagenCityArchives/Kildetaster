@@ -16,6 +16,10 @@
         left: -45px;
 
         display: inline-block;
+
+        img {
+            max-height: 50px;
+        }
     }
 
     &__item {
