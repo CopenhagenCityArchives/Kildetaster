@@ -45,7 +45,6 @@ define([
         $scope.MAINDOMAIN = MAINDOMAIN;
 
         $scope.unit = pageData.unitData;
-        console.log(pageData.unitData);
 
         $scope.buildSource = function() {
             return MAINDOMAIN + SDKCSSURL + "/ugle.gif";
