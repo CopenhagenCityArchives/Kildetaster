@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var wizardController = /*@ngInject*/ function wizardController($scope, $rootScope, stepService, $stateParams, pageData, $location, $state, $timeout, $http, Flash, API) {
+    var wizardController = /*@ngInject*/ function wizardController(helpers, $scope, $rootScope, stepService, $stateParams, pageData, taskData, $location, $state, $timeout, $http, Flash, API, pageService) {
 
         //Indicates if we should show the controls for accepting a new area (used on all other steps than the first)
         $scope.showSelectionControls = false;
@@ -60,6 +60,7 @@ define([
         $rootScope.$on('$locationChangeSuccess', function(event) {
             //Make sure we treat currentStep value as an integer
             $scope.currentStep = parseInt($location.search().stepId);
+
             $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
 
             //If we are showing step 1, enable area selection
@@ -137,15 +138,16 @@ define([
                 url: API + '/entries/',
                 data: postData
             }).then(function(response) {
-                if (response.indexOf('post_id') !== -1) {
-                    $state.go('.done', {}, { reload: true });
+
+                if (response.data && response.data.post_id) {
+                    $state.go('.pageFull', {}, { reload: true });
                 }
                 else {
                     Flash.create('danger', response);
                 }
                 
             }).catch(function(err) {
-                Flash.create('danger', err.data);
+                Flash.create('danger', err);
             });
 
         };
@@ -188,9 +190,25 @@ define([
                 $state.go('.', { stepId: stepId });
             }
 
-
         };
 
+        /**
+        * Mark current page as done, ie no more posts should be made
+        */
+        $scope.pageIsDone = function pageIsDone() {
+
+            pageService.pageIsDone({
+                page_id: pageData.id,
+                task_id: taskData.id
+            })
+            .then(function(response) {
+                //Reload current route
+                $state.go($state.current, {}, {reload: true});
+            })
+            .catch(function(err) {
+                console.log('Err', err);
+            });
+        };
 
         /**
          * Tell the app that we want to place/replace the area
