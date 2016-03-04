@@ -99,10 +99,30 @@ define([
                     deferred.resolve(response.data);
                 })
                 .catch(function(err) {
+                    deferred.reject(err);
                     console.log('Get next page error', err);
                 });
 
                 return deferred.promise;
+            },
+
+            pageIsDone: function pageIsDone(params) {
+
+                return $http({
+                    url: API + '/taskspages',
+                    method: 'PATCH',
+                    params: params,
+                    data: {
+                        "is_done": 1
+                    }
+                })
+                .then(function(response) {
+                    return response.data;
+                })
+                .catch(function(err) {
+                    console.log('Error setting page as done', err);
+                });
+
             }
 
 

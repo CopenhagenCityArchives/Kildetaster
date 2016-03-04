@@ -27,6 +27,8 @@ define([
     'app/shared/services/entry.service',
     
     'app/shared/services/post.service',
+    
+    'app/shared/services/unit.service',
 
     'app/shared/services/token.service',
     'app/shared/services/token.factory',
@@ -65,6 +67,7 @@ define([
     entryService,
     
     postService,
+    unitService,
 
     tokenService, 
     tokenFactory,
@@ -99,6 +102,7 @@ define([
     sharedApp.factory('entryService', entryService);
     
     sharedApp.factory('postService', postService);
+    sharedApp.factory('unitService', unitService);
     
     sharedApp.factory('tokenService', tokenService);
     sharedApp.factory('tokenFactory', tokenFactory);

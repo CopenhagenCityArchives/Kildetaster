@@ -12,7 +12,7 @@ define([
         $stateProvider
 
             .state('editor', {
-                url: '/task/{taskId:int}',
+                url: '/task/{taskId:int}/page/{pageId:int}',
                 abstract: true,
                 views: {
 
@@ -32,41 +32,29 @@ define([
                     /**
                      * Load project data and pass it to the controller
                      */
-                    taskData: ['$stateParams', 'taskService', function($stateParams, taskService) {
+                    taskData: ['$stateParams', 'taskService', '$q', function($stateParams, taskService, $q) {
+
+                        var deferred = $q.defer(),
+                            data;
+                        
                         return taskService.getTask($stateParams.taskId).then(function(response) {
                             return response;
                         });
-                    }]
-                }
+                    }],
 
-            })
-
-            .state('editor.page', {
-                url: '/page/{pageId:int}',
-                redirectTo: 'editor.page.wizard',
-                views: {
-                    '': {
-                        templateUrl: 'editor/page.tpl.html',
-                        controller: 'pageController'
-                    },
-                    'pageFooter': {
-                        templateUrl: 'editor/page.footer.tpl.html',
-                        controller: 'pageController'
-                    }
-                },
-                resolve: {
                     /**
                      * Load page data and pass it to the controller
                      */
-                    pageData: ['$stateParams', 'pageService', '$q', '$state', '$timeout', function($stateParams, pageService, $q, $state, $timeout) {
+                    pageData: ['$stateParams', 'pageService', 'unitService', '$q', '$state', '$timeout', function($stateParams, pageService, unitService, $q, $state, $timeout) {
 
-                        var deferred = $q.defer();
+                        var deferred = $q.defer(),
+                            data;
 
                         pageService.getPageById($stateParams.pageId).then(function(response) {
 
                             if (response) {
 
-                                deferred.resolve(response);
+                                data = response;
 
                                 //If we do not have a next_post, the page is 'done' and no more posts can be created
                                 if (response.next_post === false) {
@@ -80,11 +68,35 @@ define([
                                 deferred.reject('Error', response);
                             }
 
+                            return unitService.getUnit(response.unit_id);
+
+                        })
+                        .then(function(response) {
+                            data.unitData = response;
+
+                            deferred.resolve(data);
                         });
 
                         return deferred.promise;
 
                     }]
+
+                }
+
+            })
+
+            .state('editor.page', {
+                url: '',
+                redirectTo: 'editor.page.wizard',
+                views: {
+                    '': {
+                        templateUrl: 'editor/page.tpl.html',
+                        controller: 'pageController'
+                    },
+                    'pageFooter': {
+                        templateUrl: 'editor/page.footer.tpl.html',
+                        controller: 'pageController'
+                    }
                 }
             })
 
@@ -173,7 +185,7 @@ define([
 
                         if (pageData.next_post === false) {
                             $timeout(function() {
-                                $state.go('editor.page.pageIsDone');
+                                $state.go('editor.page.wizard.done');
                             }, 0);
                         }
 
@@ -232,9 +244,10 @@ define([
             .state('error', {
                 url: '/error',
                 templateUrl: 'editor/error.tpl.html',
-                controller: function() {
-
-                }
+                controller: ['ERRORURL', function(ERRORURL) {
+                    //Redirect to a page on KBH joomla
+                    window.location.href = ERRORURL;
+                }]
 
             });
 

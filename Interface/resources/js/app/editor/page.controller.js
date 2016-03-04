@@ -5,7 +5,7 @@ define([
     var editorController = /*@ngInject*/ function editorController($scope, $state, Flash, pageService, taskData, pageData, $location, $timeout, $rootScope) {       
 
         $scope.pageNumber = pageData.page_number;
-        $scope.totalPages = 'xx';
+        $scope.totalPages = pageData.unitData.pages;
 
         /**
         * Get next available page, based on unitId, taskId and the current page number
@@ -20,10 +20,11 @@ define([
             }).then(function(response) {
 
                 $timeout(function() {
-                    $location.search({ stepId: 1});
+                    $state.go('editor.page', { pageId: response.pages_id});     
+                    //$location.search({ stepId: 1});
                 }, 0);
 
-                $state.go('editor.page', { pageId: response.pages_id});     
+                
             });
                    
         };
@@ -34,7 +35,7 @@ define([
             if ($event.charCode === 13) {
 
                 var pageNumber = $event.target.value,
-                    unitId = pageData.unit_id
+                    unitId = pageData.unit_id;
 
                 pageService.getPageByNumber(pageNumber, unitId).then(function(response) {
 
@@ -95,6 +96,13 @@ define([
                     
             });
         };
+            
+        //Openseadragon does not like a property called id, as it tries to find the dom node with that id.
+        //Hack to rename the property, backend should do this
+        pageData.posts.forEach(function(post) {
+            post.postId = post.id;
+            delete post.id;
+        });
 
         $scope.options = {
 
