@@ -1,13 +1,14 @@
 <div class="row">
     <div class="col-sm-12">
         <h2>Udfyld kilde</h2>
-        <p>Dine indtastninger er nu gemt. Hvis der er flere personer tilbage på siden kan du starte en ny på samme side, eller skal siden markeres færdig.</p>
+        <p ng-if="!isFull">Hvis der er flere personer tilbage på siden kan du starte en ny på samme side, eller skal siden markeres færdig.</p>
+        <p ng-if="isFull">Der kan ikke tastes flere personer på denne side. Du kan nu markere siden som færdigindtastet.</p>
     </div>
 </div>
 
 <div class="row">
     <div class="col-sm-12">
-        <button type="button" class="btn btn-default btn-block" tabindex="1" ng-click="startNewOnSamePage()">Start ny på samme side</button>
+        <button type="button" class="btn btn-default btn-block" tabindex="1" ng-click="startNewOnSamePage()" ng-if="!isFull">Start ny på samme side</button>
         <button type="button" class="btn btn-default btn-block" tabindex="2" ng-click="markDone()">Siden er færdig</button>
     </div>
 </div>

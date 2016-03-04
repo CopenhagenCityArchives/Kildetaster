@@ -2,12 +2,13 @@
     
     <div class="col-sm-3 header__item">
         <h1 class="header__logo">
-            <a href="http://www.kbharkiv.dk/deltag/kildetaster-test/kildetasteren-test">
-                <img src="/resources/images/logo.svg">
+
+            <a ng-href="{{MAINDOMAIN}}/min-side">
+                <img ng-src="{{MAINDOMAIN}}/resources/images/ugle.gif">
             </a>
         </h1>
-        <p>{{protocol}}</p>
-        <progress-bar percentage="40"></progress-bar>
+        <p>{{protocol}} {{unit.description}}</p>
+        <progress-bar pages-total="pagesTotal" pages-done="pagesDone"></progress-bar>
     </div>
 
     <div class="col-sm-6 col-sm-offset-3">

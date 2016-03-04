@@ -21,7 +21,6 @@ define([
                         controller: 'taskController'
                     }
                 },
-
                 
                 resolve: {
 
@@ -56,13 +55,13 @@ define([
 
                                 data = response;
 
-                                //If we do not have a next_post, the page is 'done' and no more posts can be created
-                                if (response.next_post === false) {
-                                    $timeout(function() {
-                                        //Redirect to pageIsDone
-                                        $state.go('editor.page.pageIsDone');
-                                    }, 0);
-                                }
+                                // //If we do not have a next_post, the page is 'done' and no more posts can be created
+                                // if (response.next_post === false) {
+                                //     $timeout(function() {
+                                //         //Redirect to pageIsDone
+                                //         $state.go('editor.page.pageIsDone');
+                                //     }, 0);
+                                // }
                                 
                             } else {
                                 deferred.reject('Error', response);
@@ -181,13 +180,27 @@ define([
                 controller: 'wizardController',
                 resolve: {
 
-                    isFull: ['$state', '$timeout', 'pageData', function($state, $timeout, pageData) {
+                    isFull: ['$state', '$timeout', '$stateParams', 'pageData', function($state, $timeout, $stateParams,  pageData) {
 
-                        if (pageData.next_post === false) {
+                        if (pageData.next_post === false && pageData.task_page[0].is_done === 0) {
                             $timeout(function() {
-                                $state.go('editor.page.wizard.done');
+                                $state.go('editor.page.pageFull', { 
+                                    taskId: $stateParams.taskId, 
+                                    pageId: pageData.id
+                                });
                             }, 0);
                         }
+                        else if (pageData.task_page[0].is_done === 1) {
+
+                            $timeout(function() {
+                                $state.go('editor.page.pageDone', { 
+                                    taskId: $stateParams.taskId, 
+                                    pageId: pageData.id
+                                });
+                            }, 0);   
+                        }
+
+
 
                         return true;
                     }],
@@ -201,7 +214,7 @@ define([
                         var deferred = $q.defer();
 
                         if ($stateParams.stepId !== 1) {
-                            //$location.search({ stepId: 1 });
+                            $location.search({ stepId: 1 });
                         }
                         deferred.resolve();
 
@@ -210,19 +223,9 @@ define([
                 }
             })
 
-            .state('editor.page.pageIsDone', {
+            .state('editor.page.pageFull', {
 
-                url: '/done',
-                views: {
-                    '': {
-                        templateUrl: 'editor/page.done.tpl.html'
-                    }
-                }
-            })
-
-            .state('editor.page.wizard.done', {
-
-                url: '',
+                url: '/full',
                 views: {
                     '@editor.page': {
                         templateUrl: 'editor/wizard.done.tpl.html',
@@ -232,6 +235,17 @@ define([
                 }
             })
 
+
+
+            .state('editor.page.pageDone', {
+
+                url: '/done',
+                views: {
+                    '': {
+                        templateUrl: 'editor/page.done.tpl.html'
+                    }
+                }
+            })
 
             .state('feedback', {
 

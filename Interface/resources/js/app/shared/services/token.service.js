@@ -15,14 +15,16 @@ define([
                 formData.append('authorized', 1);
                 formData.append('state', 'kildetaster');
 
+                //Should be able to send as json and object, see mail from Bo
                 $http({
                         method: 'POST',
 
                         url: MAINDOMAIN + '/index.php',
                         headers: {
-                            'Content-Type': undefined //'application/x-www-form-urlencoded'
+                            //'Content-Type': undefined //'application/x-www-form-urlencoded'
+                            'Content-Type': 'application/json'
                         },
-                        transformRequest: angular.identity,
+                        //transformRequest: angular.identity,
                         // transformRequest: function(obj) {
                         //     var str = [];
                         //     for (var p in obj)
@@ -35,7 +37,11 @@ define([
                             client_id: 'kbhkilder',
                             api: 'oauth2'
                         },
-                        data: formData
+                        //data: formData
+                        data: {
+                            authorized: 1,
+                            state: 'kildetaster'
+                        }
                     })
                     .then(function(response) {
 
