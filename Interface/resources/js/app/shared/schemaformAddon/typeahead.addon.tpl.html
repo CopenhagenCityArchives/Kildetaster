@@ -26,7 +26,7 @@
             ng-model="$$value$$"
             ng-disabled="form.readonly || form.unreadable"
             schema-validate="form"
-            uib-typeahead="option[form.schema.datasourceValueField] for option in getData(form.schema.datasource, $viewValue)"
+            uib-typeahead="option[form.schema.datasourceValueField] for option in getData(form.schema.datasource, $viewValue, form.schema.datasourceValueField)"
             typeahead-focus-first="false"
             typeahead-append-to-body="true"
             capitalize-first

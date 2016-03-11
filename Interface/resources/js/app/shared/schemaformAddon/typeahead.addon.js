@@ -22,7 +22,7 @@ define([
             formElement.unreadable = !formElement.unreadable;
         };
 
-        $scope.getData = function getData(datasource, term) {
+        $scope.getData = function getData(datasource, term, propertyName) {
 
             //If we do not get any datasourece or a term to search for, do nothing
             if (!datasource || !term) {
@@ -38,7 +38,10 @@ define([
                 }
             }).then(function(response) {
                 //Limit the hits to only contain the first 8 this
-                return response.data.slice(0,8);
+                var startsWith = $filter('startsWith')(response.data, term, propertyName);
+
+                return startsWith.slice(0,8);
+                //return response.data.slice(0,8);
             });
 
         };
