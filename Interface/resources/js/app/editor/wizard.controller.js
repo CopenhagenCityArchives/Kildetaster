@@ -140,7 +140,7 @@ define([
             }).then(function(response) {
 
                 if (response.data && response.data.post_id) {
-                    $state.go('.pageFull', {}, { reload: true });
+                    $state.go('^.pageFull', {}, { reload: true });
                 }
                 else {
                     Flash.create('danger', response);
