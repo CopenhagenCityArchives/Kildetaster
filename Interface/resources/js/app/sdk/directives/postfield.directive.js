@@ -30,19 +30,26 @@ define([
 
                 scope.doReport = function(group, field) {
 
+                    var fieldData;
+
                     //Grab the entity_name from the fields parent (the group it belongs to)
                     field.entity_name = group.entity_name;
+
+                    //console.log('group', group);
+                    //console.log('field', field);
 
                     scope.report({
                         fieldData: field
                     });
+
+
 
                     field.showErrorsForm = false;
 
                 };  
 
                 scope.goToEditor = function(group) {
-                    console.log('group', group);
+
                     scope.toEditor({ 
                         field: group
                     });

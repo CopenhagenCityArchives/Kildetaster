@@ -23,7 +23,7 @@ define([
             return helpers.getImageUrlByPostId(resultData.postId);
         };
 
-        $scope.report = function(field) {            
+        $scope.report = function(field) {           
             
             var data = {
                 post_id: resultData.postId,
@@ -36,7 +36,14 @@ define([
 
             errorService.createErrorReport(data)
             .then(function(response) {
-                alert('Tak for fejlmeldingen!');
+                //Hide the form
+                field.showErrorForm = false;
+                //Mark field as in error, and store comment given
+                field.error = {
+                    comment: field.comment
+                };
+                //Show message
+                field.errorAccepted = true;
             })
             .catch(function(err) {
                 console.log('Fejl i oprettelse af fejlrapport', err);
