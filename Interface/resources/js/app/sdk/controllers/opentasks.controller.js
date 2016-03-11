@@ -16,7 +16,7 @@ define([
 
             pageService.getNextAvailablePage({
                 task_id: unit.tasks_id,
-                unit_id: unit.id
+                unit_id: unit.units_id
             }).then(function(response) {
                 var pageId = response.pages_id;
                 window.open(EDITORURL + '/#/task/' + unit.tasks_id + '/page/' + pageId, '_blank');
