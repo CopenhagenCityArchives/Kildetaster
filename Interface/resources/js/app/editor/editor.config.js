@@ -128,16 +128,7 @@ define([
                         })
                         .then(function(response) {
 
-                            var redo = {};
-
-                            //TODO: Get backend to output correct format
-                            redo.persons = response.persons;
-                            redo.persons.positions = response.positions;
-                            redo.persons.deathcauses = response.deathcauses;
-                            redo.persons.addresses = response.addresses;
-                            redo.persons.burials = response.burials;
-
-                            data.entryData = redo;
+                            data.entryData = response;
 
                             return errorService.getErrorReports({
                                 task_id: $stateParams.taskId,
