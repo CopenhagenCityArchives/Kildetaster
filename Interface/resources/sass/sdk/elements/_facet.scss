@@ -5,12 +5,17 @@
         font-size: 18px;
 
         text-transform: uppercase;
+        font-family: amblebold;
     }
 
 
     &__item {
         font-size: 14px;
         line-height: 28px;
+
+        a {
+            text-decoration: none;
+        }
 
         a:hover {
             text-decoration: none;
@@ -20,7 +25,8 @@
     &__count {
         font-size: 11px;
 
-        padding: 1px 8px;
+        padding: 1px 8px 2px 8px;
+        margin-left: 4px;
 
         color: $white;
         border-radius: 5px;
