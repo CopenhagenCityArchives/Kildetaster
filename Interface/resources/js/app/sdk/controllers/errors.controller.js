@@ -17,6 +17,11 @@ define([
         });
 
 
+        $scope.goToEditor = function(errorData) {
+            window.open(EDITORURL + '/#/task/' + errorData.tasks_id + '/page/' + errorData.pages_id + '/post/' + errorData.posts_id, '_blank');
+        };
+
+
         $scope.init = function() {
 
             $scope.loading = true;

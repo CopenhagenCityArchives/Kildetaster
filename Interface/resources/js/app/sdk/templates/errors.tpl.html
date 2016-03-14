@@ -1,5 +1,5 @@
 <div ng-controller="errorsController">
-    
+
     <div class="row-fluid">
         <div class="span12">
             <h2>Mine fejlmeldinger</h2>
@@ -13,19 +13,17 @@
                 <li ng-repeat="error in errorList" ng-class="{ odd: $odd }" ng-if="errorList.length > 0">
 
                     <div class="task-list__item">
-                        {{error.name}}
+                        {{error.unit_description}}
                     </div>
                     <div class="task-list__item">
-                        <div ng-repeat="field in error.fields">
-                            {{field.labelText}}
-                        </div>
+                        {{error.field_name}}
                     </div>
                     <div class="task-list__item">
-                        <div ng-if="error.timeleft">{{error.timeleft}}</div>
-                        <div ng-if="error.corrected">Rettet af {{error.corrected.user.name}}</div>
+                        <!-- <div ng-if="error.timeleft">{{error.timeleft}}</div>
+                        <div ng-if="error.corrected">Rettet af {{error.corrected.user.name}}</div> -->
                     </div>
                     <div class="task-list__item text-right">
-                        <a ng-href="{{error.url}}" ng-if="error.timeleft" class="btn btn-default" ng-click="goToEditor(task)">Ret</a>
+                        <a href ng-click="goToEditor(error)" class="button">Ret</a>
                         <div ng-if="error.corrected">{{error.corrected.date}}</div>
                     </div>
                 </li>
