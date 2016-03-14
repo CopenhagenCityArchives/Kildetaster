@@ -6,4 +6,19 @@
 
         color: inherit;
     }
+
+    &__edit {
+        display: inline-block;
+
+        width: 14px;
+        height: 14px;
+        margin-right: 4px;
+        margin-left: 4px;
+
+        content: url("/resources/images/icon_edit.svg");
+    }
+
+    &__error {
+        color: $red;
+    }
 }

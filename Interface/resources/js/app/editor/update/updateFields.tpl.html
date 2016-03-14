@@ -16,16 +16,26 @@
                         <span class="summary-item">
                             <span class="summary-item__label">{{schema.properties[mainProperty].properties[key].title}}</span>
                             <span class="summary-item__field">{{value}}
-                                <span class="icon glyphicon glyphicon-pencil"></span>
+                                <span class="icon icon__edit"></span>
+                                <span class="glyphicon glyphicon-exclamation-sign icon__error" ng-if="lookupErrorReport(key) !== undefined"></span>
                              </span>
                         </span>
                     </a>
 
                     <div class="row" ng-if="isEditing(key)">
                     
+                        <div class="col-sm-12" ng-if="lookupErrorReport(key) !== undefined">
+                            <h2>Fejlmeldingen</h2>
+                        </div>
+
                         <div class="col-sm-12">
                             <form sf-schema="schema" sf-form="[mainProperty + '.' + key]" sf-model="values" sf-options="sfDefaults"></form>
-                        </div>                    
+                        </div>  
+
+                        <div class="col-sm-12" ng-if="lookupErrorReport(key) !== undefined">
+                            <label>Kommentar</label>
+                            <p>{{lookupErrorReport(key).comment}}</p>
+                        </div>                  
 
                         <div class="col-sm-12 text-right">
                             <button tabindex="1" type="button" class="btn btn-default" ng-click="updateField(key)">
@@ -37,7 +47,7 @@
                     
 
                 <li ng-if="schema.properties[mainProperty].properties[key].type === 'object'">
-
+                
                     <span ng-repeat="(subkey, subvalue) in schema.properties[mainProperty].properties[key].properties" ng-if="value[subkey] !== undefined">
 
                         <a tabindex="1" href ng-click="toggleEditExistingValue(mainProperty + '.' + key + '.' + subkey)">
@@ -45,14 +55,25 @@
                             <span class="summary-item">
                                 <span class="summary-item__label">{{subvalue.title}}</span>
                                 <span class="summary-item__field">{{value[subkey]}}
-                                    <span class="icon glyphicon glyphicon-pencil"></span>                        
+                                    <span class="icon icon__edit"></span>
+                                    <span class="glyphicon glyphicon-exclamation-sign icon__error" ng-if="lookupErrorReport(key, mainProperty, subkey) !== undefined"></span>
                                  </span>
                             </span>
                         </a>
 
                         <div class="row" ng-if="isEditing(mainProperty + '.' + key + '.' + subkey)">
+                            
+                            <div class="col-sm-12" ng-if="lookupErrorReport(key, mainProperty, subkey) !== undefined">
+                                <h2>Fejlmeldingen</h2>
+                            </div>
+
                             <div class="col-sm-12">                                    
                                 <form sf-schema="schema" sf-form="[mainProperty + '.' + key + '.' + subkey]" sf-model="values" sf-options="sfDefaults"></form>
+                            </div>  
+
+                            <div class="col-sm-12" ng-if="lookupErrorReport(key, mainProperty, subkey) !== undefined">
+                                <label>Kommentar</label>
+                                <p>{{lookupErrorReport(key, mainProperty, subkey).comment}}</p>
                             </div>                    
 
                             <div class="col-sm-12 text-right">
@@ -81,21 +102,35 @@
 
                     <span class="summary-item__label">{{schema.properties[mainProperty].properties[key].title}}</span>
                     
-                    <ul>
+                    <ul class="list-unstyled">
 
-                        <li ng-repeat="val in values[mainProperty][key]">                            
+                        <li ng-repeat="val in values[mainProperty][key]">   
 
                             <span ng-repeat="(subkey, value) in val">
                                 <a href ng-click="toggleEditExistingValue(subkey, val.id)">
                                     <!-- HARDCODED TEST FOR PERSONS_ID, A FIELD THAT IS ONLY ON TASK 1!! -->
                                     <span ng-if="subkey !== 'id' && subkey !== 'persons_id'">
-                                       {{value}}                                        
-                                <span class="icon glyphicon glyphicon-pencil"></span></span> </a>
+                                        {{value}}
+                                        <span class="icon icon__edit"></span>
+                                        <span class="glyphicon glyphicon-exclamation-sign icon__error" ng-if="lookupErrorReport(key, mainProperty, subkey, val.id) !== undefined"></span>
+                                    </span>
+                                </a>
                                 
-                                <div class="row" ng-if="isEditing(subkey, val.id)">                    
+                                <div class="row" ng-if="isEditing(subkey, val.id)">
+
+                                    <div class="col-sm-12" ng-if="lookupErrorReport(key, mainProperty, subkey, val.id) !== undefined">
+                                        <h2>Fejlmeldingen</h2>
+                                    </div>
+
                                     <div class="col-sm-12">
                                         <form ng-init="getSchema(key, subkey);getValue(key, subkey, val.id)" sf-schema="singleSchema" sf-form="['*']" sf-model="singleValue"></form>
                                     </div>
+
+                                    <div class="col-sm-12" ng-if="lookupErrorReport(key, mainProperty, subkey, val.id) !== undefined">
+                                        <label>Kommentar</label>
+                                        <p>{{lookupErrorReport(key, mainProperty, subkey, val.id).comment}}</p>
+                                    </div>   
+
                                     <div class="col-sm-12 text-right">
                                         <button tabindex="1" type="button" class="btn btn-default" ng-click="updateField(key, subkey)">
                                             {{TEXT.BUTTON.OK}}
@@ -115,5 +150,5 @@
         </div>
         
     </div>
-    
+
 </section>

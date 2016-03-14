@@ -4,7 +4,7 @@ define([
 
     var updateFieldsController = /*@ngInject*/ function updateFieldsController(Flash, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService) {
 
-        console.log('postDAta', postData.errorReports);
+        //console.log('postDAta', postData.errorReports);
         //console.log('taskDAta', taskData);
 
         $scope.values = postData.entryData;
@@ -16,7 +16,9 @@ define([
         $scope.singleFieldForms = {};
 
         $scope.singleSchema = {};  
-        $scope.singleValue = {};     
+        $scope.singleValue = {}; 
+
+        $scope.errorReports = postData.errorReports;    
 
         //Default settings for angular-schema-forms
         $scope.sfDefaults = {
@@ -30,11 +32,44 @@ define([
             }
         };
 
+
+        $scope.lookupErrorReport = function(key, mainProperty, subkey, id) { 
+
+            var toggleKey = key;
+
+            if (mainProperty && subkey) {
+                toggleKey = mainProperty + '.' + key + '.' + subkey;
+            }
+
+            if (id) {
+                toggleKey = subkey;
+            }
+
+            var found = $scope.errorReports.find(function(error) {  
+                
+                if (mainProperty && subkey) {
+                    return error.entity_name === key && error.field_name === subkey;
+                }
+                else {
+                    return error.field_name === key;
+                }
+                
+            });
+
+            if (found) {
+                //$scope.toggleEditExistingValue(toggleKey, id);
+            }
+
+            return found;
+
+        };
+
         /**
          * Toggle wether or not we should show edit field for a given field config
          */
         $scope.toggleEditExistingValue = function toggleEditExistingValue(item, id) {
             id = id || '';
+            
             $scope.editingFields = {};
 
             $scope.editingFields[item + id] = !$scope.editingFields[item + id];

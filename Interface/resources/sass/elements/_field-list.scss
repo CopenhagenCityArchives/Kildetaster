@@ -4,6 +4,8 @@
     padding: 5px 8px;
 
     &__item {
+        position: relative;
+
         padding-bottom: 6px;
     }
 
@@ -31,5 +33,9 @@
 
     &:nth-child(odd) {
         background-color: $lighter-gray;
+    }
+
+    ul {
+        margin-left: 0;
     }
 }
