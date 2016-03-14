@@ -20,17 +20,16 @@
     <div id="content-wrap">
         <div class="item-page">
             
-            <div data-sdk-app>
+           <!--  <div data-sdk-app>
                 <div ng-include="'sdk/templates/mypage.tpl.html'"></div>
-            </div>
+            </div> -->
 
-            <div data-sdk-app>
-                <div ng-include="'sdk/templates/opentasks.tpl.html'"></div>
-            </div>
 
-            <div data-sdk-app>
-                <div ng-include="'sdk/templates/errors.tpl.html'"></div>
-            </div>
+            <div data-sdk-app ng-include="'sdk/templates/errors.tpl.html'"></div>
+            
+            <div data-sdk-app ng-include="'sdk/templates/useractivities.tpl.html'"></div>
+            
+            <div data-sdk-app ng-include="'sdk/templates/opentasks.tpl.html'"></div>
 
         </div>
     </div>
