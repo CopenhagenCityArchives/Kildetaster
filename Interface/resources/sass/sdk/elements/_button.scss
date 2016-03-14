@@ -10,22 +10,21 @@
 
     cursor: pointer;
     text-align: center;
+    /* overwrite of default KBH styling */
+    text-decoration: none !important;
     text-transform: uppercase;
 
     color: $white;
     border: none;
     border-radius: 3px;
     background-color: $blue;
-    /* overwrite of default KBH styling */
-    text-decoration: none !important;   
 
     &:hover {
-        background-color: lighten($blue, 10%);
-
         /* overwrite of default KBH styling */
         text-decoration: none !important;
 
         color: $white;
+        background-color: lighten($blue, 10%);
     }
 
     &:disabled {
