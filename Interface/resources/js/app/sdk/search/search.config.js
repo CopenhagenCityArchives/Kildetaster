@@ -19,42 +19,6 @@ define([
                 }
             })
 
-            .state('search.post', {
-                url: 'post/{postId:int}',
-                views: {
-                   '@': {
-                        templateUrl: 'sdk/search/post.tpl.html',
-                        controller: 'postController'
-                    }
-                },
-                resolve: {
-                    resultData: ['searchService', '$stateParams', '$q', function(searchService, $stateParams, $q) {
-
-                        var data = {},
-                            
-                            deferred = $q.defer(),
-
-                            taskId;
-
-                        searchService.getPost($stateParams.postId)
-                        .then(function(response) {
-
-                            data.postId = $stateParams.postId;
-                            data.post = response.data;
-                            data.metadata = response.metadata;
-                            data.errorReports = response.error_reports;
-                            data.taskId = response.metadata.task_id;
-
-                            deferred.resolve(data);
-                            
-                            return data;
-                        });
-
-                        return deferred.promise;
-                    }]
-                }
-            })
-
             .state('search.page', {
                 url: '',
                 views: {
@@ -87,7 +51,7 @@ define([
 
             })
             .state('search.page.result.page', {
-                url: 'result/{index:int}/',
+                url: 'post/{postId:int}/',
                 views: {
                    
                     'navigation': {
@@ -100,49 +64,57 @@ define([
                     }
                 },
                 resolve: {
-                    haveQuery: ['searchService', '$state', '$q', '$timeout', function(searchService, $state, $q, $timeout) {
-                         //If we dont have a search config, do not permit rendering of a specific result page
-                         if (searchService.currentSearchConfig === null) {
-                            $timeout(function() {
-                               $state.go('search.page'); 
-                            });
-                            return $q.reject();
-                        }
-
-                    }],
 
                     resultData: ['searchService', '$stateParams', '$q', function(searchService, $stateParams, $q) {
 
-                        var data = {};
+                        var data = {},
+                            deferred = $q.defer(),
+                            taskId;
 
-                        var deferred = $q.defer();
+                            data.postId = $stateParams.postId;
 
-                        var taskId;
-
-                        searchService.paginatedSearch(searchService.currentSearchConfig.query, $stateParams.index - 1)
-                        .then(function(response) {
+                        //We hit the url without having a search configured, just get post data
+                        if (searchService.currentSearchConfig === null) {
                             
-                            data.numFound = response.response.numFound;
-                            data.number = $stateParams.index;
+                            searchService.getPost($stateParams.postId)
+                            .then(function(response) {
 
-                            var postId = response.response.docs[0].post_id;
-                            taskId = response.response.docs[0].task_id;
-                            
-                            data.postId = postId;
+                                data.post = response.data;
+                                data.metadata = response.metadata;
+                                data.errorReports = response.error_reports;
+                                data.taskId = taskId;
 
-                            return searchService.getPost(postId);
-                        })
-                        .then(function(response) {
+                                deferred.resolve(data);
+                                return data;
+                            });
+                        }
+                        //We have a search config, so manage paginated search
+                        else {
+                            searchService.paginatedSearch(searchService.currentSearchConfig.query)
+                            .then(function(response) {
+                                
+                                data.numFound = response.response.numFound;
+                                data.number = searchService.currentIndex + 1;
 
-                            data.post = response.data;
-                            data.metadata = response.metadata;
-                            data.errorReports = response.error_reports;
-                            data.taskId = taskId;
+                                var postId = response.response.docs[0].post_id;
+                                taskId = response.response.docs[0].task_id;
 
-                            deferred.resolve(data);
-                            
-                            return data;
-                        });
+                                //And get post data
+                                return searchService.getPost($stateParams.postId);
+                            })
+                            .then(function(response) {
+
+                                data.post = response.data;
+                                data.metadata = response.metadata;
+                                data.errorReports = response.error_reports;
+                                data.taskId = taskId;
+
+                                deferred.resolve(data);
+
+                                return data;
+                            });
+
+                        }
 
                         return deferred.promise;
                     }]

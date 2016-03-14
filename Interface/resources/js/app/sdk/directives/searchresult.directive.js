@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var searchDirective = /*@ngInject*/ function(API, $state, helpers) {
+    var searchDirective = /*@ngInject*/ function(API, $state, helpers, searchService) {
 
         return {
             
@@ -21,8 +21,11 @@ define([
             link: function(scope, element, attr) {
 
                 scope.goToPost = function() {
-                    $state.go('.result.page', {
-                        index: scope.index + 1
+
+                    searchService.currentIndex = scope.index;
+
+                    $state.go('search.page.result.page', {
+                        postId: scope.result.post_id
                     });
                 };
                

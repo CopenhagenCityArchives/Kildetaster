@@ -1,20 +1,24 @@
-<div class="row-fluid">
-    <div class="span12">
-        <a ui-sref="search.page">Tilbage til oversigten</a>
+<div ng-if="partOfSearch">
+    <div class="row-fluid">
+        <div class="span12">
+            <a ui-sref="search.page">Tilbage til oversigten</a>
+        </div>
     </div>
-</div>
 
-<div class="row-fluid">
-    
-    <div class="span4 text-left">
-        <button class="button" ng-click="prev()" ng-disabled="disablePrev()">Forrige resultat</button>    
+    <div class="row-fluid">
+        
+        <div class="span4 text-left">
+            <button class="button" ng-click="prev()" ng-disabled="disablePrev()">Forrige resultat</button>    
+        </div>
+        
+        <div class="span4 text-center">
+            <span>Resultat {{number}} af {{numFound}}</span>    
+        </div>
+        
+        <div class="span4 text-right">
+            <button class="button" ng-click="next()" ng-disabled="disableNext()">Næste resultat</button>    
+        </div>
     </div>
-    
-    <div class="span4 text-center">
-        <span>Resultat {{number}} af {{numFound}}</span>    
-    </div>
-    
-    <div class="span4 text-right">
-        <button class="button" ng-click="next()" ng-disabled="disableNext()">Næste resultat</button>    
-    </div>
+
+    <hr>
 </div>

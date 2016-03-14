@@ -128,14 +128,14 @@ define([
                 });
             },
 
-            paginatedSearch: function(query, startIndex) {
+            paginatedSearch: function(query) {
 
                 var jsonSource = API + '/search';
 
                 return $http({
                     url: jsonSource + '?' + buildQueryString(query, [], {
                         rows: 1,
-                        start: startIndex
+                        start: this.currentIndex
                     })
                 })
                 .then(function(response) {

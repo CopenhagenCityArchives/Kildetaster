@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var postController = /*@ngInject*/ function postController($scope, API, resultData, errorService, helpers) {
+    var postController = /*@ngInject*/ function postController($scope, API, EDITORURL, resultData, errorService, helpers) {
 
         $scope.collection = resultData.metadata.collection_name;
         $scope.unit = resultData.metadata.unit_description;
@@ -53,14 +53,12 @@ define([
 
         };
 
-        $scope.toEditor = function(field) {
-            var data = {
-                postId: resultData.postId,
-                taskId: resultData.taskId
-            };
-            
-            console.log('resultData', resultData);
-            console.log('toEditor', data);
+        $scope.editorUrl = function(field) {
+            var taskId = resultData.metadata.task_id,
+                pageId = resultData.metadata.page_id,
+                postId = resultData.metadata.post_id;
+
+            return EDITORURL + '/#/task/' + taskId + '/page/' + pageId + '/post/' + postId;            
         };
         
 
