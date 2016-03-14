@@ -9,6 +9,10 @@ define([
             $scope.facetData = data;
         });
 
+        $scope.filterSearch = function(field) {
+            $rootScope.$broadcast('filterSearch', field);
+        };
+
     };
 
     return searchFacetController;

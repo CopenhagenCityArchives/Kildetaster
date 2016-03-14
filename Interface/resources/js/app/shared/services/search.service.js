@@ -182,6 +182,32 @@ define([
                     console.log('Error getting post data', err);
                     alert(err.data);
                 });
+            },
+
+            filterQuery: function (query, params) {
+
+                var q = buildSolrQuery(query);
+
+                var options = {
+                    q: q,
+                    facet: 'on',
+                    'facet.field': params.field,
+                    fq: params.field + ':' + params.data,
+                    wt: 'json',
+                    indent: true,
+                };
+
+                return $http({
+                    url: API + '/search?' + buildQueryString(query, [], options)
+                })
+                .then(function(response) {
+                    return response.data;
+                    
+                })
+                .catch(function(err) {
+                    console.log('Error filtering search', err);
+                    alert(err.data);
+                });
             }
         };
 

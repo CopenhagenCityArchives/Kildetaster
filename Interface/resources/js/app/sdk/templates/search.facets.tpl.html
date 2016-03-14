@@ -1,10 +1,10 @@
 
 <ul class="unstyled">
-    <li ng-repeat="(key, value) in facetData | groupBy: 'name'">
-        <h4>{{key}}</h4>
+    <li class="facet" ng-repeat="(key, value) in facetData | groupBy: 'name'">
+        <h4 class="facet__header">{{key}}</h4>
 
-        <div ng-repeat="facet in value">
-            {{facet.data}} ({{facet.count}})
+        <div class="facet__item" ng-repeat="facet in value">
+            <a href ng-click="filterSearch(facet)">{{facet.data}} <span class="facet__count">{{facet.count}}</span></a>
         </div>
     </li>
 </ul>

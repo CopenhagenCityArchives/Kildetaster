@@ -52,6 +52,7 @@ define([
                     facetDataObject[facetArray].forEach(function(facet, index, arr) {
                         if (typeof facet === 'string'){
                             facetData.push({
+                                field: facetArray,
                                 name: getNiceName(facetArray),
                                 data: facet,
                                 count: arr[index +1]
@@ -89,6 +90,31 @@ define([
             
         };
 
+
+        $scope.$on('filterSearch', function(event, params) {
+            console.log('filtering!', params);
+
+            searchService.filterQuery($scope.config, params).then(function(response) {
+                $scope.results = response.response;
+                $scope.facets = response.facet_counts.facet_fields;
+            })
+            .catch(function(err) {
+                console.log('Error filtering', err);
+
+            });
+        });
+
+        /**
+        * Watch for changes in facets, and broadcast any changes
+        */ 
+        $scope.$watch('facets', function(newVal, oldVal) {
+
+            if (newVal !== oldVal) {
+                $rootScope.$broadcast('facetsUpdated', buildFacetData(newVal) );
+            }
+
+        })
+
         /**
         * Execute the search
         */
@@ -102,10 +128,8 @@ define([
             searchService.search(query, facets).then(function(response) {
                 $scope.results = response.response;
                 $scope.facets = response.facet_counts.facet_fields;
-                
-                //$scope.facetData = buildFacetData($scope.facets);
 
-                $rootScope.$broadcast('facetsUpdated', buildFacetData($scope.facets) );
+                //$rootScope.$broadcast('facetsUpdated', buildFacetData($scope.facets) );
 
             }).catch(function(err) {
                 console.log('Error in search:', err);

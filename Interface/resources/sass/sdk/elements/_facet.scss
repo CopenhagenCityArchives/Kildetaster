@@ -1,0 +1,29 @@
+.facet {
+    margin-bottom: 28px;
+
+    &__header {
+        font-size: 18px;
+
+        text-transform: uppercase;
+    }
+
+
+    &__item {
+        font-size: 14px;
+        line-height: 28px;
+
+        a:hover {
+            text-decoration: none;
+        }
+    }
+
+    &__count {
+        font-size: 11px;
+
+        padding: 1px 8px;
+
+        color: $white;
+        border-radius: 5px;
+        background-color: $light-blue;
+    }
+}
