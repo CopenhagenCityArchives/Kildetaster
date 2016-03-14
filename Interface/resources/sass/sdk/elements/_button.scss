@@ -16,9 +16,16 @@
     border: none;
     border-radius: 3px;
     background-color: $blue;
+    /* overwrite of default KBH styling */
+    text-decoration: none !important;   
 
     &:hover {
         background-color: lighten($blue, 10%);
+
+        /* overwrite of default KBH styling */
+        text-decoration: none !important;
+
+        color: $white;
     }
 
     &:disabled {
