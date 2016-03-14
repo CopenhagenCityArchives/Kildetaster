@@ -13,6 +13,8 @@ define([
 
         $scope.post = resultData.post;
 
+        $scope.kildeviserUrl = resultData.metadata.kildeviser_url;
+
         $scope.errorReportingEnabled = false;
 
         $scope.toggleErrorReporting = function() {
