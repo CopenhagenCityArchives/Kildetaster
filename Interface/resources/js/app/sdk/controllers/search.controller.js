@@ -92,7 +92,6 @@ define([
 
 
         $scope.$on('filterSearch', function(event, params) {
-            console.log('filtering!', params);
 
             searchService.filterQuery($scope.config, params).then(function(response) {
                 $scope.results = response.response;
@@ -113,7 +112,7 @@ define([
                 $rootScope.$broadcast('facetsUpdated', buildFacetData(newVal) );
             }
 
-        })
+        });
 
         /**
         * Execute the search
