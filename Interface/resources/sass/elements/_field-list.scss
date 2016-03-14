@@ -1,4 +1,8 @@
 .field-list {
+    margin-right: -8px;
+    margin-left: -8px;
+    padding: 5px 8px;
+
     &__item {
         padding-bottom: 6px;
     }
@@ -23,5 +27,9 @@
         padding: 5px 5px;
 
         background-color: $yellow;
+    }
+
+    &:nth-child(odd) {
+        background-color: $lighter-gray;
     }
 }

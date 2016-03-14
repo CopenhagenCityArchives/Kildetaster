@@ -4,12 +4,19 @@ define([
 
     var updateFieldsController = /*@ngInject*/ function updateFieldsController(Flash, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService) {
 
-        //console.log('postDAta', postData);
+        console.log('postDAta', postData.errorReports);
         //console.log('taskDAta', taskData);
 
         $scope.values = postData.entryData;
 
+        $scope.arrayVal = {};
+
         $scope.editingFields = {};
+
+        $scope.singleFieldForms = {};
+
+        $scope.singleSchema = {};  
+        $scope.singleValue = {};     
 
         //Default settings for angular-schema-forms
         $scope.sfDefaults = {
@@ -26,57 +33,94 @@ define([
         /**
          * Toggle wether or not we should show edit field for a given field config
          */
-        $scope.toggleEditExistingValue = function toggleEditExistingValue(item) {
-            $scope.editingFields[item] = !$scope.editingFields[item];
+        $scope.toggleEditExistingValue = function toggleEditExistingValue(item, id) {
+            id = id || '';
+            $scope.editingFields = {};
+
+            $scope.editingFields[item + id] = !$scope.editingFields[item + id];
         };
 
         /**
          * Ask if a given field is currently being edited
          */
-        $scope.isEditing = function isEditing(field) {
-            return $scope.editingFields[field];
-        };      
-
-        $scope.updateField = function updateField(field) {
-
-            var fieldData = $scope.values[$scope.mainProperty][field];
-
-            var id, value, entityName, fieldName;
-
-            //console.log(fieldData);
-
-            var path = field.split('.');
+        $scope.isEditing = function isEditing(field, id) {
+            id = id || '';
+            return $scope.editingFields[field + id];
+        };
 
 
-            if (angular.isArray(fieldData)) {
-                //console.log('array');
-                id = fieldData[0].id;
+        /**
+        * Build the value structure for single fields, that is fields that are part of an array structure
+        */
+        $scope.getValue = function (key, subkey, id) {
+
+            var valueInValues = $scope.values[$scope.mainProperty][key]; //[0][subkey]);
+
+            var data = valueInValues.find(function(item) {
+
+                if (item.id === id) {
+                    return item;
+                }
+                
+            });
+
+            $scope.singleValue = data;
+           
+        };
+
+
+        /**
+        * Build schema for single fields, that is fields that are part of an array structure
+        */
+        $scope.getSchema = function getSchema(key, subkey) {
+
+            var data = {
+                type: 'object',
+                properties: {}
+            };
+
+            data.properties[subkey] = $scope.schema.properties[$scope.mainProperty].properties[key].items.properties[subkey];
+
+            $scope.singleSchema = data;
+
+        };
+
+        $scope.updateField = function updateField(field, subkey) {
+
+            var fieldData = $scope.values[$scope.mainProperty][field],
+                id, value, entityName, fieldName,
+                path = field.split('.');
+
+            //Array structures
+            if (angular.isArray(fieldData)) {                
                 entityName = field;
+                fieldName = subkey;
+                id = fieldData[0].id;
+                value = $scope.singleValue[subkey];
             }
+            //its a field with subfields
             else if (path.length > 1) {
-                //console.log('path');
                 entityName = path[0];
                 fieldName = path[1];
-                id = $scope.values[$scope.mainProperty][entityName].id;
+                id = $scope.values[$scope.mainProperty][entityName].id;                
                 value = $scope.values[$scope.mainProperty][entityName][fieldName];
             }
+            //Regular field
             else {
-                //console.log('else');
-                id = $scope.values[$scope.mainProperty].id;
-                value = fieldData;
                 entityName = $scope.mainProperty;
                 fieldName = field;
+                id = $scope.values[$scope.mainProperty].id;
+                value = fieldData;
             }
 
             var data = {  
-                "entity_name": entityName,//"persons",
-                "field_name" : fieldName,//"firstnames",
-                "value": value, //"Niels",
-                "concrete_entries_id": id, //178,
+                "entity_name": entityName,
+                "field_name" : fieldName,
+                "concrete_entries_id": id,
+                "value": value,
                 "task_id": taskData.id
             };
 
-            
             entryService.updateEntry(postData.entryId, data)
             .then(function(response) {
                 Flash.create('success', 'Feltet er opdateret.');
@@ -84,7 +128,7 @@ define([
             }, function(err) {
                 Flash.create('danger', 'Error updating entry' + err.data);
             });
-            //window.location.href = 'http://www.kbharkiv.dk/deltag/kildetaster-test/kildetasteren-test';
+
         };
 
         /**
@@ -93,7 +137,7 @@ define([
         stepService.getData(taskData.id).then(function(response) {
 
             //The schema setup
-            $scope.schema = response.schema;   
+            $scope.schema = response.schema;
 
             $scope.mainProperty = response.keyName;
 

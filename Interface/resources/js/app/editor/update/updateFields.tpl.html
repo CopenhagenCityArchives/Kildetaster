@@ -1,16 +1,17 @@
-<section>
-<div class="row">
-    <div class="col-sm-12">
-        <h2>Ret fejl i kilde</h2>
-        <p>Herunder er de fejlmeldte indtastninger markeret med gult. Ret fejlene i felterne og klik ”ok”.</p>
-    </div>    
-    <div class="col-sm-12">
-        <h3>Udfyldt</h3>  
+<section class="update-fields">
 
-        <ul class="list-unstyled field-list" ng-repeat="(key, value) in values[mainProperty]">
-            <li class="field-list__item">
-                
-                <span ng-if="schema.properties[mainProperty].properties[key].type === 'string'">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Ret fejl i kilde</h2>
+            <p>Herunder er de fejlmeldte indtastninger markeret med gult. Ret fejlene i felterne og klik ”ok”.</p>
+        </div>    
+        <div class="col-sm-12">
+            <h3>Udfyldt</h3>
+        
+            <ul class="list-unstyled field-list" ng-repeat="(key, value) in values[mainProperty]">
+
+                <li class="field-list__item" ng-if="schema.properties[mainProperty].properties[key].type === 'string' || schema.properties[mainProperty].properties[key].type === 'number' || schema.properties[mainProperty].properties[key].type === 'date'">
+                   
                     <a tabindex="1" href ng-click="toggleEditExistingValue(key)">
                         <span class="summary-item">
                             <span class="summary-item__label">{{schema.properties[mainProperty].properties[key].title}}</span>
@@ -32,9 +33,10 @@
                             </button>
                         </div>
                     </div>
-                </span>
+                </li>
+                    
 
-                 <span ng-if="schema.properties[mainProperty].properties[key].type === 'object'">
+                <li ng-if="schema.properties[mainProperty].properties[key].type === 'object'">
 
                     <span ng-repeat="(subkey, subvalue) in schema.properties[mainProperty].properties[key].properties" ng-if="value[subkey] !== undefined">
 
@@ -59,43 +61,59 @@
                                 </button>
                             </div>
                         </div>
-                    </span>
-                </span>
 
-                <span ng-if="schema.properties[mainProperty].properties[key].type == 'array'">
-                
+                        <div class="row" ng-if="isEditing(key)">
+                    
+                            <div class="col-sm-12">
+                                <form sf-schema="schema" sf-form="[mainProperty + '.' + key]" sf-model="values"></form>
+                            </div>                    
+
+                            <div class="col-sm-12 text-right">
+                                <button tabindex="1" type="button" class="btn btn-default" ng-click="updateField(key)">
+                                    {{TEXT.BUTTON.OK}}
+                                </button>
+                            </div>
+                        </div>
+                    </span>
+                </li>
+
+                <li ng-if="schema.properties[mainProperty].properties[key].type == 'array'">
+
                     <span class="summary-item__label">{{schema.properties[mainProperty].properties[key].title}}</span>
+                    
                     <ul>
-                        <!-- Filter out null values, ie. items that were added, but never filled out -->
-                        <li ng-repeat="val in values[mainProperty][key]">
-                            <a href ng-click="toggleEditExistingValue(key)">
-                                <span ng-repeat="(key, value) in val">
-                                    <span ng-if="key !== 'id'">
-                                        {{value}}
-                                    </span>
-                                </span>
-                            <span class="icon glyphicon glyphicon-pencil"></span> </a>
+
+                        <li ng-repeat="val in values[mainProperty][key]">                            
+
+                            <span ng-repeat="(subkey, value) in val">
+                                <a href ng-click="toggleEditExistingValue(subkey, val.id)">
+                                    <!-- HARDCODED TEST FOR PERSONS_ID, A FIELD THAT IS ONLY ON TASK 1!! -->
+                                    <span ng-if="subkey !== 'id' && subkey !== 'persons_id'">
+                                       {{value}}                                        
+                                <span class="icon glyphicon glyphicon-pencil"></span></span> </a>
+                                
+                                <div class="row" ng-if="isEditing(subkey, val.id)">                    
+                                    <div class="col-sm-12">
+                                        <form ng-init="getSchema(key, subkey);getValue(key, subkey, val.id)" sf-schema="singleSchema" sf-form="['*']" sf-model="singleValue"></form>
+                                    </div>
+                                    <div class="col-sm-12 text-right">
+                                        <button tabindex="1" type="button" class="btn btn-default" ng-click="updateField(key, subkey)">
+                                            {{TEXT.BUTTON.OK}}
+                                        </button>
+                                    </div>
+                                </div>
+
+                            </span>  
+
                         </li>
                     </ul>
-                    <div class="row" ng-if="isEditing(key)">
-                    
-                        <div class="col-sm-12">
-                            <form sf-schema="schema" sf-form="[mainProperty + '.' + key]" sf-model="values"></form>
-                        </div>                    
-
-                        <div class="col-sm-12 text-right">
-                            <button tabindex="1" type="button" class="btn btn-default" ng-click="updateField(key)">
-                                {{TEXT.BUTTON.OK}}
-                            </button>
-                        </div>
-                    </div>
                             
-                </span>
+                </li>
 
-            </li>
-        </ul>
+            </ul>
 
+        </div>
+        
     </div>
     
-</div>
 </section>
