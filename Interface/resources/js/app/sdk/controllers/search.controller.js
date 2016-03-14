@@ -90,7 +90,6 @@ define([
             
         };
 
-
         $scope.$on('filterSearch', function(event, params) {
 
             searchService.filterQuery($scope.config, params).then(function(response) {
@@ -107,11 +106,7 @@ define([
         * Watch for changes in facets, and broadcast any changes
         */ 
         $scope.$watch('facets', function(newVal, oldVal) {
-
-            if (newVal !== oldVal) {
-                $rootScope.$broadcast('facetsUpdated', buildFacetData(newVal) );
-            }
-
+            $rootScope.$broadcast('facetsUpdated', buildFacetData(newVal) );
         });
 
         /**
