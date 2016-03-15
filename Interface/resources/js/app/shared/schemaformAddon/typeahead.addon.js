@@ -37,11 +37,11 @@ define([
                     q: term
                 }
             }).then(function(response) {
-                //Limit the hits to only contain the first 8 this
+                
                 var startsWith = $filter('startsWith')(response.data, term, propertyName);
 
-                return startsWith.slice(0,8);
-                //return response.data.slice(0,8);
+                return startsWith; 
+                
             });
 
         };

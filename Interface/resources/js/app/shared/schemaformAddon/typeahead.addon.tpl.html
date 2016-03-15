@@ -28,7 +28,8 @@
             schema-validate="form"
             uib-typeahead="option[form.schema.datasourceValueField] for option in getData(form.schema.datasource, $viewValue, form.schema.datasourceValueField)"
             typeahead-focus-first="false"
-            typeahead-append-to-body="true"
+            typeahead-append-to-body="false"
+            typeahead-min-length="1"
             capitalize-first
         />
 
