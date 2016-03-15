@@ -3,12 +3,13 @@
 
     <!-- <button ng-click="goToEditor(data)">Til kildetaster</button> -->
 
-    <div class="postfield" ng-repeat="field in data.fields" ng-class="{ error: field.error }">
+    <div class="postfield" ng-repeat="field in data.fields">
 
-        <div ng-if="!isArray(field)">
+        <div ng-if="!isArray(field)" ng-class="{ error: field.error }">
             
             <strong>{{field.label}}</strong>
             <span>{{field.value}}</span> 
+
             <a href ng-if="errorReporting && !field.error" ng-click="toggleErrorReporting(field)">
                 <i class="icon-exclamation-sign"></i>
             </a>
@@ -38,8 +39,16 @@
 
         </div>
         
-        <div ng-if="isArray(field)">
-            {{field[0].value}} <a href ng-if="errorReporting" ng-click="toggleErrorReporting(field[0])"><i class="icon-exclamation-sign"></i></a>
+        <div ng-if="isArray(field)" ng-class="{ error: field[0].error }">
+            {{field[0].value}} 
+
+            <a href ng-if="errorReporting && !field[0].error" ng-click="toggleErrorReporting(field[0])">
+                <i class="icon-exclamation-sign"></i>
+            </a>
+
+            <span ng-if="field[0].error">            
+                <i class="icon-exclamation-sign" title="{{field[0].error.comment}}"></i>
+            </span>
 
             <div class="" ng-if="field[0].errorAccepted">
                 Tak for din fejlmelding

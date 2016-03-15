@@ -4,9 +4,8 @@
         display: block;
     }
 
-    &.error {
+    .error {
         i {
-            //background-color: yellow;
             color: red;
         }
     }

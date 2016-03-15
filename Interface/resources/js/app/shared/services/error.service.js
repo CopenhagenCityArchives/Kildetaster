@@ -27,7 +27,7 @@ define([
                     data: params
                 })
                 .then(function(response) {
-                    console.log(response);
+                    return response.data;
                 })
                 .catch(function(err) {
                     console.log('Error creating error report', err);

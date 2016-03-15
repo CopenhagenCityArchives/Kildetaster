@@ -67,14 +67,33 @@ define([
         */
         function addErrorInfo() {
             
+            //Loop over each error report
             $scope.errorReports.forEach(function(report) {
 
+                //Loop over all fields
                 var fieldWithError = $scope.post.find(function(entity) {
+
+                    //See if the entities match
                     if (entity.entity_name === report.entity_name) {
+                        
+                        //Locate the field that is in error and mark it
                         var found = entity.fields.find(function(field) {
-                            if (field.field_name === report.field_name && field.parent_id === report.concrete_entries_id) {
-                                field.error = report;
-                                return true;
+
+                            //Array structures
+                            if (angular.isArray(field)) {
+                                field.forEach(function(subfield) {
+                                    if (subfield.field_name === report.field_name && subfield.parent_id === report.concrete_entries_id) {
+                                    subfield.error = report;
+                                    return true;
+                                }
+                                });
+                            }
+                            //Regular fields
+                            else {
+                                if (field.field_name === report.field_name && field.parent_id === report.concrete_entries_id) {
+                                    field.error = report;
+                                    return true;
+                                }
                             }
                         });
 
