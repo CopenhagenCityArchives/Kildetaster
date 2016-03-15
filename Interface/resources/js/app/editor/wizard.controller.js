@@ -200,10 +200,8 @@ define([
             $state.go('^.pageFull', {}, { reload: true });
         };
 
-        /**
-        * Mark current page as done, ie no more posts should be made
-        */
-        $scope.pageIsDone = function pageIsDone() {
+
+        $scope.$on('okToSetPageDone', function(event) {
 
             pageService.pageIsDone({
                 page_id: pageData.id,
@@ -216,6 +214,14 @@ define([
             .catch(function(err) {
                 console.log('Err', err);
             });
+
+        });
+
+        /**
+        * Mark current page as done, ie no more posts should be made
+        */
+        $scope.pageIsDone = function pageIsDone() {
+            $state.go('.confirm');
         };
 
         /**

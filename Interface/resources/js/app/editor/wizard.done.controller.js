@@ -11,7 +11,10 @@ define([
             $state.go('^');
         };
 
-        $scope.markDone = function() {
+        /**
+        * Event from confirmation modal to go ahead and mark page as done
+        */
+        $scope.$on('okToSetPageDone', function(event) {
 
             pageService.pageIsDone({
                 page_id: pageData.id,
@@ -28,6 +31,11 @@ define([
             .catch(function(err) {
                 console.log('Error setting page as done: ', err);
             });
+        });
+
+        $scope.markDone = function() {
+            //Show confirmation modal
+            $state.go('.confirm');
         };
     };
 

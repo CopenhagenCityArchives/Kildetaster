@@ -214,6 +214,31 @@ define([
                 }
             })
 
+            .state('editor.page.wizard.confirm', {
+                //url: "/add",
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        
+                        templateUrl: 'editor/confirm.modal.tpl.html',
+                        windowClass: 'modal--center',
+                        
+                        controller: ['$scope', '$rootScope', function($scope, $rootScope) {
+                            $scope.dismiss = function() {
+                                $scope.$dismiss();
+                            };
+
+                            $scope.continue = function() {
+                                $rootScope.$broadcast('okToSetPageDone');                               
+                                $scope.$dismiss();
+                            };
+                        }]
+                    }).result.finally(function() {
+                        //Go back to previous state
+                        $state.go('^');
+                    });
+                }]
+            })
+
             .state('editor.page.pageFull', {
 
                 url: '/full',
@@ -224,6 +249,31 @@ define([
                     }
 
                 }
+            })
+
+            .state('editor.page.pageFull.confirm', {
+                //url: "/add",
+                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                    $uibModal.open({
+                        
+                        templateUrl: 'editor/confirm.modal.tpl.html',
+                        windowClass: 'modal--center',
+                        
+                        controller: ['$scope', '$rootScope', function($scope, $rootScope) {
+                            $scope.dismiss = function() {
+                                $scope.$dismiss();
+                            };
+
+                            $scope.continue = function() {
+                                $rootScope.$broadcast('okToSetPageDone');                               
+                                $scope.$dismiss();
+                            };
+                        }]
+                    }).result.finally(function() {
+                        //Go back to previous state
+                        $state.go('^');
+                    });
+                }]
             })
 
 

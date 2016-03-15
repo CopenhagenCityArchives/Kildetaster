@@ -27,6 +27,15 @@
         content: inline("resources/images/icon_help.svg");
     }
 
+    &__cross {
+        display: inline-block;
+
+        width: 18px;
+        height: 18px;
+
+        content: inline("resources/images/icon_cross.svg");
+    }
+
     &__error {
         color: $red;
     }
