@@ -51,7 +51,7 @@ define([
 
             })
             .state('search.page.result.page', {
-                url: 'post/{postId:int}/',
+                url: 'post/{postId:int}',
                 views: {
                    
                     'navigation': {
