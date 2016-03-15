@@ -5,6 +5,7 @@ prototype:
     - 'ngconstant:prototype'
     - 'copy:prototype'
     - 'sass:prototype'
+    - 'postcss:prototype'
     - 'bake:prototype'
     - 'karma:prototype'
     - 'express:prototype'

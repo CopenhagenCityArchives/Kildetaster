@@ -13,14 +13,14 @@ module.exports = function(grunt) {
 
 			scss: {
 				files: ['<%= package.resources %>/sass/**/*.scss', '<%= package.resources %>/bower_components/**/*.scss'],
-				tasks: ['newer:csscomb', 'sass:prototype'],
+				tasks: ['newer:csscomb', 'sass:prototype', 'postcss:prototype'],
 				options: {
 					livereload: true
 				},
 			},
             css: {
                 files: ['<%= package.prototyperesources %>/css/styles.css'],
-                tasks: [],
+                tasks: [''],
                 options: {
                     livereload: true
                 }
