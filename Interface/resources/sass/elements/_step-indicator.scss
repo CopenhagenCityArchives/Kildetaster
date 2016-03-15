@@ -8,6 +8,17 @@
 
     background-color: $gray;
 
+    &.disabled {
+        a:hover {
+            cursor: not-allowed;
+        }
+
+        //Dim the 'tabs' if the indicator is set as disabled
+        .step-indicator__item {
+            opacity: 0.4;
+        }
+    }
+
     &__item {
         line-height: 61px;
 
@@ -22,7 +33,6 @@
 
         color: $gray-text;
         border-bottom: $light-gray;
-
 
         &:hover, &:focus {
             text-decoration: none;

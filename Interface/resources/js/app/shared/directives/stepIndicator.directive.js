@@ -14,7 +14,8 @@ define([
             scope: {
                 current: '=',
                 total: '=',
-                goToStep: '='
+                goToStep: '=',
+                disabled: '='
             },
 
             templateUrl: 'shared/directives/stepIndicator.directive.tpl.html',
@@ -31,6 +32,12 @@ define([
 
                 scope.hasPrevious = function(index) {
                     return index < scope.current;
+                };
+
+                scope.go = function go(index) {
+                    if (!scope.disabled) {
+                        scope.goToStep(index);
+                    }
                 };
                 
             }

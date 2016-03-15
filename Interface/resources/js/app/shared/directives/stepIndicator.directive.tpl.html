@@ -1,8 +1,8 @@
-<div class="step-indicator">
+<div class="step-indicator" ng-class="{ disabled: disabled}">
     <a 
         tabindex="-1" 
         class="step-indicator__item"
-        ng-click="goToStep($index + 1)"
+        ng-click="go($index + 1)"
         ng-class="{ filled: hasPrevious($index), current: isCurrent($index)}" 
         ng-repeat="step in steps(total) track by $index">
         {{$index + 1}}
