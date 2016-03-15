@@ -15,7 +15,16 @@
         margin-right: 4px;
         margin-left: 4px;
 
-        content: url("/resources/images/icon_edit.svg");
+        content: inline("resources/images/icon_edit.svg");
+    }
+
+    &__help {
+        display: inline-block;
+
+        width: 18px;
+        height: 18px;
+
+        content: inline("resources/images/icon_help.svg");
     }
 
     &__error {
