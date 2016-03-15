@@ -1,8 +1,10 @@
 define([
 
-], function() {
+    'clipboard'
 
-    var wizardController = /*@ngInject*/ function wizardController(helpers, $scope, $rootScope, stepService, $stateParams, pageData, taskData, $location, $state, $timeout, $http, Flash, API, pageService) {
+], function(Clipboard) {
+
+    var wizardController = /*@ngInject*/ function wizardController(helpers, $scope, $rootScope, stepService, $stateParams, pageData, taskData, $location, $state, $timeout, $http, Flash, API, pageService, SEARCHURL) {
 
         //Indicates if we should show the controls for accepting a new area (used on all other steps than the first)
         $scope.showSelectionControls = false;
@@ -17,6 +19,9 @@ define([
         $scope.showComment = false;
 
         $scope.wantFeedback = false;
+
+        $scope.postId = undefined;
+        $scope.shareLink = '';
 
         //Will hold the inputted values
         $scope.values = {};
@@ -140,7 +145,7 @@ define([
             }).then(function(response) {
 
                 if (response.data && response.data.post_id) {
-                    $state.go('^.pageFull', {}, { reload: true });
+                    $scope.postId = response.data.post_id;
                 }
                 else {
                     Flash.create('danger', response);
@@ -156,7 +161,7 @@ define([
          * Move to next step
          */
         $scope.nextStep = function nextStep() {
-            
+
             $location.search({
                 stepId: parseInt($scope.currentStep) + 1
             });
@@ -191,6 +196,10 @@ define([
 
         };
 
+        $scope.postDone = function postDone() {
+            $state.go('^.pageFull', {}, { reload: true });
+        };
+
         /**
         * Mark current page as done, ie no more posts should be made
         */
@@ -217,12 +226,32 @@ define([
             $rootScope.$broadcast('makeSelectable');
             //Show controls to accept new area
             $scope.showSelectionControls = true;
+        };       
+        
+        $scope.toggleShareLink = function() {
+            $scope.buildShareLink($scope.postId);
+            $scope.showShareLink = !$scope.showShareLink;
         };
+
+
+        /**
+        * When postId has a value, build link to the id
+        */
+        $scope.$watch('postId', function(newVal) {
+
+            if (newVal !== undefined) {
+                var link = SEARCHURL + '#/post/' + newVal;
+
+                $scope.shareLink = link;
+
+                new Clipboard('.share-link .btn');
+            }
+        });
 
         /**
          * Load step data from the server
          */
-        stepService.getData(1).then(function(response) {
+        stepService.getData(taskData.id).then(function(response) {
 
             //The schema setup
             $scope.schema = response.schema;
