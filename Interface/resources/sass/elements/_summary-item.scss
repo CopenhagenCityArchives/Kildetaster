@@ -4,12 +4,18 @@
     &__label {
         font-size: 10px;
 
-        display: block;
+        display: inline-block;
 
         color: $gray-text;
+
+        &:after {
+            display: inline;
+
+            content: ": ";
+        }
     }
 
     &__field {
-        display: block;
+        display: inline-block;
     }
 }

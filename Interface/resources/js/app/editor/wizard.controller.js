@@ -27,7 +27,11 @@ define([
         $scope.values = {};
 
         //Object to keep track of what fields is currently marked as being editied
-        $scope.editingFields = {};
+        $scope.editingField = '';
+
+        $scope.singleFieldForms = {};
+        $scope.singleSchema = {};  
+        $scope.singleValue = {}; 
 
         //Default settings for angular-schema-forms
         $scope.sfDefaults = {
@@ -40,6 +44,47 @@ define([
                 }
             }
         };
+
+        
+        /**
+        * Build the value structure for single fields, that is fields that are part of an array structure
+        */
+        $scope.getValue = function (key, subkey, id) {
+
+            var valueInValues = $scope.values[$scope.mainProperty][key]; //[0][subkey]);
+
+            var data = valueInValues.find(function(item) {
+
+                if (item.id === id) {
+                    return item;
+                }
+                
+            });
+
+            $scope.singleValue = data;
+           
+        };
+
+
+        /**
+        * Build schema for single fields, that is fields that are part of an array structure
+        */
+        $scope.getSchema = function getSchema(key, subkey) {
+
+            var data = {
+                type: 'object',
+                properties: {}
+            };
+
+            data.properties[subkey] = $scope.schema.properties[$scope.mainProperty].properties[key].items.properties[subkey];
+
+            $scope.singleSchema = data;
+
+        };
+
+
+
+
 
         /**
          * When area is selected in the directive controlling openseadragon, and we are on the first step
@@ -100,18 +145,27 @@ define([
 
         };
 
+
         /**
          * Toggle wether or not we should show edit field for a given field config
          */
         $scope.toggleEditExistingValue = function toggleEditExistingValue(item) {
-            $scope.editingFields[item] = !$scope.editingFields[item];
+            
+            //Only one field open at a time
+            $scope.editingField = item;
+            
+        };
+
+        $scope.closeEditField = function closeEditField() {
+            $scope.editingField = '';
         };
 
         /**
          * Ask if a given field is currently being edited
          */
         $scope.isEditing = function isEditing(field) {
-            return $scope.editingFields[field];
+            console.log('isedit', $scope.editingField == field);
+            return $scope.editingField == field;
         };
 
         /**
