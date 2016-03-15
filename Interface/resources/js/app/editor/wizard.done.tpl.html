@@ -1,9 +1,14 @@
 <div class="wizard-done">
     <div class="row">
         <div class="col-sm-12">
-            <h2>Udfyld kilde</h2>
-            <p ng-if="!isFull">Hvis der er flere personer tilbage på siden kan du starte en ny på samme side, eller skal siden markeres færdig.</p>
-            <p ng-if="isFull">Der kan ikke tastes flere personer på denne side. Du kan nu markere siden som færdigindtastet.</p>
+            <div ng-if="!isFull">
+                <h2>Udfyld kilde</h2>
+                <p>Hvis der er flere personer tilbage på siden kan du starte en ny på samme side, eller skal siden markeres færdig.</p>
+            </div>
+            <div ng-if="isFull">
+                <h2>Er siden færdig?</h2>
+                <p>Der er nu indtastet 6 begravelser på denne side. Meld siden færdig og gå til næste ledige side.</p>
+            </div>
         </div>
     </div>
 
