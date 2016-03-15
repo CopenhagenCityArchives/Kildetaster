@@ -192,7 +192,7 @@ define([
                     q: q,
                     facet: 'on',
                     'facet.field': params.field,
-                    fq: params.field + ':' + params.data,
+                    fq: params.field + ':"' + params.data + '"',
                     wt: 'json',
                     indent: true,
                 };
