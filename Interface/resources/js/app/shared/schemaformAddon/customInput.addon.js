@@ -44,15 +44,6 @@ define([
             
             link: function (scope, element, attrs, modelCtrl) {
                 
-                // modelCtrl.$viewChangeListeners.push(function(){ 
-
-                //     console.log(attrs.ngModel);
-                //     /*Set model value differently based on the viewvalue entered*/
-                //     var a = $parse(attrs.ngModel).assign(scope, { value : 'hans', unreadable: true }); 
-                //     modelCtrl.$setViewValue('hans');
-                //     //&modelCtrl.$render();
-                // });
-
                 scope.$watch(
                     function () { return element.attr('unreadable'); },
                     function(newVal) {
@@ -68,7 +59,6 @@ define([
     
     schemaForm.config( /*@ngInject*/ function(schemaFormProvider, schemaFormDecoratorsProvider, sfPathProvider) {
 
-
         var custominput = function(name, schema, options) {
 
             //Type of string, but without a specific format
@@ -81,10 +71,10 @@ define([
                 return f;
             }
         };
-
+        
         var customnumber = function(name, schema, options) {
 
-            //Type of string, but without a specific format
+            //Type of number, but without a specific format
             if (schema.type === 'number' && schema.format === undefined && schema.enum === undefined) {
 
                 var f = schemaFormProvider.stdFormObj(name, schema, options);
@@ -97,8 +87,9 @@ define([
 
         // Put it first in the list of functions
         schemaFormProvider.defaults.string.unshift(custominput);
-        
+                
         schemaFormProvider.defaults.number.unshift(customnumber);
+
 
         schemaFormDecoratorsProvider.addMapping(
             'bootstrapDecorator',
