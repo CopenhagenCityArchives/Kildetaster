@@ -24,7 +24,7 @@ define([
                             //'Content-Type': undefined //'application/x-www-form-urlencoded'
                             'Content-Type': 'application/json'
                         },
-                        //transformRequest: angular.identity,
+                        transformRequest: angular.identity,
                         // transformRequest: function(obj) {
                         //     var str = [];
                         //     for (var p in obj)
@@ -38,10 +38,14 @@ define([
                             api: 'oauth2'
                         },
                         //data: formData
-                        data: {
-                            authorized: 1,
-                            state: 'kildetaster'
-                        }
+                        // data: {
+                        //     authorized: 1,
+                        //     state: 'kildetaster'
+                        // }
+                        data: JSON.stringify({
+                             authorized: 1,
+                             state: 'kildetaster'
+                        })
                     })
                     .then(function(response) {
 
