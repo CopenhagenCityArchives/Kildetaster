@@ -1,0 +1,21 @@
+.share-link {
+    position: relative;
+
+    margin-top: 20px;
+
+    .form-control {
+        height: 54px;
+        margin-right: 40px;
+        padding-right: 50px;
+    }
+
+    button {
+        position: absolute;
+        top: 24px;
+        right: 0;
+
+        height: 53px;
+
+        border-radius: 0 5px 5px 0;
+    }
+}
