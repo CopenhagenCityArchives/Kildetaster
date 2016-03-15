@@ -147,7 +147,7 @@ define([
                 }
                 
             }).catch(function(err) {
-                Flash.create('danger', err);
+                Flash.create('danger', err.data.userMessage);
             });
 
         };
@@ -156,8 +156,7 @@ define([
          * Move to next step
          */
         $scope.nextStep = function nextStep() {
-            //$scope.$broadcast('schemaFormValidate');
-            //return;
+            
             $location.search({
                 stepId: parseInt($scope.currentStep) + 1
             });
