@@ -23,6 +23,9 @@ requirejs.config({
         'schemaForm'                   : '../bower_components/angular-schema-form/dist/schema-form.min',
         'angular-schema-form-bootstrap': '../bower_components/angular-schema-form/dist/bootstrap-decorator',
 
+        //Copy /paste library
+        'clipboard'                    : '../bower_components/clipboard/dist/clipboard.min',
+
         'angular-flash'                : '../bower_components/angular-flash-alert/dist/angular-flash',
                 
         'openseadragon'                : '../bower_components/openseadragon/built-openseadragon/openseadragon/openseadragon.min',

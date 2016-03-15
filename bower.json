@@ -22,7 +22,8 @@
     "jquery": "1.11.3",
     "angular-flash-alert": "~1.1.1",
     "angular-schema-form": "~0.8.12",
-    "ngstorage": "^0.3.10"
+    "ngstorage": "^0.3.10",
+    "clipboard": "^1.5.9"
   },
   "devDependencies": {
     "angular": "~1.4.8",

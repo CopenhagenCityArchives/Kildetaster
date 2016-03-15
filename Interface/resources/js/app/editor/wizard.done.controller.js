@@ -26,7 +26,7 @@ define([
 
             })
             .catch(function(err) {
-                console.log('Error setting page as done', err);
+                console.log('Error setting page as done: ', err);
             });
         };
     };
