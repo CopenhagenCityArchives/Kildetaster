@@ -164,7 +164,6 @@ define([
          * Ask if a given field is currently being edited
          */
         $scope.isEditing = function isEditing(field) {
-            console.log('isedit', $scope.editingField == field);
             return $scope.editingField == field;
         };
 
