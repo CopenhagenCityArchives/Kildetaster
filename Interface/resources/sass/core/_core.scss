@@ -33,3 +33,13 @@ legend {
 .form-control:focus {
     box-shadow: none;
 }
+
+
+//Overwrites for default styling of angular schema form
+.schema-form-array {
+    .close {
+        position: absolute !important;
+        top: 4px;
+        right: 9px;
+    }
+}
