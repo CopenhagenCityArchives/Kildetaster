@@ -90,6 +90,9 @@ define([
             
         };
 
+        /**
+        * Facet clicked, do a filtered search
+        */
         $scope.$on('filterSearch', function(event, params) {
 
             searchService.filterQuery($scope.config, params).then(function(response) {
@@ -97,7 +100,7 @@ define([
                 $scope.facets = response.facet_counts.facet_fields;
             })
             .catch(function(err) {
-                console.log('Error filtering', err);
+                console.log('Error filtering: ', err);
 
             });
         });
@@ -122,8 +125,6 @@ define([
             searchService.search(query, facets).then(function(response) {
                 $scope.results = response.response;
                 $scope.facets = response.facet_counts.facet_fields;
-
-                //$rootScope.$broadcast('facetsUpdated', buildFacetData($scope.facets) );
 
             }).catch(function(err) {
                 console.log('Error in search:', err);
