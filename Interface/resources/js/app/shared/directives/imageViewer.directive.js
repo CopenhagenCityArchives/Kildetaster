@@ -3,9 +3,10 @@ define([
     'angular',
     'openseadragon',
     'libs/openseadragonselection',
-    'libs/openseadragon-filtering'
+    'libs/openseadragon-filtering',
+    'libs/openseadragon-imaginghelper'
 
-], function(ang, OpenSeadragon, osdSelection) {
+], function(ang, OpenSeadragon, osdSelection, filtering, imagingHelper) {
 
     "use strict";
 
@@ -23,7 +24,7 @@ define([
                 editArea: '='
             },
 
-            controller: /*@ngInject*/ function($scope, $compile, $templateCache, $element, $rootScope) {
+            controller: /*@ngInject*/ function($scope, $compile, $templateCache, $element, $rootScope, $timeout) {
 
                 var viewer, opts, selectionOverlay, selection, tracker;
 
@@ -52,9 +53,7 @@ define([
 
                 //Add class all given overlays to render them as existing
                 $scope.options.tileSources.overlays = addClassToOverlay($scope.options.tileSources.overlays);
-                
-
-            
+                           
                 opts = angular.extend({}, {
 
                     element: angular.element('.target')[0],
@@ -101,6 +100,12 @@ define([
 
                 //Initialize the viewer
                 viewer = OpenSeadragon(opts);
+
+                var imagingHelper = new OpenSeadragonImaging.ImagingHelper({
+                    viewer: viewer
+                });
+
+                window.vv = imagingHelper;
 
                 viewer.addHandler('add-overlay', function(overlay) {
 
@@ -157,44 +162,54 @@ define([
                 //If set to a rect object, will show a selection on initilization of the selection plugin
                 var rect = null;
 
-                //Area we supposed to show an overlay with an area being edited?
-                if ($scope.editArea) {
+                //When the viewer is ready
+                viewer.addHandler('open', function() {
+                    
+                    //Are we supposed to show an overlay with an area being edited?
+                    if ($scope.editArea) {
 
-                    //TODO: fitBounds on event instead of a custom timeout
-                    $timeout(function() {
+                        //TODO: fitBounds on event instead of a custom timeout
+                        $timeout(function() {
 
-                        var editAreaOverlay = new OpenSeadragon.Rect($scope.editArea.x, $scope.editArea.y, $scope.editArea.width, $scope.editArea.height);
+                            viewer.clearOverlays();
 
-                        viewer.addOverlay({
-                            element: $('<div class="imageViewer__progress"></div>')[0],
-                            location: editAreaOverlay
-                        });
+                            var editAreaOverlay = new OpenSeadragon.Rect($scope.editArea.x, $scope.editArea.y, $scope.editArea.width, $scope.editArea.height);
 
-                        viewer.viewport.fitBounds(editAreaOverlay, true);
+                            viewer.addOverlay({
+                                element: $('<div class="imageViewer__progress"></div>')[0],
+                                location: editAreaOverlay
+                            });
 
-                    }, 1000);
+                            viewer.viewport.fitBounds(editAreaOverlay, true);
+
+                        }, 600);
 
 
-                }
-                //Else prepare a new rect object with initial selection
-                else {
-                    //Did we get info from the backend about where to place the next post?
-                    if ($scope.options.next_post && $scope.options.next_post !== false) {
-                        var next = $scope.options.next_post;
+                    }
+                    //Else prepare a new rect object with initial selection
+                    else {
+                        //Did we get info from the backend about where to place the next post?
+                        if ($scope.options.next_post && $scope.options.next_post !== false) {
+                            var next = $scope.options.next_post;
 
-                        //Hack, multiply with aproximate aspect ratio on the image, to make up for backend calculation
-                        // @see https://openseadragon.github.io/examples/viewport-coordinates/
-                        var realHeight = 0.33 * 1.4;
-                        
-                        rect = new OpenSeadragon.SelectionRect(next.x, next.y, next.width, realHeight);
-                        //custom default
-                        //     rect = new OpenSeadragon.SelectionRect(0.25, 0.6, 0.42, 0.45);
+                            //Hack, use image apsect ratio to recalculate the height coming from the backend
+                            // @see https://openseadragon.github.io/examples/viewport-coordinates/
+                            var realHeight = next.height / imagingHelper.imgAspectRatio;
+                            
+                            rect = new OpenSeadragon.SelectionRect(next.x, next.y, next.width, realHeight);
 
-                        //When the directive is initialized, make sure we listen for key events on the selection area
-                        createKeyTracker();
-                    }                   
-                     
-                }
+                            selection.rect = rect;
+                            selection.draw();
+
+                            viewer.viewport.fitVertically(true);
+                            
+                            //When the directive is initialized, make sure we listen for key events on the selection area
+                            createKeyTracker();
+                        }
+                         
+                    }
+
+                });                
 
                 var selectionConfig = {
 
@@ -216,7 +231,7 @@ define([
 
                     },
                     //Initial selection if rect is set
-                    rect: rect,
+                    //rect: rect,
 
                     toggleButton: 'toggle-selection',
 

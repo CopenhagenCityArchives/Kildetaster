@@ -2,12 +2,14 @@ define([
 
 ], function() {
 
-    var updateFieldsController = /*@ngInject*/ function updateFieldsController(Flash, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService) {
+    var updateFieldsController = /*@ngInject*/ function updateFieldsController(Flash, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService, $rootScope) {
 
         //console.log('postDAta', postData.errorReports);
         //console.log('taskDAta', taskData);
 
         $scope.values = postData.entryData;
+
+        $rootScope.$broadcast('zoom-to-post', { postId: postData.postId });
 
         $scope.arrayVal = {};
 
@@ -31,7 +33,6 @@ define([
                 }
             }
         };
-
 
         $scope.lookupErrorReport = function(key, mainProperty, subkey, id) { 
 
