@@ -55,8 +55,11 @@
     <div class="row" ng-if="currentStep > 1" ng-hide="postId">
 
         <div class="col-sm-12">
-            <h3>Godkend og gem</h3>
-            <p>Se de indtastede oplysninger igennem inden du gemmer. Husk at klikke "Gem indtastning", for at gemme oplysningerne.</p>
+            <h3>
+                <span ng-if="isResult()">Godkend og gem</span>
+                <span ng-if="!isResult()">Udfyldt</span>
+            </h3>
+            <p ng-if="isResult()">Se de indtastede oplysninger igennem inden du gemmer. Husk at klikke "Gem indtastning", for at gemme oplysningerne.</p>
             
             <ul class="list-unstyled field-list field-list--dots">
                 
