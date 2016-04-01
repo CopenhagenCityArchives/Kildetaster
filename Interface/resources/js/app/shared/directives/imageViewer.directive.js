@@ -81,7 +81,7 @@ define([
                     gestureSettingsTouch: {
                         scrollToZoom: true,
                         clickToZoom: true,
-                        pinchToZoom: false
+                        pinchToZoom: true
                     },
 
                     //Prefix for image paths
