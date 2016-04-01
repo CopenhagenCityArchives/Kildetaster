@@ -95,9 +95,14 @@ define([
         */
         $scope.$on('filterSearch', function(event, params) {
 
+            
             searchService.filterQuery($scope.config, params).then(function(response) {
                 $scope.results = response.response;
-                $scope.facets = response.facet_counts.facet_fields;
+
+                if (response.facet_counts) {
+                    $scope.facets = response.facet_counts.facet_fields;
+                }
+                
             })
             .catch(function(err) {
                 console.log('Error filtering: ', err);

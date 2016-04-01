@@ -1,4 +1,28 @@
 .error-reporting {
+    position: relative;
+
+    margin-top: 10px;
+    margin-left: -5px;
+    padding: 16px;
+
+    background-color: $light-gray;
+
+    &:before {
+        position: absolute;
+        top: -6px;
+        left: 15px;
+
+        display: inline-block;
+
+        width: 0;
+        height: 0;
+
+        content: "";
+
+        border-width: 0 7px 7px 7px;
+        border-style: solid;
+        border-color: transparent transparent $light-gray transparent;
+    }
     textarea {
         font-size: 13px;
 
@@ -7,7 +31,16 @@
         color: $black;
     }
 
+    &__icon {
+        display: block;
+    }
+
     .button {
-        margin-left: 20px;
+        font-size: 14px;
+        line-height: 22px;
+
+        float: left;
+
+        height: 27px;
     }
 }

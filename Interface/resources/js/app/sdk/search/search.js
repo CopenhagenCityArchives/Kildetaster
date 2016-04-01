@@ -14,8 +14,8 @@ define([
     'app/sdk/search/search.config',
     'app/sdk/search/search.run',
 
-    'app/sdk/controllers/search.controller',
-    'app/sdk/controllers/search.facets.controller',
+    'app/sdk/search/search.controller',
+    'app/sdk/search/search.facets.controller',
 
     'app/sdk/search/navigation.controller',
     'app/sdk/search/post.controller',

@@ -1,9 +1,10 @@
 <div class="row-fluid">
-    <div class="span10">
+    <div class="span9">
         <h1 class="post__header">{{collection}} {{unit}} s.{{pageNumber}}</h1>
     </div>
-    <div class="span2 text-right">
-        <a href ng-click="toggleErrorReporting()" title="Rapporter fejl"><i class="icon-exclamation-sign"></i></a>
+    <div class="span3 text-right post__tools">
+        <a href ng-hide="errorReportingEnabled" ng-click="toggleErrorReporting()" title="Rapporter fejl">Rapportér fejl <i class="sdk-icon report-error"></i></a>
+        <a href ng-show="errorReportingEnabled" ng-click="toggleErrorReporting()" title="Rapporter fejl">Afslut fejlrapportering <span class="post__closereporting"><i class="sdk-icon close-error-reporting"></i></span></a>
     </div>
 </div>
 

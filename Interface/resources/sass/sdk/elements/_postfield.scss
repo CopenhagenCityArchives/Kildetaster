@@ -9,4 +9,39 @@
             color: red;
         }
     }
+
+    .sdk-icon.report-error {
+        position: relative;
+        top: 4px;
+
+        width: 16px;
+        height: 18px;
+    }
+
+    &__report-link {
+        position: relative;
+
+        margin-left: -4px;
+        padding: 2px 4px;
+
+        text-decoration: none;
+
+        background-color: $light-yellow;
+
+        &:hover, &:focus {
+            text-decoration: none;
+
+            background-color: $light-yellow;
+        }
+
+        .sdk-icon.pencil {
+            position: absolute;
+            top: 2px;
+            right: -15px;
+        }
+
+        &.postfield__reporting {
+            background-color: $dark-yellow;
+        }
+    }
 }

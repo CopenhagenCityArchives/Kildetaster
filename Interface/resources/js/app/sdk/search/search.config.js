@@ -23,11 +23,11 @@ define([
                 url: '',
                 views: {
                     '': {
-                        templateUrl: 'sdk/templates/search.tpl.html',
+                        templateUrl: 'sdk/search/search.tpl.html',
                         controller: 'searchController'
                     },
                     'facets': {
-                        templateUrl: 'sdk/templates/search.facets.tpl.html',
+                        templateUrl: 'sdk/search/search.facets.tpl.html',
                         controller: 'searchFacetsController'
                     }
                 },

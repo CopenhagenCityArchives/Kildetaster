@@ -3,6 +3,40 @@
     &__header {
         margin-bottom: 20px;
     }
+
+
+    &__tools {
+        a {
+            line-height: 30px;
+
+            position: relative;
+
+            display: inline-block;
+
+            padding-right: 34px;
+
+            .sdk-icon.report-error {
+                position: absolute;
+                top: 4px;
+                right: 0;
+            }
+        }
+    }
+
+    &__closereporting {
+        position: absolute;
+        top: 4px;
+        right: 0;
+
+        display: inline-block;
+
+        width: 25px;
+        height: 25px;
+
+        border: 1px solid #505050;
+        border-radius: 50%;
+        background-color: #8a8a8a;
+    }
     &__image {
         margin-bottom: 10px;
         padding: 20px;

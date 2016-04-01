@@ -7,4 +7,24 @@
     &.delete {
         content: inline("resources/images/icon_delete.svg");
     }
+
+    &.report-error {
+        width: 26px;
+
+        content: inline("resources/images/icon_report_error.svg");
+    }
+
+    &.pencil {
+        width: 10px;
+        height: 10px;
+
+        content: inline("resources/images/icon_pencil.svg");
+    }
+
+    &.green-checkmark {
+        width: 39px;
+        height: 32px;
+
+        content: inline("resources/images/icon_green_checkmark.svg");
+    }
 }
