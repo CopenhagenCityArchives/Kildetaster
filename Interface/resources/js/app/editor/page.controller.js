@@ -134,7 +134,6 @@ define([
             
             // $scope.options.zoomToPost = data.postId;
             $scope.editArea = convertedPosts.find(function(post) {
-                console.log('set zoom to', data.postId);
                 return post.postId === data.postId;
             });
         });
