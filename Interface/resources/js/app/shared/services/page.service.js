@@ -3,12 +3,10 @@ define([
 
 ], function() {
 
-    var pageService = /*@ngInject*/ function pageService($http, $cacheFactory, $q, $filter, API, JSONURL) {
-
-        var cache = $cacheFactory('pageCache');
+    var pageService = /*@ngInject*/ function pageService($http, $q, $filter, API, JSONURL) {
 
         /**
-        * Load all available project details, store in cache for quick retrieval
+        * Load all available page details
         */
         function getPageData(params) {
             
@@ -16,10 +14,10 @@ define([
 
             return $http({
                 method: 'GET',
+
                 url: endPoint,
                 params: params
             }).then(function(response) {
-                //cache.put('all', response.data);
                 return response.data;
             });
         }
