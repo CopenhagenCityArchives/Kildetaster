@@ -23,12 +23,19 @@
 
         margin-left: -4px;
         padding: 2px 4px;
+        //Has to bee important because of Jooma styling
 
-        text-decoration: none;
+        text-decoration: none !important;
 
         background-color: $light-yellow;
 
         &:hover, &:focus {
+            text-decoration: none;
+
+            background-color: $dark-yellow;
+        }
+
+        &:focus {
             text-decoration: none;
 
             background-color: $light-yellow;
