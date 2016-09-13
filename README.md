@@ -15,3 +15,9 @@ Then run `grunt prototype` to start the prototype. This will build all frontend 
 The editor can be hit at http://localhost:1508/#/task/1/page/1/?stepId=1
 
 The prototype loads all data from mock data sources
+
+
+## API endpoint
+The api endpoint can be changed by editing the constant in Interface/grunttasks/ngconstant.js
+
+Look for the property 'API'
