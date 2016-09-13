@@ -6,7 +6,7 @@ Frontend for indexing archival material
 
 Remember to run `npm install` and `bower install` to get all dependencies
 
-Dependencies: node.js, npm and Grunt (npm install -g grunt-cli)
+Dependencies: node.js, npm and Grunt `(npm install -g grunt-cli)`
 
 ## How to start local prototype
 
