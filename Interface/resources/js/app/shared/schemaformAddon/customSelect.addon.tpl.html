@@ -4,9 +4,9 @@
 
     <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle()}">
         {{form.title}}
-        <span 
-            class="icon icon__help" 
-            uib-tooltip="{{form.description}}" 
+        <span
+            class="icon icon__help"
+            uib-tooltip="{{form.description}}"
             tooltip-placement="top"
             tooltip-append-to-body="true"
         ></span>
@@ -16,6 +16,7 @@
             ng-model-options="form.ngModelOptions"
             ng-disabled="form.readonly"
             sf-changed="form"
+            tabindex="1"
             class="form-control {{form.fieldHtmlClass}}"
             schema-validate="form"
             ng-options="item for item in form.schema.enum"
