@@ -4,9 +4,6 @@ define([
 
     var updateFieldsController = /*@ngInject*/ function updateFieldsController(Flash, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService, $rootScope) {
 
-        //console.log('postDAta', postData.errorReports);
-        //console.log('taskDAta', taskData);
-
         $scope.values = postData.entryData;
 
         $rootScope.$broadcast('zoom-to-post', { postId: postData.postId });
@@ -17,10 +14,10 @@ define([
 
         $scope.singleFieldForms = {};
 
-        $scope.singleSchema = {};  
-        $scope.singleValue = {}; 
+        $scope.singleSchema = {};
+        $scope.singleValue = {};
 
-        $scope.errorReports = postData.errorReports;    
+        $scope.errorReports = postData.errorReports;
 
         //Default settings for angular-schema-forms
         $scope.sfDefaults = {
@@ -34,7 +31,7 @@ define([
             }
         };
 
-        $scope.lookupErrorReport = function(key, mainProperty, subkey, id) { 
+        $scope.lookupErrorReport = function(key, mainProperty, subkey, id) {
 
             var toggleKey = key;
 
@@ -46,15 +43,15 @@ define([
                 toggleKey = subkey;
             }
 
-            var found = $scope.errorReports.find(function(error) {  
-                
+            var found = $scope.errorReports.find(function(error) {
+
                 if (mainProperty && subkey) {
                     return error.entity_name === key && error.field_name === subkey;
                 }
                 else {
                     return error.field_name === key;
                 }
-                
+
             });
 
             if (found) {
@@ -70,8 +67,6 @@ define([
          */
         $scope.toggleEditExistingValue = function toggleEditExistingValue(item, id) {
             id = id || '';
-            
-            $scope.editingFields = {};
 
             $scope.editingFields[item + id] = !$scope.editingFields[item + id];
         };
@@ -97,11 +92,11 @@ define([
                 if (item.id === id) {
                     return item;
                 }
-                
+
             });
 
             $scope.singleValue = data;
-           
+
         };
 
 
@@ -128,7 +123,7 @@ define([
                 path = field.split('.');
 
             //Array structures
-            if (angular.isArray(fieldData)) {                
+            if (angular.isArray(fieldData)) {
                 entityName = field;
                 fieldName = subkey;
                 id = fieldData[0].id;
@@ -138,7 +133,7 @@ define([
             else if (path.length > 1) {
                 entityName = path[0];
                 fieldName = path[1];
-                id = $scope.values[$scope.mainProperty][entityName].id;                
+                id = $scope.values[$scope.mainProperty][entityName].id;
                 value = $scope.values[$scope.mainProperty][entityName][fieldName];
             }
             //Regular field
@@ -149,7 +144,7 @@ define([
                 value = fieldData;
             }
 
-            var data = {  
+            var data = {
                 "entity_name": entityName,
                 "field_name" : fieldName,
                 "concrete_entries_id": id,
@@ -159,8 +154,19 @@ define([
 
             entryService.updateEntry(postData.entryId, data)
             .then(function(response) {
+
                 Flash.create('success', 'Feltet er opdateret.');
+
+                //Toggle the editing portion (hide iput field and button)
                 $scope.toggleEditExistingValue(field);
+
+                //Remove the entry from the errorReports in the scope
+                $scope.errorReports = $scope.errorReports.filter(function( report ) {
+                    //Only return reports where the field_name does not match
+                    //that way removing the error report for the field we are working on
+                    return report.field_name !== field;
+                });
+
             }, function(err) {
                 Flash.create('danger', 'Error updating entry' + err.data);
             });
@@ -178,7 +184,7 @@ define([
             $scope.mainProperty = response.keyName;
 
         });
-        
+
     };
 
     return updateFieldsController;
