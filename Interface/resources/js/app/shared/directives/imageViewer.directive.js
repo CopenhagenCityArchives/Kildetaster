@@ -13,7 +13,7 @@ define([
     /**
      * Based on https://github.com/MaitreDede/angular-openseadragon
      */
-    var openseadragonDirective = /*@ngInject*/ function openseadragonDirective($timeout) {
+    var openseadragonDirective = /*@ngInject*/ function openseadragonDirective($timeout, helpers) {
 
         return {
 
@@ -53,7 +53,7 @@ define([
 
                 //Add class all given overlays to render them as existing
                 $scope.options.tileSources.overlays = addClassToOverlay($scope.options.tileSources.overlays);
-                           
+
                 opts = angular.extend({}, {
 
                     element: angular.element('.target')[0],
@@ -92,7 +92,7 @@ define([
 
                     debugMode: false,
 
-                    //The "zoom distance" per mouse scroll or touch pinch. Note: Setting this to 1.0 effectively disables the mouse-wheel zoom feature 
+                    //The "zoom distance" per mouse scroll or touch pinch. Note: Setting this to 1.0 effectively disables the mouse-wheel zoom feature
                     //(also see gestureSettings[Mouse|Touch|Pen].scrollToZoom}).
                     //zoomPerScroll: 1.0
 
@@ -117,11 +117,18 @@ define([
 
                 //Event fired when selection is confirmed
                 viewer.addHandler('selection', function(data) {
-        
+
                     var convertedRect = viewer.viewport.imageToViewportRectangle(data);
 
+                    //Convert given rect height value to percentage, as that is what the backend needs
+                    //Backend stores values in 1:1 aspect ratio, whereas the rect given here, is based on the width of the image
+                    // @see https://openseadragon.github.io/examples/viewport-coordinates/
+                    convertedRect = helpers.convertOpenSeadragonRectToPercent(convertedRect, imagingHelper.imgAspectRatio);
+
                     //Tell the application about the selected rectangle
-                    $rootScope.$broadcast('areaSelected', { rect: convertedRect });
+                    $rootScope.$broadcast('areaSelected', {
+                        rect: convertedRect
+                    });
                 });
 
                 $scope.$on('areaAccepted', function() {
@@ -164,7 +171,7 @@ define([
 
                 //When the viewer is ready
                 viewer.addHandler('open', function() {
-                    
+
                     //Are we supposed to show an overlay with an area being edited?
                     if ($scope.editArea) {
 
@@ -190,26 +197,24 @@ define([
                     else {
                         //Did we get info from the backend about where to place the next post?
                         if ($scope.options.next_post && $scope.options.next_post !== false) {
-                            var next = $scope.options.next_post;
 
-                            //Hack, use image apsect ratio to recalculate the height coming from the backend
-                            // @see https://openseadragon.github.io/examples/viewport-coordinates/
-                            var realHeight = next.height / imagingHelper.imgAspectRatio;
-                            
-                            rect = new OpenSeadragon.SelectionRect(next.x, next.y, next.width, realHeight);
+                            var next = $scope.options.next_post,
+                                convertedRect = helpers.convertPercentToOpenSeadragonRect(next, imagingHelper.imgAspectRatio);
+
+                            rect = new OpenSeadragon.SelectionRect(convertedRect.x, convertedRect.y, convertedRect.width, convertedRect.height);
 
                             selection.rect = rect;
                             selection.draw();
 
                             viewer.viewport.fitVertically(true);
-                            
+
                             //When the directive is initialized, make sure we listen for key events on the selection area
                             createKeyTracker();
                         }
-                         
+
                     }
 
-                });                
+                });
 
                 var selectionConfig = {
 
@@ -225,7 +230,7 @@ define([
 
                         //Zoom viewer to the selected area
                         viewer.viewport.fitBounds(converted, true);
-                        
+
                         //Remove the custom key event handler
                         removeKeyTracker();
 
@@ -275,11 +280,11 @@ define([
                     map = [];
 
                 /**
-                * Create a custom tracker for key events, to control moving and resizing the selection area with 
+                * Create a custom tracker for key events, to control moving and resizing the selection area with
                 * the keyboard
                 */
                 function createKeyTracker() {
-                    
+
                     // Based on http://stackoverflow.com/questions/5203407/javascript-multiple-keys-pressed-at-once
                     tracker = new OpenSeadragon.MouseTracker({
 
@@ -291,10 +296,10 @@ define([
                         },
 
                         keyDownHandler: function(event) {
-                            
+
                             //When key is pressed, set its keycode to true in the array
                             map[event.keyCode] = true;
-                                                        
+
                             //q is not pressed
                             if (!map[81]) {
                                 //Restore the saved default keyhandler
