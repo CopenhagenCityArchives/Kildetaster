@@ -1,16 +1,16 @@
-<div 
-    class="form-group dynamic-form schema-form-{{form.type}} {{form.htmlClass}}" 
+<div
+    class="form-group dynamic-form schema-form-{{form.type}} {{form.htmlClass}}"
     ng-controller="sfTypeahead"
     ng-class="{
-        'has-error': form.disableErrorState !== true && hasError(), 
-        'has-success': form.disableSuccessState !== true && hasSuccess(), 
+        'has-error': form.disableErrorState !== true && hasError(),
+        'has-success': form.disableSuccessState !== true && hasSuccess(),
         'has-feedback': form.feedback !== false }">
-    
+
     <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle()}" for="{{form.key.slice(-1)[0]}}">
         {{form.title}}
-        <span 
-            class="icon icon__help" 
-            uib-tooltip="{{form.description}}" 
+        <span
+            class="icon icon__help"
+            uib-tooltip="{{form.description}}"
             tooltip-placement="top"
             tooltip-append-to-body="true"
         ></span>
@@ -18,10 +18,9 @@
 
     <!-- <div class="dynamic-form__adjust"> -->
 
-        <input 
-            tabindex="1"
-            type="text" 
-            class="form-control" 
+        <input
+            type="text"
+            class="form-control"
             ng-model-options="ngModelOptions"
             ng-model="$$value$$"
             ng-disabled="form.readonly || form.unreadable"
@@ -33,11 +32,11 @@
             capitalize-first
         />
 
-        <!-- <a 
-            href tabindex="-1" 
-            class="icon glyphicon glyphicon-info-sign" 
-            uib-tooltip="{{TEXT.FIELD_UNREADABLE}}" 
-            tooltip-placement="left" 
+        <!-- <a
+            href tabindex="-1"
+            class="icon glyphicon glyphicon-info-sign"
+            uib-tooltip="{{TEXT.FIELD_UNREADABLE}}"
+            tooltip-placement="left"
             ng-click="toggleUnreadable(form)">
         </a> -->
 
