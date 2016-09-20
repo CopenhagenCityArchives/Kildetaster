@@ -16,7 +16,24 @@ module.exports = {
             MAINDOMAIN: 'http://www.kbharkiv.dk',
             TOKENURL: 'http://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERRORURL: 'http://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
-            SEARCHURL: 'http://www.kbharkiv.dk/sog-i-arkivet/sog-efter-personer'
+            SEARCHURL: 'http://www.kbharkiv.dk/sog-i-arkivet/sog-efter-personer',
+            BYPASSAUTH: false
+        }
+    },
+
+    prototypeNoAuth: {
+        constants: {
+            JSONURL: '/resources/mock/',
+            EDITORURL: 'http://localhost:1508',
+            RESSOURCEURL: '/resources/',
+            SDKCSSURL: '/resources/css/sdk.css',
+            API: 'http://www.kbhkilder.dk/1508/stable',
+            //API: 'http://www.kbhkilder.dk/1508/experimental',
+            MAINDOMAIN: 'http://www.kbharkiv.dk',
+            TOKENURL: 'http://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
+            ERRORURL: 'http://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
+            SEARCHURL: 'http://www.kbharkiv.dk/sog-i-arkivet/sog-efter-personer',
+            BYPASSAUTH: true
         }
     },
 
@@ -31,7 +48,8 @@ module.exports = {
             MAINDOMAIN: 'http://www.kbharkiv.dk',
             TOKENURL: 'http://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERRORURL: 'http://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
-            SEARCHURL: 'http://www.kbharkiv.dk/sog-i-arkivet/sog-efter-personer'
+            SEARCHURL: 'http://www.kbharkiv.dk/sog-i-arkivet/sog-efter-personer',
+            BYPASSAUTH: false
         }
     },
 
@@ -45,7 +63,8 @@ module.exports = {
             MAINDOMAIN: 'http://www.kbharkiv.dk',
             TOKENURL: 'http://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERRORURL: 'http://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
-            SEARCHURL: 'http://www.kbharkiv.dk/sog-i-arkivet/sog-efter-personer'
+            SEARCHURL: 'http://www.kbharkiv.dk/sog-i-arkivet/sog-efter-personer',
+            BYPASSAUTH: false
         }
     }
 };

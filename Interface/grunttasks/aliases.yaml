@@ -12,6 +12,20 @@ prototype:
     - 'open:prototype'
     - 'watchPrototype'
 
+prototypeNoAuth:
+
+        - 'clean:prototype'
+        - 'html2js:editor'
+        - 'ngconstant:prototypeNoAuth'
+        - 'copy:prototype'
+        - 'sass:prototype'
+        - 'postcss:prototype'
+        - 'bake:prototype'
+        - 'karma:prototype'
+        - 'express:prototype'
+        - 'open:prototype'
+        - 'watchPrototype'
+
 sdk:
     - 'clean:sdk'
     - 'html2js:sdk'
