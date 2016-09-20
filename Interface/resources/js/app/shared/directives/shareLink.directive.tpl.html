@@ -1,0 +1,8 @@
+<div class="share-link">
+    <label for="shareLink_{{id}}">{{label}}</label>
+    <input ng-attr-id="shareLink_{{id}}" class="form-control" type="text" ng-model="shareLink">
+
+    <button ng-attr-id="shareLink_{{id}}_btn" class="btn" type="button" ng-attr-data-clipboard-target="#shareLink_{{id}}">
+        {{buttonText}}
+    </button>
+</div>
