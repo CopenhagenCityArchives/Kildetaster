@@ -51,15 +51,9 @@ define([
         */
         $scope.getValue = function (key, subkey, id) {
 
-            var valueInValues = $scope.values[$scope.mainProperty][key]; //[0][subkey]);
+            var valueInValues = $scope.values[$scope.mainProperty][key];
 
-            var data = valueInValues.find(function(item) {
-
-                if (item.id === id) {
-                    return item;
-                }
-
-            });
+            var data = valueInValues[id];
 
             $scope.singleValue = data;
 
@@ -150,7 +144,6 @@ define([
          * Toggle wether or not we should show edit field for a given field config
          */
         $scope.toggleEditExistingValue = function toggleEditExistingValue(item) {
-
             //Only one field open at a time
             $scope.editingField = item;
 
