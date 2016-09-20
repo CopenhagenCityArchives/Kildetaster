@@ -1,5 +1,5 @@
 module.exports = {
-    
+
     options: {
         dest: '<%= package.resources %>/js/app/shared/constants.js',
         name: 'constants'
@@ -12,6 +12,7 @@ module.exports = {
             RESSOURCEURL: '/resources/',
             SDKCSSURL: '/resources/css/sdk.css',
             API: 'http://www.kbhkilder.dk/1508/stable',
+            //API: 'http://www.kbhkilder.dk/1508/experimental',
             MAINDOMAIN: 'http://www.kbharkiv.dk',
             TOKENURL: 'http://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERRORURL: 'http://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
@@ -23,11 +24,12 @@ module.exports = {
         constants: {
             JSONURL: '/resources/mock/',
             EDITORURL: 'http://kbharkiv.dk/kildetaster',
-            RESSOURCEURL: 'http://localhost:1508/resources/',
-            SDKCSSURL: 'http://localhost:1508/resources/css/sdk.css',
+            RESSOURCEURL: 'http://kbhkilder.dk/software/kildetaster/resources/',
+            SDKCSSURL: 'http://kbhkilder.dk/software/kildetaster/resources/css/sdk.css',
             API: 'http://www.kbhkilder.dk/1508/stable',
+            //API: 'http://www.kbhkilder.dk/1508/experimental',
             MAINDOMAIN: 'http://www.kbharkiv.dk',
-            TOKENURL: 'http://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',           
+            TOKENURL: 'http://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERRORURL: 'http://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
             SEARCHURL: 'http://www.kbharkiv.dk/sog-i-arkivet/sog-efter-personer'
         }

@@ -67,8 +67,8 @@ module.exports = {
                 require('cssnano')()
             ]
         },
-        src: '<%= package.prototyperesources %>/css/styles.css',
-        dest: '<%= package.prototyperesources %>/css/styles.css'
+        src: '<%= package.buildresources %>/css/styles.css',
+        dest: '<%= package.buildresources %>/css/styles.css'
     },
 
     production: {

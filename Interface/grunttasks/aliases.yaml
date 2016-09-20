@@ -9,7 +9,7 @@ prototype:
     - 'bake:prototype'
     - 'karma:prototype'
     - 'express:prototype'
-    - 'open:prototype'    
+    - 'open:prototype'
     - 'watchPrototype'
 
 sdk:
@@ -23,7 +23,7 @@ sdk:
     - 'karma:prototype'
     - 'express:prototype'
     - 'express:sdk'
-    - 'open:sdk'  
+    - 'open:sdk'
     - 'watchSdk'
 
 dev:
@@ -34,14 +34,16 @@ dev:
     - 'copy:development'
     # bundle up files
     - 'requirejs:development'
-    
+    - 'requirejs:sdk'
+
     # Add angular annotations
     - 'ngAnnotate:development'
-    
+
     - 'uglify:development'
     - 'bake:prototype'
     - 'sass:development'
     - 'postcss:development'
+    - 'postcss:sdk'
 #    - 'watchDevelopment'
 
 build:
@@ -51,22 +53,22 @@ build:
     - 'ngconstant:production'
     - 'copy:production'
     - 'imagemin:production'
-    
+
     - 'requirejs:production'
     - 'requirejs:sdkProduction'
-    
+
     - 'ngAnnotate:production'
 #    - 'uglify:production'
     - 'bake:production'
-    
+
     - 'sass:production'
     - 'sass:sdk'
     - 'postcss:production'
-    
-    #Run unittests    
+
+    #Run unittests
     - 'karma:production'
 
-travis: 
+travis:
     - 'html2js:editor'
     - 'html2js:sdk'
     - 'ngconstant:prototype'

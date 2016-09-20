@@ -1,5 +1,5 @@
 module.exports = {
-    prototype: { 
+    prototype: {
         options:{
             sourceMap: true,
             outputStyle: 'nested',
@@ -10,7 +10,7 @@ module.exports = {
         }
     },
 
-    sdk: { 
+    sdk: {
         options:{
             sourceMap: true,
             outputStyle: 'nested',
@@ -28,7 +28,8 @@ module.exports = {
             imagePath: '<%= package.buildresources %>/images'
         },
         files: {
-            '<%= package.buildresources %>/css/styles.css': '<%= package.resources %>/sass/styles.scss'
+            '<%= package.buildresources %>/css/styles.css': '<%= package.resources %>/sass/styles.scss',
+            '<%= package.buildresources %>/css/sdk.css': '<%= package.resources %>/sass/sdk-styles.scss'
         }
     },
     production: {
