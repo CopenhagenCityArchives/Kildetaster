@@ -25,7 +25,8 @@ define([
 
     'app/shared/schemaformAddon/typeahead.addon',
     'app/shared/schemaformAddon/customInput.addon',
-    'app/shared/schemaformAddon/customSelect.addon'
+    'app/shared/schemaformAddon/customSelect.addon',
+    'app/shared/schemaformAddon/customArray.addon'
 
 
 ], function(
@@ -55,7 +56,8 @@ define([
 
     sfTypeaheadAddon,
     sfCustomInputAddon,
-    sfCustomSelectAddon
+    sfCustomSelectAddon,
+    sfCustomArrayAddon
 
 ) {
 
