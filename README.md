@@ -12,11 +12,15 @@ Dependencies: node.js, npm and Grunt (`npm install -g grunt-cli`)
 
 Start with running `npm install`and `bower install` to get all dependencies from the main folder
 
+### Start prototype with Authorization
+
 Then run `grunt prototype` to start the prototype. This will build all frontend files, and start a local webserver to host the solution
 
-The editor can be hit at http://localhost:1508/#/task/1/page/1/?stepId=1
+### Start prototype with NoAuth
 
-The prototype loads all data from mock data sources
+Then run `grunt prototypeNoAuth` to start the prototype. This will build all frontend files, and start a local webserver to host the solution
+
+The editor can be hit at http://localhost:1508/#/task/1/page/1/?stepId=1
 
 
 ## API endpoint
