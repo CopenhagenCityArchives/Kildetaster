@@ -64,11 +64,16 @@ module.exports = {
                     basePath: 'kbh/'
                 }),
                 // minify the result
-                require('cssnano')()
+                //require('cssnano')()
             ]
         },
-        src: '<%= package.buildresources %>/css/styles.css',
-        dest: '<%= package.buildresources %>/css/styles.css'
+        files: [{
+            src: '<%= package.buildresources %>/css/styles.css',
+            dest: '<%= package.buildresources %>/css/styles.css'
+        }, {
+            src: '<%= package.buildresources %>/css/sdk.css',
+            dest: '<%= package.buildresources %>/css/sdk.css'
+        }]
     },
 
     production: {
