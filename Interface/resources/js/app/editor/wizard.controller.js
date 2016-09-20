@@ -30,8 +30,8 @@ define([
         $scope.editingField = '';
 
         $scope.singleFieldForms = {};
-        $scope.singleSchema = {};  
-        $scope.singleValue = {}; 
+        $scope.singleSchema = {};
+        $scope.singleValue = {};
 
         //Default settings for angular-schema-forms
         $scope.sfDefaults = {
@@ -45,7 +45,7 @@ define([
             }
         };
 
-        
+
         /**
         * Build the value structure for single fields, that is fields that are part of an array structure
         */
@@ -58,11 +58,11 @@ define([
                 if (item.id === id) {
                     return item;
                 }
-                
+
             });
 
             $scope.singleValue = data;
-           
+
         };
 
 
@@ -104,7 +104,7 @@ define([
         });
 
         /**
-         * Because we do not trigger the ui.route logic (see.editor.config.js), 
+         * Because we do not trigger the ui.route logic (see.editor.config.js),
          * listen for changes to the location.search
          */
         $rootScope.$on('$locationChangeSuccess', function(event) {
@@ -150,10 +150,10 @@ define([
          * Toggle wether or not we should show edit field for a given field config
          */
         $scope.toggleEditExistingValue = function toggleEditExistingValue(item) {
-            
+
             //Only one field open at a time
             $scope.editingField = item;
-            
+
         };
 
         $scope.closeEditField = function closeEditField() {
@@ -203,7 +203,7 @@ define([
                 else {
                     Flash.create('danger', response);
                 }
-                
+
             }).catch(function(err) {
                 Flash.create('danger', err.data.userMessage);
             });
@@ -285,13 +285,12 @@ define([
             $rootScope.$broadcast('makeSelectable');
             //Show controls to accept new area
             $scope.showSelectionControls = true;
-        };       
-        
+        };
+
         $scope.toggleShareLink = function() {
             $scope.buildShareLink($scope.postId);
             $scope.showShareLink = !$scope.showShareLink;
         };
-
 
         /**
         * When postId has a value, build link to the id
@@ -302,8 +301,6 @@ define([
                 var link = SEARCHURL + '#/post/' + newVal;
 
                 $scope.shareLink = link;
-
-                new Clipboard('.share-link .btn');
             }
         });
 
