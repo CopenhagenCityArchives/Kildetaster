@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var updateFieldsController = /*@ngInject*/ function updateFieldsController(Flash, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService, $rootScope) {
+    var updateFieldsController = /*@ngInject*/ function updateFieldsController(SEARCHURL, Flash, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService, $rootScope, $sessionStorage) {
 
         $scope.values = postData.entryData;
 
@@ -17,7 +17,13 @@ define([
         $scope.singleSchema = {};
         $scope.singleValue = {};
 
+        //Build a direct link to this post
+        $scope.shareLink = SEARCHURL + '#/post/' + postData.postId;
+
         $scope.errorReports = postData.errorReports;
+//        $scope.errorReports = [];
+
+        $scope.userId = $sessionStorage.tokenData.user_id;
 
         //Default settings for angular-schema-forms
         $scope.sfDefaults = {
@@ -65,18 +71,15 @@ define([
         /**
          * Toggle wether or not we should show edit field for a given field config
          */
-        $scope.toggleEditExistingValue = function toggleEditExistingValue(item, id) {
-            id = id || '';
-
-            $scope.editingFields[item + id] = !$scope.editingFields[item + id];
+        $scope.toggleEditExistingValue = function toggleEditExistingValue(value) {
+            $scope.editingFields[value] = !$scope.editingFields[value];
         };
 
         /**
          * Ask if a given field is currently being edited
          */
-        $scope.isEditing = function isEditing(field, id) {
-            id = id || '';
-            return $scope.editingFields[field + id];
+        $scope.isEditing = function isEditing(field) {
+            return $scope.editingFields[field];
         };
 
 
@@ -158,18 +161,34 @@ define([
                 Flash.create('success', 'Feltet er opdateret.');
 
                 //Toggle the editing portion (hide iput field and button)
-                $scope.toggleEditExistingValue(field);
+                $scope.toggleEditExistingValue(fieldName + id);
 
                 //Remove the entry from the errorReports in the scope
                 $scope.errorReports = $scope.errorReports.filter(function( report ) {
                     //Only return reports where the field_name does not match
                     //that way removing the error report for the field we are working on
-                    return report.field_name !== field;
+                    return report['field_name'] !== fieldName;
                 });
 
             }, function(err) {
                 Flash.create('danger', 'Error updating entry' + err.data);
+
+                //Toggle the editing portion (hide iput field and button)
+                $scope.toggleEditExistingValue(fieldName + id);
+
+                //Remove the entry from the errorReports in the scope
+                $scope.errorReports = $scope.errorReports.filter(function( report ) {
+
+                    //Only return reports where the field_name does not match
+                    //that way removing the error report for the field we are working on
+                    return report['field_name'] !== fieldName;
+                });
             });
+
+        };
+
+
+        $scope.goToNextPostWithErrors = function goToNextPostWithErrors() {
 
         };
 
