@@ -112,9 +112,9 @@
                         </div>
                     </span>
 
-                     <span ng-if="schema.properties[mainProperty].properties[key].type === 'object'">
+                    <span ng-if="schema.properties[mainProperty].properties[key].type === 'object'">
 
-                        <span ng-repeat="(subkey, subvalue) in schema.properties[mainProperty].properties[key].properties" ng-if="value[subkey] !== undefined">
+                        <span class="field-list__subitem" ng-repeat="(subkey, subvalue) in schema.properties[mainProperty].properties[key].properties" ng-if="value[subkey] !== undefined">
 
                             <a tabindex="1" href ng-click="toggleEditExistingValue(mainProperty + '.' + key + '.' + subkey)">
 
@@ -141,7 +141,7 @@
                         </span>
                     </span>
 
-                        <ul class="list-unstyled field-list__sublist" ng-if="schema.properties[mainProperty].properties[key].type == 'array'">
+                    <ul class="list-unstyled field-list__sublist" ng-if="schema.properties[mainProperty].properties[key].type == 'array'">
 
                             <li ng-repeat="val in values[mainProperty][key]">
 
