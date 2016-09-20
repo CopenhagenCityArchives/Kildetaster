@@ -12,13 +12,13 @@ define([
 
         originalRect = {
             x: 0,
-            y: 0,
+            y: 0.3333,
             width: 0.5,
             height: 0.3333
         },
         percentageRect = {
             x: 0,
-            y: 0,
+            y: 0.4519023487962419,
             width: 0.5,
             height: 0.4519023487962419
         },

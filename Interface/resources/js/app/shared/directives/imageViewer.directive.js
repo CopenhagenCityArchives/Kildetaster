@@ -46,13 +46,9 @@ define([
                     }
                     return overlayData.map(function(data) {
                         data.className = 'imageViewer__done';
-
                         return data;
                     });
                 }
-
-                //Add class all given overlays to render them as existing
-                $scope.options.tileSources.overlays = addClassToOverlay($scope.options.tileSources.overlays);
 
                 opts = angular.extend({}, {
 
@@ -105,6 +101,36 @@ define([
                     viewer: viewer
                 });
 
+                //Add class all given overlays to render them as existing
+                $scope.options.tileSources.deferredOverlays = addClassToOverlay($scope.options.tileSources.deferredOverlays);
+
+                //Listen for when the image has loaded, and then add any deferredOverlays found in the options
+                viewer.addHandler('tile-loaded', function() {
+
+                    //Loop over all deferredOverlays
+                    $scope.options.tileSources.deferredOverlays.forEach(function(overlay) {
+
+                            //Create a div to add overlay to
+                        var elm = document.createElement("div"),
+                            overlayRect;
+
+                        //Set className to indicate what type of overlay we have
+                        elm.className = overlay.className;
+
+                        //Convert values from backend to values OpenSeadragon can use
+                        overlayRect = helpers.convertPercentToOpenSeadragonRect(overlay, imagingHelper.imgAspectRatio);
+                        //Prepare a new rect object to be added in the overlay
+                        overlayRect = new OpenSeadragon.Rect(overlayRect.x, overlayRect.y, overlayRect.width, overlayRect.height);
+
+                        //Add the overlay
+                        viewer.addOverlay({
+                            element: elm,
+                            location: overlayRect
+                        });
+
+                    });
+                });
+
                 viewer.addHandler('add-overlay', function(overlay) {
 
                     if (overlay.element) {
@@ -145,6 +171,7 @@ define([
                     var y = selectionOverlay.location.y;
                     var height = selectionOverlay.location.height;
                     var width = selectionOverlay.location.width;
+
 
                     //Create a selection based on the previous overlay
                     var selectionRect = new OpenSeadragon.SelectionRect(x, y, width, height);

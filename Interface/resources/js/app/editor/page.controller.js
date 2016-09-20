@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var editorController = /*@ngInject*/ function editorController($scope, $state, Flash, pageService, taskData, pageData, $location, $timeout, $rootScope) {       
+    var editorController = /*@ngInject*/ function editorController($scope, $state, Flash, pageService, taskData, pageData, $location, $timeout, $rootScope) {
 
         $scope.pageNumber = pageData.page_number;
         $scope.totalPages = pageData.unitData.pages;
@@ -11,7 +11,7 @@ define([
         * Get next available page, based on unitId, taskId and the current page number
         */
         $scope.goToNextAvailablePage = function goToNextAvailablePage() {
-            
+
             pageService.getNextAvailablePage({
                 task_id: taskData.id,
                 unit_id: pageData.unit_id,
@@ -20,17 +20,17 @@ define([
             }).then(function(response) {
 
                 $timeout(function() {
-                    $state.go('editor.page', { pageId: response.pages_id});     
+                    $state.go('editor.page', { pageId: response.pages_id});
                     //$location.search({ stepId: 1});
                 }, 0);
 
-                
+
             });
-                   
+
         };
 
         $scope.goToPage = function goToPage($event) {
-           
+
             //Enter key
             if ($event.charCode === 13) {
 
@@ -47,11 +47,11 @@ define([
                             pageId: response.id
                         });
                     }
-                    
+
                 });
 
             }
-            
+
         };
 
         $scope.nextPage = function nextPage() {
@@ -65,11 +65,11 @@ define([
                     Flash.create('warning', 'Siden med nummer ' + pageNumber +  ' findes ikke');
                 }
                 else {
-                    $state.go('editor.page', { 
+                    $state.go('editor.page', {
                         pageId: response.id
                     });
                 }
-                    
+
             });
         };
 
@@ -89,16 +89,16 @@ define([
                     Flash.create('warning', 'Siden med nummer ' + pageNumber +  ' findes ikke');
                 }
                 else {
-                    $state.go('editor.page', { 
+                    $state.go('editor.page', {
                         pageId: response.id
                     });
                 }
-                    
+
             });
         };
 
         var convertedPosts = [];
-            
+
         //Openseadragon does not like a property called id, as it tries to find the dom node with that id.
         //Hack to rename the property, backend should do this
         pageData.posts.forEach(function(post) {
@@ -123,7 +123,11 @@ define([
                 type: 'image',
                 url: pageData.image_url,
                 navigatorPosition: 'TOP_LEFT',
-                overlays: convertedPosts
+                //if we use the normal overlays property, overlays will be added with wrong values. We need to convert
+                //the values from the backend - and to do that, we need the aspectRatio of the image. We therefore use
+                //a custom property, and handle the convertion and adding of overlays in the imageViewer.directive
+                //see the event handler on tile-loaded in imageViewer.directive
+                deferredOverlays: convertedPosts
             },
             //If the page is marked as done, do not show selection, eventhough next_post might contain a valid position overlay object
             next_post: pageData.task_page[0].is_done === 1 ? false : pageData.next_post
@@ -131,13 +135,13 @@ define([
         };
 
         $rootScope.$on('zoom-to-post', function(event, data) {
-            
+
             // $scope.options.zoomToPost = data.postId;
             $scope.editArea = convertedPosts.find(function(post) {
                 return post.postId === data.postId;
             });
         });
-        
+
     };
 
     return editorController;
