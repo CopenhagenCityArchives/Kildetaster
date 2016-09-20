@@ -64,20 +64,26 @@
             <ul class="list-unstyled field-list field-list--dots">
 
                 <li class="field-list__item" ng-class="{ 'field-list__active': showSelectionControls }">
-                    <a href tabindex="1" ng-click="placeArea()" ng-hide="showSelectionControls">
-                        Udsnit placeret
-                        <span class="icon icon__edit"></span>
-                    </a>
-                    <div class="row" ng-if="showSelectionControls">
-                        <div class="col-sm-12">
-                            <p>Ret udsnittet i kilden.</p>
-                        </div>
-                        <div class="col-sm-12 text-right">
-                            <button tabindex="1" class="btn btn-default" ng-click="acceptArea()">
-                                {{TEXT.BUTTON.OK}}
-                            </button>
-                        </div>
-                    </div>
+                    <span class="summary-item">
+                        <span class="summary-item__label">Udsnit</span>
+                        <span class="summary-item__field">
+                            <a href tabindex="1" ng-click="placeArea()" ng-hide="showSelectionControls">
+                                Er placeret
+                                <span class="icon icon__edit"></span>
+                            </a>
+                            <div class="row" ng-if="showSelectionControls">
+                                <div class="col-sm-12">
+                                    <p>Ret udsnittet i kilden.</p>
+                                </div>
+                                <div class="col-sm-12 text-right">
+                                    <button tabindex="1" class="btn btn-default" ng-click="acceptArea()">
+                                        {{TEXT.BUTTON.OK}}
+                                    </button>
+                                </div>
+                            </div>
+                        </span>
+                    </span>
+
                 </li>
 
                 <li class="field-list__item" ng-repeat="(key, value) in values[mainProperty]">
@@ -135,15 +141,11 @@
                         </span>
                     </span>
 
-                    <span ng-if="schema.properties[mainProperty].properties[key].type == 'array'">
-
-                        <span class="summary-item__label">
-                            {{schema.properties[mainProperty].properties[key].title}}
-                        </span>
-
-                        <ul class="list-unstyled">
+                        <ul class="list-unstyled field-list__sublist" ng-if="schema.properties[mainProperty].properties[key].type == 'array'">
 
                             <li ng-repeat="val in values[mainProperty][key]">
+
+                                <span class="summary-item__label">{{schema.properties[mainProperty].properties[key].title}}</span>
 
                                 <span ng-repeat="(subkey, value) in val">
                                     <a href ng-click="toggleEditExistingValue(subkey, val.id)">
@@ -181,7 +183,6 @@
 
                             </li>
                         </ul>
-                    </span>
 
                 </li>
             </ul>

@@ -11,6 +11,7 @@
         position: relative;
 
         padding-bottom: 6px;
+        padding-left: 7px;
     }
 
     &__active {
@@ -43,6 +44,13 @@
         margin-left: 0;
     }
 
+    &__sublist {
+        li {
+            margin-bottom: 2px;
+            margin-left: 0 !important;
+        }
+    }
+
     &--dots {
         position: relative;
 
@@ -64,11 +72,11 @@
         .field-list__item {
             //Add dot before each item
             &:before {
-                position: relative;
-                top: -1px;
+                position: absolute;
+                top: 7px;
                 left: -8px;
 
-                display: inline-block;
+                display: block;
 
                 width: 8px;
                 height: 8px;
