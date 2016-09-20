@@ -105,8 +105,6 @@ define([
                     viewer: viewer
                 });
 
-                window.vv = imagingHelper;
-
                 viewer.addHandler('add-overlay', function(overlay) {
 
                     if (overlay.element) {
