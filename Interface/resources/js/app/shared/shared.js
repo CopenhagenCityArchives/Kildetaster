@@ -14,6 +14,7 @@ define([
     'app/shared/directives/capitalizeFirst.directive',
     'app/shared/directives/progressbar.directive',
     'app/shared/directives/stringifyArray.directive',
+    'app/shared/directives/shareLink.directive',
 
     'app/shared/directives/handleSteps.directive',
 
@@ -22,12 +23,12 @@ define([
     'app/shared/services/page.service',
     'app/shared/services/user.service',
     'app/shared/services/update.service',
-    
+
     'app/shared/services/error.service',
     'app/shared/services/entry.service',
-    
+
     'app/shared/services/post.service',
-    
+
     'app/shared/services/unit.service',
 
     'app/shared/services/token.service',
@@ -55,22 +56,23 @@ define([
     capitalizeFirst,
     progressbarDirective,
     stringifyArray,
+    shareLinkDirective,
 
-    handleStepsDirective,    
+    handleStepsDirective,
 
     stepService,
     taskService,
     pageService,
     userService,
     updateService,
-    
+
     errorService,
     entryService,
-    
+
     postService,
     unitService,
 
-    tokenService, 
+    tokenService,
     tokenFactory,
 
     helpersService,
@@ -91,9 +93,10 @@ define([
     sharedApp.directive('capitalizeFirst', capitalizeFirst);
     sharedApp.directive('progressBar', progressbarDirective);
     sharedApp.directive('stringifyArray', stringifyArray);
-        
+    sharedApp.directive('shareLink', shareLinkDirective);
+
     sharedApp.directive('handleSteps', handleStepsDirective);
-    
+
 
     sharedApp.factory('stepService', stepService);
     sharedApp.factory('taskService', taskService);
@@ -102,15 +105,15 @@ define([
     sharedApp.factory('updateService', updateService);
     sharedApp.factory('errorService', errorService);
     sharedApp.factory('entryService', entryService);
-    
+
     sharedApp.factory('postService', postService);
     sharedApp.factory('unitService', unitService);
-    
+
     sharedApp.factory('tokenService', tokenService);
     sharedApp.factory('tokenFactory', tokenFactory);
 
     sharedApp.factory('helpers', helpersService);
-    
+
     sharedApp.filter('nameFromObject', nameFromObjectFilter);
     sharedApp.filter('startsWith', startsWithFilter);
 
