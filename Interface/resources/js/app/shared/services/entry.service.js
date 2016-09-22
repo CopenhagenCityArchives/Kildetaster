@@ -8,13 +8,12 @@ define([
         return {
 
             getEntry: function(entryId) {
-                
+
                 return $http({
                     url: API + '/entries/' + entryId,
                     method: 'GET'
                 })
                 .then(function(response) {
-                    console.log('entry', response.data);
                     return response.data;
                 })
                 .catch(function(err) {
