@@ -15,11 +15,13 @@
         <ui-select-match>
             <div style="height: 40px;line-height: 40px" ng-bind="$select.selected"></div>
         </ui-select-match>
-        <ui-select-choices repeat="option in options" refresh="getData(form.schema.datasource, $select.search, form.schema.datasourceValueField)" refresh-delay="0" minimum-input-length="3">
+        <ui-select-choices
+            repeat="option in options" refresh="getData(form.schema.datasource, $select.search, form.schema.datasourceValueField)"
+            refresh-delay="0">
             <div ng-bind-html="option | highlight: $select.search"></div>
         </ui-select-choices>
-        <ui-select-no-choice ng-if="$select.search">
-            <p>
+        <ui-select-no-choice>
+            <p style="padding: 10px;padding-bottom: 0">
                 {{form.schema.validationErrorMessage}}
             </p>
         </ui-select-no-choice>

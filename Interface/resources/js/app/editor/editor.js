@@ -67,7 +67,7 @@ define([
         'ui.router',
         'ui.select',
         'ngSanitize',
-        //'ngAnimate',
+        'ngAnimate',
         'flash',
         'schemaForm'
     ]);
