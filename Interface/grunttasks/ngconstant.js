@@ -27,7 +27,7 @@ module.exports = {
             EDITORURL: 'http://localhost:1508',
             RESSOURCEURL: '/resources/',
             SDKCSSURL: '/resources/css/sdk.css',
-            API: 'http://www.kbhkilder.dk/1508/stable',
+            API: 'http://www.kbhkilder.dk/1508/stable_noauth',
             //API: 'http://www.kbhkilder.dk/1508/experimental',
             MAINDOMAIN: 'http://www.kbharkiv.dk',
             TOKENURL: 'http://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
