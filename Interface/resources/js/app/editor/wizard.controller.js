@@ -76,10 +76,6 @@ define([
 
         };
 
-
-
-
-
         /**
          * When area is selected in the directive controlling openseadragon, and we are on the first step
          * go to the next step.
@@ -113,7 +109,7 @@ define([
             }
 
             //TODO: Remove this!
-            //Hack to force focus on button and no links in header
+            //Hack to force focus on button and not links in header
             $timeout(function() {
                 if ($scope.currentStep == $scope.steps.length + 1) {
                     $('.editor-form-container button:first').focus();
