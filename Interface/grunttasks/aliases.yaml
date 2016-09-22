@@ -29,7 +29,7 @@ prototypeNoAuth:
 sdk:
     - 'clean:sdk'
     - 'html2js:sdk'
-    - 'ngconstant:prototype'
+    - 'ngconstant:prototypeNoAuth'
     - 'copy:sdk'
     - 'sass:sdk'
     - 'postcss:sdk'
