@@ -10,7 +10,7 @@ define([
 
     schemaForm.controller('sfTypeahead', /*@ngInject*/  function($scope, $templateCache, $http, $filter) {
 
-        $scope.options = ["Hans"];
+        $scope.options = [];
 
         //Custom model options for this element, nessesary to overwrite the default angular-schema-form options to
         //only update on blur. The typeahead should update instantly, while typing
@@ -39,8 +39,6 @@ define([
                     q: term
                 }
             }).then(function(response) {
-
-
 
                 var startsWith = $filter('startsWith')(response.data, term, propertyName);
 
