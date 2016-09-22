@@ -1,4 +1,8 @@
 .dynamic-form {
+    .ui-select-container.select2 {
+        display: block;
+    }
+
     &__adjust {
         position: relative;
 

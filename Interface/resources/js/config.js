@@ -1,21 +1,21 @@
 /*globals requirejs:false */
 
 requirejs.config({
-    
+
     baseUrl: '/resources/js',
 
     paths: {
-        
+
         'almond'                       : '../bower_components/almond/almond',
-         
+
         'angular'                      : '../bower_components/angular/angular.min',
         'angular-animate'              : '../bower_components/angular-animate/angular-animate.min',
         'angular-bootstrap'            : '../bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
         'angular-sanitize'             : '../bower_components/angular-sanitize/angular-sanitize.min',
         'angular-cookies'              : '../bower_components/angular-cookies/angular-cookies.min',
-        'ngstorage'                    : '../bower_components/ngstorage/ngStorage.min',                 
+        'ngstorage'                    : '../bower_components/ngstorage/ngStorage.min',
         'angular-ui-router'            : '../bower_components/angular-ui-router/release/angular-ui-router.min',
-        'angular-ui-select'            : '../bower_components/ui-select/dist/select.min',
+        'angular-ui-select'            : '../bower_components/angular-ui-select/dist/select',
 
         //Angular json form
         'tv4'                          : '../bower_components/tv4/tv4',
@@ -27,7 +27,7 @@ requirejs.config({
         'clipboard'                    : '../bower_components/clipboard/dist/clipboard.min',
 
         'angular-flash'                : '../bower_components/angular-flash-alert/dist/angular-flash',
-                
+
         'openseadragon'                : '../bower_components/openseadragon/built-openseadragon/openseadragon/openseadragon.min',
 
         //Libs
@@ -45,7 +45,7 @@ requirejs.config({
 
         'bootstrap': ['jquery'],
         'angular-bootstrap': ['angular'],
-        
+
         'angular-ui-router': ['angular'],
         'angular-ui-select': ['angular'],
         'angular-sanitize': ['angular'],
@@ -61,7 +61,7 @@ requirejs.config({
         'libs/openseadragon-imaginghelper': ['openseadragon']
 
     },
-    
+
     deps: ['main']
 
 });

@@ -23,7 +23,9 @@
     "angular-flash-alert": "~1.1.1",
     "angular-schema-form": "~0.8.12",
     "ngstorage": "^0.3.10",
-    "clipboard": "^1.5.9"
+    "clipboard": "^1.5.9",
+    "angular-ui-select": "^0.19.4",
+    "select2": "~3.4.5"
   },
   "devDependencies": {
     "angular": "~1.4.8",

@@ -10,7 +10,7 @@ define([
 
     schemaForm.controller('sfTypeahead', /*@ngInject*/  function($scope, $templateCache, $http, $filter) {
 
-        $scope.options = [];
+        $scope.options = ["Hans"];
 
         //Custom model options for this element, nessesary to overwrite the default angular-schema-form options to
         //only update on blur. The typeahead should update instantly, while typing
@@ -30,6 +30,8 @@ define([
                 return [];
             }
 
+            term = $filter('capitalize')(term);
+
             return $http({
                 url: datasource,
                 method: 'GET',
@@ -37,11 +39,15 @@ define([
                     q: term
                 }
             }).then(function(response) {
-                
+
+
+
                 var startsWith = $filter('startsWith')(response.data, term, propertyName);
 
-                return startsWith; 
-                
+                $scope.options = startsWith;
+
+                return startsWith;
+
             });
 
         };
@@ -53,14 +59,14 @@ define([
 
         var typeahead = function(name, schema, options) {
             if (schema.type === 'typeahead' || (schema.type === 'string' && schema.format === 'typeahead')) {
-                
+
                 var f = schemaFormProvider.stdFormObj(name, schema, options);
-                
+
                 f.key = options.path;
                 f.type = 'typeahead';
-                
+
                 options.lookup[sfPathProvider.stringify(options.path)] = f;
-                
+
                 return f;
             }
         };

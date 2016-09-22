@@ -8,39 +8,22 @@
 
     <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle()}" for="{{form.key.slice(-1)[0]}}">
         {{form.title}}
-        <span
-            class="icon icon__help"
-            uib-tooltip="{{form.description}}"
-            tooltip-placement="top"
-            tooltip-append-to-body="true"
-        ></span>
+        <span class="icon icon__help" uib-tooltip="{{form.description}}" tooltip-placement="top" tooltip-append-to-body="true"></span>
     </label>
 
-    <!-- <div class="dynamic-form__adjust"> -->
-
-        <input
-            type="text"
-            class="form-control"
-            ng-model-options="ngModelOptions"
-            ng-model="$$value$$"
-            ng-disabled="form.readonly || form.unreadable"
-            schema-validate="form"
-            uib-typeahead="option[form.schema.datasourceValueField] for option in getData(form.schema.datasource, $viewValue, form.schema.datasourceValueField)"
-            typeahead-focus-first="false"
-            typeahead-append-to-body="true"
-            typeahead-min-length="1"
-            capitalize-first
-        />
-
-        <!-- <a
-            href tabindex="-1"
-            class="icon glyphicon glyphicon-info-sign"
-            uib-tooltip="{{TEXT.FIELD_UNREADABLE}}"
-            tooltip-placement="left"
-            ng-click="toggleUnreadable(form)">
-        </a> -->
-
-   <!--  </div> -->
+    <ui-select ng-model="$$value$$" ng-model-options="ngModelOptions" theme="bootstrap">
+        <ui-select-match>
+            <div style="height: 40px;line-height: 40px" ng-bind="$select.selected"></div>
+        </ui-select-match>
+        <ui-select-choices repeat="option in options" refresh="getData(form.schema.datasource, $select.search, form.schema.datasourceValueField)" refresh-delay="0" minimum-input-length="3">
+            <div ng-bind-html="option | highlight: $select.search"></div>
+        </ui-select-choices>
+        <ui-select-no-choice ng-if="$select.search">
+            <p>
+                {{form.schema.validationErrorMessage}}
+            </p>
+        </ui-select-no-choice>
+    </ui-select>
 
     <div class="help-block" ng-if="hasError()">{{form.schema.validationErrorMessage}}</div>
 

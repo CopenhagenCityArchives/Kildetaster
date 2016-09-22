@@ -6,9 +6,8 @@
 //Bootstrap
 @import "../bower_components/bootstrap-sass/assets/stylesheets/bootstrap";
 
-@import "../bower_components/ui-select/dist/select";
-
-
+@import "../bower_components/angular-ui-select/dist/select";
+@import "../bower_components/select2/select2";
 
 @import "core/core";
 @import "core/animations";
@@ -43,6 +42,10 @@
 
 @import "../bower_components/angular-flash-alert/dist/angular-flash";
 
+
+.ui-select-container .btn {
+    background-color: $white;
+}
 .alert {
     position: absolute;
     z-index: 2000;
@@ -51,4 +54,4 @@
     margin-left: -15px;
 
     border-radius: 0;
-}
+}
