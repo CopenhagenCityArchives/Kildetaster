@@ -26,7 +26,17 @@ define([
 
             controller: /*@ngInject*/ function($scope, $compile, $templateCache, $element, $rootScope, $timeout) {
 
-                var viewer, opts, selectionOverlay, selection, tracker;
+                var
+                    //Reference to the viewer instance
+                    viewer,
+                    //Holds the initial options for the viewer
+                    opts,
+                    //Reference to the selection plugin instance
+                    selection,
+                    //Reference to a key tracker (keyboard shortcuts)
+                    tracker,
+                    //Reference to the selection currently active (if any)
+                    selectionRect;
 
                 //Openhttps://github.com/openseadragon/openseadragon/issues/759
 
@@ -131,14 +141,6 @@ define([
                     });
                 });
 
-                viewer.addHandler('add-overlay', function(overlay) {
-
-                    if (overlay.element) {
-                        selectionOverlay = overlay;
-                    }
-
-                });
-
                 //Event fired when selection is confirmed
                 viewer.addHandler('selection', function(data) {
 
@@ -162,22 +164,21 @@ define([
                 $scope.$on('makeSelectable', function() {
 
                     //Try to remove an existing selection overlay
-                    if (selectionOverlay === undefined) {
+                    if (selectionRect === undefined) {
                         return;
                     }
 
                     //Get the settings for the old overlay
-                    var x = selectionOverlay.location.x;
-                    var y = selectionOverlay.location.y;
-                    var height = selectionOverlay.location.height;
-                    var width = selectionOverlay.location.width;
-
+                    var x = selectionRect.x;
+                    var y = selectionRect.y;
+                    var height = selectionRect.height;
+                    var width = selectionRect.width;
 
                     //Create a selection based on the previous overlay
-                    var selectionRect = new OpenSeadragon.SelectionRect(x, y, width, height);
+                    selectionRect = new OpenSeadragon.SelectionRect(x, y, width, height);
 
                     //Remove the old selection
-                    viewer.removeOverlay(selectionOverlay.element);
+                    viewer.removeOverlay($('.imageViewer__progress')[0]);
 
                     selection.rect = selectionRect;
                     selection.draw();
@@ -220,15 +221,15 @@ define([
                     }
                     //Else prepare a new rect object with initial selection
                     else {
+
                         //Did we get info from the backend about where to place the next post?
                         if ($scope.options.next_post && $scope.options.next_post !== false) {
-
                             var next = $scope.options.next_post,
                                 convertedRect = helpers.convertPercentToOpenSeadragonRect(next, imagingHelper.imgAspectRatio);
 
-                            rect = new OpenSeadragon.SelectionRect(convertedRect.x, convertedRect.y, convertedRect.width, convertedRect.height);
+                            selectionRect = new OpenSeadragon.SelectionRect(convertedRect.x, convertedRect.y, convertedRect.width, convertedRect.height);
 
-                            selection.rect = rect;
+                            selection.rect = selectionRect;
                             selection.draw();
 
                             viewer.viewport.fitVertically(true);
