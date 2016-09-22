@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var updateFieldsController = /*@ngInject*/ function updateFieldsController(SEARCHURL, Flash, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService, $rootScope, $sessionStorage) {
+    var updateFieldsController = /*@ngInject*/ function updateFieldsController(SEARCHURL, Flash, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService, $rootScope, $sessionStorage, errorService, $state) {
 
         $scope.values = postData.entryData;
 
@@ -21,8 +21,8 @@ define([
         $scope.shareLink = SEARCHURL + '#/post/' + postData.postId;
 
         $scope.errorReports = postData.errorReports;
-//        $scope.errorReports = [];
 
+        $scope.noMoreErrorsForUser = false;
         $scope.userId = $sessionStorage.tokenData.user_id;
 
         //Default settings for angular-schema-forms
@@ -166,6 +166,11 @@ define([
                     return report['field_name'] !== fieldName;
                 });
 
+                //That was the last error report on this post
+                if ($scope.errorReports.length === 0) {
+                    $scope.lookupNextPostWithErrors();
+                }
+
             }, function(err) {
                 Flash.create('danger', 'Error updating entry' + err.data);
 
@@ -183,9 +188,43 @@ define([
 
         };
 
+        $scope.nextErrorReport = null;
+        $scope.hasMoreErrors = null;
+
+        $scope.lookupNextPostWithErrors = function lookupNextPostWithErrors() {
+            //Lookup all available error reports for the current user on this task
+            errorService.getErrorReports({
+                relevant_user_id: $scope.userId,
+                task_id: taskData.id
+            }).then(function(response) {
+                //If we havent got any more errors
+                if (response.length === 0) {
+                    $scope.noMoreErrorsForUser = true;
+                }
+                else {
+                    $scope.nextErrorReport = response[0];
+                }
+
+            });
+        }
+
+        $scope.$watch('nextErrorReport', function(newval) {
+            if (newval && newval !== null) {
+                $scope.hasMoreErrors = true;
+            }
+        });
 
         $scope.goToNextPostWithErrors = function goToNextPostWithErrors() {
 
+            if ($scope.nextErrorReport !== null) {
+
+                //Go to next post
+                $state.go('editor.page.update', {
+                    taskId: $scope.nextErrorReport.tasks_id,
+                    pageId: $scope.nextErrorReport.pages_id,
+                    postId: $scope.nextErrorReport.posts_id
+                });
+            }
         };
 
         /**
