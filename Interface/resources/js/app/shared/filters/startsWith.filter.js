@@ -19,10 +19,11 @@ function() {
             var matches = [];
             for(var i = 0; i < array.length; i++) {
 
-                if (array[i][propertyName].indexOf(search) === 0 && search.length < array[i][propertyName].length) {
-                    matches.push(array[i]);
+                if (array[i][propertyName].indexOf(search) === 0 && search.length <= array[i][propertyName].length) {
+                    matches.push(array[i][propertyName]);
                 }
             }
+
             return matches;
         };
     };
