@@ -16,7 +16,7 @@
             <div style="height: 40px;line-height: 40px" ng-bind="$select.selected"></div>
         </ui-select-match>
         <ui-select-choices
-            repeat="option in options" refresh="getData(form.schema.datasource, $select.search, form.schema.datasourceValueField)"
+            repeat="option in options track by $index" refresh="getData(form.schema.datasource, $select.search, form.schema.datasourceValueField)"
             refresh-delay="0">
             <div ng-bind-html="option | highlight: $select.search"></div>
         </ui-select-choices>
