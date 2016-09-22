@@ -145,9 +145,10 @@
 
                             <li ng-repeat="val in values[mainProperty][key]">
 
-                                <span class="summary-item__label">{{schema.properties[mainProperty].properties[key].title}}</span>
+                                <div ng-repeat="(subkey, value) in val">
 
-                                <span ng-repeat="(subkey, value) in val">
+                                    <span class="summary-item__label">{{schema.properties[mainProperty].properties[key].items.properties[subkey].title}}</span>
+
                                     <a href ng-click="toggleEditExistingValue(subkey + $parent.$index)">
                                         <!-- HARDCODED TEST FOR PERSONS_ID, A FIELD THAT IS ONLY ON TASK 1!! -->
                                         <span ng-if="subkey !== 'id' && subkey !== 'persons_id'">
@@ -179,7 +180,7 @@
                                         </div>
                                     </div>
 
-                                </span>
+                                </div>
 
                             </li>
                         </ul>
