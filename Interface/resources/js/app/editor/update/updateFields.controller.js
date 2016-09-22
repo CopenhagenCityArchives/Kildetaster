@@ -60,10 +60,6 @@ define([
 
             });
 
-            if (found) {
-                //$scope.toggleEditExistingValue(toggleKey, id);
-            }
-
             return found;
 
         };
