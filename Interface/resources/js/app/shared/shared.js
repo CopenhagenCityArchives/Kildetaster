@@ -38,6 +38,7 @@ define([
 
     'app/shared/filters/nameFromObject.filter',
     'app/shared/filters/startsWith.filter',
+    'app/shared/filters/capitalize.filter',
 
     'app/shared/constants/text.constant'
 
@@ -79,6 +80,7 @@ define([
 
     nameFromObjectFilter,
     startsWithFilter,
+    capitalizeFilter,
 
     textConstant
 
@@ -116,6 +118,7 @@ define([
 
     sharedApp.filter('nameFromObject', nameFromObjectFilter);
     sharedApp.filter('startsWith', startsWithFilter);
+    sharedApp.filter('capitalize', capitalizeFilter);
 
     sharedApp.constant('TEXT', textConstant);
 
