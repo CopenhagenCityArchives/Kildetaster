@@ -32,6 +32,10 @@ define([
 
                         $timeout(function() {
                             var firstInput = $(element).find('bootstrap-decorator:first :input:first');
+
+                            if (firstInput.hasClass('ui-select-match')) {
+                                firstInput = firstInput.parent();
+                            }
                             firstInput.focus();
                         }, 0);
                     }
@@ -42,6 +46,14 @@ define([
 
                     var firstInput = $(element).find('bootstrap-decorator:first :input:first'),
                         lastInput = $(element).find('bootstrap-decorator:last :input:last');
+
+                    if (firstInput.hasClass('ui-select-match')) {
+                        firstInput = firstInput.parent();
+                    }
+
+                    if (lastInput.hasClass('ui-select-match')) {
+                        lastInput = lastInput.parent();
+                    }
 
                     //Tab
                     if (event.keyCode === 9) {
@@ -56,9 +68,18 @@ define([
                             //Need a timeout to let the routing system change view
                             time = $timeout(function() {
                                 //Set focus on the last input field
-                                $(element).find('bootstrap-decorator:last input:last').focus();
+                                var elm = $(element).find('bootstrap-decorator:last input:last');
+
+                                if (elm.hasClass('ui-select-match')) {
+                                    elm = elm.parent().controller('uiSelect');
+                                    //@see https://github.com/angular-ui/ui-select/issues/201
+                                    elm = elm.focusser[0];
+                                    console.log(elm);
+                                }
+                                elm.focus();
+
                                 noAuto = false;
-                            }, 0);
+                            }, 200);
 
                             //Force Angular to render new state
                             scope.$apply();
@@ -72,14 +93,23 @@ define([
 
                             noAuto = true;
 
-                            //To to next page
+                            //Go to next page
                             scope.nextFunc();
 
                             time = $timeout(function() {
                                 //Set focus on the first input field
-                                $(element).find('bootstrap-decorator:first input:first').focus();
+                                var elm = $(element).find('bootstrap-decorator:first input:first');
+
+                                if (elm.hasClass('ui-select-search')) {
+                                    elm = elm.parent().controller('uiSelect');
+                                    //@see https://github.com/angular-ui/ui-select/issues/201
+                                    elm = elm.focusser[0];
+                                }
+
+                                elm.focus();
+
                                 noAuto = false;
-                            }, 0);
+                            }, 200);
                         }
 
                     }
