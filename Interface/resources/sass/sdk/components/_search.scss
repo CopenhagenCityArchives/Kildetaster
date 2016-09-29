@@ -42,13 +42,13 @@
         position: relative;
 
         width: calc(100% - 100px);
-        height: 60px;
+        min-height: 60px;
     }
 
     &__remove {
         position: absolute;
         right: -32px;
-        bottom: 5px;
+        bottom: 18px;
     }
 
     &__add {
