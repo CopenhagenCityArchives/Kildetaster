@@ -23,15 +23,16 @@ define([
             });
         };
 
-        $scope.init = function init(taskId) {
+        $scope.init = function init(data) {
 
-            //TODO: Update logic for after beta, to not just use a hardcoded value
-            taskId = taskId || 1;
+            if (!data.taskId) {
+                throw new Error("No task id given");
+            }
 
             $scope.loading = true;
 
             taskService.getUnits({
-                taskId: taskId
+                task_id: data.taskId
             }).then(function(response) {
                 $scope.units = response;
             })
@@ -41,10 +42,6 @@ define([
 
         };
 
-        //TODO: Remove hardcoded taskId
-        $scope.init({ taskId: 1 });
-
-        
     };
 
     return opentasksController;
