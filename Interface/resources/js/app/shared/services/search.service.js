@@ -14,25 +14,34 @@ define([
 
             arr.forEach(function(row) {
                 if (row.field !== undefined) {
-                    rtn.push(encodeURIComponent(row.field.solr_name + ':' + buildSolrValue(row)));
+
+                    //If the term contains a space, make several 'entries' of the sorl_name in the query
+                    // for 'el' and 'se'
+                    // q=firstnames:%20El%20AND%20firstnames:%20se&rows=10&start=0&wt=json
+                    var termArray = row.term.split(' ');
+
+                    termArray.forEach(function(term) {
+                        rtn.push(encodeURIComponent(row.field.solr_name + ':' + buildSolrValue(term, row.operator)));
+                    });
+
                 }
             });
 
             return rtn.join(' AND ');
         }
 
-        function buildSolrValue(configRow) {
+        function buildSolrValue(term, operator) {
             var operator;
 
-            switch (configRow.operator) {
+            switch (operator) {
                 case 'startsWith':
-                    operator = configRow.term + '*';
+                    operator = term + '*';
                     break;
                 case 'endsWith':
-                    operator = '*' + configRow.term;
+                    operator = '*' + term;
                     break;
                 case 'contains':
-                    operator = '*' + configRow.term + '*';
+                    operator = '*' + term + '*';
             }
 
             return operator;
@@ -92,7 +101,7 @@ define([
                     rtn.push('facet.field' + '=' + facet);
                 });
             }
-            
+
             return rtn.join('&');
         }
 
@@ -107,12 +116,12 @@ define([
             search: function search(query, facets) {
 
                 var jsonSource = useReal ? API + '/search' : JSONURL + '/search/results.json';
-                
+
                 this.currentSearchConfig =  {
                     query: query,
                     facets: facets
                 };
-       
+
                 return $http({
                     url: jsonSource + '?' + buildQueryString(query, facets),
                     cache: true
@@ -202,7 +211,7 @@ define([
                 })
                 .then(function(response) {
                     return response.data;
-                    
+
                 })
                 .catch(function(err) {
                     console.log('Error filtering search', err);
