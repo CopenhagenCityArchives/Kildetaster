@@ -7,11 +7,12 @@
         </div>
         <div class="col-sm-12">
             <h3>Udfyldt</h3>
+
             <ul class="list-unstyled field-list" ng-repeat="(key, value) in values[mainProperty]">
 
                 <li class="field-list__item" ng-if="schema.properties[mainProperty].properties[key].type === 'string' || schema.properties[mainProperty].properties[key].type === 'number' || schema.properties[mainProperty].properties[key].type === 'date'">
 
-                    <a tabindex="1" href ng-click="toggleEditExistingValue(key + schema.properties[mainProperty].properties[key].id)">
+                    <a tabindex="1" href ng-click="toggleEditExistingValue(key + values[mainProperty].id)">
                         <span class="summary-item">
                             <span class="summary-item__label">{{schema.properties[mainProperty].properties[key].title}}</span>
                             <span class="summary-item__field">{{value}}
@@ -21,7 +22,7 @@
                         </span>
                     </a>
 
-                    <div class="row" ng-if="isEditing(key + schema.properties[mainProperty].properties[key].id)">
+                    <div class="row" ng-if="isEditing(key + values[mainProperty].id)">
 
                         <div class="col-sm-12" ng-if="lookupErrorReport(key) !== undefined">
                             <h2>Fejlmeldingen</h2>
