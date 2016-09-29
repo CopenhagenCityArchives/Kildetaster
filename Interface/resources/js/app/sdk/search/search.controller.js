@@ -25,10 +25,26 @@ define([
 
 
         /**
-        * Add new row of config 
+        * Add new row of config
+        * @params defaultFieldName {string} The name of the field type to set as default selection
         */
-        $scope.addField = function addField() {
-            $scope.config.push({});
+        $scope.addField = function addField(defaultFieldName) {
+
+            var defaultField,
+                found,
+                fieldConfig = {};
+
+            if (defaultFieldName) {
+                found = $scope.fields.filter(function(field) {
+                    return field.solr_name === defaultFieldName;
+                });
+
+                if (found) {
+                    fieldConfig.field = found[0];
+                }
+            }
+
+            $scope.config.push(fieldConfig);
         };
 
         /**
@@ -68,7 +84,7 @@ define([
         }
 
         /**
-        * Get the nice name based on a solr_name property 
+        * Get the nice name based on a solr_name property
         */
         function getNiceName(solrName) {
 
@@ -82,12 +98,12 @@ define([
 
         //TODO move this to a directive
         $scope.submitSearch = function submitSearch($event) {
-           
+
             //Enter key
             if ($event.charCode === 13) {
                $scope.doSearch();
             }
-            
+
         };
 
         /**
@@ -95,14 +111,14 @@ define([
         */
         $scope.$on('filterSearch', function(event, params) {
 
-            
+
             searchService.filterQuery($scope.config, params).then(function(response) {
                 $scope.results = response.response;
 
                 if (response.facet_counts) {
                     $scope.facets = response.facet_counts.facet_fields;
                 }
-                
+
             })
             .catch(function(err) {
                 console.log('Error filtering: ', err);
@@ -112,7 +128,7 @@ define([
 
         /**
         * Watch for changes in facets, and broadcast any changes
-        */ 
+        */
         $scope.$watch('facets', function(newVal, oldVal) {
             $rootScope.$broadcast('facetsUpdated', buildFacetData(newVal) );
         });
@@ -121,12 +137,12 @@ define([
         * Execute the search
         */
         $scope.doSearch = function doSearch(query, facets) {
-            
+
             $scope.searching = true;
 
             query = query || $scope.config;
             facets = facets || $scope.fields;
-          
+
             searchService.search(query, facets).then(function(response) {
                 $scope.results = response.response;
                 $scope.facets = response.facet_counts.facet_fields;
@@ -137,7 +153,7 @@ define([
             }).finally(function() {
                 $scope.searching = false;
             });
-            
+
         };
 
         if (searchService.currentSearchConfig !== null) {
@@ -147,13 +163,15 @@ define([
 
         $scope.init = function init() {
 
+            $scope.fields = availableFields;
+
             //Add empty row if no config exist
             if ($scope.config.length === 0) {
-                $scope.config.push({});
+                $scope.addField('firstnames');
             }
 
-            $scope.fields = availableFields;
-            
+
+
         };
 
         $scope.init();
