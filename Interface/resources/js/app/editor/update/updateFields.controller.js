@@ -156,7 +156,7 @@ define([
 
                 Flash.create('success', 'Feltet er opdateret.');
 
-                //Toggle the editing portion (hide iput field and button)
+                //Toggle the editing portion (hide input field and button)
                 $scope.toggleEditExistingValue(fieldName + id);
 
                 //Remove the entry from the errorReports in the scope
