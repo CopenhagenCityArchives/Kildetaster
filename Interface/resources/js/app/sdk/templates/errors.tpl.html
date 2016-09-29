@@ -1,6 +1,56 @@
 <div ng-controller="errorsController">
 
-    <div class="row-fluid">
+    <div class="row-fluid" ng-if="isSuperUser">
+        <div class="span12">
+            <h2>Mine fejlmeldinger - Superbruger</h2>
+            <ul class="unstyled task-list">
+                <li>
+                    <div class="task-list__header">Kilde</div>
+                    <div class="task-list__header">
+                        Bruger
+                        <select class="task-list__filter"
+                            ng-model="filtered.username"
+                            ng-options="name as name for name in userList"
+                            ng-change="dropdownChanged('username', filtered.username)">
+                            <option value="">Vælg</option>
+                        </select>
+                    </div>
+                    <div class="task-list__header">
+                        Felt(er)
+                        <select class="task-list__filter" ng-change="dropdownChanged('field_formName', filtered.field_formName)" ng-model="filtered.field_formName" ng-options="field as field for field in fieldList">
+                            <option value="">Vælg</option>
+                        </select>
+                    </div>
+                </li>
+                <li ng-repeat="error in errorList | filter: selectedFilter" ng-class="{ odd: $odd }" ng-if="errorList.length > 0">
+
+                    <div class="task-list__item">
+                        {{error.unit_description}}
+                    </div>
+                    <div class="task-list__item">
+                        {{error.username}}
+                    </div>
+                    <div class="task-list__item">
+                        {{error.field_formName}}
+                    </div>
+                    <div class="task-list__item text-right">
+                        <a href ng-click="goToEditor(error)" class="button">Ret</a>
+                        <div ng-if="error.corrected">{{error.corrected.date}}</div>
+                    </div>
+                </li>
+            </ul>
+            <div ng-if="loading" class="alert text-center">
+                Henter data
+            </div>
+            <div ng-if="errorList.length == 0 && !loading" class="alert text-center">
+                Ingen fejlmeldinger fundet
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row-fluid" ng-if="!isSuperUser">
         <div class="span12">
             <h2>Mine fejlmeldinger</h2>
             <ul class="unstyled task-list">
@@ -37,10 +87,5 @@
 
         </div>
 
-        <div class="row-fluid" ng-if="false">
-            <div class="span12 text-center">
-                <a href>Se flere</a>
-            </div>
-        </div>
     </div>
 </div>

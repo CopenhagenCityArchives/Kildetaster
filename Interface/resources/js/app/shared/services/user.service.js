@@ -47,6 +47,24 @@ define([
                 .catch(function(err) {
                     console.log('Error getting user activities', err);
                 });
+            },
+
+            getUserInfo: function getUserInfo(userId) {
+
+                if (!userId) {
+                    throw new Error('getUserInfo: No userId given');
+                }
+
+                return $http({
+                    url: API + '/users/' + userId,
+                    method: 'GET',
+                    cache: true
+                }).then(function(response) {
+                    return response.data;
+                })
+                .catch(function(err) {
+                    console.log('Error getting user info', err);
+                });
             }
 
         };
