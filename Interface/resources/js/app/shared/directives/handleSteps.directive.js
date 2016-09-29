@@ -62,7 +62,7 @@ define([
                         if (event.shiftKey && $(event.target).is(firstInput)) {
 
                             noAuto = true;
-                            //To to the previous page
+                            //Go to the previous page
                             scope.prevFunc();
 
                             //Need a timeout to let the routing system change view
@@ -74,7 +74,6 @@ define([
                                     elm = elm.parent().controller('uiSelect');
                                     //@see https://github.com/angular-ui/ui-select/issues/201
                                     elm = elm.focusser[0];
-                                    console.log(elm);
                                 }
                                 elm.focus();
 
@@ -91,6 +90,7 @@ define([
                         //We are on the last input field, and shift is not pressed
                         else if (!event.shiftKey && $(event.target).is(lastInput)) {
 
+                            console.log('else if', lastInput)
                             noAuto = true;
 
                             //Go to next page
@@ -109,6 +109,7 @@ define([
                                 elm.focus();
 
                                 noAuto = false;
+
                             }, 200);
                         }
 
