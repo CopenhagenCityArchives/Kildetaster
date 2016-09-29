@@ -54,7 +54,7 @@ define([
         function buildFacetsForQuery(config) {
             var arr = [];
             config.forEach(function(field) {
-                if (field.facetable === '1') {
+                if (field.facetable === 1) {
                     arr.push(field.solr_name);
                 }
             });
