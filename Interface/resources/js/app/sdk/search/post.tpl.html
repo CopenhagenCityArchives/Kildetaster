@@ -9,20 +9,20 @@
 </div>
 
 <div class="row-fluid">
-    
+
     <div class="span5">
         <div ng-repeat="field in post">
             <post-field to-editor="toEditor(field)" data="field" report="report(fieldData)" error-reporting="errorReportingEnabled"></post-field>
         </div>
     </div>
-    
+
     <div class="span7">
         <div class="post__image">
             <img ng-src="{{getImageUrl()}}" alt="{{collection}} {{unit}}, s. {{pageNumber}}">
             <span class="post__caption">{{collection}} {{unit}}, s. {{pageNumber}}</span>
         </div>
         <div class="post__links">
-            <a ng-href="{{kildeviserUrl}}" target="_blank" class="button">Vis i kilde</a>
+            <a ng-href="{{kildeviserUrl}}" target="_blank" class="button">Vis i kildeviser</a>
             <a href ng-href="{{editorUrl()}}" target="_blank" class="button">Vis i kildetaster</a>
         </div>
     </div>
