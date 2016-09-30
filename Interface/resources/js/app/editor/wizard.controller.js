@@ -108,11 +108,15 @@ define([
                 $scope.makeSelectable();
             }
 
+            console.log('current', $scope.currentStep);
+            console.log('data', $scope.steps.length)
+
             //TODO: Remove this!
             //Hack to force focus on button and not links in header
             $timeout(function() {
-                if ($scope.currentStep == $scope.steps.length + 1) {
-                    $('.editor-form-container button:first').focus();
+                if ($scope.currentStep == $scope.steps.length) {
+                    //Last step, so focus on the save button
+                    $('#save-button').focus();
                 }
             });
 
