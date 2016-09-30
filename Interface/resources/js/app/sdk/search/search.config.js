@@ -25,11 +25,14 @@ define([
                     '': {
                         templateUrl: 'sdk/search/search.tpl.html',
                         controller: 'searchController'
-                    },
-                    'facets': {
-                        templateUrl: 'sdk/search/search.facets.tpl.html',
-                        controller: 'searchFacetsController'
                     }
+                    // Functionality not ready for launch, but will probably be worked on soon
+                    // The view logic is therefore just removed fow now
+                    // ,
+                    // 'facets': {
+                    //     templateUrl: 'sdk/search/search.facets.tpl.html',
+                    //     controller: 'searchFacetsController'
+                    // }
                 },
                 resolve: {
                     availableFields: ['searchService', function(searchService) {
