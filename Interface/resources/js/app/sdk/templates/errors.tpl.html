@@ -17,7 +17,10 @@
                     </div>
                     <div class="task-list__header">
                         Felt(er)
-                        <select class="task-list__filter" ng-change="dropdownChanged('field_formName', filtered.field_formName)" ng-model="filtered.field_formName" ng-options="field as field for field in fieldList">
+                        <select class="task-list__filter" 
+                            ng-model="filtered.field_formName"
+                            ng-options="field as field for field in fieldList"
+                            ng-change="dropdownChanged('field_formName', filtered.field_formName)">
                             <option value="">Vælg</option>
                         </select>
                     </div>
