@@ -23,7 +23,7 @@
         </div>
         <div class="post__links">
             <a ng-href="{{kildeviserUrl}}" target="_blank" class="button">Vis i kildeviser</a>
-            <a href ng-href="{{editorUrl()}}" target="_blank" class="button">Vis i kildetaster</a>
+            <a href ng-if="showEditorLink" ng-href="{{editorUrl()}}" target="_blank" class="button">Vis i kildetaster</a>
         </div>
     </div>
 </div>

@@ -2,6 +2,8 @@ define([
 
     'angular',
 
+    'ngstorage',
+
     'angular-ui-router',
     'angular-filter',
 
@@ -10,6 +12,8 @@ define([
     'app/shared/services/search.service',
     'app/shared/services/error.service',
     'app/shared/services/helpers.service',
+    'app/shared/services/token.service',
+    'app/shared/services/user.service',
 
     'app/sdk/search/search.config',
     'app/sdk/search/search.run',
@@ -26,8 +30,10 @@ define([
     'app/shared/constants'
 
 ], function(
-    
+
     ang,
+
+    ngStorage,
 
     uiRouter,
     angularFilter,
@@ -37,6 +43,8 @@ define([
     searchService,
     errorService,
     helpersService,
+    tokenService,
+    userService,
 
     searchConfig,
     searchRun,
@@ -50,11 +58,11 @@ define([
     postfieldDirective,
 
     constants
-    
+
     ) {
 
 
-    var searchApp = angular.module('search', ['sdk-templates', 'constants', 'ui.router', 'angular.filter']);
+    var searchApp = angular.module('search', ['sdk-templates', 'constants', 'ui.router', 'angular.filter', 'ngStorage']);
 
     searchApp.config(searchConfig);
     searchApp.run(searchRun);
@@ -62,9 +70,9 @@ define([
     searchApp.service('searchService', searchService);
     searchApp.service('errorService', errorService);
     searchApp.service('helpers', helpersService);
+    searchApp.service('tokenService', tokenService);
+    searchApp.service('userService', userService);
 
-    searchApp.controller('searchController', searchController);
-    searchApp.controller('searchController', searchController);
     searchApp.controller('searchController', searchController);
     searchApp.controller('searchFacetsController', searchFacetsController);
     searchApp.controller('navigationController', navigationController);
@@ -77,7 +85,7 @@ define([
         angular.bootstrap(angular.element('[data-sdk-search-app]'), ['search']);
     });
 
-    
+
 
     //Debugging for ui.router state issues, fails when Uglifying because of the => operator
     // searchApp.run(($rootScope) => {
