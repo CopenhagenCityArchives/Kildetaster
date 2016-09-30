@@ -38,9 +38,9 @@ define([
                         });
                     }]
                 }
-            
+
             })
-            .state('search.page.result', {   
+            .state('search.page.result', {
                 url: '',
                 abstract: true,
                 views: {
@@ -53,7 +53,7 @@ define([
             .state('search.page.result.page', {
                 url: 'post/{postId:int}',
                 views: {
-                   
+
                     'navigation': {
                         templateUrl: 'sdk/search/post.navigation.tpl.html',
                         controller: 'navigationController'
@@ -75,14 +75,13 @@ define([
 
                         //We hit the url without having a search configured, just get post data
                         if (searchService.currentSearchConfig === null) {
-                            
+
                             searchService.getPost($stateParams.postId)
                             .then(function(response) {
 
                                 data.post = response.data;
                                 data.metadata = response.metadata;
                                 data.errorReports = response.error_reports;
-                                data.taskId = taskId;
 
                                 deferred.resolve(data);
                                 return data;
@@ -92,7 +91,7 @@ define([
                         else {
                             searchService.paginatedSearch(searchService.currentSearchConfig.query)
                             .then(function(response) {
-                                
+
                                 data.numFound = response.response.numFound;
                                 data.number = searchService.currentIndex + 1;
 
@@ -119,7 +118,7 @@ define([
                         return deferred.promise;
                     }]
                 }
-                
+
 
             });
     };
