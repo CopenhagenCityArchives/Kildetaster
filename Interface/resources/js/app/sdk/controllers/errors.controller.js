@@ -52,10 +52,10 @@ define([
         });
 
         $scope.dropdownChanged = function(prop, value) {
-            if (value === null) {
-                $scope.selectedFilter = {};
-            }
-            else {
+
+            $scope.selectedFilter = {};
+
+            if (prop && value !== null) {
                 $scope.selectedFilter[prop] = value;
             }
         };
