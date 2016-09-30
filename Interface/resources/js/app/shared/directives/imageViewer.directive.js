@@ -204,15 +204,22 @@ define([
                         //TODO: fitBounds on event instead of a custom timeout
                         $timeout(function() {
 
+                            //Make sure no overlays are displayed
                             viewer.clearOverlays();
 
-                            var editAreaOverlay = new OpenSeadragon.Rect($scope.editArea.x, $scope.editArea.y, $scope.editArea.width, $scope.editArea.height);
+                            //Prepare values for OpenSeadragon, converting from the backend controlled values that are based on a 1:1 aspect ratio
+                            var editAreaOverlay = helpers.convertPercentToOpenSeadragonRect($scope.editArea, imagingHelper.imgAspectRatio);
 
+                            //Prepare the OpenSeadragon rect
+                            editAreaOverlay = new OpenSeadragon.Rect(editAreaOverlay.x, editAreaOverlay.y, editAreaOverlay.width, editAreaOverlay.height);
+
+                            //Add the overlay
                             viewer.addOverlay({
                                 element: $('<div class="imageViewer__progress"></div>')[0],
                                 location: editAreaOverlay
                             });
 
+                            //Zoonm to the overlay
                             viewer.viewport.fitBounds(editAreaOverlay, true);
 
                         }, 600);
