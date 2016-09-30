@@ -42,6 +42,10 @@
     }
 
     &__filter {
+        font-size: inherit;
+
         width: auto;
+
+        color: $black;
     }
 }
