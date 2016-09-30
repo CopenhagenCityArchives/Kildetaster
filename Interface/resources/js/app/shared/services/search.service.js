@@ -123,7 +123,8 @@ define([
                 };
 
                 return $http({
-                    url: jsonSource + '?' + buildQueryString(query, facets)
+                    url: jsonSource + '?' + buildQueryString(query, facets),
+                    method: 'GET'
                 })
 
                 .then(function(response) {
