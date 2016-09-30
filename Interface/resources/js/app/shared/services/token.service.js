@@ -100,17 +100,22 @@ define([
 
             },
 
-
             getToken: function() {
-                //console.log('data', $sessionStorage.tokenData);
+
                 if ($sessionStorage.tokenData) {
                     return $sessionStorage.tokenData.access_token;
                 }
 
                 return null;
+            },
+
+            getTokenData: function() {
+
+                if ($sessionStorage.tokenData) {
+                    return $sessionStorage.tokenData;
+                }
+                return null;
             }
-
-
 
         };
 
