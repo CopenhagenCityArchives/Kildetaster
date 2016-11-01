@@ -4,8 +4,8 @@
 
         overflow: hidden;
 
-        border: 2px dotted $white;
-        background-color: rgba( $green-overlay, 0.15 );
+        border: 1px dotted $dark-gray;
+        background-color: rgba(0, 0, 0, 0.28);
 
         &:before {
             font-size: 20px;
@@ -36,6 +36,8 @@
 }
 
 .selection-box {
+    background-color: rgba( $green-overlay, 0.15 ) !important;
+
     &:hover {
         cursor: move;
     }
