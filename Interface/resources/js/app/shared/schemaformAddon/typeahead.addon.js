@@ -24,28 +24,37 @@ define([
 
         $scope.getData = function getData(datasource, term, propertyName) {
 
+            $scope.options = [];
+
             //If we do not get any datasourece or a term to search for, do nothing
             if (!datasource || !term) {
                 //Just return an empty array
                 return [];
             }
 
-            term = $filter('capitalize')(term);
+            if (term.length < 2) {
+                return [];
+            }
+
+            //Indicate that we are about to load new options
+            $scope.loading = true;
 
             return $http({
-                url: datasource,
+                url: datasource + term,
                 method: 'GET',
-                params: {
-                    q: term
-                }
+                cache: false
             }).then(function(response) {
 
-                var startsWith = $filter('startsWith')(response.data, term, propertyName);
+                var arr = response.data.map(function(item) {
+                    return item[propertyName];
+                });
 
-                $scope.options = startsWith;
+                //Only show the first 50 hits
+                $scope.options = arr.slice(0, 50);
 
-                return startsWith;
-
+            }).finally(function() {
+                //Done loading
+                $scope.loading = false;
             });
 
         };

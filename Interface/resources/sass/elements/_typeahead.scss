@@ -6,3 +6,22 @@
 
     max-height: 200px;
 }
+
+.ui-select-container.loading:after {
+    position: absolute;
+    z-index: 10;
+    right: 10px;
+    bottom: 31%;
+
+    width: 20px;
+    height: 20px;
+    margin: -20px 0 0 -20px;
+
+    content: "";
+    animation: spin 1s infinite linear;
+
+    border: solid rgba(9, 62, 78, 0.2);
+    border-width: 2px;
+    border-top-color: $dark-blue;
+    border-radius: 50%;
+}
