@@ -1,5 +1,5 @@
 define([
-   
+
 
 ], function() {
 
@@ -21,13 +21,13 @@ define([
                         controller: 'taskController'
                     }
                 },
-                
+
                 resolve: {
 
                     requestToken: ['$q', 'tokenService', function($q, tokenService) {
                         return tokenService.requestToken();
                     }],
-                   
+
                     /**
                      * Load project data and pass it to the controller
                      */
@@ -35,7 +35,7 @@ define([
 
                         var deferred = $q.defer(),
                             data;
-                        
+
                         return taskService.getTask($stateParams.taskId).then(function(response) {
                             return response;
                         });
@@ -62,7 +62,7 @@ define([
                                 //         $state.go('editor.page.pageIsDone');
                                 //     }, 0);
                                 // }
-                                
+
                             } else {
                                 deferred.reject('Error', response);
                             }
@@ -108,13 +108,13 @@ define([
                     }
                 },
                 resolve: {
-                    
+
                     postData: ['$stateParams','$q', 'entryService', 'postService', 'errorService', function($stateParams, $q, entryService, postService, errorService) {
-                        
+
                         var deferred = $q.defer(),
                             data = {
                                 postId: $stateParams.postId
-                            };                       
+                            };
 
                         postService.getData($stateParams.postId).then(function(response) {
 
@@ -124,7 +124,7 @@ define([
                             data.entryId = response.data[0].entry_id;
 
                             return entryService.getEntry(data.entryId);
-                            
+
                         })
                         .then(function(response) {
 
@@ -134,19 +134,19 @@ define([
                                 task_id: $stateParams.taskId,
                                 post_id: $stateParams.postId
                             });
-                                                    
+
                         })
                         .then(function(response) {
 
                             data.errorReports = response;
 
                             deferred.resolve(data);
-                        });                        
+                        });
 
                         return deferred.promise;
 
                     }]
-                }           
+                }
             })
 
             .state('editor.page.notfound', {
@@ -175,8 +175,8 @@ define([
 
                         if (pageData.next_post === false && pageData.task_page[0].is_done === 0) {
                             $timeout(function() {
-                                $state.go('editor.page.pageFull', { 
-                                    taskId: $stateParams.taskId, 
+                                $state.go('editor.page.pageFull', {
+                                    taskId: $stateParams.taskId,
                                     pageId: pageData.id
                                 });
                             }, 0);
@@ -184,14 +184,12 @@ define([
                         else if (pageData.task_page[0].is_done === 1) {
 
                             $timeout(function() {
-                                $state.go('editor.page.pageDone', { 
-                                    taskId: $stateParams.taskId, 
+                                $state.go('editor.page.pageDone', {
+                                    taskId: $stateParams.taskId,
                                     pageId: pageData.id
                                 });
-                            }, 0);   
+                            }, 0);
                         }
-
-
 
                         return true;
                     }],
@@ -215,20 +213,20 @@ define([
             })
 
             .state('editor.page.wizard.confirm', {
-                //url: "/add",
+
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        
+
                         templateUrl: 'editor/confirm.modal.tpl.html',
                         windowClass: 'modal--center',
-                        
+
                         controller: ['$scope', '$rootScope', function($scope, $rootScope) {
                             $scope.dismiss = function() {
                                 $scope.$dismiss();
                             };
 
                             $scope.continue = function() {
-                                $rootScope.$broadcast('okToSetPageDone');                               
+                                $rootScope.$broadcast('okToSetPageDone');
                                 $scope.$dismiss();
                             };
                         }]
@@ -255,17 +253,17 @@ define([
                 //url: "/add",
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
-                        
+
                         templateUrl: 'editor/confirm.modal.tpl.html',
                         windowClass: 'modal--center',
-                        
+
                         controller: ['$scope', '$rootScope', function($scope, $rootScope) {
                             $scope.dismiss = function() {
                                 $scope.$dismiss();
                             };
 
                             $scope.continue = function() {
-                                $rootScope.$broadcast('okToSetPageDone');                               
+                                $rootScope.$broadcast('okToSetPageDone');
                                 $scope.$dismiss();
                             };
                         }]
