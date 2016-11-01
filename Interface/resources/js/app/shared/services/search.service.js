@@ -113,17 +113,18 @@ define([
             currentSearchConfig: null,
             currentIndex: 0,
 
-            search: function search(query, facets) {
+            search: function search(query, facets, params) {
 
                 var jsonSource = useReal ? API + '/search' : JSONURL + '/search/results.json';
 
                 this.currentSearchConfig =  {
                     query: query,
-                    facets: facets
+                    facets: facets,
+                    params: params
                 };
 
                 return $http({
-                    url: jsonSource + '?' + buildQueryString(query, facets),
+                    url: jsonSource + '?' + buildQueryString(query, facets, params),
                     method: 'GET'
                 })
 

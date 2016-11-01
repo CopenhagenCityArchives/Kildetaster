@@ -11,6 +11,8 @@ define([
 
         $scope.results = [];
 
+        $scope.currentIndex = 0;
+
         $scope.operatorOptions = [
             {
                 value: 'contains',
@@ -133,17 +135,62 @@ define([
             $rootScope.$broadcast('facetsUpdated', buildFacetData(newVal) );
         });
 
+        function buildPaginationItem(index) {
+            return  {
+                label: index + 1,
+                index: index
+            }
+        }
+
+        function buildPagination(results, currentIndex) {
+
+            var arr = [],
+                lastPage = Math.ceil(results.numFound / 10);
+
+            if (currentIndex < 1) {
+                for (var i=0; i <= 2; i++) {
+                    arr.push(buildPaginationItem(i));
+                }
+            }
+            else if(currentIndex > lastPage - 3) {
+                arr.push(buildPaginationItem(lastPage - 3));
+                arr.push(buildPaginationItem(lastPage - 2));
+                arr.push(buildPaginationItem(lastPage - 1));
+            }
+            else {
+                arr.push(buildPaginationItem(currentIndex - 1))
+                arr.push(buildPaginationItem(currentIndex))
+                arr.push(buildPaginationItem(currentIndex + 1))
+            }
+
+            $scope.pagination = {
+                total: Math.ceil(results.numFound / 10),
+                pages: arr
+            };
+
+        }
+
+        $scope.$watch('results', function(newval, oldval) {
+            buildPagination(newval, $scope.currentIndex);
+        });
+
+        $scope.$watch('currentIndex', function(newval, oldval) {
+            buildPagination($scope.results, newval);
+        });
+
         /**
         * Execute the search
         */
-        $scope.doSearch = function doSearch(query, facets) {
+        $scope.doSearch = function doSearch(query, facets, params) {
 
             $scope.searching = true;
 
             query = query || $scope.config;
             facets = facets || $scope.fields;
+            params = params || {};
 
-            searchService.search(query, facets).then(function(response) {
+            searchService.search(query, facets, params).then(function(response) {
+
                 $scope.results = response.response;
                 $scope.facets = response.facet_counts.facet_fields;
 
@@ -159,6 +206,27 @@ define([
         if (searchService.currentSearchConfig !== null) {
             $scope.config = searchService.currentSearchConfig.query;
             $scope.doSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets);
+        }
+
+        $scope.prev = function prev() {
+            if ($scope.currentIndex > 0)  {
+                $scope.goToPage($scope.currentIndex - 1);
+            }
+
+        }
+
+        $scope.next = function next() {
+            if ($scope.currentIndex < $scope.pagination.total - 1) {
+                $scope.goToPage($scope.currentIndex + 1);
+            }
+        }
+
+        $scope.goToPage = function goToPage(index) {
+
+            $scope.currentIndex = index;
+            $scope.doSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets, {
+                start: index * 10
+            });
         }
 
         $scope.init = function init() {
