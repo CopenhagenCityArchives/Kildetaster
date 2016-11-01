@@ -34,8 +34,16 @@ define([
         });
 
         $scope.markDone = function() {
-            //Show confirmation modal
-            $state.go('.confirm');
+
+            //If the page is full, skip the confirmation dialog, and mark the page directly
+            if ($scope.isFull) {
+                $scope.$broadcast('okToSetPageDone');
+            }
+            //otherwise show a confirmation dialog
+            else {
+                //Show confirmation modal
+                $state.go('.confirm');
+            }
         };
     };
 
