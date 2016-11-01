@@ -37,7 +37,6 @@ define([
     'app/shared/services/helpers.service',
 
     'app/shared/filters/nameFromObject.filter',
-    'app/shared/filters/startsWith.filter',
     'app/shared/filters/capitalize.filter',
 
     'app/shared/constants/text.constant'
@@ -79,7 +78,6 @@ define([
     helpersService,
 
     nameFromObjectFilter,
-    startsWithFilter,
     capitalizeFilter,
 
     textConstant
@@ -117,7 +115,6 @@ define([
     sharedApp.factory('helpers', helpersService);
 
     sharedApp.filter('nameFromObject', nameFromObjectFilter);
-    sharedApp.filter('startsWith', startsWithFilter);
     sharedApp.filter('capitalize', capitalizeFilter);
 
     sharedApp.constant('TEXT', textConstant);
