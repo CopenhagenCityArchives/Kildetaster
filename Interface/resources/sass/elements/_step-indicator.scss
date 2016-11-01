@@ -60,13 +60,13 @@
                 transform: translateY(-50%);
 
                 color: $white;
-                background-color: $green;
+                background-color: $dark-blue;
             }
         }
 
         &.current {
             color: $white;
-            background-color: $dark-blue;
+            background-color: $green;
 
             &:after {
                 position: absolute;
@@ -83,7 +83,7 @@
 
                 border-top: 10px solid transparent;
                 border-bottom: 10px solid transparent;
-                border-left: 10px solid $dark-blue;
+                border-left: 10px solid $green;
             }
         }
     }
