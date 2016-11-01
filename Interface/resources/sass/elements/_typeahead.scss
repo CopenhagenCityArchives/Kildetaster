@@ -25,3 +25,17 @@
     border-top-color: $dark-blue;
     border-radius: 50%;
 }
+
+//because of issues with animations, opacity is not handled correct in the current version of ui-select (0.19.6)
+// @see https://github.com/angular-ui/ui-select/issues/1731
+.ui-select-bootstrap > .ui-select-choices {
+    width: auto;
+    min-width: 100%;
+
+    opacity: 1 !important;
+}
+
+//Prevent very long selected items to flow outside the 'input field'
+.ui-select-bootstrap .ui-select-match-text {
+    overflow: hidden;
+}
