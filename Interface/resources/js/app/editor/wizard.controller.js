@@ -108,9 +108,6 @@ define([
                 $scope.makeSelectable();
             }
 
-            console.log('current', $scope.currentStep);
-            console.log('data', $scope.steps.length)
-
             //TODO: Remove this!
             //Hack to force focus on button and not links in header
             $timeout(function() {
