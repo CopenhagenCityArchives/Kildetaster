@@ -8,7 +8,8 @@ module.exports = function(grunt) {
     require('load-grunt-config')(grunt, {
     	jitGrunt: {
              staticMappings: {
-                ngconstant: 'grunt-ng-constant'
+                ngconstant: 'grunt-ng-constant',
+                cachebreaker: 'grunt-cache-breaker'
             }
         },
         configPath: path.join(process.cwd(), 'Interface/grunttasks')

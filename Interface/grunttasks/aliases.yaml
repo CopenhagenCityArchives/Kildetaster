@@ -34,7 +34,7 @@ sdk:
     - 'sass:sdk'
     - 'postcss:sdk'
     - 'bake:sdk'
-    - 'karma:prototype'
+#    - 'karma:prototype'
     - 'express:prototype'
     - 'express:sdk'
     - 'open:sdk'
@@ -55,6 +55,7 @@ dev:
 
     - 'uglify:development'
     - 'bake:prototype'
+    - 'cachebreaker:development'
     - 'sass:development'
     - 'postcss:development'
     - 'postcss:sdk'
@@ -75,6 +76,7 @@ build:
 #    - 'uglify:production'
     - 'bake:production'
 
+    - 'cachebreaker:production'
     - 'sass:production'
     - 'sass:sdk'
     - 'postcss:production'
