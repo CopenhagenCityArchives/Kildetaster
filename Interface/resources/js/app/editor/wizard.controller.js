@@ -4,7 +4,7 @@ define([
 
 ], function(Clipboard) {
 
-    var wizardController = /*@ngInject*/ function wizardController(helpers, $scope, $rootScope, stepService, $stateParams, pageData, taskData, $location, $state, $timeout, $http, Flash, API, pageService, SEARCHURL) {
+    var wizardController = /*@ngInject*/ function wizardController($uibModal, helpers, $scope, $rootScope, stepService, $stateParams, pageData, taskData, $location, $state, $timeout, $http, Flash, API, pageService, SEARCHURL) {
 
         //Indicates if we should show the controls for accepting a new area (used on all other steps than the first)
         $scope.showSelectionControls = false;
@@ -44,7 +44,6 @@ define([
                 }
             }
         };
-
 
         /**
         * Build the value structure for single fields, that is fields that are part of an array structure
@@ -191,7 +190,24 @@ define([
                     $scope.postId = response.data.post_id;
                 }
                 else {
-                    Flash.create('danger', response);
+
+                    $scope.error = response;
+
+                    $uibModal.open({
+
+                        templateUrl: 'editor/error.modal.tpl.html',
+                        //The type of modal. The error modal makes more room for the error text
+                        windowClass: 'modal--error',
+
+                        //Make wizard scope available to the modal
+                        scope: $scope,
+
+                        controller: ['$scope', function($scope) {
+                            $scope.dismiss = function() {
+                                $scope.$dismiss();
+                            };
+                        }]
+                    });
                 }
 
             }).catch(function(err) {

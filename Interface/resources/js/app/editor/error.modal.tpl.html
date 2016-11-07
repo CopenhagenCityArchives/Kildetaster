@@ -1,0 +1,21 @@
+<a href ng-click="dismiss()" class="modal__close">
+    <span class="icon icon__cross"></span>
+</a>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <h2>Noget gik galt - Vi beklager</h2>
+            <p>Send denne tekst til os, sammen med dit brugernavn, så kan vi bedre finde fejlen.</p>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <pre>
+{{error}}
+                </pre>
+            </div>
+        </div>
+        <div class="col-sm-12 text-center">
+            <button class="btn btn-primary" ng-click="dismiss()">Ok</button>
+        </div>
+    </div>
+</div>

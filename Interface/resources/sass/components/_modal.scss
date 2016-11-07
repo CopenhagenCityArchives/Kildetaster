@@ -2,8 +2,6 @@
     //Overwrite of default style
     &-body {
         font-size: 16px;
-
-        padding: 20px 80px;
     }
 
     &__close {
@@ -29,6 +27,29 @@
             //!important to overwrite default styling
 
             transform: translateX(-50%) translateY(-105%) !important;
+        }
+
+        .modal-body {
+            padding: 20px 80px;
+        }
+    }
+
+    &--error {
+        .modal-dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+
+            width: 540px;
+            margin: 0;
+            //!important to overwrite default styling
+
+            transform: translateX(-50%) translateY(-60%) !important;
+        }
+        pre {
+            max-height: 200px;
+
+            white-space: pre-wrap;
         }
     }
 }
