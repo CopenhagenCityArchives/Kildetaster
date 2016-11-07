@@ -17,27 +17,8 @@ define([
 
         $scope.errorReportingEnabled = false;
 
-        //By default prevent the "Go to editor" link from being visible
-        $scope.showEditorLink = false;
-
-        //Test if we are logged in
-        var userTokenData = tokenService.getTokenData();
-
-        if (userTokenData) {
-
-            //We are logged in, get more user information, to determine if the user can edit the post
-            userService.getUserInfo(userTokenData.user_id).then(function(response) {
-
-                //User is super-user
-                if (response.super_user_tasks.length > 0) {
-                    $scope.showEditorLink = true;
-                }
-                //Users own post
-                else if (userTokenData && (response.username === resultData.metadata.username)) {
-                    $scope.showEditorLink = true;
-                }
-            });
-        }
+        //Determine the editor link visibility based on wether or not the user can edit
+        $scope.showEditorLink = resultData.metadata.user_can_edit;
 
         $scope.toggleErrorReporting = function() {
             $scope.errorReportingEnabled = !$scope.errorReportingEnabled;
