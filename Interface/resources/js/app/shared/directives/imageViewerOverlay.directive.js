@@ -34,7 +34,7 @@ define([
                 */
                 scope.goToPost = function($event) {
 
-                    var url = window.location.protocol + '//' + window.location.host + '/#/task/' + $stateParams.taskId + '/page/' + $stateParams.pageId + '/post/' + scope.postId;
+                    var url = window.location.protocol + '//' + window.location.host + window.location.pathname + '#/task/' + $stateParams.taskId + '/page/' + $stateParams.pageId + '/post/' + scope.postId;
                     window.open(url);
                 }
             }
