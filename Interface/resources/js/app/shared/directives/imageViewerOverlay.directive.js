@@ -30,18 +30,12 @@ define([
                 });
 
                 /**
-                * Go to specific post
+                * Go to specific post, open in new window
                 */
                 scope.goToPost = function($event) {
 
-                    $state.go('editor.page.update', {
-                        taskId: $stateParams.taskId,
-                        pageId: $stateParams.pageId,
-                        postId: scope.postId
-                    }, {
-                        //Force state to reload, ie. fetch data again
-                        reload: true
-                    });
+                    var url = window.location.protocol + '//' + window.location.host + '/#/task/' + $stateParams.taskId + '/page/' + $stateParams.pageId + '/post/' + scope.postId;
+                    window.open(url);
                 }
             }
         };
