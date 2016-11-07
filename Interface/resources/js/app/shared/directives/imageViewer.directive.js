@@ -4,9 +4,10 @@ define([
     'openseadragon',
     'libs/openseadragonselection',
     'libs/openseadragon-filtering',
-    'libs/openseadragon-imaginghelper'
+    'libs/openseadragon-imaginghelper',
+    'libs/openseadragon-viewerinputhook'
 
-], function(ang, OpenSeadragon, osdSelection, filtering, imagingHelper) {
+], function(ang, OpenSeadragon, osdSelection, filtering, imagingHelper, hookHelper) {
 
     "use strict";
 
@@ -111,6 +112,21 @@ define([
                     viewer: viewer
                 });
 
+                viewer.addViewerInputHook({hooks: [
+                    //{tracker: 'viewer', handler: 'scrollHandler', hookHandler: onViewerScroll},
+                    {tracker: 'viewer', handler: 'clickHandler', hookHandler: onViewerClick}
+                ]});
+
+                function onViewerClick(event) {
+                    var isPostOverlay = $(event.originalEvent.target).parent().hasClass('imageViewer__can-edit');
+
+                    if (isPostOverlay) {
+                        event.stopHandlers = true;
+                        event.preventDefaultAction = true;
+                        event.stopBubbling = false;
+                    }
+                }
+
                 //Add class all given overlays to render them as existing
                 $scope.options.tileSources.deferredOverlays = addClassToOverlay($scope.options.tileSources.deferredOverlays);
 
@@ -120,13 +136,18 @@ define([
                     //Loop over all deferredOverlays
                     $scope.options.tileSources.deferredOverlays.forEach(function(overlay) {
 
-                            //Create a div to add overlay to
-                        var elm = document.createElement("div"),
-                            overlayRect;
+                        var overlayRect;
 
-                        //Set className to indicate what type of overlay we have
-                        elm.className = overlay.className;
+                        var localScope = $rootScope.$new();
 
+                        localScope.canEdit = overlay.canEdit;
+                        localScope.postId = overlay.postId;
+                        
+                        var elm = '<image-viewer-overlay post-id="postId" can-edit="canEdit">';
+
+                        elm = $compile(elm)(localScope);
+
+                        //elm = elm.wrap('<div></div>').parent();
                         //Convert values from backend to values OpenSeadragon can use
                         overlayRect = helpers.convertPercentToOpenSeadragonRect(overlay, imagingHelper.imgAspectRatio);
                         //Prepare a new rect object to be added in the overlay
@@ -134,7 +155,7 @@ define([
 
                         //Add the overlay
                         viewer.addOverlay({
-                            element: elm,
+                            element: elm[0],
                             location: overlayRect
                         });
 

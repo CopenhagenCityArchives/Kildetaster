@@ -58,7 +58,8 @@ requirejs.config({
 
         'libs/openseadragonselection': ['openseadragon'],
         'libs/openseadragon-filtering': ['openseadragon'],
-        'libs/openseadragon-imaginghelper': ['openseadragon']
+        'libs/openseadragon-imaginghelper': ['openseadragon'],
+        'libs/openseadragon-viewerinputhook': ['openseadragon']
 
     },
 

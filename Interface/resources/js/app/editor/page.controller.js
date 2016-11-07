@@ -111,7 +111,8 @@ define([
                 postId: post.id,
                 width: post.width,
                 x: post.x,
-                y: post.y
+                y: post.y,
+                canEdit: post.user_can_edit
             };
             convertedPosts.push(obj);
 

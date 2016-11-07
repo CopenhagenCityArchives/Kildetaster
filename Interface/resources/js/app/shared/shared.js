@@ -9,6 +9,7 @@ define([
 
     'app/shared/directives/user.directive',
     'app/shared/directives/imageViewer.directive',
+    'app/shared/directives/imageViewerOverlay.directive',
     'app/shared/directives/stepOf.directive',
     'app/shared/directives/stepIndicator.directive',
     'app/shared/directives/capitalizeFirst.directive',
@@ -51,6 +52,7 @@ define([
 
     userDirective,
     imageViewerDirective,
+    imageViewerOverlayDirective,
     stepOfDirective,
     stepIndicatorDirective,
     capitalizeFirst,
@@ -88,6 +90,7 @@ define([
 
     sharedApp.directive('user', userDirective);
     sharedApp.directive('imageViewer', imageViewerDirective);
+    sharedApp.directive('imageViewerOverlay', imageViewerOverlayDirective);
     sharedApp.directive('stepOf', stepOfDirective);
     sharedApp.directive('stepIndicator', stepIndicatorDirective);
     sharedApp.directive('capitalizeFirst', capitalizeFirst);
