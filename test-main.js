@@ -1,6 +1,6 @@
 /**
 *
-* This file contains the RequireJS setup for require when running karma 
+* This file contains the RequireJS setup for require when running karma
 *
 **/
 
@@ -19,7 +19,7 @@ Object.keys(window.__karma__.files).forEach(function(file) {
 });
 
 require.config({
-    
+
     // Karma serves files under /base, which is the basePath from your config file
     baseUrl: '/base',
 
@@ -27,10 +27,10 @@ require.config({
         //Overall path to make paths from the application work in the test invironment
         'app'                   : 'js/app',
         'libs'                   : 'js/libs',
-    
+
         'jquery'                : 'bower_components/jquery/dist/jquery.min',
         'angular'               : 'bower_components/angular/angular.min',
-        'angular-mocks'         : 'bower_components/angular-mocks/angular-mocks',       
+        'angular-mocks'         : 'bower_components/angular-mocks/angular-mocks',
         'angular-animate'       : 'bower_components/angular-animate/angular-animate.min',
         'angular-bootstrap'     : 'bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
         'angular-sanitize'      : 'bower_components/angular-sanitize/angular-sanitize.min',
@@ -51,7 +51,7 @@ require.config({
         'clipboard'                    : 'bower_components/clipboard/dist/clipboard.min',
 
         'openseadragon'         : 'bower_components/openseadragon/built-openseadragon/openseadragon/openseadragon.min',
-        
+
     },
 
     shim: {
@@ -68,14 +68,16 @@ require.config({
         'angular-flash': ['angular'],
         'angular-cookies': ['angular'],
         'ngstorage': ['angular'],
-        
+
         'app/shared/constants': ['angular'],
 
         'bootstrap': ['jquery'],
         'angular-bootstrap': ['angular'],
 
         'libs/openseadragonselection': ['openseadragon'],
-        'libs/openseadragon-filtering': ['openseadragon']
+        'libs/openseadragon-filtering': ['openseadragon'],
+        'libs/openseadragon-imaginghelper': ['openseadragon'],
+        'libs/openseadragon-viewerinputhook': ['openseadragon'],
 
     },
 
