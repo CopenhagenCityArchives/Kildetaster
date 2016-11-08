@@ -211,7 +211,25 @@ define([
                 }
 
             }).catch(function(err) {
-                Flash.create('danger', err.data.userMessage);
+
+                $scope.error = err;
+
+                $uibModal.open({
+
+                    templateUrl: 'editor/error.modal.tpl.html',
+                    //The type of modal. The error modal makes more room for the error text
+                    windowClass: 'modal--error',
+
+                    //Make wizard scope available to the modal
+                    scope: $scope,
+
+                    controller: ['$scope', function($scope) {
+                        $scope.dismiss = function() {
+                            $scope.$dismiss();
+                        };
+                    }]
+                });
+
             });
 
         };
