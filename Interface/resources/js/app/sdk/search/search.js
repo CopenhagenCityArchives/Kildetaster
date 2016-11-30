@@ -29,6 +29,7 @@ define([
     'app/sdk/directives/searchresult.directive',
     'app/sdk/directives/postfield.directive',
     'app/sdk/directives/zoom-image.directive',
+    'app/sdk/directives/pagination.directive',
 
     'app/shared/constants'
 
@@ -63,6 +64,7 @@ define([
     postfieldDirective,
 
     zoomImageDirective,
+    paginationDirective,
 
     constants
 
@@ -91,6 +93,7 @@ define([
     searchApp.directive('postField', postfieldDirective);
 
     searchApp.directive('zoomImage', zoomImageDirective);
+    searchApp.directive('pagination', paginationDirective);
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-sdk-search-app]'), ['search']);

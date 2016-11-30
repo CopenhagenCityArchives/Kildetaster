@@ -215,19 +215,6 @@ define([
             $scope.doSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets);
         }
 
-        $scope.prev = function prev() {
-            if ($scope.currentIndex > 0)  {
-                $scope.goToPage($scope.currentIndex - 1);
-            }
-
-        }
-
-        $scope.next = function next() {
-            if ($scope.currentIndex < $scope.pagination.total - 1) {
-                $scope.goToPage($scope.currentIndex + 1);
-            }
-        }
-
         $scope.goToPage = function goToPage(index) {
 
             $scope.currentIndex = index;

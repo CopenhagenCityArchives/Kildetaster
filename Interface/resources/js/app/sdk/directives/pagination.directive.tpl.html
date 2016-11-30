@@ -1,0 +1,21 @@
+<div class="pagination sdk-search__pagination">
+    <ul>
+        <li ng-class="{'active': currentIndex === 0}">
+            <a href="" ng-click="callGoToPage(0)">&#x00AB;</a>
+        </li>
+        <li ng-class="{'disabled': !canGoBack10() }"><a href="" ng-click="prev(10)">Gå 10 tilbage</a></li>
+        <li ng-class="{'disabled': currentIndex === 0}"><a href="" ng-click="prev(1)">&#x2039;</a></li>
+        <li>
+            <a href="" class="disabled">...</a></span>
+        </li>
+        <li ng-repeat="page in pagination.pages" ng-class="{'active': page.index == currentIndex}">
+            <a href="" ng-click="goToPage(page.index)">{{page.label}}</a>
+        </li>
+        <li>
+            <a href="" class="disabled">...</a></span>
+        </li>
+        <li ng-class="{'disabled': currentIndex === pagination.total - 1}"><a href="" ng-click="next(1)">&#x203A;</a></li>
+        <li ng-class="{'disabled': !canGoForward10() }"><a href="" ng-click="next(10)">Gå 10 frem</a></li>
+        <li ng-class="{'active': currentIndex === pagination.total - 1}"><a href="" ng-click="callGoToPage(pagination.total - 1)">&#x00BB;</a></li>
+    </ul>
+</div>
