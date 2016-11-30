@@ -32,7 +32,7 @@ define([
         $scope.goToPage = function goToPage($event) {
 
             //Enter key
-            if ($event.charCode === 13) {
+            if ($event.which === 13) {
 
                 var pageNumber = $event.target.value,
                     unitId = pageData.unit_id;
