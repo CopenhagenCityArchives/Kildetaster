@@ -38,14 +38,6 @@ define([
 
                 }
 
-                scope.canGoBack10 = function canGoBack10() {
-                    return scope.currentIndex - 10 >= 0;
-                }
-
-                scope.canGoForward10 = function canGoBack10() {
-                    return scope.currentIndex + 10 < scope.pagination.total;
-                }
-
                 /**
                 * Go forward in pages, by the specified amount
                 * If no amount given, default to 1 page
@@ -55,6 +47,14 @@ define([
                     if (scope.currentIndex < scope.pagination.total - amount) {
                         scope.callGoToPage(scope.currentIndex + amount);
                     }
+                }
+
+                scope.canGoBack10 = function canGoBack10() {
+                    return scope.currentIndex - 10 >= 0;
+                }
+
+                scope.canGoForward10 = function canGoBack10() {
+                    return scope.currentIndex + 10 < scope.pagination.total;
                 }
 
             }
