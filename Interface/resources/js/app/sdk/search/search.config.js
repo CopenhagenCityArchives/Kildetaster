@@ -2,7 +2,12 @@ define([
 
 ], function() {
 
-    var searchConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider) {
+    var searchConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider, $httpProvider) {
+
+        //Include the interceptor that adds the Authoraztion bearer token if present in session storage
+        //Needed for when requesting posts, and the user is logged in. Without it, the backend is not able to determine
+        //if the user is allowed to edit the post
+        $httpProvider.interceptors.push('tokenFactory');
 
         // For any unmatched url, redirect to /
         $urlRouterProvider.otherwise('/');
