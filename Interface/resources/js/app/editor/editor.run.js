@@ -7,8 +7,8 @@ define([
         //Track in Google Analytics, that we have a changed url
         $rootScope.$on('$locationChangeSuccess', function(event){
             ga('send', 'pageview', {
-                'page': $location.absUrl()
-            });           
+                'page': window.location.pathname + window.location.hash
+            });
         });
 
         /**
@@ -16,7 +16,7 @@ define([
          */
         $rootScope.$on('$stateChangeStart', function(event, toState, params) {
 
-            
+
 
             //The state should redirect, so we append stepId, to force the first step to be the default value
             if (toState.redirectTo) {
@@ -32,7 +32,7 @@ define([
         $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error) {
             console.log("State change error", toState);
             console.log('editor.run:', error);
-            
+
             //$state.go('editor.page.notfound');
 
         });
