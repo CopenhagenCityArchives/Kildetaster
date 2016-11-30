@@ -101,6 +101,7 @@
         .disabled {
             a {
                 color: $gray-dark !important;
+                background-color: #efefef !important;
                 &:hover {
                     background-color: #efefef !important;
                 }
