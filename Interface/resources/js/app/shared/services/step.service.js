@@ -13,11 +13,11 @@ define([
                     "title": "Udfyldt"
                 };
 
-                var jsonSource = API + '/api/taskschema/';
-                
+                var jsonSource = API + '/taskschema/';
+
                 return $http({
                     url: jsonSource,
-                    params: {  
+                    params: {
                         task_id: taskId
                     }
                 })

@@ -8,7 +8,7 @@ define([
         return {
 
             getImageUrlByPostId: function(postId) {
-                return API + '/api/posts/' + postId + '/image';
+                return API + '/posts/' + postId + '/image';
             },
 
             /**

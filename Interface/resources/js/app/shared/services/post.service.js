@@ -8,8 +8,8 @@ define([
         return {
 
             getData: function getData(postId) {
-   
-                return $http.get(API + '/api/posts/' + postId)
+
+                return $http.get(API + '/posts/' + postId)
                     .then(function(response) {
                         return response.data;
                     })
