@@ -232,8 +232,6 @@ define([
                 $scope.addField('firstnames');
             }
 
-
-
         };
 
         $scope.init();
