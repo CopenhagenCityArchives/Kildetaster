@@ -147,20 +147,27 @@ define([
             var arr = [],
                 lastPage = Math.ceil(results.numFound / 10);
 
-            if (currentIndex < 1) {
-                for (var i=0; i <= 2; i++) {
+            //If we are on the first or second page, just show 1-5
+            if (currentIndex < 2) {
+                for (var i=0; i <= 4; i++) {
                     arr.push(buildPaginationItem(i));
                 }
             }
-            else if(currentIndex > lastPage - 3) {
+            //We are nearing the end, ie. on one of the last 5 pages
+            else if(currentIndex > lastPage - 5) {
+                arr.push(buildPaginationItem(lastPage - 5));
+                arr.push(buildPaginationItem(lastPage - 4));
                 arr.push(buildPaginationItem(lastPage - 3));
                 arr.push(buildPaginationItem(lastPage - 2));
                 arr.push(buildPaginationItem(lastPage - 1));
             }
+            //Otherwise, show current page, and two before and two after
             else {
-                arr.push(buildPaginationItem(currentIndex - 1))
-                arr.push(buildPaginationItem(currentIndex))
-                arr.push(buildPaginationItem(currentIndex + 1))
+                arr.push(buildPaginationItem(currentIndex - 2));
+                arr.push(buildPaginationItem(currentIndex - 1));
+                arr.push(buildPaginationItem(currentIndex));
+                arr.push(buildPaginationItem(currentIndex + 1));
+                arr.push(buildPaginationItem(currentIndex + 2));
             }
 
             $scope.pagination = {
