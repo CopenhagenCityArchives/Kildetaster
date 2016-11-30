@@ -60,16 +60,6 @@
         </div>
     </section>
 
-
-    <div class="row-fluid" ng-if="results.docs.length > 0">
-        <div class="span12">
-
-            <pagination current-index="currentIndex" pagination="pagination" go-to-page="goToPage"></pagination>
-
-
-        </div>
-    </div>
-
     <section class="row-fluid sdk-search__results" ng-class="{'loading': searching}" ng-if="results.docs.length > 0">
         <div class="span12">
 
@@ -89,17 +79,10 @@
 
     </section>
 
-    <div class="row-fluid" ng-if="results.docs.length > 0">
+    <div class="row-fluid" ng-if="results.numFound > 10">
         <div class="span12">
-            <div class="pagination sdk-search__pagination">
-                <ul>
-                    <li ng-class="{'disabled': currentIndex === 0}"><a href="" ng-click="prev($event)">Forrige</a></li>
-                    <li ng-repeat="page in pagination.pages" ng-class="{'active': page.index == currentIndex}">
-                        <a href="" ng-click="goToPage(page.index)">{{page.label}}</a>
-                    </li>
-                    <li ng-class="{'disabled': currentIndex === pagination.total - 1}"><a href="" ng-click="next()">Næste</a></li>
-                </ul>
-            </div>
+            <pagination current-index="currentIndex" pagination="pagination" go-to-page="goToPage"></pagination>
         </div>
     </div>
+
 </div>
