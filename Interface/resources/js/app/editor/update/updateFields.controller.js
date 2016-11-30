@@ -39,23 +39,13 @@ define([
 
         $scope.lookupErrorReport = function(key, mainProperty, subkey, id) {
 
-            var toggleKey = key;
-
-            if (mainProperty && subkey) {
-                toggleKey = mainProperty + '.' + key + '.' + subkey;
-            }
-
-            if (id) {
-                toggleKey = subkey;
-            }
-
             var found = $scope.errorReports.find(function(error) {
 
                 if (mainProperty && subkey) {
-                    return error.entity_name === key && error.field_name === subkey;
+                    return error.entity_name === key && error.field_name === subkey && error.concrete_entries_id === id;
                 }
                 else {
-                    return error.field_name === key;
+                    return error.field_name === key && error.concrete_entries_id === id;
                 }
 
             });
@@ -125,7 +115,7 @@ define([
             if (angular.isArray(fieldData)) {
                 entityName = field;
                 fieldName = subkey;
-                id = fieldData[0].id;
+                id = $scope.singleValue['id'];
                 value = $scope.singleValue[subkey];
             }
             //its a field with subfields
