@@ -15,6 +15,8 @@ define([
     'app/shared/services/token.service',
     'app/shared/services/user.service',
 
+    'app/shared/services/token.factory',
+
     'app/sdk/search/search.config',
     'app/sdk/search/search.run',
 
@@ -47,6 +49,8 @@ define([
     tokenService,
     userService,
 
+    tokenFactory,
+
     searchConfig,
     searchRun,
 
@@ -75,6 +79,8 @@ define([
     searchApp.service('helpers', helpersService);
     searchApp.service('tokenService', tokenService);
     searchApp.service('userService', userService);
+
+    searchApp.factory('tokenFactory', tokenFactory);
 
     searchApp.controller('searchController', searchController);
     searchApp.controller('searchFacetsController', searchFacetsController);
