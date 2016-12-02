@@ -117,27 +117,6 @@ define([
         };
 
         /**
-        * Look up error report in the list of all reports
-        * TODO: Can be deleted?
-        */
-        $scope.lookupErrorReport = function(key, mainProperty, subkey, id) {
-
-            var found = $scope.errorReports.find(function(error) {
-
-                if (mainProperty && subkey) {
-                    return error.entity_name === key && error.field_name === subkey && error.concrete_entries_id === id;
-                }
-                else {
-                    return error.field_name === key && error.concrete_entries_id === id;
-                }
-
-            });
-
-            return found;
-
-        };
-
-        /**
          * Toggle wether or not we should show edit field for a given field config
          */
         $scope.toggleEditExistingValue = function toggleEditExistingValue(value, id) {
