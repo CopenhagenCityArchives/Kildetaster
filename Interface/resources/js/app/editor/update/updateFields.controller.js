@@ -11,10 +11,7 @@ define([
         //Store information about what fields are currently being edited (open)
         $scope.editingFields = {};
 
-        //Store array type schema form configurations TODO DELETE THIS
-        $scope.schemas = {};
-
-
+        //A store for copies of the values. used to let users change the field as they want, but only after they accept the change do we copy it to the actual data
         $scope.valueCopy = {};
 
         //Build a direct link to this post
@@ -184,26 +181,6 @@ define([
          */
         $scope.isEditing = function isEditing(field) {
             return $scope.editingFields[field];
-        };
-
-
-        /**
-        * Build schema for array type values
-        //TODO DELETE THIS
-        */
-        $scope.getSchemaFromKey = function getSchemaFromKey(key) {
-
-            var data = {
-                type: 'object',
-                properties: {}
-            };
-
-            data.properties[key] = $scope.schema.properties[$scope.mainProperty].properties[key];
-
-            //Store schema setup as a property on schemas, so that we can have multiple array type fields
-            //open at the same time. They each have a unique key
-            $scope.schemas[key] = data;
-
         };
 
         $scope.getTextFromArray = function(data, prop) {
