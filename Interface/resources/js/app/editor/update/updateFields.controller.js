@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var updateFieldsController = /*@ngInject*/ function updateFieldsController(SEARCHURL, Flash, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService, $rootScope, $sessionStorage, errorService, $state) {
+    var updateFieldsController = /*@ngInject*/ function updateFieldsController($uibModal, SEARCHURL, Flash, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService, $rootScope, $sessionStorage, errorService, $state) {
 
         $scope.values = postData.entryData;
 
@@ -164,26 +164,49 @@ define([
         */
         $scope.updatePost = function() {
 
+            //Update the post with new values
             entryService.updateEntry(postData.entryId, $scope.values)
                 .then(function(response) {
+                    //Update error reports to indicate changes (deleted, fixed)
                     return errorService.editErrorReports($scope.errorReports);
                 })
                 .then(function(response) {
-                    console.log(response);
+
+                    //Go to the success state
                     $state.go('.done');
                 })
                 .catch(function(err) {
-                    console.log(err);
+
+                    $scope.error = err;
+
+                    $uibModal.open({
+
+                        templateUrl: 'editor/error.modal.tpl.html',
+                        //The type of modal. The error modal makes more room for the error text
+                        windowClass: 'modal--error',
+
+                        //Make wizard scope available to the modal
+                        scope: $scope,
+
+                        controller: ['$scope', function($scope) {
+                            $scope.dismiss = function() {
+                                $scope.$dismiss();
+                            };
+                        }]
+                    });
                 })
         };
 
+        /**
+        * Parse error report data, and return an object with info
+        */
         $scope.parseErrorReports = function(reports) {
 
             var rtn = {};
 
-            //Parse error report data, and build scope variable with info
             reports.forEach(function(report, index) {
 
+                //If the report has the status of being deleted, do not take it into account
                 if (report.deleted === 1) {
                     return;
                 }
@@ -224,7 +247,7 @@ define([
 
             $scope.mainProperty = response.keyName;
 
-
+            //Build information about the errors on the post
             $scope.hasErrorReported = $scope.parseErrorReports($scope.errorReports);
 
         });
