@@ -80,6 +80,8 @@ define([
                 'facet.mincount': 1,
                 //Sort facets on number of hits
                 'facet.sort': 'count',
+                //Default order by
+                'sort': 'lastname asc, firstnames asc'
                 //Number of results
                 //'rows': 0,
                 //Index to start from
