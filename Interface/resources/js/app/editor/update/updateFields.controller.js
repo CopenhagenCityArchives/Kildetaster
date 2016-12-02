@@ -34,8 +34,10 @@ define([
                 return report.id === id;
             });
 
+            if (found) {
             found.deleted = 1;
             found.deleted_reason = reason;
+            }
 
             $scope.hasErrorReported = $scope.parseErrorReports($scope.errorReports);
         }
