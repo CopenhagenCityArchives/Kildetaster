@@ -6,10 +6,14 @@ define([
 
         "BUTTON": {
             "NEXT": "Næste",
-            "PREV": "Forrige",     
+            "PREV": "Forrige",
             "SAVEPOST": "Gem indtastning",
             "OK": "Ok",
+            "CLOSE": "Luk",
             "SAVE": "Gem",
+            "CANCEL": "Fortryd",
+            "NOTERROR": "Ikke en fejl",
+            "DELETE": "Fjern felt",
             "SENDSUPERUSER": "Send til superbruger",
             "SENDFORUM": "Opret tråd på forum"
         },
