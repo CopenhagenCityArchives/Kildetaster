@@ -35,8 +35,8 @@ define([
             });
 
             if (found) {
-            found.deleted = 1;
-            found.deleted_reason = reason;
+                found.deleted = 1;
+                found.deleted_reason = reason;
             }
 
             $scope.hasErrorReported = $scope.parseErrorReports($scope.errorReports);
@@ -115,26 +115,6 @@ define([
                 }
             }
         };
-
-        $scope.getType = function(val) {
-
-            function isObject(obj) {
-                return obj === Object(obj);
-            }
-
-            if (val === null) {
-                return null;
-            } else if ($.isArray(val)) {
-                return "array";
-            }
-            else if (isObject(val)) {
-                return "object"
-            }
-            else {
-                return typeof(val);
-            }
-
-        }
 
         /**
         * Look up error report in the list of all reports
