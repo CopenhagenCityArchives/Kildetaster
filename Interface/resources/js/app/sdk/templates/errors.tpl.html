@@ -59,8 +59,8 @@
             <ul class="unstyled task-list">
                 <li>
                     <div class="task-list__header">Kilde</div>
-                    <div class="task-list__header">Felt(er)</div>
-                    <div class="task-list__header" style="width: 25%">Overgår til superbruger om</div>
+                    <div class="task-list__header">Felt</div>
+                    <div class="task-list__header" style="width: 25%">Overgår til superbruger</div>
                     <div class="task-list__header"></div>
                 </li>
                 <li ng-repeat="error in errorList" ng-class="{ odd: $odd }" ng-if="errorList.length > 0">
@@ -77,7 +77,7 @@
                     </div>
                     <div class="task-list__item text-right">
                         <a href ng-click="goToEditor(error)" class="button">Ret</a>
-                        <div ng-if="error.corrected">{{error.corrected.date}}</div>
+                      <!--  <div ng-if="error.corrected">{{error.corrected.date}}</div>-->
                     </div>
                 </li>
             </ul>
