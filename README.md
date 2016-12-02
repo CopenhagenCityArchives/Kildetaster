@@ -12,15 +12,23 @@ Dependencies: node.js, npm and Grunt (`npm install -g grunt-cli`)
 
 Start with running `npm install`and `bower install` to get all dependencies from the main folder
 
-### Start prototype with Authorization
+### Start prototype of the editor with Authorization
 
 Then run `grunt prototype` to start the prototype. This will build all frontend files, and start a local webserver to host the solution
 
-### Start prototype with NoAuth
+### Start prototype of the editor with NoAuth
 
 Then run `grunt prototypeNoAuth` to start the prototype. This will build all frontend files, and start a local webserver to host the solution
 
 The editor can be hit at http://localhost:1508/#/task/1/page/1/?stepId=1
+
+### Start prototype of the Joomla SDK
+
+In order to start the prototype for sdk parts, you need to run `grunt sdk`. That will start a local webserver on port 1510. Joomla parts will be visible on the page that is automatically open in the browser.
+
+#### Local version of the search
+
+After starting the SDK prototype, go to the url http://localhost:1510/search.html
 
 ## API endpoint
 The api endpoint can be changed by editing the constant in Interface/grunttasks/ngconstant.js
