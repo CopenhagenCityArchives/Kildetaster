@@ -72,8 +72,8 @@
                         {{error.field_formName}}
                     </div>
                     <div class="task-list__item">
-                        <!-- <div ng-if="error.timeleft">{{error.timeleft}}</div>
-                        <div ng-if="error.corrected">Rettet af {{error.corrected.user.name}}</div> -->
+                        <div ng-if="error.superUserTime">{{error.superUserTime | date:'dd-MM-yyyy HH:mm:ss'}}</div>
+                        <!-- <div ng-if="error.corrected">Rettet af {{error.corrected.user.name}}</div> -->
                     </div>
                     <div class="task-list__item text-right">
                         <a href ng-click="goToEditor(error)" class="button">Ret</a>

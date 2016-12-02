@@ -45,6 +45,12 @@ define([
                     params: params
                 })
                 .then(function(response) {
+                    response.data.forEach(function(row){
+                        if(row.superUserTime){
+                           row.superUserTime  = new Date(row.superUserTime);
+                        }
+                    });
+
                     return response.data;
                 })
                 .catch(function(err) {
