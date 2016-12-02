@@ -22,6 +22,7 @@ define([
 
     'app/editor/feedback/feedback.controller',
     'app/editor/update/updateFields.controller',
+    'app/editor/update/updateFieldsDone.controller',
 
     'app/shared/schemaformAddon/typeahead.addon',
     'app/shared/schemaformAddon/customInput.addon',
@@ -53,6 +54,7 @@ define([
 
     feedbackController,
     updateFieldsController,
+    updateFieldsDoneController,
 
     sfTypeaheadAddon,
     sfCustomInputAddon,
@@ -81,6 +83,7 @@ define([
     editorApp.controller('wizardDoneController', wizardDoneController);
     editorApp.controller('feedbackController', feedbackController);
     editorApp.controller('updateFieldsController', updateFieldsController);
+    editorApp.controller('updateFieldsDoneController', updateFieldsDoneController);
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-editor-app]'), ['editor']);

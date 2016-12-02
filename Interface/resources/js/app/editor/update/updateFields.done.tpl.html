@@ -1,0 +1,25 @@
+<section class="update-fields">
+
+    <div class="row">
+
+        <div class="col-sm-12">
+            <h2>Post blev opdateret</h2>
+            <br />
+
+            <button class="btn btn-default btn-block" ng-if="hasMoreErrors" ng-click="goToNextPostWithErrors()">Gå til næste fejlmeldte post</button>
+
+            <div class="panel panel-success" ng-if="noMoreErrorsForUser">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Du har ikke flere fejlmeldte poster</h3>
+                </div>
+                <div class="panel-body">
+                    Dette var din sidste åbne fejlmelding, der er ikke flere fejl at rette.
+                </div>
+            </div>
+
+            <share-link label="'Kopier link til post'" share-link="shareLink" button-text="'Del'"></share-link>
+        </div>
+
+    </div>
+
+</section>

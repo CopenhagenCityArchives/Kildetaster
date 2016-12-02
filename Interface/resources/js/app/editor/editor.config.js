@@ -149,6 +149,16 @@ define([
                 }
             })
 
+            .state('editor.page.update.done', {
+                url: '/done',
+                views: {
+                    '@editor.page': {
+                        templateUrl: 'editor/update/updateFields.done.tpl.html',
+                        controller: 'updateFieldsDoneController'
+                    }
+                }
+            })
+
             .state('editor.page.notfound', {
                 url: '',
                 views: {

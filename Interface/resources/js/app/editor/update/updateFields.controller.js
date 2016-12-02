@@ -220,121 +220,6 @@ define([
             return arr.join(', ');
         };
 
-        // $scope.updateField = function updateField(field, subkey) {
-        //
-        //     return;
-        //
-        //     var fieldData = $scope.values[$scope.mainProperty][field],
-        //         id, value, entityName, fieldName,
-        //         path = field.split('.');
-        //
-        //     //Array structures
-        //     if (angular.isArray(fieldData)) {
-        //         entityName = field;
-        //         fieldName = subkey;
-        //         id = $scope.singleValue['id'];
-        //         value = $scope.singleValue[subkey];
-        //     }
-        //     //its a field with subfields
-        //     else if (path.length > 1) {
-        //         entityName = path[0];
-        //         fieldName = path[1];
-        //         id = $scope.values[$scope.mainProperty][entityName].id;
-        //         value = $scope.values[$scope.mainProperty][entityName][fieldName];
-        //     }
-        //     //Regular field
-        //     else {
-        //         entityName = $scope.mainProperty;
-        //         fieldName = field;
-        //         id = $scope.values[$scope.mainProperty].id;
-        //         value = fieldData;
-        //     }
-        //
-        //     var data = {
-        //         "entity_name": entityName,
-        //         "field_name" : fieldName,
-        //         "concrete_entries_id": id,
-        //         "value": value,
-        //         "task_id": taskData.id
-        //     };
-        //
-        //     entryService.updateEntry(postData.entryId, data)
-        //     .then(function(response) {
-        //
-        //         Flash.create('success', 'Feltet er opdateret.');
-        //
-        //         //Toggle the editing portion (hide input field and button)
-        //         $scope.toggleEditExistingValue(fieldName + id);
-        //
-        //         //Remove the entry from the errorReports in the scope
-        //         $scope.errorReports = $scope.errorReports.filter(function( report ) {
-        //             //Only return reports where the field_name does not match
-        //             //that way removing the error report for the field we are working on
-        //             return report['field_name'] !== fieldName;
-        //         });
-        //
-        //         //That was the last error report on this post
-        //         if ($scope.errorReports.length === 0) {
-        //             $scope.lookupNextPostWithErrors();
-        //         }
-        //
-        //     }, function(err) {
-        //         Flash.create('danger', 'Error updating entry' + err.data);
-        //
-        //         //Toggle the editing portion (hide iput field and button)
-        //         $scope.toggleEditExistingValue(fieldName + id);
-        //
-        //         //Remove the entry from the errorReports in the scope
-        //         $scope.errorReports = $scope.errorReports.filter(function( report ) {
-        //
-        //             //Only return reports where the field_name does not match
-        //             //that way removing the error report for the field we are working on
-        //             return report['field_name'] !== fieldName;
-        //         });
-        //     });
-        //
-        // };
-
-        $scope.nextErrorReport = null;
-        $scope.hasMoreErrors = null;
-
-        $scope.lookupNextPostWithErrors = function lookupNextPostWithErrors() {
-            //Lookup all available error reports for the current user on this task
-            errorService.getErrorReports({
-                relevant_user_id: $scope.userId,
-                task_id: taskData.id
-            }).then(function(response) {
-                //If we havent got any more errors
-                if (response.length === 0) {
-                    $scope.noMoreErrorsForUser = true;
-                }
-                else {
-                    $scope.nextErrorReport = response[0];
-                }
-
-            });
-        }
-
-        $scope.$watch('nextErrorReport', function(newval) {
-            if (newval && newval !== null) {
-                $scope.hasMoreErrors = true;
-            }
-        });
-
-        $scope.goToNextPostWithErrors = function goToNextPostWithErrors() {
-
-            if ($scope.nextErrorReport !== null) {
-
-                //Go to next post
-                $state.go('editor.page.update', {
-                    taskId: $scope.nextErrorReport.tasks_id,
-                    pageId: $scope.nextErrorReport.pages_id,
-                    postId: $scope.nextErrorReport.posts_id
-                });
-            }
-        };
-
-
         /**
         * Update the post in the backend
         * When post is saved, update error report data on the backend in a seperate request
@@ -347,6 +232,7 @@ define([
                 })
                 .then(function(response) {
                     console.log(response);
+                    $state.go('.done');
                 })
                 .catch(function(err) {
                     console.log(err);
