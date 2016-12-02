@@ -8,7 +8,7 @@ define([
         return {
 
             getData: function getData() {
-   
+
                 return $http.get(JSONURL + '/errors.json')
                     .then(function(response) {
                         return response.data;
@@ -38,7 +38,7 @@ define([
             * Both on a task, but also for a specifik user
             */
             getErrorReports: function getErrorReports(params) {
-                
+
                 return $http({
                     url: API + '/errorreports',
                     method: 'GET',
@@ -50,6 +50,24 @@ define([
                 .catch(function(err) {
                     console.log('Error getting error reports', err);
                 });
+            },
+
+            /**
+            * Update error reports
+            **/
+            editErrorReports: function editErrorReports(params) {
+
+                return $http({
+                    url: API + '/errorreports',
+                    method: 'PATCH',
+                    params: params
+                })
+                .then(function(response) {
+                    console.log('Error reports updated')
+                })
+                .catch(function(err) {
+                    console.log('Error editing error reports', err);
+                })
             }
 
         };
