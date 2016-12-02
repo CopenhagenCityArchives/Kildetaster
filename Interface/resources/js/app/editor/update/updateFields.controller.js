@@ -249,13 +249,6 @@ define([
                 if (report.deleted === 1) {
                     return;
                 }
-                //TODO clean up when backend returns correct data
-                if (index != 0) {
-                    report.entity_position = "persons."+ report.entity_name;
-                }
-                else {
-                    report.entity_position = report.entity_name;
-                }
 
                 var arr = [];
                 arr.push(report);
