@@ -1,0 +1,15 @@
+.update-schema-form {
+    margin-top: 15px;
+    padding: 10px 0;
+
+    border-radius: 2px;
+    background-color: $green;
+
+    &__report {
+        background-color: red;
+    }
+
+    .schema-form-array > label {
+        display: none;
+    }
+}

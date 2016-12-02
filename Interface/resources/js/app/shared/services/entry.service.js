@@ -21,13 +21,16 @@ define([
                 });
             },
 
+            /**
+            *
+            */
             updateEntry: function(entryId, data) {
 
                 var deferred = $q.defer();
 
                 $http({
                     url: API + '/entries/' + entryId,
-                    method: 'PATCH',
+                    method: 'PUT',
                     data: data
                 })
                 .then(function(response) {
