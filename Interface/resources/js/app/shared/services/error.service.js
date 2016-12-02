@@ -60,7 +60,7 @@ define([
                 return $http({
                     url: API + '/errorreports',
                     method: 'PATCH',
-                    params: params
+                    data: params
                 })
                 .then(function(response) {
                     console.log('Error reports updated')
