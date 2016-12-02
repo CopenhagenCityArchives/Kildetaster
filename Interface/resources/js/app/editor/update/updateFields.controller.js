@@ -64,10 +64,10 @@ define([
             var split = key.split('.');
 
             if (split.length > 1) {
-                $scope.values[$scope.mainProperty][split[0]][split[1]] = null;
+                $scope.values[$scope.mainProperty][split[0]][split[1]] = $scope.values[$scope.mainProperty][split[0]][split[1]].constructor === Array ? [] : null;
             }
             else {
-                $scope.values[$scope.mainProperty][key] = null;
+                $scope.values[$scope.mainProperty][key] = $scope.values[$scope.mainProperty][key].constructor === Array ? [] : null;
             }
 
             if (reportId) {
