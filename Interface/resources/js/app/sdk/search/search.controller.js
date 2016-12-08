@@ -17,7 +17,7 @@ define([
         $scope.sortDirection = 'asc';
 
         //Default field to sort by
-        $scope.sortByField = {name: "firstnames" };
+        $scope.sortByField = {name: "lastname" };
 
         $scope.operatorOptions = [
             {
@@ -228,7 +228,7 @@ define([
 
             // If we dont have any parameters, reset sort field to the default
             if (!params) {
-                $scope.sortByField = { name: 'firstnames' };
+                $scope.sortByField = { name: 'lastname' };
             }
 
             query = query || $scope.config;
