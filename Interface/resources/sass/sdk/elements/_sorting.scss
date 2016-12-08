@@ -1,0 +1,39 @@
+.sorting {
+    &__container {
+        display: table;
+    }
+
+    &__label {
+        line-height: 40px;
+    }
+
+    &__direction {
+        display: table-cell;
+
+        padding-left: 5px;
+
+        &:after {
+            display: inline-block;
+
+            width: 0;
+            height: 0;
+
+            content: "";
+
+            border-width: 12px 12px 0 12px;
+            border-style: solid;
+            border-color: $black transparent transparent transparent;
+        }
+
+        &.desc {
+            &:after {
+                border-width: 0 12px 12px 12px;
+                border-color: transparent transparent $black transparent;
+            }
+        }
+    }
+
+    &__selection {
+        display: table-cell;
+    }
+}

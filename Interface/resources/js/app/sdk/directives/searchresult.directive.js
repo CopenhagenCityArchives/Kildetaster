@@ -13,7 +13,10 @@ define([
             scope: {
                 result: '=',
                 config: '=',
-                index: '='
+                //The index this posts is in, based on the current visibile results
+                index: '=',
+                //The page (in pagination) we are currently on
+                page: '='
             },
 
             templateUrl: 'sdk/directives/searchresult.directive.tpl.html',
@@ -22,7 +25,7 @@ define([
 
                 scope.goToPost = function() {
 
-                    searchService.currentIndex = scope.index;
+                    searchService.currentIndex = scope.page + scope.index;
 
                     $state.go('search.page.result.page', {
                         postId: scope.result.post_id

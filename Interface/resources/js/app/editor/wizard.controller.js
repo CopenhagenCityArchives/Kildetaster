@@ -180,6 +180,8 @@ define([
             postData.task_id = $stateParams.taskId;
             postData.post = $scope.selectedAreaRect;
 
+            $scope.saving = true;
+
             $http({
                 method: 'POST',
                 url: API + '/entries/',
@@ -230,7 +232,10 @@ define([
                     }]
                 });
 
-            });
+            })
+            .finally(function() {
+                $scope.saving = false;
+            })
 
         };
 

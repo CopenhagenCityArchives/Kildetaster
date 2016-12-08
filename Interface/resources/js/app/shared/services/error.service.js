@@ -63,17 +63,24 @@ define([
             **/
             editErrorReports: function editErrorReports(params) {
 
-                return $http({
+                var deferred = $q.defer();
+
+                $http({
                     url: API + '/errorreports',
                     method: 'PATCH',
                     data: params
                 })
                 .then(function(response) {
+
+                    deferred.resolve(response);
                     console.log('Error reports updated')
                 })
                 .catch(function(err) {
+                    deferred.reject(err);
                     console.log('Error editing error reports', err);
-                })
+                });
+
+                return deferred.promise;
             }
 
         };

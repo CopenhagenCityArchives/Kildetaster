@@ -18,11 +18,7 @@ define([
 
             link: function(scope, element, attr) {
 
-                /**
-                * Watch for changes to currently selected page, and build a string to show the user exactly what postsPrPage
-                * they are being presented
-                */
-                scope.$watch('currentIndex', function(newval, oldval) {
+                function updateValues(newval) {
                     //currentIndex is zerobased
                     scope.from = (newval * scope.postsPrPage) + 1;
 
@@ -35,6 +31,21 @@ define([
                     else {
                         scope.to = (newval + 1) * scope.postsPrPage;
                     }
+                }
+
+                /**
+                * Watch for changes to currently selected page, and build a string to show the user exactly what postsPrPage
+                * they are being presented
+                */
+                scope.$watch('currentIndex', function(newval, oldval) {
+                    updateValues(newval);
+                });
+
+                /**
+                * Watch for changes to the total amount, and update if its new
+                */
+                scope.$watch('total', function(newval, oldval) {
+                    updateValues(scope.currentIndex);
                 });
 
             }

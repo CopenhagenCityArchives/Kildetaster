@@ -61,15 +61,37 @@
     </section>
 
     <section class="row-fluid sdk-search__results" ng-class="{'loading': searching}" ng-if="results.docs.length > 0">
-        <div class="span12">
-
+        <div class="span4">
             <div class="sdk-search__count">
                 <post-count current-index="currentIndex" total="results.numFound" posts-pr-page="10"></post-count>
             </div>
         </div>
+
+        <div class="span8 sorting">
+            <div class="row">
+                <div class="span6 text-right">
+                    <label class="sorting__label">Sortér efter</label>
+                </div>
+
+                <div class="span6">
+
+                    <div class="sorting__container">
+                        <select
+                            class="sorting__selection"
+                            ng-model="sortByField.name"
+                            ng-options="field.solr_name as field.name for field in fields | filter: {'searchable': 1}">
+                        </select>
+                        <a href ng-click="toggleSortDirection()" class="sorting__direction" title="{{sortDirection}}" ng-class="sortDirection"></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
         <div class="row-fluid" ng-repeat="result in results.docs">
+
             <div class="span12">
-                <search-result result="result" config="fields" index="$index"></search-result>
+                <search-result result="result" config="fields" index="$index" page="currentPage"></search-result>
             </div>
         </div>
 

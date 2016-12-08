@@ -226,7 +226,10 @@
         </div>
 
         <div class="col-sm-12">
-            <button tabindex="1" type="button" class="btn btn-primary btn-block" ng-click="updatePost()">Opdatér post</button>
+            <button ng-disabled="saving" tabindex="1" type="button" class="btn btn-primary btn-block" ng-click="updatePost()">
+                <span ng-show="saving" class="loading-spinner"></span>
+                <span ng-hide="saving">Opdatér post</span>
+            </button>
         </div>
 
         <div class="col-sm-12" ng-if="errorReports.length === 0">

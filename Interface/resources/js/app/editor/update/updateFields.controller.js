@@ -112,7 +112,9 @@ define([
                 disableSuccessState: true,
                 ngModelOptions: {
                     updateOn: 'blur'
-                }
+                },
+                //Default value for array add action
+                add: 'Tilføj'
             }
         };
 
@@ -132,8 +134,6 @@ define([
                 $scope.editingFields[value + id] = false;
                 //cleanup
             }
-
-            console.log("qabe", $scope.valueCopy[value], $scope.values);
 
         };
 
@@ -163,6 +163,8 @@ define([
         * When post is saved, update error report data on the backend in a seperate request
         */
         $scope.updatePost = function() {
+
+            $scope.saving = true;
 
             //Update the post with new values
             entryService.updateEntry(postData.entryId, $scope.values)
@@ -195,6 +197,9 @@ define([
                         }]
                     });
                 })
+                .finally(function() {
+                    $scope.saving = false;
+                });
         };
 
         /**

@@ -5,4 +5,8 @@
         border-color: darken($green, 15%);
         background-color: $green;
     }
+
+    &[disabled] {
+        opacity: 1;
+    }
 }

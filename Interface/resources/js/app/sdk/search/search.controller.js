@@ -12,6 +12,12 @@ define([
         $scope.results = [];
 
         $scope.currentIndex = 0;
+        $scope.currentPage = 0;
+
+        $scope.sortDirection = 'asc';
+
+        //Default field to sort by
+        $scope.sortByField = {name: "firstnames" };
 
         $scope.operatorOptions = [
             {
@@ -56,6 +62,21 @@ define([
             event.preventDefault();
             $scope.config.splice(fieldIndex, 1);
         };
+
+        /**
+        * Toggle between sorting desc and asc
+        */
+        $scope.toggleSortDirection = function toggleSortDirection() {
+
+            if ($scope.sortDirection === 'desc') {
+                $scope.sortDirection = 'asc';
+            } else {
+                $scope.sortDirection = 'desc';
+            }
+
+            //Trigger new search
+            $scope.doSearch(undefined, undefined, {sort: $scope.sortByField.name + ' ' + $scope.sortDirection});
+        }
 
         /**
         * Build data object for facets, based on the facet array given from the backend
@@ -112,7 +133,6 @@ define([
         * Facet clicked, do a filtered search
         */
         $scope.$on('filterSearch', function(event, params) {
-
 
             searchService.filterQuery($scope.config, params).then(function(response) {
                 $scope.results = response.response;
@@ -185,6 +205,13 @@ define([
             buildPagination($scope.results, newval);
         });
 
+        $scope.$watch('sortByField.name', function(newval, oldval) {
+            if ($scope.results.docs && $scope.results.docs.length > 0 && newval) {
+                $scope.doSearch(undefined, undefined, {sort: newval});
+            }
+        });
+
+
         /**
         * Execute the search
         */
@@ -192,14 +219,30 @@ define([
 
             $scope.searching = true;
 
+            //If not called directly with a query, its not a previous search, ie. not a new page within the same search setup
+            //And we should treat it as a new config and reset the page index, so that we indicate that we show the first page
+            //of a new result set
+            if (!query) {
+                $scope.currentIndex = 0;
+            }
+
+            // If we dont have any parameters, reset sort field to the default
+            if (!params) {
+                $scope.sortByField = { name: 'firstnames' };
+            }
+
             query = query || $scope.config;
             facets = facets || $scope.fields;
             params = params || {};
 
+            if ($scope.sortByField.name) {
+                params.sort = $scope.sortByField.name + ' ' + $scope.sortDirection;
+            }
+
             searchService.search(query, facets, params).then(function(response) {
 
                 $scope.results = response.response;
-                $scope.facets = response.facet_counts.facet_fields;
+                //$scope.facets = response.facet_counts.facet_fields;
 
             }).catch(function(err) {
                 console.log('Error in search:', err);
@@ -218,6 +261,8 @@ define([
         $scope.goToPage = function goToPage(index) {
 
             $scope.currentIndex = index;
+            $scope.currentPage = index * 10;
+
             $scope.doSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets, {
                 start: index * 10
             });
