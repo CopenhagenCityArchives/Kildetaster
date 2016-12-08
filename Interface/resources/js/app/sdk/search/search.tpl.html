@@ -79,7 +79,7 @@
                         <select
                             class="sorting__selection"
                             ng-model="sortByField.name"
-                            ng-options="field.solr_name as field.name for field in fields | filter: {'searchable': 1}">
+                            ng-options="field.solr_name as field.name for field in fields | filter: {'searchable': 1, 'sortable' : 1}">
                         </select>
                         <a href ng-click="toggleSortDirection()" class="sorting__direction" title="{{sortDirection}}" ng-class="sortDirection"></a>
                     </div>
