@@ -170,7 +170,11 @@ define([
             entryService.updateEntry(postData.entryId, $scope.values)
                 .then(function(response) {
                     //Update error reports to indicate changes (deleted, fixed)
-                    return errorService.editErrorReports($scope.errorReports);
+                    if($scope.errorReports.lenght > 0){
+                        return errorService.editErrorReports($scope.errorReports);
+                    }
+
+                    return;
                 })
                 .then(function(response) {
 
