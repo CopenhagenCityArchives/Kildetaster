@@ -35,7 +35,7 @@ define([
                             return item[scope.prop];
                         }).join(', ');
 
-                        scope.joined = all.slice(0, scope.length) + '...';
+                        scope.joined = all.slice(0, scope.length) + ' ...';
 
                     }
                     
