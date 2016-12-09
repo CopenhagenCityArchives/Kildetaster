@@ -52,9 +52,9 @@ define([
         };
 
 
-        // userService.getUsers().then(function(response) {
-        //     $scope.activeUsers = response;
-        // });
+         userService.getUsers(pageData.unit_id).then(function(response) {
+             $scope.activeUsers = response;
+         });
 
         /**
          * Mimic activity, by reloading randomzied mock data every 7 seconds
