@@ -27,10 +27,12 @@
                 </div>
             </div>
             <div class="task-list__item">
-                <ul class="unstyled">
-                    <!-- <li><a href>Jens Jensen</a> s.93</li>
-                    <li><a href>Hanne Hansen</a> s.115</li>
-                    <li><a href>+ 5 andre</a></li> -->
+                <ul class="list-inline">
+                    <li ng-repeat="user in unit.active_users">
+                        {{user.username}}
+                        <!-- TODO: Should use the user directive: -->
+                        <!--<user data="user"></user> -->
+                    </li>
                 </ul>
             </div>
         </li>
