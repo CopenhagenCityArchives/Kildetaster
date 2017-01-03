@@ -14,13 +14,14 @@ define([
              *
              * @return {promise} That resolves with the data for the task
              */
-            getUsers: function getUsers(unitId) {
+            getUsers: function getUsers(unitId, taskId) {
 
                 return $http({
                     url: API + '/activeusers',
                     method: 'GET',
                     params: {
-                        unit_id: unitId
+                        unit_id: unitId,
+                        task_id: taskId
                     }
                 })
                 .then(function(response) {

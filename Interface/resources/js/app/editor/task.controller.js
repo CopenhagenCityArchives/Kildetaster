@@ -52,7 +52,7 @@ define([
         };
 
 
-         userService.getUsers(pageData.unit_id).then(function(response) {
+         userService.getUsers(pageData.unit_id, taskData.id).then(function(response) {
              $scope.activeUsers = response;
          });
 
