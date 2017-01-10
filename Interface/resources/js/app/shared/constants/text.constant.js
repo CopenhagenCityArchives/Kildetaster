@@ -19,7 +19,7 @@ define([
         },
 
         "PAGE_GOTO": "Gå til side",
-        "PAGE_NEXTAVAILABLE": "Næste ledige side",
+        "PAGE_NEXTAVAILABLE": "Gå til en ledig side",
         "PAGESLEFTONTASK": "sider tilbage af protokol",
         "FIELD_UNREADABLE": "Marker feltet som ulæseligt / Kan ikke udfyldes",
         "ZOOMIN": "+",
