@@ -9,7 +9,7 @@
         <li ng-repeat="unit in units" ng-class="{ odd: $odd }" ng-show="units.length > 0">
             <div class="task-list__item">
                 <span>{{unit.description}}</span>
-                <span>
+                <span ng-show="unit.pages_done < unit.pages">
                     <button type="button" ng-click="goToEditor(unit)" class="button">Start indtastning</button>
                 </span>
             </div>
