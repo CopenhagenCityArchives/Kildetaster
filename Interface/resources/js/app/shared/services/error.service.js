@@ -18,20 +18,28 @@ define([
                     });
             },
 
-
+            /**
+            * Create an error report
+            */
             createErrorReport: function createErrorReport(params) {
 
-                return $http({
+                var deferred = $q.defer();
+
+                $http({
                     url: API + '/errorreports',
                     method: 'POST',
                     data: params
                 })
                 .then(function(response) {
-                    return response.data;
+                    deferred.resolve(response.data);
                 })
                 .catch(function(err) {
-                    console.log('Error creating error report', err);
+                    //console.log('Error creating error report', err);
+                    deferred.reject(err);
+
                 });
+
+                return deferred.promise;
             },
 
             /**
