@@ -12,7 +12,8 @@
 
     <div class="span5">
         <div ng-repeat="field in post">
-            <post-field to-editor="toEditor(field)" data="field" report="report(fieldData)" error-reporting="errorReportingEnabled"></post-field>
+            <post-category ng-if="field.fields.length === 0" data="field" report="report(fieldData)" error-reporting="errorReportingEnabled"></post-category>
+            <post-field ng-if="field.fields.length > 0" data="field" report="report(fieldData)" error-reporting="errorReportingEnabled"></post-field>
         </div>
     </div>
 
