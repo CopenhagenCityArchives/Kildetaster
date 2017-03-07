@@ -4,7 +4,7 @@ define([
 
 ], function(Clipboard) {
 
-    var wizardController = /*@ngInject*/ function wizardController($uibModal, helpers, $scope, $rootScope, stepService, $stateParams, pageData, taskData, $location, $state, $timeout, $http, Flash, API, pageService, SEARCHURL) {
+    var wizardController = /*@ngInject*/ function wizardController($uibModal, helpers, $scope, $rootScope, postService, stepService, $stateParams, pageData, taskData, $location, $state, $timeout, $http, Flash, API, pageService, SEARCHURL) {
 
         //Indicates if we should show the controls for accepting a new area (used on all other steps than the first)
         $scope.showSelectionControls = false;
@@ -81,15 +81,66 @@ define([
          */
         $scope.$on('areaSelected', function(event, args) {
 
-            $scope.selectedAreaRect = args.rect;
+            var data = args.rect;
 
-            if ($scope.currentStep === 1) {
-                $scope.nextStep();
+            //Indicate that we are saving post data
+            $scope.savingPost = true;
+
+            data.page_id = pageData.id;
+
+            var postServiceMethod = 'create';
+
+            //We have already have a postId for the post, so update the id we have
+            if ($scope.postId) {
+                postServiceMethod = 'update';
             }
-            //http://stackoverflow.com/questions/12729122/angularjs-prevent-error-digest-already-in-progress-when-calling-scope-apply
-            $timeout(function() {
-                $scope.showSelectionControls = false;
-            });
+
+            //Create or update post
+            postService[postServiceMethod](data, $scope.postId)
+                .then(function(response) {
+
+                    console.log('response', response);
+
+                    $scope.postId = response;
+
+                    if ($scope.currentStep === 1) {
+                        $scope.nextStep();
+                    }
+                    //http://stackoverflow.com/questions/12729122/angularjs-prevent-error-digest-already-in-progress-when-calling-scope-apply
+                    $timeout(function() {
+                        $scope.showSelectionControls = false;
+                    });
+                })
+                .catch(function(err) {
+
+                    //Make sure area selection is possible, because something went wrong trying to save
+                    //the selected area
+                    $scope.placeArea();
+
+                    $scope.error = err;
+
+                    $uibModal.open({
+
+                        templateUrl: 'editor/error.modal.tpl.html',
+                        //The type of modal. The error modal makes more room for the error text
+                        windowClass: 'modal--error',
+
+                        //Make wizard scope available to the modal
+                        scope: $scope,
+
+                        controller: ['$scope', function($scope) {
+                            $scope.dismiss = function() {
+                                $scope.$dismiss();
+                            };
+                        }]
+                    });
+
+                })
+                .finally(function() {
+                    //Done saving post
+                    $scope.savingPost = false;
+                });
+
         });
 
         /**
@@ -137,7 +188,6 @@ define([
             $rootScope.$broadcast('areaAccepted');
             $scope.showSelectionControls = false;
         };
-
 
         //http://stackoverflow.com/questions/24081004/angularjs-ng-repeat-filter-when-value-is-greater-than
         //predicate for filter in template
@@ -187,13 +237,16 @@ define([
             return $scope.currentStep === $scope.numSteps;
         };
 
+        /**
+        * Save the entry in the backend
+        */
         $scope.save = function save() {
 
             var postData = $scope.values;
 
             postData.page_id = pageData.id;
             postData.task_id = $stateParams.taskId;
-            postData.post = $scope.selectedAreaRect;
+            postData.post_id = $scope.postId;
 
             $scope.saving = true;
 
@@ -203,29 +256,8 @@ define([
                 data: postData
             }).then(function(response) {
 
-                if (response.data && response.data.post_id) {
-                    $scope.postId = response.data.post_id;
-                }
-                else {
-
-                    $scope.error = response;
-
-                    $uibModal.open({
-
-                        templateUrl: 'editor/error.modal.tpl.html',
-                        //The type of modal. The error modal makes more room for the error text
-                        windowClass: 'modal--error',
-
-                        //Make wizard scope available to the modal
-                        scope: $scope,
-
-                        controller: ['$scope', function($scope) {
-                            $scope.dismiss = function() {
-                                $scope.$dismiss();
-                            };
-                        }]
-                    });
-                }
+                //If the reqeust was ok from the server, assume everything is allright
+                $scope.entrySaved = true;
 
             }).catch(function(err) {
 
