@@ -102,7 +102,7 @@ define([
 
             //If the form is not valid, prevent changing the location variable and thus
             //going to the next step
-            if (!$scope.stepForm.$valid) {
+            if ($scope.stepForm.$invalid) {
                 event.preventDefault();
             }
         });
