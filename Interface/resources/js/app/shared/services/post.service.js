@@ -21,16 +21,18 @@ define([
             /**
             * Create new post
             *
+            * @param data {object}
+            *   Format:
+            *       {
+            *          "x": 0.231,
+            *           "y": 0.552,
+            *           "height": 0.12,
+            *           "width" : 0.1,
+            *           "page_id" : 1423
+            *       }
             * @return {Promise}
             *
-            * Format:
-            * {
-            *    "x": 0.231,
-            *     "y": 0.552,
-            *     "height": 0.12,
-            *     "width" : 0.1,
-            *     "page_id" : 1423
-            * }
+
             */
             create: function create(data) {
 
@@ -49,6 +51,22 @@ define([
                 return deferred.promise;
             },
 
+            /**
+            * Update a given post, with new data
+            *
+            * @param data {object}
+            *   Format:
+            *       {
+            *          "x": 0.231,
+            *           "y": 0.552,
+            *           "height": 0.12,
+            *           "width" : 0.1,
+            *           "page_id" : 1423
+            *       }
+            * @param postId {int} The id of the post to update
+            *
+            * @return {Promise}
+            */
             update: function update(data, postId) {
 
                 var deferred = $q.defer();
