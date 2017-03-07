@@ -6,6 +6,9 @@ define([
 
         $scope.values = postData.entryData;
 
+        //Get the postId, and store it on the values object, we need it to be able to save data
+        $scope.values.post_id = postData.postId;
+
         $rootScope.$broadcast('zoom-to-post', { postId: postData.postId });
 
         //Store information about what fields are currently being edited (open)
