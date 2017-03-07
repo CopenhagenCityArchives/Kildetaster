@@ -273,6 +273,10 @@ define([
          */
         $scope.prevStep = function prevStep() {
 
+            //If the current step is not valid, prevent going to previous step
+            if ($scope.stepForm.$invalid) {
+                return;
+            }
             //If we are moving from step 1, make area selectable (since that is step 1)
             if ($scope.currentStep == 2) {
                 $scope.makeSelectable();
