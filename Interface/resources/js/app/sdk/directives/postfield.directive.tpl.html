@@ -1,23 +1,21 @@
 <section>
     <h4>{{data.label}}</h4>
 
-    <!-- <button ng-click="goToEditor(data)">Til kildetaster</button> -->
-
     <div class="postfield" ng-repeat="field in data.fields">
 
-        <div ng-if="!isArray(field)" ng-class="{ 
+        <div ng-if="!isArray(field) && (field.value || (!field.value && errorReporting))" ng-class="{
             error: field.error,
             reporting: field.showErrorForm
         }">
 
             <strong>{{field.label}}</strong>
-            <span ng-hide="errorReporting && !field.error">{{field.value}}</span> 
+            <span ng-hide="errorReporting && !field.error">{{field.value || 'Ingen værdi'}}</span>
 
             <a href ng-if="errorReporting && !field.error" class="postfield__report-link" ng-class="{ postfield__reporting: field.showErrorForm }" ng-click="toggleErrorReporting(field)">
-                <span>{{field.value}}</span> 
+                <span>{{field.value || 'Indberet manglende felt'}}</span>
                 <i class="sdk-icon pencil"></i>
             </a>
-            
+
             <span ng-if="field.error">
                 <i class="sdk-icon report-error" title="{{field.error.comment}}"></i>
             </span>
@@ -42,16 +40,16 @@
             </div>
 
         </div>
-        
-        <div ng-if="isArray(field)" ng-class="{ error: field[0].error }">
+
+        <div ng-if="isArray(field) && (field[0].value || (!field[0].value && errorReporting))" ng-class="{ error: field[0].error }">
             <span ng-hide="errorReporting && !field[0].error">{{field[0].value}}</span>
 
             <a href ng-if="errorReporting && !field[0].error" class="postfield__report-link"  ng-click="toggleErrorReporting(field[0])">
-                <span>{{field[0].value}}</span> 
+                <span>{{field[0].value}}</span>
                 <i class="sdk-icon pencil"></i>
             </a>
 
-            <span ng-if="field[0].error">            
+            <span ng-if="field[0].error">
                 <i class="sdk-icon report-error" title="{{field[0].error.comment}}"></i>
             </span>
 

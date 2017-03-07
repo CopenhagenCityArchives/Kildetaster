@@ -8,14 +8,13 @@ define([
             restrict: 'E',
 
             templateUrl: 'sdk/directives/postfield.directive.tpl.html',
-            
+
             scope: {
                 data: '=',
                 errorReporting: '=',
-                report: '&',
-                toEditor: '&'
+                report: '&'
             },
-            
+
             link: function(scope, element, attr) {
 
                 scope.showErrorForm = false;
@@ -42,17 +41,7 @@ define([
                         fieldData: field
                     });
 
-
-
                     field.showErrorsForm = false;
-
-                };  
-
-                scope.goToEditor = function(group) {
-
-                    scope.toEditor({ 
-                        field: group
-                    });
 
                 };
 
