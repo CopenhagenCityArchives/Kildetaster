@@ -99,9 +99,9 @@ define([
             postService[postServiceMethod](data, $scope.postId)
                 .then(function(response) {
 
-                    console.log('response', response);
-
-                    $scope.postId = response;
+                    if (response.data && response.data.post_id) {
+                        $scope.postId = response.data.post_id;
+                    }
 
                     if ($scope.currentStep === 1) {
                         $scope.nextStep();
