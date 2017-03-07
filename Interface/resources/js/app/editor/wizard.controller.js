@@ -93,6 +93,21 @@ define([
         });
 
         /**
+        * Test if the current form is valid before allowing to change location
+        */
+        $rootScope.$on('$locationChangeStart', function(event, toUrl, fromUrl) {
+
+            //Validate the form
+            $scope.$broadcast('schemaFormValidate');
+
+            //If the form is not valid, prevent changing the location variable and thus
+            //going to the next step
+            if (!$scope.stepForm.$valid) {
+                event.preventDefault();
+            }
+        });
+
+        /**
          * Because we do not trigger the ui.route logic (see.editor.config.js),
          * listen for changes to the location.search
          */

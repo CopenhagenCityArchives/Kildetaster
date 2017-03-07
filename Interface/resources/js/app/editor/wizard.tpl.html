@@ -27,13 +27,13 @@
 
     </div>
 
-    <div class="row" ng-if="currentStep > 1 && !isResult()">
+    <div class="row" ng-show="currentStep > 1 && !isResult()">
 
         <div class="col-sm-12">
             <h2>{{currentStepData.title}}</h2>
             <p>{{currentStepData.description}}</p>
 
-            <form sf-schema="schema" sf-form="currentStepData.fields" sf-model="values" sf-options="sfDefaults"></form>
+            <form name="stepForm" sf-schema="schema" sf-form="currentStepData.fields" sf-model="values" sf-options="sfDefaults"></form>
 
         </div>
     </div>
