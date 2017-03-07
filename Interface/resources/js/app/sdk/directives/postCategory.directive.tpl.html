@@ -1,0 +1,46 @@
+<section ng-if="errorReporting">
+
+    <h4>{{data.label}}</h4>
+
+    <div class="postfield">
+
+        <div ng-class="{
+            error: field.error,
+            reporting: data.showErrorForm
+        }">
+
+            <a href ng-if="errorReporting && !field.error" class="postfield__report-link" ng-class="{ postfield__reporting: data.showErrorForm }" ng-click="toggleErrorReporting()">
+                <span>Indberet manglende felt</span>
+                <i class="sdk-icon pencil"></i>
+            </a>
+
+            <span ng-if="data.error">
+                <i class="sdk-icon report-error" title="{{data.error.comment}}"></i>
+            </span>
+
+            <div class="error-reporting text-center" ng-if="data.errorAccepted">
+                <i class="sdk-icon green-checkmark"></i>
+                <div>Tak for din fejlmelding</div>
+            </div>
+
+            <div class="error-reporting" ng-if="errorReporting && data.showErrorForm">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <textarea ng-model="data.comment"></textarea>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12 text-right">
+                        <button class="button" ng-click="doReport(data)">Indberet fejl</button>
+                        <a href ng-click="toggleErrorReporting()">Fortryd</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+</section>

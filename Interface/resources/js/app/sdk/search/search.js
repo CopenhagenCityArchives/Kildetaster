@@ -28,6 +28,7 @@ define([
 
     'app/sdk/directives/searchresult.directive',
     'app/sdk/directives/postfield.directive',
+    'app/sdk/directives/postCategory.directive',
     'app/sdk/directives/zoom-image.directive',
     'app/sdk/directives/pagination.directive',
     'app/sdk/directives/post-count.directive',
@@ -63,6 +64,7 @@ define([
 
     searchResultDirective,
     postfieldDirective,
+    postCategoryDirective,
 
     zoomImageDirective,
     paginationDirective,
@@ -93,6 +95,7 @@ define([
 
     searchApp.directive('searchResult', searchResultDirective);
     searchApp.directive('postField', postfieldDirective);
+    searchApp.directive('postCategory', postCategoryDirective);
 
     searchApp.directive('zoomImage', zoomImageDirective);
     searchApp.directive('pagination', paginationDirective);
