@@ -81,7 +81,7 @@
                         <span class="summary-item__label">{{schema.properties[mainProperty].properties[key].title}}</span>
                     </span>
 
-                    <span style="display: block" ng-repeat="(subkey, subvalue) in schema.properties[mainProperty].properties[key].properties" ng-if="value[subkey] !== undefined">
+                    <span style="display: block" ng-repeat="(subkey, subvalue) in schema.properties[mainProperty].properties[key].properties">
 
                         <a tabindex="1" href ng-click="toggleEditExistingValue(key + '.' + subkey)">
 
