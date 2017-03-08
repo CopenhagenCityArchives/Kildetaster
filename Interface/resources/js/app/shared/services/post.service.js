@@ -41,7 +41,6 @@ define([
                 $http.post(API + '/posts/', data)
                     .then(function(response) {
                         deferred.resolve(response);
-                        console.log('response', response);
                         return response;
                     })
                     .catch(function(err) {
