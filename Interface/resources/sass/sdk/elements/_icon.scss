@@ -14,6 +14,14 @@
         content: inline("resources/images/icon_report_error.svg");
     }
 
+    &.close {
+        width: 10px;
+
+        content: inline("resources/images/icon_close.svg");
+
+        opacity: 1; //overwrite default Joomla styling
+    }
+
     &.pencil {
         width: 10px;
         height: 10px;

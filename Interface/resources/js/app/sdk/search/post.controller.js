@@ -81,11 +81,16 @@ define([
             //Loop over each error report
             $scope.errorReports.forEach(function(report) {
 
-                //Loop over all fields
-                var fieldWithError = $scope.post.find(function(entity) {
+                $scope.post.find(function(entity) {
 
                     //See if the entities match
                     if (entity.entity_name === report.entity_name) {
+
+                        //If the entity does not have fields, but we have a report for it, put the data directly on the entiy object
+                        if (entity.fields.length === 0) {
+                            entity.error = report;
+                            return;
+                        }
 
                         //Locate the field that is in error and mark it
                         var found = entity.fields.find(function(field) {
@@ -99,6 +104,7 @@ define([
                                 }
                                 });
                             }
+
                             //Regular fields
                             else {
                                 if (field.field_name === report.field_name && field.parent_id === report.concrete_entries_id) {
@@ -108,7 +114,6 @@ define([
                             }
                         });
 
-                        return found !== undefined;
                     }
 
                 });
