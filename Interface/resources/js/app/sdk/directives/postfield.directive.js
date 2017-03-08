@@ -12,6 +12,7 @@ define([
             scope: {
                 data: '=',
                 errorReporting: '=',
+                showEmptyFields: '=',
                 report: '&'
             },
 
@@ -22,6 +23,22 @@ define([
                 scope.isArray = function(obj) {
                     return angular.isArray(obj);
                 };
+
+                scope.fieldVisibility = function fieldVisibility(fieldData) {
+
+                    //We have a value
+                    if (fieldData.value) {
+                        return true
+                    }
+
+                    //We dont have a value but are to show empty fields
+                    if (!fieldData.value && scope.showEmptyFields) {
+                        return true;
+                    }
+
+                    return false;
+
+                }
 
                 scope.toggleErrorReporting = function(field) {
                     field.showErrorForm = !field.showErrorForm;

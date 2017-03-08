@@ -1,4 +1,4 @@
-<section ng-if="errorReporting">
+<section ng-if="showEmptyFields">
 
     <h4>{{data.label}}</h4>
 
@@ -8,6 +8,8 @@
             error: field.error,
             reporting: data.showErrorForm
         }">
+
+            <span ng-hide="errorReporting && !field.error">Dette felt er ikke udfyldt</span>
 
             <a href ng-if="errorReporting && !field.error" class="postfield__report-link" ng-class="{ postfield__reporting: data.showErrorForm }" ng-click="toggleErrorReporting()">
                 <span>Dette felt er ikke udfyldt</span>

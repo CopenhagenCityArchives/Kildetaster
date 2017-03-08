@@ -3,8 +3,17 @@
         <h1 class="post__header">{{collection}} {{unit}} s.{{pageNumber}}</h1>
     </div>
     <div class="span3 text-right post__tools">
-        <a href ng-hide="errorReportingEnabled" ng-click="toggleErrorReporting()" title="Rapporter fejl">Rapportér fejl <i class="sdk-icon report-error"></i></a>
-        <a href ng-show="errorReportingEnabled" ng-click="toggleErrorReporting()" title="Rapporter fejl">Afslut fejlrapportering <span class="post__closereporting"><i class="sdk-icon close-error-reporting"></i></span></a>
+        <a href ng-hide="errorReportingEnabled" ng-click="toggleErrorReporting()" title="Rapporter fejl">
+            Rapportér fejl <i class="sdk-icon report-error"></i>
+        </a>
+        <a href ng-show="errorReportingEnabled" ng-click="toggleErrorReporting()" title="Rapporter fejl">
+            Afslut fejlrapportering <span class="post__closereporting"><i class="sdk-icon close-error-reporting"></i></span>
+        </a>
+
+        <a href ng-click="toggleEmptyFields()" title="Vis også tomme felter">
+            <span ng-show="emptyFieldsEnabled">Vis også tomme felter <i class="sdk-icon"></i></span>
+            <span ng-hide="emptyFieldsEnabled">Vis også tomme felter <i class="sdk-icon"></i></span>
+        </a>
     </div>
 </div>
 
@@ -12,8 +21,8 @@
 
     <div class="span5">
         <div ng-repeat="field in post">
-            <post-category ng-if="field.fields.length === 0" data="field" report="report(fieldData)" error-reporting="errorReportingEnabled"></post-category>
-            <post-field ng-if="field.fields.length > 0" data="field" report="report(fieldData)" error-reporting="errorReportingEnabled"></post-field>
+            <post-category ng-if="field.fields.length === 0" data="field" report="report(fieldData)" show-empty-fields="emptyFieldsEnabled" error-reporting="errorReportingEnabled"></post-category>
+            <post-field ng-if="field.fields.length > 0" data="field" report="report(fieldData)" show-empty-fields="emptyFieldsEnabled" error-reporting="errorReportingEnabled"></post-field>
         </div>
     </div>
 

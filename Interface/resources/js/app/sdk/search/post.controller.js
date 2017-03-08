@@ -16,6 +16,7 @@ define([
         $scope.kildeviserUrl = resultData.metadata.kildeviser_url;
 
         $scope.errorReportingEnabled = false;
+        $scope.emptyFieldsEnabled = false;
 
         //Determine the editor link visibility based on wether or not the user can edit
         $scope.showEditorLink = resultData.metadata.user_can_edit;
@@ -23,6 +24,14 @@ define([
         $scope.toggleErrorReporting = function() {
             $scope.errorReportingEnabled = !$scope.errorReportingEnabled;
         };
+
+        /**
+        * Toggle visibility of fields without a value
+        */
+        $scope.toggleEmptyFields = function toggleEmptyFields() {
+            console.log('abe')
+            $scope.emptyFieldsEnabled = !$scope.emptyFieldsEnabled;
+        }
 
         $scope.getImageUrl = function getImageUrl() {
             return helpers.getImageUrlByPostId(resultData.postId);

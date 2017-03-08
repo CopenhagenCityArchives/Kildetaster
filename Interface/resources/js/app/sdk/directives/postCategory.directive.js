@@ -12,6 +12,7 @@ define([
             scope: {
                 data: '=',
                 errorReporting: '=',
+                showEmptyFields: '=',
                 report: '&'
             },
 

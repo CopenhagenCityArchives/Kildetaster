@@ -3,13 +3,16 @@
 
     <div class="postfield" ng-repeat="field in data.fields">
 
-        <div ng-if="!isArray(field) && (field.value || (!field.value && errorReporting))" ng-class="{
+        <div ng-if="!isArray(field)" ng-show="fieldVisibility(field)" ng-class="{
             error: field.error,
             reporting: field.showErrorForm
         }">
 
             <strong>{{field.label}}</strong>
-            <span ng-hide="errorReporting && !field.error">{{field.value || 'Ingen værdi'}}</span>
+
+            <span ng-hide="errorReporting && !field.error">
+                {{field.value || 'Dette felt er ikke udfyldt'}}
+            </span>
 
             <a href ng-if="errorReporting && !field.error" class="postfield__report-link" ng-class="{ postfield__reporting: field.showErrorForm }" ng-click="toggleErrorReporting(field)">
                 <span>{{field.value || 'Dette felt er ikke udfyldt'}}</span>
@@ -41,7 +44,8 @@
 
         </div>
 
-        <div ng-if="isArray(field) && (field[0].value || (!field[0].value && errorReporting))" ng-class="{ error: field[0].error }">
+        <div ng-if="isArray(field)" ng-show="fieldVisibility(field[0])" ng-class="{ error: field[0].error }">
+
             <span ng-hide="errorReporting && !field[0].error">{{field[0].value}}</span>
 
             <a href ng-if="errorReporting && !field[0].error" class="postfield__report-link"  ng-click="toggleErrorReporting(field[0])">
