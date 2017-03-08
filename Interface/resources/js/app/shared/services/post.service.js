@@ -71,10 +71,9 @@ define([
 
                 var deferred = $q.defer();
 
-                $http.post(API + '/posts/' + postId, data)
+                $http.patch(API + '/posts/' + postId, data)
                     .then(function(response) {
                         deferred.resolve(response);
-                        console.log('response', response);
                         return response;
                     })
                     .catch(function(err) {
