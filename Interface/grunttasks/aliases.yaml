@@ -87,8 +87,5 @@ travis:
     - 'html2js:sdk'
     - 'ngconstant:prototype'
 
-optimize:
-    - 'imagemin:originals'
-
 default:
     - 'build'
