@@ -40,7 +40,7 @@ define([
             $scope.loading = true;
 
             return $http({
-                url: datasource + term,
+                url: datasource + encodeURIComponent(term),
                 method: 'GET',
                 cache: false
             }).then(function(response) {
