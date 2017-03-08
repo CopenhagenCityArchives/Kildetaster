@@ -240,7 +240,7 @@ define([
                                 location: editAreaOverlay
                             });
 
-                            //Zoonm to the overlay
+                            //Zoom to the overlay
                             viewer.viewport.fitBounds(editAreaOverlay, true);
 
                         }, 600);
