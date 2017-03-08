@@ -1,0 +1,26 @@
+<section class="update-fields">
+
+    <div class="row">
+
+        <div class="col-sm-12">
+
+            <h3>Ret udsnit</h3>
+            <p>
+                Juster udsnittet i visningen til venstre
+            </p>
+        </div>
+
+        <div class="col-sm-12">
+            <button ng-disabled="saving" tabindex="1" type="button" class="btn btn-primary btn-block" ng-click="updateSelectionArea()">
+                <span ng-show="saving" class="loading-spinner"></span>
+                <span ng-hide="saving">Opdatér udsnit</span>
+            </button>
+
+            <button tabindex="1" type="button" class="btn btn-block" ng-click="abort()">
+                Fortryd
+            </button>
+        </div>
+
+    </div>
+
+</section>

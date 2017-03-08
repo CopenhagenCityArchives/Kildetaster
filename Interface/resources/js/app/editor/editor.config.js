@@ -149,6 +149,16 @@ define([
                 }
             })
 
+            .state('editor.page.update.selection', {
+                url: '/selection',
+                views: {
+                    '@editor.page': {
+                        templateUrl: 'editor/update/updateFields.selection.tpl.html',
+                        controller: 'updateFieldsSelectionController'
+                    }
+                }
+            })
+
             .state('editor.page.update.done', {
                 url: '/done',
                 views: {

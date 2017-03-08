@@ -161,6 +161,11 @@ define([
             return arr.join(', ');
         };
 
+
+        $scope.enableOverlayResize = function enableOverlayResize() {
+            $rootScope.$broadcast('selectExistingOverlay', { postId: postData.postId })
+        }
+
         /**
         * Update the post in the backend
         * When post is saved, update error report data on the backend in a seperate request

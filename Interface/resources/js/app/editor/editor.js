@@ -22,6 +22,7 @@ define([
 
     'app/editor/feedback/feedback.controller',
     'app/editor/update/updateFields.controller',
+    'app/editor/update/updateFieldsSelection.controller',
     'app/editor/update/updateFieldsDone.controller',
 
     'app/shared/schemaformAddon/typeahead.addon',
@@ -54,6 +55,7 @@ define([
 
     feedbackController,
     updateFieldsController,
+    updateFieldsSelectionController,
     updateFieldsDoneController,
 
     sfTypeaheadAddon,
@@ -83,6 +85,7 @@ define([
     editorApp.controller('wizardDoneController', wizardDoneController);
     editorApp.controller('feedbackController', feedbackController);
     editorApp.controller('updateFieldsController', updateFieldsController);
+    editorApp.controller('updateFieldsSelectionController', updateFieldsSelectionController);
     editorApp.controller('updateFieldsDoneController', updateFieldsDoneController);
 
     angular.element(document).ready(function() {

@@ -9,9 +9,32 @@
 
             <h3>Udfyldt</h3>
 
-            <ul class="list-unstyled field-list" ng-repeat="(key, value) in values[mainProperty]">
+            <ul class="list-unstyled field-list">
 
-                <li class="field-list__item" ng-if="schema.properties[mainProperty].properties[key].type === 'string' || schema.properties[mainProperty].properties[key].type === 'number' || schema.properties[mainProperty].properties[key].type === 'date'">
+                <li class="field-list__item">
+                    <span class="summary-item">
+                        <span class="summary-item__label">Udsnit</span>
+                        <span class="summary-item__field">
+                            <a href tabindex="-1" ui-sref=".selection">
+                                Er placeret
+                                <span class="icon icon__edit"></span>
+                            </a>
+                            <div class="row" ng-if="showSelectionControls">
+                                <div class="col-sm-12">
+                                    <p>Ret udsnittet i kilden.</p>
+                                </div>
+                                <div class="col-sm-12 text-right">
+                                    <button class="btn btn-default" ng-click="acceptArea()">
+                                        {{TEXT.BUTTON.OK}}
+                                    </button>
+                                </div>
+                            </div>
+                        </span>
+                    </span>
+
+                </li>
+
+                <li class="field-list__item" ng-repeat="(key, value) in values[mainProperty]" ng-if="schema.properties[mainProperty].properties[key].type === 'string' || schema.properties[mainProperty].properties[key].type === 'number' || schema.properties[mainProperty].properties[key].type === 'date'">
 
                     <a tabindex="1" href ng-click="toggleEditExistingValue(key, values[mainProperty].id)">
                         <span class="summary-item">

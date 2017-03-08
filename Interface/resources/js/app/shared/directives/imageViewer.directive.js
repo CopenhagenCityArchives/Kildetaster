@@ -142,7 +142,7 @@ define([
 
                         localScope.canEdit = overlay.canEdit;
                         localScope.postId = overlay.postId;
-                        
+
                         var elm = '<image-viewer-overlay post-id="postId" can-edit="canEdit">';
 
                         elm = $compile(elm)(localScope);
@@ -180,6 +180,68 @@ define([
 
                 $scope.$on('areaAccepted', function() {
                     selection.confirm();
+                });
+
+                $rootScope.$on('selectExistingOverlay', function(event, data) {
+
+                    var rect = {},
+
+                        //Filter out the overlay that match the postId given, and prepare the rest to be added to the viewer
+                        otherOverlays = $scope.options.tileSources.deferredOverlays.filter(function(item, index) {
+                            if (item.postId === data.postId) {
+                                rect = item;
+                                return false;
+                            }
+                            else {
+                                return true;
+                            }
+
+                        });
+
+                    //Timeout needed to let normal logic kick in, before trying to mess with the overlays and the viewer
+                    $timeout(function() {
+
+                        //Remove all existing overlays
+                        viewer.clearOverlays();
+
+                        //Loop over all other overlays
+                        otherOverlays.forEach(function(overlay) {
+
+                            var overlayRect;
+
+                            var localScope = $rootScope.$new();
+
+                            localScope.canEdit = overlay.canEdit;
+                            localScope.postId = overlay.postId;
+
+                            var elm = '<image-viewer-overlay post-id="postId" can-edit="false">';
+
+                            elm = $compile(elm)(localScope);
+
+                            //Convert values from backend to values OpenSeadragon can use
+                            overlayRect = helpers.convertPercentToOpenSeadragonRect(overlay, imagingHelper.imgAspectRatio);
+
+                            //Prepare a new rect object to be added in the overlay
+                            overlayRect = new OpenSeadragon.Rect(overlayRect.x, overlayRect.y, overlayRect.width, overlayRect.height);
+
+                            //Add the overlay
+                            viewer.addOverlay({
+                                element: elm[0],
+                                location: overlayRect
+                            });
+
+                        });
+
+                        var convertedRect = helpers.convertPercentToOpenSeadragonRect(rect, imagingHelper.imgAspectRatio);
+
+                        //Prepare the selectionRect
+                        selectionRect = new OpenSeadragon.SelectionRect(convertedRect.x, convertedRect.y, convertedRect.width, convertedRect.height);
+
+                        //Start selection logic
+                        $scope.$emit('makeSelectable');
+
+                    }, 600);
+
                 });
 
                 $scope.$on('makeSelectable', function() {
