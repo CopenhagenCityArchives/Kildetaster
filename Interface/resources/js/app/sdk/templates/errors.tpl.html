@@ -34,7 +34,7 @@
                         {{error.username}}
                     </div>
                     <div class="task-list__item">
-                        {{error.field_formName}}
+                        {{error.field_formName || error.entity_name_gui}}
                     </div>
                     <div class="task-list__item text-right">
                         <a href ng-click="goToEditor(error)" class="button">Ret</a>
