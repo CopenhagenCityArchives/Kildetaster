@@ -29,7 +29,6 @@ define([
         * Toggle visibility of fields without a value
         */
         $scope.toggleEmptyFields = function toggleEmptyFields() {
-            console.log('abe')
             $scope.emptyFieldsEnabled = !$scope.emptyFieldsEnabled;
         }
 
