@@ -47,7 +47,7 @@ module.exports = {
         options: {},
 
         files: [{
-            src: '<%= package.html %>/index_development.html',
+            src: '<%= package.html %>/index_production.html',
             dest: '<%= package.build %>/index.html'
         }]
     },
@@ -59,7 +59,7 @@ module.exports = {
 
     //     files: [{
     //         src: '<%= package.html %>/index.html',
-    //         dest: '<%= package.build %>/index.html'    
+    //         dest: '<%= package.build %>/index.html'
     //     }]
     // }
 };

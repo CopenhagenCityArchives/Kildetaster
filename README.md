@@ -40,8 +40,8 @@ In order to build the frontend to be released to production, you need to run `gr
 
 The output of this operation can be found in the filestructure in a folder called `kbh`
 
-This folder will contain an `index.html` and a `search.html` file, and a folder called `resources`. For now, the search.html file is not used anywhere and can be ignored.
+This folder will contain an `index.html` file, and a folder called `resources`.
 
-The index.html should be uploaded to where the editor needs to be found on kbharkiv.dk, and and the resources folder should be uploaded to kbhkilder in the folder `public_html/software/kildetaster`.
+The `index.html` should be uploaded to where the editor needs to be found on kbharkiv.dk, and and the resources folder should be uploaded to kbhkilder.dk in the folder `public_html/software/kildetaster`.
 
-The reason we need to upload a new index.html file, is because of cachebust url-parameters on all style and javascript includes. With updated urls for those, all browsers will forace a new download, regardless of what they might have cached from previous visits to the editor.
+The reason we need to upload a new `index.html` file, is because of cachebust url-parameters on all style and javascript includes. With updated urls for those, all browsers will force a new download, regardless of what they might have cached from previous visits to the editor.

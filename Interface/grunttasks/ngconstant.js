@@ -40,12 +40,11 @@ module.exports = {
 
     development: {
         constants: {
-            JSONURL: '/resources/mock/',
-            EDITORURL: 'http://kbharkiv.dk/kildetaster',
-            RESSOURCEURL: 'http://kbhkilder.dk/software/kildetaster/resources/',
-            SDKCSSURL: 'http://kbhkilder.dk/software/kildetaster/resources/css/sdk.css',
+            JSONURL: 'http://kildetaster.dev9.1508test.dk/resources/mock/',
+            EDITORURL: '/kildetaster',
+            RESSOURCEURL: 'http://www.kbhkilder.dk/software/kildetaster-development/resources/',
+            SDKCSSURL: 'http://www.kbhkilder.dk/software/kildetaster-development/resources/css/sdk.css',
             API: 'http://www.kbhkilder.dk/1508/stable',
-            //API: 'http://www.kbhkilder.dk/1508/experimental',
             MAINDOMAIN: 'http://www.kbharkiv.dk',
             TOKENURL: 'http://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERRORURL: 'http://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',

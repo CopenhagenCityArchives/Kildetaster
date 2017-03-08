@@ -52,7 +52,7 @@ dev:
     - 'ngAnnotate:development'
 
     - 'uglify:development'
-    - 'bake:prototype'
+    - 'bake:development'
     - 'cachebreaker:development'
     - 'sass:development'
     - 'postcss:development'
