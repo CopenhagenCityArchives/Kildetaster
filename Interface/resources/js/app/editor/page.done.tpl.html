@@ -6,7 +6,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" ng-if="!isDone()">
         <div class="col-sm-12">
             <button type="button" class="btn btn-default btn-block" tabindex="1" ng-click="goToNextAvailablePage()">Gå til en ledig side</button>
         </div>

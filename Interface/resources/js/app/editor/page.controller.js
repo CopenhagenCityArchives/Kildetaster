@@ -8,6 +8,21 @@ define([
         $scope.totalPages = pageData.unitData.pages;
 
         /**
+        * Determine if the task this page belongs to is done ie. all pages typed
+        */
+        $scope.isDone = function isDone() {
+
+            //Loop over all tasks, and find the one that match the one we are working on
+            var thisTask = pageData.task_page.find(function(task) {
+                return task.tasks_id === taskData.id;
+            });
+
+            //Are we done?
+            return thisTask.is_done === 1 ? true : false;
+
+        };
+
+        /**
         * Get next available page, based on unitId, taskId and the current page number
         */
         $scope.goToNextAvailablePage = function goToNextAvailablePage() {

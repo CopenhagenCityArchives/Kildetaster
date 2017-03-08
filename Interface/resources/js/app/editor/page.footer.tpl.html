@@ -1,10 +1,10 @@
 <div>
-    <a href ng-click="goToNextAvailablePage()">{{TEXT.PAGE_NEXTAVAILABLE}}</a>
+    <a href ng-if="!isDone()" ng-click="goToNextAvailablePage()">{{TEXT.PAGE_NEXTAVAILABLE}}</a>
     <div class="page-details">
         <div>
             <a href ng-click="prevPage()"><</a>
             {{pageNumber}} / {{totalPages}}
-            <a href ng-click="nextPage()">></a>    
+            <a href ng-click="nextPage()">></a>
         </div>
 
         <div class="form-group">
