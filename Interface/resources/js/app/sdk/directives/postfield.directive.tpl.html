@@ -46,35 +46,38 @@
 
         <div ng-if="isArray(field)" ng-show="fieldVisibility(field[0])" ng-class="{ error: field[0].error }">
 
-            <span ng-hide="errorReporting && !field[0].error">{{field[0].value}}</span>
+            <span ng-repeat="subfield in field" ng-if="fieldVisibility(subfield)">
 
-            <a href ng-if="errorReporting && !field[0].error" class="postfield__report-link"  ng-click="toggleErrorReporting(field[0])">
-                <span>{{field[0].value}}</span>
-                <i class="sdk-icon pencil"></i>
-            </a>
+                <span ng-hide="errorReporting && !subfield.error">{{subfield.value || subfield.label + ' er ikke udfyldt'}}{{$last ? '' : ','}}</span>
 
-            <span ng-if="field[0].error">
-                <i class="sdk-icon report-error" title="{{field[0].error.comment}}"></i>
+                <a href ng-if="errorReporting && !subfield.error" class="postfield__report-link"  ng-click="toggleErrorReporting(subfield)">
+                    <span>{{subfield.value || subfield.label + ' er ikke udfyldt'}}</span><i class="sdk-icon pencil"></i>
+                </a>
+
+                <span ng-if="subfield.error">
+                    <i class="sdk-icon report-error" title="{{subfield.error.comment}}"></i>
+                </span>
+
+                <div class="error-reporting text-center" ng-if="subfield.errorAccepted">
+                    <i class="sdk-icon green-checkmark"></i>
+                    <div>Din feedback er sendt</div>
+                </div>
+
+                <div class="error-reporting" ng-if="errorReporting && subfield.showErrorForm">
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <textarea ng-model="subfield.comment"></textarea>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span12 text-right">
+                            <button class="button" ng-click="doReport(data, subfield)">Indberet fejl</button>
+                            <a href ng-click="toggleErrorReporting(subfield)">Fortryd</a>
+                        </div>
+                    </div>
+                </div>
+
             </span>
-
-            <div class="error-reporting text-center" ng-if="field[0].errorAccepted">
-                <i class="sdk-icon green-checkmark"></i>
-                <div>Din feedback er sendt</div>
-            </div>
-
-            <div class="error-reporting" ng-if="errorReporting && field[0].showErrorForm">
-                <div class="row-fluid">
-                    <div class="span12">
-                        <textarea ng-model="field[0].comment"></textarea>
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span12 text-right">
-                        <button class="button" ng-click="doReport(data, field[0])">Indberet fejl</button>
-                        <a href ng-click="toggleErrorReporting(field[0])">Fortryd</a>
-                    </div>
-                </div>
-            </div>
 
         </div>
 
