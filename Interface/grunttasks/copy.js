@@ -100,11 +100,6 @@ module.exports = {
     production: {
 
         files: [{
-            //webconfig - to force cross origin setup on DEV9
-            src: 'web.config',
-            dest: '<%= package.build %>/web.config'
-        },
-        {
             //Fonts
             expand: true,
             cwd: '<%= package.resources %>/fonts/',
@@ -117,12 +112,6 @@ module.exports = {
             src: ['**/*.{png,jpg,gif,svg}'],
             dest: '<%= package.buildresources %>/images'
 
-        }, {
-            //Mock data
-            expand: true,
-            cwd: '<%= package.resources %>/mock/',
-            src: ['**/*.json'],
-            dest: '<%= package.buildresources %>/mock'
         }]
     },
 

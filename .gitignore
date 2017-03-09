@@ -6,3 +6,5 @@ kbh/
 Interface/resources/bower_components/
 Interface/resources/js/app/shared/templates.js
 Interface/resources/js/app/shared/sdk-templates.js
+Interface/resources/js/app/shared/constants.js
+*.ftppass
