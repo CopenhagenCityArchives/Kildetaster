@@ -236,7 +236,15 @@ define([
 
                     switch (type) {
                         case 'array':
-                            rtn[report.entity_position] = arr;
+                            //The value at the position for this entity, is that already an array
+                            if (rtn[report.entity_position] && angular.isArray(rtn[report.entity_position])) {
+                                //Then just push the error report to that array
+                                rtn[report.entity_position].push(report);
+                            }
+                            //Otherwise, add an array with the error report
+                            else {
+                                rtn[report.entity_position] = arr;
+                            }
                             break;
                         case 'object':
                             rtn[report.entity_position + '.' + report.field_name] = arr;
@@ -248,7 +256,7 @@ define([
                 }
 
             });
-
+console.log('rtn', rtn);
             return rtn;
         }
 

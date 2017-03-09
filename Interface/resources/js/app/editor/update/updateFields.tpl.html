@@ -201,8 +201,9 @@
 
                                     <div class="col-sm-12" ng-if="hasErrorReported[mainProperty + '.' + key]">
 
-                                        <div ng-repeat="report in hasErrorReported[mainProperty + '.' + key]">
-                                            <label>Kommentar</label>
+                                        <div class="error-report-controls" ng-repeat="report in hasErrorReported[mainProperty + '.' + key]">
+
+                                            <label>Kommentar til {{report.field_formName}} - {{report.original_value}}</label>
                                             <p>
                                                 {{report.comment}}
                                             </p>
