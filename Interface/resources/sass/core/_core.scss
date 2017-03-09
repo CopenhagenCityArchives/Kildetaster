@@ -34,6 +34,12 @@ legend {
     box-shadow: none;
 }
 
+a.no-underline, a.no-underline:hover {
+    display: inline-block;
+
+    text-decoration: none;
+}
+
 
 //Overwrites for default styling of angular schema form
 .schema-form-array {

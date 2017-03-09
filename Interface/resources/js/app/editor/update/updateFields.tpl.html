@@ -11,26 +11,15 @@
 
             <ul class="list-unstyled field-list">
                 <li class="field-list__item">
-                    <span class="summary-item">
-                        <span class="summary-item__label">Udsnit</span>
-                        <span class="summary-item__field">
-                            <a href tabindex="-1" ui-sref=".selection">
+                    <a href tabindex="1" class="no-underline" tabindex="-1" ui-sref=".selection">
+                        <span class="summary-item">
+                            <span class="summary-item__label">Udsnit</span>
+                            <span class="summary-item__field">
                                 Er placeret
                                 <span class="icon icon__edit"></span>
-                            </a>
-                            <div class="row" ng-if="showSelectionControls">
-                                <div class="col-sm-12">
-                                    <p>Ret udsnittet i kilden.</p>
-                                </div>
-                                <div class="col-sm-12 text-right">
-                                    <button class="btn btn-default" ng-click="acceptArea()">
-                                        {{TEXT.BUTTON.OK}}
-                                    </button>
-                                </div>
-                            </div>
+                            </span>
                         </span>
-                    </span>
-
+                    </a>
                 </li>
             </ul>
 
@@ -38,7 +27,7 @@
 
                 <li class="field-list__item" ng-if="schema.properties[mainProperty].properties[key].type === 'string' || schema.properties[mainProperty].properties[key].type === 'number' || schema.properties[mainProperty].properties[key].type === 'date'">
 
-                    <a tabindex="1" href ng-click="toggleEditExistingValue(key, values[mainProperty].id)">
+                    <a tabindex="1" href class="no-underline" ng-click="toggleEditExistingValue(key, values[mainProperty].id)">
                         <span class="summary-item">
                             <span class="summary-item__label">{{schema.properties[mainProperty].properties[key].title}}</span>
                             <span class="summary-item__field">{{value}}
@@ -108,7 +97,7 @@
 
                     <span style="display: block" ng-repeat="(subkey, subvalue) in schema.properties[mainProperty].properties[key].properties">
 
-                        <a tabindex="1" href ng-click="toggleEditExistingValue(key + '.' + subkey)">
+                        <a tabindex="1" href class="no-underline" ng-click="toggleEditExistingValue(key + '.' + subkey)">
 
                             <span class="summary-item">
                                 <span class="summary-item__label">{{subvalue.title}}</span>
@@ -174,9 +163,8 @@
 
                 <li class="field-list__item" ng-if="schema.properties[mainProperty].properties[key].type == 'array'">
 
-                    <span class="summary-item__label">{{schema.properties[mainProperty].properties[key].title}}</span>
-
-                    <a href ng-click="toggleEditExistingValue(key)">
+                    <a href tabindex="1" class="no-underline" ng-click="toggleEditExistingValue(key)">
+                        <span class="summary-item__label">{{schema.properties[mainProperty].properties[key].title}}</span>
                         <span class="icon icon__edit" ng-if="!hasErrorReported[mainProperty + '.' + key].length > 0"></span>
                         <span class="glyphicon glyphicon-exclamation-sign icon__error" ng-if="hasErrorReported[mainProperty + '.' + key].length > 0"></span>
                     </a>
@@ -189,7 +177,7 @@
 
                                 <ul class="list-unstyled">
                                     <li ng-repeat="row in values[mainProperty][key]">
-                                        <a href ng-click="toggleEditExistingValue(key)">{{getTextFromArray(row, key)}}</a>
+                                        <a tabindex="1" href ng-click="toggleEditExistingValue(key)">{{getTextFromArray(row, key)}}</a>
                                     </li>
                                 </ul>
 
@@ -203,7 +191,7 @@
 
                                         <div class="error-report-controls" ng-repeat="report in hasErrorReported[mainProperty + '.' + key]">
 
-                                            <label>Kommentar til {{report.field_formName}} - {{report.original_value}}</label>
+                                            <label>Kommentar <span class="small">({{report.field_formName}} - {{report.original_value || 'Ingen nuværende værdi'}})</span></label>
                                             <p>
                                                 {{report.comment}}
                                             </p>
