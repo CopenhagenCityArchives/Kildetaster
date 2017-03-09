@@ -17,7 +17,9 @@ module.exports = {
             TOKENURL: 'http://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERRORURL: 'http://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
             SEARCHURL: 'http://www.kbharkiv.dk/sog-i-arkivet/sog-efter-personer',
-            BYPASSAUTH: false
+            BYPASSAUTH: false,
+            //Number of items to fetch when working with typeahead data fields
+            TYPEAHEADMAXIUMUM: 75
         }
     },
 
@@ -34,7 +36,9 @@ module.exports = {
             TOKENURL: 'http://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERRORURL: 'http://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
             SEARCHURL: 'http://www.kbharkiv.dk/sog-i-arkivet/sog-efter-personer',
-            BYPASSAUTH: true
+            BYPASSAUTH: true,
+            //Number of items to fetch when working with typeahead data fields
+            TYPEAHEADMAXIUMUM: 75
         }
     },
 
@@ -49,7 +53,9 @@ module.exports = {
             TOKENURL: 'http://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERRORURL: 'http://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
             SEARCHURL: 'http://www.kbharkiv.dk/sog-i-arkivet/sog-efter-personer',
-            BYPASSAUTH: false
+            BYPASSAUTH: false,
+            //Number of items to fetch when working with typeahead data fields
+            TYPEAHEADMAXIUMUM: 75
         }
     },
 
@@ -64,7 +70,9 @@ module.exports = {
             TOKENURL: 'http://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERRORURL: 'http://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
             SEARCHURL: 'http://www.kbharkiv.dk/sog-i-arkivet/sog-efter-personer',
-            BYPASSAUTH: false
+            BYPASSAUTH: false,
+            //Number of items to fetch when working with typeahead data fields
+            TYPEAHEADMAXIUMUM: 75
         }
     }
 };

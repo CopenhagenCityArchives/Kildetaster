@@ -8,7 +8,7 @@ define([
 
     var schemaForm = angular.module('schemaForm');
 
-    schemaForm.controller('sfTypeahead', /*@ngInject*/  function($scope, $templateCache, $http, $filter) {
+    schemaForm.controller('sfTypeahead', /*@ngInject*/  function($scope, $templateCache, $http, $filter, TYPEAHEADMAXIUMUM) {
 
         $scope.options = [];
 
@@ -49,8 +49,8 @@ define([
                     return item[propertyName];
                 });
 
-                //Only show the first 50 hits
-                $scope.options = arr.slice(0, 50);
+                //Only show a set number of hits
+                $scope.options = arr.slice(0, TYPEAHEADMAXIUMUM);
 
             }).finally(function() {
                 //Done loading
