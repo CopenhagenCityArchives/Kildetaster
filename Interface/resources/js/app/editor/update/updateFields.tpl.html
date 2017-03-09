@@ -36,8 +36,6 @@
 
             <ul class="list-unstyled field-list" ng-repeat="(key, value) in values[mainProperty]">
 
-
-
                 <li class="field-list__item" ng-if="schema.properties[mainProperty].properties[key].type === 'string' || schema.properties[mainProperty].properties[key].type === 'number' || schema.properties[mainProperty].properties[key].type === 'date'">
 
                     <a tabindex="1" href ng-click="toggleEditExistingValue(key, values[mainProperty].id)">
@@ -53,7 +51,7 @@
                     <div class="row update-schema-form" ng-if="isEditing(key + values[mainProperty].id)">
 
                         <div class="col-sm-12">
-                            <form sf-schema="schema" sf-form="[mainProperty + '.' + key]" sf-model="valueCopy[key]" sf-options="sfDefaults"></form>
+                            <form name="singleFieldForm" sf-schema="schema" sf-form="[mainProperty + '.' + key]" sf-model="valueCopy[key]" sf-options="sfDefaults"></form>
                         </div>
 
                         <div class="col-sm-12" ng-if="hasErrorReported[mainProperty + '.' + key].deleted === 0">
@@ -77,7 +75,7 @@
                                 <button ng-if="schema.properties[mainProperty].properties[key].isRequired !== '1'" tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(key, values[mainProperty].id, hasErrorReported[mainProperty + '.' + key].id)">
                                     {{TEXT.BUTTON.DELETE}}
                                 </button>
-                                <button tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key, values[mainProperty].id, hasErrorReported[mainProperty + '.' + key].id)">
+                                <button ng-disabled="singleFieldForm.$invalid" tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key, values[mainProperty].id, hasErrorReported[mainProperty + '.' + key].id)">
                                     Ret
                                 </button>
                                 <button tabindex="1" title="Luk, uden at ændre" type="button" class="btn btn-default" ng-click="toggleEditExistingValue(key, values[mainProperty].id)">
@@ -91,7 +89,7 @@
                             <button ng-if="schema.properties[mainProperty].properties[key].isRequired !== '1'" tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(key, values[mainProperty].id)">
                                 {{TEXT.BUTTON.DELETE}}
                             </button>
-                            <button tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key, values[mainProperty].id)">
+                            <button ng-disabled="singleFieldForm.$invalid" tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key, values[mainProperty].id)">
                                 Ret
                             </button>
                             <button tabindex="1" title="Luk, uden at ændre" type="button" class="btn btn-default" ng-click="toggleEditExistingValue(key, values[mainProperty].id)">
@@ -124,7 +122,7 @@
                         <div class="row update-schema-form" ng-if="isEditing(key + '.' + subkey)">
 
                             <div class="col-sm-12">
-                                <form sf-schema="schema" sf-form="[mainProperty + '.' + key + '.' + subkey]" sf-options="sfDefaults" sf-model="valueCopy[key + '.' + subkey]"></form>
+                                <form name="singleFieldForm" sf-schema="schema" sf-form="[mainProperty + '.' + key + '.' + subkey]" sf-options="sfDefaults" sf-model="valueCopy[key + '.' + subkey]"></form>
                             </div>
 
                             <div class="col-sm-12" ng-if="hasErrorReported[mainProperty + '.' + key + '.' + subkey]">
@@ -148,7 +146,7 @@
                                         <button tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(key + '.' + subkey, undefined, report.id)">
                                             {{TEXT.BUTTON.DELETE}}
                                         </button>
-                                        <button tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key + '.' + subkey, undefined, report.id)">
+                                        <button ng-disabled="singleFieldForm.$invalid" tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key + '.' + subkey, undefined, report.id)">
                                             Ret
                                         </button>
                                         <button tabindex="1" title="Luk, uden at ændre" type="button" class="btn btn-default" ng-click="toggleEditExistingValue(key + '.' + subkey)">
@@ -162,7 +160,7 @@
                                 <button tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(key + '.' + subkey)">
                                     {{TEXT.BUTTON.DELETE}}
                                 </button>
-                                <button tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key + '.' + subkey)">
+                                <button ng-disabled="singleFieldForm.$invalid" tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key + '.' + subkey)">
                                     Ret
                                 </button>
                                 <button tabindex="1" title="Luk, uden at ændre" type="button" class="btn btn-default" ng-click="toggleEditExistingValue(key + '.' + subkey)">
@@ -198,7 +196,7 @@
                                 <div class="row update-schema-form" ng-if="isEditing(key)">
 
                                     <div class="col-sm-12">
-                                        <form sf-schema="schema" sf-form="[mainProperty + '.' + key]" sf-model="valueCopy[key]" sf-options="sfDefaults"></form>
+                                        <form name="singleFieldForm" sf-schema="schema" sf-form="[mainProperty + '.' + key]" sf-model="valueCopy[key]" sf-options="sfDefaults"></form>
                                     </div>
 
                                     <div class="col-sm-12" ng-if="hasErrorReported[mainProperty + '.' + key]">
@@ -215,7 +213,7 @@
                                                 <button tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(key, undefined, report.id)">
                                                     {{TEXT.BUTTON.DELETE}}
                                                 </button>
-                                                <button tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key, undefined, report.id)">
+                                                <button ng-disabled="singleFieldForm.$invalid" tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key, undefined, report.id)">
                                                     Ret
                                                 </button>
                                                 <button tabindex="1" title="Luk, uden at ændre" type="button" class="btn btn-default" ng-click="toggleEditExistingValue(key)">
@@ -230,7 +228,7 @@
                                         <button tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(key)">
                                             {{TEXT.BUTTON.DELETE}}
                                         </button>
-                                        <button tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key)">
+                                        <button ng-disabled="singleFieldForm.$invalid" tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key)">
                                             Ret
                                         </button>
                                         <button tabindex="1" title="Luk, uden at ændre" type="button" class="btn btn-default" ng-click="toggleEditExistingValue(key)">
