@@ -113,9 +113,7 @@ define([
                 feedback: false,
                 supressPropertyTitles: true,
                 disableSuccessState: true,
-                ngModelOptions: {
-                    updateOn: 'blur'
-                },
+                ngModelOptions: {},
                 //Default value for array add action
                 add: 'Tilføj'
             }
