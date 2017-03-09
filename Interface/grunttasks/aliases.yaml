@@ -84,6 +84,7 @@ build:
 
 deploy_dev:
     - 'ftp-deploy:deployment_resources'
+    - 'ftp-deploy:deployment_index_file'
 
 travis:
     - 'html2js:editor'
