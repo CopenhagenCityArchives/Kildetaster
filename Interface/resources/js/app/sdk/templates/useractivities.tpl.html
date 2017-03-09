@@ -17,7 +17,7 @@
                     <div class="task-list__item">
                        s. {{activity.page_number}}
                     </div>
-                    <div class="task-list__item text-right" ng-if="activity.index_active">
+                    <div class="task-list__item text-right" ng-show="activity.index_active">
                         <a target="_blank" ng-href="{{EDITORURL}}/#/task/{{activity.task_id}}/page/{{activity.page_id}}" class="button">Fortsæt</a>
                     </div>
                 </li>
