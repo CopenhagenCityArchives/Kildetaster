@@ -37,6 +37,9 @@
     }
 
     &__error {
+        position: relative;
+        top: 2px;
+
         color: $red;
     }
 }
