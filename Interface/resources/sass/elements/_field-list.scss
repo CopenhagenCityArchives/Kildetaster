@@ -1,10 +1,10 @@
 .field-list {
     margin-right: -8px;
     margin-left: -8px;
-    padding: 5px 5px 0 5px;
+    padding: 5px 8px 0 8px;
 
     & + & {
-        padding: 0 5px;
+        padding: 0 8px;
     }
 
     &__item {
