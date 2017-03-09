@@ -82,6 +82,9 @@ build:
     #Run unittests
     - 'karma:production'
 
+deploy_dev:
+    - 'ftp-deploy:deployment_resources'
+
 travis:
     - 'html2js:editor'
     - 'html2js:sdk'

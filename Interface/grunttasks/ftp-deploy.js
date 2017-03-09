@@ -8,7 +8,7 @@ module.exports = {
     forceVerbose: true,
     src: '<%= package.build %>',
     dest: 'public_html/kildetaster-development',
-    exclusions : [ '<%= package.build %>' + '/resources/**']
+    exclusions : [ '<%= package.build %>' + '/resources']
   },
   deployment_index_file: {
     auth: {
