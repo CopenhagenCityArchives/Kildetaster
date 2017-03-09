@@ -21,33 +21,41 @@
     &__report-link {
         position: relative;
 
+        display: inline-block;
+
         margin-left: -4px;
-        padding: 2px 4px;
-        //Has to bee important because of Jooma styling
+        padding-right: 23px;
+        //Has to be important because of Jooma styling
 
         text-decoration: none !important;
 
-        background-color: $light-yellow;
+        span {
+            padding: 2px 4px;
 
-        &:hover, &:focus {
+            background-color: $light-yellow;
+        }
+
+
+        &:hover span, &:focus span {
             text-decoration: none;
 
             background-color: $dark-yellow;
         }
 
-        &:focus {
+        &:focus span {
             text-decoration: none;
 
             background-color: $light-yellow;
         }
 
+
         .sdk-icon.pencil {
             position: absolute;
-            top: 2px;
-            right: -15px;
+            top: 4px;
+            right: 7px;
         }
 
-        &.postfield__reporting {
+        &.postfield__reporting span {
             background-color: $dark-yellow;
         }
     }
