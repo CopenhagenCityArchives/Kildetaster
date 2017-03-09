@@ -145,14 +145,31 @@ define([
             return $scope.editingFields[field];
         };
 
+        /**
+        * Build a string, representing the value of an array of fields
+        * Will not take fields with null value / no value into account
+        *
+        * @param data {object}
+        * @param prop {string}
+        *
+        * @return {string} The string represenation of all values, seperated by comma
+        */
         $scope.getTextFromArray = function(data, prop) {
+
             //Lookup data for the given property
             var propData = $scope.schema.properties[$scope.mainProperty].properties[prop].items.properties,
             //array to hold the values of all subproperties
             arr = [];
 
             for (subprop in propData) {
-                arr.push(data[subprop]);
+
+                //If we have a value for the property, add it to the array
+                //If a given field was not filled, it will exist, but have a null value. In that case, it should not be used
+                //to build the string
+                if (data[subprop]) {
+                    arr.push(data[subprop]);
+                }
+
             }
 
             //Join all values, seperate by comma
