@@ -10,7 +10,6 @@
             <h3>Udfyldt</h3>
 
             <ul class="list-unstyled field-list">
-
                 <li class="field-list__item">
                     <span class="summary-item">
                         <span class="summary-item__label">Udsnit</span>
@@ -33,8 +32,13 @@
                     </span>
 
                 </li>
+            </ul>
 
-                <li class="field-list__item" ng-repeat="(key, value) in values[mainProperty]" ng-if="schema.properties[mainProperty].properties[key].type === 'string' || schema.properties[mainProperty].properties[key].type === 'number' || schema.properties[mainProperty].properties[key].type === 'date'">
+            <ul class="list-unstyled field-list" ng-repeat="(key, value) in values[mainProperty]">
+
+
+
+                <li class="field-list__item" ng-if="schema.properties[mainProperty].properties[key].type === 'string' || schema.properties[mainProperty].properties[key].type === 'number' || schema.properties[mainProperty].properties[key].type === 'date'">
 
                     <a tabindex="1" href ng-click="toggleEditExistingValue(key, values[mainProperty].id)">
                         <span class="summary-item">
