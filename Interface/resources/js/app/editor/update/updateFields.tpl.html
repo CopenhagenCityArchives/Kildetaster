@@ -201,9 +201,9 @@
                                                 <button tabindex="1" title="Sletter fejlrapporten og beholder værdien" type="button" class="btn btn-default" ng-click="rejectErrorReport(report.id, key)">
                                                     {{TEXT.BUTTON.NOTERROR}}
                                                 </button>
-                                                <button tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(key, undefined, report.id)">
+                                                <!-- <button tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(key, undefined, report.id)">
                                                     {{TEXT.BUTTON.DELETE}}
-                                                </button>
+                                                </button> -->
                                                 <button ng-disabled="singleFieldForm.$invalid" tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key, undefined, report.id)">
                                                     Ret
                                                 </button>
@@ -216,9 +216,9 @@
                                     </div>
 
                                     <div class="col-sm-12 text-right" ng-if="!hasErrorReported[mainProperty + '.' + key]">
-                                        <button tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(key)">
+                                        <!-- <button tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(key)">
                                             {{TEXT.BUTTON.DELETE}}
-                                        </button>
+                                        </button> -->
                                         <button ng-disabled="singleFieldForm.$invalid" tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key)">
                                             Ret
                                         </button>
