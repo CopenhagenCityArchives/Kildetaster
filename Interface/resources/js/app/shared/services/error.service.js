@@ -55,7 +55,8 @@ define([
                 .then(function(response) {
                     response.data.forEach(function(row){
                         if(row.superUserTime){
-                           row.superUserTime  = new Date(row.superUserTime);
+                            //var convertedTime = row.superUserTime.replace(" ", "T") + ".000Z";
+                           row.superUserTime  = new Date(Date.parse(row.superUserTime.replace('-','/','g')));
                         }
                     });
 
