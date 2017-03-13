@@ -92,6 +92,11 @@ define([
 
             //The length will be more than one if we had a dot in the name
             if (split.length > 1) {
+                //If the secondary element is not set set it 
+                if(!$scope.values[$scope.mainProperty][split[0]]){
+                    $scope.values[$scope.mainProperty][split[0]] = {};
+                }
+
                 $scope.values[$scope.mainProperty][split[0]][split[1]] = $scope.valueCopy[key][$scope.mainProperty][split[0]][split[1]];
             }
             //Otherwise just use the key (single and array type fields  )
