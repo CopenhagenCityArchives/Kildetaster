@@ -19,18 +19,14 @@ define([
         //Default field to sort by
         $scope.sortByField = {name: "lastname" };
 
-        // $scope.operatorOptions = [
-        //     {
-        //         value: 'contains',
-        //         label: "Indeholder"
-        //     }, {
-        //         value: 'startsWith',
-        //         label: 'Starter med'
-        //     }, {
-        //         value: 'endsWith',
-        //         label: 'Slutter med'
-        //     }];
-
+        /**
+        * Prepare row for input, clearing any already set term and reset operator to its
+        * default value
+        */
+        $scope.clearRow = function clearRow(row) {
+            row.operator = row.field.operators[0].solr_query;
+            row.term = '';
+        };
 
         /**
         * Add new row of config

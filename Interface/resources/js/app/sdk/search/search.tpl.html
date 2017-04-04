@@ -10,6 +10,7 @@
                             Felt
                             <select
                                 ng-model="row.field"
+                                ng-change="clearRow(row)"
                                 ng-options="field.name for field in fields | filter: {'searchable': 1}">
                             </select>
                         </label>
@@ -22,7 +23,7 @@
                             <select
                                 ng-options="operator.solr_query as operator.label for operator in row.field.operators"
                                 ng-model="row.operator"
-                                ng-init="row.operator = row.field.operators[0].solr_query">
+                                ng-init="clearRow(row)"
                                 <option>Vælg</option>
                             </select>
                         </label>
