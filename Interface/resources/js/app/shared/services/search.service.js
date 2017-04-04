@@ -15,16 +15,7 @@ define([
             arr.forEach(function(row) {
 
                 if (row.field !== undefined && row.term) {
-
-                    //If the term contains a space, make several 'entries' of the sorl_name in the query
-                    // for 'el' and 'se'
-                    // q=firstnames:%20El%20AND%20firstnames:%20se&rows=10&start=0&wt=json
-                    var termArray = row.term.split(' ');
-
-                    termArray.forEach(function(term) {
-                        rtn.push(encodeURIComponent(buildSolrValue(row)));
-                    });
-
+                    rtn.push(encodeURIComponent(buildSolrValue(row)));
                 }
             });
 
