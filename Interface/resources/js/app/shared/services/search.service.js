@@ -13,7 +13,8 @@ define([
             var rtn = [];
 
             arr.forEach(function(row) {
-                if (row.field !== undefined) {
+
+                if (row.field !== undefined && row.term) {
 
                     //If the term contains a space, make several 'entries' of the sorl_name in the query
                     // for 'el' and 'se'

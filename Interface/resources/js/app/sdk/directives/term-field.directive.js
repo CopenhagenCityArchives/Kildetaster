@@ -25,14 +25,14 @@ define([
                 /**
                 *
                 */
-                $scope.getData = function getData(datasource, term, propertyName) {
+                $scope.getData = function getData(field, term) {
 
                     $scope.options = [];
 
-                    //If we do not get any datasourece or a term to search for, do nothing
-                    if (!datasource || !term) {
+                    //If we do not get any data source or a term to search for, do nothing
+                    if (!field.datasource || !term) {
                         //Just return an empty array
-                        return [];
+                        //return [];
                     }
 
                     if (term.length < 2) {
@@ -42,14 +42,21 @@ define([
                     //Indicate that we are about to load new options
                     $scope.loading = true;
 
+                    if (field.enum && field.enum.length > 0) {
+                        console.log('field enum', field.enum);
+
+                        $scope.options = field.enum;
+                        $scope.loading = false;
+                        return;
+                    }
                     return $http({
-                        url: datasource + encodeURIComponent(term),
+                        url: field.datasource + encodeURIComponent(term),
                         method: 'GET',
                         cache: false
                     }).then(function(response) {
 
                         var arr = response.data.map(function(item) {
-                            return item[propertyName];
+                            return item[field.datasourceValueField];
                         });
 
                         //Only show a set number of hits
