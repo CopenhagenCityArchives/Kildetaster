@@ -7,6 +7,7 @@ define([
 
     'angular-ui-router',
     'angular-ui-select',
+    'angularjs-datepicker',
     'angular-filter',
 
     'app/shared/sdk-templates',
@@ -48,6 +49,7 @@ define([
 
     uiRouter,
     uiSelect,
+    datepicker,
     angularFilter,
 
     sdkTemplates,
@@ -90,7 +92,8 @@ define([
         'ui.select',
         'angular.filter',
         'ngStorage',
-        'ngSanitize'
+        'ngSanitize',
+        '720kb.datepicker'
     ]);
 
     searchApp.config(searchConfig);

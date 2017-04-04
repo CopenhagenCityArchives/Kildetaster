@@ -1,0 +1,38 @@
+.input-datepicker {
+    position: relative;
+
+    //place on top of the actual input field to mask the data value, and show a user-friendly
+    //value instead
+    &__mask {
+        line-height: 34px;
+
+        position: absolute;
+        top: 3px;
+        left: 3px;
+
+        width: calc(100% - 6px);
+        height: 34px;
+        padding-left: 4px;
+
+        background-color: $gray;
+    }
+
+
+    //Datepicker theme
+    ._720kb-datepicker-calendar-header {
+        color: $white;
+        background-color: $dark-blue;
+    }
+    ._720kb-datepicker-default-button {
+        color: $white;
+    }
+
+    ._720kb-datepicker-calendar-month span {
+        color: $white;
+    }
+
+    ._720kb-datepicker-calendar-years-pagination a, ._720kb-datepicker-calendar-years-pagination a:hover {
+        opacity: 0.7;
+        color: $white;
+    }
+}

@@ -15,6 +15,8 @@ requirejs.config({
         'ngstorage'             : '../bower_components/ngstorage/ngStorage.min',
         'angular-cookies'       : '../bower_components/angular-cookies/angular-cookies.min',
 
+        'angularjs-datepicker'  : '../bower_components/angularjs-datepicker/dist/angular-datepicker',
+
         'angular-ui-router'     : '../bower_components/angular-ui-router/release/angular-ui-router.min',
         'angular-ui-select'     : '../bower_components/angular-ui-select/dist/select',
 
@@ -46,6 +48,7 @@ requirejs.config({
         'angular-filter': ['angular'],
         'angular-cookies': ['angular'],
         'ngstorage': ['angular'],
+        'angularjs-datepicker': ['angular'],
 
         'app/shared/constants': ['angular'],
 

@@ -16,6 +16,15 @@ define([
 
             controller: /* @ngInject */ function($scope) {
 
+                //default date for --date type fields
+                $scope.defaultDate = "01-01-1850";
+
+                $scope.showDatePicker = false;
+
+                $scope.toggleDatePicker = function toggleDatePicker() {
+                    $scope.showDatePicker = !$scope.showDatePicker;
+                };
+
                 $scope.ngModelOptions = {
                     updateOn: 'default'
                 };
