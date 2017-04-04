@@ -69,15 +69,24 @@ define([
 
                 };
 
+                /**
+                *
+                */
                 $scope.getTemplateUrl = function getTemplateUrl() {
 
-                    if ($scope.type) {
-                        return 'sdk/directives/term-field.directive--' + $scope.type + '.tpl.html';
-                    }
-                    else {
-                        return 'sdk/directives/term-field.directive--string.tpl.html';
+                    var rtn;
+
+                    switch ($scope.type) {
+                        case 'typeahead':
+                        case 'date':
+                            rtn = 'sdk/directives/term-field.directive--' + $scope.type + '.tpl.html';
+                            break;
+                        case 'string':
+                        default:
+                            rtn = 'sdk/directives/term-field.directive--string.tpl.html';
                     }
 
+                    return rtn;
                 }
             }
 
