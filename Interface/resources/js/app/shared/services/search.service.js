@@ -21,7 +21,7 @@ define([
                     var termArray = row.term.split(' ');
 
                     termArray.forEach(function(term) {
-                        rtn.push(encodeURIComponent(row.field.solr_name + ':' + buildSolrValue(term, row.operator)));
+                        rtn.push(encodeURIComponent(buildSolrValue(row)));
                     });
 
                 }
@@ -30,19 +30,14 @@ define([
             return rtn.join(' AND ');
         }
 
-        function buildSolrValue(term, operator) {
+        /**
+        *
+        */
+        function buildSolrValue(row) {
             var operator;
 
-            switch (operator) {
-                case 'startsWith':
-                    operator = term + '*';
-                    break;
-                case 'endsWith':
-                    operator = '*' + term;
-                    break;
-                case 'contains':
-                    operator = '*' + term + '*';
-            }
+            operator = row.operator.replace('%f%', row.field.solr_name);
+            operator = operator.replace('%q%', row.term)
 
             return operator;
         }

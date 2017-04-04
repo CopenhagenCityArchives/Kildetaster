@@ -19,17 +19,17 @@ define([
         //Default field to sort by
         $scope.sortByField = {name: "lastname" };
 
-        $scope.operatorOptions = [
-            {
-                value: 'contains',
-                label: "Indeholder"
-            }, {
-                value: 'startsWith',
-                label: 'Starter med'
-            }, {
-                value: 'endsWith',
-                label: 'Slutter med'
-            }];
+        // $scope.operatorOptions = [
+        //     {
+        //         value: 'contains',
+        //         label: "Indeholder"
+        //     }, {
+        //         value: 'startsWith',
+        //         label: 'Starter med'
+        //     }, {
+        //         value: 'endsWith',
+        //         label: 'Slutter med'
+        //     }];
 
 
         /**
@@ -256,6 +256,11 @@ define([
         if (searchService.currentSearchConfig !== null) {
             $scope.config = searchService.currentSearchConfig.query;
             $scope.doSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets);
+        }
+
+        $scope.updateSubFields = function updateSubFields(field) {
+            console.log('field', field);
+
         }
 
         $scope.goToPage = function goToPage(index) {

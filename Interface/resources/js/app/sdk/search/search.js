@@ -3,8 +3,10 @@ define([
     'angular',
 
     'ngstorage',
+    'angular-sanitize',
 
     'angular-ui-router',
+    'angular-ui-select',
     'angular-filter',
 
     'app/shared/sdk-templates',
@@ -33,6 +35,8 @@ define([
     'app/sdk/directives/pagination.directive',
     'app/sdk/directives/post-count.directive',
 
+    'app/sdk/directives/term-field.directive',
+
     'app/shared/constants'
 
 ], function(
@@ -40,8 +44,10 @@ define([
     ang,
 
     ngStorage,
+    ngSanitize,
 
     uiRouter,
+    uiSelect,
     angularFilter,
 
     sdkTemplates,
@@ -70,12 +76,22 @@ define([
     paginationDirective,
     postCountDirective,
 
+    termFieldDirective,
+
     constants
 
     ) {
 
 
-    var searchApp = angular.module('search', ['sdk-templates', 'constants', 'ui.router', 'angular.filter', 'ngStorage']);
+    var searchApp = angular.module('search', [
+        'sdk-templates',
+        'constants',
+        'ui.router',
+        'ui.select',
+        'angular.filter',
+        'ngStorage',
+        'ngSanitize'
+    ]);
 
     searchApp.config(searchConfig);
     searchApp.run(searchRun);
@@ -100,6 +116,8 @@ define([
     searchApp.directive('zoomImage', zoomImageDirective);
     searchApp.directive('pagination', paginationDirective);
     searchApp.directive('postCount', postCountDirective);
+
+    searchApp.directive('termField', termFieldDirective);
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-sdk-search-app]'), ['search']);

@@ -1,6 +1,7 @@
 <div class="sdk-search">
 
     <div class="row-fluid" ng-repeat="row in config">
+
         <div class="span12">
             <div class="row-fluid redform-form sdk-search__config">
                 <div class="span4">
@@ -19,19 +20,21 @@
                         <label>
                             Operator
                             <select
-                                ng-options="operator.value as operator.label for operator in operatorOptions"
+                                ng-options="operator.solr_query as operator.label for operator in row.field.operators"
                                 ng-model="row.operator"
-                                ng-init="row.operator = operatorOptions[0].value">
+                                ng-init="row.operator = row.field.operators[0].solr_query">
+                                <option>Vælg</option>
                             </select>
                         </label>
                     </div>
                 </div>
                 <div class="span4">
                     <div class="field">
-                        <label>
+                        <term-field type="row.field.formFieldType" data="row"></term-field>
+                        <!-- <label>
                             Søgeterm
                             <input type="text" placeholder="Søgeterm" ng-keypress="submitSearch($event)" ng-model="row.term">
-                        </label>
+                        </label> -->
                     </div>
                 </div>
                 <a href class="sdk-search__remove" title="Fjern række" ng-click="removeField($index, $event)" ng-if="config.length > 1">

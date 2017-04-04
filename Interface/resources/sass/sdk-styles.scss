@@ -1,5 +1,8 @@
 @import "sdk/variables";
 
+@import "../bower_components/angular-ui-select/dist/select";
+@import "../bower_components/select2/select2";
+
 
 //components
 @import "sdk/components/post";
@@ -16,4 +19,6 @@
 @import "sdk/elements/task-list";
 @import "sdk/elements/searchresult";
 @import "sdk/elements/sorting";
-@import "sdk/elements/zoom-image";
+@import "sdk/elements/zoom-image";@import "sdk/elements/term-field.typeahead";.ui-select-container {
+    width: 100%;
+}
