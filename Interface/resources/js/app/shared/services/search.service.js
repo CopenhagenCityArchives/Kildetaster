@@ -32,7 +32,9 @@ define([
         }
 
         /**
+        * Prepare solr value by using the api supplied operator, replacing vaues for the field and the search term
         *
+        * @param row {object} The row configuration object
         */
         function buildSolrValue(row) {
             var operator;
