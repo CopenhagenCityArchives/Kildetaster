@@ -6,6 +6,7 @@ define([
     var searchController = /*@ngInject*/ function opentasksController($q, $timeout, $scope, $stateParams, $state, $rootScope, searchService, availableFields) {
 
         $scope.loading = false;
+        $scope.initialized = false;
 
         $scope.config = [];
 
@@ -24,15 +25,20 @@ define([
         * default value
         */
         $scope.clearRow = function clearRow(row) {
-            row.operator = row.field.operators[0].solr_query;
-            row.term = '';
+            if ($scope.initialized) {
+                row.operator = row.field.operators[0].solr_query;
+                row.term = '';
+            }
         };
 
         /**
         * Add new row of config
-        * @params defaultFieldName {string} The name of the field type to set as default selection
+        *
+        * @param defaultFieldName {string} The name of the field type to set as default selection
+        * @param term {string} The value of the term field
+        * @param operator {string} The operator value for the operator to select
         */
-        $scope.addField = function addField(defaultFieldName) {
+        $scope.addField = function addField(defaultFieldName, term, operator) {
 
             var defaultField,
                 found,
@@ -48,6 +54,24 @@ define([
                 }
             }
 
+            if (term) {
+                fieldConfig.term = term;
+            }
+
+            if (operator) {
+                //Lookup the operator in the operators available on the field
+                var operatorData = fieldConfig.field.operators.find(function(operatorItem) {
+                    return operatorItem.solr_query === operator;
+                });
+
+                //Set the selected operator
+                fieldConfig.operator = operatorData.solr_query;
+            }
+            //Select the first in the list
+            else {
+                fieldConfig.operator = fieldConfig.field.operators[0].solr_query;
+            }
+            //add the field configuration
             $scope.config.push(fieldConfig);
         };
 
@@ -255,11 +279,6 @@ define([
             $scope.doSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets);
         }
 
-        $scope.updateSubFields = function updateSubFields(field) {
-            console.log('field', field);
-
-        }
-
         $scope.goToPage = function goToPage(index) {
 
             $scope.currentIndex = index;
@@ -298,49 +317,15 @@ define([
 
             $scope.fields = availableFields;
 
-
-            var promises = [];
-
-            if ($stateParams.search) {
+            if ($scope.config.length === 0 && $stateParams.search) {
 
                 var savedConfig = JSON.parse($stateParams.search);
 
                 savedConfig.each(function(item, index) {
-
-                    $scope.addField(item.solr_name);
-
-                    //Prepare a promise to resolve once the timeout below is done
-                    var deferred = $q.defer();
-
-                    promises.push(deferred.promise);
-
-                    //Using a timeout to let UI and logic start (mainly because of $scope.clearRow)
-                    $timeout(function() {
-
-                        $scope.config[index].term = decodeURIComponent(item.term);
-
-                        //Lookup the operator
-                        var found = $scope.config[index].field.operators.find(function(operator) {
-
-                            //Handle operators using " in them
-                            //return operator.solr_query.replace(/\"/g, '') === decodeURIComponent(item.operator);
-                            return operator.solr_query === decodeURIComponent(item.operator);
-                        });
-
-
-                        $scope.config[index].operator = found.solr_query;
-
-                        //Resolve the promise for the row
-                        deferred.resolve(true);
-
-                    });
-
+                    $scope.addField(item.solr_name, decodeURIComponent(item.term), decodeURIComponent(item.operator));
                 });
 
-                //when we are sure all rows have been set, initialize a search
-                $q.all(promises).then(function() {
-                    $scope.doSearch();
-                });
+                $scope.doSearch();
 
             }
 
@@ -348,6 +333,26 @@ define([
             else if ($scope.config.length === 0) {
                 $scope.addField('firstnames');
             }
+            else {
+
+                //because the contents of the field dropdown have been updated, the field reference in the existing config object
+                //does not point to the same objects, so we need to readd.
+
+                //Store current config in a tmp property as a copy
+                var tmp = angular.copy($scope.config);
+                //clear current config
+                $scope.config = [];
+
+                //add fields from the tmp copy
+                tmp.each(function(item, index) {
+                    $scope.addField(item.field.solr_name, item.term, item.operator)
+                });
+            }
+
+            $timeout(function() {
+                $scope.initialized = true;
+            });
+
 
         };
 
