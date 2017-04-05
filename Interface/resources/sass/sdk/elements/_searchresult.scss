@@ -1,28 +1,38 @@
 .sdk-searchresult {
-    font-size: 12px;
+    display: table;
 
-    margin-bottom: 18px;
-    &__image {
-        padding: 10px;
+    table-layout: fixed;
 
-        text-align: center;
+    &__item {
+        display: table-cell;
 
-        border: 1px solid $light-gray;
-        background-color: $lighter-gray;
+        width: 25%;
 
-        img {
-            width: 82px;
-            height: 111px;
+        border-right: 1px solid $light-gray;
+
+        > div {
+            padding: 15px 20px;
+        }
+
+        &:last-child {
+            border-right-width: 0;
         }
     }
+}
 
-    &__name {
-        font-weight: bold;
+/* Portrait and Landscape */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-min-device-pixel-ratio: 2) {
+    .sdk-searchresult {
+        display: block;
 
-        margin-top: 10px;
-    }
+        margin-bottom: 10px;
+        &__item {
+            display: block;
 
-    &__address {
-        margin-left: 10px;
+            width: 100%;
+
+            border-right-width: 0;
+            border-bottom: 1px solid $light-gray;
+        }
     }
 }

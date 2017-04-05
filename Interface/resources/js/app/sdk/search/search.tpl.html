@@ -92,10 +92,12 @@
 
         </div>
 
-        <div class="row-fluid" ng-repeat="result in results.docs">
-
+        <div class="row-fluid">
             <div class="span12">
-                <search-result result="result" config="fields" index="$index" page="currentPage"></search-result>
+                <div class="search-container">
+                    <search-result class="search-container__item" ng-repeat="result in results.docs" result="result" config="fields" index="$index" page="currentPage"></search-result>
+                </div>
+
             </div>
         </div>
 
