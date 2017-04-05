@@ -95,6 +95,7 @@
         <div class="row-fluid">
             <div class="span12">
                 <div class="search-container">
+
                     <div class="search-container__row">
                         <div class="search-container__header">
                             Navn
@@ -109,9 +110,10 @@
                             Om kilden
                         </div>
                     </div>
-                    <search-result ng-repeat="result in results.docs" result="result" config="fields" index="$index" page="currentPage"></search-result>
-                </div>
 
+                    <search-result ng-repeat="result in results.docs" result="result" config="fields" index="$index" page="currentPage"></search-result>
+
+                </div>
             </div>
         </div>
 

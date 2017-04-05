@@ -1,4 +1,5 @@
 .search-container {
+
     font-size: 12px;
     line-height: 20px;
     &__row {
@@ -83,6 +84,7 @@
                 border-right-width: 0;
                 border-bottom: 1px solid $light-gray;
             }
+
         }
     }
 }
