@@ -24,12 +24,11 @@ define([
             link: function(scope, element, attr) {
 
                 if (scope.result && scope.result.jsonObj) {
-                    scope.result = JSON.parse(scope.result.jsonObj);
-                    scope.data = scope.result.data;
-                    scope.metadata = scope.result.metadata;
-
+                    scope.jsonData = JSON.parse(scope.result.jsonObj);
+                    scope.data = scope.jsonData.data;
+                    scope.metadata = scope.jsonData.metadata;
                 }
-                
+
                 scope.goToPost = function() {
 
                     searchService.currentIndex = scope.page + scope.index;
