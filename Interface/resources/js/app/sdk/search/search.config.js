@@ -25,7 +25,8 @@ define([
             })
 
             .state('search.page', {
-                url: '',
+                //?search can contain a search configuration
+                url: '?search',
                 views: {
                     '': {
                         templateUrl: 'sdk/search/search.tpl.html',

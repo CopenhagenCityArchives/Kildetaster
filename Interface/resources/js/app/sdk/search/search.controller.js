@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var searchController = /*@ngInject*/ function opentasksController($scope, $rootScope, searchService, availableFields) {
+    var searchController = /*@ngInject*/ function opentasksController($q, $timeout, $scope, $stateParams, $state, $rootScope, searchService, availableFields) {
 
         $scope.loading = false;
 
@@ -237,6 +237,7 @@ define([
 
             searchService.search(query, facets, params).then(function(response) {
 
+                $scope.scrambleConfig();
                 $scope.results = response.response;
                 //$scope.facets = response.facet_counts.facet_fields;
 
@@ -269,12 +270,82 @@ define([
             });
         }
 
+        /**
+        * Encodes the current search config, and adds it as a url parameter
+        */
+        $scope.scrambleConfig = function scrambleConfig() {
+
+            var cleanedConfig = [];
+
+            $scope.config.each(function(item, index) {
+
+                var obj = {};
+                obj.solr_name = item.field.solr_name;
+                obj.term = encodeURIComponent(item.term);
+                obj.operator = encodeURIComponent(item.operator);
+
+                cleanedConfig.push(obj);
+
+            })
+
+            var stringed = JSON.stringify(cleanedConfig);
+
+            $state.go($state.current, {search: stringed}, {notify:false, reload:false});
+
+        }
+
         $scope.init = function init() {
 
             $scope.fields = availableFields;
 
+
+            var promises = [];
+
+            if ($stateParams.search) {
+
+                var savedConfig = JSON.parse($stateParams.search);
+
+                savedConfig.each(function(item, index) {
+
+                    $scope.addField(item.solr_name);
+
+                    //Prepare a promise to resolve once the timeout below is done
+                    var deferred = $q.defer();
+
+                    promises.push(deferred.promise);
+
+                    //Using a timeout to let UI and logic start (mainly because of $scope.clearRow)
+                    $timeout(function() {
+
+                        $scope.config[index].term = decodeURIComponent(item.term);
+
+                        //Lookup the operator
+                        var found = $scope.config[index].field.operators.find(function(operator) {
+
+                            //Handle operators using " in them
+                            //return operator.solr_query.replace(/\"/g, '') === decodeURIComponent(item.operator);
+                            return operator.solr_query === decodeURIComponent(item.operator);
+                        });
+
+
+                        $scope.config[index].operator = found.solr_query;
+
+                        //Resolve the promise for the row
+                        deferred.resolve(true);
+
+                    });
+
+                });
+
+                //when we are sure all rows have been set, initialize a search
+                $q.all(promises).then(function() {
+                    $scope.doSearch();
+                });
+
+            }
+
             //Add empty row if no config exist
-            if ($scope.config.length === 0) {
+            else if ($scope.config.length === 0) {
                 $scope.addField('firstnames');
             }
 
