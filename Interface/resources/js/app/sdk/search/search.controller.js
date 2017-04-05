@@ -307,7 +307,15 @@ define([
 
             })
 
-            var stringed = JSON.stringify(cleanedConfig);
+            var stringed = {};
+
+            stringed.config = cleanedConfig;
+            //Store sort direction
+            stringed.sortDirection = $scope.sortDirection;
+            //Store sort key
+            stringed.sortKey = $scope.sortByField;
+
+            stringed = JSON.stringify(stringed);
 
             $state.go($state.current, {search: stringed}, {notify:false, reload:false});
 
@@ -321,11 +329,16 @@ define([
 
                 var savedConfig = JSON.parse($stateParams.search);
 
-                savedConfig.each(function(item, index) {
+                savedConfig.config.each(function(item, index) {
                     $scope.addField(item.solr_name, decodeURIComponent(item.term), decodeURIComponent(item.operator));
                 });
 
-                $scope.doSearch();
+                //Get saved sort direction and sort key
+                $scope.sortDirection = savedConfig.sortDirection;
+                $scope.sortByField = savedConfig.sortKey;
+
+                //Trigger new search
+                $scope.doSearch(undefined, undefined, {sort: $scope.sortByField.name + ' ' + $scope.sortDirection});
 
             }
 
