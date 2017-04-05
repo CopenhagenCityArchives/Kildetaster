@@ -38,6 +38,12 @@ define([
 
     'app/sdk/directives/term-field.directive',
 
+    'app/sdk/directives/text-name.directive',
+    'app/sdk/directives/text-date.directive',
+    'app/sdk/directives/text-position.directive',
+    'app/sdk/directives/text-address.directive',
+    'app/sdk/directives/text-deathcause.directive',
+
     'app/shared/constants'
 
 ], function(
@@ -80,6 +86,12 @@ define([
 
     termFieldDirective,
 
+    textNameDirective,
+    textDateDirective,
+    textPositionDirective,
+    textAddressDirective,
+    textDeathcauseDirective,
+
     constants
 
     ) {
@@ -121,6 +133,12 @@ define([
     searchApp.directive('postCount', postCountDirective);
 
     searchApp.directive('termField', termFieldDirective);
+
+    searchApp.directive('textName', textNameDirective);
+    searchApp.directive('textDate', textDateDirective);
+    searchApp.directive('textPosition', textPositionDirective);
+    searchApp.directive('textAddress', textAddressDirective);
+    searchApp.directive('textDeathcause', textDeathcauseDirective);
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-sdk-search-app]'), ['search']);

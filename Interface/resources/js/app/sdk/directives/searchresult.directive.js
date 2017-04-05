@@ -23,6 +23,13 @@ define([
 
             link: function(scope, element, attr) {
 
+                if (scope.result && scope.result.jsonObj) {
+                    scope.result = JSON.parse(scope.result.jsonObj);
+                    scope.data = scope.result.data;
+                    scope.metadata = scope.result.metadata;
+
+                }
+                
                 scope.goToPost = function() {
 
                     searchService.currentIndex = scope.page + scope.index;
@@ -30,38 +37,6 @@ define([
                     $state.go('search.page.result.page', {
                         postId: scope.result.post_id
                     });
-                };
-
-                scope.lookItUp = function(str) {
-
-                    var found = scope.config.find(function(itm) {
-                       //Return the item that matches the solr_name and is marked as include in result
-                       return str === itm.solr_name && itm.include_in_result === 1;
-                    });
-
-                    if (found !== undefined) {
-                        return found.name;
-                    }
-                    else {
-                        return null;
-                    }
-
-                };
-
-                scope.buildValue = function(val) {
-                    if (angular.isArray(val)) {
-                        return val.join(', ');
-                    }
-                    else {
-                        return val;
-                    }
-                };
-
-                /**
-                * Build the url for the image, based on post_id
-                */
-                scope.getImage = function getImage(resultData) {
-                    return helpers.getImageUrlByPostId(resultData.post_id);
                 };
 
                 scope.$on('$destroy', function() {

@@ -1,18 +1,51 @@
-<a href ng-click="goToPost()">
+<a href class="search-container__row" ng-click="goToPost()">
 
-    <div class="row-fluid sdk-searchresult">
+    <div class="search-container__item">
+        <div>
+            <text-name firstnames="data.firstnames" lastname="data.lastname" birthname="data.birthname"></text-name>
+            <text-date date="data.dateOfDeath"></text-date>
+            <text-position position="position" ng-repeat="position in data.positions"></text-position>
+        </div>
+    </div>
 
-        <div class="span3">
-            <div class="sdk-searchresult__image">
-                <img ng-src="{{getImage(result)}}" alt="">  
+    <div class="search-container__item">
+        <div>
+            <text-address address="data.addresses"></text-address>
+        </div>
+    </div>
+
+    <div class="search-container__item">
+        <div>
+            <div ng-if="data.deathcauses.length > 0">
+                <strong>Dødsårsag:</strong>
+                <text-deathcause deathcause="deathcause" ng-repeat="deathcause in data.deathcauses"></text-deathcause>
+            </div>
+            <div ng-if="data.burials && data.burials.parish">
+                <strong>Sogn:</strong>
+                <div>
+                    {{data.burials.parish}}
+                </div>
+            </div>
+            <div ng-if="data.burials && data.burials.cemetary">
+                <strong>Kirkegård:</strong>
+                <div>
+                    {{data.burials.cemetary}}
+                </div>
             </div>
         </div>
-        <div class="span9">
-            <ul class="unstyled">
-                <li ng-repeat="(key, val) in result" ng-if="lookItUp(key) !== null">
-                    {{ lookItUp(key) }}: {{ buildValue(val) }}
-                </li>
-            </ul>
+    </div>
+
+    <div class="search-container__item">
+        <div>
+            <div>
+                {{metadata.collection_name}} {{metadata.unit_description}} s.{{metadata.page_number}}
+            </div>
+            <div ng-if="data.burials && data.burials.number">
+                <strong>Lb. nr:</strong> {{data.burials.number}}
+            </div>
+            <div class="search-container__link">
+                <span>Til kilden</span>
+            </div>
         </div>
     </div>
 </a>

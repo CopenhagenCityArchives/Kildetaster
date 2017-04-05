@@ -5,11 +5,10 @@
 
 @import "../bower_components/angularjs-datepicker/dist/angular-datepicker";
 
-
 //components
 @import "sdk/components/post";
 @import "sdk/components/search";
-
+@import "sdk/components/search-container";
 
 //elements
 @import "sdk/elements/button";
@@ -19,6 +18,5 @@
 @import "sdk/elements/postarray";
 @import "sdk/elements/postfield";
 @import "sdk/elements/task-list";
-@import "sdk/elements/searchresult";
 @import "sdk/elements/sorting";
-@import "sdk/elements/zoom-image";@import "sdk/elements/term-field.typeahead";@import "sdk/elements/input-datepicker";
+@import "sdk/elements/zoom-image";@import "sdk/elements/term-field.typeahead";@import "sdk/elements/input-datepicker";@import "sdk/elements/name";
