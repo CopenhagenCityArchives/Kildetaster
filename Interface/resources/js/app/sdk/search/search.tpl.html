@@ -95,7 +95,21 @@
         <div class="row-fluid">
             <div class="span12">
                 <div class="search-container">
-                    <search-result class="search-container__item" ng-repeat="result in results.docs" result="result" config="fields" index="$index" page="currentPage"></search-result>
+                    <div class="search-container__row">
+                        <div class="search-container__header">
+                            Navn
+                        </div>
+                        <div class="search-container__header">
+                            Adresse
+                        </div>
+                        <div class="search-container__header">
+                            Andre oplysninger
+                        </div>
+                        <div class="search-container__header">
+                            Om kilden
+                        </div>
+                    </div>
+                    <search-result ng-repeat="result in results.docs" result="result" config="fields" index="$index" page="currentPage"></search-result>
                 </div>
 
             </div>

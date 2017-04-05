@@ -1,9 +1,88 @@
 .search-container {
-    &__item {
-        display: block;
+    font-size: 12px;
+    line-height: 20px;
+    &__row {
+        display: table;
 
-        &:nth-child(odd) {
+        width: 100%;
+
+        table-layout: fixed;
+
+        color: $font-color;
+
+        //Because the default Joomla stylesheet sets a color on all DIV and SPAN tags.. go figure
+        div, span {
+            color: currentColor;
+        }
+
+        &:hover {
+            text-decoration: none;
+        }
+
+        &:nth-child(even) {
             background-color: $lighter-gray;
+        }
+    }
+
+    &__item {
+        display: table-cell;
+
+        width: 25%;
+        height: 100%;
+
+        border-right: 1px solid $light-gray;
+
+        > div {
+            position: relative;
+
+            height: 100%;
+            padding: 15px 20px 45px;;
+        }
+
+        &:last-child {
+            border-right-width: 0;
+        }
+    }
+
+    &__link {
+        position: absolute;
+        bottom: 10px;
+
+        text-decoration: underline;
+    }
+
+    &__header {
+        display: table-cell;
+
+        width: 25%;
+        padding: 15px 20px;
+
+        vertical-align: bottom;
+
+        color: $black !important;
+    }
+
+    /* Portrait and Landscape */
+    @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+        .search-container {
+            &__row {
+                display: block;
+
+                margin-bottom: 10px;
+            }
+
+            &__header {
+                display: none;
+            }
+
+            &__item {
+                display: block;
+
+                width: 100%;
+
+                border-right-width: 0;
+                border-bottom: 1px solid $light-gray;
+            }
         }
     }
 }
