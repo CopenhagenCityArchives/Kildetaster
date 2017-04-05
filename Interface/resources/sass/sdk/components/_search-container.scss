@@ -1,0 +1,9 @@
+.search-container {
+    &__item {
+        display: block;
+
+        &:nth-child(odd) {
+            background-color: $lighter-gray;
+        }
+    }
+}
