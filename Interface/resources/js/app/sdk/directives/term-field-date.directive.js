@@ -54,7 +54,8 @@ define([
 
                 }
 
-
+                //Convert the saved timesamp to a value the datepicker understands
+                $scope.data.tmpDate = new moment($scope.data.term).format('DD-MM-YYYY');
 
             }
 
