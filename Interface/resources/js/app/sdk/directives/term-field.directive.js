@@ -79,7 +79,7 @@ define([
 
                     var rtn;
 
-                    //Fields with enum are also identified as being of type typeahead, but we do not have a datasource for TYPEAHEADMAXIUMUM
+                    //Fields with enum are also identified as being of type typeahead, but we do not have a datasource for them
                     //we there fore change the type for these fields, and handle them in a different template
                     if ($scope.type === 'typeahead' && $scope.data.field.enum && $scope.data.field.enum.length > 0) {
                         $scope.type = 'select';
