@@ -244,6 +244,7 @@ define([
             //of a new result set
             if (!query) {
                 $scope.currentIndex = 0;
+                $scope.currentPage = 0;
             }
 
             // If we dont have any parameters, reset sort field to the default
