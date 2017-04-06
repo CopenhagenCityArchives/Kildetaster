@@ -37,21 +37,6 @@ define([
                     }
                 });
 
-                /**
-                * Show date picker
-                */
-                $scope.dateFieldFocus = function() {
-                    $scope.showDatePicker = true;
-                }
-
-                /**
-                * Hide the date picker
-                */
-                $scope.dateFieldBlur = function() {
-                    $scope.showDatePicker = false;
-                }
-
-
                 $scope.ngModelOptions = {
                     updateOn: 'default'
                 };

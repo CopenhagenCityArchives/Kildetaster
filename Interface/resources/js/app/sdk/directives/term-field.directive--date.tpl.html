@@ -8,10 +8,11 @@
         datepicker-append-to=".input-datepicker"
         date-format="dd-MM-yyyy"
         datepicker-show="{{showDatePicker}}"
-        datepicker-toggle="false"
+        datepicker-toggle="true"
+        date-typer="true"
         date-week-start-day="1">
             <div class="input-datepicker">
-                <input class="input-datepicker__field" ng-focus="dateFieldFocus()" ng-blur="dateFieldBlur()" placeholder="dd-mm-åååå" ng-model="data.tmpDate" type="text" />
+                <input class="input-datepicker__field" placeholder="dd-mm-åååå" ng-model="data.tmpDate" type="text" />
             </div>
     </datepicker>
 
