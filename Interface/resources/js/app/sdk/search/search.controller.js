@@ -64,8 +64,14 @@ define([
                     return operatorItem.solr_query === operator;
                 });
 
-                //Set the selected operator
-                fieldConfig.operator = operatorData.solr_query;
+                //If we found the given operator in the fields possible operators, set it
+                if (operatorData) {
+                    //Set the selected operator
+                    fieldConfig.operator = operatorData.solr_query;
+                }
+                else {
+                    console.warn('Trying to set operator: ' + operator + ' but it is not found in the possible operators on the field');
+                }
             }
             //Select the first in the list
             else {
