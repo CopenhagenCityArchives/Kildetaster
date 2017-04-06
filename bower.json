@@ -1,5 +1,5 @@
 {
-  "name": "Kildetaster",
+  "name": "kildetaster",
   "description": "",
   "main": "",
   "authors": [
@@ -26,7 +26,8 @@
     "clipboard": "^1.5.9",
     "angular-ui-select": "^0.19.4",
     "select2": "~3.4.5",
-    "angularjs-datepicker": "^2.1.17"
+    "angularjs-datepicker": "^2.1.17",
+    "moment": "^2.18.1"
   },
   "devDependencies": {
     "angular": "~1.4.8",

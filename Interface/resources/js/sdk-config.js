@@ -16,6 +16,7 @@ requirejs.config({
         'angular-cookies'       : '../bower_components/angular-cookies/angular-cookies.min',
 
         'angularjs-datepicker'  : '../bower_components/angularjs-datepicker/dist/angular-datepicker',
+        'moment'                : '../bower_components/moment/min/moment-with-locales',
 
         'angular-ui-router'     : '../bower_components/angular-ui-router/release/angular-ui-router.min',
         'angular-ui-select'     : '../bower_components/angular-ui-select/dist/select',

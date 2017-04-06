@@ -2,6 +2,8 @@ define([
 
     'angular',
 
+    'moment',
+
     'ngstorage',
     'angular-sanitize',
 
@@ -51,6 +53,8 @@ define([
 
     ang,
 
+    moment,
+
     ngStorage,
     ngSanitize,
 
@@ -98,6 +102,8 @@ define([
 
     ) {
 
+    moment.locale('da');
+    window.moment = moment;
 
     var searchApp = angular.module('search', [
         'sdk-templates',

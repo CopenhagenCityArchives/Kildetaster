@@ -1,16 +1,14 @@
 <label>
     Søgeterm
     <datepicker
+        ng-keypress="selectDate($event)"
         selector="input-datepicker__field"
         datepicker-append-to=".input-datepicker"
-        date-format="yyyy-MM-ddTHH:mm:ss.sssZ"
-        date-set="{{defaultDate}}"
+        date-format="dd-MM-yyyy"
+        datepicker-show="showDatePicker"
         date-week-start-day="1">
             <div class="input-datepicker">
-                <input class="input-datepicker__field" ng-model="data.term" type="text" />
-                <div class="input-datepicker__mask">
-                    {{data.term | date: 'dd-MM-yyyy' }}
-                </div>
+                <input class="input-datepicker__field" placeholder="dd-mm-åååå" ng-model="data.tmpDate" type="text" />
             </div>
     </datepicker>
 

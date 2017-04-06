@@ -20,22 +20,38 @@ define([
                 /**
                 * Local proxy function to handle sending function parameters
                 */
-                $scope.doSubmit = function($event, forceSubmit) {
+                $scope.doSubmit = function($event) {
                     //Call function from invoking controller, passing in our event object
                     $scope.submitFunc({ event: $event });
                 }
-                //default date for --date type fields
-                $scope.defaultDate = "01-01-1850";
+
+                // Watch property to the temp date value, and convert it to the correct
+                //format for solr to process
+                $scope.$watch('data.tmpDate', function(newval, oldval) {
+
+                    if (newval && newval !== oldval) {
+                        $scope.data.term = new moment.utc(newval, 'DD-MM-YYYY').toISOString();
+                    }
+                });
 
                 $scope.showDatePicker = false;
-
-                $scope.toggleDatePicker = function toggleDatePicker() {
-                    $scope.showDatePicker = !$scope.showDatePicker;
-                };
 
                 $scope.ngModelOptions = {
                     updateOn: 'default'
                 };
+
+                /**
+                * Keypress event handler, that tests if they pressed key is Enter
+                * and if so, submits a search
+                */
+                $scope.selectDate = function selectDate($event) {
+
+                    if ($event.keyCode === 13) {
+                        $scope.showDatePicker = false;
+                        $scope.submitFunc({ event: $event });
+                    }
+
+                }
 
                 $scope.options = [];
 
