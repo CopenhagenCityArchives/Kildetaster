@@ -43,6 +43,7 @@ define([
     'app/sdk/directives/text-position.directive',
     'app/sdk/directives/text-address.directive',
     'app/sdk/directives/text-deathcause.directive',
+    'app/sdk/directives/text-age.directive',
 
     'app/shared/constants'
 
@@ -91,6 +92,7 @@ define([
     textPositionDirective,
     textAddressDirective,
     textDeathcauseDirective,
+    textAgeDirective,
 
     constants
 
@@ -139,6 +141,7 @@ define([
     searchApp.directive('textPosition', textPositionDirective);
     searchApp.directive('textAddress', textAddressDirective);
     searchApp.directive('textDeathcause', textDeathcauseDirective);
+    searchApp.directive('textAge', textAgeDirective);
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-sdk-search-app]'), ['search']);
