@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var termFieldDirective = /* @ngInject */ function($http, $sce, TYPEAHEADMAXIUMUM) {
+    var termFieldDirective = /* @ngInject */ function() {
         return {
 
             restrict: 'E',
