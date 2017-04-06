@@ -3,7 +3,7 @@
     Søgeterm
 
     <ui-select ng-model="data.term" ng-class="{'loading': loading}" on-select="doSubmit({ charCode: 13})" append-to-body="false" ng-model-options="ngModelOptions" theme="select2">
-        <ui-select-match placeholder="Vælg fra listen">
+        <ui-select-match placeholder="Skriv for at se valgmuligheder">
             <div ng-bind="$select.selected"></div>
         </ui-select-match>
         <!-- minimum-input-length is set to 0, and is handled in the getData function instead, if we let ui-select
