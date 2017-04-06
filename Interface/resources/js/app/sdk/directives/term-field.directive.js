@@ -25,34 +25,12 @@ define([
                     $scope.submitFunc({ event: $event });
                 }
 
-                // Watch property to the temp date value, and convert it to the correct
-                //format for solr to process
-                $scope.$watch('data.tmpDate', function(newval, oldval) {
-
-                    if (newval && newval !== oldval) {
-                        $scope.data.term = new moment.utc(newval, 'DD-MM-YYYY').toISOString();
-                    }
-                });
-
-                $scope.showDatePicker = false;
 
                 $scope.ngModelOptions = {
                     updateOn: 'default'
                 };
 
-                /**
-                * Keypress event handler, that tests if they pressed key is Enter
-                * and if so, submits a search
-                */
-                $scope.selectDate = function selectDate($event) {
-
-                    if ($event.keyCode === 13) {
-                        $scope.showDatePicker = false;
-                        $scope.submitFunc({ event: $event });
-                    }
-
-                }
-
+                //Options to show when rendered as a typeahead or select
                 $scope.options = [];
 
                 /**
@@ -113,7 +91,6 @@ define([
                             rtn = 'sdk/directives/term-field.directive--select.tpl.html';
                             break;
                         case 'typeahead':
-                        case 'date':
                             rtn = 'sdk/directives/term-field.directive--' + $scope.type + '.tpl.html';
                             break;
                         case 'string':

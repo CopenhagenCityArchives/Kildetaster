@@ -31,7 +31,8 @@
                 </div>
                 <div class="span4">
                     <div class="field">
-                        <term-field type="row.field.formFieldType" data="row" submit-func="submitSearch(event)"></term-field>
+                        <term-field-date ng-if="row.field.formFieldType === 'date'" type="row.field.formFieldType" data="row" submit-func="submitSearch(event)"></term-field-date>
+                        <term-field ng-if="row.field.formFieldType !== 'date'" type="row.field.formFieldType" data="row" submit-func="submitSearch(event)"></term-field>
                     </div>
                 </div>
                 <a href class="sdk-search__remove" title="Fjern række" ng-click="removeField($index, $event)" ng-if="config.length > 1">

@@ -39,6 +39,7 @@ define([
     'app/sdk/directives/post-count.directive',
 
     'app/sdk/directives/term-field.directive',
+    'app/sdk/directives/term-field-date.directive',
 
     'app/sdk/directives/text-name.directive',
     'app/sdk/directives/text-date.directive',
@@ -90,6 +91,7 @@ define([
     postCountDirective,
 
     termFieldDirective,
+    termFieldDateDirective,
 
     textNameDirective,
     textDateDirective,
@@ -141,6 +143,7 @@ define([
     searchApp.directive('postCount', postCountDirective);
 
     searchApp.directive('termField', termFieldDirective);
+    searchApp.directive('termFieldDate', termFieldDateDirective);
 
     searchApp.directive('textName', textNameDirective);
     searchApp.directive('textDate', textDateDirective);
