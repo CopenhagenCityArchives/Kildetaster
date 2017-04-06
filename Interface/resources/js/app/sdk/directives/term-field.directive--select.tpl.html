@@ -2,7 +2,7 @@
 
     Søgeterm
 
-    <ui-select search-enabled="false" ng-model="data.term" ng-class="{'loading': loading}" append-to-body="false" ng-model-options="ngModelOptions" theme="select2">
+    <ui-select ng-model="data.term" ng-class="{'loading': loading}" search-enabled="false" on-select="doSubmit({ charCode: 13})" append-to-body="false" ng-model-options="ngModelOptions" theme="select2">
 
         <ui-select-match placeholder="Vælg fra listen">
             <div ng-bind="$select.selected"></div>

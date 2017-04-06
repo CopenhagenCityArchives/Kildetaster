@@ -140,10 +140,10 @@ define([
 
 
         //TODO move this to a directive
-        $scope.submitSearch = function submitSearch($event) {
+        $scope.submitSearch = function submitSearch(event) {
 
             //Enter key
-            if ($event.charCode === 13) {
+            if (event.charCode === 13) {
                $scope.doSearch();
             }
 

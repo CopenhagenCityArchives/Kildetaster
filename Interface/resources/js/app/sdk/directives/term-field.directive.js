@@ -17,6 +17,13 @@ define([
 
             controller: /* @ngInject */ function($scope) {
 
+                /**
+                * Local proxy function to handle sending function parameters
+                */
+                $scope.doSubmit = function($event, forceSubmit) {
+                    //Call function from invoking controller, passing in our event object
+                    $scope.submitFunc({ event: $event });
+                }
                 //default date for --date type fields
                 $scope.defaultDate = "01-01-1850";
 
