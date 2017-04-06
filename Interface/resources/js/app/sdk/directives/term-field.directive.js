@@ -42,7 +42,7 @@ define([
                     //If we do not get any data source or a term to search for, do nothing
                     if (!field.datasource || !term) {
                         //Just return an empty array
-                        //return [];
+                        return [];
                     }
 
                     if (term.length < 2) {
@@ -52,13 +52,6 @@ define([
                     //Indicate that we are about to load new options
                     $scope.loading = true;
 
-                    if (field.enum && field.enum.length > 0) {
-                        console.log('field enum', field.enum);
-
-                        $scope.options = field.enum;
-                        $scope.loading = false;
-                        return;
-                    }
                     return $http({
                         url: field.datasource + encodeURIComponent(term),
                         method: 'GET',
@@ -86,7 +79,16 @@ define([
 
                     var rtn;
 
+                    //Fields with enum are also identified as being of type typeahead, but we do not have a datasource for TYPEAHEADMAXIUMUM
+                    //we there fore change the type for these fields, and handle them in a different template
+                    if ($scope.type === 'typeahead' && $scope.data.field.enum && $scope.data.field.enum.length > 0) {
+                        $scope.type = 'select';
+                    }
+
                     switch ($scope.type) {
+                        case 'select':
+                            rtn = 'sdk/directives/term-field.directive--select.tpl.html';
+                            break;
                         case 'typeahead':
                         case 'date':
                             rtn = 'sdk/directives/term-field.directive--' + $scope.type + '.tpl.html';

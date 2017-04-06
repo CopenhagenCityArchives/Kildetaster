@@ -1,0 +1,16 @@
+<label>
+
+    Søgeterm
+
+    <ui-select ng-model="data.term" ng-class="{'loading': loading}" append-to-body="false" ng-model-options="ngModelOptions" theme="select2">
+
+        <ui-select-match placeholder="Vælg fra listen">
+            <div ng-bind="$select.selected"></div>
+        </ui-select-match>
+
+        <ui-select-choices repeat="option in data.field.enum track by $index">
+            <div ng-bind-html="option | highlight: $select.search"></div>
+        </ui-select-choices>
+
+    </ui-select>
+</label>
