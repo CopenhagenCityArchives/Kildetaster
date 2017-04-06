@@ -1,5 +1,4 @@
 .search-container {
-
     font-size: 12px;
     line-height: 20px;
     &__row {
@@ -8,6 +7,8 @@
         width: 100%;
 
         table-layout: fixed;
+
+        text-decoration: none !important;
 
         color: $font-color;
 
@@ -84,7 +85,6 @@
                 border-right-width: 0;
                 border-bottom: 1px solid $light-gray;
             }
-
         }
     }
 }
