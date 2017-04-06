@@ -9,7 +9,8 @@ define([
 
             scope: {
                 data: '=',
-                type: '='
+                type: '=',
+                submitFunc: '&'
             },
 
             template: '<ng-include src="getTemplateUrl()"></ng-include>',
