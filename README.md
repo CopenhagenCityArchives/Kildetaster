@@ -35,6 +35,13 @@ The api endpoint can be changed by editing the constant in Interface/grunttasks/
 
 Look for the property 'API'
 
+## Deployment using grunt
+
+Add a .ftppass file with FTP credentials for the server(s).
+
+Run `grunt deploy_dev` or `grunt deploy_prod`
+
+
 ## How to build for production
 In order to build the frontend to be released to production, you need to run `grunt`with no arguments. That will build and bundle frontend for both the editor and the Joomla SDK.
 

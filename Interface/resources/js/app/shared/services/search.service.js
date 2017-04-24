@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var searchService = /*@ngInject*/ function stepService($q, $http, API, JSONURL, $filter) {
+    var searchService = /*@ngInject*/ function stepService($q, $http, API, SOLRAPI, JSONURL, $filter) {
 
         var useReal = true;
 
@@ -106,7 +106,7 @@ define([
 
             search: function search(query, facets, params) {
 
-                var jsonSource = useReal ? API + '/search' : JSONURL + '/search/results.json';
+                var jsonSource = useReal ? SOLRAPI : JSONURL + '/search/results.json';
 
                 this.currentSearchConfig =  {
                     query: query,

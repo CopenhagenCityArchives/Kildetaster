@@ -1,44 +1,44 @@
 module.exports = {
   deployment_resources: {
     auth: {
-      host: 'phhw-160601.cust.powerhosting.dk',
+      host: 'kbhkilder.dk',
       port: 21,
       authKey: 'kbharkiv'
     },
     forceVerbose: true,
     src: '<%= package.build %>',
-    dest: 'public_html/kildetaster-development',
+    dest: 'public_html/software/kildetaster-development',
     exclusions : [ '<%= package.build %>' + '/resources']
   },
   deployment_index_file: {
     auth: {
-      host: 'phhw-140602.cust.powerhosting.dk',
+      host: 'kbharkiv.dk',
       port: 21,
       authKey: 'kbhkilder'
     },
     forceVerbose : true,
     src: '<%= package.build %>',
-    dest: 'public_html/software/kildetaster-development'
+    dest: 'public_html/kildetaster-development'
   },
   production_resources: {
     auth: {
-      host: 'phhw-160601.cust.powerhosting.dk',
+      host: 'kbhkilder.dk',
       port: 21,
       authKey: 'kbharkiv'
     },
     forceVerbose: true,
     src: '<%= package.build %>',
-    dest: 'public_html/kildetaster',
+    dest: 'public_html/software/kildetaster',
     exclusions : [ '<%= package.build %>' + '/resources/**']
   },
   production_index_file: {
     auth: {
-      host: 'phhw-140602.cust.powerhosting.dk',
+      host: 'kbharkiv.dk',
       port: 21,
       authKey: 'kbhkilder'
     },
     forceVerbose : true,
     src: '<%= package.build %>',
-    dest: 'public_html/software/kildetaster'
-  }  
+    dest: 'public_html/kildetaster'
+  }
 }
