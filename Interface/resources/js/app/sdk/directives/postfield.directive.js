@@ -27,7 +27,7 @@ define([
                 scope.fieldVisibility = function fieldVisibility(fieldData) {
 
                     //We have a value
-                    if (fieldData.value) {
+                    if (fieldData.value || fieldData.value === 0) {
                         return true
                     }
 
@@ -38,6 +38,13 @@ define([
 
                     return false;
 
+                }
+
+                scope.realValue = function(fieldData){
+                    if(fieldData.value === 0)
+                        return '0';
+
+                    return fieldData.value;
                 }
 
                 scope.toggleErrorReporting = function(field) {

@@ -11,11 +11,11 @@
             <strong>{{field.label}}</strong>
 
             <span ng-hide="errorReporting && !field.error">
-                {{field.value || 'Dette felt er ikke udfyldt'}}
+                {{realValue(field) || 'Dette felt er ikke udfyldt'}}
             </span>
 
             <a href ng-if="errorReporting && !field.error" class="postfield__report-link" ng-class="{ postfield__reporting: field.showErrorForm }" ng-click="toggleErrorReporting(field)">
-                <span>{{field.value || 'Dette felt er ikke udfyldt'}}</span>
+                <span>{{realValue(field) || 'Dette felt er ikke udfyldt'}}</span>
                 <i class="sdk-icon pencil"></i>
             </a>
 
