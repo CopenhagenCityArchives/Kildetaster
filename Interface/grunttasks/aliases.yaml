@@ -83,12 +83,12 @@ build:
     - 'karma:production'
 
 deploy_dev:
-    - 'ftp-deploy:deployment_resources'
-    - 'ftp-deploy:deployment_index_file'
+    - 'ftp-deploy:deploy_resources_dev'
+    - 'ftp-deploy:deploy_index_dev'
 
 deploy_prod:
-    - 'ftp-deploy:production_resources'
-    - 'ftp-deploy:production_index_file'
+    - 'ftp-deploy:deploy_resources_prod'
+    - 'ftp-deploy:deploy_index_prod'
 
 travis:
     - 'html2js:editor'
