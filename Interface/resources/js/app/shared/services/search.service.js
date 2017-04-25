@@ -131,7 +131,7 @@ define([
 
             paginatedSearch: function(query) {
 
-                var jsonSource = API + '/search';
+                var jsonSource = SOLRAPI;
 
                 return $http({
                     url: jsonSource + '?' + buildQueryString(query, [], {
