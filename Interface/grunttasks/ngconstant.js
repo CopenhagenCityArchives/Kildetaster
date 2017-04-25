@@ -69,7 +69,7 @@ module.exports = {
             RESSOURCEURL: 'http://www.kbhkilder.dk/software/kildetaster/resources/',
             SDKCSSURL: 'http://www.kbhkilder.dk/software/kildetaster/resources/css/sdk.css',
             API: 'http://www.kbhkilder.dk/1508/stable',
-            SOLRAPI: 'http://www.kbhkilder.dk/1508/stable/search',
+            SOLRAPI: 'http://ec2-54-194-89-54.eu-west-1.compute.amazonaws.com/solr/apacs_core/select',
             MAINDOMAIN: 'http://www.kbharkiv.dk',
             TOKENURL: 'http://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERRORURL: 'http://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
