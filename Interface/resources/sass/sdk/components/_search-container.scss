@@ -22,7 +22,10 @@
         }
 
         &:nth-child(even) {
-            background-color: $lighter-gray;
+            background-color: $light-gray;
+        }
+        &:first-child {
+            background-color: transparent;
         }
     }
 
@@ -34,7 +37,7 @@
 
         vertical-align: top;
 
-        border-right: 1px solid $light-gray;
+        border-right: 1px solid darken($light-gray, 10%);
 
         > div {
             position: relative;
