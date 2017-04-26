@@ -22,7 +22,10 @@
         }
 
         &:nth-child(even) {
-            background-color: $lighter-gray;
+            background-color: $light-gray;
+        }
+        &:first-child {
+            background-color: transparent;
         }
     }
 
@@ -32,7 +35,9 @@
         width: 25%;
         height: 100%;
 
-        border-right: 1px solid $light-gray;
+        vertical-align: top;
+
+        border-right: 1px solid darken($light-gray, 10%);
 
         > div {
             position: relative;
