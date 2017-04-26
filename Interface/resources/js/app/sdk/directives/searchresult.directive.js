@@ -26,6 +26,13 @@ define([
                 if (scope.result && scope.result.jsonObj) {
                     scope.jsonData = JSON.parse(scope.result.jsonObj);
                     scope.data = scope.jsonData.data;
+
+                    //HACK START
+                    // takes the dateOfDeath from the data and overwrites the wrongfully formatted dateOfDeath in the jsonObj data
+                    //This should be removed when the API is updated to return the correct date format (a timestamp)
+                    scope.data.dateOfDeath = scope.result.dateOfDeath;
+                    //HACK END
+
                     scope.metadata = scope.jsonData.metadata;
                 }
 
