@@ -290,10 +290,9 @@ define([
 
             $scope.currentIndex = index;
             $scope.currentPage = index * 10;
+            searchService.currentSearchConfig.params.start = index * 10;
 
-            $scope.doSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets, {
-                start: index * 10
-            });
+            $scope.doSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets, searchService.currentSearchConfig.params);
         }
 
         /**

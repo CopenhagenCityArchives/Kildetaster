@@ -136,7 +136,8 @@ define([
                 return $http({
                     url: jsonSource + '?' + buildQueryString(query, [], {
                         rows: 1,
-                        start: this.currentIndex
+                        start: this.currentIndex,
+                        sort: this.currentSearchConfig.params.sort
                     })
                 })
                 .then(function(response) {
