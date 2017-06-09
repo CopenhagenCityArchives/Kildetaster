@@ -39,7 +39,10 @@
     <div class="search-container__item">
         <div>
             <div>
-                {{metadata.collection_name}} {{metadata.unit_description}} s.{{metadata.page_number}}
+                <strong>Begravelsesprotokol {{metadata.collection_name}}</strong>
+            </div>
+            <div>
+                {{metadata.unit_description}} s.{{metadata.page_number}}
             </div>
             <div ng-if="data.burials && data.burials.number">
                 <strong>Lb. nr:</strong> {{data.burials.number}}
