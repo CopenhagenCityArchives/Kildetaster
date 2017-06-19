@@ -24,10 +24,11 @@ define([
         $scope.currentIndex = 0;
         $scope.currentPage = 0;
 
-        $scope.sortDirection = 'asc';
+        //Use stored direction if we have one, otherwise default to asc
+        $scope.sortDirection = $rootScope.sortDirection ? $rootScope.sortDirection : 'asc';
 
-        //Default field to sort by
-        $scope.sortByField = {name: "lastname" };
+        //Default field to sort by, use value from rootScope if we have it, otherwise default ot lastname
+        $scope.sortByField = $rootScope.sortByField ? { name: $rootScope.sortByField } : {name: "lastname" };
 
         /**
         * Prepare row for input, clearing any already set term and reset operator to its
@@ -108,6 +109,9 @@ define([
             } else {
                 $scope.sortDirection = 'desc';
             }
+
+            //Store selected direction in rootscope, so we have a value if we revisit the list
+            $rootScope.sortDirection = $scope.sortDirection;
 
             //Trigger new search
             $scope.doSearch(undefined, undefined, {sort: $scope.sortByField.name + ' ' + $scope.sortDirection});
@@ -241,6 +245,8 @@ define([
         });
 
         $scope.$watch('sortByField.name', function(newval, oldval) {
+            //Store value in rootscope, to make it available if we go back to the overview page
+            $rootScope.sortByField = newval;
             if ($scope.results.docs && $scope.results.docs.length > 0 && newval) {
                 $scope.doSearch(undefined, undefined, {sort: newval});
             }
@@ -262,8 +268,8 @@ define([
                 $scope.currentPage = 0;
             }
 
-            // If we dont have any parameters, reset sort field to the default
-            if (!params) {
+            // If we dont have any parameters, and no set sort field, reset sort field to the default
+            if (!params && !$scope.sortByField) {
                 $scope.sortByField = { name: 'lastname' };
             }
 
@@ -292,7 +298,7 @@ define([
 
         if (searchService.currentSearchConfig !== null) {
             $scope.config = searchService.currentSearchConfig.query;
-            $scope.doSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets);
+            $scope.doSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets, {sort: $scope.sortByField.name + ' ' + $scope.sortDirection});
         }
 
         $scope.goToPage = function goToPage(index) {
