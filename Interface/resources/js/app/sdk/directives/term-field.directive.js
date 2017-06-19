@@ -25,13 +25,15 @@ define([
                     $scope.submitFunc({ event: $event });
                 }
 
-
                 $scope.ngModelOptions = {
                     updateOn: 'default'
                 };
 
                 //Options to show when rendered as a typeahead or select
                 $scope.options = [];
+
+                //Default placeholder
+                $scope.placeholder = 'Søgeterm';
 
                 /**
                 *
@@ -93,7 +95,15 @@ define([
                         case 'typeahead':
                             rtn = 'sdk/directives/term-field.directive--' + $scope.type + '.tpl.html';
                             break;
+                        case 'date':
+                            //Dates should be handled as a normal string, but with a different placeholder text
+                            $scope.placeholder = 'dd-mm-åååå';
+                            rtn = 'sdk/directives/term-field.directive--string.tpl.html';
+                            break;
                         case 'string':
+                            $scope.placeholder = 'Søgesterm';
+                            rtn = 'sdk/directives/term-field.directive--string.tpl.html';
+                            break;
                         default:
                             rtn = 'sdk/directives/term-field.directive--string.tpl.html';
                     }
