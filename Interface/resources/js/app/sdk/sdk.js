@@ -11,7 +11,7 @@ define([
     'app/sdk/search/search',
 
     'app/sdk/controllers/mypage.controller',
-    'app/sdk/controllers/opentasks.controller',
+    'app/sdk/controllers/tasks.controller',
     'app/sdk/controllers/errors.controller',
     'app/sdk/controllers/useractivities.controller',
 
@@ -41,7 +41,7 @@ define([
     searchApp,
 
     mypageController,
-    opentasksController,
+    tasksController,
     errorsController,
     useractivitiesController,
 
@@ -67,7 +67,7 @@ define([
     });
 
     sdkApp.controller('mypageController', mypageController);
-    sdkApp.controller('opentasksController', opentasksController);
+    sdkApp.controller('tasksController', tasksController);
     sdkApp.controller('errorsController', errorsController);
     sdkApp.controller('useractivitiesController', useractivitiesController);
 
@@ -77,8 +77,8 @@ define([
 
     sdkApp.service('pageService', pageService);
     sdkApp.service('taskService', taskService);
-    sdkApp.service('errorService', errorService);   
-    sdkApp.service('userService', userService);   
+    sdkApp.service('errorService', errorService);
+    sdkApp.service('userService', userService);
 
     sdkApp.directive('progressBar', progressbarDirective);
 

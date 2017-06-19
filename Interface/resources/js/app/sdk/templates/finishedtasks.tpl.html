@@ -1,0 +1,32 @@
+<div ng-controller="tasksController" ng-init="init({taskId: 1, showOpen: false, showFinished: true})"">
+
+    <ul class="unstyled task-list">
+        <li>
+            <div class="task-list__header">Protokolnavn</div>
+            <div class="task-list__header">Status</div>
+            <div class="task-list__header">Brugere online</div>
+        </li>
+        <li ng-repeat="unit in units" ng-class="{ odd: $odd }" ng-show="units.length > 0">
+            <div class="task-list__item">
+                <span>{{unit.description}}</span>
+            </div>
+            <div class="task-list__item">
+                <div class="row">
+                    <div class="span12">
+                        <span title="Færdig" class="task-list__icon sdk-icon green-checkmark"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="task-list__item">
+                <ul class="list-inline">
+                    <li ng-repeat="user in unit.active_users">
+                        {{user.username}}
+                    </li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+    <div ng-if="units.length == 0" class="alert text-center">
+        Henter data
+    </div>
+</div>

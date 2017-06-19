@@ -34,6 +34,10 @@
         > span {
             display: block;
         }
+
+        button {
+            margin-top: 8px;
+        }
     }
     &__header, &__item {
         &:first-child {
@@ -47,5 +51,18 @@
         width: auto;
 
         color: $black;
+    }
+
+    &__icon {
+        width: 20px !important;
+        height: 13px !important;
+    }
+
+    //Joomla overwrite
+    .row {
+        margin-left: 0;
+    }
+    [class*="span"] {
+        min-height: auto;
     }
 }
