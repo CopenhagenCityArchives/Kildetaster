@@ -3,7 +3,16 @@ define([
 
 ], function() {
 
-    var searchController = /*@ngInject*/ function opentasksController($q, $timeout, $scope, $stateParams, $state, $rootScope, searchService, availableFields) {
+    var searchController = /*@ngInject*/ function opentasksController(
+        $q,
+        $timeout,
+        $scope,
+        $stateParams,
+        $state,
+        $rootScope,
+        searchService,
+        availableFields
+    ) {
 
         $scope.loading = false;
         $scope.initialized = false;
