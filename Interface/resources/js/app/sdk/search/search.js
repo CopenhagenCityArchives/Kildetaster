@@ -25,7 +25,6 @@ define([
     'app/sdk/search/search.run',
 
     'app/sdk/search/search.controller',
-    'app/sdk/search/search.facets.controller',
 
     'app/sdk/search/navigation.controller',
     'app/sdk/search/post.controller',
@@ -48,6 +47,7 @@ define([
     'app/sdk/directives/text-age.directive',
 
     'app/sdk/directives/filterLink/filterLink.directive',
+    'app/sdk/directives/facets/facets.directive',
 
     'app/shared/constants'
 
@@ -78,7 +78,6 @@ define([
     searchRun,
 
     searchController,
-    searchFacetsController,
     navigationController,
     postController,
 
@@ -101,6 +100,7 @@ define([
     textAgeDirective,
 
     filterLinkDirective,
+    facetsDirective,
 
     constants
 
@@ -131,7 +131,6 @@ define([
     searchApp.factory('tokenFactory', tokenFactory);
 
     searchApp.controller('searchController', searchController);
-    searchApp.controller('searchFacetsController', searchFacetsController);
     searchApp.controller('navigationController', navigationController);
     searchApp.controller('postController', postController);
 
@@ -154,6 +153,7 @@ define([
     searchApp.directive('textAge', textAgeDirective);
 
     searchApp.directive('filterLink', filterLinkDirective);
+    searchApp.directive('facets', facetsDirective);
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-sdk-search-app]'), ['search']);
