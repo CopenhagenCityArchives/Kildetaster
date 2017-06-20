@@ -3,6 +3,7 @@
 
     display: inline-block;
 
+    margin-left: 6px;
     padding: 8px 10px;
     padding-right: 40px;
 
@@ -10,7 +11,13 @@
     border-radius: 3px;
     background-color: $primary;
 
+    &:first-child {
+        margin-left: 0;
+    }
+
     &:hover {
+        text-decoration: none; //Joomla overwrite
+
         color: $white;
         background-color: darken($primary, 10%);
     }

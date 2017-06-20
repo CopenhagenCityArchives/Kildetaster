@@ -7,6 +7,8 @@ define([
         return {
             restrict: 'E',
 
+            replace: true,
+
             templateUrl: 'sdk/directives/filterLink/filterLink.tpl.html',
 
             scope: {
@@ -15,7 +17,7 @@ define([
             },
 
             link: function(scope, element, attr) {
-                
+
             }
 
         }
