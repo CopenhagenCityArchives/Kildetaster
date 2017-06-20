@@ -1,3 +1,28 @@
 <div>
-    <span ng-if="years">{{years}} år</span><span ng-if="years && month">, </span><span ng-if="month">{{month}} måneder</span>
+    <span ng-if="years">{{years}} år</span>
+
+    <span ng-if="months">
+        <ng-pluralize count="months"
+            when="{
+                '1': '{} måned',
+                'other': '{} måneder'}">
+        </ng-pluralize>
+    </span>
+    <span ng-if="weeks">
+        <ng-pluralize count="weeks"
+            when="{
+                '1': '{} uge',
+                'other': '{} uger'}">
+        </ng-pluralize>
+    </span>
+    <span ng-if="days">
+        {{days}} {{daysText}}
+    </span>
+    <span ng-if="hours">
+        <ng-pluralize count="hours"
+            when="{
+                '1': '{} time',
+                'other': '{} timer'}">
+        </ng-pluralize>
+    </span>
 </div>
