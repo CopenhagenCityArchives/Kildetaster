@@ -11,35 +11,55 @@ define([
         $state,
         $rootScope,
         searchService,
-        availableFields
+        searchConfig
     ) {
 
-        $scope.loading = false;
-        $scope.initialized = false;
+        var that = this;
 
-        $scope.config = [];
+        that.loading = false;
+        that.initialized = false;
 
-        $scope.results = [];
+        that.config = [];
 
-        $scope.currentIndex = 0;
-        $scope.currentPage = 0;
+        that.results = [];
+
+        that.currentIndex = 0;
+        that.currentPage = 0;
 
         //Use stored direction if we have one, otherwise default to asc
-        $scope.sortDirection = $rootScope.sortDirection ? $rootScope.sortDirection : 'asc';
+        that.sortDirection = $rootScope.sortDirection ? $rootScope.sortDirection : 'asc';
 
         //Default field to sort by, use value from rootScope if we have it, otherwise default ot lastname
-        $scope.sortByField = $rootScope.sortByField ? { name: $rootScope.sortByField } : {name: "lastname" };
+        that.sortByField = $rootScope.sortByField ? { name: $rootScope.sortByField } : {name: "lastname" };
 
         /**
         * Prepare row for input, clearing any already set term and reset operator to its
         * default value
         */
-        $scope.clearRow = function clearRow(row) {
-            if ($scope.initialized) {
+        that.clearRow = function clearRow(row) {
+            if (that.initialized) {
                 row.operator = row.field.operators[0].solr_query;
                 row.term = '';
             }
         };
+
+        that.selectedFilters = {};
+
+        that.addFilter = function addFilter(fieldName, term) {
+
+            if (!that.selectedFilters[fieldName]) {
+                that.selectedFilters[fieldName] = {
+                    name: term,
+                    filterQuery: fieldName + ':' + term
+                }
+            }
+            else {
+                delete that.selectedFilters[fieldName];
+            }
+
+            that.doSearch();
+
+        }
 
         /**
         * Add new row of config
@@ -48,14 +68,15 @@ define([
         * @param term {string} The value of the term field
         * @param operator {string} The operator value for the operator to select
         */
-        $scope.addField = function addField(defaultFieldName, term, operator) {
+        that.addField = function addField(defaultFieldName, term, operator) {
 
+            console.log('adding field', arguments);
             var defaultField,
                 found,
                 fieldConfig = {};
 
             if (defaultFieldName) {
-                found = $scope.fields.filter(function(field) {
+                found = that.fields.filter(function(field) {
                     return field.solr_name === defaultFieldName;
                 });
 
@@ -88,61 +109,33 @@ define([
                 fieldConfig.operator = fieldConfig.field.operators[0].solr_query;
             }
             //add the field configuration
-            $scope.config.push(fieldConfig);
+            that.config.push(fieldConfig);
         };
 
         /**
         * Remove a given row, based on its index in the array
         */
-        $scope.removeField = function removeField(fieldIndex, event) {
+        that.removeField = function removeField(fieldIndex, event) {
             event.preventDefault();
-            $scope.config.splice(fieldIndex, 1);
+            that.config.splice(fieldIndex, 1);
         };
 
         /**
         * Toggle between sorting desc and asc
         */
-        $scope.toggleSortDirection = function toggleSortDirection() {
+        that.toggleSortDirection = function toggleSortDirection() {
 
-            if ($scope.sortDirection === 'desc') {
-                $scope.sortDirection = 'asc';
+            if (that.sortDirection === 'desc') {
+                that.sortDirection = 'asc';
             } else {
-                $scope.sortDirection = 'desc';
+                that.sortDirection = 'desc';
             }
 
             //Store selected direction in rootscope, so we have a value if we revisit the list
-            $rootScope.sortDirection = $scope.sortDirection;
+            $rootScope.sortDirection = that.sortDirection;
 
             //Trigger new search
-            $scope.doSearch(undefined, undefined, {sort: $scope.sortByField.name + ' ' + $scope.sortDirection});
-        }
-
-        /**
-        * Build data object for facets, based on the facet array given from the backend
-        */
-        function buildFacetData(facetDataObject) {
-
-            var facetData = [];
-
-            for (var facetArray in facetDataObject) {
-                if (facetDataObject.hasOwnProperty(facetArray)) {
-
-                    facetDataObject[facetArray].forEach(function(facet, index, arr) {
-                        if (typeof facet === 'string'){
-                            facetData.push({
-                                field: facetArray,
-                                name: getNiceName(facetArray),
-                                data: facet,
-                                count: arr[index +1]
-                            });
-                        }
-                    });
-
-                }
-            }
-
-            return facetData;
-
+            that.doSearch(undefined, undefined, {sort: that.sortByField.name + ' ' + that.sortDirection});
         }
 
         /**
@@ -150,7 +143,7 @@ define([
         */
         function getNiceName(solrName) {
 
-            var found = $scope.fields.find(function(field) {
+            var found = that.fields.find(function(field) {
                 return field.solr_name === solrName;
             });
 
@@ -159,40 +152,14 @@ define([
 
 
         //TODO move this to a directive
-        $scope.submitSearch = function submitSearch(event) {
+        that.submitSearch = function submitSearch(event) {
 
             //Enter key
             if (event.charCode === 13) {
-               $scope.doSearch();
+               that.doSearch();
             }
 
         };
-
-        /**
-        * Facet clicked, do a filtered search
-        */
-        $scope.$on('filterSearch', function(event, params) {
-
-            searchService.filterQuery($scope.config, params).then(function(response) {
-                $scope.results = response.response;
-
-                if (response.facet_counts) {
-                    $scope.facets = response.facet_counts.facet_fields;
-                }
-
-            })
-            .catch(function(err) {
-                console.log('Error filtering: ', err);
-
-            });
-        });
-
-        /**
-        * Watch for changes in facets, and broadcast any changes
-        */
-        $scope.$watch('facets', function(newVal, oldVal) {
-            $rootScope.$broadcast('facetsUpdated', buildFacetData(newVal) );
-        });
 
         function buildPaginationItem(index) {
             return  {
@@ -202,6 +169,8 @@ define([
         }
 
         function buildPagination(results, currentIndex) {
+
+            console.log('ap', results, currentIndex)
 
             var arr = [],
                 lastPage = Math.ceil(results.numFound / 10);
@@ -229,95 +198,162 @@ define([
                 arr.push(buildPaginationItem(currentIndex + 2));
             }
 
-            $scope.pagination = {
+            that.pagination = {
                 total: Math.ceil(results.numFound / 10),
                 pages: arr
             };
 
         }
 
-        $scope.$watch('results', function(newval, oldval) {
-            buildPagination(newval, $scope.currentIndex);
+        //@see https://stackoverflow.com/questions/24078535/angularjs-controller-as-syntax-and-watch
+        $scope.$watch(angular.bind(that, function () {
+            return that.results;
+        }), function (newval, oldval) {
+            buildPagination(newval, that.currentIndex);
         });
-
-        $scope.$watch('currentIndex', function(newval, oldval) {
-            buildPagination($scope.results, newval);
+        $scope.$watch(angular.bind(that, function () {
+            return that.currentIndex;
+        }), function (newval, oldval) {
+            buildPagination(that.results, newval);
         });
-
-        $scope.$watch('sortByField.name', function(newval, oldval) {
+        $scope.$watch(angular.bind(that, function () {
+            return that.sortByField.name;
+        }), function (newval, oldval) {
             //Store value in rootscope, to make it available if we go back to the overview page
             $rootScope.sortByField = newval;
-            if ($scope.results.docs && $scope.results.docs.length > 0 && newval) {
-                $scope.doSearch(undefined, undefined, {sort: newval});
+            if (that.results.docs && that.results.docs.length > 0 && newval) {
+                that.doSearch(undefined, undefined, {sort: newval});
             }
         });
-
 
         /**
         * Execute the search
         */
-        $scope.doSearch = function doSearch(query, facets, params) {
+        that.doSearch = function doSearch(query, facets, params) {
 
-            $scope.searching = true;
+            that.searching = true;
 
             //If not called directly with a query, its not a previous search, ie. not a new page within the same search setup
             //And we should treat it as a new config and reset the page index, so that we indicate that we show the first page
             //of a new result set
             if (!query) {
-                $scope.currentIndex = 0;
-                $scope.currentPage = 0;
+                that.currentIndex = 0;
+                that.currentPage = 0;
             }
 
             // If we dont have any parameters, and no set sort field, reset sort field to the default
-            if (!params && !$scope.sortByField) {
-                $scope.sortByField = { name: 'lastname' };
+            if (!params && !that.sortByField) {
+                that.sortByField = { name: 'lastname' };
             }
 
-            query = query || $scope.config;
-            facets = facets || $scope.fields;
+            query = query || that.config;
+            facets = facets || that.selectedFilters;
             params = params || {};
 
-            if ($scope.sortByField.name) {
-                params.sort = $scope.sortByField.name + ' ' + $scope.sortDirection;
+            if (that.sortByField.name) {
+                params.sort = that.sortByField.name + ' ' + that.sortDirection;
+            }
+
+            //TODO move to helpers
+            function buildFacetData(field) {
+                var index = 0,
+                    rtn = [];
+
+                for(var index = 0; field.length > index; index = index + 2) {
+                    rtn.push({
+                        name: field[index],
+                        count: field[index + 1]
+                    });
+                }
+                return rtn;
+
             }
 
             searchService.search(query, facets, params).then(function(response) {
 
-                $scope.scrambleConfig();
-                $scope.results = response.response;
-                //$scope.facets = response.facet_counts.facet_fields;
+                that.scrambleConfig();
+                that.results = response.response;
+
+                that.facets = [];
+
+                //Prepare facet data
+                angular.forEach(response.facet_counts.facet_fields, function(field, name) {
+                    if (response.facet_counts.facet_fields.hasOwnProperty(name)) {
+
+                        var found = searchConfig[0].fields.find(function(fieldData) {
+                            return fieldData.solr_name === name;
+                        })
+
+                        //See if we have special mappings for the facet
+                        if (found.facets.mappings) {
+                            var fieldData = [];
+
+                            //Loop over all mappings on the field
+                            found.facets.mappings.forEach(function(mapping) {
+
+                                //Locate those that have a facet_queiry defined
+                                if (response.facet_counts.facet_queries[mapping.key] !== undefined) {
+                                    //Generate fieldData for the facet, using the name from the search config and count from facet_queries in the search result
+                                    fieldData.push({
+                                        name: mapping.label,
+                                        count: response.facet_counts.facet_queries[mapping.key]
+                                    });
+                                }
+
+                            });
+
+                            //Add the configured facet
+                            that.facets.push({
+                                name: name,
+                                label: found.facets.facet_label,
+                                field: fieldData
+                            });
+                        }
+                        //Nothing needs to be mapped, use the values as is
+                        else {
+                            that.facets.push({
+                                name: name,
+                                label: found.facets.facet_label,
+                                field: buildFacetData(field)
+                            });
+                        }
+
+                        console.log('found', found);
+
+
+                    }
+                });
 
             }).catch(function(err) {
                 console.log('Error in search:', err);
                 //Error handling
             }).finally(function() {
-                $scope.searching = false;
+                that.searching = false;
             });
 
         };
 
         if (searchService.currentSearchConfig !== null) {
-            $scope.config = searchService.currentSearchConfig.query;
-            $scope.doSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets, {sort: $scope.sortByField.name + ' ' + $scope.sortDirection});
+            that.config = searchService.currentSearchConfig.query;
+            that.doSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets, {sort: that.sortByField.name + ' ' + that.sortDirection});
         }
 
-        $scope.goToPage = function goToPage(index) {
-
-            $scope.currentIndex = index;
-            $scope.currentPage = index * 10;
+        that.goToPage = function goToPage(index) {
+            that.currentIndex = index;
+            that.currentPage = index * 10;
             searchService.currentSearchConfig.params.start = index * 10;
 
-            $scope.doSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets, searchService.currentSearchConfig.params);
+            that.doSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets, searchService.currentSearchConfig.params);
         }
 
         /**
         * Encodes the current search config, and adds it as a url parameter
         */
-        $scope.scrambleConfig = function scrambleConfig() {
+        that.scrambleConfig = function scrambleConfig() {
 
             var cleanedConfig = [];
 
-            $scope.config.each(function(item, index) {
+            that.config.each(function(item, index) {
 
                 var obj = {};
                 obj.solr_name = item.field.solr_name;
@@ -332,9 +368,9 @@ define([
 
             stringed.config = cleanedConfig;
             //Store sort direction
-            stringed.sortDirection = $scope.sortDirection;
+            stringed.sortDirection = that.sortDirection;
             //Store sort key
-            stringed.sortKey = $scope.sortByField;
+            stringed.sortKey = that.sortByField;
 
             stringed = JSON.stringify(stringed);
 
@@ -342,30 +378,30 @@ define([
 
         }
 
-        $scope.init = function init() {
+        that.init = function init() {
 
-            $scope.fields = availableFields;
+            that.fields = searchConfig[0].fields;
 
-            if ($scope.config.length === 0 && $stateParams.search) {
+            if (that.config.length === 0 && $stateParams.search) {
 
                 var savedConfig = JSON.parse($stateParams.search);
 
                 savedConfig.config.each(function(item, index) {
-                    $scope.addField(item.solr_name, decodeURIComponent(item.term), decodeURIComponent(item.operator));
+                    that.addField(item.solr_name, decodeURIComponent(item.term), decodeURIComponent(item.operator));
                 });
 
                 //Get saved sort direction and sort key
-                $scope.sortDirection = savedConfig.sortDirection;
-                $scope.sortByField = savedConfig.sortKey;
+                that.sortDirection = savedConfig.sortDirection;
+                that.sortByField = savedConfig.sortKey;
 
                 //Trigger new search
-                $scope.doSearch(undefined, undefined, {sort: $scope.sortByField.name + ' ' + $scope.sortDirection});
+                that.doSearch(undefined, undefined, {sort: that.sortByField.name + ' ' + that.sortDirection});
 
             }
 
             //Add empty row if no config exist
-            else if ($scope.config.length === 0) {
-                $scope.addField('firstnames');
+            else if (that.config.length === 0) {
+                that.addField('firstnames');
             }
             else {
 
@@ -373,24 +409,24 @@ define([
                 //does not point to the same objects, so we need to readd.
 
                 //Store current config in a tmp property as a copy
-                var tmp = angular.copy($scope.config);
+                var tmp = angular.copy(that.config);
                 //clear current config
-                $scope.config = [];
+                that.config = [];
 
                 //add fields from the tmp copy
                 tmp.each(function(item, index) {
-                    $scope.addField(item.field.solr_name, item.term, item.operator)
+                    that.addField(item.field.solr_name, item.term, item.operator)
                 });
             }
 
             $timeout(function() {
-                $scope.initialized = true;
+                that.initialized = true;
             });
 
 
         };
 
-        $scope.init();
+        that.init();
 
     };
 

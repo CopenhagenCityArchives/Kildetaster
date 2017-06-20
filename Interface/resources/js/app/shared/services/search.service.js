@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var searchService = /*@ngInject*/ function stepService($q, $http, API, SOLRAPI, JSONURL, $filter) {
+    var searchService = /*@ngInject*/ function searchService($q, $http, API, SOLRAPI, JSONURL, $filter) {
 
         var useReal = true;
 
@@ -18,7 +18,6 @@ define([
                     rtn.push(encodeURIComponent(buildSolrValue(row)));
                 }
             });
-
             return rtn.join(' AND ');
         }
 
@@ -36,20 +35,36 @@ define([
             return operator;
         }
 
-        /**
-        *
-        * @return {array} A list of the fields that are facetable
-        */
-        function buildFacetsForQuery(config) {
-            var arr = [];
-            config.forEach(function(field) {
-                if (field.facetable === 1) {
-                    arr.push(field.solr_name);
-                }
-            });
-            return arr;
-        }
+        // /**
+        // *
+        // * @return {array} A list of the fields that are facetable
+        // */
+        // function buildFacetsForQuery(config) {
+        //     var arr = [];
+        //     config.forEach(function(field) {
+        //         if (field.facetable === 1) {
+        //             arr.push(field.solr_name);
+        //         }
+        //     });
+        //     return arr;
+        // }
 
+
+        function buildSolrFacetQuery(facets) {
+            var rtn = [];
+
+            if (facets) {
+                console.log('facets', facets)
+                angular.forEach(facets, function(facet, facetName) {
+                    if (facets.hasOwnProperty(facetName)) {
+                        rtn.push(facet.filterQuery);
+                    }
+                });
+            }
+            //join with fq= because if we have multiple entries in the array, they should be seperatred by &, but all be fq
+            //but since the buildQueryString function already prepares a fq, the first entry does not need this
+            return rtn.join('&fq=');
+        }
 
         /**
         *
@@ -58,19 +73,21 @@ define([
 
             var rtn = [];
 
-            facets = facets || [];
+            //facets = facets || [];
 
+            console.log('I am budl', facets);
             var options = {
-                'wt': 'json',
-                'indent': true,
+                //'wt': 'json',
+                //'indent': true,
                 'q': buildSolrQuery(query),
+                'fq': buildSolrFacetQuery(facets)
                 //Include facet information
-                'facet': true,
-                'facet.mincount': 1,
+                //'facet': true,
+                //'facet.mincount': 1,
                 //Sort facets on number of hits
-                'facet.sort': 'count',
+                //'facet.sort': 'count',
                 //Default order by
-                'sort': 'lastname asc, firstnames asc'
+                //'sort': 'lastname asc, firstnames asc'
                 //Number of results
                 //'rows': 0,
                 //Index to start from
@@ -84,14 +101,15 @@ define([
                     rtn.push(param + '=' + params[param]);
                 }
             }
-
-            if (angular.isArray(facets) && facets.length > 0) {
-                facets = buildFacetsForQuery(facets);
-
-                facets.forEach(function(facet) {
-                    rtn.push('facet.field' + '=' + facet);
-                });
-            }
+            //
+            // if (angular.isArray(facets) && facets.length > 0) {
+            //     facets = buildFacetsForQuery(facets);
+            //
+            //     facets.forEach(function(facet) {
+            //         rtn.push('facet.field' + '=' + facet);
+            //     });
+            // }
+            console.log('params', params);
 
             return rtn.join('&');
         }
@@ -106,55 +124,70 @@ define([
 
             search: function search(query, facets, params) {
 
-                var jsonSource = useReal ? SOLRAPI : JSONURL + '/search/results.json';
-
+                var deferred = $q.defer();
+console.log('facets', facets);
                 this.currentSearchConfig =  {
                     query: query,
                     facets: facets,
                     params: params
                 };
 
-                return $http({
-                    url: jsonSource + '?' + buildQueryString(query, facets, params),
-                    method: 'GET'
-                })
+                this.getSearchConfig()
+                .then(function(searchConfig) {
 
+                    var baseSolrQuery = searchConfig[0].solr_base_query;
+                    return $http({
+                        url: SOLRAPI + baseSolrQuery + '&' + buildQueryString(query, facets, params),
+                        method: 'GET'
+                    });
+                })
                 .then(function(response) {
-                    return response.data;
+                    deferred.resolve(response.data);
                 })
-
                 .catch(function(err) {
                     //Flash.create('danger', 'searchService:getData: Could not get step data');
-                    return [];
+                    deferred.resolve([]);
                 });
+
+                return deferred.promise;
             },
 
             paginatedSearch: function(query) {
 
-                var jsonSource = SOLRAPI;
+                var deferred = $q.defer(),
+                    that = this;
 
-                return $http({
-                    url: jsonSource + '?' + buildQueryString(query, [], {
-                        rows: 1,
-                        start: this.currentIndex,
-                        sort: this.currentSearchConfig.params.sort
+                this.getSearchConfig().then(function(searchConfig) {
+
+                    var baseSolrQuery = searchConfig[0].solr_base_query;
+
+                    return $http({
+                        url: SOLRAPI + baseSolrQuery + '&' + buildQueryString(query, [], {
+                            rows: 1,
+                            start: that.currentIndex,
+                            sort: that.currentSearchConfig.params.sort
+                        })
                     })
                 })
+
                 .then(function(response) {
-                    return response.data;
+                    deferred.resolve(response.data);
                 })
                 .catch(function(err) {
                     console.log('Error doing paginatedSearch', err);
                 });
 
+                return deferred.promise;
+
             },
 
-            getFields: function getFields() {
-
-                var jsonSource = useReal ? API + '/searchconfig' : JSONURL + '/search/fields.json';
+            /**
+            *
+            */
+            getSearchConfig: function getSearchConfig() {
 
                 return $http({
-                    url: jsonSource,
+                    url: API + '/searchconfig',
                     params: {
                         collection_id: 1
                     },
@@ -186,31 +219,31 @@ define([
                 });
             },
 
-            filterQuery: function (query, params) {
-
-                var q = buildSolrQuery(query);
-
-                var options = {
-                    q: q,
-                    facet: 'on',
-                    'facet.field': params.field,
-                    fq: params.field + ':"' + params.data + '"',
-                    wt: 'json',
-                    indent: true,
-                };
-
-                return $http({
-                    url: API + '/search?' + buildQueryString(query, [], options)
-                })
-                .then(function(response) {
-                    return response.data;
-
-                })
-                .catch(function(err) {
-                    console.log('Error filtering search', err);
-                    alert(err.data);
-                });
-            }
+            // filterQuery: function (query, params) {
+            //
+            //     var q = buildSolrQuery(query);
+            //
+            //     var options = {
+            //         q: q,
+            //         facet: 'on',
+            //         'facet.field': params.field,
+            //         fq: params.field + ':"' + params.data + '"',
+            //         wt: 'json',
+            //         indent: true,
+            //     };
+            //
+            //     return $http({
+            //         url: API + '/search?' + buildQueryString(query, [], options)
+            //     })
+            //     .then(function(response) {
+            //         return response.data;
+            //
+            //     })
+            //     .catch(function(err) {
+            //         console.log('Error filtering search', err);
+            //         alert(err.data);
+            //     });
+            // }
         };
 
     };

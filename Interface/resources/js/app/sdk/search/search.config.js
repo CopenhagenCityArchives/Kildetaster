@@ -30,20 +30,13 @@ define([
                 views: {
                     '': {
                         templateUrl: 'sdk/search/search.tpl.html',
-                        controller: 'searchController'
+                        controller: 'searchController as ctrl'
                     }
-                    // Functionality not ready for launch, but will probably be worked on soon
-                    // The view logic is therefore just removed fow now
-                    // ,
-                    // 'facets': {
-                    //     templateUrl: 'sdk/search/search.facets.tpl.html',
-                    //     controller: 'searchFacetsController'
-                    // }
                 },
                 resolve: {
-                    availableFields: ['searchService', function(searchService) {
-                        return searchService.getFields().then(function(response) {
-                            return response[0].fields;
+                    searchConfig: ['searchService', function(searchService) {
+                        return searchService.getSearchConfig().then(function(response) {
+                            return response;
                         });
                     }]
                 }
