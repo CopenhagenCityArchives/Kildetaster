@@ -1,0 +1,43 @@
+.filter-link {
+    position: relative;
+
+    display: inline-block;
+
+    padding: 8px 10px;
+    padding-right: 40px;
+
+    color: $white;
+    border-radius: 3px;
+    background-color: $primary;
+
+    &:hover {
+        color: $white;
+        background-color: darken($primary, 10%);
+    }
+
+    &__name {
+        color: currentColor;
+    }
+
+
+    &__remove {
+        position: absolute;
+        top: 50%;
+        right: 8px;
+
+        width: 21px;
+        height: 21px;
+        margin-left: 10px;
+
+        transform: translateY(-50%);
+
+        border: 1px solid $white;
+        border-radius: 50%;
+
+        .sdk-icon.close {
+            position: relative;
+            top: -2px;
+            left: -4px;
+        }
+    }
+}
