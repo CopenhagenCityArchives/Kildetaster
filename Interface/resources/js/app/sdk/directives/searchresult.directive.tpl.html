@@ -22,6 +22,12 @@
                 <strong>Dødsårsag:</strong>
                 <text-deathcause deathcause="deathcause" ng-repeat="deathcause in data.deathcauses"></text-deathcause>
             </div>
+            <div ng-if="data.deathplace">
+                <strong>Dødssted:</strong>
+                <div>
+                    {{data.deathplace}}
+                </div>
+            </div>
             <div ng-if="data.burials && data.burials.parish">
                 <strong>Sogn:</strong>
                 <div>
