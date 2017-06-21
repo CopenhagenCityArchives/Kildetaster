@@ -19,15 +19,10 @@ define([
 
             link: function(scope, element, attr) {
 
-                console.log(scope);
-
-                //alle kan have decimaler
-                scope.days = scope.days;
-                scope.daysText = scope.days === '1,00' ? 'dag' : 'dage';
-
-                scope.weeks = scope.weeks;
-
-                scope.hours = scope.hours;
+                //Convert the given string to a float
+                scope.format = function(val) {
+                    return parseFloat(val.replace(',', '.'));
+                }
 
             }
         };

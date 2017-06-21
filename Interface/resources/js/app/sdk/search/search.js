@@ -47,6 +47,8 @@ define([
     'app/sdk/directives/text-deathcause.directive',
     'app/sdk/directives/text-age.directive',
 
+    'app/sdk/filters/formatStringNumber.filter',
+
     'app/shared/constants'
 
 ], function(
@@ -98,6 +100,8 @@ define([
     textDeathcauseDirective,
     textAgeDirective,
 
+    formatStringNumberFilter,
+
     constants
 
     ) {
@@ -148,6 +152,8 @@ define([
     searchApp.directive('textAddress', textAddressDirective);
     searchApp.directive('textDeathcause', textDeathcauseDirective);
     searchApp.directive('textAge', textAgeDirective);
+
+    searchApp.filter('formatStringNumber', formatStringNumberFilter);
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-sdk-search-app]'), ['search']);
