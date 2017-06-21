@@ -35,31 +35,17 @@ define([
             return operator;
         }
 
-        // /**
-        // *
-        // * @return {array} A list of the fields that are facetable
-        // */
-        // function buildFacetsForQuery(config) {
-        //     var arr = [];
-        //     config.forEach(function(field) {
-        //         if (field.facetable === 1) {
-        //             arr.push(field.solr_name);
-        //         }
-        //     });
-        //     return arr;
-        // }
-
-
         function buildSolrFacetQuery(facets) {
             var rtn = [];
 
             if (facets) {
-                console.log('facets', facets)
+
                 angular.forEach(facets, function(facet, facetName) {
                     if (facets.hasOwnProperty(facetName)) {
                         rtn.push(facet.filterQuery);
                     }
                 });
+
             }
             //join with fq= because if we have multiple entries in the array, they should be seperatred by &, but all be fq
             //but since the buildQueryString function already prepares a fq, the first entry does not need this
@@ -73,25 +59,13 @@ define([
 
             var rtn = [];
 
-            //facets = facets || [];
-
-            console.log('I am budl', facets);
             var options = {
-                //'wt': 'json',
-                //'indent': true,
+
+                //The query for the search
                 'q': buildSolrQuery(query),
+                //The selected filters to use as facet query
                 'fq': buildSolrFacetQuery(facets)
-                //Include facet information
-                //'facet': true,
-                //'facet.mincount': 1,
-                //Sort facets on number of hits
-                //'facet.sort': 'count',
-                //Default order by
-                //'sort': 'lastname asc, firstnames asc'
-                //Number of results
-                //'rows': 0,
-                //Index to start from
-                //'start': 0
+
             };
 
             params = angular.extend(options, params);
@@ -101,15 +75,6 @@ define([
                     rtn.push(param + '=' + params[param]);
                 }
             }
-            //
-            // if (angular.isArray(facets) && facets.length > 0) {
-            //     facets = buildFacetsForQuery(facets);
-            //
-            //     facets.forEach(function(facet) {
-            //         rtn.push('facet.field' + '=' + facet);
-            //     });
-            // }
-            console.log('params', params);
 
             return rtn.join('&');
         }
@@ -145,7 +110,6 @@ define([
                     deferred.resolve(response.data);
                 })
                 .catch(function(err) {
-                    //Flash.create('danger', 'searchService:getData: Could not get step data');
                     deferred.reject();
                 });
 
@@ -217,33 +181,7 @@ define([
                     console.log('Error getting post data', err);
                     alert(err.data);
                 });
-            },
-
-            // filterQuery: function (query, params) {
-            //
-            //     var q = buildSolrQuery(query);
-            //
-            //     var options = {
-            //         q: q,
-            //         facet: 'on',
-            //         'facet.field': params.field,
-            //         fq: params.field + ':"' + params.data + '"',
-            //         wt: 'json',
-            //         indent: true,
-            //     };
-            //
-            //     return $http({
-            //         url: API + '/search?' + buildQueryString(query, [], options)
-            //     })
-            //     .then(function(response) {
-            //         return response.data;
-            //
-            //     })
-            //     .catch(function(err) {
-            //         console.log('Error filtering search', err);
-            //         alert(err.data);
-            //     });
-            // }
+            }
         };
 
     };

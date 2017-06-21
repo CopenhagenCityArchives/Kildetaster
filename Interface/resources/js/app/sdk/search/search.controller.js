@@ -53,40 +53,6 @@ define([
             }
         };
 
-        that.selectedFilters = {};
-        that.noSelectedFilters = true;
-
-
-        that.toggleFilter = function toggleFilter(fieldName, facetData) {
-
-            if (!that.selectedFilters[fieldName]) {
-
-                var found = that.facetableFields.find(function(field) {
-                    return field.facet_key === fieldName;
-                });
-
-                that.selectedFilters[fieldName] = {
-                    name: facetData.name,
-                    fieldName: fieldName,
-                    filterQuery: facetData.query
-                }
-            }
-            else {
-                delete that.selectedFilters[fieldName];
-            }
-
-            //Test if the selectedFilters object is empty, and set a property to indicate that fact
-            if (angular.equals({}, that.selectedFilters)) {
-                that.noSelectedFilters = true;
-            }
-            else {
-                that.noSelectedFilters = false;
-            }
-
-            that.doSearch();
-
-        }
-
         /**
         * Add new row of config
         *
@@ -96,7 +62,6 @@ define([
         */
         that.addField = function addField(defaultFieldName, term, operator) {
 
-            console.log('adding field', arguments);
             var defaultField,
                 found,
                 fieldConfig = {};
@@ -146,6 +111,32 @@ define([
             that.config.splice(fieldIndex, 1);
         };
 
+        that.selectedFilters = {};
+        that.noSelectedFilters = true;
+
+
+        that.toggleFilter = function toggleFilter(fieldName, facetData) {
+
+            if (!that.selectedFilters[fieldName]) {
+
+                var found = that.facetableFields.find(function(field) {
+                    return field.facet_key === fieldName;
+                });
+
+                that.selectedFilters[fieldName] = {
+                    name: facetData.name,
+                    fieldName: fieldName,
+                    filterQuery: facetData.query
+                }
+            }
+            else {
+                delete that.selectedFilters[fieldName];
+            }
+
+            that.doSearch();
+
+        }
+
         /**
         * Toggle between sorting desc and asc
         */
@@ -162,18 +153,6 @@ define([
 
             //Trigger new search
             that.doSearch(undefined, undefined, {sort: that.sortByField.name + ' ' + that.sortDirection});
-        }
-
-        /**
-        * Get the nice name based on a solr_name property
-        */
-        function getNiceName(solrName) {
-
-            var found = that.fields.find(function(field) {
-                return field.solr_name === solrName;
-            });
-
-            return found.name;
         }
 
 
@@ -195,8 +174,6 @@ define([
         }
 
         function buildPagination(results, currentIndex) {
-
-            console.log('results', results);
 
             var arr = [],
                 lastPage = Math.ceil(results.numFound / 10);
