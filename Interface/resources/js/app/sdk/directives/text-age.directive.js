@@ -11,11 +11,20 @@ define([
 
             scope: {
                 years: '=',
-                month: '='
+                months: '=',
+                weeks: '=',
+                days: '=',
+                hours: '='
             },
 
             link: function(scope, element, attr) {
-                //noop
+
+                //Convert the given string to a float
+                scope.format = function(val) {
+                    val = '' + val || '';
+                    return parseFloat(val.replace(',', '.'));
+                }
+
             }
         };
 
