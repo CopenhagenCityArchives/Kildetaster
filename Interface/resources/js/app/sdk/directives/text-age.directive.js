@@ -21,6 +21,7 @@ define([
 
                 //Convert the given string to a float
                 scope.format = function(val) {
+                    val = '' + val || '';
                     return parseFloat(val.replace(',', '.'));
                 }
 
