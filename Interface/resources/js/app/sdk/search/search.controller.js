@@ -231,6 +231,17 @@ define([
                 that.doSearch(undefined, undefined, {sort: newval});
             }
         });
+        $scope.$watchCollection(angular.bind(that, function () {
+            return that.selectedFilters;
+        }), function (newval, oldval) {
+            //Test if the selectedFilters object is empty, and set a property to indicate that fact
+            if (angular.equals({}, that.selectedFilters)) {
+                that.noSelectedFilters = true;
+            }
+            else {
+                that.noSelectedFilters = false;
+            }
+        });
 
         /**
         * Execute the search
@@ -394,7 +405,10 @@ define([
             //Store sort key
             stringed.sortKey = that.sortByField;
 
+            stringed.selectedFilters = that.selectedFilters;
+
             stringed = JSON.stringify(stringed);
+
 
             $state.go($state.current, {search: stringed}, {notify:false, reload:false});
 
@@ -415,9 +429,10 @@ define([
                 //Get saved sort direction and sort key
                 that.sortDirection = savedConfig.sortDirection;
                 that.sortByField = savedConfig.sortKey;
+                that.selectedFilters = savedConfig.selectedFilters;
 
                 //Trigger new search
-                that.doSearch(undefined, undefined, {sort: that.sortByField.name + ' ' + that.sortDirection});
+                that.doSearch(undefined, that.selectedFilters, {sort: that.sortByField.name + ' ' + that.sortDirection});
 
             }
 
@@ -426,6 +441,9 @@ define([
                 that.addField('firstnames');
             }
             else {
+
+                //Use the stored selection of tilers
+                that.selectedFilters = searchService.currentSearchConfig.facets;
 
                 //because the contents of the field dropdown have been updated, the field reference in the existing config object
                 //does not point to the same objects, so we need to readd.

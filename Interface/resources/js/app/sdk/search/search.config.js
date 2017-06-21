@@ -91,7 +91,7 @@ define([
                         }
                         //We have a search config, so manage paginated search
                         else {
-                            searchService.paginatedSearch(searchService.currentSearchConfig.query)
+                            searchService.paginatedSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets)
                             .then(function(response) {
 
                                 data.numFound = response.response.numFound;

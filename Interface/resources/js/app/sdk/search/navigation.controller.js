@@ -25,10 +25,10 @@ define([
         };
 
         $scope.next = function() {
-            
+
             searchService.currentIndex++;
 
-            searchService.paginatedSearch(searchService.currentSearchConfig.query).then(function(response) {
+            searchService.paginatedSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets).then(function(response) {
                 $state.go('.', {
                     postId: response.response.docs[0].post_id
                 });
@@ -40,7 +40,7 @@ define([
 
             searchService.currentIndex--;
 
-            searchService.paginatedSearch(searchService.currentSearchConfig.query).then(function(response) {
+            searchService.paginatedSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets).then(function(response) {
                 $state.go('.', {
                     postId: response.response.docs[0].post_id
                 });

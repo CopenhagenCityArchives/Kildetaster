@@ -116,7 +116,7 @@ define([
                 return deferred.promise;
             },
 
-            paginatedSearch: function(query) {
+            paginatedSearch: function(query, facets) {
 
                 var deferred = $q.defer(),
                     that = this;
@@ -126,7 +126,7 @@ define([
                     var baseSolrQuery = searchConfig[0].solr_base_query;
 
                     return $http({
-                        url: SOLRAPI + baseSolrQuery + '&' + buildQueryString(query, [], {
+                        url: SOLRAPI + baseSolrQuery + '&' + buildQueryString(query, facets, {
                             rows: 1,
                             start: that.currentIndex,
                             sort: that.currentSearchConfig.params.sort
