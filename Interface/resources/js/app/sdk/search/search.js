@@ -10,6 +10,7 @@ define([
     'angular-ui-router',
     'angular-ui-select',
     'angular-filter',
+    'angular-animate',
 
     'app/shared/sdk-templates',
 
@@ -65,6 +66,7 @@ define([
     uiRouter,
     uiSelect,
     angularFilter,
+    angularAnimate,
 
     sdkTemplates,
 
@@ -120,7 +122,8 @@ define([
         'ui.select',
         'angular.filter',
         'ngStorage',
-        'ngSanitize'
+        'ngSanitize',
+        'ngAnimate'
     ]);
 
     searchApp.config(searchConfig);

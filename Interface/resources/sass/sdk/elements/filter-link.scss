@@ -1,31 +1,37 @@
 .filter-link {
-    position: relative;
+    display: flex;
+    flex-direction: row;
 
-    display: inline-block;
+    margin: 16px 0;
 
-    margin-left: 6px;
-    padding: 8px 10px;
-    padding-right: 40px;
+    flex-wrap: wrap;
 
-    color: $white;
-    border-radius: 3px;
-    background-color: $primary;
+    &__item {
+        position: relative;
 
-    &:first-child {
-        margin-left: 0;
-    }
+        display: inline-block;
 
-    &:hover {
-        text-decoration: none; //Joomla overwrite
+        margin-right: 5px;
+        margin-bottom: 5px;
+        padding: 8px 40px 8px 10px;
 
         color: $white;
-        background-color: darken($primary, 10%);
+        border-radius: 3px;
+        background-color: $primary;
+
+        &:active, &:focus, &:hover {
+            text-decoration: none; //Joomla overwrite
+
+            color: $white;
+            background-color: darken($primary, 10%);
+        }
     }
 
     &__name {
+        text-transform: capitalize;
+
         color: currentColor;
     }
-
 
     &__remove {
         position: absolute;

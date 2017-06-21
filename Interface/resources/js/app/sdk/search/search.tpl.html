@@ -60,7 +60,13 @@
         </div>
     </section>
 
-    <section class="row-fluid">
+    <section class="row-fluid" ng-if="ctrl.error">
+        <div class="span12">
+            Der skete en uventet fejl, prøv venligst igen.
+        </div>
+    </section>
+
+    <section class="row-fluid" ng-if="!ctrl.error">
 
         <div class="span3">
 
@@ -68,11 +74,13 @@
 
             <div>
 
-                <div ng-if="ctrl.noSelectedFilters">
-                    Ingen aktive filtre
+                <div class="filter-link">
+                    <div ng-if="ctrl.noSelectedFilters">
+                        Ingen aktive filtre
+                    </div>
+                    <filter-link ng-repeat="filter in ctrl.selectedFilters" data="filter" name="filter.name" url="filter.filterQuery" remove-func="ctrl.toggleFilter"></filter-link>
                 </div>
 
-                <filter-link ng-repeat="filter in ctrl.selectedFilters" data="filter" name="filter.name" url="filter.filterQuery" remove-func="ctrl.toggleFilter"></filter-link>
             </div>
 
 

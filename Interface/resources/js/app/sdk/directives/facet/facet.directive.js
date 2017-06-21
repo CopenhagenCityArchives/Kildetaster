@@ -18,14 +18,16 @@ define([
 
             link: function(scope, element, attr) {
 
-                scope.numberOfItems = 10;
+                var defaultNumberOfItems = 5;
+
+                scope.numberOfItems = defaultNumberOfItems;
 
                 scope.showMore = function(fieldName) {
-                    scope.numberOfItems = scope.numberOfItems + 10;
+                    scope.numberOfItems = scope.numberOfItems + defaultNumberOfItems;
                 };
 
-                scope.toggleFilter = function toggleFilter(fieldName, facetName) {
-                    scope.addFilter()(fieldName, facetName)
+                scope.toggleFilter = function toggleFilter(fieldName, facet) {
+                    scope.addFilter()(fieldName, facet);
                 };
 
                 /**

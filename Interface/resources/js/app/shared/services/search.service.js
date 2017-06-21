@@ -125,7 +125,7 @@ define([
             search: function search(query, facets, params) {
 
                 var deferred = $q.defer();
-console.log('facets', facets);
+
                 this.currentSearchConfig =  {
                     query: query,
                     facets: facets,
@@ -146,7 +146,7 @@ console.log('facets', facets);
                 })
                 .catch(function(err) {
                     //Flash.create('danger', 'searchService:getData: Could not get step data');
-                    deferred.resolve([]);
+                    deferred.reject();
                 });
 
                 return deferred.promise;

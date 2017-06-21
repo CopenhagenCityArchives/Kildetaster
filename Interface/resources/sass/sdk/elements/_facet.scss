@@ -13,9 +13,10 @@
         margin: 0;
         padding: 0 20px;
 
+        cursor: pointer;
+
         border-bottom: 1px solid $light-gray;
         background-color: $white;
-
 
         &:after {
             position: absolute;
@@ -62,12 +63,30 @@
 
     &__item {
         font-size: 14px;
-        line-height: 50px;
 
-        padding: 0 20px;
+        display: flex;
+        flex-direction: column;
+
+        min-height: 50px;
+        padding: 8px 20px;
+
+        cursor: pointer;
+        text-transform: capitalize;
 
         border-bottom: 1px solid $light-gray;
         background-color: $lighter-gray;
+
+        justify-content: center;
+
+        /* ngAnimate */
+        &.ng-enter {
+            transition: 0.5s all linear;
+
+            opacity: 0;
+        }
+        &.ng-enter.ng-enter-active {
+            opacity: 1;
+        }
 
         a {
             text-decoration: none;

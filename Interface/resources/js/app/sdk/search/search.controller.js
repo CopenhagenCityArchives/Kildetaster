@@ -27,8 +27,8 @@ define([
         that.currentPage = 0;
 
         that.facetableFields = searchConfig[0].fields.map(function(field) {
-
-            if (field.facets && !angular.isArray(field.facets)) {
+            //Return only the facets part of the object
+            if (field.facets) {
                 return field.facets;
             }
 
@@ -57,26 +57,18 @@ define([
         that.noSelectedFilters = true;
 
 
-
-        that.toggleFilter = function toggleFilter(fieldName, term) {
-
-            console.log('searchConfig', that.facetableFields);
+        that.toggleFilter = function toggleFilter(fieldName, facetData) {
 
             if (!that.selectedFilters[fieldName]) {
 
                 var found = that.facetableFields.find(function(field) {
-
                     return field.facet_key === fieldName;
                 });
-console.log('that', that.results);
-                var query = '';
-                if (!found.result_key) {
 
-                }
                 that.selectedFilters[fieldName] = {
-                    name: term,
+                    name: facetData.name,
                     fieldName: fieldName,
-                    filterQuery: found.facet_query.replace('%f%', fieldName).replace('%q%', term)
+                    filterQuery: facetData.query
                 }
             }
             else {
@@ -204,7 +196,7 @@ console.log('that', that.results);
 
         function buildPagination(results, currentIndex) {
 
-            console.log('ap', results, currentIndex)
+            console.log('results', results);
 
             var arr = [],
                 lastPage = Math.ceil(results.numFound / 10);
@@ -243,7 +235,10 @@ console.log('that', that.results);
         $scope.$watch(angular.bind(that, function () {
             return that.results;
         }), function (newval, oldval) {
-            buildPagination(newval, that.currentIndex);
+            if (newval) {
+                buildPagination(newval, that.currentIndex);
+            }
+
         });
         $scope.$watch(angular.bind(that, function () {
             return that.currentIndex;
@@ -265,6 +260,10 @@ console.log('that', that.results);
         */
         that.doSearch = function doSearch(query, facets, params) {
 
+            if (that.error) {
+                that.error = false;
+                that.selectedFilters = {};
+            }
             that.searching = true;
 
             //If not called directly with a query, its not a previous search, ie. not a new page within the same search setup
@@ -289,16 +288,19 @@ console.log('that', that.results);
             }
 
             //TODO move to helpers
-            function buildFacetData(field) {
+            function buildFacetData(field, facetData) {
                 var index = 0,
                     rtn = [];
 
                 for(var index = 0; field.length > index; index = index + 2) {
+
                     rtn.push({
                         name: field[index],
-                        count: field[index + 1]
+                        count: field[index + 1],
+                        query: facetData.facet_query.replace('%f%', facetData.facet_key).replace('%q%', field[index])
                     });
                 }
+
                 return rtn;
 
             }
@@ -312,6 +314,7 @@ console.log('that', that.results);
 
                 //Prepare facet data
                 angular.forEach(response.facet_counts.facet_fields, function(field, name) {
+
                     if (response.facet_counts.facet_fields.hasOwnProperty(name)) {
 
                         var found = searchConfig[0].fields.find(function(fieldData) {
@@ -320,6 +323,7 @@ console.log('that', that.results);
 
                         //See if we have special mappings for the facet
                         if (found.facets.mappings) {
+
                             var fieldData = [];
 
                             //Loop over all mappings on the field
@@ -330,7 +334,9 @@ console.log('that', that.results);
                                     //Generate fieldData for the facet, using the name from the search config and count from facet_queries in the search result
                                     fieldData.push({
                                         name: mapping.label,
-                                        count: response.facet_counts.facet_queries[mapping.key]
+                                        //Look up the count under facet_queries in the result
+                                        count: response.facet_counts.facet_queries[mapping.key],
+                                        query: mapping.facet_query
                                     });
                                 }
 
@@ -339,27 +345,32 @@ console.log('that', that.results);
                             //Add the configured facet
                             that.facets.push({
                                 name: name,
+                                query: '',
                                 label: found.facets.facet_label,
                                 field: fieldData
                             });
                         }
                         //Nothing needs to be mapped, use the values as is
                         else {
-                            that.facets.push({
-                                name: name,
-                                label: found.facets.facet_label,
-                                field: buildFacetData(field)
+                            //look up missing values from the array of facetable fields
+                            var lookupData = that.facetableFields.find(function(item) {
+                                return name === item.facet_key;
                             });
+
+                            that.facets.push({
+                                name: lookupData.facet_key,
+                                label: lookupData.facet_label,
+                                field: buildFacetData(field, lookupData)
+                            });
+
                         }
-
-                        console.log('found', found);
-
 
                     }
                 });
 
             }).catch(function(err) {
                 console.log('Error in search:', err);
+                that.error = true;
                 //Error handling
             }).finally(function() {
                 that.searching = false;
