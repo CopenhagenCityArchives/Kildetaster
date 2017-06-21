@@ -63,7 +63,21 @@
     <section class="row-fluid">
 
         <div class="span3">
-            <facets data="ctrl.facets" selected-filters="ctrl.selectedFilters" add-filter="ctrl.addFilter"></facets>
+
+            <h2>Valgte filtre</h2>
+
+            <div>
+
+                <div ng-if="ctrl.noSelectedFilters">
+                    Ingen aktive filtre
+                </div>
+
+                <filter-link ng-repeat="filter in ctrl.selectedFilters" data="filter" name="filter.name" url="filter.filterQuery" remove-func="ctrl.toggleFilter"></filter-link>
+            </div>
+
+
+            <facet ng-repeat="fieldData in ctrl.facets" data="fieldData" add-filter="ctrl.toggleFilter"></facet>
+
         </div>
 
         <div class="span9">

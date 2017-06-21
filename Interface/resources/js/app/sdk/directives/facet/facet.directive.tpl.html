@@ -1,0 +1,14 @@
+<div class="facet" ng-class="{ active: data.active }">
+
+    <h3 class="facet__header" ng-click="toggle()">{{data.label}}</h3>
+
+    <ul class="facet__group">
+        <li class="facet__item" ng-repeat="facet in data.field | limitTo:numberOfItems">
+            <a href="" ng-click="toggleFilter(data.name, facet.name)">{{facet.name}} ({{facet.count}})</a>
+        </li>
+        <li class="facet__item" ng-if="numberOfItems < data.field.length">
+            <a class="facet__more" href="" ng-click="showMore()">Se flere</a>
+        </li>
+    </ul>
+
+</div>

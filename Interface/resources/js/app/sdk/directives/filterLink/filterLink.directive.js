@@ -13,11 +13,16 @@ define([
 
             scope: {
                 name: '=',
-                url: '='
+                data: '=',
+                removeFunc: '&'
             },
 
             link: function(scope, element, attr) {
 
+                scope.remove = function() {
+                    console.log('removing', arguments);
+                    scope.removeFunc()(scope.data.fieldName, scope.data.name);
+                };
             }
 
         }

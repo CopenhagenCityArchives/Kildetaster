@@ -1,17 +1,73 @@
 .facet {
-    margin-bottom: 28px;
+    overflow: hidden;
 
     &__header {
-        font-family: amblebold;
-        font-size: 18px;
+        font-family: verdana, sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 50px;
 
-        text-transform: uppercase;
+        position: relative;
+        z-index: 100;
+
+        margin: 0;
+        padding: 0 20px;
+
+        border-bottom: 1px solid $light-gray;
+        background-color: $white;
+
+
+        &:after {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+
+            display: inline-block;
+
+            width: 0;
+            height: 0;
+
+            content: "";
+            transition: transform 100ms ease-in;
+            transform: translateY(-50%);
+
+            border-width: 10px 6px 0 6px;
+            border-style: solid;
+            border-color: $font-color transparent transparent transparent;
+
+            .active & {
+                transform: translateY(-50%) rotateX(180deg);
+            }
+        }
+    }
+
+    &__group {
+        position: relative;
+        z-index: 50;
+
+        max-height: 0;
+        margin: 0;
+
+        list-style: none;
+
+        transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+
+        .active & {
+            max-height: 9000px;
+
+            transition: max-height 1s ease-in-out;
+        }
     }
 
 
     &__item {
         font-size: 14px;
-        line-height: 28px;
+        line-height: 50px;
+
+        padding: 0 20px;
+
+        border-bottom: 1px solid $light-gray;
+        background-color: $lighter-gray;
 
         a {
             text-decoration: none;
@@ -20,6 +76,10 @@
         a:hover {
             text-decoration: none;
         }
+    }
+
+    &__more {
+        font-weight: 600;
     }
 
     &__count {

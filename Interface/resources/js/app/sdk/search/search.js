@@ -47,7 +47,7 @@ define([
     'app/sdk/directives/text-age.directive',
 
     'app/sdk/directives/filterLink/filterLink.directive',
-    'app/sdk/directives/facets/facets.directive',
+    'app/sdk/directives/facet/facet.directive',
 
     'app/shared/constants'
 
@@ -100,7 +100,7 @@ define([
     textAgeDirective,
 
     filterLinkDirective,
-    facetsDirective,
+    facetDirective,
 
     constants
 
@@ -153,7 +153,7 @@ define([
     searchApp.directive('textAge', textAgeDirective);
 
     searchApp.directive('filterLink', filterLinkDirective);
-    searchApp.directive('facets', facetsDirective);
+    searchApp.directive('facet', facetDirective);
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-sdk-search-app]'), ['search']);

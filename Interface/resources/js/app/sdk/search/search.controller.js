@@ -26,6 +26,16 @@ define([
         that.currentIndex = 0;
         that.currentPage = 0;
 
+        that.facetableFields = searchConfig[0].fields.map(function(field) {
+
+            if (field.facets && !angular.isArray(field.facets)) {
+                return field.facets;
+            }
+
+        })
+        //filter out empty entries in the array
+        .filter(Boolean);
+
         //Use stored direction if we have one, otherwise default to asc
         that.sortDirection = $rootScope.sortDirection ? $rootScope.sortDirection : 'asc';
 
@@ -44,17 +54,41 @@ define([
         };
 
         that.selectedFilters = {};
+        that.noSelectedFilters = true;
 
-        that.addFilter = function addFilter(fieldName, term) {
+
+
+        that.toggleFilter = function toggleFilter(fieldName, term) {
+
+            console.log('searchConfig', that.facetableFields);
 
             if (!that.selectedFilters[fieldName]) {
+
+                var found = that.facetableFields.find(function(field) {
+
+                    return field.facet_key === fieldName;
+                });
+console.log('that', that.results);
+                var query = '';
+                if (!found.result_key) {
+
+                }
                 that.selectedFilters[fieldName] = {
                     name: term,
-                    filterQuery: fieldName + ':' + term
+                    fieldName: fieldName,
+                    filterQuery: found.facet_query.replace('%f%', fieldName).replace('%q%', term)
                 }
             }
             else {
                 delete that.selectedFilters[fieldName];
+            }
+
+            //Test if the selectedFilters object is empty, and set a property to indicate that fact
+            if (angular.equals({}, that.selectedFilters)) {
+                that.noSelectedFilters = true;
+            }
+            else {
+                that.noSelectedFilters = false;
             }
 
             that.doSearch();
