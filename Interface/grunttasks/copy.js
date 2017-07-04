@@ -71,6 +71,13 @@ module.exports = {
         	cwd: '<%= package.html %>/dump/index_files/',
         	src: ['**/*.*'],
         	dest: '<%= package.sdkresources %>/dump_files'
+        },{
+            //.htaccess files for resources
+            expand: true,
+            cwd: '<%= package.resources %>/',
+            src: ['.htaccess'],
+            dest: '<%= package.sdkresources %>/'
+
         }]
     },
 
@@ -87,6 +94,13 @@ module.exports = {
             cwd: '<%= package.resources %>/images/',
             src: ['**/*.{png,jpg,gif,svg}'],
             dest: '<%= package.buildresources %>/images'
+
+        },{
+            //.htaccess files for resources
+            expand: true,
+            cwd: '<%= package.resources %>/',
+            src: ['.htaccess'],
+            dest: '<%= package.buildresources %>/'
 
         }, {
             //Mock data
@@ -111,6 +125,13 @@ module.exports = {
             cwd: '<%= package.resources %>/images/',
             src: ['**/*.{png,jpg,gif,svg}'],
             dest: '<%= package.buildresources %>/images'
+
+        },{
+            //.htaccess files for resources
+            expand: true,
+            cwd: '<%= package.resources %>/',
+            src: ['.htaccess'],
+            dest: '<%= package.buildresources %>/'
 
         }]
     },
