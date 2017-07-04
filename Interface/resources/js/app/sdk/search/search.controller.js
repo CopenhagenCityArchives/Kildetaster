@@ -41,14 +41,37 @@ define([
             }
         };
 
+        $scope.shouldEscape = function shouldEscape(row, operator) {
+
+            var found = row.field.operators.find(function(operatorItem) {
+                return operatorItem.solr_query === operator;
+            });
+
+
+            if (found) {
+
+                row.escapeSpecialChars = found.escape_special_chars || false;
+
+                if (!row.escapeSpecialChars) {
+                    row.term = row.term.replace('*', ' ');
+                }
+                else {
+                    row.term = row.term.replace(' ', '*');
+                }
+
+            }
+
+        }
+
         /**
         * Add new row of config
         *
         * @param defaultFieldName {string} The name of the field type to set as default selection
         * @param term {string} The value of the term field
         * @param operator {string} The operator value for the operator to select
+        * @param shouldEscape {bool} Should we run conversion logic, to handle spaces?
         */
-        $scope.addField = function addField(defaultFieldName, term, operator) {
+        $scope.addField = function addField(defaultFieldName, term, operator, shouldEscape) {
 
             var defaultField,
                 found,
@@ -66,6 +89,10 @@ define([
 
             if (term) {
                 fieldConfig.term = term;
+            }
+
+            if (shouldEscape !== undefined) {
+                fieldConfig.escapeSpecialChars = shouldEscape;
             }
 
             if (operator) {
@@ -323,6 +350,7 @@ define([
                 obj.solr_name = item.field.solr_name;
                 obj.term = encodeURIComponent(item.term);
                 obj.operator = encodeURIComponent(item.operator);
+                obj.escapeSpecialChars = item.escapeSpecialChars;
 
                 cleanedConfig.push(obj);
 
@@ -351,7 +379,7 @@ define([
                 var savedConfig = JSON.parse($stateParams.search);
 
                 savedConfig.config.each(function(item, index) {
-                    $scope.addField(item.solr_name, decodeURIComponent(item.term), decodeURIComponent(item.operator));
+                    $scope.addField(item.solr_name, decodeURIComponent(item.term), decodeURIComponent(item.operator), item.escapeSpecialChars);
                 });
 
                 //Get saved sort direction and sort key
@@ -379,7 +407,7 @@ define([
 
                 //add fields from the tmp copy
                 tmp.each(function(item, index) {
-                    $scope.addField(item.field.solr_name, item.term, item.operator)
+                    $scope.addField(item.field.solr_name, item.term, item.operator, item.escapeSpecialChars);
                 });
             }
 

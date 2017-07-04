@@ -1,4 +1,4 @@
 <label>
     Søgeterm
-    <input type="text" placeholder="{{placeholder}}" ng-keypress="doSubmit($event)" ng-model="data.term">
+    <input type="text" placeholder="{{placeholder}}" ng-keypress="doSubmit($event)" format-input should-escape="data.escapeSpecialChars" ng-model="data.term">
 </label>

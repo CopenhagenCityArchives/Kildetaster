@@ -24,6 +24,7 @@
                                 ng-options="operator.solr_query as operator.label for operator in row.field.operators"
                                 ng-model="row.operator"
                                 ng-init="clearRow(row)"
+                                ng-change="shouldEscape(row, row.operator)"
                                 <option>Vælg</option>
                             </select>
                         </label>
