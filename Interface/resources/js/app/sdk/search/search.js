@@ -41,6 +41,7 @@ define([
     'app/sdk/directives/term-field-date.directive',
 
     'app/sdk/directives/format-input.directive',
+    'app/sdk/directives/format-date.directive',
 
     'app/sdk/directives/text-name.directive',
     'app/sdk/directives/text-date.directive',
@@ -96,6 +97,7 @@ define([
     termFieldDateDirective,
 
     formatInputDirective,
+    formatDateDirective,
 
     textNameDirective,
     textDateDirective,
@@ -151,6 +153,7 @@ define([
     searchApp.directive('termFieldDate', termFieldDateDirective);
 
     searchApp.directive('formatInput', formatInputDirective);
+    searchApp.directive('formatDate', formatDateDirective);
 
     searchApp.directive('textName', textNameDirective);
     searchApp.directive('textDate', textDateDirective);

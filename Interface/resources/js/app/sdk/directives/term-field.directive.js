@@ -96,9 +96,8 @@ define([
                             rtn = 'sdk/directives/term-field.directive--' + $scope.type + '.tpl.html';
                             break;
                         case 'date':
-                            //Dates should be handled as a normal string, but with a different placeholder text
                             $scope.placeholder = 'dd-mm-åååå';
-                            rtn = 'sdk/directives/term-field.directive--string.tpl.html';
+                            rtn = 'sdk/directives/term-field.directive--date.tpl.html';
                             break;
                         case 'string':
                             $scope.placeholder = 'Søgesterm';
