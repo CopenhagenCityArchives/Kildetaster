@@ -1,0 +1,28 @@
+{
+  "name": "APACS datasource editor",
+  "authors": [
+    "Bo Henriksen <stumpdenmark@hotmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-schema-form": "^0.8.13",
+    "bootstrap": "3.3.4",
+    "font-awesome": "fontawesome#4.1",
+    "angular": "1.6",
+    "angular-route": "1.6",
+    "angular-ui-select": "^0.19.8",
+    "angular-sanitize": "1.6",
+    "ngstorage": "^0.3.11"
+  }
+}

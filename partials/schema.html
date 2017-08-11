@@ -1,0 +1,65 @@
+<div class="container" ng-controller="EditorController">
+    <div class="col-md-12">
+    <h2 class="text-center">Datalister</h2>
+    <p>Her kan du oprette nye og rette eksisterende værdier i Københavns Stadsarkivs datalister.</p>
+    <p>Bemærk at listerne ved indtastning og rettelser opdateres med det samme. Ved visning af søgeresultater opdateres værdierne efter et døgn.</p>
+    <p>Du skal være superbruger og være logget ind for at gemme ændringerne.</p>
+    <p ng-if="model.loginStatus">Du er logget ind</p>
+    <p ng-if="!model.loginStatus">Du er IKKE logget ind</p>
+    <div class="col-md-4 col-md-offset-4">
+        <h4 class="text-center">Liste</h4>
+        <form name="myForm">
+        <select name="mySelect" id="mySelect" class="form-control"
+          ng-options="option.name for option in model.datasources track by option.id"
+          ng-model="model.selected_datasource">
+        </select>
+      </form>
+    </div>
+
+    </div>
+    <div class="col-md-6">
+        <h3>Ret eksisterende værdier</h3>
+        <h4>Eksisterende værdi</h4>
+        <ui-select ng-model="model.selectedValue"
+                   theme="bootstrap"
+                   ng-disabled="!model.selected_datasource.valueField"
+                   reset-search-input="true"
+                   style="width: 400px;"
+                   title="Indtast en værdi">
+          <ui-select-match placeholder="Indtast en værdi">{{$select.selected[model.selected_datasource.valueField]}}</ui-select-match>
+          <ui-select-choices repeat="address in model.values track by $index"
+                   refresh="getValuesByQuery($select.search)"
+                   refresh-delay="250"
+                   minimum-input-length="3">
+            <div ng-bind-html="address[model.selected_datasource.valueField] | highlight: $select.search"></div>
+          </ui-select-choices>
+        </ui-select>
+        <h4>Ny værdi</h4>
+            <input value="indtast værdi" ng-model="model.changeValue" class="form-control" style="width: 400px;" ng-disabled="model.canCreateValue"></input>
+            <p ng-hide="model.canUpdateValue">Indtast en ny værdi for at gemme</p>
+            <p ng-hide="!model.canUpdateValue">Værdien <b>{{model.selectedValue[model.selected_datasource.valueField]}}</b> vil blive ændret til <b>{{model.changeValue}}</b></p>
+            <input type="button" value="Gem værdi" class="btn btn-default" ng-disabled="!model.canUpdateValue" ng-click="save()"></input>
+    </div>
+
+
+        <div class="col-md-6">
+            <h3>Opret nye værdier</h3>
+            <h4>Ny værdi</h4>
+                <input value="indtast værdi" ng-model="model.newValue" class="form-control" style="width: 400px;" ng-disabled="model.canUpdateValue"></input>
+                <p ng-hide="model.canCreateValue">Indtast en ny værdi for at gemme</p>
+                <p ng-hide="!model.canCreateValue">Værdien <b>{{model.newValue}}</b> vil blive oprettet i listen</p>
+                <input type="button" value="Gem værdi" class="btn btn-default" ng-disabled="!model.canCreateValue" ng-click="save()"></input>
+        </div>
+
+        <div class="col-md-12">
+            <h4 ng-hide="model.status!==''" style="color:green;" class="text-center">&nbsp;</h4>
+            <h4 ng-hide="model.status==''" style="color:green;" class="text-center">{{model.status}}</h4>
+            <p>&nbsp;</p>
+            <h4 class="text-center" ng-hide="model.history.length == 0">Historik</h4>
+            <div ng-repeat="x in model.history">
+            <div ng-if="!x.oldValue">Du tilføjede værdien <b>{{x.newValue}}</b></div>
+            <div ng-if="x.oldValue">Du ændrede værdien <b>{{x.oldValue}}</b> til <b>{{x.newValue}}</b></div>
+            </div>
+        </div>
+    <!--<div><pre>{{ model | json }}</pre></div>-->
+</div>

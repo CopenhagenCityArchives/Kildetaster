@@ -1,0 +1,8 @@
+version: "2.0"
+services:
+  phpfpm:
+    image: 'eboraas/apache-php'
+    ports:
+      - '9000:80'
+    volumes:
+      - ./:/var/www/html
