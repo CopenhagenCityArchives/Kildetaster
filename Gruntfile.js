@@ -14,6 +14,10 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-clean');
 
+    grunt.loadNpmTasks('grunt-ftp-deploy');
+
+    require('time-grunt')(grunt);
+
     grunt.config.init({
 
         concat: {
@@ -85,6 +89,20 @@ module.exports = function(grunt) {
 
         clean: {
             build: ['build/', 'index_build.html']
+        },
+
+        'ftp-deploy': {
+            build: {
+                auth: {
+                    host: 'phhw-140602.cust.powerhosting.dk',
+                    port: 21,
+                    authKey: 'kbhkilder'
+                },
+                forceVerbose: true,
+                src: 'build/',
+                dest: 'public_html/software/apacs_datasource_editor',
+                exclusions: []
+            }
         }
     });
 
@@ -120,4 +138,6 @@ module.exports = function(grunt) {
 
     //Same as watch:js, but without watching...
     grunt.registerTask('build-dev', ['clean:build', 'concat:main', 'jsbeautifier', 'wiredep:task']);
+
+    grunt.registerTask('deploy', ['ftp-deploy:build']);
 };

@@ -21,6 +21,12 @@ The same, but without watching
 
 This will concat all js and css files and place them in /build.
 
+``grunt deploy``
+
+This will deploy all files in /build to kbhkilder.dk/software/apacs_datasource_editor
+
+Remember to run ´´grunt build´´ first!
+
 ###Docker
 Start server:
 
