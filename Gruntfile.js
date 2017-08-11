@@ -12,6 +12,8 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-text-replace');
 
+    grunt.loadNpmTasks('grunt-contrib-clean');
+
     grunt.config.init({
 
         concat: {
@@ -77,8 +79,12 @@ module.exports = function(grunt) {
         watch: {
             js: {
                 files: ['js/*.js'],
-                tasks: ['concat:main', 'jsbeautifier', 'wiredep:task']
+                tasks: ['clean:build', 'concat:main', 'jsbeautifier', 'wiredep:task']
             }
+        },
+
+        clean: {
+            build: ['build/', 'index_build.html']
         }
     });
 
@@ -107,11 +113,11 @@ module.exports = function(grunt) {
     });
 
     //Replace bower sources with concatted js and css files
-    grunt.registerTask('build', ['concat:main', 'jsbeautifier', 'wiredep:task', 'bower-bundler', 'replace:task']);
+    grunt.registerTask('build', ['clean:build', 'concat:main', 'jsbeautifier', 'wiredep:task', 'bower-bundler', 'replace:task']);
 
     //Default: Watch as js files
     grunt.registerTask('default', ['watch:js']);
 
     //Same as watch:js, but without watching...
-    grunt.registerTask('build-dev', ['concat:main', 'jsbeautifier', 'wiredep:task']);
+    grunt.registerTask('build-dev', ['clean:build', 'concat:main', 'jsbeautifier', 'wiredep:task']);
 };

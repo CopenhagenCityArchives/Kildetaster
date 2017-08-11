@@ -2,12 +2,28 @@
 
 Small service for super users. Used to create and update values in APACS datasources.
 
-Development:
+###Initialization
+``npm install``
+
+``bower install``
+
+###Grunt commands
+
 ``grunt``
 
-This will uglify all js and add all bower dependencies.
+This will watch and concat all js and add all bower dependencies. Great for development.
 
+``grunt build-dev``
+
+The same, but without watching
+
+``grunt build``
+
+This will concat all js and css files and place them in /build.
+
+###Docker
 Start server:
+
 ``docker-compose up``
 
-Serveren is now accessible at http://localhost:9000/index.html
+Server is now accessible at http://localhost:9000/index.html

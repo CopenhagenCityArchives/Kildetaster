@@ -1,7 +1,7 @@
 /**
  * Main AngularJS Web Application
  */
-var app = angular.module('tutorialWebApp', [
+var app = angular.module('APACSDatasourceEditor', [
     'ngSanitize',
     'schemaForm',
     'ngRoute',
@@ -18,7 +18,7 @@ app.config(['$routeProvider', function($routeProvider) {
         //  .when("/", {templateUrl: "partials/home.html", controller: "PageCtrl"})
         // Pages*/
         .when("/", {
-            templateUrl: "partials/schema.html",
+            templateUrl: "partials/main.html",
             controller: "EditorController"
         })
         /*
