@@ -33,3 +33,8 @@ Start server:
 ``docker-compose up``
 
 Server is now accessible at http://localhost:9000/index.html
+
+
+###Deployment
+``grunt build``
+``grunt deploy``

@@ -10,15 +10,21 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.loadNpmTasks('grunt-text-replace');
+    grunt.loadNpmTasks('grunt-replace');
 
     grunt.loadNpmTasks('grunt-contrib-clean');
 
     grunt.loadNpmTasks('grunt-ftp-deploy');
 
+    grunt.loadNpmTasks('grunt-contrib-copy');
+
     require('time-grunt')(grunt);
 
     grunt.config.init({
+
+        env: {
+            libUrl: 'http://kbhkilder.dk/software/apacs_datasource_editor',
+        },
 
         concat: {
             main: {
@@ -63,13 +69,33 @@ module.exports = function(grunt) {
             }
         },
 
-        replace: {
+        copy: {
+            partials: {
+                files: [
+                    // includes files within path
+                    {
+                        expand: true,
+                        src: ['partials/*'],
+                        dest: 'build/html/',
+                        filter: 'isFile'
+                    },
+                    {
+                        expand: false,
+                        src: ['.htaccess'],
+                        dest: 'build/html/',
+                        filter: 'isFile'
+                    },
+                ],
+            },
+        },
+
+        /*replace: {
             task: {
-                src: ['index.html'],
-                dest: 'index_build.html',
+                src: 'index.html',
+                dest: 'build/html/index_build.html',
                 overwrite: false,
                 replacements: [{
-                        from: /<!-- bower:css -->(.|\n)*?<!-- endbower -->/,
+                        from: /<!-- bower:css -->(.|\n|\w)*?<!-- endbower -->/,
                         to: '<link rel="stylesheet" href="build/css.min.css">'
                     },
                     {
@@ -77,6 +103,32 @@ module.exports = function(grunt) {
                         to: '<script src="build/js.min.js"></script>'
                     }
                 ]
+            }
+        },*/
+
+        replace: {
+            dist: {
+                options: {
+                    patterns: [{
+                            match: /(<!-- bower:css -->)((\s|.)*?)(<!-- endbower -->)/g,
+                            replacement: '<link rel="stylesheet" href="<%= env.libUrl %>/css.min.css">'
+                        },
+                        {
+                            match: /(<!-- bower:js -->)((\s|.)*?)(<!-- endbower -->)/g,
+                            replacement: '<script src="<%= env.libUrl %>/js.min.js"></script>'
+                        },
+                        {
+                            match: /(<script src="build\/app\.js"><\/script>)/g,
+                            replacement: '<script src="<%= env.libUrl %>/app.js"></script>'
+                        }
+                    ]
+                },
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    src: ['index.html'],
+                    dest: 'build/html/'
+                }]
             }
         },
 
@@ -88,11 +140,11 @@ module.exports = function(grunt) {
         },
 
         clean: {
-            build: ['build/', 'index_build.html']
+            build: ['build/']
         },
 
         'ftp-deploy': {
-            build: {
+            source: {
                 auth: {
                     host: 'phhw-140602.cust.powerhosting.dk',
                     port: 21,
@@ -101,6 +153,17 @@ module.exports = function(grunt) {
                 forceVerbose: true,
                 src: 'build/',
                 dest: 'public_html/software/apacs_datasource_editor',
+                exclusions: ['build/html']
+            },
+            frontend: {
+                auth: {
+                    host: 'kbharkiv.dk',
+                    port: 21,
+                    authKey: 'kbharkiv'
+                },
+                forceVerbose: true,
+                src: ['build/html'],
+                dest: 'public_html/datalister',
                 exclusions: []
             }
         }
@@ -131,13 +194,13 @@ module.exports = function(grunt) {
     });
 
     //Replace bower sources with concatted js and css files
-    grunt.registerTask('build', ['clean:build', 'concat:main', 'jsbeautifier', 'wiredep:task', 'bower-bundler', 'replace:task']);
-
+    grunt.registerTask('build', ['clean:build', 'concat:main', 'jsbeautifier', 'wiredep:task', 'bower-bundler', 'replace:dist']);
+    grunt.registerTask('test', ['wiredep:task']);
     //Default: Watch as js files
     grunt.registerTask('default', ['watch:js']);
 
     //Same as watch:js, but without watching...
-    grunt.registerTask('build-dev', ['clean:build', 'concat:main', 'jsbeautifier', 'wiredep:task']);
+    grunt.registerTask('build-dev', ['clean:build', 'concat:main', 'jsbeautifier', 'wiredep:task', 'replace:dist']);
 
-    grunt.registerTask('deploy', ['ftp-deploy:build']);
+    grunt.registerTask('deploy', ['copy:partials', 'replace:dist', 'ftp-deploy:source', 'ftp-deploy:frontend']);
 };

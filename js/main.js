@@ -40,19 +40,18 @@ app.config(['$routeProvider', function($routeProvider) {
 app.factory('httpRequestInterceptor', ['$sessionStorage', function($sessionStorage) {
     return {
         request: function($config) {
-            if ($config.method == 'GET') {
-                return $config;
-            }
-            if ($sessionStorage.tokenData) {
-                //Fetch token from cookie
-                var token = $sessionStorage.tokenData.access_token;
+            /*        if ($config.method == 'GET') {
+                        return $config;
+                    }
+                    if ($sessionStorage.tokenData) {
+                        //Fetch token from cookie
+                        var token = $sessionStorage.tokenData.access_token;
 
-                //set authorization header
-                $config.headers['Authorization'] = 'Bearer ' + token;
-                console.log('got token!');
-            } else {
-                console.log('could not get token');
-            }
+                        //set authorization header
+                        $config.headers['Authorization'] = 'Bearer ' + token;
+                    } else {
+                        console.log('could not get token');
+                    }*/
             return $config;
         }
     };
@@ -62,7 +61,8 @@ app.config(function($httpProvider) {
     $httpProvider.interceptors.push('httpRequestInterceptor');
 });
 
-app.constant('API', 'http://localhost:8000/datasource');
+//app.constant('API', 'http://localhost:8000/datasource');
+app.constant('API', 'http://kbhkilder.dk/1508/experimental/datasource');
 
 //Loading and saving files
 app.service('Datasource', ['$http', '$q', 'API', function($http, $q, API) {
@@ -136,7 +136,67 @@ app.service('Datasource', ['$http', '$q', 'API', function($http, $q, API) {
     return pubs;
 }]);
 
-app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'Datasource', function(scope, $location, $sessionStorage, Datasource) {
+app.service('TokenService', ['$sessionStorage', '$http', '$q', '$location', function($sessionStorage, $http, $q, $location) {
+    var pubs = {};
+
+    pubs.get = function() {
+        var deferred = $q.defer();
+
+        var MAINDOMAIN = 'http://www.kbharkiv.dk';
+
+        var headers = $location.protocol() + "://" + $location.host() == MAINDOMAIN ? {
+            'Content-Type': 'application/json'
+        } : {
+            'Content-Type': 'text/plain'
+        };
+        console.log(headers);
+        console.log($location.protocol() + "://" + $location.host(), MAINDOMAIN);
+        //Should be able to send as json and object, see mail from Bo
+        $http({
+                method: 'POST',
+
+                url: MAINDOMAIN + '/index.php',
+                headers: headers,
+                transformRequest: angular.identity,
+                params: {
+                    option: 'authorize',
+                    response_type: 'token',
+                    client_id: 'kbhkilder',
+                    api: 'oauth2'
+                },
+                data: JSON.stringify({
+                    authorized: 1,
+                    state: 'kildetaster'
+                })
+            })
+            .then(function(response) {
+
+                //We got data back from the request, we are loggeld in and can save to sessionStorage
+                if (typeof response.data === 'object') {
+                    //console.log('tokenData', response.data);
+                    $sessionStorage.tokenData = response.data;
+
+                    deferred.resolve({
+                        tokenData: response.data
+                    });
+                }
+                //We are not logged in, point users to min-side
+                else {
+                    //            window.location.href = MAINDOMAIN + '/min-side';
+                }
+
+            })
+            .catch(function(err) {
+                console.log('err', err);
+            });
+
+        return deferred.promise;
+    };
+
+    return pubs;
+}]);
+
+app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'Datasource', 'TokenService', function(scope, $location, $sessionStorage, Datasource, TokenService) {
     scope.model = {};
     scope.model.selected_datasource = null;
     scope.model.datasources = [];
@@ -227,8 +287,11 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
         });
     };
 
-    scope.init = function() {
-        scope.model.loginStatus = $sessionStorage.tokenData !== undefined;
+    var init = function() {
+
+        TokenService.get().then(function() {
+            scope.model.loginStatus = $sessionStorage.tokenData !== undefined;
+        });
         scope.model.status = 'Henter lister';
         Datasource.getList().then(function(data) {
             scope.model.datasources = data.data;
@@ -240,7 +303,7 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
         console.log();
     };
 
-    scope.init();
+    init();
 }]);
 
 /**
