@@ -56,7 +56,7 @@
 
         <div class="col-md-12">
             <h4 ng-hide="model.status!==''" style="color:green;" class="text-center">&nbsp;</h4>
-            <h4 ng-hide="model.status==''" style="color:green;" class="text-center">{{model.status}}</h4>
+            <h4 ng-hide="model.status==''" ng-class="{status_success: model.statusType == 'success', status_error: model.statusType == 'error'}" class="text-center">{{model.status}}</h4>
             <p>&nbsp;</p>
             <h4 class="text-center" ng-hide="model.history.length == 0">Historik</h4>
             <div ng-repeat="x in model.history">

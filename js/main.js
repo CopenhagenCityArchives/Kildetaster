@@ -62,7 +62,7 @@ app.config(function($httpProvider) {
 });
 
 //app.constant('API', 'http://localhost:8000/datasource');
-app.constant('API', 'http://kbhkilder.dk/1508/experimental/datasource');
+app.constant('API', 'http://kbhkilder.dk/api/datasource');
 
 //Loading and saving files
 app.service('Datasource', ['$http', '$q', 'API', function($http, $q, API) {
@@ -90,10 +90,10 @@ app.service('Datasource', ['$http', '$q', 'API', function($http, $q, API) {
         }).then(
             function(resdata, status, headers) {
                 deferred.resolve(resdata);
-                console.log(resdata);
+                //console.log(resdata);
             },
             function(resdata, status, headers) {
-                deferred.reject(null);
+                deferred.reject(resdata, status, headers);
             }
         );
 
@@ -107,11 +107,11 @@ app.service('Datasource', ['$http', '$q', 'API', function($http, $q, API) {
             value: value
         }).then(
             function(resdata, status, headers) {
-                deferred.resolve(resdata);
-                console.log(resdata);
+                deferred.resolve(resdata, status, headers);
+                //console.log(resdata);
             },
             function(resdata, status, headers) {
-                deferred.reject(null);
+                deferred.reject(resdata, status, headers);
             }
         );
 
@@ -123,7 +123,7 @@ app.service('Datasource', ['$http', '$q', 'API', function($http, $q, API) {
         $http.get(API).then(
             function(resdata, status, headers) {
                 deferred.resolve(resdata);
-                console.log(resdata);
+                //console.log(resdata);
             },
             function(resdata, status, headers) {
                 deferred.reject(null);
@@ -149,8 +149,8 @@ app.service('TokenService', ['$sessionStorage', '$http', '$q', '$location', func
         } : {
             'Content-Type': 'text/plain'
         };
-        console.log(headers);
-        console.log($location.protocol() + "://" + $location.host(), MAINDOMAIN);
+        //console.log(headers);
+        //console.log($location.protocol() + "://" + $location.host(), MAINDOMAIN);
         //Should be able to send as json and object, see mail from Bo
         $http({
                 method: 'POST',
@@ -208,6 +208,7 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
     scope.model.canCreateValue = false;
 
     scope.model.status = "";
+    scope.model.statusType = 'success';
 
     scope.model.loginStatus = false;
 
@@ -230,6 +231,7 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
         scope.model.newValue = undefined;
         if (changeValue) {
             scope.model.status = "";
+            scope.model.statusType = 'success';
         }
     });
 
@@ -240,30 +242,47 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
         scope.model.changeValue = undefined;
         if (newValue) {
             scope.model.status = "";
+            scope.model.statusType = 'success';
         }
     });
 
     scope.save = function() {
-        if (scope.model.selectedValue.id) {
-            Datasource.update(scope.model.selected_datasource.id, scope.model.selectedValue.id, scope.model.changeValue).then(function(resdata) {
-                scope.model.history.push({
-                    type: "update",
-                    oldValue: scope.model.selectedValue[scope.model.selected_datasource.valueField],
-                    newValue: scope.model.changeValue
-                });
-                scope.reset();
-                scope.model.status = "Ændringerne blev gemt";
-            });
+        if (scope.model.selectedValue.id && (scope.model.changeValue != "" && scope.model.changeValue != undefined)) {
+            Datasource.update(scope.model.selected_datasource.id, scope.model.selectedValue.id, scope.model.changeValue).then(
+                function(resdata) {
+                    scope.model.history.push({
+                        type: "update",
+                        oldValue: scope.model.selectedValue[scope.model.selected_datasource.valueField],
+                        newValue: scope.model.changeValue
+                    });
+                    scope.reset();
+                    scope.model.status = "Ændringerne blev gemt";
+                    scope.model.statusType = 'success';
+                },
+                function(error) {
+                    console.log(error);
+                    scope.model.status = "Fejl: " + error.data.error;
+                    scope.model.statusType = 'error';
+                }
+            );
         } else {
-            Datasource.create(scope.model.selected_datasource.id, scope.model.newValue).then(function() {
-                scope.model.history.push({
-                    type: "create",
-                    oldValue: "",
-                    newValue: scope.model.newValue
-                });
-                scope.reset();
-                scope.model.status = "Ændringerne blev gemt";
-            });
+            Datasource.create(scope.model.selected_datasource.id, scope.model.newValue).then(
+                function() {
+                    scope.model.history.push({
+                        type: "create",
+                        oldValue: "",
+                        newValue: scope.model.newValue
+                    });
+                    scope.reset();
+                    scope.model.status = "Ændringerne blev gemt";
+                    scope.model.statusType = 'success';
+                },
+                function(error) {
+                    console.log(error);
+                    scope.model.status = "Fejl: " + error.data.error;
+                    scope.model.statusType = 'error';
+                }
+            );
         }
     };
 
