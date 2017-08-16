@@ -15,10 +15,11 @@ define([
             },
 
             templateUrl: 'shared/directives/user.directive.tpl.html',
-            
+
             link: function(scope, element, attrs) {
 
                 scope.username = scope.data.username;
+                scope.page_number = scope.data.page_number;
                 scope.link = "someurl/" + scope.data.id;
 
             }
