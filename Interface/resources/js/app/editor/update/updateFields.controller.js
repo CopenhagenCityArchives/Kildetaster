@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var updateFieldsController = /*@ngInject*/ function updateFieldsController($uibModal, SEARCHURL, Flash, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService, $rootScope, $sessionStorage, errorService, $state) {
+    var updateFieldsController = /*@ngInject*/ function updateFieldsController($uibModal, SEARCHURL, Flash, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService, $rootScope, $sessionStorage, errorService, $state, helpers) {
 
         $scope.values = postData.entryData;
 
@@ -66,6 +66,10 @@ define([
 
             var split = key.split('.');
 
+            if (split[0] === $scope.mainProperty) {
+                split.shift();
+            }
+
             if (split.length > 1) {
                 $scope.values[$scope.mainProperty][split[0]][split[1]] = $scope.values[$scope.mainProperty][split[0]][split[1]].constructor === Array ? [] : null;
             }
@@ -81,7 +85,7 @@ define([
         }
 
         /**
-        * Copy the tempoary value when editing a field to the actual values object
+        * Copy the temporary value when editing a field to the actual values object
         */
         $scope.updateValues = function updateValues(key, id, reportId) {
 
@@ -90,6 +94,11 @@ define([
             //If we have a key from an object type, it will contain a dot, to indicate the object and the property on that object
             var split = key.split('.');
 
+            if (split[0] === $scope.mainProperty) {
+                split.shift();
+                subkey = split.join('.');
+            }
+
             //The length will be more than one if we had a dot in the name
             if (split.length > 1) {
                 //If the secondary element is not set set it
@@ -97,11 +106,12 @@ define([
                     $scope.values[$scope.mainProperty][split[0]] = {};
                 }
 
-                $scope.values[$scope.mainProperty][split[0]][split[1]] = $scope.valueCopy[key][$scope.mainProperty][split[0]][split[1]];
+                $scope.values[$scope.mainProperty][split[0]][split[1]] = $scope.valueCopy[$scope.mainProperty + '.' + subkey][$scope.mainProperty][split[0]][split[1]];
+
             }
             //Otherwise just use the key (single and array type fields  )
             else {
-                $scope.values[$scope.mainProperty][key] = $scope.valueCopy[key][$scope.mainProperty][key];
+                $scope.values[$scope.mainProperty][subkey] = $scope.valueCopy[key][$scope.mainProperty][subkey];
             }
 
             $scope.updateErrorReport(reportId, "Error was handled");
@@ -159,14 +169,12 @@ define([
         *
         * @return {string} The string represenation of all values, seperated by comma
         */
-        $scope.getTextFromArray = function(data, prop) {
+        $scope.getTextFromArrayField = function(data, prop) {
 
-            //Lookup data for the given property
-            var propData = $scope.schema.properties[$scope.mainProperty].properties[prop].items.properties,
             //array to hold the values of all subproperties
-            arr = [];
+            var arr = [];
 
-            for (subprop in propData) {
+            for (subprop in prop) {
 
                 //If we have a value for the property, add it to the array
                 //If a given field was not filled, it will exist, but have a null value. In that case, it should not be used
@@ -234,6 +242,11 @@ define([
                 });
         };
 
+        $scope.lookupFieldValue = function lookupFieldValue(key) {
+            return helpers.lookupFieldValue(key, $scope.values);
+        };
+
+
         /**
         * Parse error report data, and return an object with info
         */
@@ -294,6 +307,9 @@ define([
 
             //Build information about the errors on the post
             $scope.hasErrorReported = $scope.parseErrorReports($scope.errorReports);
+
+            //Prepare data to render out fields in the correct order, ie. the order they are in the task step configuration
+            $scope.summaryFields = helpers.prepareSummaryData(response.steps, response.schema, response.keyName);
 
         });
 

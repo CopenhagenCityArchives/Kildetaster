@@ -23,31 +23,31 @@
                 </li>
             </ul>
 
-            <ul class="list-unstyled field-list" ng-repeat="(key, value) in values[mainProperty]">
+            <ul class="list-unstyled field-list" ng-repeat="field in summaryFields">
 
-                <li class="field-list__item" ng-if="schema.properties[mainProperty].properties[key].type === 'string' || schema.properties[mainProperty].properties[key].type === 'number' || schema.properties[mainProperty].properties[key].type === 'date'">
-
-                    <a tabindex="1" href class="no-underline" ng-click="toggleEditExistingValue(key, values[mainProperty].id)">
+                <li class="field-list__item" ng-if="field.schema.type === 'string' || field.schema.type === 'number' || field.schema.type === 'date'">
+                    <a tabindex="1" href class="no-underline" ng-click="toggleEditExistingValue(field.key, values[mainProperty].id)">
                         <span class="summary-item">
-                            <span class="summary-item__label">{{schema.properties[mainProperty].properties[key].title}}</span>
-                            <span class="summary-item__field">{{value}}
-                                <span class="icon icon__edit" ng-if="hasErrorReported[mainProperty + '.' + key].deleted !== 0"></span>
-                                <span class="glyphicon glyphicon-exclamation-sign icon__error" ng-if="hasErrorReported[mainProperty + '.' + key].deleted === 0"></span>
+                            <span class="summary-item__label">{{field.schema.title}}</span>
+                            <span class="summary-item__field">{{lookupFieldValue(field.key)}}
+                                <span class="icon icon__edit" ng-if="hasErrorReported[field.key].deleted !== 0"></span>
+                                <span class="glyphicon glyphicon-exclamation-sign icon__error" ng-if="hasErrorReported[field.key].deleted === 0"></span>
                              </span>
                         </span>
                     </a>
 
-                    <div class="row update-schema-form" ng-if="isEditing(key + values[mainProperty].id)">
+                    <div class="row update-schema-form" ng-if="isEditing(field.key + values[mainProperty].id)">
 
                         <div class="col-sm-12">
-                            <form name="singleFieldForm" sf-schema="schema" sf-form="[mainProperty + '.' + key]" sf-model="valueCopy[key]" sf-options="sfDefaults"></form>
+                            <h1>hov</h1>
+                            <form name="singleFieldForm" sf-schema="schema" sf-form="[field.key]" sf-model="valueCopy[field.key]" sf-options="sfDefaults"></form>
                         </div>
 
-                        <div class="col-sm-12" ng-if="hasErrorReported[mainProperty + '.' + key].deleted === 0">
+                        <div class="col-sm-12" ng-if="hasErrorReported[field.key].deleted === 0">
 
                             <label>Kommentar</label>
                             <p>
-                                {{hasErrorReported[mainProperty + '.' + key].comment}}
+                                {{hasErrorReported[field.key].comment}}
                             </p>
 
                             <div class="text-right">
@@ -57,33 +57,162 @@
                                     title="Sletter fejlrapporten og beholder værdien"
                                     type="button"
                                     class="btn btn-default"
-                                    ng-if="hasErrorReported[mainProperty + '.' + key].deleted === 0"
-                                    ng-click="rejectErrorReport(hasErrorReported[mainProperty + '.' + key].id, key, values[mainProperty].id)">
+                                    ng-if="hasErrorReported[field.key].deleted === 0"
+                                    ng-click="rejectErrorReport(hasErrorReported[field.key].id, field.key, values[mainProperty].id)">
                                     {{TEXT.BUTTON.NOTERROR}}
                                 </button>
 
-                                <button ng-if="(values[mainProperty][key] || values[mainProperty][key] === 0) && schema.properties[mainProperty].properties[key].isRequired !== '1'" tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(key, values[mainProperty].id, hasErrorReported[mainProperty + '.' + key].id)">
+                                <button
+                                    ng-if="lookupFieldValue(field.key) && field.schema.isRequired !== '1'"
+                                    tabindex="1"
+                                    title="Sletter værdien og feltet"
+                                    type="button" class="btn btn-default"
+                                    ng-click="removeFieldValue(field.key, values[mainProperty].id, hasErrorReported[field.key].id)">
                                     {{TEXT.BUTTON.DELETE}}
                                 </button>
-                                <button ng-disabled="singleFieldForm.$invalid" tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key, values[mainProperty].id, hasErrorReported[mainProperty + '.' + key].id)">
+                                <button
+                                    ng-disabled="singleFieldForm.$invalid"
+                                    tabindex="1"
+                                    title="Opdaterer værdien og sletter fejlrapporten"
+                                    type="button"
+                                    class="btn btn-default"
+                                    ng-click="updateValues(field.key, values[mainProperty].id, hasErrorReported[field.key].id)">
                                     Ret
                                 </button>
-                                <button tabindex="1" title="Luk, uden at ændre" type="button" class="btn btn-default" ng-click="toggleEditExistingValue(key, values[mainProperty].id)">
+                                <button
+                                    tabindex="1"
+                                    title="Luk, uden at ændre"
+                                    type="button"
+                                    class="btn btn-default"
+                                    ng-click="toggleEditExistingValue(field.key, values[mainProperty].id)">
                                     {{TEXT.BUTTON.CANCEL}}
                                 </button>
                             </div>
 
                         </div>
 
-                        <div class="col-sm-12 text-right" ng-if="hasErrorReported[mainProperty + '.' + key].deleted !== 0">
+                        <div class="col-sm-12 text-right" ng-if="hasErrorReported[field.key].deleted !== 0">
 
-                            <button ng-if="(values[mainProperty][key] || values[mainProperty][key] === 0) && schema.properties[mainProperty].properties[key].isRequired !== '1'" tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(key, values[mainProperty].id)">
+                            <button
+                                ng-if="lookupFieldValue(field.key) && field.schema.isRequired !== '1'"
+                                tabindex="1"
+                                title="Sletter værdien og feltet"
+                                type="button"
+                                class="btn btn-default"
+                                ng-click="removeFieldValue(field.key, values[mainProperty].id)">
                                 {{TEXT.BUTTON.DELETE}}
                             </button>
-                            <button ng-disabled="singleFieldForm.$invalid" tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key, values[mainProperty].id)">
+                            <button
+                                ng-disabled="singleFieldForm.$invalid"
+                                tabindex="1"
+                                title="Opdaterer værdien og sletter fejlrapporten"
+                                type="button"
+                                class="btn btn-default"
+                                ng-click="updateValues(field.key, values[mainProperty].id)">
                                 Ret
                             </button>
-                            <button tabindex="1" title="Luk, uden at ændre" type="button" class="btn btn-default" ng-click="toggleEditExistingValue(key, values[mainProperty].id)">
+                            <button
+                                tabindex="1"
+                                title="Luk, uden at ændre"
+                                type="button"
+                                class="btn btn-default"
+                                ng-click="toggleEditExistingValue(field.key, values[mainProperty].id)">
+                                {{TEXT.BUTTON.CANCEL}}
+                            </button>
+                        </div>
+                    </div>
+                </li>
+
+                <li class="field-list__item" ng-if="field.schema.type === 'object'">
+
+                    <a tabindex="-1" href ng-click="toggleEditExistingValue(field.key)">
+                        <span class="summary-item">
+                            <span class="summary-item__label">{{field.schema.properties[field.realKey].title}}</span>
+                            <span class="summary-item__field">{{lookupFieldValue(field.key)}}
+                                <span class="icon icon__edit"></span>
+                             </span>
+                        </span>
+                    </a>
+
+                    <div class="row update-schema-form" ng-if="isEditing(field.key)">
+
+                        <div class="col-sm-12">
+                            <form name="singleFieldForm" sf-schema="schema" sf-form="[field.key]" sf-options="sfDefaults" sf-model="valueCopy[field.key]"></form>
+                        </div>
+
+                        <div class="col-sm-12" ng-if="hasErrorReported[field.key]">
+
+                            <div class="update-schema-form__error" ng-repeat="report in hasErrorReported[field.key]">
+                                <label>Kommentar</label>
+                                <p>
+                                    {{report.comment}}
+                                </p>
+
+                                <div class="col-sm-12 text-right">
+                                    <button
+                                        tabindex="1"
+                                        title="Sletter fejlrapporten og beholder værdien"
+                                        type="button"
+                                        class="btn btn-default"
+                                        ng-if="hasErrorReported[field.key][0].deleted === 0"
+                                        ng-click="rejectErrorReport(report.id, field.key)">
+                                        {{TEXT.BUTTON.NOTERROR}}
+                                    </button>
+                                    <button
+                                        ng-if="lookupFieldValue(field.key)"
+                                        tabindex="1"
+                                        title="Sletter værdien og feltet"
+                                        type="button"
+                                        class="btn btn-default"
+                                        ng-click="removeFieldValue(field.key, undefined, report.id)">
+                                        {{TEXT.BUTTON.DELETE}}
+                                    </button>
+                                    <button
+                                        ng-disabled="singleFieldForm.$invalid"
+                                        tabindex="1"
+                                        title="Opdaterer værdien og sletter fejlrapporten"
+                                        type="button"
+                                        class="btn btn-default"
+                                        ng-click="updateValues(field.key, undefined, report.id)">
+                                        Ret
+                                    </button>
+                                    <button
+                                        tabindex="1"
+                                        title="Luk, uden at ændre"
+                                        type="button"
+                                        class="btn btn-default"
+                                        ng-click="toggleEditExistingValue(field.key)">
+                                        {{TEXT.BUTTON.CANCEL}}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 text-right" ng-if="!hasErrorReported[field.key]">
+                            <button
+                                ng-if="lookupFieldValue(field.key)"
+                                tabindex="1"
+                                title="Sletter værdien og feltet"
+                                type="button"
+                                class="btn btn-default"
+                                ng-click="removeFieldValue(field.key)">
+                                {{TEXT.BUTTON.DELETE}}
+                            </button>
+                            <button
+                                ng-disabled="singleFieldForm.$invalid"
+                                tabindex="1"
+                                title="Opdaterer værdien"
+                                type="button"
+                                class="btn btn-default"
+                                ng-click="updateValues(field.key)">
+                                Ret
+                            </button>
+                            <button
+                                tabindex="1"
+                                title="Luk, uden at ændre"
+                                type="button"
+                                class="btn btn-default"
+                                ng-click="toggleEditExistingValue(field.key)">
                                 {{TEXT.BUTTON.CANCEL}}
                             </button>
                         </div>
@@ -91,85 +220,12 @@
 
                 </li>
 
-                <li class="field-list__item" ng-if="schema.properties[mainProperty].properties[key].type === 'object'">
+                <li class="field-list__item" ng-if="field.schema.type === 'array'">
 
-                    <span class="summary-item">
-                        <span class="summary-item__label">{{schema.properties[mainProperty].properties[key].title}}</span>
-                    </span>
-
-                    <span style="display: block" ng-repeat="(subkey, subvalue) in schema.properties[mainProperty].properties[key].properties">
-
-                        <a tabindex="1" href class="no-underline" ng-click="toggleEditExistingValue(key + '.' + subkey)">
-
-                            <span class="summary-item">
-                                <span class="summary-item__label">{{subvalue.title}}</span>
-                                <span class="summary-item__field">{{value[subkey]}}
-                                    <span class="icon icon__edit" ng-if="hasErrorReported[mainProperty + '.' + key + '.' + subkey][0].deleted !== 0"></span>
-                                    <span class="glyphicon glyphicon-exclamation-sign icon__error" ng-if="hasErrorReported[mainProperty + '.' + key + '.' + subkey][0].deleted === 0"></span>
-                                 </span>
-                            </span>
-                        </a>
-
-                        <div class="row update-schema-form" ng-if="isEditing(key + '.' + subkey)">
-
-                            <div class="col-sm-12">
-                                <form name="singleFieldForm" sf-schema="schema" sf-form="[mainProperty + '.' + key + '.' + subkey]" sf-options="sfDefaults" sf-model="valueCopy[key + '.' + subkey]"></form>
-                            </div>
-
-                            <div class="col-sm-12" ng-if="hasErrorReported[mainProperty + '.' + key + '.' + subkey]">
-
-                                <div class="update-schema-form__error" ng-repeat="report in hasErrorReported[mainProperty + '.' + key + '.' + subkey]">
-                                    <label>Kommentar</label>
-                                    <p>
-                                        {{report.comment}}
-                                    </p>
-
-                                    <div class="col-sm-12 text-right">
-                                        <button
-                                            tabindex="1"
-                                            title="Sletter fejlrapporten og beholder værdien"
-                                            type="button"
-                                            class="btn btn-default"
-                                            ng-if="hasErrorReported[mainProperty + '.' + key + '.' + subkey][0].deleted === 0"
-                                            ng-click="rejectErrorReport(report.id, key + '.' + subkey)">
-                                            {{TEXT.BUTTON.NOTERROR}}
-                                        </button>
-                                        <button ng-if="values[mainProperty][key][subkey]" tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(key + '.' + subkey, undefined, report.id)">
-                                            {{TEXT.BUTTON.DELETE}}
-                                        </button>
-                                        <button ng-disabled="singleFieldForm.$invalid" tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key + '.' + subkey, undefined, report.id)">
-                                            Ret
-                                        </button>
-                                        <button tabindex="1" title="Luk, uden at ændre" type="button" class="btn btn-default" ng-click="toggleEditExistingValue(key + '.' + subkey)">
-                                            {{TEXT.BUTTON.CANCEL}}
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-sm-12 text-right" ng-if="!hasErrorReported[mainProperty + '.' + key + '.' + subkey]">
-                                <button ng-if="values[mainProperty][key][subkey]" tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(key + '.' + subkey)">
-
-                                    {{TEXT.BUTTON.DELETE}}
-                                </button>
-                                <button ng-disabled="singleFieldForm.$invalid" tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key + '.' + subkey)">
-                                    Ret
-                                </button>
-                                <button tabindex="1" title="Luk, uden at ændre" type="button" class="btn btn-default" ng-click="toggleEditExistingValue(key + '.' + subkey)">
-                                    {{TEXT.BUTTON.CANCEL}}
-                                </button>
-                            </div>
-                        </div>
-
-                    </span>
-                </li>
-
-                <li class="field-list__item" ng-if="schema.properties[mainProperty].properties[key].type == 'array'">
-
-                    <a href tabindex="1" class="no-underline" ng-click="toggleEditExistingValue(key)">
-                        <span class="summary-item__label">{{schema.properties[mainProperty].properties[key].title}}</span>
-                        <span class="icon icon__edit" ng-if="!hasErrorReported[mainProperty + '.' + key].length > 0"></span>
-                        <span class="glyphicon glyphicon-exclamation-sign icon__error" ng-if="hasErrorReported[mainProperty + '.' + key].length > 0"></span>
+                    <a href tabindex="1" class="no-underline" ng-click="toggleEditExistingValue(field.key)">
+                        <span class="summary-item__label">{{field.schema.title}}</span>
+                        <span class="icon icon__edit" ng-if="!hasErrorReported[field.key].length > 0"></span>
+                        <span class="glyphicon glyphicon-exclamation-sign icon__error" ng-if="hasErrorReported[field.key].length > 0"></span>
                     </a>
 
                     <ul class="list-unstyled">
@@ -179,36 +235,52 @@
                             <span>
 
                                 <ul class="list-unstyled">
-                                    <li ng-repeat="row in values[mainProperty][key]">
-                                        <a tabindex="1" href ng-click="toggleEditExistingValue(key)">{{getTextFromArray(row, key)}}</a>
+                                    <li ng-repeat="row in lookupFieldValue(field.key)">
+                                        <a tabindex="1" href ng-click="toggleEditExistingValue(field.key)">
+                                            {{getTextFromArrayField(row, field.schema.items.properties)}}
+                                        </a>
                                     </li>
                                 </ul>
 
-                                <div class="row update-schema-form" ng-if="isEditing(key)">
+                                <div class="row update-schema-form" ng-if="isEditing(field.key)">
 
                                     <div class="col-sm-12">
-                                        <form name="singleFieldForm" sf-schema="schema" sf-form="[mainProperty + '.' + key]" sf-model="valueCopy[key]" sf-options="sfDefaults"></form>
+                                        <form name="singleFieldForm" sf-schema="schema" sf-form="[field.key]" sf-model="valueCopy[field.key]" sf-options="sfDefaults"></form>
                                     </div>
 
-                                    <div class="col-sm-12" ng-if="hasErrorReported[mainProperty + '.' + key]">
+                                    <div class="col-sm-12" ng-if="hasErrorReported[field.key]">
 
-                                        <div class="error-report-controls" ng-repeat="report in hasErrorReported[mainProperty + '.' + key]">
+                                        <div class="error-report-controls" ng-repeat="report in hasErrorReported[field.key]">
 
                                             <label>Kommentar <span class="small">({{report.field_formName}} - {{report.original_value || 'Ingen nuværende værdi'}})</span></label>
                                             <p>
                                                 {{report.comment}}
                                             </p>
-                                            <div class="text-right" ng-if="hasErrorReported[mainProperty + '.' + key]">
-                                                <button tabindex="1" title="Sletter fejlrapporten og beholder værdien" type="button" class="btn btn-default" ng-click="rejectErrorReport(report.id, key)">
+                                            <div class="text-right" ng-if="hasErrorReported[field.key]">
+                                                <button
+                                                    tabindex="1"
+                                                    title="Sletter fejlrapporten og beholder værdien"
+                                                    type="button"
+                                                    class="btn btn-default"
+                                                    ng-click="rejectErrorReport(report.id, field.key)">
                                                     {{TEXT.BUTTON.NOTERROR}}
                                                 </button>
-                                                <!-- <button tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(key, undefined, report.id)">
-                                                    {{TEXT.BUTTON.DELETE}}
-                                                </button> -->
-                                                <button ng-disabled="singleFieldForm.$invalid" tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key, undefined, report.id)">
+
+                                                <button
+                                                    ng-disabled="singleFieldForm.$invalid"
+                                                    tabindex="1"
+                                                    title="Opdaterer værdien og sletter fejlrapporten"
+                                                    type="button"
+                                                    class="btn btn-default"
+                                                    ng-click="updateValues(field.key, undefined, report.id)">
                                                     Ret
                                                 </button>
-                                                <button tabindex="1" title="Luk, uden at ændre" type="button" class="btn btn-default" ng-click="toggleEditExistingValue(key)">
+                                                <button
+                                                    tabindex="1"
+                                                    title="Luk, uden at ændre"
+                                                    type="button"
+                                                    class="btn btn-default"
+                                                    ng-click="toggleEditExistingValue(field.key)">
                                                     {{TEXT.BUTTON.CANCEL}}
                                                 </button>
                                             </div>
@@ -216,14 +288,23 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-12 text-right" ng-if="!hasErrorReported[mainProperty + '.' + key]">
-                                        <!-- <button tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(key)">
-                                            {{TEXT.BUTTON.DELETE}}
-                                        </button> -->
-                                        <button ng-disabled="singleFieldForm.$invalid" tabindex="1" title="Opdaterer værdien og sletter fejlrapporten" type="button" class="btn btn-default" ng-click="updateValues(key)">
+                                    <div class="col-sm-12 text-right" ng-if="!hasErrorReported[field.key]">
+
+                                        <button
+                                            ng-disabled="singleFieldForm.$invalid"
+                                            tabindex="1"
+                                            title="Opdaterer værdien og sletter fejlrapporten"
+                                            type="button"
+                                            class="btn btn-default"
+                                            ng-click="updateValues(field.key)">
                                             Ret
                                         </button>
-                                        <button tabindex="1" title="Luk, uden at ændre" type="button" class="btn btn-default" ng-click="toggleEditExistingValue(key)">
+                                        <button
+                                            tabindex="1"
+                                            title="Luk, uden at ændre"
+                                            type="button"
+                                            class="btn btn-default"
+                                            ng-click="toggleEditExistingValue(field.key)">
                                             {{TEXT.BUTTON.CANCEL}}
                                         </button>
                                     </div>
@@ -233,7 +314,6 @@
 
                         </li>
                     </ul>
-
                 </li>
 
             </ul>
