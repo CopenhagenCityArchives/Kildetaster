@@ -18,6 +18,8 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-copy');
 
+    grunt.loadNpmTasks('grunt-html2js');
+
     require('time-grunt')(grunt);
 
     grunt.config.init({
@@ -70,22 +72,13 @@ module.exports = function(grunt) {
         },
 
         copy: {
-            partials: {
-                files: [
-                    // includes files within path
-                    {
-                        expand: true,
-                        src: ['partials/*'],
-                        dest: 'build/html/',
-                        filter: 'isFile'
-                    },
-                    {
-                        expand: false,
-                        src: ['.htaccess'],
-                        dest: 'build/html/',
-                        filter: 'isFile'
-                    },
-                ],
+            htaccess: {
+                files: [{
+                    expand: false,
+                    src: ['.htaccess'],
+                    dest: 'build/html/',
+                    filter: 'isFile'
+                }, ],
             },
         },
 
@@ -135,12 +128,13 @@ module.exports = function(grunt) {
         watch: {
             js: {
                 files: ['js/*.js'],
-                tasks: ['clean:build', 'concat:main', 'jsbeautifier', 'wiredep:task']
+                tasks: ['clean:build', 'html2js:task', 'concat:main', 'jsbeautifier', 'wiredep:task', 'bower-bundler', 'replace:dist', 'clean:templates']
             }
         },
 
         clean: {
-            build: ['build/']
+            build: ['build/'],
+            templates: ['js/templates.js']
         },
 
         'ftp-deploy': {
@@ -166,6 +160,24 @@ module.exports = function(grunt) {
                 dest: 'public_html/datalister',
                 exclusions: []
             }
+        },
+        'html2js': {
+            options: {
+                base: './',
+                //            module: 'templates',
+                amd: false
+                // rename: function(moduleName) {
+                //     return moduleName;
+                // }
+
+            },
+
+            task: {
+                src: [
+                    'partials/*.html',
+                ],
+                dest: 'js/templates.js'
+            }
         }
     });
 
@@ -184,6 +196,8 @@ module.exports = function(grunt) {
 
         grunt.task.run('concat:withWiredepJS');
 
+
+
         grunt.config.set('concat.withWiredepCSS', {
             src: [
                 result.css
@@ -191,16 +205,19 @@ module.exports = function(grunt) {
             dest: 'build/css.min.css'
         });
         grunt.task.run('concat:withWiredepCSS');
+
+        console.log('Got the following CSS files from bower install: ', result.css);
+        console.log('Got the following JS files from bower install: ', result.js);
     });
 
     //Replace bower sources with concatted js and css files
-    grunt.registerTask('build', ['clean:build', 'concat:main', 'jsbeautifier', 'wiredep:task', 'bower-bundler', 'replace:dist']);
-    grunt.registerTask('test', ['wiredep:task']);
+    grunt.registerTask('build', ['clean:build', 'html2js:task', 'concat:main', 'jsbeautifier', 'wiredep:task', 'bower-bundler', 'replace:dist', 'clean:templates']);
+    grunt.registerTask('test', ['wiredep:task', 'bower-bundler']);
     //Default: Watch as js files
     grunt.registerTask('default', ['watch:js']);
 
     //Same as watch:js, but without watching...
-    grunt.registerTask('build-dev', ['clean:build', 'concat:main', 'jsbeautifier', 'wiredep:task', 'replace:dist']);
+    grunt.registerTask('build-dev', ['clean:build', 'html2js:task', 'concat:main', 'jsbeautifier', 'wiredep:task', 'replace:dist', 'clean:templates']);
 
-    grunt.registerTask('deploy', ['copy:partials', 'replace:dist', 'ftp-deploy:source', 'ftp-deploy:frontend']);
+    grunt.registerTask('deploy', ['copy:htaccess', 'replace:dist', 'ftp-deploy:source', 'ftp-deploy:frontend']);
 };

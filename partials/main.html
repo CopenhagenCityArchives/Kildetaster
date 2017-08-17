@@ -1,16 +1,21 @@
-<div class="container">
+<div class="container" ng-if="!model.loginStatus">
+<div class="col-md-4">
+    <p><span class="label label-warning">Du er IKKE logget ind</span></p>
+    <p>Du skal være superbruger og være logget ind for at kunne tilgå denne side. Klik <a target="_blank" href="http://www.kbharkiv.dk/log-in">her</a> for at logge ind.</p>
+</div>
+
+</div>
+<div class="container" ng-if="model.loginStatus">
     <div class="col-md-12">
+
     <h2 class="text-center">Datalister</h2>
+    <p ng-if="model.loginStatus"><span class="label label-success">Du er logget ind</span></p>
     <p>Her kan du oprette nye og rette eksisterende værdier i Københavns Stadsarkivs datalister.</p>
     <p>Bemærk at listerne ved indtastning og rettelser opdateres med det samme. Ved visning af søgeresultater opdateres værdierne efter et døgn.</p>
+    <p>Hvis du vil <b>slette</b> værdier skal du skrive til Jeppe på jeppec@kff.kk.dk</p>
 
-    <p ng-if="model.loginStatus"><span class="label label-success">Du er logget ind</span></p>
-    <div ng-if="!model.loginStatus">
-        <p><span class="label label-warning">Du er IKKE logget ind</span></p>
-        <p>Du skal være superbruger og være logget ind for at gemme ændringerne. Klik <a target="_blank" href="http://www.kbharkiv.dk/log-in">her</a> for at logge ind.</p>
-    </div>
-    <div class="col-md-4 col-md-offset-4">
-        <h4 class="text-center">Liste</h4>
+    <div class="separator">
+        <h4>Vælg liste</h4>
         <form name="myForm">
         <select name="mySelect" id="mySelect" class="form-control"
           ng-options="option.name for option in model.datasources track by option.id"
@@ -18,9 +23,8 @@
         </select>
       </form>
     </div>
-
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 separator">
         <h3>Ret eksisterende værdier</h3>
         <h4>Eksisterende værdi</h4>
         <ui-select ng-model="model.selectedValue"
@@ -45,7 +49,7 @@
     </div>
 
 
-        <div class="col-md-6">
+        <div class="col-md-6 separator">
             <h3>Opret nye værdier</h3>
             <h4>Ny værdi</h4>
                 <input value="indtast værdi" ng-model="model.newValue" class="form-control" style="width: 400px;" ng-disabled="model.canUpdateValue"></input>

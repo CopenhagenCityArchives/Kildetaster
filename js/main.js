@@ -3,10 +3,10 @@
  */
 var app = angular.module('APACSDatasourceEditor', [
     'ngSanitize',
-    'schemaForm',
     'ngRoute',
     'ui.select',
     'ngStorage',
+    'templates-task'
 ]);
 
 /**
@@ -40,18 +40,18 @@ app.config(['$routeProvider', function($routeProvider) {
 app.factory('httpRequestInterceptor', ['$sessionStorage', function($sessionStorage) {
     return {
         request: function($config) {
-            /*        if ($config.method == 'GET') {
-                        return $config;
-                    }
-                    if ($sessionStorage.tokenData) {
-                        //Fetch token from cookie
-                        var token = $sessionStorage.tokenData.access_token;
+            if ($config.url == "http://www.kbharkiv.dk/index.php") {
+                return $config;
+            }
+            if ($sessionStorage.tokenData) {
+                //Fetch token from cookie
+                var token = $sessionStorage.tokenData.access_token;
 
-                        //set authorization header
-                        $config.headers['Authorization'] = 'Bearer ' + token;
-                    } else {
-                        console.log('could not get token');
-                    }*/
+                //set authorization header
+                $config.headers['Authorization'] = 'Bearer ' + token;
+            } else {
+                console.log('could not get token');
+            }
             return $config;
         }
     };
