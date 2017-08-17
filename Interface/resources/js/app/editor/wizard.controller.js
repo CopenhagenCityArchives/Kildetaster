@@ -207,7 +207,6 @@ define([
         $scope.toggleEditExistingValue = function toggleEditExistingValue(item) {
             //Only one field open at a time
             $scope.editingField = item;
-
         };
 
         $scope.closeEditField = function closeEditField() {
@@ -405,6 +404,33 @@ define([
 
             //Prepare the initial step data, so we can render the current step
             $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
+
+            var arr = [];
+
+            var stepCopy = angular.copy(response.steps);
+            //Build array for the summary rendering, working on a copy
+            stepCopy.forEach(function(stepData) {
+
+                if (stepData.fields && stepData.fields.length > 0) {
+                    var stepFields = stepData.fields.forEach(function(field) {
+
+                        var key = field.key.split('.');
+
+                        field.schema = $scope.schema.properties[$scope.mainProperty].properties[key[1]];
+
+                        //The last key part
+                        field.realKey = key[key.length - 1];
+                        field.toggleKey = field.key.replace(/\./g, '-');
+
+                        arr.push(field);
+
+                    });
+                }
+
+
+            });
+
+            $scope.summaryFields = arr;
         });
 
     };
