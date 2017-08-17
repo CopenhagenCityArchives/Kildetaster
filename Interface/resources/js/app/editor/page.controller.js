@@ -33,13 +33,12 @@ define([
                 current_number: pageData.page_number
 
             }).then(function(response) {
-
-                $timeout(function() {
-                    $state.go('editor.page', { pageId: response.pages_id});
-                    //$location.search({ stepId: 1});
-                }, 0);
-
-
+                if(response.pages_id){
+                    $timeout(function() {
+                        $state.go('editor.page', { pageId: response.pages_id});
+                        //$location.search({ stepId: 1});
+                    }, 0);
+                }
             });
 
         };

@@ -18,8 +18,10 @@ define([
                 task_id: unit.tasks_id,
                 unit_id: unit.units_id
             }).then(function(response) {
-                var pageId = response.pages_id;
-                window.open(EDITORURL + '/#/task/' + unit.tasks_id + '/page/' + pageId, '_blank');
+                if(response.pages_id){
+                    var pageId = response.pages_id;
+                    window.open(EDITORURL + '/#/task/' + unit.tasks_id + '/page/' + pageId, '_blank');
+                }
             });
         };
 
