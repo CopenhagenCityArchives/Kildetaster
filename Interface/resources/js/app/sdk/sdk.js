@@ -24,6 +24,7 @@ define([
     'app/shared/services/user.service',
 
     'app/sdk/directives/progressbar.directive',
+    'app/shared/directives/user.directive',
 
     'app/shared/constants'
 
@@ -54,6 +55,7 @@ define([
     userService,
 
     progressbarDirective,
+    userDirective,
 
     constants
 ) {
@@ -81,6 +83,7 @@ define([
     sdkApp.service('userService', userService);
 
     sdkApp.directive('progressBar', progressbarDirective);
+    sdkApp.directive('user', userDirective);
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-sdk-app]'), ['sdk']);
