@@ -108,6 +108,9 @@
                             </div>
 
                             <div class="col-sm-12 text-right">
+                                <button ng-if="lookupFieldValue(field.key) && field.schema.isRequired !== '1'" tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(field.key)">
+                                    {{TEXT.BUTTON.DELETE}}
+                                </button>
                                 <button type="button" class="btn btn-default" ng-click="closeEditField()">
                                     {{TEXT.BUTTON.OK}}
                                 </button>
@@ -120,7 +123,7 @@
                         <a tabindex="-1" href ng-click="toggleEditExistingValue(field.toggleKey)">
                             <span class="summary-item">
                                 <span class="summary-item__label">{{field.schema.properties[field.realKey].title}}</span>
-                                <span class="summary-item__field">{{values[mainProperty][field.key.split('.')[1]][field.realKey]}}
+                                <span class="summary-item__field">{{lookupFieldValue(field.key)}}
                                     <span class="icon icon__edit"></span>
                                  </span>
                             </span>
@@ -133,6 +136,9 @@
                             </div>
 
                             <div class="col-sm-12 text-right">
+                                <button ng-if="lookupFieldValue(field.key) && field.schema.isRequired !== '1'" tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(field.key)">
+                                    {{TEXT.BUTTON.DELETE}}
+                                </button>
                                 <button type="button" class="btn btn-default" ng-click="closeEditField()">
                                     {{TEXT.BUTTON.OK}}
                                 </button>
@@ -179,20 +185,14 @@
 
                                 <div class="row" ng-if="isEditing(subkey + $parent.$index)">
 
-                                    <div class="col-sm-12" ng-if="lookupErrorReport(field.realKey, mainProperty, subkey, val.id) !== undefined">
-                                        <h2>Fejlmeldingen</h2>
-                                    </div>
-
                                     <div class="col-sm-12">
                                         <form ng-init="getSchema(field.realKey, subkey);getValue(field.realKey, subkey, $parent.$parent.$index)" sf-schema="singleSchema" sf-form="['*']" sf-model="singleValue"></form>
                                     </div>
 
-                                    <div class="col-sm-12" ng-if="lookupErrorReport(field.realKey, mainProperty, subkey, val.id) !== undefined">
-                                        <label>Kommentar</label>
-                                        <p>{{lookupErrorReport(field.realKey, mainProperty, subkey, val.id).comment}}</p>
-                                    </div>
-
                                     <div class="col-sm-12 text-right">
+                                        <button tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(field.key, subkey, $parent.$parent.$index)">
+                                            {{TEXT.BUTTON.DELETE}}
+                                        </button>
                                         <button type="button" class="btn btn-default" ng-click="closeEditField()">
                                             {{TEXT.BUTTON.OK}}
                                         </button>

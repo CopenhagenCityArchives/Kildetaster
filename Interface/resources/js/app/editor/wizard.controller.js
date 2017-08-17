@@ -375,6 +375,67 @@ define([
         };
 
         /**
+        * Lookup the value of a specifik object path in the $scope.values object
+        *
+        * @param key {string|array} The path to the value
+        *
+        * @return The value found, or an empty string if none were found
+        */
+        $scope.lookupFieldValue = function lookupFieldValue(key) {
+
+            if (!angular.isArray(key)) {
+                key = key.split('.');
+            }
+
+            var value = key.reduce(function(accumulator, currentValue) {
+                //Only continue if we have a value
+                if (accumulator[currentValue]) {
+                    return accumulator[currentValue];
+                }
+                return '';
+
+            }, $scope.values);
+
+            return value;
+
+        };
+
+        /**
+        * Delete value on the given key from the values object
+        *
+        * @param key {string|array} The path to the value
+        * @param subkey {string} The property name to look for in an array type field
+        * @param index {int} The index of the field, ie. the index of the field in the array object
+        */
+        $scope.removeFieldValue = function removeFieldValue(key, subkey, index) {
+
+            //Path can be either a string, or an array
+            var path = angular.isArray(key) ? key : key.split('.'),
+                len = path.length;
+
+            path.reduce(function(accumulator, currentValue, currentIndex, arr) {
+                //Are we on the last iteration of the reduce?
+                if (currentIndex === len - 1) {
+
+                    if (subkey && index !== undefined) {
+                        //Find the subkey, and delete it
+                        if (subkey in accumulator[currentValue][index]) {
+                            delete accumulator[currentValue][index][subkey]
+                        }
+                    }
+                    else {
+                        delete accumulator[currentValue];
+                    }
+
+                }
+                return accumulator[currentValue];
+            }, $scope.values);
+
+            $scope.closeEditField();
+
+        };
+
+        /**
         * When postId has a value, build link to the id
         */
         $scope.$watch('postId', function(newVal) {
