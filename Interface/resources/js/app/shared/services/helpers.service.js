@@ -51,6 +51,65 @@ define([
                     }
                 });
                 return distinct;
+            },
+
+            /**
+            * Lookup the value of a specifik object path in the $scope.values object
+            *
+            * @param key {string|array} The path to the value
+            *
+            * @return The value found, or an empty string if none were found
+            */
+            lookupFieldValue: function lookupFieldValue(key, values) {
+
+                if (!angular.isArray(key)) {
+                    key = key.split('.');
+                }
+
+                var value = key.reduce(function(accumulator, currentValue) {
+                    //Only continue if we have a value
+                    if (accumulator[currentValue]) {
+                        return accumulator[currentValue];
+                    }
+                    return '';
+
+                }, values);
+
+                return value;
+
+            },
+
+            /**
+            * Parse stepData, and return the needed data to render a Summary
+            */
+            prepareSummaryData: function prepareSummaryData(stepData, schema, mainProperty) {
+
+                var arr = [],
+                    stepCopy = angular.copy(stepData);
+
+                //Build array for the summary rendering, working on a copy
+                stepCopy.forEach(function(stepData) {
+
+                    if (stepData.fields && stepData.fields.length > 0) {
+
+                        var stepFields = stepData.fields.forEach(function(field) {
+
+                            var key = field.key.split('.');
+
+                            field.schema = schema.properties[mainProperty].properties[key[1]];
+
+                            //The last key part
+                            field.realKey = key[key.length - 1];
+                            field.toggleKey = field.key.replace(/\./g, '-');
+
+                            arr.push(field);
+
+                        });
+                    }
+
+                });
+
+                return arr;
             }
 
         };

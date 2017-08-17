@@ -382,22 +382,7 @@ define([
         * @return The value found, or an empty string if none were found
         */
         $scope.lookupFieldValue = function lookupFieldValue(key) {
-
-            if (!angular.isArray(key)) {
-                key = key.split('.');
-            }
-
-            var value = key.reduce(function(accumulator, currentValue) {
-                //Only continue if we have a value
-                if (accumulator[currentValue]) {
-                    return accumulator[currentValue];
-                }
-                return '';
-
-            }, $scope.values);
-
-            return value;
-
+            return helpers.lookupFieldValue(key, $scope.values);
         };
 
         /**
@@ -466,32 +451,8 @@ define([
             //Prepare the initial step data, so we can render the current step
             $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
 
-            var arr = [];
+            $scope.summaryFields = helpers.prepareSummaryData(response.steps, response.schema, response.keyName);
 
-            var stepCopy = angular.copy(response.steps);
-            //Build array for the summary rendering, working on a copy
-            stepCopy.forEach(function(stepData) {
-
-                if (stepData.fields && stepData.fields.length > 0) {
-                    var stepFields = stepData.fields.forEach(function(field) {
-
-                        var key = field.key.split('.');
-
-                        field.schema = $scope.schema.properties[$scope.mainProperty].properties[key[1]];
-
-                        //The last key part
-                        field.realKey = key[key.length - 1];
-                        field.toggleKey = field.key.replace(/\./g, '-');
-
-                        arr.push(field);
-
-                    });
-                }
-
-
-            });
-
-            $scope.summaryFields = arr;
         });
 
     };
