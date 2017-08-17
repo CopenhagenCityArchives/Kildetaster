@@ -58,7 +58,6 @@ define([
 
         };
 
-
         /**
         * Build schema for single fields, that is fields that are part of an array structure
         */
@@ -333,7 +332,7 @@ define([
         };
 
         $scope.postDone = function postDone() {
-            $state.go('^.pageFull', {}, { reload: true });
+            $state.go('editor.page.new', {}, { reload: true });
         };
 
         $scope.$on('okToSetPageDone', function(event) {
@@ -351,13 +350,6 @@ define([
             });
 
         });
-
-        /**
-        * Mark current page as done, ie no more posts should be made
-        */
-        $scope.pageIsDone = function pageIsDone() {
-            $state.go('.confirm');
-        };
 
         /**
          * Tell the app that we want to place/replace the area
@@ -454,6 +446,11 @@ define([
             $scope.summaryFields = helpers.prepareSummaryData(response.steps, response.schema, response.keyName);
 
         });
+
+        $scope.init = function() {
+            console.log('zooming')
+            $rootScope.$broadcast('zoom-to-selection');
+        };
 
     };
 

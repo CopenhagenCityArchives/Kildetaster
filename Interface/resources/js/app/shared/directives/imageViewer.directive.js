@@ -244,6 +244,21 @@ define([
 
                 });
 
+                $scope.$on('zoom-to-selection', function() {
+                    $timeout(function() {
+                        if (selectionRect) {
+                            viewer.viewport.fitBounds(selectionRect, true);
+                        }
+                    });
+
+                });
+
+                $scope.$on('zoom-out', function() {
+                    $timeout(function() {
+                        viewer.viewport.fitVertically(true);
+                    })
+                })
+
                 $scope.$on('makeSelectable', function() {
 
                     //Try to remove an existing selection overlay
@@ -322,7 +337,14 @@ define([
                             selection.rect = selectionRect;
                             selection.draw();
 
-                            viewer.viewport.fitVertically(true);
+                            // if ($scope.initialZoom) {
+                            //     viewer.viewport.fitBounds(selectionRect, true);
+                            //
+                            // }
+                            // else {
+                            //     viewer.viewport.fitVertically(true);
+                            // }
+
 
                             //When the directive is initialized, make sure we listen for key events on the selection area
                             createKeyTracker();

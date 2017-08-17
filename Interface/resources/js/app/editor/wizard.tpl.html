@@ -2,23 +2,21 @@
 
 <section handle-steps prev="prevStep" next="nextStep">
 
-    <div class="row" ng-if="currentStep == 1">
+    <div class="row" ng-if="currentStep == 1" ng-init="init()">
 
         <div class="col-sm-12">
-            <h2>{{currentStepData.title}}</h2>
-            <p>{{currentStepData.description}}</p>
+            <h2>{{currentStepData.name}}</h2>
+            <!-- <p>{{currentStepData.description}}</p> -->
 
-            <p>Vælg området for den person, du vil indtaste. Brug musen til at flytte området eller ændre dets størrelse, så alle informationer er inden for det markerede.</p>
-            <p class="text-center" ng-click="enableSelection()">
-                <br>
-                <img src="http://kbhkilder.dk/software/kildetaster/resources/images/Cursor-Select-512.png" alt="Vælg område" width="50px">
-                <br>
-            </p>
+            <p>Klik næste, hvis dit indtastningsområde er ramt korrekt.</p>
+            <p>Hvis ikke, juster ved at trække eller rykke det grønne område.</p>
+            <p>Brug protokollens oprindelige inddeling og linjer til at vurdere indtastningsområdets korrekte størrelse.</p>
 
         </div>
 
         <div class="col-sm-6">
-            <button class="btn btn-default btn-block" ng-click="pageIsDone()">Siden er færdig</button>
+            <!-- <button class="btn btn-default btn-block" ng-click="pageIsDone()">Siden er færdig</button> -->
+            <button class="btn btn-default btn-block" ui-sref="^">Fortryd</button>
         </div>
 
         <div class="col-sm-6">
@@ -33,7 +31,7 @@
     <div class="row" ng-show="currentStep > 1 && !isResult()">
 
         <div class="col-sm-12">
-            <h2>{{currentStepData.title}}</h2>
+            <h2>{{currentStepData.name}}</h2>
             <p>{{currentStepData.description}}</p>
 
             <form name="stepForm" sf-schema="schema" sf-form="currentStepData.fields" sf-model="values" sf-options="sfDefaults"></form>

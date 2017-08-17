@@ -24,6 +24,7 @@ define([
 
         /**
         * Get next available page, based on unitId, taskId and the current page number
+        * TODO Delete this?
         */
         $scope.goToNextAvailablePage = function goToNextAvailablePage() {
 

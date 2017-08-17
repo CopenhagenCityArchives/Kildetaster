@@ -86,7 +86,7 @@ define([
 
             .state('editor.page', {
                 url: '',
-                redirectTo: 'editor.page.wizard',
+                redirectTo: 'editor.page.new',
                 views: {
                     '': {
                         templateUrl: 'editor/page.tpl.html',
@@ -96,6 +96,34 @@ define([
                         templateUrl: 'editor/page.footer.tpl.html',
                         controller: 'pageController'
                     }
+                }
+            })
+
+            .state('editor.page.new', {
+                url: '/new',
+                templateUrl: 'editor/page.new.tpl.html',
+                controller: 'pageNewController as $ctrl',
+                resolve: {
+
+                    //Determine if the page is marked as done, and if it is, show the pageDone state
+                    isDone: ['$state', 'taskData', '$timeout', '$stateParams', 'pageData', function($state, taskData, $timeout, $stateParams, pageData) {
+
+                        var task = pageData.task_page.find(function(obj) {
+                            return obj.tasks_id === taskData.id;
+                        });
+
+                        if (task.is_done === 1) {
+
+                            $timeout(function() {
+                                $state.go('editor.page.pageDone', {
+                                    taskId: $stateParams.taskId,
+                                    pageId: pageData.id
+                                });
+                            }, 0);
+                        }
+
+                        return true;
+                    }]
                 }
             })
 
@@ -181,38 +209,19 @@ define([
                 }
             })
 
-            .state('editor.page.wizard', {
+            .state('editor.page.new.wizard', {
 
                 url: '/?{stepId:int}',
                 //Prevent reinitializing the controller when changing steps, handled with watch in the controller instead
                 reloadOnSearch: false,
 
-                templateUrl: 'editor/wizard.tpl.html',
-                controller: 'wizardController',
+                views: {
+                    '@editor.page': {
+                        templateUrl: 'editor/wizard.tpl.html',
+                        controller: 'wizardController',
+                    }
+                },
                 resolve: {
-
-                    isFull: ['$state', '$timeout', '$stateParams', 'pageData', function($state, $timeout, $stateParams,  pageData) {
-
-                        if (pageData.next_post === false && pageData.task_page[0].is_done === 0) {
-                            $timeout(function() {
-                                $state.go('editor.page.pageFull', {
-                                    taskId: $stateParams.taskId,
-                                    pageId: pageData.id
-                                });
-                            }, 0);
-                        }
-                        else if (pageData.task_page[0].is_done === 1) {
-
-                            $timeout(function() {
-                                $state.go('editor.page.pageDone', {
-                                    taskId: $stateParams.taskId,
-                                    pageId: pageData.id
-                                });
-                            }, 0);
-                        }
-
-                        return true;
-                    }],
 
                     /**
                     * Test if we are starting from stepId == 1, and if not redirect to stepId = 1
@@ -232,7 +241,7 @@ define([
                 }
             })
 
-            .state('editor.page.wizard.confirm', {
+            .state('editor.page.new.wizard.confirm', {
 
                 onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
                     $uibModal.open({
@@ -269,39 +278,13 @@ define([
                 }
             })
 
-            .state('editor.page.pageFull.confirm', {
-                //url: "/add",
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
-                    $uibModal.open({
-
-                        templateUrl: 'editor/confirm.modal.tpl.html',
-                        windowClass: 'modal--center',
-
-                        controller: ['$scope', '$rootScope', function($scope, $rootScope) {
-                            $scope.dismiss = function() {
-                                $scope.$dismiss();
-                            };
-
-                            $scope.continue = function() {
-                                $rootScope.$broadcast('okToSetPageDone');
-                                $scope.$dismiss();
-                            };
-                        }]
-                    }).result.finally(function() {
-                        //Go back to previous state
-                        $state.go('^');
-                    });
-                }]
-            })
-
-
-
             .state('editor.page.pageDone', {
 
                 url: '/done',
                 views: {
                     '': {
-                        templateUrl: 'editor/page.done.tpl.html'
+                        templateUrl: 'editor/page.done.tpl.html',
+                        controller: 'pageDoneController as $ctrl'
                     }
                 }
             })
