@@ -68,7 +68,7 @@ define([
 
                 var value = key.reduce(function(accumulator, currentValue) {
                     //Only continue if we have a value
-                    if (accumulator[currentValue]) {
+                    if (accumulator[currentValue] || accumulator[currentValue] === 0) {
                         return accumulator[currentValue];
                     }
                     return '';
