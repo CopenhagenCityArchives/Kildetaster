@@ -448,7 +448,6 @@ define([
         });
 
         $scope.init = function() {
-            console.log('zooming')
             $rootScope.$broadcast('zoom-to-selection');
         };
 
