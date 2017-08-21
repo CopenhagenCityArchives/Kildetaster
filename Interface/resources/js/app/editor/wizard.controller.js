@@ -204,8 +204,14 @@ define([
          * Toggle wether or not we should show edit field for a given field config
          */
         $scope.toggleEditExistingValue = function toggleEditExistingValue(item) {
-            //Only one field open at a time
-            $scope.editingField = item;
+
+            if ($scope.editingField === item) {
+                $scope.editingField = '';
+            }
+            else {
+                $scope.editingField = item;
+            }
+
         };
 
         $scope.closeEditField = function closeEditField() {
