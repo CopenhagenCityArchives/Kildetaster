@@ -12,7 +12,7 @@
         <span class="icon icon__help" uib-tooltip="{{form.description}}" tooltip-placement="top" tooltip-append-to-body="true"></span>
     </label>
 
-    <ui-select ng-model="$$value$$" ng-class="{'loading': loading}" append-to-body="false" ng-model-options="ngModelOptions" theme="bootstrap">
+    <ui-select ng-model="$$value$$" ng-class="{'loading': loading}" reset-search-input="false" append-to-body="false" ng-model-options="ngModelOptions" theme="bootstrap">
         <ui-select-match>
             <div style="height: 40px;line-height: 40px" ng-bind="$select.selected"></div>
         </ui-select-match>
