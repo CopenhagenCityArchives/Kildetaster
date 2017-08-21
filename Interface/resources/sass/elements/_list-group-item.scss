@@ -1,0 +1,5 @@
+.list-group-item.ng-enter {
+    //Change default duration for transitions for this bootstrap specific styling
+    //Used for array type forms
+    transition-duration: 200ms;
+}
