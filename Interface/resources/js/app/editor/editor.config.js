@@ -94,7 +94,7 @@ define([
                     },
                     'pageFooter': {
                         templateUrl: 'editor/page.footer.tpl.html',
-                        controller: 'pageController'
+                        controller: 'pageFooterController as $ctrl'
                     }
                 }
             })

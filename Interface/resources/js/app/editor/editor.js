@@ -21,6 +21,7 @@ define([
     'app/editor/wizard.done.controller',
     'app/editor/page.new.controller',
     'app/editor/page.done.controller',
+    'app/editor/page.footer.controller',
 
     'app/editor/feedback/feedback.controller',
     'app/editor/update/updateFields.controller',
@@ -56,6 +57,7 @@ define([
     wizardDoneController,
     pageNewController,
     pageDoneController,
+    pageFooterController,
 
     feedbackController,
     updateFieldsController,
@@ -93,6 +95,7 @@ define([
     editorApp.controller('updateFieldsDoneController', updateFieldsDoneController);
     editorApp.controller('pageNewController', pageNewController);
     editorApp.controller('pageDoneController', pageDoneController);
+    editorApp.controller('pageFooterController', pageFooterController);
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-editor-app]'), ['editor']);
