@@ -90,7 +90,6 @@ define([
                         //We are on the last input field, and shift is not pressed
                         else if (!event.shiftKey && $(event.target).is(lastInput)) {
 
-                            console.log('else if', lastInput)
                             noAuto = true;
 
                             //Go to next page
