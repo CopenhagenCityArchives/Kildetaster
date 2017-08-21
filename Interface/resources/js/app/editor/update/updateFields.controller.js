@@ -74,7 +74,7 @@ define([
                 $scope.values[$scope.mainProperty][split[0]][split[1]] = $scope.values[$scope.mainProperty][split[0]][split[1]].constructor === Array ? [] : null;
             }
             else {
-                $scope.values[$scope.mainProperty][key] = $scope.values[$scope.mainProperty][key].constructor === Array ? [] : null;
+                $scope.values[$scope.mainProperty][split[0]] = $scope.values[$scope.mainProperty][split[0]].constructor === Array ? [] : null;
             }
 
             if (reportId) {
