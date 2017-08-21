@@ -4,7 +4,6 @@ define([
 
     var updateFieldsDoneController = /*@ngInject*/ function updateFieldsDoneController(SEARCHURL, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService, $rootScope, $sessionStorage, errorService, $state) {
 
-        console.log(taskData);
         //Build a direct link to this post
         $scope.shareLink = SEARCHURL + '#/post/' + postData.postId;
 
@@ -54,7 +53,7 @@ define([
 
             //Determine if the user has more posts with errors reported
             $scope.lookupNextPostWithErrors().then(function() {
-                
+
             });
 
         };
