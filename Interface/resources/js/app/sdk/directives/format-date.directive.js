@@ -28,7 +28,7 @@ define([
 
                 ngModel.$formatters.push(function(val) {
                     //convert timestamp, and convert to string in the format of DD-MM-YYYY
-                    return new moment.utc(val).format(dateFormat);
+                    return val ? new moment.utc(val).format(dateFormat) : '';
                 });
 
             }
