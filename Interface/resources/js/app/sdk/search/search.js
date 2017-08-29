@@ -50,6 +50,8 @@ define([
     'app/sdk/directives/text-deathcause.directive',
     'app/sdk/directives/text-age.directive',
 
+    'app/sdk/directives/text-person-name.directive',
+
     'app/sdk/filters/formatStringNumber.filter',
 
     'app/shared/constants'
@@ -105,6 +107,7 @@ define([
     textAddressDirective,
     textDeathcauseDirective,
     textAgeDirective,
+    textPersonNameDirective,
 
     formatStringNumberFilter,
 
@@ -161,6 +164,8 @@ define([
     searchApp.directive('textAddress', textAddressDirective);
     searchApp.directive('textDeathcause', textDeathcauseDirective);
     searchApp.directive('textAge', textAgeDirective);
+
+    searchApp.directive('textPersonName', textPersonNameDirective);
 
     searchApp.filter('formatStringNumber', formatStringNumberFilter);
 

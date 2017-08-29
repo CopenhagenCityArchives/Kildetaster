@@ -1,3 +1,3 @@
-<div ng-if="date">
-    Død: {{date | date: 'dd-MM-yyyy'}}
+<div ng-if="date && prefix">
+    {{prefix}}: {{date | date: 'dd-MM-yyyy'}}
 </div>

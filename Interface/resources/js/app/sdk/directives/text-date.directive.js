@@ -10,7 +10,8 @@ define([
             templateUrl: 'sdk/directives/text-date.directive.tpl.html',
 
             scope: {
-                date: '='
+                date: '=',
+                prefix: '@prefix'
             },
 
             link: function(scope, element, attr) {
