@@ -31,6 +31,8 @@ define([
     'app/sdk/search/post.controller',
 
     'app/sdk/directives/searchresult.directive',
+    'app/sdk/directives/searchresult-burial.directive',
+    'app/sdk/directives/searchresult-police.directive',
     'app/sdk/directives/postfield.directive',
     'app/sdk/directives/postCategory.directive',
     'app/sdk/directives/zoom-image.directive',
@@ -51,6 +53,7 @@ define([
     'app/sdk/directives/text-age.directive',
 
     'app/sdk/directives/text-person-name.directive',
+    'app/sdk/directives/text-address-police.directive',
 
     'app/sdk/filters/formatStringNumber.filter',
 
@@ -88,6 +91,9 @@ define([
     postController,
 
     searchResultDirective,
+    searchResultBurialDirective,
+    searchResultPoliceDirective,
+
     postfieldDirective,
     postCategoryDirective,
 
@@ -108,6 +114,7 @@ define([
     textDeathcauseDirective,
     textAgeDirective,
     textPersonNameDirective,
+    textAddressPoliceDirective,
 
     formatStringNumberFilter,
 
@@ -145,6 +152,8 @@ define([
     searchApp.controller('postController', postController);
 
     searchApp.directive('searchResult', searchResultDirective);
+    searchApp.directive('searchResultBurial', searchResultBurialDirective);
+    searchApp.directive('searchResultPolice', searchResultPoliceDirective);
     searchApp.directive('postField', postfieldDirective);
     searchApp.directive('postCategory', postCategoryDirective);
 
@@ -166,6 +175,7 @@ define([
     searchApp.directive('textAge', textAgeDirective);
 
     searchApp.directive('textPersonName', textPersonNameDirective);
+    searchApp.directive('textAddressPolice', textAddressPoliceDirective);
 
     searchApp.filter('formatStringNumber', formatStringNumberFilter);
 
