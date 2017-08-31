@@ -1,10 +1,13 @@
-<div>
+<a href class="search-container__row">
     <div class="search-container__item">
         <div>
             <text-name firstnames="data.firstnames" lastname="data.lastname" birthname="data.birthname"></text-name>
-            <div ng-if="data.person_type == 1">Persontype: Hovedperson</div>
-            <div ng-if="data.person_type == 2">Persontype: Ægtefælle</div>
-            <div ng-if="data.person_type == 3">Persontype: Barn</div>
+            <div>
+                Persontype:
+                <span ng-if="data.person_type == 1"> Hovedperson</span>
+                <span ng-if="data.person_type == 2"> Ægtefælle</span>
+                <span ng-if="data.person_type == 3"> Barn</span>
+            </div>
             <span ng-if="data.birthplace">Fødested: {{data.birthplace}}</span>
             <text-date prefix="Født" date="data.dateOfBirth"></text-date>
             <text-position position="position" ng-repeat="position in data.positions"></text-position>
@@ -50,4 +53,4 @@
             </div>
         </div>
     </div>
-</div>
+</a>

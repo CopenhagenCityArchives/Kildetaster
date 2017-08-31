@@ -11,7 +11,8 @@ define([
 
             scope: {
                 data: "=",
-                metadata: "="
+                metadata: "=",
+                gotopost: "="
             },
 
             templateUrl: 'sdk/directives/searchresult-burial.directive.tpl.html',

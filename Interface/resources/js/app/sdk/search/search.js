@@ -10,6 +10,7 @@ define([
     'angular-ui-router',
     'angular-ui-select',
     'angular-filter',
+    'angular-animate',
 
     'app/shared/sdk-templates',
 
@@ -25,7 +26,6 @@ define([
     'app/sdk/search/search.run',
 
     'app/sdk/search/search.controller',
-    'app/sdk/search/search.facets.controller',
 
     'app/sdk/search/navigation.controller',
     'app/sdk/search/post.controller',
@@ -51,12 +51,13 @@ define([
     'app/sdk/directives/text-address.directive',
     'app/sdk/directives/text-deathcause.directive',
     'app/sdk/directives/text-age.directive',
-
     'app/sdk/directives/text-person-name.directive',
     'app/sdk/directives/text-address-police.directive',
 
-    'app/sdk/filters/formatStringNumber.filter',
+    'app/sdk/directives/filterLink/filterLink.directive',
+    'app/sdk/directives/facet/facet.directive',
 
+    'app/sdk/filters/formatStringNumber.filter',
     'app/shared/constants'
 
 ], function(
@@ -71,6 +72,7 @@ define([
     uiRouter,
     uiSelect,
     angularFilter,
+    angularAnimate,
 
     sdkTemplates,
 
@@ -86,7 +88,6 @@ define([
     searchRun,
 
     searchController,
-    searchFacetsController,
     navigationController,
     postController,
 
@@ -116,6 +117,9 @@ define([
     textPersonNameDirective,
     textAddressPoliceDirective,
 
+    filterLinkDirective,
+    facetDirective,
+
     formatStringNumberFilter,
 
     constants
@@ -132,7 +136,8 @@ define([
         'ui.select',
         'angular.filter',
         'ngStorage',
-        'ngSanitize'
+        'ngSanitize',
+        'ngAnimate'
     ]);
 
     searchApp.config(searchConfig);
@@ -147,7 +152,6 @@ define([
     searchApp.factory('tokenFactory', tokenFactory);
 
     searchApp.controller('searchController', searchController);
-    searchApp.controller('searchFacetsController', searchFacetsController);
     searchApp.controller('navigationController', navigationController);
     searchApp.controller('postController', postController);
 
@@ -173,9 +177,11 @@ define([
     searchApp.directive('textAddress', textAddressDirective);
     searchApp.directive('textDeathcause', textDeathcauseDirective);
     searchApp.directive('textAge', textAgeDirective);
-
     searchApp.directive('textPersonName', textPersonNameDirective);
     searchApp.directive('textAddressPolice', textAddressPoliceDirective);
+
+    searchApp.directive('filterLink', filterLinkDirective);
+    searchApp.directive('facet', facetDirective);
 
     searchApp.filter('formatStringNumber', formatStringNumberFilter);
 

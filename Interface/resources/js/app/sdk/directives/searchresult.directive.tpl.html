@@ -1,4 +1,4 @@
-<a href class="search-container__row" ng-click="goToPost()">
-    <search-result-burial data="data" metadata="metadata" ng-if="metadata.collection_id == 1"></search-result-burial>
-    <search-result-police data="data" metadata="metadata" ng-if="metadata.station"></search-result-police>
-</a>
+<div class="search-container__row">
+    <search-result-burial data="data" metadata="metadata" ng-click="goToPost()" ng-if="metadata.collection_id == 1"></search-result-burial>
+    <search-result-police data="data" metadata="metadata" ng-click="goToPost()" ng-if="metadata.station"></search-result-police>
+</div>
