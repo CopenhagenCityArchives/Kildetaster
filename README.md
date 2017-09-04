@@ -46,6 +46,11 @@ Run `grunt dev` and `grunt deploy_dev`
 
 This will build a development package and deploy it to the two deployment sites (kbhkilder.dk/software/kildetaster-development and kbharkiv.dk/kildetaster-development)
 
+## How to deploy to production
+Run `grunt` and `grunt deploy_prod`
+
+This will build a development package and deploy it to the two deployment sites (kbhkilder.dk/software/kildetaster and kbharkiv.dk/kildetaster)
+
 ## How to build for production
 In order to build the frontend to be released to production, you need to run `grunt`with no arguments. That will build and bundle frontend for both the editor and the Joomla SDK.
 
