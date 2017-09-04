@@ -40,7 +40,7 @@ app.config(['$routeProvider', function($routeProvider) {
 app.factory('httpRequestInterceptor', ['$sessionStorage', function($sessionStorage) {
     return {
         request: function($config) {
-            if ($config.url == "http://www.kbharkiv.dk/index.php") {
+            if ($config.url == "https://www.kbharkiv.dk/index.php") {
                 return $config;
             }
             if ($sessionStorage.tokenData) {
@@ -62,7 +62,7 @@ app.config(function($httpProvider) {
 });
 
 //app.constant('API', 'http://localhost:8000/datasource');
-app.constant('API', 'http://kbhkilder.dk/api/datasource');
+app.constant('API', 'https://kbhkilder.dk/api/datasource');
 
 //Loading and saving files
 app.service('Datasource', ['$http', '$q', 'API', function($http, $q, API) {
@@ -142,7 +142,7 @@ app.service('TokenService', ['$sessionStorage', '$http', '$q', '$location', func
     pubs.get = function() {
         var deferred = $q.defer();
 
-        var MAINDOMAIN = 'http://www.kbharkiv.dk';
+        var MAINDOMAIN = 'https://www.kbharkiv.dk';
 
         var headers = $location.protocol() + "://" + $location.host() == MAINDOMAIN ? {
             'Content-Type': 'application/json'
