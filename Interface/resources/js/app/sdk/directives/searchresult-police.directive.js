@@ -11,8 +11,7 @@ define([
 
             scope: {
                 data: "=",
-                metadata: "=",
-                gotopost: "="
+                metadata: "="
             },
 
             templateUrl: 'sdk/directives/searchresult-police.directive.tpl.html',
