@@ -39,10 +39,15 @@ define([
                 scope.goToPost = function() {
 
                     searchService.currentIndex = scope.page + scope.index;
-
-                    $state.go('search.page.result.page', {
-                        postId: scope.result.post_id
-                    });
+                    if (scope.metadata.collection_id == 1) {
+                        // get post data from db
+                        $state.go('search.page.result.page', {
+                            postId: scope.result.post_id
+                        });
+                    } else {
+                        // construct post from solr data
+                        $state.go('search.page.result.data_page', { data: scope.data, metadata: scope.metadata });
+                    }
                 };
 
                 scope.$on('$destroy', function() {

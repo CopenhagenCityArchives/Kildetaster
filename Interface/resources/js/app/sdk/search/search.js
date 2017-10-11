@@ -29,10 +29,15 @@ define([
 
     'app/sdk/search/navigation.controller',
     'app/sdk/search/post.controller',
+    'app/sdk/search/datapost.controller',
+
+    'app/sdk/directives/datapost-erindring.directive',
+    //'app/sdk/directives/datapost-police.directive',
 
     'app/sdk/directives/searchresult.directive',
     'app/sdk/directives/searchresult-burial.directive',
     'app/sdk/directives/searchresult-police.directive',
+    'app/sdk/directives/searchresult-erindring.directive',
     'app/sdk/directives/postfield.directive',
     'app/sdk/directives/postCategory.directive',
     'app/sdk/directives/zoom-image.directive',
@@ -90,10 +95,15 @@ define([
     searchController,
     navigationController,
     postController,
+    datapostController,
+
+    datapostErindringDirective,
+    //datapostPoliceDirective,
 
     searchResultDirective,
     searchResultBurialDirective,
     searchResultPoliceDirective,
+    searchResultErindringDirective,
 
     postfieldDirective,
     postCategoryDirective,
@@ -154,10 +164,15 @@ define([
     searchApp.controller('searchController', searchController);
     searchApp.controller('navigationController', navigationController);
     searchApp.controller('postController', postController);
+    searchApp.controller('datapostController', datapostController);
+
+    searchApp.directive('datapostErindring', datapostErindringDirective);
+    //searchApp.directive('datapostPolice', datapostPoliceDirective);
 
     searchApp.directive('searchResult', searchResultDirective);
     searchApp.directive('searchResultBurial', searchResultBurialDirective);
     searchApp.directive('searchResultPolice', searchResultPoliceDirective);
+    searchApp.directive('searchResultErindring', searchResultErindringDirective);
     searchApp.directive('postField', postfieldDirective);
     searchApp.directive('postCategory', postCategoryDirective);
 

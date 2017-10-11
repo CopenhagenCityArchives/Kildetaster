@@ -52,10 +52,26 @@ define([
                 }
 
             })
+            .state('search.page.result.data_page', {
+                url: 'data_post',
+                views: {
+                    'navigation': {
+                        templateUrl: 'sdk/search/post.navigation.tpl.html',
+                        controller: 'navigationController'
+                    },
+                    '': {
+                        templateUrl: 'sdk/search/data-post.tpl.html',
+                        controller: 'datapostController'
+                    }
+                },
+                params: {
+                    data: {},
+                    metadata: {}
+                }
+            })
             .state('search.page.result.page', {
                 url: 'post/{postId:int}',
                 views: {
-
                     'navigation': {
                         templateUrl: 'sdk/search/post.navigation.tpl.html',
                         controller: 'navigationController'
