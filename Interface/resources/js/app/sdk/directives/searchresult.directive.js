@@ -47,7 +47,7 @@ define([
                         });
                     } else {
                         // construct post from solr data
-                        $state.go('search.page.result.data_page', { data: scope.data, metadata: scope.metadata, highlighting: scope.highlighting });
+                        $state.go('search.page.result.data_page', { dataPostId: scope.result.id, highlighting: scope.highlighting });
                     }
                 };
 

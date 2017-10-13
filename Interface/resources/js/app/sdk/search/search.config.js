@@ -53,7 +53,7 @@ define([
 
             })
             .state('search.page.result.data_page', {
-                url: 'data_post',
+                url: 'data_post/{dataPostId}',
                 views: {
                     'navigation': {
                         templateUrl: 'sdk/search/post.navigation.tpl.html',
@@ -65,9 +65,25 @@ define([
                     }
                 },
                 params: {
-                    data: {},
-                    metadata: {},
                     highlighting: {}
+                },
+                resolve: {
+                    result: ['searchService', '$stateParams', '$q', function(searchService, $stateParams, $q) {
+                        var deferred = $q.defer();
+
+                        var oldSearchConfig = searchService.currentSearchConfig;
+                        searchService.search([{operator: '%f%: %q%', field: { solr_name: 'id' }, term: $stateParams.dataPostId}], [], [])
+                        .then(function(result) {
+                            if (result.response.numFound === 1) {
+                                deferred.resolve(result.response.docs[0]);
+                            } else {
+                                deferred.reject();
+                            }
+                            searchService.currentSearchConfig = oldSearchConfig;
+                        });
+
+                        return deferred.promise;
+                    }]
                 }
             })
             .state('search.page.result.page', {
