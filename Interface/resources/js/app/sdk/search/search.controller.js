@@ -363,6 +363,15 @@ define([
 
                 that.scrambleConfig();
                 that.results = response.response;
+                
+                // Add highlighting to individual documents
+                angular.forEach(response.highlighting, function(highlights, docId) {
+                    angular.forEach(that.results.docs, function(doc, index) {
+                        if (doc.id === docId) {
+                            doc.highlighting = highlights;
+                        }
+                    });
+                });
 
                 that.facets = [];
 

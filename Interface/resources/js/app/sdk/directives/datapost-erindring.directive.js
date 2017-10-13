@@ -11,7 +11,8 @@ define([
 
             scope: {
                 data: "=",
-                metadata: "="
+                metadata: "=",
+                highlighting: "="
             },
 
             templateUrl: 'sdk/directives/datapost-erindring.directive.tpl.html',
@@ -19,6 +20,13 @@ define([
             link: function(scope, element, attr) {
                 // Set up post information
                 scope.post = [];
+
+                var highlights = [];
+                if (scope.highlighting && scope.highlighting.erindring_document_text) {
+                    highlights = scope.highlighting.erindring_document_text.map(function(hltext) {
+                        return { value: hltext, html: true };
+                    });
+                }
 
                 scope.post.push({
                     label: "Person",
@@ -61,6 +69,10 @@ define([
                         label: "Indeholder foto",
                         value: scope.metadata.containsPhotos
                     }]
+                },
+                {
+                    label: "Kontekst",
+                    fields: highlights
                 })
 
                 // Scope function definitions
@@ -129,6 +141,7 @@ define([
                     scope.pdfDoc = pdfDoc;
                     scope.renderPage(scope.pageNum)
                 });
+
             }
         };
     };

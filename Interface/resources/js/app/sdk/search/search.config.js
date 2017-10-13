@@ -66,7 +66,8 @@ define([
                 },
                 params: {
                     data: {},
-                    metadata: {}
+                    metadata: {},
+                    highlighting: {}
                 }
             })
             .state('search.page.result.page', {

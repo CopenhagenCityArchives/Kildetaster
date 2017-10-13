@@ -11,7 +11,8 @@ define([
 
             scope: {
                 data: "=",
-                metadata: "="
+                metadata: "=",
+                highlighting: "="
             },
 
             templateUrl: 'sdk/directives/searchresult-erindring.directive.tpl.html',

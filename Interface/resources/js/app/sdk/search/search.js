@@ -32,7 +32,7 @@ define([
     'app/sdk/search/datapost.controller',
 
     'app/sdk/directives/datapost-erindring.directive',
-    //'app/sdk/directives/datapost-police.directive',
+    'app/sdk/directives/datapost-police.directive',
 
     'app/sdk/directives/searchresult.directive',
     'app/sdk/directives/searchresult-burial.directive',
@@ -98,7 +98,7 @@ define([
     datapostController,
 
     datapostErindringDirective,
-    //datapostPoliceDirective,
+    datapostPoliceDirective,
 
     searchResultDirective,
     searchResultBurialDirective,
@@ -167,7 +167,7 @@ define([
     searchApp.controller('datapostController', datapostController);
 
     searchApp.directive('datapostErindring', datapostErindringDirective);
-    //searchApp.directive('datapostPolice', datapostPoliceDirective);
+    searchApp.directive('datapostPolice', datapostPoliceDirective);
 
     searchApp.directive('searchResult', searchResultDirective);
     searchApp.directive('searchResultBurial', searchResultBurialDirective);

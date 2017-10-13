@@ -102,7 +102,7 @@ define([
 
                     var baseSolrQuery = searchConfig[0].solr_base_query;
                     return $http({
-                        url: SOLRAPI + baseSolrQuery + '&' + buildQueryString(query, facets, params),
+                        url: SOLRAPI + baseSolrQuery + '&' + buildQueryString(query, facets, params) + "&hl=on&hl.fl=erindring_document_text&hl.snippets=3&hl.simple.pre=<b>&hl.simple.post=</b>",
                         method: 'GET'
                     });
                 })

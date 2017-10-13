@@ -26,6 +26,7 @@ define([
                 if (scope.result && scope.result.jsonObj) {
                     scope.jsonData = JSON.parse(scope.result.jsonObj);
                     scope.data = scope.jsonData.data;
+                    scope.highlighting = scope.result.highlighting;
 
                     //HACK START
                     // takes the dateOfDeath from the data and overwrites the wrongfully formatted dateOfDeath in the jsonObj data
@@ -46,7 +47,7 @@ define([
                         });
                     } else {
                         // construct post from solr data
-                        $state.go('search.page.result.data_page', { data: scope.data, metadata: scope.metadata });
+                        $state.go('search.page.result.data_page', { data: scope.data, metadata: scope.metadata, highlighting: scope.highlighting });
                     }
                 };
 
