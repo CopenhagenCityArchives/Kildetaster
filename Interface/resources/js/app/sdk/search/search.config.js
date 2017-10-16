@@ -71,7 +71,7 @@ define([
                     result: ['searchService', '$stateParams', '$q', function(searchService, $stateParams, $q) {
                         var deferred = $q.defer();
 
-                        var oldSearchConfig = searchService.currentSearchConfig;
+                        var oldSearchConfig = searchService.currentSearchConfig; // save search config to restore later
                         searchService.search([{operator: '%f%: %q%', field: { solr_name: 'id' }, term: $stateParams.dataPostId}], [], [])
                         .then(function(result) {
                             if (result.response.numFound === 1) {
@@ -79,7 +79,7 @@ define([
                             } else {
                                 deferred.reject();
                             }
-                            searchService.currentSearchConfig = oldSearchConfig;
+                            searchService.currentSearchConfig = oldSearchConfig; // restore search config
                         });
 
                         return deferred.promise;
