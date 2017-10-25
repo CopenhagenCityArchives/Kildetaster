@@ -176,6 +176,7 @@ define([
 
                 if (!anySelected) {
                     collection.selected = true;
+                    return;
                 }
             }
 
