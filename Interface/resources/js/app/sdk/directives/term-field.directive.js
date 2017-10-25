@@ -43,12 +43,8 @@ define([
                     $scope.options = [];
 
                     //If we do not get any data source or a term to search for, do nothing
-                    if (!field.datasource || !term) {
+                    if (!field.datasource) {
                         //Just return an empty array
-                        return [];
-                    }
-
-                    if (term.length < 2) {
                         return [];
                     }
 
@@ -56,13 +52,13 @@ define([
                     $scope.loading = true;
 
                     return $http({
-                        url: field.datasource + encodeURIComponent(term),
+                        url: field.datasource.url + encodeURIComponent(term),
                         method: 'GET',
                         cache: false
                     }).then(function(response) {
 
                         var arr = response.data.map(function(item) {
-                            return item[field.datasourceValueField];
+                            return item[field.datasource.field];
                         });
 
                         //Only show a set number of hits
