@@ -15,6 +15,7 @@ define([
     'app/shared/sdk-templates',
 
     'app/shared/services/search.service',
+    'app/shared/services/solr.service',
     'app/shared/services/error.service',
     'app/shared/services/helpers.service',
     'app/shared/services/token.service',
@@ -82,6 +83,7 @@ define([
     sdkTemplates,
 
     searchService,
+    solrService,
     errorService,
     helpersService,
     tokenService,
@@ -154,6 +156,7 @@ define([
     searchApp.run(searchRun);
 
     searchApp.service('searchService', searchService);
+    searchApp.service('solrService', solrService);
     searchApp.service('errorService', errorService);
     searchApp.service('helpers', helpersService);
     searchApp.service('tokenService', tokenService);

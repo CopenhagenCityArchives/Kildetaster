@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var searchDirective = /*@ngInject*/ function(API, $state, helpers, searchService) {
+    var searchDirective = /*@ngInject*/ function(API, $state, helpers, solrService) {
 
         return {
 
@@ -38,17 +38,7 @@ define([
                 }
 
                 scope.goToPost = function() {
-
-                    searchService.currentIndex = scope.page + scope.index;
-                    if (scope.metadata.collection_id == 1) {
-                        // get post data from db
-                        $state.go('search.page.result.page', {
-                            postId: scope.result.post_id
-                        });
-                    } else {
-                        // construct post from solr data
-                        $state.go('search.page.result.data_page', { dataPostId: scope.result.id, highlighting: scope.highlighting });
-                    }
+                    $state.go('search.page.result.data_page', { index: scope.page * 10 + scope.index, highlighting: scope.highlighting });
                 };
 
                 scope.$on('$destroy', function() {

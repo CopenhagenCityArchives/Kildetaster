@@ -1,191 +1,143 @@
-define([
-
-], function() {
-
-    var searchService = /*@ngInject*/ function searchService($q, $http, API, SOLRAPI, JSONURL, $filter) {
-
-        var useReal = true;
-
-        /**
-        * Build the string that matches the current query
-        */
-        function buildSolrQuery(arr) {
-            var rtn = [];
-
-            arr.forEach(function(row) {
-
-                if (row.field !== undefined && row.term) {
-                    rtn.push(encodeURIComponent(buildSolrValue(row)));
-                }
-            });
-            return rtn.join(' AND ');
-        }
-
-        /**
-        * Prepare solr value by using the api supplied operator, replacing vaues for the field and the search term
-        *
-        * @param row {object} The row configuration object
-        */
-        function buildSolrValue(row) {
-            var operator;
-
-            operator = row.operator.replace('%f%', row.field.solr_name);
-            operator = operator.replace('%q%', row.term)
-
-            return operator;
-        }
-
-        function buildSolrFacetQuery(facets) {
-            var rtn = [];
-
-            if (facets) {
-
-                angular.forEach(facets, function(facet, facetName) {
-                    if (facets.hasOwnProperty(facetName)) {
-                        rtn.push(facet.filterQuery.replace("%f%", facet.fieldName));
-                    }
-                });
-
-            }
-            //join with fq= because if we have multiple entries in the array, they should be seperatred by &, but all be fq
-            //but since the buildQueryString function already prepares a fq, the first entry does not need this
-            return rtn.join('&fq=');
-        }
-
-        /**
-        *
-        */
-        function buildQueryString(query, facets, params) {
-
-            var rtn = [];
-
-            var options = {
-
-                //The query for the search
-                'q': buildSolrQuery(query),
-                //The selected filters to use as facet query
-                'fq': buildSolrFacetQuery(facets)
-
-            };
-
-            params = angular.extend(options, params);
-
-            for (var param in params) {
-                if (params.hasOwnProperty(param)) {
-                    rtn.push(param + '=' + params[param]);
-                }
-            }
-
-            return rtn.join('&');
-        }
-
-        var index = 0;
+define([], function() {
+    var searchService = /*@ngInject*/ function searchService($q, $http, $location) {
 
         return {
+            currentSearch: undefined,
 
-            //Reference to current search configuration, enables us to run other requests using the same query
-            currentSearchConfig: null,
-            currentIndex: 0,
-
-            search: function search(query, facets, params) {
-
+            getConfigPromise: function() {
                 var deferred = $q.defer();
 
-                this.currentSearchConfig =  {
-                    query: query,
-                    facets: facets,
-                    params: params
-                };
-
-                this.getSearchConfig()
-                .then(function(searchConfig) {
-
-                    var baseSolrQuery = searchConfig[0].solr_base_query;
-                    return $http({
-                        url: SOLRAPI + baseSolrQuery + '&' + buildQueryString(query, facets, params) + "&hl=on&hl.fl=erindring_document_text&hl.snippets=3&hl.simple.pre=<b>&hl.simple.post=</b>",
-                        method: 'GET'
-                    });
-                })
-                .then(function(response) {
-                    deferred.resolve(response.data);
-                })
-                .catch(function(err) {
-                    deferred.reject();
-                });
-
-                return deferred.promise;
-            },
-
-            paginatedSearch: function(query, facets) {
-
-                var deferred = $q.defer(),
-                    that = this;
-
-                this.getSearchConfig().then(function(searchConfig) {
-
-                    var baseSolrQuery = searchConfig[0].solr_base_query;
-
-                    return $http({
-                        url: SOLRAPI + baseSolrQuery + '&' + buildQueryString(query, facets, {
-                            rows: 1,
-                            start: that.currentIndex,
-                            sort: that.currentSearchConfig.params.sort
-                        })
-                    })
-                })
-
-                .then(function(response) {
-                    deferred.resolve(response.data);
-                })
-                .catch(function(err) {
-                    console.log('Error doing paginatedSearch', err);
-                });
-
-                return deferred.promise;
-
-            },
-
-            /**
-            *
-            */
-            getSearchConfig: function getSearchConfig() {
-
-                return $http({
-                    url: API + '/searchconfig',
-                    params: {
-                        collection_id: 1
-                    },
+                $http({
+                    url: 'http://localhost:1510/resources/configs/search.json',
                     cache: true
                 })
                 .then(function(response) {
-                    return response.data;
+                    deferred.resolve(response.data);
                 })
-
                 .catch(function(err) {
-                    console.log('Error getting search fields', err);
+                    deferred.reject(err);
                 });
+
+                return deferred.promise;
             },
 
-            /**
-            * TODO: Move to own service
-            */
-            getPost: function getPost(postId) {
+            urlParamsExist: function() {
+                return !angular.equals($location.search(), {});
+            },
 
-                return $http({
-                    url: API + '/posts/' + postId
-                })
-                .then(function(response) {
-                    return response.data;
-                })
-                .catch(function(err) {
-                    console.log('Error getting post data', err);
-                    alert(err.data);
+            getSearch: function(searchConfig) {
+                var queries = {};
+                var filterQueries = {};
+                var sortDirection = "asc";
+                var sortField = searchConfig.fields["lastname"];
+                var colIds = [];
+
+                var regex = /(q(\d+)\.(t|op|f)|f(\d)\.(f|l))/
+
+                angular.forEach($location.search(), function(value, param) {
+                    var match = regex.exec(param);
+                    if (match) {
+                        if (match[2] !== undefined) { // query parameter
+                            if (!queries[match[2]]) {
+                                queries[match[2]] = {};
+                            }
+                            switch (match[3]) {
+                                case "f":
+                                    queries[match[2]].field = searchConfig.fields[value];
+                                    break;
+                                case "op":
+                                    queries[match[2]].operator = searchConfig.operators[value];
+                                    break;
+                                case "t":
+                                    queries[match[2]].term = decodeURIComponent(value);
+                                    break;
+                                default: break;
+                            }
+                        } else { // facet parameter
+                            if (!filterQueries[match[4]]) {
+                                filterQueries[match[4]] = {};
+                            }
+                            switch (match[5]) {
+                                case "f":
+                                    filterQueries[match[4]].facet = searchConfig.facets[value];
+                                    break;
+                                case "l":
+                                    filterQueries[match[4]].bucket = { val: filterQueries[match[4]].facet.type === "range" ? parseInt(value) : value };
+                                    break;
+                                default: break;
+                            }
+                        }
+                    }
                 });
+                // TODO: verify params (ie. does each query have field/term/operator)
+
+                if ($location.search().sortField && searchConfig.fields[$location.search().sortField]) {
+                    sortField = searchConfig.fields[$location.search().sortField];
+                }
+
+                var qSortDirection = $location.search().sortDirection;
+                if (qSortDirection) {
+                    qSortDirection = qSortDirection.toLowerCase();
+                }
+                if (qSortDirection === "asc" || qSortDirection === "desc") {
+                    sortDirection = qSortDirection;
+                }
+
+                var page = $location.search().page || 0;
+                page = parseInt(page);
+
+                var qCollections = $location.search().collections;
+                if (qCollections) {
+                    var qColIds = qCollections.split(",");
+                    angular.forEach(qColIds, function(colId) {
+                        if (searchConfig.collections[colId]) {
+                            colIds.push(colId);
+                        }
+                    });
+                } else {
+                    angular.forEach(searchConfig.collections, function(collection, id) { colIds.push(id); });
+                }
+
+                return { queries: Object.values(queries), filterQueries: Object.values(filterQueries), collections: colIds, sortDirection: sortDirection, sortField: sortField, page: page };
+            },
+
+            setSearch: function(search) {
+                $location.search({});
+
+                // add queries
+                var i = 1;
+                angular.forEach(search.queries, function(query) {
+                    $location.search("q" + i + ".f", query.field.name);
+                    $location.search("q" + i + ".op", query.operator.op);
+                    $location.search("q" + i + ".t", encodeURIComponent(query.term));
+                    i = i + 1;
+                });
+
+                // add facets
+                i = 1;
+                angular.forEach(search.filterQueries, function(filterQuery) {
+                    $location.search("f" + i + ".f", filterQuery.facet.field);
+                    $location.search("f" + i + ".l", filterQuery.bucket.val);
+                    i = i + 1;
+                });
+
+                if (search.sortField) {
+                    $location.search('sortField', search.sortField.name);
+                }
+
+                if (search.sortDirection) {
+                    $location.search('sortDirection', search.sortDirection);
+                }
+
+                if (search.page) {
+                    $location.search('page', search.page);
+                }
+
+                if (search.collections && search.collections.length > 0) {
+                    $location.search('collections', search.collections.join(","));
+                }
             }
         };
-
     };
-
     return searchService;
-
 });

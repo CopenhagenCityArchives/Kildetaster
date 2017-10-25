@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var searchConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider, $httpProvider) {
+    var searchConfig = /*@ngInject*/ function searchConfig($stateProvider, $urlRouterProvider, $httpProvider) {
 
         //Include the interceptor that adds the Authoraztion bearer token if present in session storage
         //Needed for when requesting posts, and the user is logged in. Without it, the backend is not able to determine
@@ -23,24 +23,31 @@ define([
                     }
                 }
             })
-
             .state('search.page', {
                 //?search can contain a search configuration
-                url: '?search',
+                url: '',
                 views: {
                     '': {
                         templateUrl: 'sdk/search/search.tpl.html',
                         controller: 'searchController as ctrl'
                     }
                 },
+                reloadOnSearch: false,
                 resolve: {
-                    searchConfig: ['searchService', function(searchService) {
-                        return searchService.getSearchConfig().then(function(response) {
-                            return response;
+                    searchConfig: ['searchService', '$q', function(searchService, $q) {
+                        var deferred = $q.defer();
+
+                        searchService.getConfigPromise()
+                        .then(function(searchConfig) {
+                            deferred.resolve(searchConfig);
+                        })
+                        .catch(function(err) {
+                            deferred.reject(err);
                         });
+
+                        return deferred.promise;
                     }]
                 }
-
             })
             .state('search.page.result', {
                 url: '',
@@ -65,96 +72,65 @@ define([
                     }
                 },
                 params: {
-                    highlighting: {}
+                    highlighting: {},
+                    index: 0
                 },
                 resolve: {
-                    result: ['searchService', '$stateParams', '$q', function(searchService, $stateParams, $q) {
+                    resultData: ['solrService', 'searchService', '$stateParams', '$q', function(solrService, searchService, $stateParams, $q) {
                         var deferred = $q.defer();
 
-                        var oldSearchConfig = searchService.currentSearchConfig; // save search config to restore later
-                        searchService.search([{operator: '%f%: %q%', field: { solr_name: 'id' }, term: $stateParams.dataPostId}], [], [])
-                        .then(function(result) {
-                            if (result.response.numFound === 1) {
-                                deferred.resolve(result.response.docs[0]);
-                            } else {
-                                deferred.reject();
-                            }
-                            searchService.currentSearchConfig = oldSearchConfig; // restore search config
+                        // Entry with pagination
+                        if (searchService.currentSearch || searchService.urlParamsExist()) {
+                            // Either use active search configuration, or if that is absent, URL parameters
+                            searchService.getConfigPromise()
+                            .then(function(searchConfig) {
+                                searchService.currentSearch = searchService.currentSearch || searchService.getSearch(searchConfig);
+                                solrService.paginatedSearch(searchService.currentSearch.queries, searchService.currentSearch.facets, searchService.currentSearch.collections, searchService.currentSearch.sortField, searchService.currentSearch.sortDirection, $stateParams.index)
+                                .then(function(results) {
+                                    if (results && results.response && results.response.numFound > 0) {
+                                        deferred.resolve(results.response);
+                                    } else {
+                                        deferred.reject("no results for page");
+                                    }
+                                })
+                                .catch(function(err) {
+                                    deferred.reject(err);
+                                })
+                            }).catch(function(err) {
+                                deferred.reject(err);
+                            });
+                        // Entry without pagination
+                        } else {
+                            var queries = angular.copy(searchService.currentSearch.queries);
+                            queries.push({
+                                field: { name: 'id', type: 'string' },
+                                operator: { op: 'eq' },
+                                term: $stateParams.dataPostId
+                            });
+                            solrService.pageinatedSearch(queries, searchService.currentSearch.facets, searchService.currentSearch.collections, searchService.currentSearch.sortField, searchService.currentSearch.sortDirection, 0)
+                            .then(function(results) {
+                                deferred.resolve(results.respones);
+                            }).catch(function(err) {
+                                deferred.reject(err);
+                            });
+                        }
+
+                        return deferred.promise;
+                    }],
+                    searchConfig: ['searchService', '$q', function(searchService, $q) {
+                        var deferred = $q.defer();
+
+                        searchService.getConfigPromise()
+                        .then(function(searchConfig) {
+                            deferred.resolve(searchConfig);
+                        })
+                        .catch(function(err) {
+                            deferred.reject(err);
                         });
 
                         return deferred.promise;
                     }]
                 }
-            })
-            .state('search.page.result.page', {
-                url: 'post/{postId:int}',
-                views: {
-                    'navigation': {
-                        templateUrl: 'sdk/search/post.navigation.tpl.html',
-                        controller: 'navigationController'
-                    },
-                    '': {
-                        templateUrl: 'sdk/search/post.tpl.html',
-                        controller: 'postController'
-                    }
-                },
-                resolve: {
-
-                    resultData: ['searchService', '$stateParams', '$q', function(searchService, $stateParams, $q) {
-
-                        var data = {},
-                            deferred = $q.defer(),
-                            taskId;
-
-                            data.postId = $stateParams.postId;
-
-                        //We hit the url without having a search configured, just get post data
-                        if (searchService.currentSearchConfig === null) {
-
-                            searchService.getPost($stateParams.postId)
-                            .then(function(response) {
-
-                                data.post = response.data;
-                                data.metadata = response.metadata;
-                                data.errorReports = response.error_reports;
-
-                                deferred.resolve(data);
-                                return data;
-                            });
-                        }
-                        //We have a search config, so manage paginated search
-                        else {
-                            searchService.paginatedSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets)
-                            .then(function(response) {
-
-                                data.numFound = response.response.numFound;
-                                data.number = searchService.currentIndex + 1;
-
-                                var postId = response.response.docs[0].post_id;
-                                taskId = response.response.docs[0].task_id;
-
-                                //And get post data
-                                return searchService.getPost($stateParams.postId);
-                            })
-                            .then(function(response) {
-
-                                data.post = response.data;
-                                data.metadata = response.metadata;
-                                data.errorReports = response.error_reports;
-                                data.taskId = taskId;
-
-                                deferred.resolve(data);
-
-                                return data;
-                            });
-
-                        }
-
-                        return deferred.promise;
-                    }]
-                }
-
-
             });
     };
 

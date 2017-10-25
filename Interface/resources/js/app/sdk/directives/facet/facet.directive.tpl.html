@@ -1,12 +1,13 @@
-<div class="facet" ng-class="{ active: data.active }">
+<div class="facet" ng-class="{ active: active }">
 
-    <h3 class="facet__header" ng-click="toggle()">{{data.label}}</h3>
+    <h3 class="facet__header" ng-click="toggle()">{{field.view_name}}</h3>
 
     <ul class="facet__group">
-        <li class="facet__item" ng-repeat="facet in data.field | limitTo:numberOfItems" ng-click="toggleFilter(data.name, facet)">
-            <a href="">{{facet.name}} ({{facet.count}})</a>
+        <li class="facet__item" ng-repeat="bucket in buckets | limitTo:numberOfItems | filter:notSelectedBucket" ng-click="callAddFilter(facet, bucket)">
+            <a href="" ng-if="facet.type == 'range'">{{bucket.val}}-{{bucket.val+facet.gap}} ({{bucket.count}})</a>
+            <a href="" ng-if="facet.type == 'terms'">{{bucket.val}} ({{bucket.count}})</a>
         </li>
-        <li class="facet__item" ng-if="numberOfItems < data.field.length">
+        <li class="facet__item" ng-if="numberOfItems < buckets.length">
             <a class="facet__more" href="" ng-click="showMore()">Se flere</a>
         </li>
     </ul>

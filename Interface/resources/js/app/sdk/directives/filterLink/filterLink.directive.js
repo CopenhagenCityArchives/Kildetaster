@@ -12,14 +12,14 @@ define([
             templateUrl: 'sdk/directives/filterLink/filterLink.tpl.html',
 
             scope: {
-                name: '=',
-                data: '=',
+                facet: '=',
+                bucket: '=',
                 removeFunc: '&'
             },
 
             link: function(scope, element, attr) {
                 scope.remove = function() {
-                    scope.removeFunc()(scope.data.fieldName, scope.data);
+                    scope.removeFunc()(scope.facet, scope.bucket);
                 };
             }
 

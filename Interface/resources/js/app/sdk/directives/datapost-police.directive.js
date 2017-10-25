@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var directive = /*@ngInject*/ function(API, $state, helpers, searchService) {
+    var directive = /*@ngInject*/ function(API, $state, helpers, solrService) {
 
         return {
             restrict: 'E',
@@ -47,7 +47,7 @@ define([
                         }]
                     });
 
-                    if (scope.data.spouses.length == 1) {
+                    if (scope.data.spouses && scope.data.spouses.length == 1) {
                         scope.post.push({
                             label: "Ægtefælle",
                             fields: [{
