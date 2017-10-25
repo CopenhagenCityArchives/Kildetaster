@@ -60,6 +60,12 @@ module.exports = {
             dest: '<%= package.sdkresources %>/bower_components'
 
         }, {
+            // Search configuration
+            expand: true,
+            cwd: '<%= package.configs %>/search/',
+            src: ['**/*.json'],
+            dest: '<%= package.sdkresources %>/configs'
+        }, {
             //Mock data
             expand: true,
             cwd: '<%= package.resources %>/mock/',

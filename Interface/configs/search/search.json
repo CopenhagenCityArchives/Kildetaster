@@ -1,0 +1,132 @@
+{
+	"collections": {
+		"1": {
+			"name": "Begravelsesprotokoller",
+			"id": 1
+		},
+		"17": {
+			"name": "Politiets Registerblade",
+			"id": 17
+		},
+		"18": {
+			"name": "Erindringer",
+			"id": 18
+		}
+	},
+	"fields": {
+		"firstnames": {
+			"name": "firstnames",
+			"view_name": "Fornavne",
+			"collections": [1, 17, 18],
+			"type": "string",
+			"special_chars": false,
+			"searchable": true,
+			"sortable": true
+		},
+		"lastname": {
+			"name": "lastname",
+			"view_name": "Efternavn",
+			"collections": [1, 17, 18],
+			"type": "string",
+			"special_chars": false,
+			"searchable": true,
+			"sortable": true
+		},
+		"deathcauses": {
+			"name": "deathcauses",
+			"view_name": "Dødsårsag",
+			"collections": [1],
+			"type": "string",
+			"special_chars": false,
+			"searchable": true,
+			"sortable": false
+		},
+		"dateOfDeath": {
+			"name": "dateOfDeath",
+			"view_name": "Dødsdato",
+			"collections": [1],
+			"type": "date",
+			"special_chars": false,
+			"searchable": true,
+			"sortable": true
+		},
+		"dateOfBirth": {
+			"name": "dateOfBirth",
+			"view_name": "Fødselsdato",
+			"collections": [17],
+			"type": "date",
+			"special_chars": false,
+			"searchable": true,
+			"sortable": true
+		},
+		"positions": {
+			"name": "positions",
+			"view_name": "Erhverv",
+			"collections": [1, 17],
+			"type": "typeahead",
+			"special_chars": false,
+			"datasource": "https://www.kbhkilder.dk/1508/stable/api/datasource/1?q=",
+			"searchable": true,
+			"sortable": false
+		},
+		"street": {
+			"name": "streets",
+			"view_name": "Gade",
+			"collections": [1, 17],
+			"type": "typeahead",
+			"special_chars": false,
+			"datasource": "https://www.kbhkilder.dk/1508/stable/api/datasource/18?q=",
+			"searchable": true,
+			"sortable": false
+		},
+		"yearOfBirth": {
+			"name": "yearOfBirth",
+			"view_name": "Udregnet fødselsår",
+			"collections": [1, 17],
+			"type": "number",
+			"special_chars": false,
+			"searchable": true,
+			"sortable": true
+		},
+		"freetext_store": {
+			"name": "freetext_store",
+			"view_name": "Fritekst",
+			"collections": [1, 17, 18],
+			"type": "string",
+			"special_chars": true,
+			"searchable": true,
+			"sortable": false
+		}
+	},
+	"types": {
+		"string": { "operators": [ "eq", "neq", "starts", "ends", "in", "nin"] },
+		"typeahead": { "operators": [ "eq", "neq" ] },
+		"number": { "operators": [ "eq", "neq", "lt", "gt" ] },
+		"date": { "operators": ["eq", "neq", "lt", "gt" ]}
+	},
+	"operators": {
+		"eq": { "op": "eq", "label": "lig med" },
+		"neq": { "op": "neq", "label": "ikke lig med" },
+		"starts": { "op": "starts",  "label": "starter med" },
+		"ends": { "op": "ends",  "label": "ender med" },
+		"gt": { "op": "gt",  "label": "større end" },
+		"lt": { "op": "lt",  "label": "mindre end" },
+		"in": { "op": "in",  "label": "indeholder" },
+		"nin": { "op": "nin",  "label": "indeholder ikke" }
+	},
+	"facets": {
+		"yearOfBirth": {
+			"field": "yearOfBirth",
+			"type": "range",
+			"start": 1780,
+			"end": 1960,
+			"gap": 10,
+			"mincount": 1
+		},
+		"street": {
+			"field": "street",
+			"type": "terms",
+			"mincount": 1
+		}
+	}
+}
