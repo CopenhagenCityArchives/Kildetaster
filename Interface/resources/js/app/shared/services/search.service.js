@@ -32,8 +32,8 @@ define([], function() {
                 var sortField = searchConfig.fields["lastname"];
                 var colIds = [];
 
-                var regex = /(q(\d+)\.(t|op|f)|f(\d)\.(f|l))/
-
+                // parse query and filterQuery parameters
+                var regex = /(q(\d+)\.(f|op|t)|f(\d)\.(f|l))/
                 angular.forEach($location.search(), function(value, param) {
                     var match = regex.exec(param);
                     if (match) {
@@ -69,12 +69,29 @@ define([], function() {
                         }
                     }
                 });
-                // TODO: verify params (ie. does each query have field/term/operator)
+                
+                // verify queries
+                var validQueries = [];
+                angular.forEach(queries, function(query, idx) {
+                    if (query && query.field && query.operator && query.term) {
+                        validQueries.push(query);
+                    }
+                });
 
+                // verify filterQueries
+                var validFilterQueries = [];
+                angular.forEach(filterQueries, function(filterQuery, idx) {
+                    if (filterQuery && filterQuery.facet && filterQuery.bucket) {
+                        validFilterQueries.push(filterQuery);
+                    }
+                });
+
+                // Field to sort by
                 if ($location.search().sortField && searchConfig.fields[$location.search().sortField]) {
                     sortField = searchConfig.fields[$location.search().sortField];
                 }
 
+                // Sort direction
                 var qSortDirection = $location.search().sortDirection;
                 if (qSortDirection) {
                     qSortDirection = qSortDirection.toLowerCase();
@@ -83,9 +100,11 @@ define([], function() {
                     sortDirection = qSortDirection;
                 }
 
+                // Current page
                 var page = $location.search().page || 0;
                 page = parseInt(page);
 
+                // Selected collections
                 var qCollections = $location.search().collections;
                 if (qCollections) {
                     var qColIds = qCollections.split(",");
@@ -98,7 +117,7 @@ define([], function() {
                     angular.forEach(searchConfig.collections, function(collection, id) { colIds.push(id); });
                 }
 
-                return { queries: Object.values(queries), filterQueries: Object.values(filterQueries), collections: colIds, sortDirection: sortDirection, sortField: sortField, page: page };
+                return { queries: validQueries, filterQueries: validFilterQueries, collections: colIds, sortDirection: sortDirection, sortField: sortField, page: page };
             },
 
             setSearch: function(search) {
@@ -107,6 +126,10 @@ define([], function() {
                 // add queries
                 var i = 1;
                 angular.forEach(search.queries, function(query) {
+                    // ignore invalid queries
+                    if (!query || !query.field || !query.operator) {
+                        return;
+                    }
                     $location.search("q" + i + ".f", query.field.name);
                     $location.search("q" + i + ".op", query.operator.op);
                     $location.search("q" + i + ".t", encodeURIComponent(query.term));
@@ -116,6 +139,10 @@ define([], function() {
                 // add facets
                 i = 1;
                 angular.forEach(search.filterQueries, function(filterQuery) {
+                    // ignore invalid filterQueries
+                    if (!filterQuery || !filterQuery.facet || !filterQuery.bucket) {
+                        return;
+                    }
                     $location.search("f" + i + ".f", filterQuery.facet.field);
                     $location.search("f" + i + ".l", filterQuery.bucket.val);
                     i = i + 1;
