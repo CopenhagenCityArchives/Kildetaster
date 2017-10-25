@@ -17,7 +17,7 @@
 		"firstnames": {
 			"name": "firstnames",
 			"view_name": "Fornavne",
-			"collections": [1, 17, 18],
+			"collections" :[1, 17, 18],
 			"type": "string",
 			"special_chars": false,
 			"searchable": true,
@@ -70,7 +70,7 @@
 			"sortable": false
 		},
 		"street": {
-			"name": "streets",
+			"name": "street",
 			"view_name": "Gade",
 			"collections": [1, 17],
 			"type": "typeahead",
@@ -125,6 +125,17 @@
 		},
 		"street": {
 			"field": "street",
+			"type": "terms",
+			"mincount": 1
+		},
+		
+		"firstnames": {
+			"field": "firstnames",
+			"type": "terms",
+			"mincount": 1
+		},
+		"lastname": {
+			"field": "lastname",
 			"type": "terms",
 			"mincount": 1
 		}
