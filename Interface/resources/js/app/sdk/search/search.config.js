@@ -73,19 +73,26 @@ define([
                 },
                 params: {
                     highlighting: {},
-                    index: 0
+                    index: undefined
                 },
                 resolve: {
-                    resultData: ['solrService', 'searchService', '$stateParams', '$q', function(solrService, searchService, $stateParams, $q) {
+                    resultData: ['solrService', 'searchService', '$location', '$stateParams', '$q', function(solrService, searchService, $location, $stateParams, $q) {
                         var deferred = $q.defer();
 
                         // Entry with pagination
                         if (searchService.currentSearch || searchService.urlParamsExist()) {
+                            if ($stateParams.index === undefined && $location.search().index) {
+                                $stateParams.index = $location.search().index || 0;
+                            } else {
+                                $stateParams.index = $stateParams.index || 0;
+                            }
+                            $stateParams.index = parseInt($stateParams.index);
+
                             // Either use active search configuration, or if that is absent, URL parameters
                             searchService.getConfigPromise()
                             .then(function(searchConfig) {
                                 searchService.currentSearch = searchService.currentSearch || searchService.getSearch(searchConfig);
-                                solrService.paginatedSearch(searchService.currentSearch.queries, searchService.currentSearch.facets, searchService.currentSearch.collections, searchService.currentSearch.sortField, searchService.currentSearch.sortDirection, $stateParams.index)
+                                solrService.paginatedSearch(searchService.currentSearch.queries, searchService.currentSearch.filterQueries, searchService.currentSearch.collections, searchService.currentSearch.sortField, searchService.currentSearch.sortDirection, $stateParams.index)
                                 .then(function(results) {
                                     if (results && results.response && results.response.numFound > 0) {
                                         deferred.resolve(results.response);

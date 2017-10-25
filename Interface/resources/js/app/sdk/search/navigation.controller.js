@@ -18,7 +18,7 @@ define([
         $scope.currentIndex = $stateParams.index || 0;
 
         $scope.disableNext = function() {
-            return $scope.currentIndex >= $scope.numFound;
+            return $scope.currentIndex >= $scope.numFound - 1;
         };
 
         $scope.disablePrev = function() {
