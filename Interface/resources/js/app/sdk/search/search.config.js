@@ -77,7 +77,8 @@ define([
                 },
                 params: {
                     highlighting: {},
-                    index: undefined
+                    index: undefined,
+                    dataPostId: null
                 },
                 resolve: {
                     resultData: ['solrService', 'searchService', '$location', '$stateParams', '$q', function(solrService, searchService, $location, $stateParams, $q) {
