@@ -22,9 +22,9 @@ Then run `grunt prototypeNoAuth` to start the prototype. This will build all fro
 
 The editor can be hit at http://localhost:1508/#/task/1/page/1/?stepId=1
 
-### Start prototype of the Joomla SDK
+### Development of prototype of the Joomla SDK
 
-In order to start the prototype for sdk parts, you need to run `grunt sdk`. That will start a local webserver on port 1510. Joomla parts will be visible on the page that is automatically open in the browser.
+In order to start the prototype for sdk parts, you need to run `grunt sdk`. That will start a local webserver on port 1510. Joomla parts will be visible on the page that is automatically opened in the browser.
 
 #### Local version of the search
 
