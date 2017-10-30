@@ -255,7 +255,7 @@
 	        "searchable": true,
 	        "sortable": false,
 	        "type": "string",
-	        "view_name": "Udregnet f\u00f8dsels\u00e5r"
+	        "view_name": "F\u00f8dsels\u00e5r"
 	    }
 	},
 	"types": {
@@ -283,12 +283,12 @@
 			"gap": 10,
 			"mincount": 1
 		},
-		"street": {
-			"field": "street",
+		"streets": {
+			"field": "streets",
 			"type": "terms",
 			"mincount": 1
 		},
-		
+
 		"firstnames": {
 			"field": "firstnames",
 			"type": "terms",
@@ -297,6 +297,11 @@
 		"lastname": {
 			"field": "lastname",
 			"type": "terms",
+			"mincount": 1
+		},
+		"positions": {
+			"field" : "positions",
+			"type" : "terms",
 			"mincount": 1
 		}
 	}
