@@ -39,6 +39,7 @@ define([
                 reloadOnSearch: false,
                 resolve: {
                     searchConfig: ['searchService', '$q', function(searchService, $q) {
+
                         var deferred = $q.defer();
 
                         searchService.getConfigPromise()
@@ -64,7 +65,7 @@ define([
 
             })
             .state('search.page.result.data_page', {
-                url: 'data_post/{dataPostId}',
+                url: 'data_post/',
                 views: {
                     'navigation': {
                         templateUrl: 'sdk/search/post.navigation.tpl.html',
@@ -77,11 +78,11 @@ define([
                 },
                 params: {
                     highlighting: {},
-                    index: undefined,
-                    dataPostId: null
+                    index: undefined
                 },
                 resolve: {
                     resultData: ['solrService', 'searchService', '$location', '$stateParams', '$q', function(solrService, searchService, $location, $stateParams, $q) {
+                        
                         var deferred = $q.defer();
 
                         // Entry with pagination
@@ -92,7 +93,7 @@ define([
                                 $stateParams.index = $stateParams.index || 0;
                             }
                             $stateParams.index = parseInt($stateParams.index);
-
+                            
                             // Either use active search configuration, or if that is absent, URL parameters
                             searchService.getConfigPromise()
                             .then(function(searchConfig) {
