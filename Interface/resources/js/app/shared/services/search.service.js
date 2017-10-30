@@ -1,5 +1,5 @@
 define([], function() {
-    var searchService = /*@ngInject*/ function searchService($q, $http, $location) {
+    var searchService = /*@ngInject*/ function searchService($q, $http, $location, SEARCHCONFIGURL) {
 
         return {
             currentSearch: undefined,
@@ -8,8 +8,9 @@ define([], function() {
                 var deferred = $q.defer();
 
                 $http({
-                    url: 'http://localhost:1510/resources/configs/search.json',
-                    cache: true
+                    url: SEARCHCONFIGURL,
+                    cache: false,
+                    method: 'GET'
                 })
                 .then(function(response) {
                     deferred.resolve(response.data);
@@ -69,7 +70,7 @@ define([], function() {
                         }
                     }
                 });
-                
+
                 // verify queries
                 var validQueries = [];
                 angular.forEach(queries, function(query, idx) {

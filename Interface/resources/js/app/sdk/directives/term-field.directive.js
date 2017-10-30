@@ -96,7 +96,7 @@ define([
                             rtn = 'sdk/directives/term-field.directive--date.tpl.html';
                             break;
                         case 'string':
-                            $scope.placeholder = 'Søgesterm';
+                            $scope.placeholder = 'Søgeterm';
                             rtn = 'sdk/directives/term-field.directive--string.tpl.html';
                             break;
                         default:

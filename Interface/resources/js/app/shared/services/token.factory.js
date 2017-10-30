@@ -28,8 +28,8 @@ define([
             },
 
             response: function(response) {
-                //if you get a token back in your response you can use 
-                //the response interceptor to update the token in the 
+                //if you get a token back in your response you can use
+                //the response interceptor to update the token in the
                 //stored in the cookie
 
                 // if (response.config.headers.yourTokenProperty) {
