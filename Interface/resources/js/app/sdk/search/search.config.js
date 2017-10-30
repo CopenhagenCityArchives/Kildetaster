@@ -83,9 +83,7 @@ define([
                 resolve: {
                     resultData: ['solrService', 'searchService', '$location', '$stateParams', '$q', function(solrService, searchService, $location, $stateParams, $q) {
                         
-
                         var deferred = $q.defer();
-
                         var currentIndex = null;
 
                         // Entry with pagination
