@@ -78,27 +78,34 @@ define([
                 },
                 params: {
                     highlighting: {},
-                    index: undefined
+                    index:  undefined  
                 },
                 resolve: {
                     resultData: ['solrService', 'searchService', '$location', '$stateParams', '$q', function(solrService, searchService, $location, $stateParams, $q) {
                         
+
                         var deferred = $q.defer();
+
+                        var currentIndex = null;
 
                         // Entry with pagination
                         if (searchService.currentSearch || searchService.urlParamsExist()) {
+
                             if ($stateParams.index === undefined && $location.search().index) {
-                                $stateParams.index = $location.search().index || 0;
-                            } else {
-                                $stateParams.index = $stateParams.index || 0;
+                                currentIndex = parseInt($location.search().index);
                             }
-                            $stateParams.index = parseInt($stateParams.index);
+                            else if ($stateParams.index) {
+                                currentIndex = $stateParams.index;
+                            }
+                            else {
+                                currentIndex = 0;
+                            }
                             
                             // Either use active search configuration, or if that is absent, URL parameters
                             searchService.getConfigPromise()
                             .then(function(searchConfig) {
                                 searchService.currentSearch = searchService.currentSearch || searchService.getSearch(searchConfig);
-                                solrService.paginatedSearch(searchService.currentSearch.queries, searchService.currentSearch.filterQueries, searchService.currentSearch.collections, searchService.currentSearch.sortField, searchService.currentSearch.sortDirection, $stateParams.index)
+                                solrService.paginatedSearch(searchService.currentSearch.queries, searchService.currentSearch.filterQueries, searchService.currentSearch.collections, searchService.currentSearch.sortField, searchService.currentSearch.sortDirection, currentIndex)
                                 .then(function(results) {
                                     if (results && results.response && results.response.numFound > 0) {
                                         deferred.resolve(results.response);
