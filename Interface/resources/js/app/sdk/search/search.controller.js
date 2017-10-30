@@ -43,7 +43,7 @@ define([
         that.clearRow = function clearRow(row) {
             if (that.initialized) {
                 if (!row.field) {
-                    row.field = Object.values(searchConfig.fields).find(function(field) { 
+                    row.field = Object.values(searchConfig.fields).find(function(field) {
                         var found = false;
                         angular.forEach(field.collections, function(id) {
                             found = found || $scope.collections[id].selected;
@@ -77,7 +77,7 @@ define([
             }
             var field = searchConfig.fields[defaultFieldName];
 
-            // verify 
+            // verify
             if (!searchConfig.types.hasOwnProperty(field.type) ||
                 (op && !searchConfig.types[field.type].operators.includes(op))) {
                 return;
@@ -180,7 +180,7 @@ define([
                 }
             }
 
-            // set up query rows of rows that are undefined due to 
+            // set up query rows of rows that are undefined due to
             // the collection, that the field exists in, has been unselected
             angular.forEach(that.queries, function(row) {
                 if (!row.field) {
@@ -214,7 +214,13 @@ define([
             solrService.search(that.queries, that.filterQueries, colIds, that.sortField, that.sortDirection, $scope.page * 10)
             .then(function(response) {
                 that.results = response.response;
-                
+
+                //Reset page number and search again if no results are found on current page
+                if(that.results.docs.length == 0 && $scope.page > 1){
+                    $scope.page = 1;
+                    $scope.doSearch();
+                }
+
                 // process documents
                 angular.forEach(that.results.docs, function(doc, index) {
                     // Add highlighting to individual documents
