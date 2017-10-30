@@ -152,6 +152,7 @@ define([
         'ngAnimate'
     ]);
 
+    console.log('defining search')
     searchApp.config(searchConfig);
     searchApp.run(searchRun);
 
@@ -202,17 +203,6 @@ define([
     searchApp.directive('facet', facetDirective);
 
     searchApp.filter('formatStringNumber', formatStringNumberFilter);
-
-    angular.element(document).ready(function() {
-        angular.bootstrap(angular.element('[data-sdk-search-app]'), ['search']);
-    });
-
-
-
-    //Debugging for ui.router state issues, fails when Uglifying because of the => operator
-    // searchApp.run(($rootScope) => {
-    //     $rootScope.$on("$stateChangeError", console.log.bind(console));
-    // });
 
     return searchApp;
 });
