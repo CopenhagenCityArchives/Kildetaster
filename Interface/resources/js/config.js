@@ -14,7 +14,11 @@ requirejs.config({
         'angular-sanitize'             : '../bower_components/angular-sanitize/angular-sanitize.min',
         'angular-cookies'              : '../bower_components/angular-cookies/angular-cookies.min',
         'ngstorage'                    : '../bower_components/ngstorage/ngStorage.min',
+        
         'angular-ui-router'            : '../bower_components/angular-ui-router/release/angular-ui-router.min',
+        // Polyfill for ui-router events being deprecated @see https://ui-router.github.io/guide/ng1/migrate-to-1_0
+        'angular-ui-router/stateEvents': '../bower_components/angular-ui-router/release/stateEvents',
+        
         'angular-ui-select'            : '../bower_components/angular-ui-select/dist/select',
 
         //Angular json form
