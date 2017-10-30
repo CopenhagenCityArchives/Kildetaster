@@ -13,6 +13,8 @@ define([
 
         /**
          * Listen for changes to a state with a redirectTo property
+         * NOTE: This works because we include a polyfill for ui-router to mimic the old state events,
+         * @see https://ui-router.github.io/guide/ng1/migrate-to-1_0
          */
         $rootScope.$on('$stateChangeStart', function(event, toState, params) {
 
@@ -28,6 +30,8 @@ define([
 
         /**
          * If state change, show page not found error
+         * NOTE: This works because we include a polyfill for ui-router to mimic the old state events,
+         * @see https://ui-router.github.io/guide/ng1/migrate-to-1_0
          */
         $rootScope.$on('$stateChangeError', function(e, toState, toParams, fromState, fromParams, error) {
             console.log("State change error", toState);
