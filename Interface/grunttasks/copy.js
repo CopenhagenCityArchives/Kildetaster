@@ -83,8 +83,14 @@ module.exports = {
             cwd: '<%= package.resources %>/',
             src: ['.htaccess'],
             dest: '<%= package.sdkresources %>/'
-
-        }]
+        },{
+            //.htaccess files for configs
+            expand: true,
+            cwd: '<%= package.resources %>/',
+            src: ['.htaccess'],
+            dest: '<%= package.sdkresources %>/configs'
+        }
+    ]
     },
 
     development: {
@@ -94,6 +100,12 @@ module.exports = {
             cwd: '<%= package.resources %>/fonts/',
             src: '**',
             dest: '<%= package.buildresources %>/fonts'
+        }, {
+            // Search configuration
+            expand: true,
+            cwd: '<%= package.configs %>/search/',
+            src: ['**/*.json'],
+            dest: '<%= package.buildresources %>/configs'
         }, {
             //Images
             expand: true,
@@ -108,7 +120,13 @@ module.exports = {
             src: ['.htaccess'],
             dest: '<%= package.buildresources %>/'
 
-        }, {
+        },{
+            //.htaccess files for configs
+            expand: true,
+            cwd: '<%= package.resources %>/',
+            src: ['.htaccess'],
+            dest: '<%= package.buildresources %>/configs'
+        },{
             //Mock data
             expand: true,
             cwd: '<%= package.resources %>/mock/',
@@ -126,6 +144,12 @@ module.exports = {
             src: '**',
             dest: '<%= package.buildresources %>/fonts'
         }, {
+            // Search configuration
+            expand: true,
+            cwd: '<%= package.configs %>/search/',
+            src: ['**/*.json'],
+            dest: '<%= package.buildresources %>/configs'
+        }, {
             //Images
             expand: true,
             cwd: '<%= package.resources %>/images/',
@@ -139,6 +163,12 @@ module.exports = {
             src: ['.htaccess'],
             dest: '<%= package.buildresources %>/'
 
+        },{
+            //.htaccess files for configs
+            expand: true,
+            cwd: '<%= package.resources %>/',
+            src: ['.htaccess'],
+            dest: '<%= package.buildresources %>/configs'
         }]
     },
 
