@@ -38,7 +38,10 @@ define([
                 }
 
                 scope.goToPost = function() {
-                    $state.go('search.page.result.data_page', { index: scope.page * 10 + scope.index, highlighting: scope.highlighting });
+                    $state.go('search.page.result.data_page', { 
+                        index: scope.page * 10 + scope.index, 
+                        highlighting: scope.highlighting
+                    });
                 };
 
                 scope.$on('$destroy', function() {
