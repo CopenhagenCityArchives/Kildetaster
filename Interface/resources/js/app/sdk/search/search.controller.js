@@ -216,7 +216,7 @@ define([
                 that.results = response.response;
 
                 //Reset page number and search again if no results are found on current page
-                if(that.results && that.results.numFound != 0 && $scope.page > 1){
+                if(that.results && that.results.numFound == 0 && $scope.page > 1){
                     $scope.page = 1;
                     $scope.doSearch();
                 }
