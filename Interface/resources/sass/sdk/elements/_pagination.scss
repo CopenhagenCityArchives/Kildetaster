@@ -1,4 +1,6 @@
 .pagination.sdk-pagination {
+    float: right;
+
     li > a {
         line-height: 22px;
 
@@ -70,6 +72,15 @@
         }
     }
 
+    .sdk-pagination__divider {
+        a {
+            width: 20px;
+            min-width: 20px;
+            padding-right: 0;
+            padding-left: 0;
+        }
+    }
+
     .sdk-pagination__arrow {
         a, &.disabled a {
             position: relative;
@@ -88,6 +99,8 @@
             }
         }
     }
+
+
 
     .sdk-pagination__next {
         img {
