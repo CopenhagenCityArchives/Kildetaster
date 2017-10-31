@@ -48,6 +48,10 @@ define([
                     updateValues(scope.page);
                 });
 
+                scope.$watch('postsPrPage', function(newval, oldval) {
+                    updateValues(0);
+                })
+
             }
         };
 
