@@ -1,0 +1,14 @@
+.jumpToPage {
+    margin: 10px auto 20px;
+    &__label {
+        font-size: 18px;
+
+        display: inline-block;
+
+        margin-right: 8px;
+    }
+    &__field {
+        max-width: 70px;
+        height: 30px !important;
+    }
+}
