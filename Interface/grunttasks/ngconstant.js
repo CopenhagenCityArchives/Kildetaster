@@ -15,7 +15,7 @@ module.exports = {
             SOLRAPI: 'https://kbhkilder.dk/1508/experimental/search',
             SEARCHCONFIGURL: 'http://localhost:1510/resources/configs/search.json',
             //API: 'http://www.kbhkilder.dk/1508/experimental',
-            MAINDOMAIN: 'http://www.kbharkiv.dk',
+            MAINDOMAIN: 'https://www.kbharkiv.dk',
             TOKENURL: 'https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERRORURL: 'http://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
             SEARCHURL: 'http://www.kbharkiv.dk/sog-i-arkivet/sog-efter-personer',
@@ -23,7 +23,7 @@ module.exports = {
             //Number of items to fetch when working with typeahead data fields
             TYPEAHEADMAXIUMUM: 75
         }
-    },
+    }, 
 
     prototypeNoAuth: {
         constants: {
@@ -36,7 +36,7 @@ module.exports = {
             API: 'http://www.kbhkilder.dk/1508/experimental',
             SOLRAPI: 'https://kbhkilder.dk/1508/experimental/search',
             SEARCHCONFIGURL: 'http://localhost:1510/resources/configs/search.json',
-            MAINDOMAIN: 'http://www.kbharkiv.dk',
+            MAINDOMAIN: 'https://www.kbharkiv.dk',
             TOKENURL: 'https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERRORURL: 'http://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
             SEARCHURL: 'http://www.kbharkiv.dk/sog-i-arkivet/sog-efter-personer',
@@ -55,7 +55,7 @@ module.exports = {
             API: 'http://www.kbhkilder.dk/1508/experimental',
             SOLRAPI: 'https://kbhkilder.dk/1508/experimental/search',
             SEARCHCONFIGURL: 'http://kbhkilder.dk/software/kildetaster-development/resources/configs/search.json',
-            MAINDOMAIN: 'http://www.kbharkiv.dk',
+            MAINDOMAIN: 'https://www.kbharkiv.dk',
             TOKENURL: 'https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERRORURL: 'http://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
             SEARCHURL: 'http://www.kbharkiv.dk/sog-i-arkivet/sog-efter-personer',
@@ -74,7 +74,7 @@ module.exports = {
             API: 'http://www.kbhkilder.dk/1508/stable',
             SOLRAPI: 'https://kbhkilder.dk/api/search',
             SEARCHCONFIGURL: 'http://kbhkilder.dk/software/kildetaster/configs/resources/earch.json',
-            MAINDOMAIN: 'http://www.kbharkiv.dk',
+            MAINDOMAIN: 'https://www.kbharkiv.dk',
             TOKENURL: 'https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERRORURL: 'http://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
             SEARCHURL: 'http://www.kbharkiv.dk/sog-i-arkivet/sog-efter-personer',
