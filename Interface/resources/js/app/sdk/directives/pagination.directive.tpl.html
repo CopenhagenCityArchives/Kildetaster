@@ -7,16 +7,16 @@
                 <img width="12" height="9" src="/resources/images/arrow.svg">
             </a>
         </li>
-        <li class="sdk-pagination__arrow sdk-pagination__prev" ng-class="{'disabled': !canGoBack10() }">
+        <!-- <li class="sdk-pagination__arrow sdk-pagination__prev" ng-class="{'disabled': !canGoBack10() }">
             <a href="" ng-click="prev(10)">10 tilbage</a>
-        </li>
+        </li> -->
         <li class="sdk-pagination__arrow sdk-pagination__prev" ng-class="{'disabled': currentPage === 0}">
             <a href="" ng-click="prev(1)">
                 <img src="/resources/images/arrow.svg">
             </a>
         </li>
-        <li class="sdk-search__divider" ng-if="currentPage > 2">
-            <a href="" class="disabled">...</a></span>
+        <li class="sdk-pagination__divider disabled" ng-if="currentPage > 2">
+            <a href="">...</a></span>
         </li>
 
         <!-- pages -->
@@ -25,17 +25,17 @@
         </li>
 
         <!-- arrows -->
-        <li class="sdk-search__divider" ng-if="currentPage !== pagination.total - 1">
-            <a href="" class="disabled">...</a></span>
+        <li class="sdk-pagination__divider disabled" ng-if="currentPage !== pagination.total - 1">
+            <a href="">...</a></span>
         </li>
         <li class="sdk-pagination__arrow sdk-pagination__next" ng-class="{'disabled': currentPage === pagination.total - 1}">
             <a href="" ng-click="next(1)">
                 <img src="/resources/images/arrow.svg">
             </a>
         </li>
-        <li class="sdk-pagination__arrow sdk-pagination__next" ng-class="{'disabled': !canGoForward10() }">
+        <!-- <li class="sdk-pagination__arrow sdk-pagination__next" ng-class="{'disabled': !canGoForward10() }">
             <a href="" ng-click="next(10)">10 frem</a>
-        </li>
+        </li> -->
         <li class="sdk-pagination__arrow sdk-pagination__next-double" ng-class="{'disabled': currentPage === pagination.total - 1}">
             <a href="" ng-click="callGoToPage(pagination.total - 1)">
                 <img src="/resources/images/arrow.svg">
