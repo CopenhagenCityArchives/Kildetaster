@@ -4,7 +4,7 @@ define([], function() {
 
         var that = this;
 
-        that.page = 10;
+        that.page = null;
 
         that.callParent = function callParent(page) {
             // Because page is 0 based in the parent
