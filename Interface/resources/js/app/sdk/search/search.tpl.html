@@ -1,5 +1,5 @@
 <div class="sdk-search">
-
+    
     <section ng-if="ctrl.results.numFound === undefined">
         <div class="row-fluid">
             <div class="span12">
@@ -171,13 +171,16 @@
 
             </section>
 
-            <div class="row-fluid" ng-if="ctrl.results.numFound > 10">
-                <div class="span12">
-                    <pagination current-page="page" results="ctrl.results" go-to-page="ctrl.goToPage"></pagination>
-                </div>
-            </div>
-
         </div>
+
+        <section class="row-fluid" ng-if="ctrl.results.numFound > 10">
+            <div class="span4">
+                <jump-to-page change-page="ctrl.goToPage(page)"></jump-to-page>
+            </div>
+            <div class="span8">
+                <pagination  style="float: right" current-page="page" results="ctrl.results" go-to-page="ctrl.goToPage"></pagination>
+            </div>
+        </section>
 
     </section>
 

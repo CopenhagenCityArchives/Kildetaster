@@ -63,6 +63,8 @@ define([
     'app/sdk/directives/filterLink/filterLink.directive',
     'app/sdk/directives/facet/facet.directive',
 
+    'app/sdk/components/jumpToPage/jumpToPage.component',
+
     'app/sdk/filters/formatStringNumber.filter',
     'app/shared/constants'
 
@@ -132,6 +134,8 @@ define([
     filterLinkDirective,
     facetDirective,
 
+    jumpToPageComponent,
+
     formatStringNumberFilter,
 
     constants
@@ -152,7 +156,6 @@ define([
         'ngAnimate'
     ]);
 
-    console.log('defining search')
     searchApp.config(searchConfig);
     searchApp.run(searchRun);
 
@@ -201,6 +204,8 @@ define([
 
     searchApp.directive('filterLink', filterLinkDirective);
     searchApp.directive('facet', facetDirective);
+
+    searchApp.component('jumpToPage', jumpToPageComponent);
 
     searchApp.filter('formatStringNumber', formatStringNumberFilter);
 
