@@ -48,7 +48,7 @@ define([
                     row.field = Object.values(searchConfig.fields).find(function(field) {
                         var found = false;
                         angular.forEach(field.collections, function(id) {
-                            found = found || $scope.collections[id].selected;
+                            found = found || that.collections[id].selected;
                         });
                         return found;
                     });
@@ -101,7 +101,7 @@ define([
         $scope.fieldCollectionFilter = function(value, index, array) {
             var found = true;
 
-            angular.forEach($scope.collections, function (col, colId) {
+            angular.forEach(that.collections, function (col, colId) {
                 var colInField = value.collections.indexOf(parseInt(colId)) !== -1;
                 if (!colInField && col.selected) {
                     found = false;
@@ -176,7 +176,7 @@ define([
             // prevent deselection of last collection
             if (collection.selected === false) {
                 var anySelected = false;
-                angular.forEach($scope.collections, function (collection) {
+                angular.forEach(that.collections, function (collection) {
                     anySelected = anySelected | collection.selected;
                 });
 
@@ -212,7 +212,7 @@ define([
             that.searching = true;
 
             var colIds = [];
-            angular.forEach($scope.collections, function(collection, id) {
+            angular.forEach(that.collections, function(collection, id) {
                 if (collection.selected) {
                     colIds.push(collection.id);
                 }
@@ -286,8 +286,8 @@ define([
             // Clean entry
             if (!searchService.currentSearch && !searchService.urlParamsExist()) {
                 that.addField('firstnames', '', "eq");
-                $scope.collections = angular.copy(searchConfig.collections);
-                angular.forEach($scope.collections, function(col, id) {
+                that.collections = angular.copy(searchConfig.collections);
+                angular.forEach(that.collections, function(col, id) {
                     col.selected = true;
                 });
             }
@@ -310,10 +310,10 @@ define([
                 that.sortField = urlSearch.sortField;
                 that.page = urlSearch.page;
 
-                $scope.collections = angular.copy(searchConfig.collections);
+                that.collections = angular.copy(searchConfig.collections);
                 angular.forEach(urlSearch.collections, function(id) {
-                    if ($scope.collections[id]) {
-                        $scope.collections[id].selected = true;
+                    if (that.collections[id]) {
+                        that.collections[id].selected = true;
                     }
                 });
 
@@ -332,10 +332,10 @@ define([
                 });
 
                 that.page = searchService.currentSearch.page;
-                $scope.collections = angular.copy(searchConfig.collections);
+                that.collections = angular.copy(searchConfig.collections);
                 angular.forEach(searchService.currentSearch.collections, function(id) {
-                    if ($scope.collections[id]) {
-                        $scope.collections[id].selected = true;
+                    if (that.collections[id]) {
+                        that.collections[id].selected = true;
                     }
                 });
                 $scope.doSearch();

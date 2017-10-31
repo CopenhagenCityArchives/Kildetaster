@@ -4,14 +4,14 @@
         <div class="row-fluid">
             <div class="span12">
                 <label>Samlinger</label>
-                <span style="height: 20px; vertical-align: center;" ng-repeat="collection in collections">
+                <span style="height: 20px; vertical-align: center;" ng-repeat="collection in ctrl.collections">
                     <input
                         type="checkbox"
                         value="{{collection.id}}"
                         ng-model="collection.selected"
                         ng-change="collectionsChange(collection)"
-                        style="width: 20px;"
-                    >{{collection.name}}
+                        style="width: 20px;">
+                        {{collection.name}}
                 </span>
             </div>
         </div>
