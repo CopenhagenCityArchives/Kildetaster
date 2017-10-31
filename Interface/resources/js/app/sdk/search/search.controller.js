@@ -69,6 +69,7 @@ define([
         * @param term {string} The value of the term field
         * @param operator {string} The operator value for the operator to select
         * @param shouldEscape {bool} Should we run conversion logic, to handle spaces?
+        * TODO update to use that
         */
         that.addField = function addField(defaultFieldName, term, op) {
             // verify and set default field
@@ -94,6 +95,7 @@ define([
         };
 
         // a field must be associated with all selected collections to be shown
+        // TODO update to use that
         $scope.fieldCollectionFilter = function(value, index, array) {
             var found = true;
 
@@ -135,7 +137,7 @@ define([
             $scope.doSearch();
         }
 
-
+        // TODO update to use that
         $scope.toggleFilter = function toggleFilter(facet, bucket) {
             var idx = that.filterQueries.findIndex(function(filterQuery) {
                 return filterQuery.facet.field == facet.field && filterQuery.bucket.val == bucket.val;
@@ -160,12 +162,14 @@ define([
         };
 
         //Trigger serach and reset indexes
+        // TODO update to use that
         $scope.startNewSearch = function startNewSearch() {
             $rootScope.page = 0;
             $scope.page = 0;
             $scope.doSearch();
         }
 
+        // TODO update to use that
         $scope.collectionsChange = function(collection) {
             // prevent deselection of last collection
             if (collection.selected === false) {
@@ -196,6 +200,7 @@ define([
 
         /**
         * Execute the search
+        // TODO update to use that
         */
         $scope.doSearch = function doSearch() {
             if (that.error) {
