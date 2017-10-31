@@ -1,6 +1,8 @@
 .pagination.sdk-pagination {
     li > a {
-        min-width: 44px;
+        min-width: 34px;
+        padding-right: 8px;
+        padding-left: 8px;
         &:hover {
             background-color: $gray-dark !important;
         }
@@ -8,8 +10,9 @@
 
     .active {
         a {
+            font-weight: 800;
+
             color: currentColor !important;
-            background-color: $gray-dark;
             &:hover {
                 background-color: #f5f5f5 !important; //hack to overwrite default Joomla styling
             }
@@ -62,7 +65,56 @@
 
     .sdk-pagination__arrow {
         a, &.disabled a {
+            position: relative;
+
+            color: $white;
             background-color: #e0e0e0 !important;
+        }
+
+        img {
+            position: absolute;
+            top: 13px;
+            left: 10px;
+
+            & + img {
+                left: 5px;
+            }
+        }
+    }
+
+    .sdk-pagination__next {
+        img {
+            transform: rotate(-90deg);
+        }
+    }
+
+    .sdk-pagination__next-double {
+        img {
+            left: 14px;
+
+            transform: rotate(-90deg);
+
+            & + img {
+                left: 9px;
+            }
+        }
+    }
+
+    .sdk-pagination__prev {
+        img {
+            transform: rotate(90deg);
+        }
+    }
+    .sdk-pagination__prev-double {
+        img {
+            top: 13px;
+            left: 12px;
+
+            transform: rotate(90deg);
+
+            & + img {
+                left: 7px;
+            }
         }
     }
 }
