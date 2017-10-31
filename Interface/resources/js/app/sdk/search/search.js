@@ -64,6 +64,7 @@ define([
     'app/sdk/directives/facet/facet.directive',
 
     'app/sdk/components/jumpToPage/jumpToPage.component',
+    'app/sdk/components/numPages/numPages.component',
 
     'app/sdk/filters/formatStringNumber.filter',
     'app/shared/constants'
@@ -135,6 +136,7 @@ define([
     facetDirective,
 
     jumpToPageComponent,
+    numPagesComponent,
 
     formatStringNumberFilter,
 
@@ -206,6 +208,7 @@ define([
     searchApp.directive('facet', facetDirective);
 
     searchApp.component('jumpToPage', jumpToPageComponent);
+    searchApp.component('numPages', numPagesComponent);
 
     searchApp.filter('formatStringNumber', formatStringNumberFilter);
 

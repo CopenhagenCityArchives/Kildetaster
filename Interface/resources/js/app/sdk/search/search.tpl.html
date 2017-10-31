@@ -87,63 +87,66 @@
         </div>
     </section>
 
+    <div class="row-fluid">
+
+        <div class="span3">
+            <num-pages selected="ctrl.postsPrPage" change-count="ctrl.setPostsPrPage(count)"></num-pages>
+        </div>
+
+        <div class="span3 sorting">
+            <div class="row-fluid">
+                
+                <div class="span6 text-right">
+                    <label class="sorting__label">Sortér efter</label>
+                </div>
+
+                <div class="span6">
+                    <div class="sorting__container">
+                        <select class="sorting__selection" ng-model="ctrl.sortField" ng-options="field as field.view_name for (fieldName, field) in fields | filter:{searchable:true, sortable:true}"></select>
+                        <a href ng-click="ctrl.toggleSortDirection()" class="sorting__direction" title="{{ctrl.sortDirection}}" ng-class="ctrl.sortDirection"></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="span6" ng-if="ctrl.results.numFound > 10">
+            <pagination current-page="ctrl.page" results="ctrl.results" go-to-page="ctrl.goToPage"></pagination>
+        </div>
+    </div>
+
     <section class="row-fluid" ng-if="!ctrl.error">
 
         <div class="span3">
-
+        
             <h2>Valgte filtre</h2>
-
+        
             <div>
-
+        
                 <div class="filter-link">
                     <div ng-if="ctrl.noSelectedFilters">
                         Ingen aktive filtre
                     </div>
-                    <filter-link ng-repeat="(field, filterQuery) in ctrl.filterQueries" facet="filterQuery.facet" bucket="filterQuery.bucket" url="filter.filterQuery" remove-func="toggleFilter"></filter-link>
+                    <filter-link ng-repeat="(field, filterQuery) in ctrl.filterQueries" facet="filterQuery.facet" bucket="filterQuery.bucket"
+                        url="filter.filterQuery" remove-func="toggleFilter"></filter-link>
                 </div>
-
+        
             </div>
-
-            <facet ng-repeat="facetData in facets" field="fieldIndex[facetData.field]" filter-queries="ctrl.filterQueries" facet="facetData" buckets="ctrl.facetFields[facetData.field].buckets" add-filter="toggleFilter"></facet>
-
+        
+            <facet ng-repeat="facetData in facets" field="fieldIndex[facetData.field]" filter-queries="ctrl.filterQueries" facet="facetData"
+                buckets="ctrl.facetFields[facetData.field].buckets" add-filter="toggleFilter"></facet>
+        
         </div>
 
         <div class="span9">
 
-            <section class="row-fluid" ng-if="ctrl.results.numFound > 10">
-                <div class="span12">
-                    <pagination current-page="page" results="ctrl.results" go-to-page="ctrl.goToPage"></pagination>
-                </div>
-            </section>
-
             <section class="row-fluid sdk-search__results" ng-class="{'loading': ctrl.searching}" ng-if="ctrl.results.docs.length > 0">
                 <div class="span4">
                     <div class="sdk-search__count">
-                        <post-count page="page" total="ctrl.results.numFound" posts-pr-page="10"></post-count>
+                        <post-count page="ctrl.page" total="ctrl.results.numFound" posts-pr-page="ctrl.postsPrPage"></post-count>
                     </div>
                 </div>
-
-                <div class="span8 sorting">
-                    <div class="row">
-                        <div class="span6 text-right">
-                            <label class="sorting__label">Sortér efter</label>
-                        </div>
-
-                        <div class="span6">
-
-                            <div class="sorting__container">
-                                <select
-                                    class="sorting__selection"
-                                    ng-model="ctrl.sortField"
-                                    ng-options="field as field.view_name for (fieldName, field) in fields | filter:{searchable:true, sortable:true}">
-                                </select>
-                                <a href ng-click="ctrl.toggleSortDirection()" class="sorting__direction" title="{{ctrl.sortDirection}}" ng-class="ctrl.sortDirection"></a>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
+         
                 <div class="row-fluid">
                     <div class="span12">
                         <div class="search-container">
@@ -163,7 +166,7 @@
                                 </div>
                             </div>
 
-                            <search-result ng-repeat="result in ctrl.results.docs" result="result" config="ctrl.fields" index="$index" page="page"></search-result>
+                            <search-result ng-repeat="result in ctrl.results.docs" result="result" config="ctrl.fields" index="$index" page="ctrl.page"></search-result>
 
                         </div>
                     </div>
@@ -178,7 +181,7 @@
                 <jump-to-page change-page="ctrl.goToPage(page)"></jump-to-page>
             </div>
             <div class="span8">
-                <pagination  style="float: right" current-page="page" results="ctrl.results" go-to-page="ctrl.goToPage"></pagination>
+                <pagination current-page="ctrl.page" results="ctrl.results" go-to-page="ctrl.goToPage"></pagination>
             </div>
         </section>
 
