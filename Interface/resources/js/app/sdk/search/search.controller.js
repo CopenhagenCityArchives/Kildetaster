@@ -25,7 +25,7 @@ define([
         that.filterQueries = [];
         that.noSelectedFilters = true;
 
-        that.results = [];
+        that.results = {};
 
         $scope.page = 0;
         $scope.postsPerPage = 10;
