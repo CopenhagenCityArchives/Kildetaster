@@ -151,14 +151,18 @@ define([
         }
 
         return {
-            search: function search(queries, filterQueries, collections, sortField, sortDirection, index) {
+            search: function search(queries, filterQueries, collections, sortField, sortDirection, index, rows) {
+                
                 var deferred = $q.defer();
-                var that = this;
 
                 searchService.getConfigPromise()
                 .then(function(searchConfig) {
                     $http({
-                        url: SOLRAPI + buildSolrBaseQuery(searchConfig) + '&' + buildQueryString(queries, filterQueries, collections, sortField, sortDirection, { start: index }),
+                        url: SOLRAPI + buildSolrBaseQuery(searchConfig) + '&' + buildQueryString(queries, filterQueries, collections, sortField, sortDirection, { 
+                            start: index, 
+                            // Number of posts to fetch
+                            rows: rows
+                        }),
                         method: 'GET'
                     })
                     .then(function(response) {
