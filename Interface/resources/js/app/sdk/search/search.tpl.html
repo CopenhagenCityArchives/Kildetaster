@@ -160,21 +160,23 @@
                                 <div class="search-container">
 
                                     <div class="search-container__row">
-                                        <div class="search-container__header">
-                                            Navn
-                                        </div>
-                                        <div class="search-container__header">
-                                            Adresse
-                                        </div>
-                                        <div class="search-container__header">
-                                            Andre oplysninger
-                                        </div>
-                                        <div class="search-container__header">
-                                            Om kilden
+                                        <div>
+                                            <div class="search-container__header">
+                                                Navn
+                                            </div>
+                                            <div class="search-container__header">
+                                                Adresse
+                                            </div>
+                                            <div class="search-container__header">
+                                                Andre oplysninger
+                                            </div>
+                                            <div class="search-container__header">
+                                                Om kilden
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <search-result ng-repeat="result in ctrl.results.docs" result="result" config="ctrl.fields" index="$index" page="ctrl.page"></search-result>
+                                    <search-result class="search-container__row" ng-repeat="result in ctrl.results.docs" result="result" config="ctrl.fields" index="$index" page="ctrl.page"></search-result>
 
                                 </div>
                             </div>

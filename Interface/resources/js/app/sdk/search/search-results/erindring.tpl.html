@@ -1,0 +1,51 @@
+
+<div class="search-container__item">
+    <div>
+        <text-name firstnames="data.firstnames" lastname="data.lastname"></text-name>
+        <div ng-if="data.yearOfBirth">
+            <strong>Født:</strong> {{ data.yearOfBirth }}
+        </div>
+        <div ng-if="data.position">
+            {{ data.position }}
+        </div>
+    </div>
+</div>
+
+<div class="search-container__item">
+    <text-prb-address address="address" ng-repeat="address in data.addresses"></text-prb-address>
+</div>
+
+<div class="search-container__item">
+    <div>
+        <div ng-if="data.position_parent">
+            <strong>Forældres stilling:</strong>
+            <div>{{ data.position_parent }}</div>
+        </div>
+        <div ng-if="data.description">
+            <strong>Beskrivelse</strong>
+            <div>{{ data.description }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="search-container__item">
+    <div>
+        <div>
+            <strong>Erindringer</strong>
+        </div>
+        <div>
+            <strong>Nr.:</strong> {{ metadata.erindring_number }}
+        </div>
+        <div ng-if="metadata.writtenYear">
+            <strong>Modtaget år:</strong> {{ metadata.writtenYear }}
+        </div>
+        <div ng-if="metadata.extent">
+            {{ metadata.extent }}
+        </div>
+        <div ng-if="metadata.containsPhotos">Indeholder fotos</div>
+        <div ng-if="metadata.writeMethod">{{ metadata.writeMethod }}</div>
+        <div class="search-container__link">
+            <span>Til kilden</span>
+        </div>
+    </div>
+</div>

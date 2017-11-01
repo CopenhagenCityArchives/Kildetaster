@@ -35,10 +35,6 @@ define([
     'app/sdk/directives/datapost-erindring.directive',
     'app/sdk/directives/datapost-police.directive',
 
-    'app/sdk/directives/searchresult.directive',
-    'app/sdk/directives/searchresult-burial.directive',
-    'app/sdk/directives/searchresult-police.directive',
-    'app/sdk/directives/searchresult-erindring.directive',
     'app/sdk/directives/postfield.directive',
     'app/sdk/directives/postCategory.directive',
     'app/sdk/directives/zoom-image.directive',
@@ -65,6 +61,8 @@ define([
 
     'app/sdk/components/jumpToPage/jumpToPage.component',
     'app/sdk/components/numPages/numPages.component',
+
+    'app/sdk/search/search-results/search-result.component',
 
     'app/sdk/filters/formatStringNumber.filter',
     'app/shared/constants'
@@ -105,11 +103,6 @@ define([
     datapostErindringDirective,
     datapostPoliceDirective,
 
-    searchResultDirective,
-    searchResultBurialDirective,
-    searchResultPoliceDirective,
-    searchResultErindringDirective,
-
     postfieldDirective,
     postCategoryDirective,
 
@@ -137,6 +130,8 @@ define([
 
     jumpToPageComponent,
     numPagesComponent,
+
+    searchResultComponent,
 
     formatStringNumberFilter,
 
@@ -178,10 +173,11 @@ define([
     searchApp.directive('datapostErindring', datapostErindringDirective);
     searchApp.directive('datapostPolice', datapostPoliceDirective);
 
-    searchApp.directive('searchResult', searchResultDirective);
-    searchApp.directive('searchResultBurial', searchResultBurialDirective);
-    searchApp.directive('searchResultPolice', searchResultPoliceDirective);
-    searchApp.directive('searchResultErindring', searchResultErindringDirective);
+    // searchApp.directive('searchResult', searchResultDirective);
+    // searchApp.directive('searchResultBurial', searchResultBurialDirective);
+    //searchApp.directive('searchResultPolice', searchResultPoliceDirective);
+    //searchApp.directive('searchResultErindring', searchResultErindringDirective);
+    
     searchApp.directive('postField', postfieldDirective);
     searchApp.directive('postCategory', postCategoryDirective);
 
@@ -209,6 +205,12 @@ define([
 
     searchApp.component('jumpToPage', jumpToPageComponent);
     searchApp.component('numPages', numPagesComponent);
+
+    // Search results
+    searchApp.component('searchResult', searchResultComponent);
+    //searchApp.component('searchResultBurial', searchResultBurialComponent);
+    //searchApp.component('searchResultErindring', searchResultErindringComponent);
+    //searchApp.component('searchResultPolice', searchResultPoliceComponent);
 
     searchApp.filter('formatStringNumber', formatStringNumberFilter);
 
