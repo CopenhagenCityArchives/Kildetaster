@@ -171,13 +171,16 @@ define([
             $scope.doSearch();
         }
 
-        // TODO update to use that
-        $scope.collectionsChange = function(collection) {
+        /**
+         * 
+         */
+        that.collectionsChange = function(collection) {
+
             // prevent deselection of last collection
             if (collection.selected === false) {
                 var anySelected = false;
                 angular.forEach(that.collections, function (collection) {
-                    anySelected = anySelected | collection.selected;
+                    anySelected = anySelected || collection.selected;
                 });
 
                 if (!anySelected) {
@@ -192,12 +195,8 @@ define([
                 if (!row.field) {
                     that.clearRow(row);
                 }
-            })
+            });
 
-            // update search with collection selection
-            if (that.initialized && searchService.currentSearch) {
-                $scope.doSearch();
-            }
         }
 
         /**

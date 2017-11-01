@@ -1,0 +1,16 @@
+.collection {
+    font-size: 28px;
+
+    display: flex;
+
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    @media (max-width: 767px) {
+        display: block;
+    }
+
+    &__item {
+        margin-right: 20px;
+    }
+}

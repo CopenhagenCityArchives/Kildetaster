@@ -4,7 +4,7 @@
         padding-left: 15px;
     }
 
-    select, input {
+    select, input[type="text"] {
         font-size: 13px;
         //Overwrite default joomla styling
 
@@ -13,6 +13,10 @@
 
         color: $black;
         background-color: $gray;
+    }
+
+    input[type="checkbox"] + label {
+        display: inline-block;
     }
 
     ::-webkit-input-placeholder {

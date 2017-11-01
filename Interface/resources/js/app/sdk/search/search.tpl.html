@@ -2,18 +2,21 @@
     
     <!-- Search config -->
     <section ng-if="ctrl.results.numFound === undefined">
+        
         <div class="row-fluid">
             <div class="span12">
-                <label>Samlinger</label>
-                <span style="height: 20px; vertical-align: center;" ng-repeat="collection in ctrl.collections">
-                    <input
-                        type="checkbox"
-                        value="{{collection.id}}"
-                        ng-model="collection.selected"
-                        ng-change="collectionsChange(collection)"
-                        style="width: 20px;">
-                        {{collection.name}}
-                </span>
+                <h3>Søg i</h3>
+                <div class="collection">
+                    <div class="collection__item" ng-repeat="collection in ctrl.collections">
+                        <input
+                            id="col_{{collection.id}}"
+                            type="checkbox"
+                            value="{{collection.id}}"
+                            ng-model="collection.selected"
+                            ng-change="ctrl.collectionsChange(collection)">
+                            <label for="col_{{collection.id}}">{{collection.name}}</label>
+                    </div>
+                </div>
             </div>
         </div>
 
