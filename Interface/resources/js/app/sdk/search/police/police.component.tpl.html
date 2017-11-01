@@ -1,0 +1,59 @@
+<section class="post">
+
+    <div class="post__head">
+        <div class="post__item post__main post__alternate">
+            
+            <h2 class="post__header">
+                {{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} <span ng-if="$ctrl.data.birthname">{{$ctrl.data.birthname}}</span></span>
+                <span class="post__collection">Politiets registerblade</span>
+            </h2>
+            
+            <p>Født: {{$ctrl.data.dateOfBirth}}, i {{$ctrl.data.birthplace}}</p>
+            <p style="color: red">Død: DATAMANGLER</p>
+            <p>{{$ctrl.data.civilstand}}, <text-gender type="$ctrl.data.sex"></text-gender></p>
+            <div ng-repeat="position in $ctrl.data.positions">
+                {{position.position}}<span ng-if="!$last">, </span>
+            </div>
+           
+        </div>
+        <div class="post__item post__viewer" ng-if="$ctrl.imageFront">
+            <zoom-image image-url="$ctrl.imageFront"></zoom-image>
+        </div>
+    </div>
+
+    <div class="post__col">
+        <div class="post__item">
+            <h3 class="post__sectionheader">Adresse</h3>
+            <div ng-repeat="address in $ctrl.data.addresses">
+                {{address.year}}-{{address.month}}-{{address.day}}: {{address.full_address}}
+            </div>
+        </div>
+        <div class="post__item" ng-if="$ctrl.data.spouses.length > 0 || $ctrl.data.children.length > 0">
+            <h3 class="post__sectionheader">Andre personer</h3>
+            <div ng-repeat="spouse in $ctrl.data.spouses">
+                Ægtefælle: {{spouse.firstnames}} {{spouse.lastname}}
+                <p style="color: red">Mangler eksempel på positions, og så mangler info om fødselsdato, fødested og dødsdato</p>
+            </div>
+            <div ng-repeat="child in $ctrl.data.children">
+                Barn: {{child.firstnames}} {{child.lastname}}
+            </div>
+        </div>
+    </div>
+
+    <div class="post__col post__alternate">
+        <div class="post__item">
+            <h3 class="post__sectionheader">Om kilden</h3>
+            <p>Station {{$ctrl.metadata.station}}. Filmrulle {{$ctrl.metadata.film}}. Registerblad {{$ctrl.metadata.number}} (unikt id. {{$ctrl.metadata.person_id}})</p>
+            <p style="color: red">Udfyldelsesdato: DATA MANGLER</p>
+            <p style="color: red">Særlige bemærkninger: DATA MANGLER</p>
+        </div>
+        <div class="post__item">
+            <h3 class="post__sectionheader">Om indtastningen</h3>
+            <p style="color: red">Indtastet dato: DATA MANGLER af INDTASTER MANGLER</p>
+        </div>
+        <div class="post__item post__viewer" ng-if="$ctrl.imageBack">
+            <zoom-image image-url="$ctrl.imageBack"></zoom-image>
+        </div>
+    </div>
+
+</section>

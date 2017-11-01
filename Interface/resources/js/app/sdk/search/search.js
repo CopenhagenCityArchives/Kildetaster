@@ -55,6 +55,7 @@ define([
     'app/sdk/directives/text-age.directive',
     'app/sdk/directives/text-person-name.directive',
     'app/sdk/directives/text-address-police.directive',
+    'app/sdk/directives/text-gender.directive',
 
     'app/sdk/directives/filterLink/filterLink.directive',
     'app/sdk/directives/facet/facet.directive',
@@ -64,6 +65,8 @@ define([
 
     'app/sdk/search/search-results/search-result.component',
     'app/sdk/search/search-config-text/search-config-text.component',
+
+    'app/sdk/search/police/police.component',
 
     'app/sdk/filters/formatStringNumber.filter',
     'app/shared/constants'
@@ -125,6 +128,7 @@ define([
     textAgeDirective,
     textPersonNameDirective,
     textAddressPoliceDirective,
+    textGenderDirective,
 
     filterLinkDirective,
     facetDirective,
@@ -134,6 +138,8 @@ define([
 
     searchResultComponent,
     searchConfigTextComponent,
+
+    postPoliceComponent,
 
     formatStringNumberFilter,
 
@@ -173,12 +179,7 @@ define([
     searchApp.controller('datapostController', datapostController);
 
     searchApp.directive('datapostErindring', datapostErindringDirective);
-    searchApp.directive('datapostPolice', datapostPoliceDirective);
-
-    // searchApp.directive('searchResult', searchResultDirective);
-    // searchApp.directive('searchResultBurial', searchResultBurialDirective);
-    //searchApp.directive('searchResultPolice', searchResultPoliceDirective);
-    //searchApp.directive('searchResultErindring', searchResultErindringDirective);
+    //searchApp.directive('datapostPolice', datapostPoliceDirective);
     
     searchApp.directive('postField', postfieldDirective);
     searchApp.directive('postCategory', postCategoryDirective);
@@ -201,6 +202,7 @@ define([
     searchApp.directive('textAge', textAgeDirective);
     searchApp.directive('textPersonName', textPersonNameDirective);
     searchApp.directive('textAddressPolice', textAddressPoliceDirective);
+    searchApp.directive('textGender', textGenderDirective);
 
     searchApp.directive('filterLink', filterLinkDirective);
     searchApp.directive('facet', facetDirective);
@@ -211,6 +213,8 @@ define([
     // Search results
     searchApp.component('searchResult', searchResultComponent);
     searchApp.component('searchConfigText', searchConfigTextComponent);
+
+    searchApp.component('postPolice', postPoliceComponent);
 
     searchApp.filter('formatStringNumber', formatStringNumberFilter);
 
