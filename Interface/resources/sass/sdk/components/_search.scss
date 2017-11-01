@@ -71,6 +71,14 @@
         border-top: 1px solid $light-gray;
     }
 
+    &__configtoggle {
+        text-decoration: underline;
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
     &__count {
         font-family: amblebold;
         font-size: 16px;

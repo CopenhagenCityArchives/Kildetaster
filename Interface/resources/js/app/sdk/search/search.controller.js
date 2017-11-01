@@ -267,11 +267,14 @@ define([
         }
 
         that.setPostsPrPage = function setPostsPrPage(count) {
-            console.log('posts now set to', count);
             that.postsPrPage = count;
             // Set page to show the first of the new set (0-based)
             that.page = 0;
             $scope.doSearch();
+        }
+
+        that.showSearchConfig = function showSearchConfig() {
+            that.results = {};
         }
 
         that.init = function init() {
