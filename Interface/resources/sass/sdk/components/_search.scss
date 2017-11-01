@@ -7,6 +7,10 @@
         padding-left: 15px;
     }
 
+    .row-fluid [class*="span"] {
+        margin-left: 0;
+    }
+
     select, input {
         font-size: 13px;
         //Overwrite default joomla styling
@@ -36,6 +40,25 @@
 
     :-moz-placeholder {
         color: $black;
+    }
+
+    // Overwrites of default bootstrap grid, to make columns fit without margins
+    &__col {
+        margin: 0;
+
+        &.span3 {
+            width: 25%;
+        }
+
+        &.span9 {
+            width: 75%;
+        }
+
+        @media (max-width: 767px) {
+            &.span3, &.span9 {
+                width: 100%;
+            }
+        }
     }
 
     &__config {
@@ -72,17 +95,15 @@
     }
 
     &__configtoggle {
+        display: block;
+
+        padding: 15px 20px;
+
         text-decoration: underline;
 
         &:hover {
             text-decoration: none;
         }
-    }
-
-    &__count {
-        font-family: amblebold;
-        font-size: 16px;
-        font-weight: bold;
     }
 
     &__results {

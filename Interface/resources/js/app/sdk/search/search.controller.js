@@ -274,7 +274,10 @@ define([
         }
 
         that.showSearchConfig = function showSearchConfig() {
+            // Reset results
             that.results = {};
+            // Reset filters
+            that.filterQueries = [];
         }
 
         that.init = function init() {
