@@ -63,6 +63,7 @@ define([
     'app/sdk/components/numPages/numPages.component',
 
     'app/sdk/search/search-results/search-result.component',
+    'app/sdk/search/search-config-text/search-config-text.component',
 
     'app/sdk/filters/formatStringNumber.filter',
     'app/shared/constants'
@@ -132,6 +133,7 @@ define([
     numPagesComponent,
 
     searchResultComponent,
+    searchConfigTextComponent,
 
     formatStringNumberFilter,
 
@@ -208,6 +210,7 @@ define([
 
     // Search results
     searchApp.component('searchResult', searchResultComponent);
+    searchApp.component('searchConfigText', searchConfigTextComponent);
 
     searchApp.filter('formatStringNumber', formatStringNumberFilter);
 

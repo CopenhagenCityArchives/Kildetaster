@@ -1,0 +1,7 @@
+for <span ng-repeat="row in $ctrl.config">
+    {{row.field.view_name}} {{row.operator.label}} {{row.term}}<span ng-if="!$last"> og </span>
+</span>
+i
+<span ng-repeat="(identifier, obj) in $ctrl.selectedCollections">
+    {{obj.name}}<span ng-if="!$last"> og </span>
+</span>
