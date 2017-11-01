@@ -1,7 +1,9 @@
-for <span ng-repeat="row in $ctrl.config">
-    {{row.field.view_name}} {{row.operator.label}} {{row.term}}<span ng-if="!$last"> og </span>
+<p class="search-config-text__count" ng-transclude></p>
+for
+<span ng-repeat="row in $ctrl.config">
+    {{row.field.view_name}} {{row.operator.label}} <span class="search-config-text__item">{{row.term}}</span><span ng-if="!$last"> og </span>
 </span>
 i
 <span ng-repeat="(identifier, obj) in $ctrl.selectedCollections">
-    {{obj.name}}<span ng-if="!$last"> og </span>
+    <span class="search-config-text__item">{{obj.name}}</span><span ng-if="!$last"> og </span>
 </span>
