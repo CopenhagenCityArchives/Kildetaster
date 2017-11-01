@@ -1,10 +1,12 @@
 .sorting {
+    margin: 10px auto 20px;
     &__container {
         display: table;
     }
 
     &__label {
-        line-height: 40px;
+        font-size: 18px;
+        line-height: 30px;
     }
 
     &__direction {
@@ -13,27 +15,34 @@
         padding-left: 5px;
 
         &:after {
+            position: relative;
+            top: -3px;
+
             display: inline-block;
 
             width: 0;
             height: 0;
 
             content: "";
+            transition: transform 300ms ease-in-out;
 
-            border-width: 12px 12px 0 12px;
+            border-width: 9px 9px 0 9px;
             border-style: solid;
             border-color: $black transparent transparent transparent;
         }
 
         &.desc {
             &:after {
-                border-width: 0 12px 12px 12px;
-                border-color: transparent transparent $black transparent;
+                //border-width: 0 9px 9px 9px;
+                //border-color: transparent transparent $black transparent;
+                transform: rotateX(180deg) scaleX(-1);
             }
         }
     }
 
     &__selection {
         display: table-cell;
+
+        height: 30px !important;
     }
 }

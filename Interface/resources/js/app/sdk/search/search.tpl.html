@@ -93,8 +93,8 @@
             <num-pages selected="ctrl.postsPrPage" change-count="ctrl.setPostsPrPage(count)"></num-pages>
         </div>
 
-        <div class="span3 sorting">
-            <div class="row-fluid">
+        <div class="span4">
+            <div class="row-fluid sorting">
                 
                 <div class="span6 text-right">
                     <label class="sorting__label">Sortér efter</label>
@@ -110,7 +110,7 @@
             </div>
         </div>
 
-        <div class="span6" ng-if="ctrl.results.numFound > 10">
+        <div class="span5" ng-if="ctrl.results.numFound > 10">
             <pagination current-page="ctrl.page" results="ctrl.results" go-to-page="ctrl.goToPage"></pagination>
         </div>
     </div>
