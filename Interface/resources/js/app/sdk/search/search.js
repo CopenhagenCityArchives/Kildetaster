@@ -208,9 +208,6 @@ define([
 
     // Search results
     searchApp.component('searchResult', searchResultComponent);
-    //searchApp.component('searchResultBurial', searchResultBurialComponent);
-    //searchApp.component('searchResultErindring', searchResultErindringComponent);
-    //searchApp.component('searchResultPolice', searchResultPoliceComponent);
 
     searchApp.filter('formatStringNumber', formatStringNumberFilter);
 
