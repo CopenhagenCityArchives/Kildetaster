@@ -1,5 +1,6 @@
 .sorting {
     margin: 10px auto 20px;
+
     &__container {
         display: table;
     }
@@ -7,6 +8,8 @@
     &__label {
         font-size: 18px;
         line-height: 30px;
+
+        margin-right: 8px;
     }
 
     &__direction {
