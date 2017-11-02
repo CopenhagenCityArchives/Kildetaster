@@ -137,6 +137,16 @@
 	        "type": "string",
 	        "view_name": "Fornavne"
 	    },
+		"streets": {
+			"collections": [
+				1, 17
+			],
+			"name": "streets",
+			"searchable": false,
+			"sortable": false,
+			"type": "string",
+			"view_name": "Vejnavn"
+		},
 	    "freetext_store": {
 	        "collections": [
 	            1, 17, 18
@@ -283,12 +293,6 @@
 			"gap": 10,
 			"mincount": 1
 		},
-		"streets": {
-			"field": "streets",
-			"type": "terms",
-			"mincount": 1
-		},
-
 		"firstnames": {
 			"field": "firstnames",
 			"type": "terms",
@@ -299,6 +303,11 @@
 			"type": "terms",
 			"mincount": 1
 		},
+		"streets": {
+			"field": "streets",
+			"type": "terms",
+			"mincount": 1
+		},		
 		"positions": {
 			"field" : "positions",
 			"type" : "terms",
