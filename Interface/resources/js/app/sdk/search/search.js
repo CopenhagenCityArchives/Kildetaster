@@ -67,6 +67,7 @@ define([
     'app/sdk/search/search-config-text/search-config-text.component',
 
     'app/sdk/search/police/police.component',
+    'app/sdk/search/burial/burial.component',
 
     'app/sdk/filters/formatStringNumber.filter',
     'app/shared/constants'
@@ -140,6 +141,7 @@ define([
     searchConfigTextComponent,
 
     postPoliceComponent,
+    postBurialComponent,
 
     formatStringNumberFilter,
 
@@ -215,6 +217,7 @@ define([
     searchApp.component('searchConfigText', searchConfigTextComponent);
 
     searchApp.component('postPolice', postPoliceComponent);
+    searchApp.component('postBurial', postBurialComponent);
 
     searchApp.filter('formatStringNumber', formatStringNumberFilter);
 

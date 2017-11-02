@@ -1,4 +1,5 @@
 <datapost-erindring ng-if="metadata.erindring_number" data="data" metadata="metadata" highlighting="highlighting"></datapost-erindring>
 <!-- <datapost-police ng-if="metadata.station" data="data" metadata="metadata"></datapost-police> -->
 
-<post-police data="data" metadata="metadata"></post-police>
+<post-police ng-if="metadata.station" data="data" metadata="metadata"></post-police>
+<post-burial data="data" metadata="metadata"></post-burial>
