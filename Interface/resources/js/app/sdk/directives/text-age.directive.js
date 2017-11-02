@@ -10,6 +10,7 @@ define([
             templateUrl: 'sdk/directives/text-age.directive.tpl.html',
 
             scope: {
+                prefix: '=',
                 years: '=',
                 months: '=',
                 weeks: '=',
