@@ -6,7 +6,6 @@ define([], function() {
 
         this.$onInit = function() {
 
-            console.log(that.metadata);
             // Set up post information
             that.imageFront = "http://politietsregisterblade.dk/registerblade/" + that.metadata.station + "/" + that.metadata.film + "/" + that.metadata.file_front + ".jpg";
             if (that.metadata.file_back !== 'noback') {

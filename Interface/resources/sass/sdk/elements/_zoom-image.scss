@@ -10,8 +10,8 @@
     &__tools {
         position: absolute;
         z-index: 500;
-        top: 4px;
-        left: -20px;
+        top: -8px;
+        right: -8px;
 
         list-style: none;
 
@@ -32,9 +32,9 @@
             text-align: center;
             text-decoration: none;
 
-            color: $black;
+            color: $white;
             border-radius: 50%;
-            background-color: $white;
+            background-color: $search-primary;
 
             &:hover {
                 text-decoration: none;

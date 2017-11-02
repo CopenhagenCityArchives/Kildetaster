@@ -1,0 +1,69 @@
+<section class="post">
+
+    <div class="post__head">
+        <div class="post__item post__main post__alternate">
+            
+            <h2 class="post__header">
+                {{ $ctrl.data.firstnames }} {{ $ctrl.data.lastname }} <span ng-if="$ctrl.data.birthname">{{$ctrl.data.birthname}}</span></span>
+                <span class="post__collection">Begravelse</span>
+            </h2>
+            
+            <p>Født: {{ $ctrl.data.dateOfBirth }} {{ $ctrl.data.yearOfBirth }}, i <span style="color: red">birthplaces_id ??</span></p>
+            <p>Død: {{ $ctrl.data.dateOfDeath }}</p>
+            <p><text-age prefix="'Alder: '" years="$ctrl.data.ageYears" months="$ctrl.data.ageMonths" weeks="$ctrl.data.ageWeeks" days="$ctrl.data.ageDays" hours="$ctrl.data.ageHours"></text-age></p>
+            <p>{{ $ctrl.data.civilstatus }}, {{ $ctrl.data.sex }}</p>
+            <div ng-repeat="position in $ctrl.data.positions">
+                <span ng-if="position.relationtype">{{position.relationtype}}: </span>{{position.position}}<span ng-if="!$last">, </span>
+            </div>
+           
+        </div>
+        <div class="post__item post__viewer">
+            <zoom-image image-url="$ctrl.imageUrl"></zoom-image>
+            <div class="post__links">
+                <a ng-href="{{$ctrl.metadata.kildeviser_url}}" target="_blank" class="button">Vis i kildeviser</a>
+                <a href ng-if="$ctrl.showEditorLink" ng-href="{{ $ctrl.editorUrl }}" target="_blank" class="button">Vis i kildetaster</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="post__col">
+        
+        <div class="post__item">
+            <h3 class="post__sectionheader">Adresse</h3>
+            <text-address address="$ctrl.data.addresses"></text-address>
+        </div>
+
+        <div class="post__item">
+            <h3 class="post__sectionheader">Om dødsfaldet/begravelsen</h3>
+            <p>Dødsårsag:
+                <div ng-repeat="deathcause in $ctrl.data.deathcauses">
+                    <text-deathcause deathcause="deathcause"></text-deathcause>
+                </div>
+            </p>
+            <p>{{ $ctrl.data.deathplaces_id }} <span style="color: red">deathplaces_id??</span></p>
+            <p>Dødssted: <span style="color: red">data mangler?</span></p>
+            <!-- TODO: make directive to show burials -->
+            <p ng-if="$ctrl.data.burials.chapel">Fra (kapel): {{ $ctrl.data.burials.chapel }}</p>
+            <p ng-if="$ctrl.data.burials.parish">Sogn: {{ $ctrl.data.burials.parish }}</p>
+            <p ng-if="$ctrl.data.burials.cemetary">Til (kirkegård): {{ $ctrl.data.burials.cemetary }}</p>
+            
+        </div>
+    </div>
+
+    <div class="post__col post__alternate">
+        
+        <div class="post__item">
+            <h3 class="post__sectionheader">Om kilden</h3>
+            <p>{{ $ctrl.metadata.collection_info }} {{ $ctrl.metadata.unit_description }} s. {{ $ctrl.metadata.page_number }}</p>
+        </div>
+
+        <div class="post__item">
+            <h3 class="post__sectionheader">Om indtastningen</h3>
+            <p>Indtastet: <span style="color: red">Data mangler, eller er det 'last_update'?</span> af {{ $ctrl.metadata.user_name }}</p>
+            <p>Redigeret: {{ $ctrl.metadata.last_update }} <span style="color: red">bør være timestamp, eller formmateret</span> af <span style="color: red">Mangler user info</span></span></p>
+            <p>Fejl, fejlentitet, kommentar: <span style="color: red">Mangler info</span></p>
+        </div>
+
+    </div>
+
+</section>

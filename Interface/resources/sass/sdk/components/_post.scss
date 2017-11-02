@@ -67,4 +67,17 @@
         font-size: 12px;
         font-weight: 600;
     }
+
+    &__links {
+        display: flex;
+        flex-direction: row;
+
+        margin-top: 10px;
+
+        justify-content: space-between;
+
+        a {
+            flex: 0 0 calc(50% - 5px);
+        }
+    }
 }
