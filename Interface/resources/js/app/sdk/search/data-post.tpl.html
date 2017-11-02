@@ -2,4 +2,4 @@
 <!-- <datapost-police ng-if="metadata.station" data="data" metadata="metadata"></datapost-police> -->
 
 <post-police ng-if="metadata.station" data="data" metadata="metadata"></post-police>
-<post-burial data="data" metadata="metadata"></post-burial>
+<post-burial ng-if="metadata.collection_id == 1" data="data" metadata="metadata"></post-burial>
