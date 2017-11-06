@@ -27,6 +27,7 @@ define([], function() {
             },
 
             getSearch: function(searchConfig) {
+                
                 var queries = {};
                 var filterQueries = {};
                 var sortDirection = "asc";
@@ -118,7 +119,14 @@ define([], function() {
                     angular.forEach(searchConfig.collections, function(collection, id) { colIds.push(id); });
                 }
 
-                return { queries: validQueries, filterQueries: validFilterQueries, collections: colIds, sortDirection: sortDirection, sortField: sortField, page: page };
+                return { 
+                    queries: validQueries, 
+                    filterQueries: validFilterQueries, 
+                    collections: colIds, 
+                    sortDirection: sortDirection, 
+                    sortField: sortField, 
+                    page: page
+                };
             },
 
             setSearch: function(search) {
