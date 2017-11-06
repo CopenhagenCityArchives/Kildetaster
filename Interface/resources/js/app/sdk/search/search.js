@@ -28,7 +28,7 @@ define([
 
     'app/sdk/search/search.controller',
 
-    'app/sdk/search/navigation.controller',
+//    'app/sdk/search/navigation.controller',
     'app/sdk/search/post.controller',
     'app/sdk/search/datapost.controller',
 
@@ -67,6 +67,7 @@ define([
     'app/sdk/search/search-config-text/search-config-text.component',
 
     'app/sdk/search/post/post.component',
+    'app/sdk/search/navigation/navigation.component',
     'app/sdk/search/police/police.component',
     'app/sdk/search/burial/burial.component',
 
@@ -102,7 +103,7 @@ define([
     searchRun,
 
     searchController,
-    navigationController,
+//    navigationController,
     postController,
     datapostController,
 
@@ -142,6 +143,7 @@ define([
     searchConfigTextComponent,
 
     postComponent,
+    navigationComponent,
     postPoliceComponent,
     postBurialComponent,
 
@@ -178,7 +180,7 @@ define([
     searchApp.factory('tokenFactory', tokenFactory);
 
     searchApp.controller('searchController', searchController);
-    searchApp.controller('navigationController', navigationController);
+//    searchApp.controller('navigationController', navigationController);
     searchApp.controller('postController', postController);
     searchApp.controller('datapostController', datapostController);
 
@@ -219,6 +221,7 @@ define([
     searchApp.component('searchConfigText', searchConfigTextComponent);
 
     searchApp.component('post', postComponent);
+    searchApp.component('navigation', navigationComponent);
     searchApp.component('postPolice', postPoliceComponent);
     searchApp.component('postBurial', postBurialComponent);
 

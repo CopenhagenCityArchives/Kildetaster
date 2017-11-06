@@ -11,8 +11,8 @@ define([
 
         // Set URL location search, if we have a search configuration
         if (!angular.equals(searchService.currentSearch, {})) {
-        	searchService.setSearch(searchService.currentSearch);
-        	$location.search('index', $stateParams.index);
+//        	searchService.setSearch(searchService.currentSearch);
+//        	$location.search('index', $stateParams.index);
         }
     };
 

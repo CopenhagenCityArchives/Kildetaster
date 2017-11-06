@@ -4,8 +4,7 @@ define([
 
     var solrService = /*@ngInject*/ function solrService($q, $http, API, SOLRAPI, JSONURL, searchService, $filter, $location) {
 
-        var useReal = true;
-
+        var that = this;
         /**
         * Build the string that matches the current query
         */
@@ -79,6 +78,7 @@ define([
             angular.forEach(facetConfig, function(value, key) {
                 value.domain = {excludeTags:key.toUpperCase()};
             });
+            console.log('base query', facetConfig);
             return "?wt=json&hl=on&hl.fl=erindring_document_text&hl.snippets=3&hl.simple.pre=<b>&hl.simple.post=</b>&json.facet=" + JSON.stringify(facetConfig);        
         }
 
@@ -123,6 +123,7 @@ define([
         *
         */
         function buildQueryString(queries, filterQueries, collections, sortField, sortDirection, params) {
+            
             var rtn = [];
 
             var options = {
@@ -130,9 +131,12 @@ define([
                 'q': buildSolrQuery(queries),
                 //The selected filters to use as facet query
                 'fq': buildSolrFilterQuery(filterQueries),
-                'sort': sortField.name + " " + sortDirection
-
+                //'sort': sortField.name + " " + sortDirection
             };
+
+            if (sortField) {
+                options.sort = sortField.name + " " + sortDirection
+            }
 
             params = angular.extend(options, params);
 
@@ -150,27 +154,58 @@ define([
             return rtn.join('&') + collectionsFilter;
         }
 
+        var savedSearch = null;
+
         return {
+
+            saveSearch: function saveSearch(data) {
+                savedSearch = data;
+            },
+
+            getSearchData: function getSearchData() {
+                return savedSearch;
+            },
+
+            /**
+             * 
+             */
             search: function search(queries, filterQueries, collections, sortField, sortDirection, index, rows) {
                 
                 var deferred = $q.defer();
 
+                var that = this;
+
+                
+
                 searchService.getConfigPromise()
                 .then(function(searchConfig) {
-                    $http({
-                        url: SOLRAPI + buildSolrBaseQuery(searchConfig) + '&' + buildQueryString(queries, filterQueries, collections, sortField, sortDirection, { 
-                            start: index, 
-                            // Number of posts to fetch
-                            rows: rows
-                        }),
-                        method: 'GET'
-                    })
-                    .then(function(response) {
-                        deferred.resolve(response.data);
-                    })
-                    .catch(function(err) {
-                        deferred.reject(err);
-                    });
+
+                    if (savedSearch) {
+                        console.log('Getting saved data', savedSearch);
+                        deferred.resolve(savedSearch);
+                    }
+                    else {
+
+                        console.log('Fetching new data');
+                    
+                        $http({
+                            url: SOLRAPI + buildSolrBaseQuery(searchConfig) + '&' + buildQueryString(queries, filterQueries, collections, sortField, sortDirection, { 
+                                start: index, 
+                                // Number of posts to fetch
+                                rows: rows
+                            }),
+                            method: 'GET'
+                        })
+                        .then(function(response) {
+                            console.log('saving response', response);
+                            that.saveSearch(response.data);
+                            deferred.resolve(response.data);
+                        })
+                        .catch(function(err) {
+                            deferred.reject(err);
+                        });
+                    }
+
                 })
                 .catch(function(err) {
                     deferred.reject(err);
@@ -179,13 +214,17 @@ define([
                 return deferred.promise;
             },
 
+            /**
+             * 
+             */
             paginatedSearch: function(queries, filterQueries, collections, sortField, sortDirection, index) {
+                
                 var deferred = $q.defer(),
                     that = this;
 
                 searchService.getConfigPromise()
                 .then(function(searchConfig) {
-
+console.log('this is search config', searchConfig);
                     $http({
                         url: SOLRAPI + buildSolrBaseQuery(searchConfig) + '&' + buildQueryString(queries, filterQueries, collections, sortField, sortDirection, {
                             rows: 1,
@@ -193,6 +232,7 @@ define([
                         })
                     })
                     .then(function(response) {
+                        console.log('Solr reso', response.data)
                         deferred.resolve(response.data);
                     })
                     .catch(function(err) {

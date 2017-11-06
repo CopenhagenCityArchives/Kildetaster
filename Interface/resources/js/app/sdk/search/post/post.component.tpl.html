@@ -1,3 +1,2 @@
-<h1>I am post!</h1>
-<post-police ng-if="metadata.station" data="data" metadata="metadata"></post-police>
-<post-burial ng-if="metadata.collection_id == 1" data="data" metadata="metadata"></post-burial>
+<post-police ng-if="$ctrl.json.metadata.station" data="$ctrl.json.data" metadata="$ctrl.json.metadata"></post-police>
+<post-burial ng-if="$ctrl.json.metadata.collection_id == 1" data="$ctrl.json.data" metadata="$ctrl.json.metadata"></post-burial>

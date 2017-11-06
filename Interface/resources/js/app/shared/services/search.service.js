@@ -13,6 +13,7 @@ define([], function() {
                     method: 'GET'
                 })
                 .then(function(response) {
+                    console.log('response', response);
                     deferred.resolve(response.data);
                 })
                 .catch(function(err) {

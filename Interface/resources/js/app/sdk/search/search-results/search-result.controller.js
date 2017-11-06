@@ -4,9 +4,13 @@ define([], function() {
         var that = this;
 
         this.goToPost = function () {
-            $state.go('search.page.result.data_page', {
-                index: that.page * 10 + that.index,
-                highlighting: that.highlighting
+            // $state.go('search.page.result.data_page', {
+            //     index: that.page * 10 + that.index,
+            //     highlighting: that.highlighting
+            // });
+            console.log(that.data);
+            $state.go('search.page.result.post', {
+                postId: that.data.id
             });
         };
         
@@ -17,6 +21,11 @@ define([], function() {
                 this.jsonData = JSON.parse(this.result.jsonObj);
                 this.data = this.jsonData.data;
                 this.highlighting = this.result.highlighting;
+
+                // HACK FOR UNIQUE ID
+                if (!this.data.id) {
+                    this.data.id = this.result.id || 'unknown-17';
+                }
 
                 //HACK START
                 // takes the dateOfDeath from the data and overwrites the wrongfully formatted dateOfDeath in the jsonObj data
