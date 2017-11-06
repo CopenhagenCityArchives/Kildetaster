@@ -8,7 +8,7 @@ define([
 ], function(ang, OpenSeadragon, osdSelection, filtering) {
 
 
-    var zoomImageDirective = function /*@ngInject*/ zoomImageDirective($timeout) {
+    var zoomImageDirective = function zoomImageDirective() {
 
         // Counter for how many times the directive has been used, used to build unique id's
         var num = 0;
@@ -21,7 +21,7 @@ define([
                 imageUrl: '='
             },
 
-            controller: /*@ngInject*/ function($scope, $compile, $templateCache, $element) {
+            controller: /*@ngInject*/ function ($scope, $compile, $templateCache, $element, $timeout) {
                 
                 // Store current unique number on the scope
                 $scope.num = num;
