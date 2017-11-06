@@ -4,11 +4,6 @@ define([], function() {
         var that = this;
 
         this.goToPost = function () {
-            // $state.go('search.page.result.data_page', {
-            //     index: that.page * 10 + that.index,
-            //     highlighting: that.highlighting
-            // });
-            console.log(that.data);
             $state.go('search.page.result.post', {
                 postId: that.data.id
             });
