@@ -2,7 +2,10 @@ define([
 
 ], function() {
 
-    var searchRun =  /*@ngInject*/ function searchRun(SDKCSSURL) {
+    var searchRun =  /*@ngInject*/ function searchRun(SDKCSSURL, $trace) {
+
+        // https://ui-router.github.io/ng1/docs/1.0.0/enums/trace.category.html
+        $trace.enable('TRANSITION');
 
          //Load the css file for the SDK
         var fileref = document.createElement("link");

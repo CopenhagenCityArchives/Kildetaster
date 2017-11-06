@@ -64,6 +64,27 @@ define([
                 }
 
             })
+            .state('search.page.result.post', {
+                url: 'post/:id',
+                views: {
+                    'navigation': {
+                        template: '<h1>I am nav - to be done</h1>'
+                    },
+                    '': {
+                        component: 'post'
+                    }
+                },
+                resolve: {
+                    data: ['$transition$', function ($transition$) {
+                        console.log($transition$.params())
+                        console.log('Get solr request based on id: ' + $transition$.params().id);
+                        return $transition$.params().id;
+                    }],
+                    metadata: [function() {
+                        return 'abe'
+                    }]
+                }
+            })
             .state('search.page.result.data_page', {
                 url: 'data_post/',
                 views: {
