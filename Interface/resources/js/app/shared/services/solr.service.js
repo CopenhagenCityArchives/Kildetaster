@@ -130,8 +130,7 @@ define([
                 //The query for the search
                 'q': buildSolrQuery(queries),
                 //The selected filters to use as facet query
-                'fq': buildSolrFilterQuery(filterQueries),
-                //'sort': sortField.name + " " + sortDirection
+                'fq': buildSolrFilterQuery(filterQueries)
             };
 
             if (sortField) {
