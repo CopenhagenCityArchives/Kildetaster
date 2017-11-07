@@ -23,13 +23,16 @@ define([], function() {
                 this.data.dateOfDeath = this.result.dateOfDeath;
                 //HACK END
 
+                // Begravelser
                 if (this.data.collection_id == 1) {
                     this.templateUrl = 'sdk/search/search-results/burial.tpl.html';
                 }
-                else if (this.data.station) {
+                // Politiets registerblade
+                else if (this.data.collection_id == 17) {
                     this.templateUrl = 'sdk/search/search-results/police.tpl.html'
                 }
-                else if (this.data.erindring_number) {
+                // Erindringer
+                else if (this.data.collection_id == 18) {
                     this.templateUrl = 'sdk/search/search-results/erindring.tpl.html'
                 }
             }
