@@ -80,7 +80,11 @@ define([
                         component: 'post'
                     }
                 },
-                
+                // Scroll the browser to the top 
+                onEnter: function() {
+                    jQuery('html, body').animate({ scrollTop: 0 }, 100);
+                },
+
                 params: {
                     postId: null
                 },
