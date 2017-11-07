@@ -102,7 +102,7 @@ define([
 
                         // Use post data from existing search
                         if (solrService.getSearchData()) {
-                            
+
                             docs = solrService.getSearchData().response.docs;
 
                             // Find the post with the id in the url
@@ -112,7 +112,7 @@ define([
 
                             if (found) {
                                 // Parse the jsonObj in the found post data
-                                deferred.resolve(JSON.parse(found.jsonObj).data);
+                                deferred.resolve(JSON.parse(found.jsonObj));
                             }
                             // We somehow did not find the post we wanted
                             else {
