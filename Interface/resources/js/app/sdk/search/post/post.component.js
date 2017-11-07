@@ -6,7 +6,7 @@ define([
 
     return {
         bindings: {
-            json: '<'
+            data: '<'
         },
         templateUrl: 'sdk/search/post/post.component.tpl.html',
         controller: controller

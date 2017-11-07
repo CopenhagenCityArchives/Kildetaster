@@ -20,7 +20,7 @@
         <div class="post__item post__viewer">
             <zoom-image image-url="$ctrl.imageUrl"></zoom-image>
             <div class="post__links">
-                <a ng-href="{{$ctrl.metadata.kildeviser_url}}" target="_blank" class="button">Vis i kildeviser</a>
+                <a ng-href="{{$ctrl.data.kildeviser_url}}" target="_blank" class="button">Vis i kildeviser</a>
                 <a href ng-if="$ctrl.showEditorLink" ng-href="{{ $ctrl.editorUrl }}" target="_blank" class="button">Vis i kildetaster</a>
             </div>
         </div>
@@ -54,13 +54,13 @@
         
         <div class="post__item">
             <h3 class="post__sectionheader">Om kilden</h3>
-            <p>{{ $ctrl.metadata.collection_info }} {{ $ctrl.metadata.unit_description }} s. {{ $ctrl.metadata.page_number }}</p>
+            <p>{{ $ctrl.data.collection_info }} {{ $ctrl.data.unit_description }} s. {{ $ctrl.data.page_number }}</p>
         </div>
 
         <div class="post__item">
             <h3 class="post__sectionheader">Om indtastningen</h3>
-            <p>Indtastet: <span style="color: red">Data mangler, eller er det 'last_update'?</span> af {{ $ctrl.metadata.user_name }}</p>
-            <p>Redigeret: {{ $ctrl.metadata.last_update }} <span style="color: red">bør være timestamp, eller formmateret</span> af <span style="color: red">Mangler user info</span></span></p>
+            <p>Indtastet: <span style="color: red">Data mangler, eller er det 'last_update'?</span> af {{ $ctrl.data.user_name }}</p>
+            <p>Redigeret: {{ $ctrl.data.last_update }} <span style="color: red">bør være timestamp, eller formmateret</span> af <span style="color: red">Mangler user info</span></span></p>
             <p>Fejl, fejlentitet, kommentar: <span style="color: red">Mangler info</span></p>
         </div>
 

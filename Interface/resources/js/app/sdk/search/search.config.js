@@ -95,7 +95,7 @@ define([
                         return solrService.getSearchData();
                     }],
 
-                    json: ['$q','$stateParams', '$transition$', 'solrService', 'searchService', function ($q, $stateParams, $transition$, solrService, searchService) {
+                    data: ['$q','$stateParams', '$transition$', 'solrService', 'searchService', function ($q, $stateParams, $transition$, solrService, searchService) {
 
                         var deferred = $q.defer(),
                             docs = null;
@@ -112,7 +112,7 @@ define([
 
                             if (found) {
                                 // Parse the jsonObj in the found post data
-                                deferred.resolve(JSON.parse(found.jsonObj));
+                                deferred.resolve(JSON.parse(found.jsonObj).data);
                             }
                             // We somehow did not find the post we wanted
                             else {
@@ -152,6 +152,7 @@ define([
 
                                 })
                                 .then(function(data) {
+                                    console.log(JSON.parse(data.response.docs[0].jsonObj))
                                     // Parse and return the parsed jsonObj on the returned data object
                                     deferred.resolve(JSON.parse(data.response.docs[0].jsonObj));
                                 });

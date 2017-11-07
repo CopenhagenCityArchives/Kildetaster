@@ -44,10 +44,10 @@
 <div class="search-container__item">
     <div>
         <div>
-            <strong>Begravelses&shy;protokol {{$ctrl.metadata.collection_name}}</strong>
+            <strong>Begravelses&shy;protokol {{$ctrl.data.collection_name}}</strong>
         </div>
         <div>
-            {{$ctrl.metadata.unit_description}} s.{{$ctrl.metadata.page_number}}
+            {{$ctrl.data.unit_description}} s.{{$ctrl.data.page_number}}
         </div>
         <div ng-if="$ctrl.data.burials && $ctrl.data.burials.number">
             <strong>Lb. nr:</strong> {{$ctrl.data.burials.number}}
