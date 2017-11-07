@@ -16,6 +16,10 @@
         flex-direction: column;
 
         width: 50%;
+
+        @media (max-width: 767px) {
+            width: 100%;
+        }
     }
 
     &__item {
@@ -30,6 +34,10 @@
 
         &:last-child {
             border-bottom: none;
+        }
+
+        @media (max-width: 767px) {
+            width: 100%;
         }
     }
 
