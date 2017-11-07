@@ -150,6 +150,12 @@ module.exports = {
             src: ['**/*.json'],
             dest: '<%= package.buildresources %>/configs'
         }, {
+            // Errorreport configuration
+            expand: true,
+            cwd: '<%= package.configs %>/errorreport/',
+            src: ['**/*.json'],
+            dest: '<%= package.buildresources %>/configs'
+        },{
             //Images
             expand: true,
             cwd: '<%= package.resources %>/images/',

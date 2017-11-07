@@ -1,0 +1,56 @@
+{
+    "1" : {
+        "task_id": 1,
+        "add_metadata": true,
+        "error_reports" : [
+            {
+                "label": "Person",
+                "entity": "person"
+            },
+            {
+                "label": "Begravelse",
+                "entity": "burial"
+            },
+            {
+                "label": "Adresse",
+                "entity": "address"
+            }
+        ]
+    },
+    "2": {
+        "task_id": 2,
+        "add_metadata": false,
+        "error_reports" : [
+            {
+                "label": "Person",
+                "entity": "person"
+            },
+            {
+                "label": "Slægtning",
+                "entity": "relative"
+            },
+            {
+                "label": "Adresser",
+                "entity": "burial"
+            },
+            {
+                "label": "Stillinger",
+                "entity": "address"
+            }
+        ]
+    },
+    "3": {
+        "task_id": 3,
+        "add_metadata": false,
+        "error_reports" : [
+            {
+                "label": "Forfatter",
+                "entity": "author"
+            },
+            {
+                "label": "Transkribering",
+                "entity": "transcription"
+            }
+        ]
+    }
+}

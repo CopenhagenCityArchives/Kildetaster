@@ -3,9 +3,20 @@ define([
 
 ], function() {
 
-    var errorService = /*@ngInject*/ function errorService($http, $q, $filter, API, JSONURL) {
+    var errorService = /*@ngInject*/ function errorService($http, $q, $filter, API, JSONURL, ERRORREPORCONFIGURL) {
 
         return {
+
+            getConfig: function getConfig() {
+
+                return $http.get(ERRORREPORCONFIGURL)
+                    .then(function(response){
+                        return response.data;
+                    })
+                    .catch(function(err){
+                        throw new Error('errorService:getConfig: ' + err);
+                    });
+            },
 
             getData: function getData() {
 
