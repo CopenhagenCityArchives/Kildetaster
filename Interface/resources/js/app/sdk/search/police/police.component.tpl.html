@@ -1,5 +1,5 @@
 <section class="post">
-    
+
     <div class="post__head">
         <div class="post__item post__main post__alternate">
             
@@ -8,7 +8,7 @@
                 <span class="post__collection">Politiets registerblade</span>
             </h2>
             
-            <p>Født: {{$ctrl.data.dateOfBirth}}, i {{$ctrl.data.birthplace}}</p>
+            <p>Født: {{$ctrl.data.dateOfBirth | date: 'd. MMMM yyyy' | lowercase }}, i {{$ctrl.data.birthplace}}</p>
             <p style="color: red">Død: DATAMANGLER</p>
             <p>{{$ctrl.data.civilstand}}, <text-gender type="$ctrl.data.sex"></text-gender></p>
             <div ng-repeat="position in $ctrl.data.positions">
