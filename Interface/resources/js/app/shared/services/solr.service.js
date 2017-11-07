@@ -152,24 +152,24 @@ define([
             return rtn.join('&') + collectionsFilter;
         }
 
-        var savedSearch = null;
+        var savedSearchResults = null;
 
         return {
 
             saveSearch: function saveSearch(data) {
-                savedSearch = data;
+                savedSearchResults = data;
             },
 
             getSearchData: function getSearchData() {
-                return savedSearch;
+                return savedSearchResults;
             },
             
             clearSearchData: function clearSearchData() {
-                savedSearch = null;
+                savedSearchResults = null;
             },
 
             /**
-             * 
+             * Initiate a solr search
              */
             search: function search(queries, filterQueries, collections, sortField, sortDirection, index, rows) {
                 
@@ -180,13 +180,14 @@ define([
                 searchService.getConfigPromise()
                 .then(function(searchConfig) {
 
-                    if (savedSearch) {
-                        console.log('Getting saved data', savedSearch);
-                        deferred.resolve(savedSearch);
+                    // Do we have search results in memory
+                    if (savedSearchResults) {
+                        deferred.resolve(savedSearchResults);
                     }
+                    // otherwise, fetch data from the server
                     else {
 
-                        console.log('Fetching new data');
+                        // console.log('Fetching new data');
                     
                         $http({
                             url: SOLRAPI + buildSolrBaseQuery(searchConfig) + '&' + buildQueryString(queries, filterQueries, collections, sortField, sortDirection, { 
