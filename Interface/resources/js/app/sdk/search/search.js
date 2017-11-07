@@ -28,12 +28,9 @@ define([
 
     'app/sdk/search/search.controller',
 
-//    'app/sdk/search/navigation.controller',
     'app/sdk/search/post.controller',
-    'app/sdk/search/datapost.controller',
 
     'app/sdk/directives/datapost-erindring.directive',
-    'app/sdk/directives/datapost-police.directive',
 
     'app/sdk/directives/postfield.directive',
     'app/sdk/directives/postCategory.directive',
@@ -103,12 +100,9 @@ define([
     searchRun,
 
     searchController,
-//    navigationController,
     postController,
-    datapostController,
 
     datapostErindringDirective,
-    datapostPoliceDirective,
 
     postfieldDirective,
     postCategoryDirective,
@@ -180,12 +174,10 @@ define([
     searchApp.factory('tokenFactory', tokenFactory);
 
     searchApp.controller('searchController', searchController);
-//    searchApp.controller('navigationController', navigationController);
     searchApp.controller('postController', postController);
-    searchApp.controller('datapostController', datapostController);
 
+    // TODO remove when new version is done
     searchApp.directive('datapostErindring', datapostErindringDirective);
-    //searchApp.directive('datapostPolice', datapostPoliceDirective);
     
     searchApp.directive('postField', postfieldDirective);
     searchApp.directive('postCategory', postCategoryDirective);
