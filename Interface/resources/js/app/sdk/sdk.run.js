@@ -4,8 +4,9 @@ define([
 
     var sdkRun = /*@ngInject*/ function sdkRun(SDKCSSURL, $state, $trace) {
 
-        // Enable debugging of state to the console
-        // $trace.enable('TRANSITON');
+        // Enable this to get debug info about transitions in the console
+        // https://ui-router.github.io/ng1/docs/1.0.0/enums/trace.category.html
+        //$trace.enable('TRANSITION');
 
         //Load the css file for the SDK
         var fileref = document.createElement("link");
