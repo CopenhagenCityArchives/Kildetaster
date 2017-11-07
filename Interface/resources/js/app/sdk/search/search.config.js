@@ -140,13 +140,14 @@ define([
                                     });
 
                                     // Call solr with the config and query
-                                    return solrService.paginatedSearch(
+                                    return solrService.search(
                                         queries, 
                                         parsedConfig.filterQueries, 
                                         parsedConfig.collections, 
                                         parsedConfig.sortField, 
                                         parsedConfig.sortDirection,
-                                        0
+                                        0,
+                                        1
                                     );
 
                                 })

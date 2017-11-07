@@ -212,40 +212,8 @@ define([
                 });
 
                 return deferred.promise;
-            },
-
-            /**
-             * 
-             */
-            paginatedSearch: function(queries, filterQueries, collections, sortField, sortDirection, index) {
-                
-                var deferred = $q.defer(),
-                    that = this;
-
-                searchService.getConfigPromise()
-                .then(function(searchConfig) {
-
-                    $http({
-                        url: SOLRAPI + buildSolrBaseQuery(searchConfig) + '&' + buildQueryString(queries, filterQueries, collections, sortField, sortDirection, {
-                            rows: 1,
-                            start: index
-                        })
-                    })
-                    .then(function(response) {
-                        console.log('Solr reso', response.data)
-                        deferred.resolve(response.data);
-                    })
-                    .catch(function(err) {
-                        deferred.reject(err);
-                        console.log('Error doing paginatedSearch', err);
-                    });
-                })
-                .catch(function(err) {
-                    deferred.reject(err);
-                })
-
-                return deferred.promise;
             }
+            
         };
 
     };
