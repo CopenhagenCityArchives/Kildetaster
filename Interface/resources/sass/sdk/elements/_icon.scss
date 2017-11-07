@@ -38,4 +38,11 @@
 
         background-image: inline("resources/images/icon_green_checkmark.svg");
     }
+
+    &.arrow {
+        width: 12px;
+        height: 9px;
+
+        background-image: inline("resources/images/icon_arrow.svg");
+    }
 }

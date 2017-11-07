@@ -89,12 +89,12 @@
             background-color: #e0e0e0 !important;
         }
 
-        img {
+        i {
             position: absolute;
             top: 10px;
             left: 10px;
 
-            & + img {
+            & + i {
                 left: 5px;
             }
         }
@@ -103,35 +103,35 @@
 
 
     .sdk-pagination__next {
-        img {
+        i {
             transform: rotate(-90deg);
         }
     }
 
     .sdk-pagination__next-double {
-        img {
+        i {
             left: 14px;
 
             transform: rotate(-90deg);
 
-            & + img {
+            & + i {
                 left: 9px;
             }
         }
     }
 
     .sdk-pagination__prev {
-        img {
+        i {
             transform: rotate(90deg);
         }
     }
     .sdk-pagination__prev-double {
-        img {
+        i {
             left: 12px;
 
             transform: rotate(90deg);
 
-            & + img {
+            & + i {
                 left: 7px;
             }
         }

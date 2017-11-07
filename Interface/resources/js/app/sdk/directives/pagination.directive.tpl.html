@@ -3,8 +3,10 @@
         <!-- arrows -->
         <li class="sdk-pagination__arrow sdk-pagination__prev-double" ng-class="{'disabled': currentPage === 0}">
             <a href="" ng-click="callGoToPage(0)">
-                <img width="12" height="9" src="/resources/images/arrow.svg">
-                <img width="12" height="9" src="/resources/images/arrow.svg">
+                <i class="sdk-icon arrow"></i>
+                <i class="sdk-icon arrow"></i>
+                <!-- <img width="12" height="9" src="/resources/images/arrow.svg">
+                <img width="12" height="9" src="/resources/images/arrow.svg"> -->
             </a>
         </li>
         <!-- <li class="sdk-pagination__arrow sdk-pagination__prev" ng-class="{'disabled': !canGoBack10() }">
@@ -12,7 +14,7 @@
         </li> -->
         <li class="sdk-pagination__arrow sdk-pagination__prev" ng-class="{'disabled': currentPage === 0}">
             <a href="" ng-click="prev(1)">
-                <img src="/resources/images/arrow.svg">
+                <i class="sdk-icon arrow"></i>
             </a>
         </li>
         <li class="sdk-pagination__divider disabled" ng-if="currentPage > 2">
@@ -30,7 +32,7 @@
         </li>
         <li class="sdk-pagination__arrow sdk-pagination__next" ng-class="{'disabled': currentPage === pagination.total - 1}">
             <a href="" ng-click="next(1)">
-                <img src="/resources/images/arrow.svg">
+                <i class="sdk-icon arrow"></i>
             </a>
         </li>
         <!-- <li class="sdk-pagination__arrow sdk-pagination__next" ng-class="{'disabled': !canGoForward10() }">
@@ -38,8 +40,8 @@
         </li> -->
         <li class="sdk-pagination__arrow sdk-pagination__next-double" ng-class="{'disabled': currentPage === pagination.total - 1}">
             <a href="" ng-click="callGoToPage(pagination.total - 1)">
-                <img src="/resources/images/arrow.svg">
-                <img src="/resources/images/arrow.svg">
+                <i class="sdk-icon arrow"></i>
+                <i class="sdk-icon arrow"></i>
             </a>
         </li>
 
