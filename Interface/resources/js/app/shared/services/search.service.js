@@ -3,17 +3,20 @@ define([], function() {
 
         return {
             currentSearch: undefined,
+            
+            // TODO move to currentSearch
+            sortDirection: 'asc',
 
             getConfigPromise: function() {
                 var deferred = $q.defer();
 
                 $http({
                     url: SEARCHCONFIGURL,
-                    cache: false,
+                    //TODO why turned off ?
+                    //cache: false,
                     method: 'GET'
                 })
                 .then(function(response) {
-                    console.log('response', response);
                     deferred.resolve(response.data);
                 })
                 .catch(function(err) {
@@ -28,10 +31,9 @@ define([], function() {
             },
 
             getSearch: function(searchConfig) {
-                
+                console.log('Getting search', searchConfig);
                 var queries = {};
                 var filterQueries = {};
-                var sortDirection = "asc";
                 var sortField = searchConfig.fields["lastname"];
                 var colIds = [];
 
@@ -99,13 +101,16 @@ define([], function() {
                 if (qSortDirection) {
                     qSortDirection = qSortDirection.toLowerCase();
                 }
-                if (qSortDirection === "asc" || qSortDirection === "desc") {
-                    sortDirection = qSortDirection;
+                if (qSortDirection === "asc" || qSortDirection === "desc") {                    
+                    this.sortDirection = qSortDirection;
                 }
 
                 // Current page
-                var page = $location.search().page || 0;
-                page = parseInt(page);
+                this.page = $location.search().page || 0;
+                this.page = parseInt(this.page);
+
+                this.postsPrPage = $location.search().postsPrPage || 10;
+                this.postsPrPage = parseInt(this.postsPrPage);
 
                 // Selected collections
                 var qCollections = $location.search().collections;
@@ -116,21 +121,28 @@ define([], function() {
                             colIds.push(colId);
                         }
                     });
-                } else {
+                } 
+                else {
                     angular.forEach(searchConfig.collections, function(collection, id) { colIds.push(id); });
                 }
 
-                return { 
+                var newConfig = { 
                     queries: validQueries, 
                     filterQueries: validFilterQueries, 
                     collections: colIds, 
-                    sortDirection: sortDirection, 
+                    sortDirection: this.sortDirection, 
                     sortField: sortField, 
-                    page: page
+                    postsPrPage: this.postsPrPage,
+                    page: this.page
                 };
+
+                this.currentSearch = newConfig;
+
+                return newConfig;
             },
 
             setSearch: function(search) {
+
                 $location.search({});
 
                 // add queries
@@ -170,11 +182,16 @@ define([], function() {
                     $location.search('page', search.page);
                 }
 
+                if (search.postsPrPage) {
+                    $location.search('postsPrPage', search.postsPrPage);
+                }
+
                 if (search.collections && search.collections.length > 0) {
                     $location.search('collections', search.collections.join(","));
                 }
             }
         };
     };
+
     return searchService;
 });

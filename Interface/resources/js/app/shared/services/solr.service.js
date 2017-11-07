@@ -163,6 +163,10 @@ define([
             getSearchData: function getSearchData() {
                 return savedSearch;
             },
+            
+            clearSearchData: function clearSearchData() {
+                savedSearch = null;
+            },
 
             /**
              * 

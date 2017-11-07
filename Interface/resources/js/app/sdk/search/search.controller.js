@@ -32,8 +32,8 @@ define([
         // How many posts to show on a page
         that.postsPrPage = 10;
 
-        //Use stored direction if we have one, otherwise default to asc
-        that.sortDirection = $rootScope.sortDirection ? $rootScope.sortDirection : 'asc';
+        // Set sortDirection
+        that.sortDirection = searchService.sortDirection;
 
         //Default field to sort by, use value from rootScope if we have it, otherwise default ot lastname
         that.sortField = $rootScope.sortField ? $rootScope.sortField : searchConfig.fields['lastname'];
@@ -94,6 +94,7 @@ define([
             }
 
             that.queries.push({ field: field, operator: operator, term: term });
+
         };
 
         // a field must be associated with all selected collections to be shown
@@ -133,10 +134,10 @@ define([
             }
 
             //Store selected direction in rootscope, so we have a value if we revisit the list
-            $rootScope.sortDirection = that.sortDirection;
+            searchService.sortDirection = that.sortDirection;
 
             //Trigger new search
-            $scope.doSearch();
+            $scope.doSearch(true);
         }
 
         // TODO update to use that
@@ -151,7 +152,10 @@ define([
                 that.filterQueries.push({facet:facet, bucket:bucket});
             }
 
-            $scope.doSearch();
+            that.page = 0;
+            searchService.currentSearch.page = 0;
+
+            $scope.doSearch(true);
         }
 
         //TODO move this to a directive
@@ -163,12 +167,12 @@ define([
 
         };
 
-        //Trigger serach and reset indexes
+        //Trigger search and reset indexes
         // TODO update to use that
         $scope.startNewSearch = function startNewSearch() {
             $rootScope.page = 0;
             that.page = 0;
-            $scope.doSearch();
+            $scope.doSearch(true);
         }
 
         /**
@@ -203,7 +207,12 @@ define([
         * Execute the search
         // TODO update to use that
         */
-        $scope.doSearch = function doSearch() {
+        $scope.doSearch = function doSearch(forceNew) {
+
+            if (forceNew) {
+                solrService.clearSearchData();
+            }
+            
             if (that.error) {
                 that.error = false;
                 that.filterQueries = [];
@@ -216,6 +225,13 @@ define([
                     colIds.push(collection.id);
                 }
             });
+
+            searchService.currentSearch.collections = colIds;
+
+            // Update current search settings
+            searchService.currentSearch.queries = that.queries;
+
+            searchService.currentSearch.filterQueries = that.filterQueries;
 
             solrService.search(
                 that.queries, 
@@ -232,7 +248,7 @@ define([
                 //Reset page number and search again if no results are found on current page
                 if(that.results && that.results.numFound == 0 && that.page > 1){
                     that.page = 1;
-                    $scope.doSearch();
+                    $scope.doSearch(true);
                 }
 
                 // process documents
@@ -255,21 +271,37 @@ define([
                 that.searching = false;
             });
 
-            var thisSearch = { queries: that.queries, filterQueries: that.filterQueries, collections: colIds, sortField: that.sortField, sortDirection: that.sortDirection, page: that.page };
-            searchService.currentSearch = thisSearch;
+            var thisSearch = { 
+                queries: that.queries, 
+                filterQueries: that.filterQueries, 
+                collections: colIds, 
+                sortField: that.sortField, 
+                sortDirection: that.sortDirection, 
+                postsPrPage: that.postsPrPage,
+                page: that.page
+            };
+            
             searchService.setSearch(thisSearch);
         };
 
         that.goToPage = function goToPage(page) {
             that.page = page;
-            $scope.doSearch();
+            
+            // Store current page in the search service
+            searchService.currentSearch.page = page;
+
+            $scope.doSearch(true);
         }
 
         that.setPostsPrPage = function setPostsPrPage(count) {
             that.postsPrPage = count;
             // Set page to show the first of the new set (0-based)
             that.page = 0;
-            $scope.doSearch();
+
+            searchService.currentSearch.postsPrPage = count;
+            searchService.currentSearch.page = 0;
+
+            $scope.doSearch(true);
         }
 
         that.showSearchConfig = function showSearchConfig() {
@@ -290,7 +322,10 @@ define([
 
             // Clean entry
             if (!searchService.currentSearch && !searchService.urlParamsExist()) {
-                that.addField('firstnames', '', "eq");
+                
+                searchService.getSearch(searchConfig);
+                
+                that.addField('firstnames', '', 'eq');
                 that.collections = angular.copy(searchConfig.collections);
                 angular.forEach(that.collections, function(col, id) {
                     col.selected = true;
@@ -313,6 +348,7 @@ define([
                 //Get saved sort direction and sort key
                 that.sortDirection = urlSearch.sortDirection;
                 that.sortField = urlSearch.sortField;
+                that.postsPrPage = urlSearch.postsPrPage;
                 that.page = urlSearch.page;
 
                 that.collections = angular.copy(searchConfig.collections);
@@ -323,7 +359,7 @@ define([
                 });
 
                 //Trigger new search
-                $scope.doSearch();
+                $scope.doSearch(true);
             }
             // Entry into page that is already configured
             else {
@@ -337,6 +373,7 @@ define([
                 });
 
                 that.page = searchService.currentSearch.page;
+                that.postsPrPage = searchService.currentSearch.postsPrPage;
                 that.collections = angular.copy(searchConfig.collections);
                 angular.forEach(searchService.currentSearch.collections, function(id) {
                     if (that.collections[id]) {
@@ -355,9 +392,10 @@ define([
             return that.sortField;
         }), function (newval, oldval) {
             //Store value in rootscope, to make it available if we go back to the overview page
+            //TODO store in service, not rootscope
             $rootScope.sortField = newval;
             if (that.results.docs && that.results.docs.length > 0 && newval) {
-                $scope.doSearch();
+                $scope.doSearch(true);
             }
         });
 
