@@ -14,6 +14,7 @@ define([
     'app/sdk/controllers/tasks.controller',
     'app/sdk/controllers/errors.controller',
     'app/sdk/controllers/useractivities.controller',
+    'app/sdk/controllers/fritekst-search.controller',
 
     'app/shared/services/token.service',
     'app/shared/services/token.factory',
@@ -25,7 +26,6 @@ define([
 
     'app/sdk/directives/progressbar.directive',
     'app/shared/directives/user.directive',
-
     'app/shared/constants'
 
 
@@ -45,6 +45,7 @@ define([
     tasksController,
     errorsController,
     useractivitiesController,
+    fritekstSearchController,
 
     tokenService,
     tokenFactory,
@@ -72,6 +73,7 @@ define([
     sdkApp.controller('tasksController', tasksController);
     sdkApp.controller('errorsController', errorsController);
     sdkApp.controller('useractivitiesController', useractivitiesController);
+    sdkApp.controller('fritekstSearchController', fritekstSearchController);
 
     //sdkApp.factory('accessTokenHttpInterceptor', tokenFactory);
     sdkApp.service('tokenService', tokenService);

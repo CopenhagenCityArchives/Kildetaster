@@ -14,6 +14,7 @@
 @import "sdk/elements/error-reporting";
 @import "sdk/elements/facet";
 @import "sdk/elements/filter-link";
+@import "sdk/elements/fritekst-search";
 @import "sdk/elements/icon";
 @import "sdk/elements/jumpToPage";
 @import "sdk/elements/numPages";
@@ -27,4 +28,8 @@
 @import "sdk/elements/zoom-image";
 @import "sdk/elements/term-field.typeahead";
 @import "sdk/elements/input-datepicker";
-@import "sdk/elements/name";
+@import "sdk/elements/name";
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
