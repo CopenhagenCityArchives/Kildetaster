@@ -78,7 +78,6 @@ define([
             angular.forEach(facetConfig, function(value, key) {
                 value.domain = {excludeTags:key.toUpperCase()};
             });
-            console.log('base query', facetConfig);
             return "?wt=json&hl=on&hl.fl=erindring_document_text&hl.snippets=3&hl.simple.pre=<b>&hl.simple.post=</b>&json.facet=" + JSON.stringify(facetConfig);        
         }
 
@@ -174,8 +173,6 @@ define([
 
                 var that = this;
 
-                
-
                 searchService.getConfigPromise()
                 .then(function(searchConfig) {
 
@@ -196,7 +193,6 @@ define([
                             method: 'GET'
                         })
                         .then(function(response) {
-                            console.log('saving response', response);
                             that.saveSearch(response.data);
                             deferred.resolve(response.data);
                         })
@@ -223,7 +219,7 @@ define([
 
                 searchService.getConfigPromise()
                 .then(function(searchConfig) {
-console.log('this is search config', searchConfig);
+
                     $http({
                         url: SOLRAPI + buildSolrBaseQuery(searchConfig) + '&' + buildQueryString(queries, filterQueries, collections, sortField, sortDirection, {
                             rows: 1,
