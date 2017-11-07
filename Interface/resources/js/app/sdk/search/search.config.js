@@ -38,6 +38,7 @@ define([
                 },
                 reloadOnSearch: false,
                 resolve: {
+
                     searchConfig: ['searchService', '$q', function(searchService, $q) {
 
                         var deferred = $q.defer();
@@ -169,7 +170,6 @@ define([
                 resolve: {
 
                     searchData: ['solrService', function (solrService) {
-                        console.log('data', solrService.getSearchData());
                         return solrService.getSearchData();
                     }],
 
@@ -177,8 +177,6 @@ define([
 
                         var deferred = $q.defer(),
                             docs = null;
-        
-                        console.log('jsondata', solrService.getSearchData());
 
                         // Use post data from existing search
                         if (solrService.getSearchData()) {
@@ -205,6 +203,7 @@ define([
                             // Get current search config
                             searchService.getConfigPromise()
                                 .then(function(response) {
+                                    
                                     return response;
                                 })
                                 .then(function(config) {
