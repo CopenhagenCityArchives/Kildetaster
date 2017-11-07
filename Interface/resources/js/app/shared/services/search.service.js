@@ -3,17 +3,18 @@ define([], function() {
 
         return {
             currentSearch: undefined,
-            
+
             // TODO move to currentSearch
             sortDirection: 'asc',
 
             getConfigPromise: function() {
+                
                 var deferred = $q.defer();
 
                 $http({
                     url: SEARCHCONFIGURL,
-                    //TODO why turned off ?
-                    //cache: false,
+                    // Cache response, to prevent multiple requests to the config
+                    cache: true,
                     method: 'GET'
                 })
                 .then(function(response) {
