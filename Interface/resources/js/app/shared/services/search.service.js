@@ -32,7 +32,7 @@ define([], function() {
             },
 
             getSearch: function(searchConfig) {
-                console.log('Getting search', searchConfig);
+
                 var queries = {};
                 var filterQueries = {};
                 var sortField = searchConfig.fields["lastname"];
