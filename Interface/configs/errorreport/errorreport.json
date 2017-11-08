@@ -5,15 +5,28 @@
         "error_reports" : [
             {
                 "label": "Person",
-                "entity": "person"
+                "entity": "person",
+                "field": "firstnames"
+            },
+            {
+                "label": "Person",
+                "entity": "person",
+                "field": "lastname"
+            },
+            {
+                "label": "Person",
+                "entity": "person",
+                "field": "birthplace"
             },
             {
                 "label": "Begravelse",
-                "entity": "burial"
+                "entity": "burial",
+                "field": null
             },
             {
                 "label": "Adresse",
-                "entity": "address"
+                "entity": "address",
+                "field": null
             }
         ]
     },
@@ -23,19 +36,23 @@
         "error_reports" : [
             {
                 "label": "Person",
-                "entity": "person"
+                "entity": "person",
+                "field": null
             },
             {
                 "label": "Slægtning",
-                "entity": "relative"
+                "entity": "relative",
+                "field": null
             },
             {
                 "label": "Adresser",
-                "entity": "burial"
+                "entity": "burial",
+                "field": null
             },
             {
                 "label": "Stillinger",
-                "entity": "address"
+                "entity": "address",
+                "field": null
             }
         ]
     },
@@ -45,11 +62,13 @@
         "error_reports" : [
             {
                 "label": "Forfatter",
-                "entity": "author"
+                "entity": "author",
+                "field": null     
             },
             {
                 "label": "Transkribering",
-                "entity": "transcription"
+                "entity": "transcription",
+                "field": null
             }
         ]
     }
