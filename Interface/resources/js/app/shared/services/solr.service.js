@@ -73,12 +73,29 @@ define([
             return field +":"+ term;
         }
 
-        function buildSolrBaseQuery(searchConfig) {
+        function buildSolrBaseQuery(searchConfig, queries) {
             var facetConfig = angular.copy(searchConfig.facets);
             angular.forEach(facetConfig, function(value, key) {
                 value.domain = {excludeTags:key.toUpperCase()};
             });
-            return "?wt=json&hl=on&hl.fl=erindring_document_text&hl.snippets=3&hl.simple.pre=<b>&hl.simple.post=</b>&json.facet=" + JSON.stringify(facetConfig);        
+
+            // Check if we should do highlighting, by seeing if there is a freetext_store query
+            // with length more than 2, and there are none with length 2 or less.
+            var freetextRowTooShort = false;
+            var freetextRowLongEnough = false;
+            angular.forEach(queries, function(query) {
+                if (query.field.name === "freetext_store") {
+                    if (query.term.length < 3) {
+                        freetextRowTooShort = true;
+                    } else {
+                        freetextRowLongEnough = true;
+                    }
+                }
+            });
+            if (!freetextRowTooShort && freetextRowLongEnough) {
+                return "?wt=json&hl=on&hl.fl=erindring_document_text&hl.snippets=3&hl.simple.pre=<b>&hl.simple.post=</b>&json.facet=" + JSON.stringify(facetConfig);
+            }
+            return "?wt=json&json.facet=" + JSON.stringify(facetConfig);
         }
 
         function buildSolrFilterQueryValue(facet, bucket) {
@@ -190,7 +207,7 @@ define([
                         // console.log('Fetching new data');
                     
                         $http({
-                            url: SOLRAPI + buildSolrBaseQuery(searchConfig) + '&' + buildQueryString(queries, filterQueries, collections, sortField, sortDirection, { 
+                            url: SOLRAPI + buildSolrBaseQuery(searchConfig, queries) + '&' + buildQueryString(queries, filterQueries, collections, sortField, sortDirection, { 
                                 start: index, 
                                 // Number of posts to fetch
                                 rows: rows
