@@ -33,6 +33,7 @@ define([
 
             switch (op) {
                 case "eq":
+                    term = "\"" + term + "\""
                     break;
                 case "neq":
                     field = "-" + field;
@@ -66,7 +67,7 @@ define([
 
             term = term.replace(/:/g, '\\:');
 
-            if (type === "string") {
+            if (type === "string") { 
                 term = term.replace(/ /g, '\\ ');
             }
 
@@ -139,7 +140,7 @@ define([
         *
         */
         function buildQueryString(queries, filterQueries, collections, sortField, sortDirection, params) {
-            
+
             var rtn = [];
 
             var options = {
@@ -180,7 +181,7 @@ define([
             getSearchData: function getSearchData() {
                 return savedSearchResults;
             },
-            
+
             clearSearchData: function clearSearchData() {
                 savedSearchResults = null;
             },
@@ -189,7 +190,7 @@ define([
              * Initiate a solr search
              */
             search: function search(queries, filterQueries, collections, sortField, sortDirection, index, rows) {
-                
+
                 var deferred = $q.defer();
 
                 var that = this;
@@ -205,10 +206,10 @@ define([
                     else {
 
                         // console.log('Fetching new data');
-                    
+
                         $http({
-                            url: SOLRAPI + buildSolrBaseQuery(searchConfig, queries) + '&' + buildQueryString(queries, filterQueries, collections, sortField, sortDirection, { 
-                                start: index, 
+                            url: SOLRAPI + buildSolrBaseQuery(searchConfig, queries) + '&' + buildQueryString(queries, filterQueries, collections, sortField, sortDirection, {
+                                start: index,
                                 // Number of posts to fetch
                                 rows: rows
                             }),
@@ -230,7 +231,7 @@ define([
 
                 return deferred.promise;
             }
-            
+
         };
 
     };
