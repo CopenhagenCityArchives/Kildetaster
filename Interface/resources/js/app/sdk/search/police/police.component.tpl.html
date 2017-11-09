@@ -2,19 +2,19 @@
 
     <div class="post__head">
         <div class="post__item post__main post__alternate">
-            
+
             <h2 class="post__header">
                 {{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} <span ng-if="$ctrl.data.birthname">{{$ctrl.data.birthname}}</span></span>
                 <span class="post__collection">Politiets registerblade</span>
             </h2>
-            
-            <p>Født: {{$ctrl.data.dateOfBirth | date: 'd. MMMM yyyy' | lowercase }}, i {{$ctrl.data.birthplace}}</p>
-            <p style="color: red">Død: DATAMANGLER</p>
+
+            <p>Født: {{$ctrl.data.dateOfBirth | date: 'd. MMMM yyyy' | lowercase }} <span ng-if="$ctrl.data.birthplace">, i {{$ctrl.data.birthplace}}</span></p>
+            <p ng-if="$ctrl.data.dateOfDeath">Død: {{$ctrl.data.dateOfDeath}}</p>
             <p>{{$ctrl.data.civilstand}}, <text-gender type="$ctrl.data.sex"></text-gender></p>
             <div ng-repeat="position in $ctrl.data.positions">
                 {{position.position}}<span ng-if="!$last">, </span>
             </div>
-           
+
         </div>
         <div class="post__item post__viewer" ng-if="$ctrl.imageFront">
             <zoom-image image-url="$ctrl.imageFront"></zoom-image>
@@ -44,13 +44,13 @@
         <div class="post__item">
             <h3 class="post__sectionheader">Om kilden</h3>
             <p>Station {{$ctrl.data.station}}. Filmrulle {{$ctrl.data.film}}. Registerblad {{$ctrl.data.number}} (unikt id. {{$ctrl.data.person_id}})</p>
-            <p style="color: red">Udfyldelsesdato: DATA MANGLER</p>
-            <p style="color: red">Særlige bemærkninger: DATA MANGLER</p>
+            <p>Udfyldelsesdato: {{$ctrl.data.dateOfCompletion}}</p>
+            <p>Særlige bemærkninger: {{$ctrl.data.specialComment}}</p>
         </div>
-        <div class="post__item">
+        <!--<div class="post__item">
             <h3 class="post__sectionheader">Om indtastningen</h3>
             <p style="color: red">Indtastet dato: DATA MANGLER af INDTASTER MANGLER</p>
-        </div>
+        </div>-->
         <div class="post__item post__viewer" ng-if="$ctrl.imageBack">
             <zoom-image image-url="$ctrl.imageBack"></zoom-image>
         </div>
