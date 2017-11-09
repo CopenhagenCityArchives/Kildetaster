@@ -8,19 +8,19 @@ define([], function() {
                 postId: that.data.id
             });
         };
-        
+
         this.$onInit = function() {
 
             if (this.result && this.result.jsonObj) {
-                
+
                 this.data = JSON.parse(this.result.jsonObj);
-               
+
                 this.highlighting = this.result.highlighting;
 
                 //HACK START
                 // takes the dateOfDeath from the data and overwrites the wrongfully formatted dateOfDeath in the jsonObj data
                 //This should be removed when the API is updated to return the correct date format (a timestamp)
-                this.data.dateOfDeath = this.result.dateOfDeath;
+                //this.data.dateOfDeath = this.result.dateOfDeath;
                 //HACK END
 
                 // Begravelser
@@ -38,7 +38,7 @@ define([], function() {
             }
 
         }
-        
+
 
     }
     return searchResultController;
