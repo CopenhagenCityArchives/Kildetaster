@@ -25,7 +25,7 @@
         <div class="post__item">
             <h3 class="post__sectionheader">Adresse</h3>
             <div ng-repeat="address in $ctrl.data.addresses">
-                {{address.year}}-{{address.month}}-{{address.day}}: {{address.full_address}}
+                {{address.address_date | date: 'd. MMMM yyyy' | lowercase }}: {{address.full_address}}
             </div>
         </div>
         <div class="post__item" ng-if="$ctrl.data.spouses.length > 0 || $ctrl.data.children.length > 0">
@@ -44,8 +44,8 @@
         <div class="post__item">
             <h3 class="post__sectionheader">Om kilden</h3>
             <p>Station {{$ctrl.data.station}}. Filmrulle {{$ctrl.data.film}}. Registerblad {{$ctrl.data.number}} (unikt id. {{$ctrl.data.person_id}})</p>
-            <p>Udfyldelsesdato: {{$ctrl.data.dateOfCompletion}}</p>
-            <p>Særlige bemærkninger: {{$ctrl.data.specialComment}}</p>
+            <p ng-if="$ctrl.data.dateOfCompletion">Udfyldelsesdato: {{$ctrl.data.dateOfCompletion | date: 'd. MMMM yyyy' | lowercase }}</p>
+            <p ng-if="$ctrl.data.specialComment">Særlige bemærkninger: {{$ctrl.data.specialComment}}</p>
         </div>
         <!--<div class="post__item">
             <h3 class="post__sectionheader">Om indtastningen</h3>
