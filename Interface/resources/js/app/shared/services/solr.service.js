@@ -103,7 +103,7 @@ define([
             if (facet.type === "range") {
                 return '[' + bucket.val + ' TO ' + (bucket.val + facet.gap - 1) + ']'
             } else if (facet.type === "terms") {
-                return bucket.val;
+                return "\"" + bucket.val + "\"";
             }
         }
 
