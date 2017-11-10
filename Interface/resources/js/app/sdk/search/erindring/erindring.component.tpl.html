@@ -1,0 +1,48 @@
+<section class="post">
+
+    <div class="post__head">
+        <div class="post__item post__main post__alternate">
+
+            <h2 class="post__header">
+                {{ $ctrl.data.firstnames }} {{ $ctrl.data.lastname }} <span ng-if="$ctrl.data.birthname">{{$ctrl.data.birthname}}</span></span>
+                <span class="post__collection">Erindring</span>
+            </h2>
+
+            <p ng-if="$ctrl.data.yearOfBirth">Født: {{ $ctrl.data.yearOfBirth }}</p>
+            <p>{{ $ctrl.data.civilstatus }}, {{ $ctrl.data.sex }}</p>
+            <div ng-repeat="position in $ctrl.data.positions">
+                <span ng-if="position.relationtype">{{position.relationtype}}: </span>{{position.position}}<span ng-if="!$last">, </span>
+            </div>
+
+        </div>
+        <div class="post__item">
+        </div>
+    </div>
+
+    <div class="post__col">
+
+        <div class="post__item">
+            <h3 class="post__sectionheader">Emneord:</h3>
+            <p><span ng-repeat="keyword in $ctrl.data.keywords">{{ keyword }}{{ $last ? '' : ', ' }}</span></p>
+        </div>
+
+        <div class="post__item" ng-if="$ctrl.data.description">
+            <h3 class="post__sectionheader">Beskrivelse</h3>
+            <p>{{ $ctrl.data.description }}</p>
+        </div>
+    </div>
+
+    <div class="post__col post__alternate">
+
+        <div class="post__item">
+            <h3 class="post__sectionheader">Om kilden</h3>
+            <p>Erindringsnummer {{ $ctrl.data.erindring_number }}, skrevet i {{ $ctrl.data.writtenYear }}.</p>
+            <p>Omfang: {{ $ctrl.data.extent }}</p>
+            <p ng-if="$ctrl.data.writeMethod">{{ $ctrl.data.writeMethod }}</p>
+            <p><a ng-href="http://www.kbharkiv.dk/kbharkiv/collections/erindringer/{{$ctrl.data.filename}}">Link til fil</a></p>
+            <p ng-if="$ctrl.data.transcribed"><a ng-href="http://www.kbharkiv.dk/kbharkiv/collections/erindringer/{{$ctrl.data.filename}}">Link til transkriberet fil</a></p>
+        </div>
+
+    </div>
+
+</section>
