@@ -91,6 +91,10 @@ define([
 
                 resolve: {
 
+                    errorReportingConfig: ['errorService', function (errorService) {
+                        return errorService.getConfig();
+                    }],
+
                     searchData: ['solrService', function (solrService) {
                         return solrService.getSearchData();
                     }],

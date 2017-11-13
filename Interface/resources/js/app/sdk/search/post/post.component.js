@@ -6,7 +6,8 @@ define([
 
     return {
         bindings: {
-            data: '<'
+            data: '<',
+            errorReportingConfig: '<'
         },
         templateUrl: 'sdk/search/post/post.component.tpl.html',
         controller: controller

@@ -1,8 +1,34 @@
 define([], function() {
 
-    var erindringController = /* @ngInject */ function erindringController(helpers, EDITORURL) {
+    var erindringController = /* @ngInject */ function erindringController(helpers, $uibModal, EDITORURL) {
 
         var that = this;
+        
+        /**
+         * Open error reporting modal
+         */
+        this.open = function open() {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'sdk/search/error-report/error-report.tpl.html',
+                controller: 'errorReportController as $ctrl',
+                resolve: {
+                    errorReportingConfig: function () {
+                        return that.errorReportingConfig;
+                    },
+                    postData: function () {
+                        return that.data;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (response) {
+                // Stuff to do when modal is done
+            }, function () {
+                
+            });
+        };
 
         this.$onInit = function() {
             that.imageUrl = helpers.getImageUrlByPostId(this.data.post_id);

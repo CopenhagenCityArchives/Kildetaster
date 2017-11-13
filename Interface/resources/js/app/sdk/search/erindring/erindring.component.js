@@ -7,6 +7,7 @@ define([
     return {
         bindings: {
             data: '<',
+            errorReportingConfig: '<'
         },
         templateUrl: 'sdk/search/erindring/erindring.component.tpl.html',
         controller: controller

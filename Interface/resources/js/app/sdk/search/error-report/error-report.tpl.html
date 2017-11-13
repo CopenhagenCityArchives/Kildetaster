@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <h2>Rapportér fejl</h2>
+    <span ng-click="$ctrl.cancel()" class="modal__close sdk-icon close-dark"></span>
+</div>
+
+<div class="modal-body error-reporting">
+    
+    <div class="row-fluid">
+
+        <div class="span10 offset1">
+   
+            <div class="span12">
+                <label>Vælg hvilken oplysning du vil fejlmelde</label>
+                <select class="error-reporting__select" ng-model="$ctrl.selected" ng-options="field.label for field in $ctrl.errorReportingConfig.error_reports"></select>
+            </div>
+
+            <div class="span12">
+                <label>Kommentar</label>
+                <textarea class="error-reporting__textarea" ng-model="$ctrl.selectedComment"></textarea>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="modal-footer">
+    <div class="row-fluid">
+        <div class="span8 offset2 text-center">
+            <button ng-disabled="!$ctrl.selected || !$ctrl.selectedComment" class="button" type="button" ng-click="$ctrl.saveErrorReport()">Send</button>
+        </div>
+    </div>
+</div>

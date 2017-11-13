@@ -7,6 +7,7 @@ define([
 
         return {
 
+            
             getConfig: function getConfig() {
 
                 return $http.get(ERRORREPORCONFIGURL)
@@ -34,7 +35,7 @@ define([
                     deferred.resolve(response.data);
                 })
                 .catch(function(err) {
-                    //console.log('Error creating error report', err);
+                    console.log('Error creating error report', err);
                     deferred.reject(err);
 
                 });
