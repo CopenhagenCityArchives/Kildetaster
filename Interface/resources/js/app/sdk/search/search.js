@@ -30,6 +30,8 @@ define([
 
     'app/sdk/search/post.controller',
 
+    'app/sdk/search/error-report/error-report.controller',
+
     'app/sdk/directives/datapost-erindring.directive',
 
     'app/sdk/directives/postfield.directive',
@@ -102,6 +104,7 @@ define([
 
     searchController,
     postController,
+    errorReportController,
 
     datapostErindringDirective,
 
@@ -177,6 +180,7 @@ define([
 
     searchApp.controller('searchController', searchController);
     searchApp.controller('postController', postController);
+    searchApp.controller('errorReportController', errorReportController);
 
     // TODO remove when new version is done
     searchApp.directive('datapostErindring', datapostErindringDirective);

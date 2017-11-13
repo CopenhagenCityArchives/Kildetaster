@@ -1,6 +1,7 @@
 define([
 
     'angular',
+    'angular-bootstrap',
 
     'ngstorage',
 
@@ -32,6 +33,7 @@ define([
 ], function(
 
     ang,
+    angularBootstrap,
 
     ngStorage,
 
@@ -61,7 +63,12 @@ define([
     constants
 ) {
 
-    var sdkApp = angular.module('sdk', ['sdk-templates', 'search', 'constants', 'ngStorage']);
+    var sdkApp = angular.module('sdk', [
+        'ui.bootstrap',
+        'sdk-templates', 
+        'search', 
+        'constants', 
+        'ngStorage']);
 
     sdkApp.run(run);
 
