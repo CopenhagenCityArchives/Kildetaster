@@ -66,6 +66,12 @@ module.exports = {
             src: ['**/*.json'],
             dest: '<%= package.sdkresources %>/configs'
         }, {
+            // Error report configuration
+            expand: true,
+            cwd: '<%= package.configs %>/errorreport/',
+            src: ['**/*.json'],
+            dest: '<%= package.sdkresources %>/configs'
+        }, {
             //Mock data
             expand: true,
             cwd: '<%= package.resources %>/mock/',
@@ -104,6 +110,12 @@ module.exports = {
             // Search configuration
             expand: true,
             cwd: '<%= package.configs %>/search/',
+            src: ['**/*.json'],
+            dest: '<%= package.buildresources %>/configs'
+        }, {
+            // Error report configuration
+            expand: true,
+            cwd: '<%= package.configs %>/errorreport/',
             src: ['**/*.json'],
             dest: '<%= package.buildresources %>/configs'
         }, {
