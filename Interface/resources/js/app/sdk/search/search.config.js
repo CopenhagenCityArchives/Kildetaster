@@ -98,12 +98,14 @@ define([
                     data: ['$q','$stateParams', '$transition$', 'solrService', 'searchService', function ($q, $stateParams, $transition$, solrService, searchService) {
 
                         var deferred = $q.defer(),
-                            docs = null;
+                            docs = null,
+                            highlighting = null;
 
                         // Use post data from existing search
                         if (solrService.getSearchData()) {
 
                             docs = solrService.getSearchData().response.docs;
+                            highlighting = solrService.getSearchData().highlighting;
 
                             // Find the post with the id in the url
                             var found = docs.find(function (doc) {
@@ -112,7 +114,15 @@ define([
 
                             if (found) {
                                 // Parse the jsonObj in the found post data
-                                deferred.resolve(JSON.parse(found.jsonObj));
+                                var obj = JSON.parse(found.jsonObj);
+
+                                // Add highlighting if it exists
+                                if (highlighting && highlighting[$stateParams.postId]) {
+                                    obj.highlighting = highlighting[$stateParams.postId]
+                                }
+
+                                // resolve
+                                deferred.resolve(obj);
                             }
                             // We somehow did not find the post we wanted
                             else {

@@ -20,7 +20,7 @@ define([
 
             link: function(scope, element, attr) {
 
-                var defaultNumberOfItems = 5;
+                var defaultNumberOfItems = 10;
 
                 scope.numberOfItems = defaultNumberOfItems;
 
