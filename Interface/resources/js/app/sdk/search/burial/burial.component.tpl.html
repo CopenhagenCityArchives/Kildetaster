@@ -8,8 +8,8 @@
                 <span class="post__collection">Begravelse</span>
             </h2>
 
-            <p>Født: {{ $ctrl.data.dateOfBirth }} {{ $ctrl.data.yearOfBirth }}, i <span style="color: red">birthplaces_id ??</span></p>
-            <p>Død: {{ $ctrl.data.dateOfDeath }}</p>
+            <p>Født: {{ $ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
+            <p ng-if="$ctrl.data.dateOfBirth">Død: {{ $ctrl.data.dateOfDeath | date: 'dd-MM-yyyy' }}</p>
             <p><text-age prefix="'Alder: '" years="$ctrl.data.ageYears" months="$ctrl.data.ageMonths" weeks="$ctrl.data.ageWeeks" days="$ctrl.data.ageDays" hours="$ctrl.data.ageHours"></text-age></p>
             <p>{{ $ctrl.data.civilstatus }}, {{ $ctrl.data.sex }}</p>
             <div ng-repeat="position in $ctrl.data.positions">
@@ -30,7 +30,7 @@
 
         <div class="post__item">
             <h3 class="post__sectionheader">Adresse</h3>
-            <text-address address="$ctrl.data.addresses"></text-address>
+            <text-address address="$ctrl.data.address"></text-address>
         </div>
 
         <div class="post__item">
@@ -59,7 +59,7 @@
         <div class="post__item">
             <h3 class="post__sectionheader">Om indtastningen</h3>
             <!--<p>Indtastet: <span style="color: red">Data mangler, eller er det 'last_update'?</span> af {{ $ctrl.data.user_name }}</p>-->
-            <p>Sidst opdateret {{ $ctrl.data.last_update }} af {{ $ctrl.data.user_name }}</p>
+            <p>Sidst opdateret {{ $ctrl.data.last_update | date: 'dd-MM-yyyy' }} af {{ $ctrl.data.user_name }}</p>
             <!--<p>Fejl, fejlentitet, kommentar: <span style="color: red">Mangler info</span></p>-->
         </div>
 

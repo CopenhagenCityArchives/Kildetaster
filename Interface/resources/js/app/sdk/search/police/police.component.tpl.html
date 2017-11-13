@@ -8,8 +8,8 @@
                 <span class="post__collection">Politiets registerblade</span>
             </h2>
 
-            <p>Født: {{$ctrl.data.dateOfBirth | date: 'd. MMMM yyyy' | lowercase }} <span ng-if="$ctrl.data.birthplace">, i {{$ctrl.data.birthplace}}</span></p>
-            <p ng-if="$ctrl.data.dateOfDeath">Død: {{$ctrl.data.dateOfDeath}}</p>
+            <p ng-if="$ctrl.data.dateOfBirth">Født: {{$ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
+            <p ng-if="$ctrl.data.dateOfDeath">Død: {{$ctrl.data.dateOfDeath | date: 'dd-MM-yyyy' }}</p>
             <p>{{$ctrl.data.civilstand}}, <text-gender type="$ctrl.data.sex"></text-gender></p>
             <div ng-repeat="position in $ctrl.data.positions">
                 {{position.position}}<span ng-if="!$last">, </span>
@@ -25,17 +25,18 @@
         <div class="post__item">
             <h3 class="post__sectionheader">Adresse</h3>
             <div ng-repeat="address in $ctrl.data.addresses">
-                {{address.address_date | date: 'd. MMMM yyyy' | lowercase }}: {{address.full_address}}
+                {{address.address_date | date: 'dd-MM-yyyy' }}: {{address.full_address}}
             </div>
         </div>
         <div class="post__item" ng-if="$ctrl.data.spouses.length > 0 || $ctrl.data.children.length > 0">
             <h3 class="post__sectionheader">Andre personer</h3>
             <div ng-repeat="spouse in $ctrl.data.spouses">
                 Ægtefælle: {{spouse.firstnames}} {{spouse.lastname}}
-                <p style="color: red">Mangler eksempel på positions, og så mangler info om fødselsdato, fødested og dødsdato</p>
+                <p ng-if="spouse.dateOfBirth">Født: {{spouse.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{spouse.birthplace}}</span></p>
             </div>
             <div ng-repeat="child in $ctrl.data.children">
                 Barn: {{child.firstnames}} {{child.lastname}}
+                <p ng-if="child.dateOfBirth">Født: {{child.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="child.birthplace"> i {{child.birthplace}}</span></p>
             </div>
         </div>
     </div>
@@ -44,7 +45,7 @@
         <div class="post__item">
             <h3 class="post__sectionheader">Om kilden</h3>
             <p>Station {{$ctrl.data.station}}. Filmrulle {{$ctrl.data.film}}. Registerblad {{$ctrl.data.number}} (unikt id. {{$ctrl.data.person_id}})</p>
-            <p ng-if="$ctrl.data.dateOfCompletion">Udfyldelsesdato: {{$ctrl.data.dateOfCompletion | date: 'd. MMMM yyyy' | lowercase }}</p>
+            <p ng-if="$ctrl.data.dateOfCompletion">Udfyldelsesdato: {{$ctrl.data.dateOfCompletion | date: 'dd-MM-yyyy' }}</p>
             <p ng-if="$ctrl.data.specialComment">Særlige bemærkninger: {{$ctrl.data.specialComment}}</p>
         </div>
         <!--<div class="post__item">
