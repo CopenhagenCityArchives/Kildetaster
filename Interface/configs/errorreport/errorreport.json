@@ -4,17 +4,17 @@
         "add_metadata": true,
         "error_reports" : [
             {
-                "label": "Person",
+                "label": "Fornavn",
                 "entity": "person",
                 "field": "firstnames"
             },
             {
-                "label": "Person",
+                "label": "Efternavn",
                 "entity": "person",
                 "field": "lastname"
             },
             {
-                "label": "Person",
+                "label": "Fødested",
                 "entity": "person",
                 "field": "birthplace"
             },
@@ -30,8 +30,7 @@
             }
         ]
     },
-    "2": {
-        "task_id": 2,
+    "17": {
         "add_metadata": false,
         "error_reports" : [
             {
@@ -56,8 +55,7 @@
             }
         ]
     },
-    "3": {
-        "task_id": 3,
+    "18": {
         "add_metadata": false,
         "error_reports" : [
             {
