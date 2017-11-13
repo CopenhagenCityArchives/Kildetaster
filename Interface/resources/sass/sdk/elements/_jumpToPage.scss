@@ -1,14 +1,38 @@
 .jumpToPage {
+    display: flex;
+
     margin: 10px auto 20px;
     &__label {
         font-size: 18px;
+        line-height: 27px;
 
         display: inline-block;
 
+        height: 30px;
         margin-right: 8px;
     }
     &__field {
         max-width: 70px;
         height: 30px !important;
+        margin-right: 0;
+
+        border-right: 0 !important; // joomla overwrite
+        border-top-right-radius: 0 !important;  // joomla overwrite
+        border-bottom-right-radius: 0 !important; // joomla overwrite
+    }
+
+    &__button {
+        line-height: 16px;
+
+        display: inline-block;
+
+        height: 30px;
+
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+
+        &:hover {
+            background-color: $gray-dark;
+        }
     }
 }
