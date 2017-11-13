@@ -32,8 +32,6 @@ define([], function() {
 
         this.$onInit = function() {
 
-            console.log(that.errorReportingConfig);
-
             that.imageUrl = helpers.getImageUrlByPostId(this.data.post_id);
 
             //Determine the editor link visibility based on wether or not the user can edit
