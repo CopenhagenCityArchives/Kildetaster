@@ -18,17 +18,6 @@ define([
                     });
             },
 
-            getData: function getData() {
-
-                return $http.get(JSONURL + '/errors.json')
-                    .then(function(response) {
-                        return response.data;
-                    })
-                    .catch(function(err) {
-                        throw new Error('errorService:getData: ' + err);
-                    });
-            },
-
             /**
             * Create an error report
             */
