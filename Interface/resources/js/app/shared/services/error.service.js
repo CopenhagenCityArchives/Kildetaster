@@ -44,7 +44,7 @@ define([
             },
 
             /**
-            * Both on a task, but also for a specifik user
+            * Both on a task, but also for a specific user
             */
             getErrorReports: function getErrorReports(params) {
 

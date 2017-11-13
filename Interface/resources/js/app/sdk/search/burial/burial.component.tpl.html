@@ -6,6 +6,7 @@
             <div class="post__tools">
                 <a href="" ng-click="$ctrl.open()">Rapportér fejl</a>
             </div>
+            
             <div class="post__header">
                 <h2>
                     {{ $ctrl.data.firstnames }} {{ $ctrl.data.lastname }} <span ng-if="$ctrl.data.birthname">{{$ctrl.data.birthname}}</span></span>
@@ -19,6 +20,17 @@
                 <div ng-repeat="position in $ctrl.data.positions">
                     <span ng-if="position.relationtype">{{position.relationtype}}: </span>{{position.position}}<span ng-if="!$last">, </span>
                 </div>
+
+                <!-- Error reports -->
+                <div ng-if="$ctrl.postErrors" class="post__error">
+                    <div>Denne post er fejlmeldt</div>
+                    <a href ng-click="$ctrl.toggleErrorReports()">Læs mere</a>
+
+                    <div ng-repeat="error in $ctrl.postErrors" ng-if="$ctrl.showErrorReports">
+                        {{error.entity_name}} <span ng-if="error.field_name">- {{error.field_name}}</span>: {{error.comment}}
+                    </div>
+                </div>
+
             </div>
 
         </div>

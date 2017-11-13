@@ -17,6 +17,17 @@
                 <p>{{ $ctrl.data.civilstatus }}<span ng-if="$ctrl.data.civilstatus">, </span>{{ $ctrl.data.sex }}</p>
                 <p>{{ $ctrl.data.position }}</p>
                 <p>Forældres stilling: {{ $ctrl.data.position_parent }}</p>
+
+                <!-- Error reports -->
+                <div ng-if="$ctrl.postErrors" class="post__error">
+                    <div>Denne post er fejlmeldt</div>
+                    <a href ng-click="$ctrl.toggleErrorReports()">Læs mere</a>
+                
+                    <div ng-repeat="error in $ctrl.postErrors" ng-if="$ctrl.showErrorReports">
+                        {{error.entity_name}}
+                        <span ng-if="error.field_name">- {{error.field_name}}</span>: {{error.comment}}
+                    </div>
+                </div>
             </div>
         </div>
         <div class="post__item post__viewer">

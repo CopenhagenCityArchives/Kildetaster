@@ -99,7 +99,29 @@
         }
     }
 
-    &__tools {
-        color: red;
+    &__error {
+        font-weight: 600;
+
+        margin-top: 20px;
+
+        color: $red;
+
+        a {
+            display: block;
+
+            margin-bottom: 14px;
+
+            text-decoration: underline;
+
+            color: currentColor;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
+        // joomla overwrite
+        div, span {
+            color: currentColor;
+        }
     }
 }
