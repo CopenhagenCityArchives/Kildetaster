@@ -12,8 +12,8 @@ define([
             "CLOSE": "Luk",
             "SAVE": "Gem",
             "CANCEL": "Fortryd",
-            "NOTERROR": "Ikke en fejl",
             "DELETE": "Fjern felt",
+            "EDIT": "Ret",
             "SENDSUPERUSER": "Send til superbruger",
             "SENDFORUM": "Opret tråd på forum"
         },
