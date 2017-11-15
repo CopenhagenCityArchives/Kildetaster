@@ -166,7 +166,6 @@ define([
 
                                 })
                                 .then(function(data) {
-                                    console.log(JSON.parse(data.response.docs[0].jsonObj))
                                     // Parse and return the parsed jsonObj on the returned data object
                                     deferred.resolve(JSON.parse(data.response.docs[0].jsonObj));
                                 });
