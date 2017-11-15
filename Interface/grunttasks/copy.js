@@ -59,19 +59,7 @@ module.exports = {
             src: ['**/*.*'],
             dest: '<%= package.sdkresources %>/bower_components'
 
-        }, {
-            // Search configuration
-            expand: true,
-            cwd: '<%= package.configs %>/search/',
-            src: ['**/*.json'],
-            dest: '<%= package.sdkresources %>/configs'
-        }, {
-            // Error report configuration
-            expand: true,
-            cwd: '<%= package.configs %>/errorreport/',
-            src: ['**/*.json'],
-            dest: '<%= package.sdkresources %>/configs'
-        }, {
+        },{
             //Mock data
             expand: true,
             cwd: '<%= package.resources %>/mock/',
@@ -89,12 +77,6 @@ module.exports = {
             cwd: '<%= package.resources %>/',
             src: ['.htaccess'],
             dest: '<%= package.sdkresources %>/'
-        },{
-            //.htaccess files for configs
-            expand: true,
-            cwd: '<%= package.resources %>/',
-            src: ['.htaccess'],
-            dest: '<%= package.sdkresources %>/configs'
         }
     ]
     },
@@ -106,19 +88,7 @@ module.exports = {
             cwd: '<%= package.resources %>/fonts/',
             src: '**',
             dest: '<%= package.buildresources %>/fonts'
-        }, {
-            // Search configuration
-            expand: true,
-            cwd: '<%= package.configs %>/search/',
-            src: ['**/*.json'],
-            dest: '<%= package.buildresources %>/configs'
-        }, {
-            // Error report configuration
-            expand: true,
-            cwd: '<%= package.configs %>/errorreport/',
-            src: ['**/*.json'],
-            dest: '<%= package.buildresources %>/configs'
-        }, {
+        },{
             //Images
             expand: true,
             cwd: '<%= package.resources %>/images/',
@@ -132,12 +102,6 @@ module.exports = {
             src: ['.htaccess'],
             dest: '<%= package.buildresources %>/'
 
-        },{
-            //.htaccess files for configs
-            expand: true,
-            cwd: '<%= package.resources %>/',
-            src: ['.htaccess'],
-            dest: '<%= package.buildresources %>/configs'
         },{
             //Mock data
             expand: true,
@@ -155,18 +119,6 @@ module.exports = {
             cwd: '<%= package.resources %>/fonts/',
             src: '**',
             dest: '<%= package.buildresources %>/fonts'
-        }, {
-            // Search configuration
-            expand: true,
-            cwd: '<%= package.configs %>/search/',
-            src: ['**/*.json'],
-            dest: '<%= package.buildresources %>/configs'
-        }, {
-            // Errorreport configuration
-            expand: true,
-            cwd: '<%= package.configs %>/errorreport/',
-            src: ['**/*.json'],
-            dest: '<%= package.buildresources %>/configs'
         },{
             //Images
             expand: true,
@@ -181,12 +133,6 @@ module.exports = {
             src: ['.htaccess'],
             dest: '<%= package.buildresources %>/'
 
-        },{
-            //.htaccess files for configs
-            expand: true,
-            cwd: '<%= package.resources %>/',
-            src: ['.htaccess'],
-            dest: '<%= package.buildresources %>/configs'
         }]
     },
 
