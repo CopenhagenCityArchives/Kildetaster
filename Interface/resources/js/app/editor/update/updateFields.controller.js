@@ -22,45 +22,25 @@ define([
 
         $scope.errorReports = postData.errorReports;
 
-        $scope.hasErrorReported = {};
-
         /**
         * Update a given error report
         * @params {int} id The error report id
         * @params {reason} string The reason for the update
         */
-        $scope.updateErrorReport = function(id, reason) {
+        $scope.updateErrorReport = function(report, reason) {
 
             reason = reason || "No reason given";
+         
+            report.deleted = 1;
+            report.deleted_reason = reason;
 
-            var found = $scope.errorReports.find(function(report) {
-                return report.id === id;
-            });
-
-            if (found) {
-                found.deleted = 1;
-                found.deleted_reason = reason;
-            }
-
-            $scope.hasErrorReported = $scope.parseErrorReports($scope.errorReports);
-        }
-
-        /**
-        * Reject an error report
-        * @params {int} id The error report id
-        * @params {string} key The property name for the field in question
-        * @params {int} keyId An optional id for the field. Is nessesary in some cases
-        */
-        $scope.rejectErrorReport = function rejectErrorReport(id, key, keyId) {
-            $scope.updateErrorReport(id, "Error was rejected");
-            $scope.toggleEditExistingValue(key, keyId);
         }
 
         /**
         * Delete a value from the value object
         * ie. the user does not think the saved value should be there at all
         */
-        $scope.removeFieldValue = function removeFieldValue(key, id, reportId) {
+        $scope.removeFieldValue = function removeFieldValue(key, id) {
 
             id = id || '';
 
@@ -77,17 +57,13 @@ define([
                 $scope.values[$scope.mainProperty][split[0]] = $scope.values[$scope.mainProperty][split[0]].constructor === Array ? [] : null;
             }
 
-            if (reportId) {
-                $scope.updateErrorReport(reportId, "Field value was deleted");
-            }
-
             $scope.toggleEditExistingValue(key, id);
         }
 
         /**
         * Copy the temporary value when editing a field to the actual values object
         */
-        $scope.updateValues = function updateValues(key, id, reportId) {
+        $scope.updateValues = function updateValues(key, id) {
 
             id = id || '';
 
@@ -114,12 +90,9 @@ define([
                 $scope.values[$scope.mainProperty][subkey] = $scope.valueCopy[key][$scope.mainProperty][subkey];
             }
 
-            $scope.updateErrorReport(reportId, "Error was handled");
-
             $scope.toggleEditExistingValue(key, id);
         }
 
-        $scope.noMoreErrorsForUser = false;
         $scope.userId = $sessionStorage.tokenData.user_id;
 
         //Default settings for angular-schema-forms
@@ -246,55 +219,6 @@ define([
             return helpers.lookupFieldValue(key, $scope.values);
         };
 
-
-        /**
-        * Parse error report data, and return an object with info
-        */
-        $scope.parseErrorReports = function(reports) {
-
-            var rtn = {};
-
-            reports.forEach(function(report, index) {
-
-                //If the report has the status of being deleted, do not take it into account
-                if (report.deleted === 1) {
-                    return;
-                }
-
-                var arr = [];
-                arr.push(report);
-
-                //non simple fields, like array and object type
-                if ($scope.schema.properties[$scope.mainProperty].properties[report.entity_name] !== undefined) {
-
-                    var type = $scope.schema.properties[$scope.mainProperty].properties[report.entity_name].type;
-
-                    switch (type) {
-                        case 'array':
-                            //The value at the position for this entity, is that already an array
-                            if (rtn[report.entity_position] && angular.isArray(rtn[report.entity_position])) {
-                                //Then just push the error report to that array
-                                rtn[report.entity_position].push(report);
-                            }
-                            //Otherwise, add an array with the error report
-                            else {
-                                rtn[report.entity_position] = arr;
-                            }
-                            break;
-                        case 'object':
-                            rtn[report.entity_position + '.' + report.field_name] = arr;
-                            break;
-                    }
-                }
-                else {
-                    rtn[report.entity_position + '.' + report.field_name] = report;
-                }
-
-            });
-
-            return rtn;
-        }
-
         /**
          * Load step data from the server
          */
@@ -304,9 +228,6 @@ define([
             $scope.schema = response.schema;
 
             $scope.mainProperty = response.keyName;
-
-            //Build information about the errors on the post
-            $scope.hasErrorReported = $scope.parseErrorReports($scope.errorReports);
 
             //Prepare data to render out fields in the correct order, ie. the order they are in the task step configuration
             $scope.summaryFields = helpers.prepareSummaryData(response.steps, response.schema, response.keyName);

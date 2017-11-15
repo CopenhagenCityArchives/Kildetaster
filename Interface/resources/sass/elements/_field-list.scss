@@ -100,3 +100,34 @@
         }
     }
 }
+
+.field-list--error {
+    @extend .field-list;
+
+    color: $red;
+
+    .field-list__item {
+        display: flex;
+
+        transition: opacity 300ms ease-in-out;
+
+        opacity: 1;
+
+        align-items: flex-start;
+        justify-content: space-between;
+
+        &.ng-leave-active {
+            opacity: 0;
+        }
+
+        > span {
+            align-self: center;
+        }
+    }
+
+    .field-list__button {
+        margin-left: 20px;
+
+        flex: 0 0 100px;
+    }
+}
