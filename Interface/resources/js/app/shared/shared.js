@@ -18,7 +18,6 @@ define([
     'app/shared/directives/shareLink.directive',
 
     'app/shared/directives/handleSteps.directive',
-    'app/shared/directives/getDomContent/getDomContent.directive',
 
     'app/shared/services/step.service',
     'app/shared/services/task.service',
@@ -62,7 +61,6 @@ define([
     shareLinkDirective,
 
     handleStepsDirective,
-    getDomContentDirective,
 
     stepService,
     taskService,
@@ -101,7 +99,6 @@ define([
     sharedApp.directive('shareLink', shareLinkDirective);
 
     sharedApp.directive('handleSteps', handleStepsDirective);
-    sharedApp.directive('getDomContent', getDomContentDirective);
 
     sharedApp.factory('stepService', stepService);
     sharedApp.factory('taskService', taskService);
