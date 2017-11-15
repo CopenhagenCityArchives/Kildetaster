@@ -5,7 +5,9 @@
         
         <div class="row-fluid">
             <div class="span12">
-                <h3>Søg i</h3>
+
+                <div get-dom-content="search-app-upper-text"></div>
+          
                 <div class="collection">
                     <div class="collection__item" ng-repeat="collection in ctrl.collections">
                         <input
@@ -17,6 +19,8 @@
                             <label for="col_{{collection.id}}">{{collection.name}}</label>
                     </div>
                 </div>
+
+                <div get-dom-content="search-app-lower-text"></div>
             </div>
         </div>
 
@@ -36,7 +40,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="span4">
+                    <div class="span2">
                         <div class="field">
                             <label>
                                 Operator
@@ -49,7 +53,7 @@
                             </label>
                         </div>
                     </div>
-                    <div class="span4">
+                    <div class="span6">
                         <div class="field">
                             <term-field type="row.field.type" data="row" submit-func="ctrl.submitSearch(event)"></term-field>
                         </div>

@@ -59,6 +59,8 @@ define([
     'app/sdk/directives/filterLink/filterLink.directive',
     'app/sdk/directives/facet/facet.directive',
 
+    'app/sdk/search/getDomContent/getDomContent.directive',
+
     'app/sdk/components/jumpToPage/jumpToPage.component',
     'app/sdk/components/numPages/numPages.component',
 
@@ -133,6 +135,8 @@ define([
 
     filterLinkDirective,
     facetDirective,
+
+    getDomContentDirective,
 
     jumpToPageComponent,
     numPagesComponent,
@@ -210,6 +214,8 @@ define([
 
     searchApp.directive('filterLink', filterLinkDirective);
     searchApp.directive('facet', facetDirective);
+
+    searchApp.directive('getDomContent', getDomContentDirective);
 
     searchApp.component('jumpToPage', jumpToPageComponent);
     searchApp.component('numPages', numPagesComponent);
