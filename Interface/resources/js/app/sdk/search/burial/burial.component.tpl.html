@@ -27,7 +27,7 @@
                     <a href ng-click="$ctrl.toggleErrorReports()">Læs mere</a>
 
                     <div ng-repeat="error in $ctrl.postErrors" ng-if="$ctrl.showErrorReports">
-                        {{error.entity_name}} <span ng-if="error.field_name">- {{error.field_name}}</span>: {{error.comment}}
+                        {{ error.label || 'Ukendt felt' }}: {{error.comment}}
                     </div>
                 </div>
 
