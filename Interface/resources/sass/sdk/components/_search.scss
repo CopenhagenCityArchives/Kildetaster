@@ -1,9 +1,14 @@
 .sdk-search {
-    clear: both;
+    // Joomla overwrites and adjustments, to make our custom design fit into
+    // the bootstrap styling of pages
+    margin-right: -15px;
+    margin-left: -15px;
+    padding-top: 15px;
 
-    > .row-fluid {
-        padding-right: 15px;
-        padding-left: 15px;
+    // Utility class to adjust styling of our custom design
+    .with-padding {
+        padding-right: 20px;
+        padding-left: 20px;
     }
 
     select, input[type="text"] {
