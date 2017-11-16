@@ -3,6 +3,7 @@ define([], function () {
     var postController = /*@ngInject*/ function postController(errorService, $uibModal) {
 
         var that = this;
+        var config = null;
 
         this.showErrorReports = false;
 
@@ -32,16 +33,21 @@ define([], function () {
             });
 
             modalInstance.result.then(function (response) {
-                // console.log('this is the modal result', response);
-            }, function () {
+                
+                // After sending an error report, fetch updated list of errors reported
+                errorService.getErrorReports(config).then(function (response) {
+                    that.postErrors = response;
+                });
 
+            }, function () {
+                // Error report cancelled
             });
         };
 
 
         this.$onInit = function () {
 
-            var config = {
+            config = {
                 id: this.data.id,
                 collection_id: this.data.collection_id,
 
@@ -52,7 +58,12 @@ define([], function () {
 
             errorService.getErrorReports(config).then(function(response) {
                 that.postErrors = response;
-            })
+            });
+        };
+
+        this.$onDestroy = function() {
+            console.log('stopping')
+            errorService.abortGetErrorReports();
         };
 
     };
