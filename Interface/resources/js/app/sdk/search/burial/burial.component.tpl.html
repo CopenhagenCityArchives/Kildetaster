@@ -22,7 +22,7 @@
                 </div>
 
                 <!-- Error reports -->
-                <div ng-if="$ctrl.postErrors" class="post__error">
+                <div ng-if="$ctrl.postErrors.length > 0" class="post__error">
                     <div>Denne post er fejlmeldt</div>
                     <a href ng-click="$ctrl.toggleErrorReports()">Læs mere</a>
 
