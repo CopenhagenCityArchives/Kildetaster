@@ -6,6 +6,8 @@ define([
 
     return {
         bindings: {
+            // From route resolve
+            userData: '<',
             data: '<',
             errorReportingConfig: '<'
         },

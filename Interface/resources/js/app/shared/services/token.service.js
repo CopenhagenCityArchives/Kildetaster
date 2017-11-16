@@ -7,10 +7,18 @@ define([
 
         return {
 
-            requestToken: function() {
+            /**
+             * Check if the user is logged in, and return the access token if they are
+             * 
+             * @param doNotForceLogin {bool} Indicate if we require the user to be logged in
+             *                               Is not required in the sdk part of the solution
+             */
+            requestToken: function(doNotForceLogin) {
 
                 var deferred = $q.defer();
                 var formData = new FormData();
+
+                doNotForceLogin = doNotForceLogin || false;
 
                 if (BYPASSAUTH && BYPASSAUTH === true) {
                     var fakeResponse = {
@@ -77,7 +85,7 @@ define([
                     })
                     .then(function(response) {
 
-                        //We got data back from the request, we are loggeld in and can save to sessionStorage
+                        //We got data back from the request, we are logged in and can save to sessionStorage
                         if (typeof response.data === 'object') {
                             //console.log('tokenData', response.data);
                             $sessionStorage.tokenData = response.data;
@@ -86,9 +94,16 @@ define([
                                 tokenData: response.data
                             });
                         }
-                        //We are not logged in, point users to min-side
+                        
                         else {
-                            window.location.href = MAINDOMAIN + '/min-side';
+                            //We are not logged in, and should force login, point users to min-side
+                            if (!doNotForceLogin) {
+                                window.location.href = MAINDOMAIN + '/min-side';
+                            }
+                            else {
+                                deferred.resolve(undefined);
+                            }
+                            
                         }
 
                     })
