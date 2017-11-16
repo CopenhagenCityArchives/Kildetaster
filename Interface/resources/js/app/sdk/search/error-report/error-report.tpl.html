@@ -8,15 +8,19 @@
     <div class="row-fluid">
 
         <div class="span10 offset1">
-   
-            <div class="span12">
-                <label>Vælg hvilken oplysning du vil fejlmelde</label>
-                <select class="error-reporting__select" ng-model="$ctrl.selected" ng-options="field.label for field in $ctrl.errorReportingConfig.error_reports"></select>
+
+            <div class="row-fluid">
+                <div class="span12">
+                    <label>Vælg hvilken oplysning du vil fejlmelde</label>
+                    <select class="error-reporting__select" ng-model="$ctrl.selected" ng-options="field.label for field in $ctrl.errorReportingConfig.error_reports"></select>
+                </div>
             </div>
 
-            <div class="span12">
-                <label>Kommentar</label>
-                <textarea class="error-reporting__textarea" ng-model="$ctrl.selectedComment"></textarea>
+            <div class="row-fluid">
+                <div class="span12">
+                    <label>Kommentar</label>
+                    <textarea class="error-reporting__textarea" ng-model="$ctrl.selectedComment"></textarea>
+                </div>
             </div>
 
         </div>
