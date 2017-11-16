@@ -4,6 +4,10 @@
 
     width: 100%;
 
+    .border-left {
+        border-left: 1px solid $gray-border;
+    }
+
     &__row {
         display: block;
 

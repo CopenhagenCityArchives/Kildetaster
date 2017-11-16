@@ -45,6 +45,10 @@
         color: $black;
     }
 
+    &__subheader {
+        margin-top: 10px;
+    }
+
     // Overwrites of default bootstrap grid, to make columns fit without margins
     &__col {
         margin: 0 !important;
@@ -104,6 +108,8 @@
 
         text-decoration: underline;
 
+        border-bottom: 1px solid $gray-border;
+
         &:hover {
             text-decoration: none;
         }
@@ -127,5 +133,11 @@
                 background-color: #efefef !important;
             }
         }
+    }
+
+    &__footer {
+        clear: both;
+
+        border-top: 1px solid $gray-border;
     }
 }

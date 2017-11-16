@@ -145,9 +145,9 @@
 
                     <a href="" ng-click="ctrl.showSearchConfig()" class="sdk-search__configtoggle">Rediger din søgning</a>
                 
-                    <h2 class="with-padding">Valgte filtre</h2>
+                    <h2 class="sdk-search__subheader with-padding">Valgte filtre</h2>
                 
-                    <div>
+                    <div class="with-padding">
                 
                         <div class="filter-link">
                             <div ng-if="ctrl.noSelectedFilters">
@@ -189,7 +189,7 @@
                                         </div>
                                     </div>
 
-                                    <search-result class="search-container__row" ng-repeat="result in ctrl.results.docs" result="result" config="ctrl.fields" index="$index" page="ctrl.page"></search-result>
+                                    <search-result class="search-container__row border-left" ng-repeat="result in ctrl.results.docs" result="result" config="ctrl.fields" index="$index" page="ctrl.page"></search-result>
 
                                 </div>
                             </div>
@@ -200,12 +200,12 @@
                 </div>
             </div>
 
-            <section class="row-fluid" ng-if="ctrl.results.numFound > 10">
+            <section class="row-fluid with-padding sdk-search__footer">
                 <div class="span5">
-                    <jump-to-page change-page="ctrl.goToPage(page)"></jump-to-page>
+                    <jump-to-page change-page="ctrl.goToPage(page)" ng-if="ctrl.results.numFound > 10"></jump-to-page>
                 </div>
                 <div class="span7">
-                    <pagination current-page="ctrl.page" results="ctrl.results" go-to-page="ctrl.goToPage"></pagination>
+                    <pagination current-page="ctrl.page" results="ctrl.results" go-to-page="ctrl.goToPage" ng-if="ctrl.results.numFound > 10"></pagination>
                 </div>
             </section>
 
