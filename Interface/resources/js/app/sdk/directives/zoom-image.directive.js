@@ -79,7 +79,10 @@ define([
                     //viewer = OpenSeadragon(opts);
                     viewer = OpenSeadragon({
 
+                        // Turn off default buttons on the viewer, as we dont need those
                         showNavigator: false,
+                        showHomeControl: false,
+                        showFullPageControl: false,
 
                         zoomInButton: "zoom-in-" + $scope.num,
                         zoomOutButton: "zoom-out-" + $scope.num,
