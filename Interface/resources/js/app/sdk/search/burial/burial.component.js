@@ -6,8 +6,8 @@ define([
     
     return {
         bindings: {
+            openErrorReporting: '&',
             data: '<',
-            errorReportingConfig: '<',
             postErrors: '<',
             showErrorReports: '<',
             toggleErrorReports: '&'

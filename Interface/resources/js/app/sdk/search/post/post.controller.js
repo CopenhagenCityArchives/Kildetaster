@@ -1,6 +1,6 @@
 define([], function () {
 
-    var postController = /*@ngInject*/ function postController(errorService) {
+    var postController = /*@ngInject*/ function postController(errorService, $uibModal) {
 
         var that = this;
 
@@ -11,6 +11,33 @@ define([], function () {
         this.toggleErrorReports = function toggleErrorReports() {
             that.showErrorReports = !that.showErrorReports;
         }
+
+        /**
+         * Open error reporting modal
+         */
+        this.open = function open() {
+
+            var modalInstance = $uibModal.open({
+                animation: true,
+                templateUrl: 'sdk/search/error-report/error-report.tpl.html',
+                controller: 'errorReportController as $ctrl',
+                resolve: {
+                    errorReportingConfig: function () {
+                        return that.errorReportingConfig;
+                    },
+                    postData: function () {
+                        return that.data;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (response) {
+                // console.log('this is the modal result', response);
+            }, function () {
+
+            });
+        };
+
 
         this.$onInit = function () {
 
