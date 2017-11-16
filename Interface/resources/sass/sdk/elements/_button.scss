@@ -16,7 +16,7 @@
     border-radius: 3px;
     background-color: $search-primary;
 
-    &:hover {
+    &:hover, &:active {
         /* overwrite of default KBH styling */
         text-decoration: none !important;
 
