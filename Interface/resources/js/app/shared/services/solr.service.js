@@ -28,7 +28,7 @@ define([
         function buildSolrValue(row) {
             var field = row.field.name;
             var type = row.field.type;
-            var term = row.term;
+            var term = row.term.value !== undefined ? row.term.value : row.term;
             var op = row.operator.op;
 
             switch (op) {
@@ -67,7 +67,7 @@ define([
 
             term = term.replace(/:/g, '\\:');
 
-            if (type === "string") { 
+            if (type === "string") {
                 term = term.replace(/ /g, '\\ ');
             }
 

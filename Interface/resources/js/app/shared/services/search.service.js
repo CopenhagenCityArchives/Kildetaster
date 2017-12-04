@@ -8,7 +8,7 @@ define([], function() {
             sortDirection: 'asc',
 
             getConfigPromise: function() {
-                
+
                 var deferred = $q.defer();
 
                 $http({
@@ -80,6 +80,14 @@ define([], function() {
                 var validQueries = [];
                 angular.forEach(queries, function(query, idx) {
                     if (query && query.field && query.operator && query.term) {
+                        var field = searchConfig.fields[query.field.name];
+                        if (field.enum) {
+                          query.term = field.enum.find(function(enumval) {
+                            return enumval.value.toString() == query.term;
+                          });
+                        } else if (field.datasource) {
+                          query.term = { label: query.term, value: query.term };
+                        }
                         validQueries.push(query);
                     }
                 });
@@ -102,7 +110,7 @@ define([], function() {
                 if (qSortDirection) {
                     qSortDirection = qSortDirection.toLowerCase();
                 }
-                if (qSortDirection === "asc" || qSortDirection === "desc") {                    
+                if (qSortDirection === "asc" || qSortDirection === "desc") {
                     this.sortDirection = qSortDirection;
                 }
 
@@ -122,17 +130,17 @@ define([], function() {
                             colIds.push(colId);
                         }
                     });
-                } 
+                }
                 else {
                     angular.forEach(searchConfig.collections, function(collection, id) { colIds.push(id); });
                 }
 
-                var newConfig = { 
-                    queries: validQueries, 
-                    filterQueries: validFilterQueries, 
-                    collections: colIds, 
-                    sortDirection: this.sortDirection, 
-                    sortField: sortField, 
+                var newConfig = {
+                    queries: validQueries,
+                    filterQueries: validFilterQueries,
+                    collections: colIds,
+                    sortDirection: this.sortDirection,
+                    sortField: sortField,
                     postsPrPage: this.postsPrPage,
                     page: this.page
                 };
@@ -155,7 +163,11 @@ define([], function() {
                     }
                     $location.search("q" + i + ".f", query.field.name);
                     $location.search("q" + i + ".op", query.operator.op);
-                    $location.search("q" + i + ".t", encodeURIComponent(query.term));
+                    if (query.term.value !== undefined) {
+                      $location.search("q" + i + ".t", encodeURIComponent(query.term.value));
+                    } else {
+                      $location.search("q" + i + ".t", encodeURIComponent(query.term));
+                    }
                     i = i + 1;
                 });
 

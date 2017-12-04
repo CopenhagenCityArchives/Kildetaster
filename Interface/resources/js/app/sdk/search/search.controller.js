@@ -176,7 +176,7 @@ define([
         }
 
         /**
-         * 
+         *
          */
         that.collectionsChange = function(collection) {
 
@@ -212,7 +212,7 @@ define([
             if (forceNew) {
                 solrService.clearSearchData();
             }
-            
+
             if (that.error) {
                 that.error = false;
                 that.filterQueries = [];
@@ -234,11 +234,11 @@ define([
             searchService.currentSearch.filterQueries = that.filterQueries;
 
             solrService.search(
-                that.queries, 
-                that.filterQueries, 
-                colIds, 
-                that.sortField, 
-                that.sortDirection, 
+                that.queries,
+                that.filterQueries,
+                colIds,
+                that.sortField,
+                that.sortDirection,
                 that.page * that.postsPrPage,
                 that.postsPrPage
             )
@@ -271,22 +271,22 @@ define([
                 that.searching = false;
             });
 
-            var thisSearch = { 
-                queries: that.queries, 
-                filterQueries: that.filterQueries, 
-                collections: colIds, 
-                sortField: that.sortField, 
-                sortDirection: that.sortDirection, 
+            var thisSearch = {
+                queries: that.queries,
+                filterQueries: that.filterQueries,
+                collections: colIds,
+                sortField: that.sortField,
+                sortDirection: that.sortDirection,
                 postsPrPage: that.postsPrPage,
                 page: that.page
             };
-            
+
             searchService.setSearch(thisSearch);
         };
 
         that.goToPage = function goToPage(page) {
             that.page = page;
-            
+
             // Store current page in the search service
             searchService.currentSearch.page = page;
 
@@ -322,9 +322,9 @@ define([
 
             // Clean entry
             if (!searchService.currentSearch && !searchService.urlParamsExist()) {
-                
+
                 searchService.getSearch(searchConfig);
-                
+
                 that.addField('firstnames', '', 'eq');
                 that.collections = angular.copy(searchConfig.collections);
                 angular.forEach(that.collections, function(col, id) {

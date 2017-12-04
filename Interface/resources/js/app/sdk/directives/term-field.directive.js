@@ -42,6 +42,11 @@ define([
 
                     $scope.options = [];
 
+                    // If we have an enum
+                    if ($scope.type === 'typeahead' && $scope.data.field.enum && $scope.data.field.enum.length > 0) {
+                        return field.enum;
+                    }
+
                     //If we do not get any data source or a term to search for, do nothing
                     if (!field.datasource) {
                         //Just return an empty array
@@ -56,9 +61,8 @@ define([
                         method: 'GET',
                         cache: false
                     }).then(function(response) {
-
                         var arr = response.data.map(function(item) {
-                            return item[field.datasource.field];
+                            return { label: item[field.datasource.field], value: item[field.datasource.field] };
                         });
 
                         //Only show a set number of hits
@@ -81,13 +85,10 @@ define([
                     //Fields with enum are also identified as being of type typeahead, but we do not have a datasource for them
                     //we there fore change the type for these fields, and handle them in a different template
                     if ($scope.type === 'typeahead' && $scope.data.field.enum && $scope.data.field.enum.length > 0) {
-                        $scope.type = 'select';
+                        return 'sdk/directives/term-field.directive--select.tpl.html';
                     }
 
                     switch ($scope.type) {
-                        case 'select':
-                            rtn = 'sdk/directives/term-field.directive--select.tpl.html';
-                            break;
                         case 'typeahead':
                             rtn = 'sdk/directives/term-field.directive--' + $scope.type + '.tpl.html';
                             break;
