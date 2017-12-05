@@ -25,7 +25,7 @@ define([
         that.filterQueries = [];
         that.noSelectedFilters = true;
 
-        that.results = {};
+        that.results = null;
 
         // The index of the current page
         that.page = 0;
@@ -271,7 +271,7 @@ define([
             //Store value in rootscope, to make it available if we go back to the overview page
             //TODO store in service, not rootscope
             $rootScope.sortField = newval;
-            if (that.results.docs && that.results.docs.length > 0 && newval) {
+            if (that.results && that.results.docs && that.results.docs.length > 0 && newval) {
                 $scope.doSearch(true);
             }
         });
