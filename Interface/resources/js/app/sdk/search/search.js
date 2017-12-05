@@ -27,6 +27,7 @@ define([
     'app/sdk/search/search.run',
 
     'app/sdk/search/search.controller',
+    'app/sdk/search/search.results.controller',
 
     'app/sdk/search/error-report/error-report.controller',
 
@@ -103,6 +104,8 @@ define([
     searchRun,
 
     searchController,
+    searchResultsController,
+
     errorReportController,
 
     datapostErindringDirective,
@@ -180,6 +183,8 @@ define([
     searchApp.factory('tokenFactory', tokenFactory);
 
     searchApp.controller('searchController', searchController);
+    searchApp.controller('searchResultsController', searchResultsController);
+    
     searchApp.controller('errorReportController', errorReportController);
 
     // TODO remove when new version is done

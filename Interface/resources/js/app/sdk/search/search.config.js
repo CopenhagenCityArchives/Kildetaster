@@ -59,6 +59,16 @@ define([
                 }
             })
 
+            .state('search.page.results', {
+                url: 'results',
+                views: {
+                    '@': {
+                        templateUrl: 'sdk/search/search.results.tpl.html',
+                        controller: 'searchResultsController as ctrl'
+                    }
+                }
+            })
+
             .state('search.page.result', {
                 url: '',
                 abstract: true,
