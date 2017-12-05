@@ -61,10 +61,7 @@ define([], function () {
             });
         };
 
-        this.$onDestroy = function() {
-            console.log('stopping')
-            errorService.abortGetErrorReports();
-        };
+        this.$onDestroy = function() {};
 
     };
 
