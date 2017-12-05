@@ -32,6 +32,8 @@
 @import "sdk/elements/input-datepicker";
 @import "sdk/elements/name";
 
+@import "elements/loading-spinner";
+
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
