@@ -1,6 +1,6 @@
 define([], function() {
 
-    var policeController = /* @ngInject */ function policeController(helpers, EDITORURL) {
+    var policeController = /* @ngInject */ function policeController(helpers, EDITORURL, $scope) {
 
         var that = this;
 
