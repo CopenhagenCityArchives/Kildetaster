@@ -2,17 +2,19 @@
 
     <div class="post__head">
         <div class="post__item post__main post__alternate">
-            
+
             <div class="post__tools">
                 <a href="" ng-click="$ctrl.openErrorReporting()">Rapporter fejl</a>
             </div>
-            
+
             <div class="post__header">
                 <h2>
                     {{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} <span ng-if="$ctrl.data.birthname">{{$ctrl.data.birthname}}</span></span>
                     <span class="post__collection">Politiets registerblade</span>
                 </h2>
 
+
+                <p ng-if="$ctrl.data.person_type_text">Persontype: {{$ctrl.data.person_type_text}}</p>
                 <p ng-if="$ctrl.data.dateOfBirth">Født: {{$ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
                 <p ng-if="$ctrl.data.dateOfDeath">Død: {{$ctrl.data.dateOfDeath | date: 'dd-MM-yyyy' }}</p>
                 <p>{{$ctrl.data.civilstand}}, <text-gender type="$ctrl.data.sex"></text-gender></p>
@@ -24,7 +26,7 @@
                 <div ng-if="$ctrl.postErrors.length > 0" class="post__error">
                     <div>Denne post er fejlmeldt</div>
                     <a href ng-click="$ctrl.toggleErrorReports()">Læs mere</a>
-                
+
                     <div ng-repeat="error in $ctrl.postErrors" ng-if="$ctrl.showErrorReports">
                         {{ error.label || 'Ukendt felt' }}: {{error.comment}}
                     </div>
@@ -39,7 +41,7 @@
 
     <div class="post__col">
         <div class="post__item">
-            <h3 class="post__sectionheader">Adresse</h3>
+            <h3 class="post__sectionheader" ng-if="$ctrl.data.addresses">Adresse</h3>
             <div ng-repeat="address in $ctrl.data.addresses">
                 {{address.address_date | date: 'dd-MM-yyyy' }}: {{address.full_address}}
             </div>
@@ -48,11 +50,13 @@
             <h3 class="post__sectionheader">Andre personer</h3>
             <div ng-repeat="spouse in $ctrl.data.spouses">
                 Ægtefælle: {{spouse.firstnames}} {{spouse.lastname}}
-                <p ng-if="spouse.dateOfBirth">Født: {{spouse.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{spouse.birthplace}}</span></p>
+                <p ng-if="spouse.dateOfBirth">Født: {{spouse.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="spouse.birthplace"> i {{spouse.birthplace}}</span></p>
+                <a target="_blank" ui-sref="search.page.result.post({postId:spouse.post_id})">Vis person</a>
             </div>
             <div ng-repeat="child in $ctrl.data.children">
                 Barn: {{child.firstnames}} {{child.lastname}}
                 <p ng-if="child.dateOfBirth">Født: {{child.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="child.birthplace"> i {{child.birthplace}}</span></p>
+                <a target="_blank" ui-sref="search.page.result.post({postId:child.post_id})">Vis person</a>
             </div>
         </div>
     </div>
@@ -60,14 +64,14 @@
     <div class="post__col post__alternate">
         <div class="post__item">
             <h3 class="post__sectionheader">Om kilden</h3>
-            <p>Station {{$ctrl.data.station}}. Filmrulle {{$ctrl.data.film}}. Registerblad {{$ctrl.data.number}} (unikt id. {{$ctrl.data.person_id}})</p>
-            <p ng-if="$ctrl.data.dateOfCompletion">Udfyldelsesdato: {{$ctrl.data.dateOfCompletion | date: 'dd-MM-yyyy' }}</p>
+            <p>Station {{$ctrl.data.station}}. Filmrulle {{$ctrl.data.film}}. Registerblad {{$ctrl.data.number}} (unikt id. {{$ctrl.data.registerblad_id}})</p>
+            <p ng-if="$ctrl.data.dateOfCompletion">Registerbladet er udfyldt: {{$ctrl.data.dateOfCompletion | date: 'dd-MM-yyyy' }}</p>
             <p ng-if="$ctrl.data.specialComment">Særlige bemærkninger: {{$ctrl.data.specialComment}}</p>
         </div>
-        <!--<div class="post__item">
+        <div class="post__item" ng-if="$ctrl.data.last_changed">
             <h3 class="post__sectionheader">Om indtastningen</h3>
-            <p style="color: red">Indtastet dato: DATA MANGLER af INDTASTER MANGLER</p>
-        </div>-->
+            <p>Senest ændret: {{$ctrl.data.last_changed}}</p>
+        </div>
         <div class="post__item post__viewer" ng-if="$ctrl.imageBack">
             <zoom-image image-url="$ctrl.imageBack"></zoom-image>
         </div>
