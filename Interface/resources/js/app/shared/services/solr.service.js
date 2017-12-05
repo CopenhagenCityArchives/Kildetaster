@@ -151,7 +151,13 @@ define([
             };
 
             if (sortField) {
-                options.sort = sortField.name + " " + sortDirection
+                options.sort = sortField.name + " " + sortDirection;
+                if(sortField.name !== 'firstnames'){
+                    options.sort = options.sort + ", firstnames asc";
+                }
+            }
+            else{
+                options.sort = "firstnames asc";
             }
 
             params = angular.extend(options, params);
