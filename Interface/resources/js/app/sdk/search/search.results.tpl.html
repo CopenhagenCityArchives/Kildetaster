@@ -57,7 +57,12 @@
         </div>
 
         <div class="span5" ng-if="ctrl.results.numFound > 10">
-            <pagination current-page="ctrl.page" results="ctrl.results" go-to-page="ctrl.goToPage"></pagination>
+            <pagination 
+                current-page="ctrl.page" 
+                results="ctrl.results" 
+                posts-pr-page="ctrl.postsPrPage"
+                go-to-page="ctrl.goToPage(page)">
+            </pagination>
         </div>
     </div>
 
@@ -129,7 +134,12 @@
                 <jump-to-page change-page="ctrl.goToPage(page)" ng-if="ctrl.results.numFound > 10"></jump-to-page>
             </div>
             <div class="span7">
-                <pagination current-page="ctrl.page" results="ctrl.results" go-to-page="ctrl.goToPage" ng-if="ctrl.results.numFound > 10"></pagination>
+                <pagination 
+                    current-page="ctrl.page" 
+                    results="ctrl.results" 
+                    posts-pr-page="ctrl.postsPrPage"
+                    go-to-page="ctrl.goToPage(page)">
+                </pagination>
             </div>
         </section>
 
