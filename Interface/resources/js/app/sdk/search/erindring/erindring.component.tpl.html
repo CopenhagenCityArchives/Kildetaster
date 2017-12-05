@@ -13,10 +13,10 @@
                     <span class="post__collection">Erindring</span>
                 </h2>
 
-                <p ng-if="$ctrl.data.yearOfBirth">Født: {{ $ctrl.data.yearOfBirth }}</p>
-                <p>{{ $ctrl.data.civilstatus }}<span ng-if="$ctrl.data.civilstatus">, </span><span ng-if="$ctrl.data.sex">køn: {{ $ctrl.data.sex }}</span></p>
+                <p ng-if="$ctrl.data.yearOfBirth"><strong>Født:</strong> {{ $ctrl.data.yearOfBirth }}</p>
+                <p>{{ $ctrl.data.civilstatus }}<span ng-if="$ctrl.data.sex">, </span><span ng-if="$ctrl.data.sex">køn: {{ $ctrl.data.sex }}</span></p>
                 <p>{{ $ctrl.data.position }}</p>
-                <p>Forældres stilling: {{ $ctrl.data.position_parent }}</p>
+                <p ng-if="$ctrl.data.position_parent"><strong>Forældres stilling:</strong> {{ $ctrl.data.position_parent }}</p>
 
                 <!-- Error reports -->
                 <div ng-if="$ctrl.postErrors.length > 0" class="post__error">
@@ -60,8 +60,8 @@
 
         <div class="post__item">
             <h3 class="post__sectionheader">Om kilden</h3>
-            <p>Erindringsnummer {{ $ctrl.data.erindring_number }}, skrevet i {{ $ctrl.data.writtenYear }}.</p>
-            <p>Omfang: {{ $ctrl.data.extent }}</p>
+            <p>Erindringsnummer {{ $ctrl.data.erindring_number }}<span ng-if="$ctrl.data.writtenYear">, skrevet i {{ $ctrl.data.writtenYear }}</span></p>
+            <p><strong>Omfang:</strong> {{ $ctrl.data.extent }}</p>
             <p ng-if="$ctrl.data.writeMethod">{{ $ctrl.data.writeMethod }}</p>
         </div>
     </div>

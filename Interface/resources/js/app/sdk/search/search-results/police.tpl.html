@@ -3,12 +3,12 @@
     <div>
         <text-name firstnames="$ctrl.data.firstnames" lastname="$ctrl.data.lastname" birthname="$ctrl.data.birthname"></text-name>
         <div>
-            Persontype:
+            <strong>Persontype:</strong>
             <span ng-if="$ctrl.data.person_type == 1"> Hovedperson</span>
             <span ng-if="$ctrl.data.person_type == 2"> Ægtefælle</span>
             <span ng-if="$ctrl.data.person_type == 3"> Barn</span>
         </div>
-        <span ng-if="$ctrl.data.birthplace">Fødested: {{$ctrl.data.birthplace}}</span>
+        <span ng-if="$ctrl.data.birthplace"><strong>Fødested:</strong> {{$ctrl.data.birthplace}}</span>
         <text-date prefix="Født" date="$ctrl.data.dateOfBirth"></text-date>
         <text-position position="position" ng-repeat="position in $ctrl.data.positions"></text-position>
     </div>

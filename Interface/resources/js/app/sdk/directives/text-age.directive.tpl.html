@@ -1,5 +1,5 @@
 <div>
-    <span ng-if="prefix && (years || months || weeks || days || hours)">{{prefix}}</span>
+    <strong ng-if="prefix && (years || months || weeks || days || hours)">{{prefix}}</strong>
     <span ng-if="years">{{years | formatStringNumber }} år</span>
 
     <span ng-if="months">
