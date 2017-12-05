@@ -13,8 +13,8 @@
                     <span class="post__collection">Politiets registerblade</span>
                 </h2>
 
-                <p ng-if="$ctrl.data.dateOfBirth">Født: {{$ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
-                <p ng-if="$ctrl.data.dateOfDeath">Død: {{$ctrl.data.dateOfDeath | date: 'dd-MM-yyyy' }}</p>
+                <p ng-if="$ctrl.data.dateOfBirth"><strong>Født:</strong> {{$ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
+                <p ng-if="$ctrl.data.dateOfDeath"><strong>Død:</strong> {{$ctrl.data.dateOfDeath | date: 'dd-MM-yyyy' }}</p>
                 <p>{{$ctrl.data.civilstand}}, <text-gender type="$ctrl.data.sex"></text-gender></p>
                 <div ng-repeat="position in $ctrl.data.positions">
                     {{position.position}}<span ng-if="!$last">, </span>
@@ -61,7 +61,7 @@
         <div class="post__item">
             <h3 class="post__sectionheader">Om kilden</h3>
             <p>Station {{$ctrl.data.station}}. Filmrulle {{$ctrl.data.film}}. Registerblad {{$ctrl.data.number}} (unikt id. {{$ctrl.data.person_id}})</p>
-            <p ng-if="$ctrl.data.dateOfCompletion">Udfyldelsesdato: {{$ctrl.data.dateOfCompletion | date: 'dd-MM-yyyy' }}</p>
+            <p ng-if="$ctrl.data.dateOfCompletion"><strong>Udfyldelsesdato:</strong> {{$ctrl.data.dateOfCompletion | date: 'dd-MM-yyyy' }}</p>
             <p ng-if="$ctrl.data.specialComment">Særlige bemærkninger: {{$ctrl.data.specialComment}}</p>
         </div>
         <!--<div class="post__item">

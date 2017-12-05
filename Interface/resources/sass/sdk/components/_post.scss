@@ -1,4 +1,6 @@
 .post {
+    font-size: 13px;
+
     display: flex;
 
     flex-wrap: wrap;
@@ -61,6 +63,8 @@
 
         display: block;
 
+        margin-top: 4px;
+
         color: $font-color;
     }
 
@@ -69,11 +73,12 @@
         flex-direction: column;
 
         height: 100%;
+        padding-top: 20px;
 
         justify-content: center;
 
         h2 {
-            font-size: 28px;
+            font-size: 32px;
 
             margin-bottom: 20px;
 
@@ -82,8 +87,9 @@
     }
 
     &__sectionheader {
-        font-size: 12px;
         font-weight: 600;
+
+        margin-bottom: 8px !important;  // !important because of Joomla styling
     }
 
     &__links {
@@ -95,6 +101,8 @@
         justify-content: space-between;
 
         a {
+            font-size: 11px;
+
             flex: 0 0 calc(50% - 5px);
         }
     }
