@@ -14,7 +14,7 @@
                 </h2>
 
                 <p ng-if="$ctrl.data.dateOfBirth">Født: {{ $ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
-                <p ng-if="$ctrl.data.yearOfbirth">Født: {{$ctrl.data.yearOfBirth}}</p>
+                <p ng-if="isNumber($ctrl.data.yearOfBirth)">Fødselsår: {{$ctrl.data.yearOfBirth}}</p>
                 <text-date prefix="Død" date="$ctrl.data.dateOfDeath"></text-date>
                 <p><text-age prefix="'Alder: '" years="$ctrl.data.ageYears" months="$ctrl.data.ageMonths" weeks="$ctrl.data.ageWeeks" days="$ctrl.data.ageDays" hours="$ctrl.data.ageHours"></text-age></p>
                 <p ><span ng-if="$ctrl.data.civilstatus">{{ $ctrl.data.civilstatus }}<span ng-if="$ctrl.data.civilstatus && $ctrl.data.sex">,</span> <span ng-if="$ctrl.data.sex">{{ $ctrl.data.sex }}</span></p>

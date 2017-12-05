@@ -4,6 +4,8 @@ define([], function() {
 
         var that = this;
 
+        $scope.isNumber = angular.isNumber;
+
         /**
          * Is the current logged in user allowed to edit?
          */
@@ -22,7 +24,7 @@ define([], function() {
             }
             // Or is the current logged in user a superuser for the task the post was from
             else {
-                
+
                 found = that.userData.super_user_tasks.find(function(task) {
                     return task.tasks_id=== that.data.task_id;
                 });
@@ -34,14 +36,14 @@ define([], function() {
         }
 
         this.$onInit = function() {
-      
+
             that.imageUrl = helpers.getImageUrlByPostId(this.data.post_id);
 
             //Determine the editor link visibility based on wether or not the user can edit
             that.showEditorLink = allowedToEdit();
 
             that.editorUrl = EDITORURL + '/#/task/' + that.data.task_id + '/page/' + that.data.page_id + '/post/' + that.data.post_id;
-            
+
         };
 
     };
