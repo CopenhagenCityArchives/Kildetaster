@@ -49,7 +49,9 @@ define([
                 }
                 if (row.field) {
                     row.operator = searchConfig.operators[searchConfig.types[row.field.type].operators[0]];
-                    row.term = '';
+                    if(row.field.type !== 'string'){
+                        row.term = '';
+                    }
                 }
                 else {
                     row.operator = undefined;
