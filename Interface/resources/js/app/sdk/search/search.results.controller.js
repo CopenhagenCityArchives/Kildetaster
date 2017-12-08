@@ -42,8 +42,8 @@ define([
         that.fieldCollectionFilter = function(field, index, array) {
             var found = false;
 
-            angular.forEach(that.collections, function (col, colId) {
-                field.collections.indexOf(parseInt(colId)) !== -1 && col.selected) {
+            angular.forEach(field.collections, function (colId) {
+                if (that.collections[colId] && that.collections[colId].selected) {
                     found = true;
                 }
             });
