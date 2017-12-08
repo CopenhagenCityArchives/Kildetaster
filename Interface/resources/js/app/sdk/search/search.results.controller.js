@@ -38,6 +38,19 @@ define([
         //Default field to sort by, use value from rootScope if we have it, otherwise default ot lastname
         that.sortField = $rootScope.sortField ? $rootScope.sortField : searchConfig.fields['lastname'];
 
+        // a sort field must be associated with some selected collection to be shown
+        that.fieldCollectionFilter = function(field, index, array) {
+            var found = false;
+
+            angular.forEach(that.collections, function (col, colId) {
+                field.collections.indexOf(parseInt(colId)) !== -1 && col.selected) {
+                    found = true;
+                }
+            });
+
+            return found;
+        }
+
         /**
         * Toggle between sorting desc and asc
         */
@@ -207,7 +220,7 @@ define([
             }
             // entry from URL
             else if (!searchService.currentSearch && searchService.urlParamsExist()) {
-     
+
                 var urlSearch = searchService.getSearch(searchConfig);
 
                 that.queries = [];
@@ -250,7 +263,7 @@ define([
 
                 that.page = searchService.currentSearch.page;
                 that.postsPrPage = searchService.currentSearch.postsPrPage;
-                
+
                 that.collections = angular.copy(searchConfig.collections);
                 angular.forEach(searchService.currentSearch.collections, function (id) {
                     if (that.collections[id]) {

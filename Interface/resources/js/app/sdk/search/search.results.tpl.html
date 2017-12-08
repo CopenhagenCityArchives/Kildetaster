@@ -48,7 +48,7 @@
 
                 <div class="span6">
                     <div class="sorting__container">
-                        <select class="sorting__selection" ng-model="ctrl.sortField" ng-options="field as field.view_name for (fieldName, field) in ctrl.fields | filter:{searchable:true, sortable:true}"></select>
+                        <select class="sorting__selection" ng-model="ctrl.sortField" ng-options="field as field.view_name for (fieldName, field) in ctrl.fields | filter:{searchable:true, sortable:true} | filter:ctrl.fieldCollectionFilter"></select>
                         <a href ng-click="ctrl.toggleSortDirection()" class="sorting__direction" title="{{ctrl.sortDirection}}" ng-class="ctrl.sortDirection"></a>
                     </div>
                 </div>
@@ -57,9 +57,9 @@
         </div>
 
         <div class="span5" ng-if="ctrl.results.numFound > ctrl.postPrPage">
-            <pagination 
-                current-page="ctrl.page" 
-                results="ctrl.results" 
+            <pagination
+                current-page="ctrl.page"
+                results="ctrl.results"
                 posts-pr-page="ctrl.postsPrPage"
                 go-to-page="ctrl.goToPage(page)">
             </pagination>
@@ -134,9 +134,9 @@
                 <jump-to-page change-page="ctrl.goToPage(page)" ng-if="ctrl.results.numFound > 10"></jump-to-page>
             </div>
             <div class="span7" ng-if="ctrl.results.numFound > ctrl.postPrPage">
-                <pagination 
-                    current-page="ctrl.page" 
-                    results="ctrl.results" 
+                <pagination
+                    current-page="ctrl.page"
+                    results="ctrl.results"
                     posts-pr-page="ctrl.postsPrPage"
                     go-to-page="ctrl.goToPage(page)">
                 </pagination>
