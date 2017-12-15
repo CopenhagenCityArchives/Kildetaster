@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <div class="span5" ng-if="ctrl.results.numFound > ctrl.postPrPage">
+        <div class="span5" ng-if="ctrl.results.numFound > ctrl.postsPrPage">
             <pagination
                 current-page="ctrl.page"
                 results="ctrl.results"
@@ -131,9 +131,9 @@
 
         <section class="row-fluid with-padding sdk-search__footer">
             <div class="span5">
-                <jump-to-page change-page="ctrl.goToPage(page)" ng-if="ctrl.results.numFound > 10"></jump-to-page>
+                <jump-to-page change-page="ctrl.goToPage(page)" ng-if="ctrl.results.numFound > ctrl.postsPrPage"></jump-to-page>
             </div>
-            <div class="span7" ng-if="ctrl.results.numFound > ctrl.postPrPage">
+            <div class="span7" ng-if="ctrl.results.numFound > ctrl.postsPrPage">
                 <pagination
                     current-page="ctrl.page"
                     results="ctrl.results"
