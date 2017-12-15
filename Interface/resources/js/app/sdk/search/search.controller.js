@@ -37,26 +37,36 @@ define([
         * default value
         */
         that.clearRow = function clearRow(row) {
-            if (that.initialized) {
-                if (!row.field) {
-                    row.field = Object.values(searchConfig.fields).find(function(field) {
-                        var found = false;
-                        angular.forEach(field.collections, function(id) {
-                            found = found || that.collections[id].selected;
-                        });
-                        return found;
+            if (!that.initialized) {
+                return
+            }
+
+            if (!row.field) {
+                row.field = Object.values(searchConfig.fields).find(function(field) {
+                    var fieldInAllSelectedCollections = true;
+                    angular.forEach(that.collections, function(col) {
+                        if (col.selected && field.collections.indexOf(col.id) === -1) {
+                            fieldInAllSelectedCollections = false;
+                        }
                     });
+                    return fieldInAllSelectedCollections;
+                });
+
+                // if the term object, and the field type are not both string,
+                // reset term value
+                if (typeof row.term !== "string" || row.field.type !== "string") {
+                    row.term = undefined;
                 }
-                if (row.field) {
-                    row.operator = searchConfig.operators[searchConfig.types[row.field.type].operators[0]];
-                    if(row.field.type !== 'string'){
-                        row.term = '';
-                    }
-                }
-                else {
-                    row.operator = undefined;
+            }
+            if (row.field) {
+                row.operator = searchConfig.operators[searchConfig.types[row.field.type].operators[0]];
+                if(row.field.type !== 'string'){
                     row.term = '';
                 }
+            }
+            else {
+                row.operator = undefined;
+                row.term = '';
             }
         };
 
