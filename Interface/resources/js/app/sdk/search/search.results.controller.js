@@ -185,6 +185,7 @@ define([
                 page: that.page
             };
 
+            searchService.currentSearch = thisSearch;
             searchService.setSearch(thisSearch);
         };
 
@@ -235,7 +236,13 @@ define([
 
                 //Get saved sort direction and sort key
                 that.sortDirection = urlSearch.sortDirection;
-                that.sortField = urlSearch.sortField;
+                if (urlSearch.sortField.collections.some(function(colId) {
+                    return urlSearch.collections.indexOf(colId) != -1;
+                })) {
+                    that.sortField = urlSearch.sortField;
+                } else {
+                    that.sortField = searchConfig.fields["lastname"];
+                }
                 that.postsPrPage = urlSearch.postsPrPage;
                 that.page = urlSearch.page;
 
@@ -251,6 +258,11 @@ define([
             }
             // Entry into page that is already configured
             else {
+                if (!searchService.currentSearch.sortField.collections.some(function(colId) {
+                    return searchService.currentSearch.collections.indexOf(colId) != -1;
+                })) {
+                    that.sortField = searchConfig.fields["lastname"];
+                }
 
                 that.queries = searchService.currentSearch.queries;
 

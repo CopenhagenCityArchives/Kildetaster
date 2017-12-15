@@ -114,7 +114,7 @@ define([
             that.queries.splice(fieldIndex, 1);
         };
 
-       
+
         //TODO move this to a directive
         that.submitSearch = function submitSearch(event) {
             //Enter key
@@ -222,11 +222,10 @@ define([
                     postsPrPage: that.postsPrPage
                 };
 
-
             }
             // entry from URL
             else if (!searchService.currentSearch && searchService.urlParamsExist()) {
-                 
+
                 var urlSearch = searchService.getSearch(searchConfig);
 
                 that.queries = [];
@@ -241,7 +240,13 @@ define([
 
                 //Get saved sort direction and sort key
                 that.sortDirection = urlSearch.sortDirection;
-                that.sortField = urlSearch.sortField;
+                if (urlSearch.sortField.collections.some(function(colId) {
+                    return urlSearch.collections.indexOf(colId) != -1;
+                })) {
+                    that.sortField = urlSearch.sortField;
+                } else {
+                    that.sortField = searchConfig.fields["lastname"];
+                }
                 that.postsPrPage = urlSearch.postsPrPage;
                 that.page = urlSearch.page;
 
@@ -255,6 +260,11 @@ define([
             }
             // Entry into page that is already configured
             else {
+                if (!searchService.currentSearch.sortField.collections.some(function(colId) {
+                    return searchService.currentSearch.collections.indexOf(colId) != -1;
+                })) {
+                    searchService.currentSearch.sortField = searchConfig.fields["lastname"];
+                }
 
                 // Add current search config to the url query param
                 searchService.setSearch(searchService.currentSearch);
