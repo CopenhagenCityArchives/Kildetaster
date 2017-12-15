@@ -164,9 +164,6 @@ define([
                     });
 
                     that.facetFields = response.facets;
-
-                    $state.go('.results');
-
                 }).catch(function (err) {
                     console.log('Error in search:', err);
                     that.error = true;
