@@ -44,6 +44,8 @@ define([
 
                 scope.callAddFilter = function(facet, bucket) {
                     scope.addFilter()(facet, bucket);
+                    // collapse when selecting a filter
+                    scope.toggle();
                 }
 
                 /**
@@ -51,6 +53,10 @@ define([
                 */
                 scope.toggle = function toggle() {
                     scope.active = !scope.active;
+
+                    if (!scope.active) {
+                        scope.numberOfItems = defaultNumberOfItems;
+                    }
                 }
             }
         }
