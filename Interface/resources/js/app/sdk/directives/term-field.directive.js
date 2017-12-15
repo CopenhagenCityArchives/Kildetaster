@@ -32,6 +32,8 @@ define([
                 //Options to show when rendered as a typeahead or select
                 $scope.options = [];
 
+                $scope.lastTerm = undefined;
+
                 //Default placeholder
                 $scope.placeholder = 'Søgeterm';
 
@@ -39,19 +41,27 @@ define([
                 *
                 */
                 $scope.getData = function getData(field, term) {
-
-                    $scope.options = [];
-
                     // If we have an enum
                     if ($scope.type === 'typeahead' && $scope.data.field.enum && $scope.data.field.enum.length > 0) {
                         return field.enum;
                     }
 
-                    //If we do not get any data source or a term to search for, do nothing
+                    //If we do not get any data source, do nothing
                     if (!field.datasource) {
                         //Just return an empty array
                         return [];
                     }
+
+                    // If the term is the same as the last term, do nothing
+                    if (term === $scope.lastTerm) {
+                        return;
+                    }
+
+                    // Store used term, for next getData call
+                    $scope.lastTerm = term;
+
+                    // Remove options, before populating the list again
+                    $scope.options = [];
 
                     //Indicate that we are about to load new options
                     $scope.loading = true;
