@@ -7,15 +7,14 @@
 <!-- Status messages -->
 <section class="row-fluid with-padding" ng-if="ctrl.results.docs.length === 0">
     <div class="span12">
-        <p>Der er ikke fundet nogen resultater</p>
-
+        <div get-dom-content="search-app-no-results"></div>
         <a href="" ui-sref="^" class="sdk-search__configtoggle">Rediger din søgning</a>
     </div>
 </section>
 
 <section class="row-fluid with-padding" ng-if="ctrl.error">
     <div class="span12">
-        Der skete en uventet fejl, prøv venligst igen.
+        <div get-dom-content="search-app-error"></div>
     </div>
 </section>
 
