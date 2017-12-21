@@ -32,16 +32,16 @@
 
         </div>
         <div class="post__item post__viewer">
-            <zoom-image image-url="$ctrl.imageUrl"></zoom-image>
+            <zoom-image image-url="$ctrl.data.imageUrl"></zoom-image>
             <div class="post__links">
-                <a ng-href="{{$ctrl.data.kildeviser_url}}" target="_blank" class="button">Vis i kildeviser</a>
+                <a ng-href="{{$ctrl.data.kildeviser_url}}" target="_blank" class="button">Vis protokol i kildeviser</a>
             </div>
         </div>
     </div>
 
     <div class="post__col">
 
-    
+
         </div>
     </div>
 
@@ -49,7 +49,7 @@
 
         <div class="post__item">
             <h3 class="post__sectionheader">Om kilden</h3>
-            <p>{{ $ctrl.data.collection_info }} {{ $ctrl.data.unit_description }}</p>
+            <p>{{ $ctrl.data.collection_info }}: {{ $ctrl.data.unit_description }} s. {{$ctrl.data.page_number}}</p>
         </div>
 
         <div class="post__item">
