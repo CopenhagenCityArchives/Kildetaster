@@ -71,6 +71,7 @@ define([
     'app/sdk/search/police/police.component',
     'app/sdk/search/burial/burial.component',
     'app/sdk/search/erindring/erindring.component',
+    'app/sdk/search/school/school.component',
 
     'app/sdk/filters/formatStringNumber.filter',
     'app/shared/constants'
@@ -149,6 +150,7 @@ define([
     postPoliceComponent,
     postBurialComponent,
     postErindringComponent,
+    postSchoolComponent,
 
     formatStringNumberFilter,
 
@@ -184,12 +186,12 @@ define([
 
     searchApp.controller('searchController', searchController);
     searchApp.controller('searchResultsController', searchResultsController);
-    
+
     searchApp.controller('errorReportController', errorReportController);
 
     // TODO remove when new version is done
     searchApp.directive('datapostErindring', datapostErindringDirective);
-    
+
     searchApp.directive('postField', postfieldDirective);
     searchApp.directive('postCategory', postCategoryDirective);
 
@@ -230,7 +232,8 @@ define([
     searchApp.component('postPolice', postPoliceComponent);
     searchApp.component('postBurial', postBurialComponent);
     searchApp.component('postErindring', postErindringComponent);
-    
+    searchApp.component('postSchool', postSchoolComponent);
+
 
     searchApp.filter('formatStringNumber', formatStringNumberFilter);
 

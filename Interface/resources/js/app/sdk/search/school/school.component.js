@@ -6,7 +6,6 @@ define([
 
     return {
         bindings: {
-            userData: '<',
             openErrorReporting: '&',
             data: '<',
             postErrors: '<',
