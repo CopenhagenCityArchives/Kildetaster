@@ -14,7 +14,7 @@
   "configs": "Interface/configs",
   "html": "Interface/html",
   "dependencies": {
-    "request": "<=2.81.0",
+    "request": "<=2.81.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.6",
