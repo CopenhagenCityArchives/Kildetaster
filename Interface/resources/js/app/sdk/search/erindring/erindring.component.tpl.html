@@ -14,7 +14,7 @@
                 </h2>
 
                 <p ng-if="$ctrl.data.yearOfBirth"><strong>Født:</strong> {{ $ctrl.data.yearOfBirth }}</p>
-                <p>{{ $ctrl.data.civilstatus }}<span ng-if="$ctrl.data.sex">, </span><span ng-if="$ctrl.data.sex">køn: {{ $ctrl.data.sex }}</span></p>
+                <p>{{ $ctrl.data.civilstatus }}{{ $ctrl.data.civilstatus && $ctrl.data.sex ? ', ' : '' }}</span><span ng-if="$ctrl.data.sex">{{ $ctrl.data.civilstatus ? 'køn' : 'Køn' }}: {{ $ctrl.data.sex }}</span></p>
                 <p>{{ $ctrl.data.position }}</p>
                 <p ng-if="$ctrl.data.position_parent"><strong>Forældres stilling:</strong> {{ $ctrl.data.position_parent }}</p>
 
@@ -32,7 +32,7 @@
         <div class="post__item post__viewer">
             <div class="post__links">
                 <a ng-href="{{$ctrl.getAssetHref()}}" target="_blank" class="button">Link til erindringsdokument</a>
-                <a ng-href="{{$ctrl.getTranscribedAssetHref()}}" target="_blank" class="button">Link til transkribering</a>
+                <a ng-if="$ctrl.data.transcribed" ng-href="{{$ctrl.getTranscribedAssetHref()}}" target="_blank" class="button">Link til transkribering</a>
             </div>
         </div>
     </div>
