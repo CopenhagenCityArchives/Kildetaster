@@ -51,22 +51,14 @@ define([
                     });
                     return fieldInAllSelectedCollections;
                 });
+            }
 
-                // if the term object, and the field type are not both string,
-                // reset term value
-                if (typeof row.term !== "string" || row.field.type !== "string") {
-                    row.term = undefined;
-                }
-            }
-            if (row.field) {
-                row.operator = searchConfig.operators[searchConfig.types[row.field.type].operators[0]];
-                if(row.field.type !== 'string'){
-                    row.term = '';
-                }
-            }
-            else {
-                row.operator = undefined;
-                row.term = '';
+            row.operator = searchConfig.operators[searchConfig.types[row.field.type].operators[0]];
+
+            // if the term object, and the field type are not both string,
+            // reset term value
+            if (typeof row.term !== "string" || row.field.type !== "string") {
+                row.term = undefined;
             }
         };
 
