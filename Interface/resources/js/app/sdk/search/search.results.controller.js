@@ -163,7 +163,14 @@ define([
                         });
                     });
 
-                    that.facetFields = response.facets;
+                    that.facetFields = [];
+                    angular.forEach(response.facets, function(value, key) {
+                        if(response.facets[key].buckets && response.facets[key].buckets.length > 0){
+                            this[key] = response.facets[key];
+                        }
+                    }, that.facetFields);
+
+                    //console.log(response.facets, that.facetFields);
                 }).catch(function (err) {
                     console.log('Error in search:', err);
                     that.error = true;

@@ -1,4 +1,4 @@
-<div class="facet" ng-class="{ active: active }">
+<div class="facet" ng-if="buckets.length > 0" ng-class="{ active: active }">
 
     <h3 class="facet__header" ng-click="toggle()">{{field.view_name}}</h3>
 
