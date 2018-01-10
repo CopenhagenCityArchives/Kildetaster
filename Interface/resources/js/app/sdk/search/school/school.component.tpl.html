@@ -1,0 +1,64 @@
+<section class="post">
+
+    <div class="post__head">
+        <div class="post__item post__main post__alternate">
+
+            <div class="post__tools">
+                <a href="" ng-click="$ctrl.openErrorReporting()">Rapporter fejl</a>
+            </div>
+
+            <div class="post__header">
+                <h2>
+                    {{ $ctrl.data.firstnames }} {{ $ctrl.data.lastname }} <span ng-if="$ctrl.data.birthname">{{$ctrl.data.birthname}}</span></span>
+                    <span class="post__collection">Skoleprotokol</span>
+                </h2>
+
+                <p ng-if="$ctrl.data.dateOfBirth"><strong>Født:</strong> {{ $ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }}</p>
+                <p ng-if="isNumber($ctrl.data.yearOfBirth)"><strong>Fødselsår:</strong> {{$ctrl.data.yearOfBirth}}</p>
+
+                <p><text-age prefix="'Alder: '" years="$ctrl.data.ageYears"></text-age></p>
+
+                <!-- Error reports -->
+                <div ng-if="$ctrl.postErrors.length > 0" class="post__error">
+                    <div>Denne post er fejlmeldt</div>
+                    <a href ng-click="$ctrl.toggleErrorReports()">Læs mere</a>
+
+                    <div ng-repeat="error in $ctrl.postErrors" ng-if="$ctrl.showErrorReports">
+                        {{ error.label || 'Ukendt felt' }}: {{error.comment}}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="post__item post__viewer">
+            <zoom-image image-url="$ctrl.data.imageUrl"></zoom-image>
+            <div class="post__links">
+                <a ng-href="{{$ctrl.data.kildeviser_url}}" target="_blank" class="button">Vis protokol i kildeviser</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="post__col">
+
+
+        </div>
+    </div>
+
+    <div class="post__col post__alternate">
+
+        <div class="post__item">
+            <h3 class="post__sectionheader">Om kilden</h3>
+            <p>{{ $ctrl.data.collection_info }}: {{ $ctrl.data.unit_description }} s. {{$ctrl.data.page_number}}</p>
+        </div>
+
+        <div class="post__item">
+            <h3 class="post__sectionheader">Om indtastningen</h3>
+            <!--<p>Indtastet: <span style="color: red">Data mangler, eller er det 'last_update'?</span> af {{ $ctrl.data.user_name }}</p>-->
+            <p>Sidst opdateret {{ $ctrl.data.last_update | date: 'dd-MM-yyyy' }} af {{ $ctrl.data.user_name }}</p>
+            <!--<p>Fejl, fejlentitet, kommentar: <span style="color: red">Mangler info</span></p>-->
+        </div>
+
+    </div>
+
+</section>

@@ -1,6 +1,6 @@
 <!-- Display post info based on collection id -->
-<post-police 
-    ng-if="$ctrl.data.collection_id == 17" 
+<post-police
+    ng-if="$ctrl.data.collection_id == 17"
     data="$ctrl.data"
     open-error-reporting="$ctrl.open()"
     toggle-error-reports="$ctrl.toggleErrorReports()"
@@ -8,9 +8,9 @@
     post-errors="$ctrl.postErrors">
 </post-police>
 
-<post-burial 
-    ng-if="$ctrl.data.collection_id == 1" 
-    data="$ctrl.data" 
+<post-burial
+    ng-if="$ctrl.data.collection_id == 1"
+    data="$ctrl.data"
     user-data="$ctrl.userData"
     open-error-reporting="$ctrl.open()"
     toggle-error-reports="$ctrl.toggleErrorReports()"
@@ -18,11 +18,20 @@
     post-errors="$ctrl.postErrors">
 </post-burial>
 
-<post-erindring 
-    ng-if="$ctrl.data.collection_id == 18" 
-    data="$ctrl.data" 
+<post-erindring
+    ng-if="$ctrl.data.collection_id == 18"
+    data="$ctrl.data"
     open-error-reporting="$ctrl.open()"
     toggle-error-reports="$ctrl.toggleErrorReports()"
     show-error-reports="$ctrl.showErrorReports"
     post-errors="$ctrl.postErrors">
 </post-erindring>
+
+<post-school
+    ng-if="$ctrl.data.collection_id == 100" 
+    data="$ctrl.data"
+    open-error-reporting="$ctrl.open()"
+    toggle-error-reports="$ctrl.toggleErrorReports()"
+    show-error-reports="$ctrl.showErrorReports"
+    post-errors="$ctrl.postErrors">
+</post-school>
