@@ -45,10 +45,10 @@ define([
                     term = "*" + term;
                     break;
                 case "gt":
-                    term = "[" + term + " TO *]";
+                    term = "{" + term + " TO *]";
                     break;
                 case "lt":
-                    term = "[* TO " + term + "]";
+                    term = "[* TO " + term + "}";
                     break;
                 case "in":
                     term = "*" + term + "*";
@@ -56,6 +56,10 @@ define([
                 case "nin":
                     field = "-" + field;
                     term = "*" + term + "*";
+                    break;
+                //Special case used for string matching in multivalued fields (freetext_store)
+                case "in_multivalued":
+                    term = "\"*" + term + "*\"";
                     break;
                 default:
                     return undefined;
