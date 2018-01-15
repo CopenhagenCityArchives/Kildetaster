@@ -32,6 +32,24 @@ define([
         //Default field to sort by, use value from rootScope if we have it, otherwise default ot lastname
         that.sortField = $rootScope.sortField ? $rootScope.sortField : searchConfig.fields['lastname'];
 
+        //Private method used to init/reset search fields
+        var initSearchFields = function(){
+            // Add default search config field for firstnames
+            that.addField('firstnames', '', 'eq');
+            // Build collections
+            that.collections = angular.copy(searchConfig.collections);
+
+            // Initially select all available collections
+            angular.forEach(that.collections, function(col, id) {
+                col.selected = true;
+            });
+
+            searchService.currentSearch = {
+                page: that.page,
+                postsPrPage: that.postsPrPage
+            };
+        };
+
         /**
         * Prepare row for input, clearing any already set term and reset operator to its
         * default value
@@ -55,9 +73,8 @@ define([
 
             row.operator = searchConfig.operators[searchConfig.types[row.field.type].operators[0]];
 
-            // if the term object, and the field type are not both string,
-            // reset term value
-            if (typeof row.term !== "string" || row.field.type !== "string") {
+            // if the term is an object, or the field type is not a string, or the field is a UTC time format then reset term value
+            if (typeof row.term !== "string" || row.field.type !== "string" || row.term.match(/\d{4}-[0-1]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-6]\d.\d{3}Z/)) {
                 row.term = undefined;
             }
         };
@@ -162,7 +179,15 @@ define([
                 }
             });
 
-        }
+        };
+
+        $scope.resetSearch = function(){
+            solrService.clearSearchData();
+            searchService.currentSearch = null;
+            that.queries = [];
+            that.filterQueries = [];
+            initSearchFields();
+        };
 
         /**
         * Execute the search
@@ -211,20 +236,7 @@ define([
             // Clean entry
             if (!searchService.currentSearch && !searchService.urlParamsExist()) {
 
-                // Add default search config field for firstnames
-                that.addField('firstnames', '', 'eq');
-                // Build collections
-                that.collections = angular.copy(searchConfig.collections);
-
-                // Initially select all available collections
-                angular.forEach(that.collections, function(col, id) {
-                    col.selected = true;
-                });
-
-                searchService.currentSearch = {
-                    page: that.page,
-                    postsPrPage: that.postsPrPage
-                };
+                initSearchFields();
 
             }
             // entry from URL

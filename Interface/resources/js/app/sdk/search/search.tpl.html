@@ -1,13 +1,13 @@
 <div>
-    
+
     <!-- Search config -->
     <section>
-        
+
         <div class="row-fluid with-padding">
             <div class="span12">
 
                 <div get-dom-content="search-app-upper-text"></div>
-          
+
                 <div class="collection">
                     <div class="collection__item" ng-repeat="collection in ctrl.collections">
                         <input
@@ -74,10 +74,9 @@
         <div class="row-fluid with-padding">
             <div class="span12">
                 <button type="button" class="button" ng-click="startNewSearch()" ng-disabled="searching">Søg</button>
-
+                <button type="button" class="button" ng-click="resetSearch()" ng-disabled="searching">Nulstil</button>
                 <hr class="sdk-search__divider">
             </div>
-
         </div>
     </section>
 
