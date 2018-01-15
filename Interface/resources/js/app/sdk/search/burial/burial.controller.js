@@ -19,14 +19,14 @@ define([], function() {
             }
 
             // did the current logged in user create the post?
-            if (that.data.user_id === that.userData.id) {
+            if (that.data.user_id == that.userData.id) {
                 return true;
             }
             // Or is the current logged in user a superuser for the task the post was from
             else {
 
                 found = that.userData.super_user_tasks.find(function(task) {
-                    return task.tasks_id=== that.data.task_id;
+                    return task.tasks_id == that.data.task_id;
                 });
 
                 if (found) {
