@@ -43,7 +43,7 @@
         <div class="post__item">
             <h3 class="post__sectionheader" ng-if="$ctrl.data.addresses">Adresse</h3>
             <div ng-repeat="address in $ctrl.data.addresses">
-                {{address.address_date | date: 'dd-MM-yyyy' }}: {{address.full_address}}
+                <text-address-police address="address" date="true" ng-repeat="address in $ctrl.data.addresses"></text-address-police>
             </div>
         </div>
         <div class="post__item" ng-if="$ctrl.data.spouses.length > 0 || $ctrl.data.children.length > 0">

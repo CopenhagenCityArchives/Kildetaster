@@ -10,7 +10,8 @@ define([
             templateUrl: 'sdk/directives/text-address-police.directive.tpl.html',
 
             scope: {
-                address: '='
+                address: '=',
+                date: '='
             },
 
             link: function(scope, element, attr) {
