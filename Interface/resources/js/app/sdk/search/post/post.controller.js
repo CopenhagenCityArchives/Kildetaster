@@ -33,7 +33,7 @@ define([], function () {
             });
 
             modalInstance.result.then(function (response) {
-                
+
                 // After sending an error report, fetch updated list of errors reported
                 errorService.getErrorReports(config).then(function (response) {
                     that.postErrors = response;
