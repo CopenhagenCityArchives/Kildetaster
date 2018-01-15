@@ -71,6 +71,7 @@ define([
         'search', 
         'constants', 
         'ngStorage']);
+        'angular-google-analytics'
 
     sdkApp.run(run);
 
