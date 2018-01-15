@@ -153,6 +153,11 @@ define([
                         $scope.doSearch(true);
                     }
 
+                    if(that.results && that.results.numFound == 0 && that.filterQueries.length > 0) {
+                        that.filterQueries = [];
+                        $scope.doSearch(true);
+                    }
+
                     // process documents
                     angular.forEach(that.results.docs, function (doc, index) {
                         // Add highlighting to individual documents
