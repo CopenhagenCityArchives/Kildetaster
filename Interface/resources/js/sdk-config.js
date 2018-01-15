@@ -13,6 +13,7 @@ requirejs.config({
         'angular-bootstrap'     : '../bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
         'angular-sanitize'      : '../bower_components/angular-sanitize/angular-sanitize.min',
         'ngstorage'             : '../bower_components/ngstorage/ngStorage.min',
+        'angular-google-analytics'     : '../bower_components/angular-google-analytics/dist/angular-google-analytics.min',
         'angular-cookies'       : '../bower_components/angular-cookies/angular-cookies.min',
 
         'angularjs-datepicker'  : '../bower_components/angularjs-datepicker/dist/angular-datepicker',
@@ -49,6 +50,7 @@ requirejs.config({
         'angular-filter': ['angular'],
         'angular-cookies': ['angular'],
         'ngstorage': ['angular'],
+        'angular-google-analytics': ['angular'],
         'angularjs-datepicker': ['angular'],
 
         'app/shared/constants': ['angular'],

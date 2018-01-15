@@ -4,6 +4,7 @@ define([
     'angular-bootstrap',
 
     'ngstorage',
+    'angular-google-analytics',
 
     'app/shared/sdk-templates',
 
@@ -36,6 +37,7 @@ define([
     angularBootstrap,
 
     ngStorage,
+    angularGoogleAnalytics,
 
     sdkTemplates,
 

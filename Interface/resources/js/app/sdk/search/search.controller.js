@@ -12,7 +12,8 @@ define([
         $rootScope,
         solrService,
         searchService,
-        searchConfig
+        searchConfig,
+        Analytics
     ) {
 
         var that = this;
@@ -196,6 +197,8 @@ define([
         $scope.doSearch = function doSearch() {
 
             solrService.clearSearchData();
+
+            Analytics.trackEvent('person_search', 'start_search');
 
             var colIds = [];
             // Only set the collections that are currently selected
