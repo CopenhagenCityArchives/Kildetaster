@@ -9,7 +9,7 @@ define([
 
             /**
              * Check if the user is logged in, and return the access token if they are
-             * 
+             *
              * @param doNotForceLogin {bool} Indicate if we require the user to be logged in
              *                               Is not required in the sdk part of the solution
              */
@@ -44,6 +44,13 @@ define([
                     //HACK TO CIRCUMVENT AUTH
                     deferred.resolve({
                         tokenData: fakeResponse
+                    });
+                    return deferred.promise;
+                }
+
+                if(doNotForceLogin && $sessionStorage.tokenData){
+                    deferred.resolve({
+                        tokenData: $sessionStorage.tokenData
                     });
                     return deferred.promise;
                 }
@@ -94,7 +101,7 @@ define([
                                 tokenData: response.data
                             });
                         }
-                        
+
                         else {
                             //We are not logged in, and should force login, point users to min-side
                             if (!doNotForceLogin) {
@@ -103,7 +110,7 @@ define([
                             else {
                                 deferred.resolve(undefined);
                             }
-                            
+
                         }
 
                     })
