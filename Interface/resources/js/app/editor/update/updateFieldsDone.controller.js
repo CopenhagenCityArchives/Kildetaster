@@ -5,7 +5,7 @@ define([
     var updateFieldsDoneController = /*@ngInject*/ function updateFieldsDoneController(SEARCHURL, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService, $rootScope, $sessionStorage, errorService, $state) {
 
         //Build a direct link to this post
-        $scope.shareLink = SEARCHURL + '#/post/' + postData.postId;
+        $scope.shareLink = SEARCHURL + '/post/burial-' + postData.entryData.concrete_entries_id;
 
         $scope.nextErrorReport = null;
         $scope.userId = $sessionStorage.tokenData.user_id;

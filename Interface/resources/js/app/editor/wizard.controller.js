@@ -424,7 +424,7 @@ define([
         $scope.$watch('postId', function(newVal) {
 
             if (newVal !== undefined) {
-                var link = SEARCHURL + '#/post/' + newVal;
+                var link = SEARCHURL + '/post/burial-' + newVal;
 
                 $scope.shareLink = link;
             }

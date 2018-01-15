@@ -18,7 +18,7 @@ define([
         $scope.valueCopy = {};
 
         //Build a direct link to this post
-        $scope.shareLink = SEARCHURL + '#/post/' + postData.postId;
+        $scope.shareLink = SEARCHURL + '/post/burial-' + postData.entryData.concrete_entries_id;
 
         $scope.errorReports = postData.errorReports;
 
@@ -30,7 +30,7 @@ define([
         $scope.updateErrorReport = function(report, reason) {
 
             reason = reason || "No reason given";
-         
+
             report.deleted = 1;
             report.deleted_reason = reason;
 
