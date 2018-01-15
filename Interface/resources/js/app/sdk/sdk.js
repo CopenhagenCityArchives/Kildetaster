@@ -28,6 +28,7 @@ define([
 
     'app/sdk/directives/progressbar.directive',
     'app/shared/directives/user.directive',
+    'app/shared/directives/shareLink.directive',
     'app/shared/constants'
 
 
@@ -61,17 +62,19 @@ define([
 
     progressbarDirective,
     userDirective,
+    shareLinkDirective,
 
     constants
 ) {
 
     var sdkApp = angular.module('sdk', [
         'ui.bootstrap',
-        'sdk-templates', 
-        'search', 
-        'constants', 
-        'ngStorage']);
+        'sdk-templates',
+        'search',
+        'constants',
+        'ngStorage',
         'angular-google-analytics'
+        ]);
 
     sdkApp.run(run);
 
@@ -96,6 +99,12 @@ define([
 
     sdkApp.directive('progressBar', progressbarDirective);
     sdkApp.directive('user', userDirective);
+    sdkApp.directive('shareLink', shareLinkDirective);
+
+    sdkApp.config(['AnalyticsProvider', function (AnalyticsProvider) {
+       // Add configuration code as desired
+       AnalyticsProvider.setAccount('UA-45125468-1');  //UU-XXXXXXX-X should be your tracking code
+    }]).run(['Analytics', function(Analytics) { }]);
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-sdk-app]'), ['sdk']);

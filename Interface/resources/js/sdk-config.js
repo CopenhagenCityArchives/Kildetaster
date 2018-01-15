@@ -32,6 +32,9 @@ requirejs.config({
 
         'query-string'          : '../bower_components/query-string/query-string',
 
+        //Copy /paste library
+        'clipboard'                    : '../bower_components/clipboard/dist/clipboard.min',        
+
     },
 
     shim: {
