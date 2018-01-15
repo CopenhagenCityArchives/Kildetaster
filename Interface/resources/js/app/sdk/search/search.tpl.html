@@ -73,8 +73,13 @@
 
         <div class="row-fluid with-padding">
             <div class="span12">
+                <div>
                 <button type="button" class="button" ng-click="startNewSearch()" ng-disabled="searching">Søg</button>
-                <button type="button" class="button" ng-click="resetSearch()" ng-disabled="searching">Nulstil</button>
+                </div>
+                <br>
+                <div>
+                    <a href ng-click="resetSearch()" ng-disabled="searching">Nulstil søgning</a>
+                </div>
                 <hr class="sdk-search__divider">
             </div>
         </div>
