@@ -2,11 +2,11 @@
     <strong ng-if="prefix && (years || months || weeks || days || hours)">{{prefix}}</strong>
     <span ng-if="years">{{years | formatStringNumber }} år</span>
 
-    <span ng-if="months">
-        <ng-pluralize count="format(months)"
+    <span ng-if="month">
+        <ng-pluralize count="format(month)"
             when="{
-                '1': '{{ months | formatStringNumber }} måned',
-                'other': '{{ months | formatStringNumber }} måneder'}">
+                '1': '{{ month | formatStringNumber }} måned',
+                'other': '{{ month | formatStringNumber }} måneder'}">
         </ng-pluralize>
     </span>
     <span ng-if="weeks">
