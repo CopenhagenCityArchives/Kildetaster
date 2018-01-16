@@ -54,6 +54,6 @@
     "time-grunt": "^1.2.1"
   },
   "scripts": {
-    "test": "./snode_modules/karma/bin/karma start --single-run --browsers PhantomJS"
+    "test": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
   }
 }
