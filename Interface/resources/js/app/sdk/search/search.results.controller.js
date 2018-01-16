@@ -12,7 +12,8 @@ define([
         $rootScope,
         solrService,
         searchService,
-        searchConfig
+        searchConfig,
+        Analytics
     ) {
 
         var that = this;
@@ -111,6 +112,8 @@ define([
         // TODO update to use that
         */
         $scope.doSearch = function doSearch(forceNew) {
+
+            Analytics.trackEvent('person_search', 'start_search');
 
             if (forceNew) {
                 solrService.clearSearchData();
