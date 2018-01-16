@@ -50,7 +50,7 @@
 
         <div class="post__item">
             <h3 class="post__sectionheader">Adresse</h3>
-            <text-address address="$ctrl.data.address"></text-address>
+            <text-address address="$ctrl.data.addresses"></text-address>
         </div>
 
         <div class="post__item">
@@ -62,7 +62,7 @@
 
             <p ng-if="$ctrl.data.deathplace"><strong>Dødssted:</strong> {{ $ctrl.data.deathplace }}</p>
             <!-- TODO: make directive to show burials -->
-            
+
             <p ng-if="$ctrl.data.chapel"><strong>Fra (kapel):</strong> {{ $ctrl.data.chapel }}</p>
             <p ng-if="$ctrl.data.parish"><strong>Sogn:</strong> {{ $ctrl.data.parish }}</p>
             <p ng-if="$ctrl.data.cemetary"><strong>Til (kirkegård):</strong> {{ $ctrl.data.cemetary }}</p>
