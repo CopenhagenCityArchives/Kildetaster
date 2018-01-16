@@ -229,7 +229,7 @@ define([
                 $state.go('^');
             }
             // entry from URL
-            else if (!searchService.currentSearch && searchService.urlParamsExist()) {
+            else if ((!searchService.currentSearch || !searchService.currentSearch.queries) && searchService.urlParamsExist()) {
 
                 var urlSearch = searchService.getSearch(searchConfig);
 
@@ -267,7 +267,7 @@ define([
             }
             // Entry into page that is already configured
             else {
-                if (!searchService.currentSearch.sortField.collections.some(function(colId) {
+                if (searchService.currentSearch.sortField && !searchService.currentSearch.sortField.collections.some(function(colId) {
                     return searchService.currentSearch.collections.indexOf(colId) != -1;
                 })) {
                     that.sortField = searchConfig.fields["lastname"];
