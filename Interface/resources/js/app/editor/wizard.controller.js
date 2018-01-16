@@ -22,6 +22,7 @@ define([
 
         $scope.postId = undefined;
         $scope.shareLink = '';
+        $scope.shareLinkId = undefined;
 
         //Will hold the inputted values
         $scope.values = {};
@@ -262,6 +263,7 @@ define([
 
                 //If the reqeust was ok from the server, assume everything is allright
                 $scope.entrySaved = true;
+                $scope.shareLinkId = response.data.solr_id;
 
             }).catch(function(err) {
 
@@ -368,7 +370,7 @@ define([
         };
 
         $scope.toggleShareLink = function() {
-            $scope.buildShareLink($scope.postId);
+            $scope.buildShareLink($scope.shareLinkId);
             $scope.showShareLink = !$scope.showShareLink;
         };
 
@@ -421,10 +423,10 @@ define([
         /**
         * When postId has a value, build link to the id
         */
-        $scope.$watch('postId', function(newVal) {
+        $scope.$watch('shareLinkId', function(newVal) {
 
             if (newVal !== undefined) {
-                var link = SEARCHURL + '/post/burial-' + newVal;
+                var link = SEARCHURL + '/post/' + newVal;
 
                 $scope.shareLink = link;
             }
