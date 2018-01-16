@@ -42,9 +42,7 @@
     <div class="post__col">
         <div class="post__item">
             <h3 class="post__sectionheader" ng-if="$ctrl.data.addresses">Adresse</h3>
-            <div ng-repeat="address in $ctrl.data.addresses">
-                <text-address-police address="address" date="true" ng-repeat="address in $ctrl.data.addresses"></text-address-police>
-            </div>
+            <text-address-police address="address" date="true" ng-repeat="address in $ctrl.data.addresses"></text-address-police>
         </div>
         <div class="post__item" ng-if="$ctrl.data.spouses.length > 0 || $ctrl.data.children.length > 0">
             <h3 class="post__sectionheader">Andre personer</h3>
