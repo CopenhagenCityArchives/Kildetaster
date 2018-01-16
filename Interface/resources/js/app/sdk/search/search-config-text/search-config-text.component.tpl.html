@@ -1,7 +1,7 @@
 <p class="search-config-text__count" ng-transclude></p>
 for
 <span ng-repeat="row in $ctrl.config">
-    {{row.field.view_name}} {{row.operator.label}} <span class="search-config-text__item">{{ row.term.label ? row.term.label : row.converted_term ? row.converted_term : row.term}}</span><span ng-if="!$last"> og </span>
+    {{row.field.view_name | lowercase }} {{row.operator.label | lowercase }} <span class="search-config-text__item">{{ row.term.label ? row.term.label : row.converted_term ? row.converted_term : row.term}}</span><span ng-if="!$last"> og </span>
 </span>
 i
 <span ng-repeat="(identifier, obj) in $ctrl.selectedCollections">
