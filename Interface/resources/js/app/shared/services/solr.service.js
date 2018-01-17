@@ -59,7 +59,8 @@ define([
                     break;
                 //Special case used for string matching in multivalued fields (freetext_store)
                 case "in_multivalued":
-                    term = "\"*" + term + "*\"";
+                    term = "(*" + term.split(' ').join('* AND *') + "*)";
+                    //term = "(*" + term.replace(' ', '* AND *') + "*)";
                     break;
                 default:
                     return undefined;
