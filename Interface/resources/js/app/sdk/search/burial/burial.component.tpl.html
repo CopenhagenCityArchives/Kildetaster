@@ -18,7 +18,7 @@
                 <p>
                     <text-date prefix="Død" date="$ctrl.data.dateOfDeath"></text-date>
                 </p>
-                <p><text-age prefix="'Alder: '" years="$ctrl.data.ageYears" months="$ctrl.data.ageMonths" weeks="$ctrl.data.ageWeeks" days="$ctrl.data.ageDays" hours="$ctrl.data.ageHours"></text-age></p>
+                <p><text-age prefix="'Alder: '" years="$ctrl.data.ageYears" months="$ctrl.data.ageMonth" weeks="$ctrl.data.ageWeeks" days="$ctrl.data.ageDays" hours="$ctrl.data.ageHours"></text-age></p>
                 <p><span ng-if="$ctrl.data.civilstatus">{{ $ctrl.data.civilstatus }}<span ng-if="$ctrl.data.civilstatus && $ctrl.data.sex">,</span> <span ng-if="$ctrl.data.sex">{{ $ctrl.data.sex }}</span></p>
                 <div ng-repeat="position in $ctrl.data.positions">
                     <text-position position="position"></text-position>
