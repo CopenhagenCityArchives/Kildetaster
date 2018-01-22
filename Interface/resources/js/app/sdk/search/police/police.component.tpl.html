@@ -44,8 +44,13 @@
             <h3 class="post__sectionheader" ng-if="$ctrl.data.addresses">Adresse</h3>
             <text-address-police address="address" date="true" ng-repeat="address in $ctrl.data.addresses"></text-address-police>
         </div>
-        <div class="post__item" ng-if="$ctrl.data.spouses.length > 0 || $ctrl.data.children.length > 0">
+        <div class="post__item" ng-if="$ctrl.data.spouses.length > 0 || $ctrl.data.children.length > 0 || $ctrl.data.parent">
             <h3 class="post__sectionheader">Andre personer</h3>
+            <div ng-if="$ctrl.data.parent">
+                Forælder: {{$ctrl.data.parent.firstnames}} {{$ctrl.data.parent.lastname}}
+                <p ng-if="$ctrl.data.parent.birthDate">Født: {{$ctrl.data.parent.birthDate | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.parent.birthplace"> i {{$ctrl.data.parent.birthplace}}</span></p>
+                <a target="_blank" ui-sref="search.page.result.post({postId:$ctrl.data.parent.post_id})">Vis person</a>
+            </div>
             <div ng-repeat="spouse in $ctrl.data.spouses">
                 Ægtefælle: {{spouse.firstnames}} {{spouse.lastname}}
                 <p ng-if="spouse.dateOfBirth">Født: {{spouse.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="spouse.birthplace"> i {{spouse.birthplace}}</span></p>
