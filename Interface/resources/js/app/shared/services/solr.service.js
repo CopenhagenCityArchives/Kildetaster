@@ -37,7 +37,7 @@ define([
                     break;
                 case "neq":
                     field = "-" + field;
-                    term = "\"" + term + "\""
+                    term = "\"" + term + "\"";
                     break;
                 case "starts":
                     term = term + "*";
