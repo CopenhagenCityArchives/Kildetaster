@@ -33,10 +33,11 @@ define([
 
             switch (op) {
                 case "eq":
-                    term = "\"" + term + "\""
+                    term = "\"" + term + "\"";
                     break;
                 case "neq":
                     field = "-" + field;
+                    term = "\"" + term + "\""
                     break;
                 case "starts":
                     term = term + "*";
