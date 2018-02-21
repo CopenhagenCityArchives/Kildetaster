@@ -58,14 +58,24 @@
                 <input type="button" value="Gem værdi" class="btn btn-default" ng-disabled="!model.canCreateValue" ng-click="save()"></input>
         </div>
 
+        <div class="col-md-12 separator">
+            <h3>Lås side op</h3>
+            <h4>Side-id</h4>
+                <input value="indtast side-id" ng-model="model.pageId" class="form-control" style="width: 400px;"></input>
+                <p ng-hide="model.hasPageId">Indtast et side-id (<b>ikke</b> side-tal) for at låse en side op. Side-id'et findes i URL'en til siden.</p>
+                <p ng-hide="!model.hasPageId">Siden <b>{{model.pageId}}</b> vil blive låst op</p>
+                <input type="button" value="Lås side op" class="btn btn-default" ng-disabled="!model.hasPageId" ng-click="unlockPage()"></input>
+        </div>
+
         <div class="col-md-12">
             <h4 ng-hide="model.status!==''" style="color:green;" class="text-center">&nbsp;</h4>
             <h4 ng-hide="model.status==''" ng-class="{status_success: model.statusType == 'success', status_error: model.statusType == 'error'}" class="text-center">{{model.status}}</h4>
             <p>&nbsp;</p>
             <h4 class="text-center" ng-hide="model.history.length == 0">Historik</h4>
             <div ng-repeat="x in model.history">
-            <div ng-if="!x.oldValue">Du tilføjede værdien <b>{{x.newValue}}</b></div>
-            <div ng-if="x.oldValue">Du ændrede værdien <b>{{x.oldValue}}</b> til <b>{{x.newValue}}</b></div>
+            <div ng-if="x.pageId">Du låste siden <b>{{x.pageId}}</b> op</div>
+            <div ng-if="!x.oldValue && x.newValue">Du tilføjede værdien <b>{{x.newValue}}</b></div>
+            <div ng-if="x.oldValue && !x.newValue">Du ændrede værdien <b>{{x.oldValue}}</b> til <b>{{x.newValue}}</b></div>
             </div>
         </div>
     <!--<div><pre>{{ model | json }}</pre></div>-->

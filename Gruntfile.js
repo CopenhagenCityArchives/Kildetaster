@@ -127,7 +127,7 @@ module.exports = function(grunt) {
 
         watch: {
             js: {
-                files: ['js/*.js'],
+                files: ['js/*.js', '!js/templates.js'],
                 tasks: ['clean:build', 'html2js:task', 'concat:main', 'jsbeautifier', 'wiredep:task', 'bower-bundler', 'replace:dist', 'clean:templates']
             }
         },

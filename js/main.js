@@ -63,6 +63,30 @@ app.config(function($httpProvider) {
 
 //app.constant('API', 'http://localhost:8000/datasource');
 app.constant('API', 'https://kbhkilder.dk/api/datasource');
+app.constant('PageAPI', 'https://kbhkilder.dk/api/taskspages');
+
+app.service('PagesService', ['$http', '$q', 'PageAPI', function($http, $q, PageAPI) {
+    var pubs = {};
+
+    pubs.unlock = function(taskId, pageId) {
+        var deferred = $q.defer();
+
+        $http.patch(PageAPI + '?task_id=' + taskId + '&page_id=' + pageId, {
+            'is_done': 0
+        }).then(
+            function(data, status, headers) {
+                deferred.resolve(data);
+            },
+            function(data, status, headers) {
+                deferred.reject(null);
+            }
+        );
+
+        return deferred.promise;
+    };
+
+    return pubs;
+}]);
 
 //Loading and saving files
 app.service('Datasource', ['$http', '$q', 'API', function($http, $q, API) {
@@ -182,6 +206,12 @@ app.service('TokenService', ['$sessionStorage', '$http', '$q', '$location', func
                 }
                 //We are not logged in, point users to min-side
                 else {
+                    if ($location.host() == 'localhost') {
+                        $sessionStorage.tokenData = 'test';
+                        deferred.resolve({
+                            tokenData: 'test'
+                        });
+                    }
                     //            window.location.href = MAINDOMAIN + '/min-side';
                 }
 
@@ -196,7 +226,7 @@ app.service('TokenService', ['$sessionStorage', '$http', '$q', '$location', func
     return pubs;
 }]);
 
-app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'Datasource', 'TokenService', function(scope, $location, $sessionStorage, Datasource, TokenService) {
+app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'Datasource', 'TokenService', 'PagesService', function(scope, $location, $sessionStorage, Datasource, TokenService, PagesService) {
     scope.model = {};
     scope.model.selected_datasource = null;
     scope.model.datasources = [];
@@ -245,6 +275,35 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
             scope.model.statusType = 'success';
         }
     });
+
+    scope.$watch(function() {
+        return scope.model.pageId;
+    }, function(newValue) {
+        if (newValue && parseInt(newValue)) {
+            scope.model.hasPageId = true;
+            scope.model.status = "";
+            scope.model.statusType = 'success';
+        } else {
+            scope.model.hasPageId = false;
+        }
+    });
+
+    scope.unlockPage = function() {
+        var input = scope.model.pageId;
+
+        PagesService.unlock(1, input).then(function(resdata) {
+                scope.model.history.push({
+                    type: "page_unlock",
+                    pageId: input
+                });
+                scope.model.pageId = undefined;
+            },
+            function(error) {
+                console.log(error);
+                scope.model.status = "Kunne ikke låse siden op.";
+                scope.model.statusType = 'error';
+            });
+    };
 
     scope.save = function() {
         if (scope.model.selectedValue.id && (scope.model.changeValue != "" && scope.model.changeValue != undefined)) {
