@@ -50,6 +50,9 @@
 
         <div class="post__item">
             <h3 class="post__sectionheader">Adresse</h3>
+            <span ng-if="$ctrl.data.address.addressOutsideCph">
+                {{$ctrl.data.address.adressOutsideCph}}
+            </span>
             <text-address address="$ctrl.data.addresses"></text-address>
         </div>
 
