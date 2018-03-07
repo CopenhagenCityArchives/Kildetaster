@@ -17,7 +17,7 @@
                 <p ng-if="$ctrl.data.person_type_text">Persontype: {{$ctrl.data.person_type_text}}</p>
                 <p ng-if="$ctrl.data.dateOfBirth">Født: {{$ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
                 <p ng-if="$ctrl.data.dateOfDeath">Død: {{$ctrl.data.dateOfDeath | date: 'dd-MM-yyyy' }}</p>
-                <p>{{$ctrl.data.civilstand}}, <text-gender type="$ctrl.data.sex"></text-gender></p>
+                <p><span ng-if="$ctrl.data.civilstand">{{$ctrl.data.civilstand}}</span> <span ng-if="$ctrl.data.civilstand && $ctrl.data.sex">, </span> <text-gender type="$ctrl.data.sex"></text-gender></p>
                 <div ng-repeat="position in $ctrl.data.positions">
                     {{position.position}}<span ng-if="!$last">, </span>
                 </div>
