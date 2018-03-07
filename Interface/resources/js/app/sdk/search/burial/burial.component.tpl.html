@@ -63,11 +63,10 @@
             <p ng-if="$ctrl.data.deathplace"><strong>Dødssted:</strong> {{ $ctrl.data.deathplace }}</p>
             <!-- TODO: make directive to show burials -->
 
-            <p ng-if="$ctrl.data.chapel"><strong>Fra (kapel):</strong> {{ $ctrl.data.chapel }}</p>
-            <p ng-if="$ctrl.data.parish"><strong>Sogn:</strong> {{ $ctrl.data.parish }}</p>
-            <p ng-if="$ctrl.data.cemetary"><strong>Til (kirkegård):</strong> {{ $ctrl.data.cemetary }}</p>
+            <p ng-if="$ctrl.data.burials.chapel"><strong>Fra (kapel):</strong> {{ $ctrl.data.burials.chapel }}</p>
+            <p ng-if="$ctrl.data.burials.parish"><strong>Sogn:</strong> {{ $ctrl.data.burials.parish }}</p>
+            <p ng-if="$ctrl.data.burials.cemetary"><strong>Til (kirkegård):</strong> {{ $ctrl.data.burials.cemetary }}</p>
             <p ng-if="$ctrl.data.comment"><strong>Kommentar:</strong> {{ $ctrl.data.comment }}</p>
-
         </div>
     </div>
 
@@ -76,7 +75,7 @@
         <div class="post__item">
             <h3 class="post__sectionheader">Om kilden</h3>
             <p>{{ $ctrl.data.collection_info }} {{ $ctrl.data.unit_description }} s. {{ $ctrl.data.page_number }}</p>
-            <p ng-if="$ctrl.data.record_number"><strong>Løbenummer:</strong> {{ $ctrl.data.record_number }}</p>
+            <p ng-if="$ctrl.data.burials.record_number"><strong>Løbenummer:</strong> {{ $ctrl.data.burials.record_number }}</p>
         </div>
 
         <div class="post__item">
