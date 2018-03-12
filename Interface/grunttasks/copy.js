@@ -39,6 +39,12 @@ module.exports = {
 
     sdk: {
         files: [{
+            //Fonts
+            expand: true,
+            cwd: '<%= package.resources %>/fonts/',
+            src: '**',
+            dest: '<%= package.sdkresources %>/fonts'
+        }, {
             //Javascript
             expand: true,
             cwd: '<%= package.resources %>/js/',
