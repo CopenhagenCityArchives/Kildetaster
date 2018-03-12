@@ -28,18 +28,21 @@
         width: 50%;
         padding: 20px;
 
-        border-bottom: 1px solid darken($light-gray, 10%);
+
 
         .post__col & {
             width: 100%;
         }
 
-        &:last-child {
-            border-bottom: none;
-        }
-
         @media (max-width: 767px) {
             width: 100%;
+        }
+
+        p {
+            margin-bottom: 0;
+        }
+        p, span, div, a {
+            color: $font-color;
         }
     }
 
@@ -59,13 +62,17 @@
     }
 
     &__collection {
-        font-size: 13px;
+        font-family: "amblelight_condensed";
+        font-size: 20px;
 
         display: block;
 
         margin-top: 4px;
 
         color: $font-color;
+    }
+    &__infogroup {
+        margin-bottom: 20px;
     }
 
     &__header {
@@ -87,6 +94,7 @@
     }
 
     &__sectionheader {
+        font-size: 1.5em !important; // !important because of Joomla styling
         font-weight: 600;
 
         margin-bottom: 8px !important;  // !important because of Joomla styling
@@ -130,6 +138,35 @@
         // joomla overwrite
         div, span {
             color: currentColor;
+        }
+    }
+    &__sharelink {
+        label {
+            margin-bottom: 0;
+        }
+        input[type="text"].input {
+            display: inline-block;
+
+            width: auto;
+            max-width: calc(100% - 80px);
+            margin: 0;
+
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+
+
+            &.copied + .button + .confirm {
+                opacity: 1;
+            }
+        }
+        .button {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+        .confirm {
+            padding-left: 10px;
+
+            opacity: 0;
         }
     }
 }

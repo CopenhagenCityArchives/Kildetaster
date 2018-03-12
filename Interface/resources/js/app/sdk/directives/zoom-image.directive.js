@@ -82,7 +82,7 @@ define([
                         // Turn off default buttons on the viewer, as we dont need those
                         showNavigator: false,
                         showHomeControl: false,
-                        showFullPageControl: false,
+                        showFullPageControl: true,
 
                         zoomInButton: "zoom-in-" + $scope.num,
                         zoomOutButton: "zoom-out-" + $scope.num,

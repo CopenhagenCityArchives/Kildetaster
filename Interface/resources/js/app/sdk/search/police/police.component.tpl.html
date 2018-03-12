@@ -15,13 +15,21 @@
 
 
                 <p ng-if="$ctrl.data.person_type_text">Persontype: {{$ctrl.data.person_type_text}}</p>
-                <p ng-if="$ctrl.data.dateOfBirth">Født: {{$ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
-                <p ng-if="$ctrl.data.dateOfDeath">Død: {{$ctrl.data.dateOfDeath | date: 'dd-MM-yyyy' }}</p>
-                <p><span ng-if="$ctrl.data.civilstand">{{$ctrl.data.civilstand}}</span> <span ng-if="$ctrl.data.civilstand && $ctrl.data.sex">, </span> <text-gender type="$ctrl.data.sex"></text-gender></p>
-                <div ng-repeat="position in $ctrl.data.positions">
-                    {{position.position}}<span ng-if="!$last">, </span>
+                <div class="post__infogroup">
+                    <p ng-if="$ctrl.data.dateOfBirth">Født: {{$ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
+                    <p ng-if="$ctrl.data.dateOfDeath">Død: {{$ctrl.data.dateOfDeath | date: 'dd-MM-yyyy' }}</p>
                 </div>
-                <p ng-if="$ctrl.data.person_comment">Indtasters kommentar: {{$ctrl.data.person_comment}}</p>
+                <div class="post__infogroup">
+                    <p><span ng-if="$ctrl.data.civilstand">{{$ctrl.data.civilstand}}</span><span ng-if="$ctrl.data.civilstand && $ctrl.data.sex">, </span><text-gender type="$ctrl.data.sex"></text-gender></p>
+                </div>
+                <div class="post__infogroup">
+                    <div ng-repeat="position in $ctrl.data.positions">
+                        <span>{{position.position}}</span><span ng-if="!$last">, </span>
+                    </div>
+                </div>
+                <div class="post__infogroup">
+                    <p ng-if="$ctrl.data.person_comment">Indtasters kommentar: {{$ctrl.data.person_comment}}</p>
+                </div>
 
                 <!-- Error reports -->
                 <div ng-if="$ctrl.postErrors.length > 0" class="post__error">
@@ -32,6 +40,11 @@
                         {{ error.label || 'Ukendt felt' }}: {{error.comment}}
                     </div>
                 </div>
+                
+            </div>
+            <div class="post__sharelink">
+                <label for="permalink">Permalink</label>
+                <input id="permalink" class="input" type="text" ng-value="$ctrl.permalink"/><button ng-click="$ctrl.copy()" class="button">kopier</button><span class="confirm">Kopieret</span>
             </div>
 
         </div>
@@ -42,8 +55,10 @@
 
     <div class="post__col">
         <div class="post__item">
-            <h3 class="post__sectionheader" ng-if="$ctrl.data.addresses">Adresse</h3>
-            <text-address-police address="address" date="true" ng-repeat="address in $ctrl.data.addresses"></text-address-police>
+            <h3 class="post__sectionheader">Om kilden</h3>
+            <p>Station {{$ctrl.data.station}}. Filmrulle {{$ctrl.data.film}}. Registerblad {{$ctrl.data.number}} (unikt id. {{$ctrl.data.registerblad_id}})</p>
+            <p ng-if="$ctrl.data.dateOfCompletion">Registerbladet er udfyldt: {{$ctrl.data.dateOfCompletion | date: 'dd-MM-yyyy' }}</p>
+            <p ng-if="$ctrl.data.specialComment">Særlige bemærkninger: {{$ctrl.data.specialComment}}</p>
         </div>
         <div class="post__item" ng-if="$ctrl.data.spouses.length > 0 || $ctrl.data.children.length > 0 || $ctrl.data.parent">
             <h3 class="post__sectionheader">Andre personer</h3>
@@ -53,7 +68,7 @@
                 <a target="_blank" ui-sref="search.page.result.post({postId:$ctrl.data.parent.post_id})">Vis person</a>
             </div>
             <div ng-repeat="spouse in $ctrl.data.spouses">
-                Ægtefælle: {{spouse.firstnames}} {{spouse.lastname}}
+                <strong>Ægtefælle:</strong> {{spouse.firstnames}} {{spouse.lastname}}
                 <p ng-if="spouse.dateOfBirth">Født: {{spouse.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="spouse.birthplace"> i {{spouse.birthplace}}</span></p>
                 <a target="_blank" ui-sref="search.page.result.post({postId:spouse.post_id})">Vis person</a>
             </div>
@@ -67,10 +82,8 @@
 
     <div class="post__col post__alternate">
         <div class="post__item">
-            <h3 class="post__sectionheader">Om kilden</h3>
-            <p>Station {{$ctrl.data.station}}. Filmrulle {{$ctrl.data.film}}. Registerblad {{$ctrl.data.number}} (unikt id. {{$ctrl.data.registerblad_id}})</p>
-            <p ng-if="$ctrl.data.dateOfCompletion">Registerbladet er udfyldt: {{$ctrl.data.dateOfCompletion | date: 'dd-MM-yyyy' }}</p>
-            <p ng-if="$ctrl.data.specialComment">Særlige bemærkninger: {{$ctrl.data.specialComment}}</p>
+            <h3 class="post__sectionheader" ng-if="$ctrl.data.addresses">Adresse</h3>
+            <text-address-police address="address" date="true" ng-repeat="address in $ctrl.data.addresses"></text-address-police>    
         </div>
         <div class="post__item" ng-if="$ctrl.data.last_changed">
             <h3 class="post__sectionheader">Om indtastningen</h3>
