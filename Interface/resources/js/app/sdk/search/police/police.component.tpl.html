@@ -12,9 +12,9 @@
                     <text-name firstnames="$ctrl.data.firstnames" lastname="$ctrl.data.lastname" birthname="$ctrl.data.birthname"></text-name>
                     <span class="post__collection">Politiets registerblade</span>
                 </h2>
-
-
-                <p ng-if="$ctrl.data.person_type_text">Persontype: {{$ctrl.data.person_type_text}}</p>
+                <div class="post__infogroup">
+                    <p ng-if="$ctrl.data.person_type_text">Persontype: {{$ctrl.data.person_type_text}}</p>
+                </div>
                 <div class="post__infogroup">
                     <p ng-if="$ctrl.data.dateOfBirth">Født: {{$ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
                     <p ng-if="$ctrl.data.dateOfDeath">Død: {{$ctrl.data.dateOfDeath | date: 'dd-MM-yyyy' }}</p>
@@ -55,11 +55,9 @@
 
     <div class="post__col">
         <div class="post__item">
-            <h3 class="post__sectionheader">Om kilden</h3>
-            <p>Station {{$ctrl.data.station}}. Filmrulle {{$ctrl.data.film}}. Registerblad {{$ctrl.data.number}} (unikt id. {{$ctrl.data.registerblad_id}})</p>
-            <p ng-if="$ctrl.data.dateOfCompletion">Registerbladet er udfyldt: {{$ctrl.data.dateOfCompletion | date: 'dd-MM-yyyy' }}</p>
-            <p ng-if="$ctrl.data.specialComment">Særlige bemærkninger: {{$ctrl.data.specialComment}}</p>
-        </div>
+            <h3 class="post__sectionheader" ng-if="$ctrl.data.addresses">Adresse</h3>
+            <text-address-police address="address" date="true" ng-repeat="address in $ctrl.data.addresses"></text-address-police>        
+       </div>
         <div class="post__item" ng-if="$ctrl.data.spouses.length > 0 || $ctrl.data.children.length > 0 || $ctrl.data.parent">
             <h3 class="post__sectionheader">Andre personer</h3>
             <div ng-if="$ctrl.data.parent">
@@ -82,8 +80,10 @@
 
     <div class="post__col post__alternate">
         <div class="post__item">
-            <h3 class="post__sectionheader" ng-if="$ctrl.data.addresses">Adresse</h3>
-            <text-address-police address="address" date="true" ng-repeat="address in $ctrl.data.addresses"></text-address-police>    
+                <h3 class="post__sectionheader">Om kilden</h3>
+                <p>Station {{$ctrl.data.station}}. Filmrulle {{$ctrl.data.film}}. Registerblad {{$ctrl.data.number}} (unikt id. {{$ctrl.data.registerblad_id}})</p>
+                <p ng-if="$ctrl.data.dateOfCompletion">Registerbladet er udfyldt: {{$ctrl.data.dateOfCompletion | date: 'dd-MM-yyyy' }}</p>
+                <p ng-if="$ctrl.data.specialComment">Særlige bemærkninger: {{$ctrl.data.specialComment}}</p>     
         </div>
         <div class="post__item" ng-if="$ctrl.data.last_changed">
             <h3 class="post__sectionheader">Om indtastningen</h3>

@@ -37,6 +37,8 @@ define([], function() {
 
         this.$onInit = function() {
 
+            that.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id + "/";
+
             that.imageUrl = helpers.getImageUrlByPostId(this.data.post_id);
 
             //Determine the editor link visibility based on wether or not the user can edit
@@ -44,6 +46,14 @@ define([], function() {
 
             that.editorUrl = EDITORURL + '/#/task/' + that.data.task_id + '/page/' + that.data.page_id + '/post/' + that.data.post_id;
 
+        };
+
+        this.copy = function() {
+            var copyText = document.querySelector("#permalink");
+            copyText.select();
+            document.execCommand("copy");
+            copyText.className = "input copied"
+            copyText.blur();
         };
 
     };

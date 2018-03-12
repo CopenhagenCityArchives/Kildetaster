@@ -20,7 +20,7 @@ define([], function() {
             document.execCommand("copy");
             copyText.className = "input copied"
             copyText.blur();
-          };
+        };
     };
 
     return policeController;
