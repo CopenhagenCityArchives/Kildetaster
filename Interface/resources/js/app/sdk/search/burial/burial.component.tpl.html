@@ -19,7 +19,7 @@
                     <text-date prefix="Død" date="$ctrl.data.dateOfDeath"></text-date>
                 </p>
                 <p><text-age prefix="'Alder: '" years="$ctrl.data.ageYears" months="$ctrl.data.ageMonth" weeks="$ctrl.data.ageWeeks" days="$ctrl.data.ageDays" hours="$ctrl.data.ageHours"></text-age></p>
-                <p><span ng-if="$ctrl.data.civilstatus">{{ $ctrl.data.civilstatus }}<span ng-if="$ctrl.data.civilstatus && $ctrl.data.sex">,</span> <span ng-if="$ctrl.data.sex">{{ $ctrl.data.sex }}</span></p>
+                <p><span ng-if="$ctrl.data.civilstatus">{{ $ctrl.data.civilstatus }}<span ng-if="$ctrl.data.civilstatus && $ctrl.data.sex">,</span><span ng-if="$ctrl.data.sex">{{ $ctrl.data.sex }}</span></p>
                 <div ng-repeat="position in $ctrl.data.positions">
                     <text-position position="position"></text-position>
                 </div>
@@ -50,8 +50,8 @@
 
         <div class="post__item">
             <h3 class="post__sectionheader">Adresse</h3>
-            <span ng-if="$ctrl.data.address.addressOutsideCph">
-                {{$ctrl.data.address.adressOutsideCph}}
+            <span ng-if="$ctrl.data.addresses.addressOutsideCph">
+                {{$ctrl.data.address.addressOutsideCph}}
             </span>
             <text-address address="$ctrl.data.addresses"></text-address>
         </div>

@@ -21,6 +21,7 @@
                 <div ng-repeat="position in $ctrl.data.positions">
                     {{position.position}}<span ng-if="!$last">, </span>
                 </div>
+                <p ng-if="$ctrl.data.person_comment">Indtasters kommentar: {{$ctrl.data.person_comment}}</p>
 
                 <!-- Error reports -->
                 <div ng-if="$ctrl.postErrors.length > 0" class="post__error">
@@ -74,6 +75,7 @@
         <div class="post__item" ng-if="$ctrl.data.last_changed">
             <h3 class="post__sectionheader">Om indtastningen</h3>
             <p>Senest ændret: {{$ctrl.data.last_changed}}</p>
+            <p ng-if="$ctrl.data.registerblad_comment">Indtasters kommentar: {{$ctrl.data.registerblad_comment}}</p>
         </div>
         <div class="post__item post__viewer" ng-if="$ctrl.imageBack">
             <zoom-image image-url="$ctrl.imageBack"></zoom-image>

@@ -1,3 +1,5 @@
 <div>
     <span ng-if="date">{{address.address_date | date: 'dd-MM-yyyy' }}: </span>{{address.street ? address.street : address.institution }}<span ng-if="address.number"> {{address.number}}</span><span ng-if="address.letter">{{address.letter}}</span><span ng-if="address.floor">, {{address.floor}}</span><span ng-if="address.side"> {{address.side}}</span><span ng-if="address.place">, {{address.place}}</span><span ng-if="address.servant_staying_at">, hos {{address.servant_staying_at}}</span>
+    <span ng-if="address.addressOutsideCph">, {{address.addressOutsideCph}}</span>
+    <span ng-if="address.adr_comment">Indtasters kommentar: {{address.adr_comment}}</span>
 </div>
