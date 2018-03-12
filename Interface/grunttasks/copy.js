@@ -59,7 +59,7 @@ module.exports = {
             src: ['**/*.*'],
             dest: '<%= package.sdkresources %>/bower_components'
 
-        }, {
+        },{
             //Mock data
             expand: true,
             cwd: '<%= package.resources %>/mock/',
@@ -77,8 +77,8 @@ module.exports = {
             cwd: '<%= package.resources %>/',
             src: ['.htaccess'],
             dest: '<%= package.sdkresources %>/'
-
-        }]
+        }
+    ]
     },
 
     development: {
@@ -88,7 +88,7 @@ module.exports = {
             cwd: '<%= package.resources %>/fonts/',
             src: '**',
             dest: '<%= package.buildresources %>/fonts'
-        }, {
+        },{
             //Images
             expand: true,
             cwd: '<%= package.resources %>/images/',
@@ -102,7 +102,7 @@ module.exports = {
             src: ['.htaccess'],
             dest: '<%= package.buildresources %>/'
 
-        }, {
+        },{
             //Mock data
             expand: true,
             cwd: '<%= package.resources %>/mock/',
@@ -119,7 +119,7 @@ module.exports = {
             cwd: '<%= package.resources %>/fonts/',
             src: '**',
             dest: '<%= package.buildresources %>/fonts'
-        }, {
+        },{
             //Images
             expand: true,
             cwd: '<%= package.resources %>/images/',

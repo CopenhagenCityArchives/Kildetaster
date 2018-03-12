@@ -45,7 +45,7 @@ define([
                 });
 
                 $scope.fieldList = helpers.uniqueBy(newval, function(item) {
-                    return item.field_formName;
+                    return item.label;
                 })
             }
 
@@ -64,12 +64,12 @@ define([
 
             if (newval && newval !== null) {
                 //Clear the other dropdown
-                $scope.filtered.field_formName = null;
+                $scope.filtered.label = null;
             }
 
         });
 
-        $scope.$watch('filtered.field_formName', function(newval) {
+        $scope.$watch('filtered.label', function(newval) {
 
             if (newval && newval !== null) {
                 //Clear the other dropdown

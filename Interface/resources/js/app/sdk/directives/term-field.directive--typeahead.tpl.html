@@ -2,9 +2,9 @@
 
     Søgeterm
 
-    <ui-select ng-model="data.term" ng-class="{'loading': loading}" on-select="doSubmit({ charCode: 13})" append-to-body="false" ng-model-options="ngModelOptions" theme="select2">
+    <ui-select ng-model="data.term" ng-class="{'loading': loading}" append-to-body="false" ng-model-options="ngModelOptions" theme="select2">
         <ui-select-match placeholder="Skriv for at se valgmuligheder">
-            <div ng-bind="$select.selected"></div>
+            <div ng-bind="$select.selected.label"></div>
         </ui-select-match>
         <!-- minimum-input-length is set to 0, and is handled in the getData function instead, if we let ui-select
             handle the limit, it will not clear/reset the options correctly -->
@@ -12,7 +12,7 @@
             repeat="option in options track by $index" refresh="getData(data.field, $select.search)"
             refresh-delay="200"
             minimum-input-length="0">
-            <div ng-bind-html="option | highlight: $select.search"></div>
+            <div ng-bind-html="option.label | highlight: $select.search"></div>
         </ui-select-choices>
         <!-- <ui-select-no-choice>
             No content

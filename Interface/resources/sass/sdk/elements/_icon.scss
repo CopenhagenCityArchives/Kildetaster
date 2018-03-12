@@ -25,6 +25,13 @@
         background-image: inline("resources/images/icon_close.svg");
     }
 
+    &.close-dark {
+        width: 10px;
+
+        opacity: 1; //overwrite default Joomla styling
+        background-image: inline("resources/images/icon_close_dark.svg");
+    }
+
     &.pencil {
         width: 10px;
         height: 10px;
@@ -37,5 +44,12 @@
         height: 32px;
 
         background-image: inline("resources/images/icon_green_checkmark.svg");
+    }
+
+    &.arrow {
+        width: 12px;
+        height: 9px;
+
+        background-image: inline("resources/images/icon_arrow.svg");
     }
 }

@@ -3,7 +3,11 @@ define([
 
 ], function() {
 
-    var editorConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider, sfPathProvider, schemaFormProvider, schemaFormDecoratorsProvider, sfBuilderProvider) {
+    var editorConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider, $locationProvider, sfPathProvider, schemaFormProvider, schemaFormDecoratorsProvider, sfBuilderProvider) {
+
+        // Prevent default use of !# hash bang urls
+        // @see https://stackoverflow.com/questions/41226122/url-hash-bang-prefix-instead-of-simple-hash-in-angular-1-6
+        $locationProvider.hashPrefix('');
 
         // For any unmatched url, redirect to /
         $urlRouterProvider.otherwise('/error');

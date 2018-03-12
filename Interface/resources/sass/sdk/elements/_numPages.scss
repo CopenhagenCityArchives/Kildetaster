@@ -1,0 +1,19 @@
+.numPages {
+    margin: 10px auto 20px;
+
+    &__label {
+        font-size: 18px;
+    }
+
+    &__select {
+        width: 60px !important;
+        height: 30px !important;
+        margin-bottom: 0;
+
+        // IE10+ targetting styling
+        @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+            min-width: 65px;
+            max-width: 70px;
+        }
+    }
+}

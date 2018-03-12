@@ -32,6 +32,13 @@ module.exports = function(grunt) {
                     livereload: true
                 }
             },
+            config: {
+                files: ['<%= package.configs %>/**/*.json'],
+                tasks: ['newer:copy:sdk', 'karma:prototype:run'],
+                options: {
+                    livereload: true
+                }
+            },
 
             mock: {
                 files: ['<%= package.resources %>/mock/**/*.json'],

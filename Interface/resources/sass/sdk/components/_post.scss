@@ -1,89 +1,135 @@
 .post {
-    background-color: $white;
-    &__header {
-        margin-bottom: 20px;
+    font-size: 13px;
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    &__head {
+        display: flex;
+
+        width: 100%;
+
+        flex-wrap: wrap;
     }
 
-    &__tools {
-        a {
-            line-height: 30px;
+    &__col {
+        display: flex;
+        flex-direction: column;
 
-            position: relative;
+        width: 50%;
 
-            display: block;
-
-            padding-right: 34px;
-
-            .sdk-icon.report-error {
-                position: absolute;
-                top: 4px;
-                right: 0;
-            }
-
-            .sdk-icon.close {
-                position: absolute;
-                top: 0;
-                right: 6px;
-            }
-
-            .sdk-icon.green-checkmark {
-                position: absolute;
-                top: 0;
-                right: 0;
-
-                width: 20px;
-            }
-        }
-    }
-
-    &__closereporting {
-        position: absolute;
-        top: 4px;
-        right: 0;
-
-        display: inline-block;
-
-        width: 25px;
-        height: 25px;
-
-        border: 1px solid #505050;
-        border-radius: 50%;
-        background-color: #8a8a8a;
-    }
-    &__image {
-        margin-bottom: 10px;
-        padding: 10px;
-
-        text-align: center;
-
-        border: 1px solid $light-gray;
-        background-color: $lighter-gray;
-
-        img {
+        @media (max-width: 767px) {
             width: 100%;
-            max-width: 400px;
-            height: 100%;
-            max-height: 570px;
         }
     }
 
-    &__button {
-        font-size: 16px;
-        font-weight: normal;
-        line-height: 24px;
+    &__item {
+        width: 50%;
+        padding: 20px;
 
-        text-transform: uppercase;
+        border-bottom: 1px solid darken($light-gray, 10%);
 
-        color: $white;
-        border: none;
-        border-radius: 3px;
-        background-color: $dark-blue;
-        background-image: none; /* default bootstrap overwrite */
+        .post__col & {
+            width: 100%;
+        }
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        @media (max-width: 767px) {
+            width: 100%;
+        }
     }
 
-    &__caption {
+    &__main {
+        display: flex;
+        flex-direction: column;
+
+        justify-content: center;
+    }
+
+    &__alternate {
+        background-color: $light-gray;
+    }
+
+    &__viewer {
+        background-color: $gray-dark;
+    }
+
+    &__collection {
+        font-size: 13px;
+
         display: block;
 
+        margin-top: 4px;
+
+        color: $font-color;
+    }
+
+    &__header {
+        display: flex;
+        flex-direction: column;
+
+        height: 100%;
+        padding-top: 20px;
+
+        justify-content: center;
+
+        h2 {
+            font-size: 32px;
+
+            margin-bottom: 20px;
+
+            color: $font-color-dark;
+        }
+    }
+
+    &__sectionheader {
+        font-weight: 600;
+
+        margin-bottom: 8px !important;  // !important because of Joomla styling
+    }
+
+    &__links {
+        display: flex;
+        flex-direction: row;
+
         margin-top: 10px;
+
+        justify-content: space-between;
+
+        a {
+            font-size: 11px;
+
+            flex: 0 0 calc(50% - 5px);
+        }
+    }
+
+    &__error {
+        font-weight: 600;
+
+        margin-top: 20px;
+
+        color: $red;
+
+        a {
+            display: block;
+
+            margin-bottom: 14px;
+
+            text-decoration: underline;
+
+            color: currentColor;
+            &:hover {
+                text-decoration: none;
+            }
+        }
+
+        // joomla overwrite
+        div, span {
+            color: currentColor;
+        }
     }
 }

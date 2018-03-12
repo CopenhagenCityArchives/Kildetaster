@@ -2,9 +2,26 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <h2>Ret fejl i kilde</h2>
-            <p>Herunder er de fejlmeldte indtastninger markeret med rødt ikon. Ret fejlene i felterne og klik "Opdater" nedenfor.</p>
+            <h2>Ret fejl i kilde</h2>         
         </div>
+
+        <div class="col-sm-12" ng-if="(errorReports | filter: { deleted: 0 }).length > 0 ">
+            
+            <h3>Fejlmeldinger</h3>
+            <p>Herunder er de indmeldte fejl. Ret posten til hvor det er nødvendigt, og markér hefter at fejlen er håndteret.</p>
+            
+            <ul class="list-unstyled field-list field-list--error">
+                <li class="field-list__item" ng-repeat="report in errorReports | filter: { deleted: 0 } | orderBy: label">
+                    <span>
+                        <strong>{{ report.label || 'Ukendt felt' }}</strong>: {{ report.comment }}
+                    </span>
+
+                    <button class="btn-sm btn-danger field-list__button" ng-click="updateErrorReport(report)">Fejl håndteret</button>
+                </li>
+            </ul>
+
+        </div>
+
         <div class="col-sm-12">
 
             <h3>Udfyldt</h3>
@@ -31,7 +48,6 @@
                             <span class="summary-item__label">{{field.schema.title}}</span>
                             <span class="summary-item__field">{{lookupFieldValue(field.key)}}
                                 <span class="icon icon__edit" ng-if="hasErrorReported[field.key].deleted !== 0"></span>
-                                <span class="glyphicon glyphicon-exclamation-sign icon__error" ng-if="hasErrorReported[field.key].deleted === 0"></span>
                              </span>
                         </span>
                     </a>
@@ -42,55 +58,7 @@
                             <form name="singleFieldForm" sf-schema="schema" sf-form="[field.key]" sf-model="valueCopy[field.key]" sf-options="sfDefaults"></form>
                         </div>
 
-                        <div class="col-sm-12" ng-if="hasErrorReported[field.key].deleted === 0">
-
-                            <label>Kommentar</label>
-                            <p>
-                                {{hasErrorReported[field.key].comment}}
-                            </p>
-
-                            <div class="text-right">
-
-                                <button
-                                    tabindex="1"
-                                    title="Sletter fejlrapporten og beholder værdien"
-                                    type="button"
-                                    class="btn btn-default"
-                                    ng-if="hasErrorReported[field.key].deleted === 0"
-                                    ng-click="rejectErrorReport(hasErrorReported[field.key].id, field.key, values[mainProperty].id)">
-                                    {{TEXT.BUTTON.NOTERROR}}
-                                </button>
-
-                                <button
-                                    ng-if="lookupFieldValue(field.key) && field.schema.isRequired !== '1'"
-                                    tabindex="1"
-                                    title="Sletter værdien og feltet"
-                                    type="button" class="btn btn-default"
-                                    ng-click="removeFieldValue(field.key, values[mainProperty].id, hasErrorReported[field.key].id)">
-                                    {{TEXT.BUTTON.DELETE}}
-                                </button>
-                                <button
-                                    ng-disabled="singleFieldForm.$invalid"
-                                    tabindex="1"
-                                    title="Opdaterer værdien og sletter fejlrapporten"
-                                    type="button"
-                                    class="btn btn-default"
-                                    ng-click="updateValues(field.key, values[mainProperty].id, hasErrorReported[field.key].id)">
-                                    Ret
-                                </button>
-                                <button
-                                    tabindex="1"
-                                    title="Luk, uden at ændre"
-                                    type="button"
-                                    class="btn btn-default"
-                                    ng-click="toggleEditExistingValue(field.key, values[mainProperty].id)">
-                                    {{TEXT.BUTTON.CANCEL}}
-                                </button>
-                            </div>
-
-                        </div>
-
-                        <div class="col-sm-12 text-right" ng-if="hasErrorReported[field.key].deleted !== 0">
+                        <div class="col-sm-12 text-right">
 
                             <button
                                 ng-if="lookupFieldValue(field.key) && field.schema.isRequired !== '1'"
@@ -108,7 +76,7 @@
                                 type="button"
                                 class="btn btn-default"
                                 ng-click="updateValues(field.key, values[mainProperty].id)">
-                                Ret
+                                 {{TEXT.BUTTON.EDIT}}
                             </button>
                             <button
                                 tabindex="1"
@@ -139,55 +107,7 @@
                             <form name="singleFieldForm" sf-schema="schema" sf-form="[field.key]" sf-options="sfDefaults" sf-model="valueCopy[field.key]"></form>
                         </div>
 
-                        <div class="col-sm-12" ng-if="hasErrorReported[field.key]">
-
-                            <div class="update-schema-form__error" ng-repeat="report in hasErrorReported[field.key]">
-                                <label>Kommentar</label>
-                                <p>
-                                    {{report.comment}}
-                                </p>
-
-                                <div class="col-sm-12 text-right">
-                                    <button
-                                        tabindex="1"
-                                        title="Sletter fejlrapporten og beholder værdien"
-                                        type="button"
-                                        class="btn btn-default"
-                                        ng-if="hasErrorReported[field.key][0].deleted === 0"
-                                        ng-click="rejectErrorReport(report.id, field.key)">
-                                        {{TEXT.BUTTON.NOTERROR}}
-                                    </button>
-                                    <button
-                                        ng-if="lookupFieldValue(field.key)"
-                                        tabindex="1"
-                                        title="Sletter værdien og feltet"
-                                        type="button"
-                                        class="btn btn-default"
-                                        ng-click="removeFieldValue(field.key, undefined, report.id)">
-                                        {{TEXT.BUTTON.DELETE}}
-                                    </button>
-                                    <button
-                                        ng-disabled="singleFieldForm.$invalid"
-                                        tabindex="1"
-                                        title="Opdaterer værdien og sletter fejlrapporten"
-                                        type="button"
-                                        class="btn btn-default"
-                                        ng-click="updateValues(field.key, undefined, report.id)">
-                                        Ret
-                                    </button>
-                                    <button
-                                        tabindex="1"
-                                        title="Luk, uden at ændre"
-                                        type="button"
-                                        class="btn btn-default"
-                                        ng-click="toggleEditExistingValue(field.key)">
-                                        {{TEXT.BUTTON.CANCEL}}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-sm-12 text-right" ng-if="!hasErrorReported[field.key]">
+                        <div class="col-sm-12 text-right">
                             <button
                                 ng-if="lookupFieldValue(field.key)"
                                 tabindex="1"
@@ -224,7 +144,6 @@
                     <a href tabindex="1" class="no-underline" ng-click="toggleEditExistingValue(field.key)">
                         <span class="summary-item__label">{{field.schema.title}}</span>
                         <span class="icon icon__edit" ng-if="!hasErrorReported[field.key].length > 0"></span>
-                        <span class="glyphicon glyphicon-exclamation-sign icon__error" ng-if="hasErrorReported[field.key].length > 0"></span>
                     </a>
 
                     <ul class="list-unstyled">
@@ -247,47 +166,7 @@
                                         <form name="singleFieldForm" sf-schema="schema" sf-form="[field.key]" sf-model="valueCopy[field.key]" sf-options="sfDefaults"></form>
                                     </div>
 
-                                    <div class="col-sm-12" ng-if="hasErrorReported[field.key]">
-
-                                        <div class="error-report-controls" ng-repeat="report in hasErrorReported[field.key]">
-
-                                            <label>Kommentar <span class="small">({{report.field_formName}} - {{report.original_value || 'Ingen nuværende værdi'}})</span></label>
-                                            <p>
-                                                {{report.comment}}
-                                            </p>
-                                            <div class="text-right" ng-if="hasErrorReported[field.key]">
-                                                <button
-                                                    tabindex="1"
-                                                    title="Sletter fejlrapporten og beholder værdien"
-                                                    type="button"
-                                                    class="btn btn-default"
-                                                    ng-click="rejectErrorReport(report.id, field.key)">
-                                                    {{TEXT.BUTTON.NOTERROR}}
-                                                </button>
-
-                                                <button
-                                                    ng-disabled="singleFieldForm.$invalid"
-                                                    tabindex="1"
-                                                    title="Opdaterer værdien og sletter fejlrapporten"
-                                                    type="button"
-                                                    class="btn btn-default"
-                                                    ng-click="updateValues(field.key, undefined, report.id)">
-                                                    Ret
-                                                </button>
-                                                <button
-                                                    tabindex="1"
-                                                    title="Luk, uden at ændre"
-                                                    type="button"
-                                                    class="btn btn-default"
-                                                    ng-click="toggleEditExistingValue(field.key)">
-                                                    {{TEXT.BUTTON.CANCEL}}
-                                                </button>
-                                            </div>
-
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-12 text-right" ng-if="!hasErrorReported[field.key]">
+                                    <div class="col-sm-12 text-right">
 
                                         <button
                                             ng-disabled="singleFieldForm.$invalid"

@@ -16,11 +16,11 @@
                         </select>
                     </div>
                     <div class="task-list__header">
-                        Felt(er)
+                        Felter
                         <select class="task-list__filter"
-                            ng-model="filtered.field_formName"
+                            ng-model="filtered.label"
                             ng-options="field as field for field in fieldList"
-                            ng-change="dropdownChanged('field_formName', filtered.field_formName)">
+                            ng-change="dropdownChanged('label', filtered.label)">
                             <option value="">Vælg</option>
                         </select>
                     </div>
@@ -34,7 +34,7 @@
                         {{error.username}}
                     </div>
                     <div class="task-list__item">
-                        {{error.field_formName || error.entity_name_gui}}
+                        {{error.label}}
                     </div>
                     <div class="task-list__item text-right">
                         <a href ng-click="goToEditor(error)" class="button">Ret</a>
@@ -69,7 +69,7 @@
                         {{error.unit_description}}
                     </div>
                     <div class="task-list__item">
-                        {{error.field_formName || error.entity_name_gui}}
+                        {{error.label || error.entity_name_gui}}
                     </div>
                     <div class="task-list__item">
                         <div ng-if="error.superUserTime">{{error.superUserTime | date:'dd-MM-yyyy HH:mm:ss'}}</div>

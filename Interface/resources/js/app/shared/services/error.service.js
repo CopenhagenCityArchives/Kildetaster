@@ -3,18 +3,19 @@ define([
 
 ], function() {
 
-    var errorService = /*@ngInject*/ function errorService($http, $q, $filter, API, JSONURL) {
+    var errorService = /*@ngInject*/ function errorService($http, $q, $filter, API, JSONURL, ERRORREPORCONFIGURL) {
 
         return {
 
-            getData: function getData() {
+            
+            getConfig: function getConfig() {
 
-                return $http.get(JSONURL + '/errors.json')
-                    .then(function(response) {
+                return $http.get(ERRORREPORCONFIGURL)
+                    .then(function(response){
                         return response.data;
                     })
-                    .catch(function(err) {
-                        throw new Error('errorService:getData: ' + err);
+                    .catch(function(err){
+                        throw new Error('errorService:getConfig: ' + err);
                     });
             },
 
@@ -34,7 +35,7 @@ define([
                     deferred.resolve(response.data);
                 })
                 .catch(function(err) {
-                    //console.log('Error creating error report', err);
+                    console.log('Error creating error report', err);
                     deferred.reject(err);
 
                 });
@@ -43,7 +44,7 @@ define([
             },
 
             /**
-            * Both on a task, but also for a specifik user
+            * Both on a task, but also for a specific user
             */
             getErrorReports: function getErrorReports(params) {
 

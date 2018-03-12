@@ -10,10 +10,12 @@ define([
     'angular-ui-router',
     'angular-ui-select',
     'angular-filter',
+    'angular-animate',
 
     'app/shared/sdk-templates',
 
     'app/shared/services/search.service',
+    'app/shared/services/solr.service',
     'app/shared/services/error.service',
     'app/shared/services/helpers.service',
     'app/shared/services/token.service',
@@ -25,16 +27,15 @@ define([
     'app/sdk/search/search.run',
 
     'app/sdk/search/search.controller',
-    'app/sdk/search/search.facets.controller',
+    'app/sdk/search/search.results.controller',
 
-    'app/sdk/search/navigation.controller',
-    'app/sdk/search/post.controller',
+    'app/sdk/search/error-report/error-report.controller',
 
-    'app/sdk/directives/searchresult.directive',
+    'app/sdk/directives/datapost-erindring.directive',
+
     'app/sdk/directives/postfield.directive',
     'app/sdk/directives/postCategory.directive',
     'app/sdk/directives/zoom-image.directive',
-    'app/sdk/directives/pagination.directive',
     'app/sdk/directives/post-count.directive',
 
     'app/sdk/directives/term-field.directive',
@@ -49,9 +50,30 @@ define([
     'app/sdk/directives/text-address.directive',
     'app/sdk/directives/text-deathcause.directive',
     'app/sdk/directives/text-age.directive',
+    'app/sdk/directives/text-person-name.directive',
+    'app/sdk/directives/text-address-police.directive',
+    'app/sdk/directives/text-gender.directive',
+
+    'app/sdk/directives/filterLink/filterLink.directive',
+    'app/sdk/directives/facet/facet.directive',
+
+    'app/sdk/search/getDomContent/getDomContent.directive',
+
+    'app/sdk/components/jumpToPage/jumpToPage.component',
+    'app/sdk/components/numPages/numPages.component',
+
+    'app/sdk/search/search-results/search-result.component',
+    'app/sdk/search/search-config-text/search-config-text.component',
+
+    'app/sdk/search/post/post.component',
+    'app/sdk/search/navigation/navigation.component',
+    'app/sdk/search/pagination/pagination.component',
+    'app/sdk/search/police/police.component',
+    'app/sdk/search/burial/burial.component',
+    'app/sdk/search/erindring/erindring.component',
+    'app/sdk/search/school/school.component',
 
     'app/sdk/filters/formatStringNumber.filter',
-
     'app/shared/constants'
 
 ], function(
@@ -66,10 +88,12 @@ define([
     uiRouter,
     uiSelect,
     angularFilter,
+    angularAnimate,
 
     sdkTemplates,
 
     searchService,
+    solrService,
     errorService,
     helpersService,
     tokenService,
@@ -81,16 +105,16 @@ define([
     searchRun,
 
     searchController,
-    searchFacetsController,
-    navigationController,
-    postController,
+    searchResultsController,
 
-    searchResultDirective,
+    errorReportController,
+
+    datapostErindringDirective,
+
     postfieldDirective,
     postCategoryDirective,
 
     zoomImageDirective,
-    paginationDirective,
     postCountDirective,
 
     termFieldDirective,
@@ -105,6 +129,28 @@ define([
     textAddressDirective,
     textDeathcauseDirective,
     textAgeDirective,
+    textPersonNameDirective,
+    textAddressPoliceDirective,
+    textGenderDirective,
+
+    filterLinkDirective,
+    facetDirective,
+
+    getDomContentDirective,
+
+    jumpToPageComponent,
+    numPagesComponent,
+
+    searchResultComponent,
+    searchConfigTextComponent,
+
+    postComponent,
+    navigationComponent,
+    paginationComponent,
+    postPoliceComponent,
+    postBurialComponent,
+    postErindringComponent,
+    postSchoolComponent,
 
     formatStringNumberFilter,
 
@@ -122,13 +168,15 @@ define([
         'ui.select',
         'angular.filter',
         'ngStorage',
-        'ngSanitize'
+        'ngSanitize',
+        'ngAnimate'
     ]);
 
     searchApp.config(searchConfig);
     searchApp.run(searchRun);
 
     searchApp.service('searchService', searchService);
+    searchApp.service('solrService', solrService);
     searchApp.service('errorService', errorService);
     searchApp.service('helpers', helpersService);
     searchApp.service('tokenService', tokenService);
@@ -137,16 +185,17 @@ define([
     searchApp.factory('tokenFactory', tokenFactory);
 
     searchApp.controller('searchController', searchController);
-    searchApp.controller('searchFacetsController', searchFacetsController);
-    searchApp.controller('navigationController', navigationController);
-    searchApp.controller('postController', postController);
+    searchApp.controller('searchResultsController', searchResultsController);
 
-    searchApp.directive('searchResult', searchResultDirective);
+    searchApp.controller('errorReportController', errorReportController);
+
+    // TODO remove when new version is done
+    searchApp.directive('datapostErindring', datapostErindringDirective);
+
     searchApp.directive('postField', postfieldDirective);
     searchApp.directive('postCategory', postCategoryDirective);
 
     searchApp.directive('zoomImage', zoomImageDirective);
-    searchApp.directive('pagination', paginationDirective);
     searchApp.directive('postCount', postCountDirective);
 
     searchApp.directive('termField', termFieldDirective);
@@ -161,19 +210,32 @@ define([
     searchApp.directive('textAddress', textAddressDirective);
     searchApp.directive('textDeathcause', textDeathcauseDirective);
     searchApp.directive('textAge', textAgeDirective);
+    searchApp.directive('textPersonName', textPersonNameDirective);
+    searchApp.directive('textAddressPolice', textAddressPoliceDirective);
+    searchApp.directive('textGender', textGenderDirective);
+
+    searchApp.directive('filterLink', filterLinkDirective);
+    searchApp.directive('facet', facetDirective);
+
+    searchApp.directive('getDomContent', getDomContentDirective);
+
+    searchApp.component('jumpToPage', jumpToPageComponent);
+    searchApp.component('numPages', numPagesComponent);
+
+    // Search results
+    searchApp.component('searchResult', searchResultComponent);
+    searchApp.component('searchConfigText', searchConfigTextComponent);
+
+    searchApp.component('post', postComponent);
+    searchApp.component('navigation', navigationComponent);
+    searchApp.component('pagination', paginationComponent);
+    searchApp.component('postPolice', postPoliceComponent);
+    searchApp.component('postBurial', postBurialComponent);
+    searchApp.component('postErindring', postErindringComponent);
+    searchApp.component('postSchool', postSchoolComponent);
+
 
     searchApp.filter('formatStringNumber', formatStringNumberFilter);
-
-    angular.element(document).ready(function() {
-        angular.bootstrap(angular.element('[data-sdk-search-app]'), ['search']);
-    });
-
-
-
-    //Debugging for ui.router state issues, fails when Uglifying because of the => operator
-    // searchApp.run(($rootScope) => {
-    //     $rootScope.$on("$stateChangeError", console.log.bind(console));
-    // });
 
     return searchApp;
 });

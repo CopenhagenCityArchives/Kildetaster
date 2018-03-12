@@ -1,0 +1,28 @@
+.collection {
+    font-size: 20px;
+
+    display: flex;
+
+    margin-top: 10px;
+    margin-bottom: 20px;
+
+    @media (max-width: 767px) {
+        display: block;
+    }
+
+    &__item {
+        display: flex;
+
+        margin-right: 20px;
+
+        align-items: baseline;
+
+        input {
+            margin: 0;
+            margin-right: 5px;
+        }
+        label {
+            margin: 0;
+        }
+    }
+}

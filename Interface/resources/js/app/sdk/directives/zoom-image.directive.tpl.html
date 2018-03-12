@@ -1,10 +1,10 @@
 <div class="zoom-image">
 
-    <div class="zoom-image__target"></div>
+    <div ng-attr-id="{{ 'zoom-image-' + num}}" class="zoom-image__target"></div>
 
     <ul id="tools" class="zoom-image__tools">
-        <li><a id="zoom-in" href>+</a></li>
-        <li><a id="zoom-out" href>-</a></li>
+        <li><a ng-attr-id="{{ 'zoom-in-' + num }}" href>+</a></li>
+        <li><a ng-attr-id="{{ 'zoom-out-' + num }}" href>-</a></li>
     </ul>
 
 </div>

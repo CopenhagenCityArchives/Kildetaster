@@ -100,7 +100,6 @@ define([
 
     sharedApp.directive('handleSteps', handleStepsDirective);
 
-
     sharedApp.factory('stepService', stepService);
     sharedApp.factory('taskService', taskService);
     sharedApp.factory('pageService', pageService);

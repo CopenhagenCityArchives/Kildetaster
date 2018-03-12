@@ -6,7 +6,7 @@ prototype:
     - 'sass:prototype'
     - 'postcss:prototype'
     - 'bake:prototype'
-    - 'karma:prototype'
+    #- 'karma:prototype'
     - 'express:prototype'
     - 'open:prototype'
     - 'watchPrototype'
@@ -19,7 +19,7 @@ prototypeNoAuth:
     - 'sass:prototype'
     - 'postcss:prototype'
     - 'bake:prototype'
-    - 'karma:prototype'
+    #- 'karma:prototype'
     - 'express:prototype'
     - 'open:prototype'
     - 'watchPrototype'
@@ -80,7 +80,7 @@ build:
     - 'postcss:production'
 
     #Run unittests
-    - 'karma:production'
+    #- 'karma:production'
 
 deploy_dev:
     - 'ftp-deploy:deploy_resources_dev'

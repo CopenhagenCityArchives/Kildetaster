@@ -1,0 +1,69 @@
+<section class="post">
+
+    <div class="post__head">
+        <div class="post__item post__main post__alternate">
+
+            <div class="post__tools">
+                <a href="" ng-click="$ctrl.openErrorReporting()">Rapporter fejl</a>
+            </div>
+
+            <div class="post__header">
+                <h2>
+                    {{ $ctrl.data.firstnames }} {{ $ctrl.data.lastname }} <span ng-if="$ctrl.data.birthname">{{$ctrl.data.birthname}}</span></span>
+                    <span class="post__collection">Erindring</span>
+                </h2>
+
+                <p ng-if="$ctrl.data.yearOfBirth"><strong>Født:</strong> {{ $ctrl.data.yearOfBirth }}</p>
+                <p>{{ $ctrl.data.civilstatus }}{{ $ctrl.data.civilstatus && $ctrl.data.sex ? ', ' : '' }}</span><span ng-if="$ctrl.data.sex">{{ $ctrl.data.civilstatus ? 'køn' : 'Køn' }}: {{ $ctrl.data.sex }}</span></p>
+                <p>{{ $ctrl.data.position }}</p>
+                <p ng-if="$ctrl.data.position_parent"><strong>Forældres stilling:</strong> {{ $ctrl.data.position_parent }}</p>
+
+                <!-- Error reports -->
+                <div ng-if="$ctrl.postErrors.length > 0" class="post__error">
+                    <div>Denne post er fejlmeldt</div>
+                    <a href ng-click="$ctrl.toggleErrorReports()">Læs mere</a>
+
+                    <div ng-repeat="error in $ctrl.postErrors" ng-if="$ctrl.showErrorReports">
+                        {{ error.label || 'Ukendt felt' }}: {{error.comment}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post__item post__viewer">
+            <div class="post__links">
+                <a ng-href="{{$ctrl.getAssetHref()}}" target="_blank" class="button">Link til erindringsdokument</a>
+                <a ng-if="$ctrl.data.transcribed" ng-href="{{$ctrl.getTranscribedAssetHref()}}" target="_blank" class="button">Link til transkribering</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="post__col">
+        <div class="post__item" ng-if="$ctrl.data.highlighting.erindring_document_text">
+            <h3 class="post__sectionheader">Søgekontekst</h3>
+            <p ng-repeat="highlight in $ctrl.data.highlighting.erindring_document_text">
+                ...<span ng-bind-html="highlight"></span>...
+            </p>
+        </div>
+
+        <div class="post__item" ng-if="$ctrl.data.keywords && $ctrl.data.keywords.length > 0">
+            <h3 class="post__sectionheader">Emneord</h3>
+            <p><span ng-repeat="keyword in $ctrl.data.keywords track by $index">{{ keyword }}{{ $last ? '' : ', ' }}</span></p>
+        </div>
+
+        <div class="post__item" ng-if="$ctrl.data.description">
+            <h3 class="post__sectionheader">Beskrivelse</h3>
+            <p>{{ $ctrl.data.description }}</p>
+        </div>
+    </div>
+
+    <div class="post__col post__alternate">
+
+        <div class="post__item">
+            <h3 class="post__sectionheader">Om kilden</h3>
+            <p>Erindringsnummer {{ $ctrl.data.erindring_number }}<span ng-if="$ctrl.data.writtenYear">, skrevet i {{ $ctrl.data.writtenYear }}</span></p>
+            <p><strong>Omfang:</strong> {{ $ctrl.data.extent }}</p>
+            <p ng-if="$ctrl.data.writeMethod">{{ $ctrl.data.writeMethod }}</p>
+        </div>
+    </div>
+
+</section>

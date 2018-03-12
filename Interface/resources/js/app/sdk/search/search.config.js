@@ -2,7 +2,11 @@ define([
 
 ], function() {
 
-    var searchConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider, $httpProvider) {
+    var searchConfig = /*@ngInject*/ function searchConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+
+        // Prevent default use of !# hash bang urls
+        // @see https://stackoverflow.com/questions/41226122/url-hash-bang-prefix-instead-of-simple-hash-in-angular-1-6
+        $locationProvider.hashPrefix('');
 
         //Include the interceptor that adds the Authoraztion bearer token if present in session storage
         //Needed for when requesting posts, and the user is logged in. Without it, the backend is not able to determine
@@ -14,6 +18,7 @@ define([
 
         // Now set up the states
         $stateProvider
+
             .state('search', {
                 url: '/',
                 abstract: true,
@@ -26,29 +31,44 @@ define([
 
             .state('search.page', {
                 //?search can contain a search configuration
-                url: '?search',
+                url: '',
                 views: {
                     '': {
                         templateUrl: 'sdk/search/search.tpl.html',
-                        controller: 'searchController'
+                        controller: 'searchController as ctrl'
                     }
-                    // Functionality not ready for launch, but will probably be worked on soon
-                    // The view logic is therefore just removed fow now
-                    // ,
-                    // 'facets': {
-                    //     templateUrl: 'sdk/search/search.facets.tpl.html',
-                    //     controller: 'searchFacetsController'
-                    // }
                 },
+                reloadOnSearch: false,
+
                 resolve: {
-                    availableFields: ['searchService', function(searchService) {
-                        return searchService.getFields().then(function(response) {
-                            return response[0].fields;
+
+                    searchConfig: ['searchService', '$q', function(searchService, $q) {
+
+                        var deferred = $q.defer();
+
+                        searchService.getConfigPromise()
+                        .then(function(searchConfig) {
+                            deferred.resolve(searchConfig);
+                        })
+                        .catch(function(err) {
+                            deferred.reject(err);
                         });
+
+                        return deferred.promise;
                     }]
                 }
-
             })
+
+            .state('search.page.results', {
+                url: 'results',
+                views: {
+                    '@': {
+                        templateUrl: 'sdk/search/search.results.tpl.html',
+                        controller: 'searchResultsController as ctrl'
+                    }
+                }
+            })
+
             .state('search.page.result', {
                 url: '',
                 abstract: true,
@@ -59,76 +79,136 @@ define([
                 }
 
             })
-            .state('search.page.result.page', {
-                url: 'post/{postId:int}',
-                views: {
 
+            .state('search.page.result.post', {
+                url: 'post/:postId',
+                views: {
                     'navigation': {
-                        templateUrl: 'sdk/search/post.navigation.tpl.html',
-                        controller: 'navigationController'
+                        component: 'navigation'
                     },
                     '': {
-                        templateUrl: 'sdk/search/post.tpl.html',
-                        controller: 'postController'
+                        component: 'post'
                     }
                 },
+                // Scroll the browser to the top 
+                onEnter: function() {
+                    jQuery('html, body').animate({ scrollTop: 0 }, 100);
+                },
+
+                params: {
+                    postId: null
+                },
+
                 resolve: {
 
-                    resultData: ['searchService', '$stateParams', '$q', function(searchService, $stateParams, $q) {
+                    userData: ['userService', 'tokenService', '$q', function (userService, tokenService, $q) {
 
-                        var data = {},
-                            deferred = $q.defer(),
-                            taskId;
+                        var deferred = $q.defer();
 
-                            data.postId = $stateParams.postId;
+                        // Get token if the user is logged in
+                        tokenService.requestToken(true).then(function (response) {
+                            if (response) {
+                                return userService.getUserInfo(response.tokenData.user_id);
+                            }
+                            else {
+                                deferred.resolve(undefined)
+                            }
+                            
+                        })
+                        .then(function (userData) {
+                            deferred.resolve(userData);
+                        })
+                        .catch(function (err) {
+                            deferred.reject(err);
+                        });
 
-                        //We hit the url without having a search configured, just get post data
-                        if (searchService.currentSearchConfig === null) {
+                        return deferred.promise;
+                    }],
 
-                            searchService.getPost($stateParams.postId)
-                            .then(function(response) {
+                    errorReportingConfig: ['errorService', function (errorService) {
+                        return errorService.getConfig();
+                    }],
 
-                                data.post = response.data;
-                                data.metadata = response.metadata;
-                                data.errorReports = response.error_reports;
+                    searchData: ['solrService', function (solrService) {
+                        return solrService.getSearchData();
+                    }],
 
-                                deferred.resolve(data);
-                                return data;
+                    data: ['$q','$stateParams', '$transition$', 'solrService', 'searchService', function ($q, $stateParams, $transition$, solrService, searchService) {
+
+                        var deferred = $q.defer(),
+                            docs = null,
+                            highlighting = null;
+
+                        // Use post data from existing search
+                        if (solrService.getSearchData()) {
+
+                            docs = solrService.getSearchData().response.docs;
+                            highlighting = solrService.getSearchData().highlighting;
+
+                            // Find the post with the id in the url
+                            var found = docs.find(function (doc) {
+                                return doc.id === $stateParams.postId;
                             });
+
+                            if (found) {
+                                // Parse the jsonObj in the found post data
+                                var obj = JSON.parse(found.jsonObj);
+
+                                // Add highlighting if it exists
+                                if (highlighting && highlighting[$stateParams.postId]) {
+                                    obj.highlighting = highlighting[$stateParams.postId]
+                                }
+
+                                // resolve
+                                deferred.resolve(obj);
+                            }
+                            // We somehow did not find the post we wanted
+                            else {
+                                deferred.reject('Post not found in saved search data!');
+                            }
                         }
-                        //We have a search config, so manage paginated search
+                        // Fetch new post data
                         else {
-                            searchService.paginatedSearch(searchService.currentSearchConfig.query)
-                            .then(function(response) {
+                            
+                            // Get current search config
+                            searchService.getConfigPromise()
+                                .then(function(response) {                   
+                                    return response;
+                                })
+                                .then(function(config) {
+                                    // Parse the config, preparing it for solr
+                                    var parsedConfig = searchService.getSearch(config),
+                                        queries = [];
 
-                                data.numFound = response.response.numFound;
-                                data.number = searchService.currentIndex + 1;
+                                    // Make a forced search query to get a specifik post by its id
+                                    queries.push({
+                                        field: { name: 'id', type: 'string' },
+                                        operator: { op: 'eq' },
+                                        term: $stateParams.postId
+                                    });
 
-                                var postId = response.response.docs[0].post_id;
-                                taskId = response.response.docs[0].task_id;
+                                    // Call solr with the config and query
+                                    return solrService.search(
+                                        queries, 
+                                        parsedConfig.filterQueries, 
+                                        parsedConfig.collections, 
+                                        parsedConfig.sortField, 
+                                        parsedConfig.sortDirection,
+                                        0,
+                                        1
+                                    );
 
-                                //And get post data
-                                return searchService.getPost($stateParams.postId);
-                            })
-                            .then(function(response) {
-
-                                data.post = response.data;
-                                data.metadata = response.metadata;
-                                data.errorReports = response.error_reports;
-                                data.taskId = taskId;
-
-                                deferred.resolve(data);
-
-                                return data;
-                            });
-
+                                })
+                                .then(function(data) {
+                                    // Parse and return the parsed jsonObj on the returned data object
+                                    deferred.resolve(JSON.parse(data.response.docs[0].jsonObj));
+                                });
                         }
 
                         return deferred.promise;
+
                     }]
                 }
-
-
             });
     };
 

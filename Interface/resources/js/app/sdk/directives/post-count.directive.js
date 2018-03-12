@@ -11,7 +11,7 @@ define([
             templateUrl: 'sdk/directives/post-count.directive.tpl.html',
 
             scope: {
-                currentIndex: '=',
+                page: '=',
                 total: '=',
                 postsPrPage: '='
             },
@@ -23,7 +23,7 @@ define([
                     scope.from = (newval * scope.postsPrPage) + 1;
 
                     //If we are showing the last page, and it does not contain a full set of total pages
-                    if ((newval + 1) *  10 > scope.total) {
+                    if ((newval + 1) * scope.postsPrPage > scope.total) {
                         //Just show the total as the to
                         scope.to = scope.total;
                     }
@@ -37,7 +37,7 @@ define([
                 * Watch for changes to currently selected page, and build a string to show the user exactly what postsPrPage
                 * they are being presented
                 */
-                scope.$watch('currentIndex', function(newval, oldval) {
+                scope.$watch('page', function(newval, oldval) {
                     updateValues(newval);
                 });
 
@@ -45,8 +45,12 @@ define([
                 * Watch for changes to the total amount, and update if its new
                 */
                 scope.$watch('total', function(newval, oldval) {
-                    updateValues(scope.currentIndex);
+                    updateValues(scope.page);
                 });
+
+                scope.$watch('postsPrPage', function(newval, oldval) {
+                    updateValues(0);
+                })
 
             }
         };

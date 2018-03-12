@@ -1,0 +1,147 @@
+
+<!-- Initial loading spinner -->
+<section ng-if="ctrl.searching && !ctrl.results" style="position: relative; min-height: 200px">
+    <div class="loading-spinner"></div>
+</section>
+
+<!-- Status messages -->
+<section class="row-fluid with-padding" ng-if="ctrl.results.docs.length === 0">
+    <div class="span12">
+        <div get-dom-content="search-app-no-results"></div>
+        <a href="" ui-sref="^" class="sdk-search__configtoggle">Rediger din søgning</a>
+    </div>
+</section>
+
+<section class="row-fluid with-padding" ng-if="ctrl.error">
+    <div class="span12">
+        <div get-dom-content="search-app-error"></div>
+    </div>
+</section>
+
+<!-- Results -->
+<section ng-if="ctrl.results.docs.length > 0">
+
+    <div class="row-fluid with-padding">
+
+        <div class="span12">
+
+            <h1>Søgeresultat</h1>
+            <search-config-text class="search-config-text" config="ctrl.queries" collections="ctrl.collections">
+                <post-count page="ctrl.page" total="ctrl.results.numFound" posts-pr-page="ctrl.postsPrPage"></post-count>
+            </search-config-text>
+        </div>
+    </div>
+
+    <div class="row-fluid with-padding">
+
+        <div class="span3">
+            <num-pages selected="ctrl.postsPrPage" change-count="ctrl.setPostsPrPage(count)"></num-pages>
+        </div>
+
+        <div class="span4">
+            <div class="row-fluid sorting">
+
+                <div class="span6 text-right">
+                    <label class="sorting__label">Sorter efter</label>
+                </div>
+
+                <div class="span6">
+                    <div class="sorting__container">
+                        <select class="sorting__selection" ng-model="ctrl.sortField" ng-options="field as field.view_name for (fieldName, field) in ctrl.fields | filter:{searchable:true, sortable:true} | filter:ctrl.fieldCollectionFilter"></select>
+                        <a href ng-click="ctrl.toggleSortDirection()" class="sorting__direction" title="{{ctrl.sortDirection}}" ng-class="ctrl.sortDirection"></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="span5" ng-if="ctrl.results.numFound > ctrl.postsPrPage">
+            <pagination
+                current-page="ctrl.page"
+                results="ctrl.results"
+                posts-pr-page="ctrl.postsPrPage"
+                go-to-page="ctrl.goToPage(page)">
+            </pagination>
+        </div>
+    </div>
+
+    <section class="row-fluid" ng-if="!ctrl.error">
+
+        <div class="span12">
+            <div class="span3 sdk-search__col">
+
+                <a href="" ui-sref="^" class="sdk-search__configtoggle">Rediger din søgning</a>
+
+                <h2 class="sdk-search__subheader with-padding">Valgte filtre</h2>
+
+                <div class="with-padding">
+
+                    <div class="filter-link">
+                        <div ng-if="ctrl.noSelectedFilters">
+                            Ingen aktive filtre
+                        </div>
+                        <filter-link ng-repeat="(field, filterQuery) in ctrl.filterQueries" facet="filterQuery.facet" bucket="filterQuery.bucket"
+                            url="filter.filterQuery" remove-func="toggleFilter"></filter-link>
+                    </div>
+
+                </div>
+
+                <facet ng-repeat="facetData in ctrl.facets" field="ctrl.fieldIndex[facetData.field]" filter-queries="ctrl.filterQueries" facet="facetData"
+                    buckets="ctrl.facetFields[facetData.field].buckets" add-filter="toggleFilter"></facet>
+
+            </div>
+
+            <div class="span9 sdk-search__col">
+
+                <section class="row-fluid sdk-search__results" ng-class="{'loading': ctrl.searching}" ng-if="ctrl.results.docs.length > 0">
+
+                    <div class="row-fluid">
+                        <div class="span12">
+                            <div class="search-container">
+
+                                <div class="search-container__row">
+                                    <div>
+                                        <div class="search-container__header">
+                                            Navn
+                                        </div>
+                                        <div class="search-container__header">
+                                            Adresse
+                                        </div>
+                                        <div class="search-container__header">
+                                            Andre oplysninger
+                                        </div>
+                                        <div class="search-container__header">
+                                            Om kilden
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <search-result class="search-container__row border-left" ng-repeat="result in ctrl.results.docs" result="result" config="ctrl.fields"
+                                    index="$index" page="ctrl.page"></search-result>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+            </div>
+        </div>
+
+        <section class="row-fluid with-padding sdk-search__footer">
+            <div class="span5">
+                <jump-to-page change-page="ctrl.goToPage(page)" ng-if="ctrl.results.numFound > ctrl.postsPrPage"></jump-to-page>
+            </div>
+            <div class="span7" ng-if="ctrl.results.numFound > ctrl.postsPrPage">
+                <pagination
+                    current-page="ctrl.page"
+                    results="ctrl.results"
+                    posts-pr-page="ctrl.postsPrPage"
+                    go-to-page="ctrl.goToPage(page)">
+                </pagination>
+            </div>
+        </section>
+
+    </section>
+
+</section>

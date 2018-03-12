@@ -1,7 +1,6 @@
 .button {
-    font-size: 16px;
     font-weight: normal;
-    line-height: 24px;
+    line-height: 30px;
 
     display: inline-block;
 
@@ -9,22 +8,20 @@
     padding: 4px 20px;
 
     cursor: pointer;
-    text-align: center;
     /* overwrite of default KBH styling */
     text-decoration: none !important;
-    text-transform: uppercase;
 
     color: $white;
     border: none;
     border-radius: 3px;
-    background-color: $blue;
+    background-color: $search-primary;
 
-    &:hover {
+    &:hover, &:active {
         /* overwrite of default KBH styling */
         text-decoration: none !important;
 
         color: $white;
-        background-color: lighten($blue, 10%);
+        background-color: darken($search-primary, 10%);
     }
 
     &:disabled {

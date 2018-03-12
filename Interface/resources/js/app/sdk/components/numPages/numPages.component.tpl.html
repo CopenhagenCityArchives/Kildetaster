@@ -1,0 +1,13 @@
+
+<div class="numPages">
+    <label class="numPages__label">
+        Vis
+        <select
+            class="numPages__select"
+            ng-change="$ctrl.updateCount()" 
+            ng-model="$ctrl.selected" 
+            ng-options="option as option for option in $ctrl.options">
+        </select>
+        pr. side
+    </label>
+</div>

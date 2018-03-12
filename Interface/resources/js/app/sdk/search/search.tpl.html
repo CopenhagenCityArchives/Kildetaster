@@ -1,125 +1,88 @@
-<div class="sdk-search">
+<div>
 
-    <div class="row-fluid" ng-repeat="row in config">
+    <!-- Search config -->
+    <section>
 
-        <div class="span12">
-            <div class="row-fluid redform-form sdk-search__config">
-                <div class="span4">
-                    <div class="field">
-                        <label>
-                            Felt
-                            <select
-                                ng-model="row.field"
-                                ng-change="clearRow(row)"
-                                ng-options="field.name for field in fields | filter: {'searchable': 1}">
-                            </select>
-                        </label>
-                    </div>
-                </div>
-                <div class="span4">
-                    <div class="field">
-                        <label>
-                            Operator
-                            <select
-                                ng-options="operator.solr_query as operator.label for operator in row.field.operators"
-                                ng-model="row.operator"
-                                ng-init="clearRow(row)"
-                                ng-change="shouldEscape(row, row.operator)"
-                                <option>Vælg</option>
-                            </select>
-                        </label>
-                    </div>
-                </div>
-                <div class="span4">
-                    <div class="field">
-                        <term-field type="row.field.formFieldType" data="row" submit-func="submitSearch(event)"></term-field>
-                    </div>
-                </div>
-                <a href class="sdk-search__remove" title="Fjern række" ng-click="removeField($index, $event)" ng-if="config.length > 1">
-                    <span class="sdk-icon delete"></span>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="row-fluid">
-        <div class="span12">
-            <a href class="sdk-search__add" ng-click="addField('firstnames')">Tilføj et felt</a>
-        </div>
-    </div>
-    <div class="row-fluid">
-        <div class="span12">
-            <button type="button" class="button" ng-click="startNewSearch()" ng-disabled="searching">Søg</button>
-
-             <hr class="sdk-search__divider">
-        </div>
-
-    </div>
-
-    <section class="row-fluid" ng-if="results.docs.length == 0">
-        <div class="span12">
-            <p>Der er ikke fundet nogen resultater</p>
-        </div>
-    </section>
-
-    <section class="row-fluid sdk-search__results" ng-class="{'loading': searching}" ng-if="results.docs.length > 0">
-        <div class="span4">
-            <div class="sdk-search__count">
-                <post-count current-index="currentIndex" total="results.numFound" posts-pr-page="10"></post-count>
-            </div>
-        </div>
-
-        <div class="span8 sorting">
-            <div class="row">
-                <div class="span6 text-right">
-                    <label class="sorting__label">Sortér efter</label>
-                </div>
-
-                <div class="span6">
-
-                    <div class="sorting__container">
-                        <select
-                            class="sorting__selection"
-                            ng-model="sortByField.name"
-                            ng-options="field.solr_name as field.name for field in fields | filter: {'searchable': 1, 'sortable' : 1}">
-                        </select>
-                        <a href ng-click="toggleSortDirection()" class="sorting__direction" title="{{sortDirection}}" ng-class="sortDirection"></a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="row-fluid">
+        <div class="row-fluid with-padding">
             <div class="span12">
-                <div class="search-container">
 
-                    <div class="search-container__row">
-                        <div class="search-container__header">
-                            Navn
-                        </div>
-                        <div class="search-container__header">
-                            Adresse
-                        </div>
-                        <div class="search-container__header">
-                            Andre oplysninger
-                        </div>
-                        <div class="search-container__header">
-                            Om kilden
+                <div get-dom-content="search-app-upper-text"></div>
+
+                <div class="collection">
+                    <div class="collection__item" ng-repeat="collection in ctrl.collections">
+                        <input
+                            id="col_{{collection.id}}"
+                            type="checkbox"
+                            value="{{collection.id}}"
+                            ng-model="collection.selected"
+                            ng-change="ctrl.collectionsChange(collection)">
+                            <label for="col_{{collection.id}}">{{collection.name}}</label>
+                    </div>
+                </div>
+
+                <div get-dom-content="search-app-lower-text"></div>
+            </div>
+        </div>
+
+        <div class="row-fluid with-padding" ng-repeat="row in ctrl.queries">
+
+            <div class="span12">
+                <div class="row-fluid redform-form sdk-search__config">
+                    <div class="span4">
+                        <div class="field">
+                            <label>
+                                Felt
+                                <select
+                                    ng-model="row.field"
+                                    ng-change="ctrl.clearRow(row)"
+                                    ng-options="field.view_name for field in fields | filter:{searchable:true} | filter:fieldCollectionFilter">
+                                </select>
+                            </label>
                         </div>
                     </div>
-
-                    <search-result ng-repeat="result in results.docs" result="result" config="fields" index="$index" page="currentPage"></search-result>
-
+                    <div class="span2">
+                        <div class="field">
+                            <label>
+                                Operator
+                                <select
+                                    ng-options="operators[operator] as operators[operator].label for operator in types[row.field.type].operators"
+                                    ng-model="row.operator"
+                                    ng-change="shouldEscape(row, row.operator)">
+                                    <option>Vælg</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <div class="field">
+                            <term-field type="row.field.type" data="row" submit-func="ctrl.submitSearch(event)"></term-field>
+                        </div>
+                    </div>
+                    <a href class="sdk-search__remove" title="Fjern række" ng-click="ctrl.removeField($index, $event)" ng-if="ctrl.queries.length > 1">
+                        <span class="sdk-icon delete"></span>
+                    </a>
                 </div>
             </div>
         </div>
 
-    </section>
-
-    <div class="row-fluid" ng-if="results.numFound > 10">
-        <div class="span12">
-            <pagination current-index="currentIndex" pagination="pagination" go-to-page="goToPage"></pagination>
+        <div class="row-fluid with-padding">
+            <div class="span12">
+                <a href class="sdk-search__add" ng-click="ctrl.addField('firstnames')">Tilføj et felt</a>
+            </div>
         </div>
-    </div>
+
+        <div class="row-fluid with-padding">
+            <div class="span12">
+                <div>
+                <button type="button" class="button" ng-click="startNewSearch()" ng-disabled="searching">Søg</button>
+                </div>
+                <br>
+                <div>
+                    <a href ng-click="resetSearch()" ng-disabled="searching">Nulstil søgning</a>
+                </div>
+                <hr class="sdk-search__divider">
+            </div>
+        </div>
+    </section>
 
 </div>

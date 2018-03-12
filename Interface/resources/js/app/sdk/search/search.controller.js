@@ -3,65 +3,82 @@ define([
 
 ], function() {
 
-    var searchController = /*@ngInject*/ function opentasksController(
+    var searchController = /*@ngInject*/ function searchController(
         $q,
         $timeout,
         $scope,
         $stateParams,
         $state,
         $rootScope,
+        solrService,
         searchService,
-        availableFields
+        searchConfig,
+        Analytics
     ) {
 
-        $scope.loading = false;
-        $scope.initialized = false;
+        var that = this;
 
-        $scope.config = [];
+        that.initialized = false;
 
-        $scope.results = [];
+        that.queries = [];
 
-        $scope.currentIndex = 0;
-        $scope.currentPage = 0;
+        // The index of the current page
+        that.page = 0;
+        // How many posts to show on a page
+        that.postsPrPage = 10;
 
-        //Use stored direction if we have one, otherwise default to asc
-        $scope.sortDirection = $rootScope.sortDirection ? $rootScope.sortDirection : 'asc';
+        // Set sortDirection
+        that.sortDirection = searchService.sortDirection;
 
         //Default field to sort by, use value from rootScope if we have it, otherwise default ot lastname
-        $scope.sortByField = $rootScope.sortByField ? { name: $rootScope.sortByField } : {name: "lastname" };
+        that.sortField = $rootScope.sortField ? $rootScope.sortField : searchConfig.fields['lastname'];
+
+        //Private method used to init/reset search fields
+        var initSearchFields = function(){
+            // Add default search config field for firstnames
+            that.addField('firstnames', '', 'eq');
+            // Build collections
+            that.collections = angular.copy(searchConfig.collections);
+
+            // Initially select all available collections
+            angular.forEach(that.collections, function(col, id) {
+                col.selected = true;
+            });
+
+            searchService.currentSearch = {
+                page: that.page,
+                postsPrPage: that.postsPrPage
+            };
+        };
 
         /**
         * Prepare row for input, clearing any already set term and reset operator to its
         * default value
         */
-        $scope.clearRow = function clearRow(row) {
-            if ($scope.initialized) {
-                row.operator = row.field.operators[0].solr_query;
-                row.term = '';
+        that.clearRow = function clearRow(row) {
+            if (!that.initialized) {
+                return
+            }
+
+            if (!row.field) {
+                row.field = Object.values(searchConfig.fields).find(function(field) {
+                    var fieldInAllSelectedCollections = true;
+                    angular.forEach(that.collections, function(col) {
+                        if (col.selected && field.collections.indexOf(col.id) === -1) {
+                            fieldInAllSelectedCollections = false;
+                        }
+                    });
+                    return fieldInAllSelectedCollections;
+                });
+            }
+
+            row.operator = searchConfig.operators[searchConfig.types[row.field.type].operators[0]];
+
+            // if the term is an object, or the field type is not a string, or the field is a UTC time format then reset term value
+            if (typeof row.term !== "string" || row.field.type !== "string" || row.term.match(/\d{4}-[0-1]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-6]\d.\d{3}Z/)) {
+                row.term = undefined;
             }
         };
-
-        $scope.shouldEscape = function shouldEscape(row, operator) {
-
-            var found = row.field.operators.find(function(operatorItem) {
-                return operatorItem.solr_query === operator;
-            });
-
-
-            if (found) {
-
-                row.escapeSpecialChars = found.escape_special_chars || false;
-
-                if (!row.escapeSpecialChars) {
-                    row.term = row.term.replace('*', ' ');
-                }
-                else {
-                    row.term = row.term.replace(' ', '*');
-                }
-
-            }
-
-        }
 
         /**
         * Add new row of config
@@ -70,131 +87,58 @@ define([
         * @param term {string} The value of the term field
         * @param operator {string} The operator value for the operator to select
         * @param shouldEscape {bool} Should we run conversion logic, to handle spaces?
+        * TODO update to use that
         */
-        $scope.addField = function addField(defaultFieldName, term, operator, shouldEscape) {
+        that.addField = function addField(defaultFieldName, term, op) {
+            // verify and set default field
+            if (!searchConfig.fields.hasOwnProperty(defaultFieldName)) {
+                return;
+            }
+            var field = searchConfig.fields[defaultFieldName];
 
-            var defaultField,
-                found,
-                fieldConfig = {};
-
-            if (defaultFieldName) {
-                found = $scope.fields.filter(function(field) {
-                    return field.solr_name === defaultFieldName;
-                });
-
-                if (found) {
-                    fieldConfig.field = found[0];
-                }
+            // verify
+            if (!searchConfig.types.hasOwnProperty(field.type) ||
+                (op && !searchConfig.types[field.type].operators.includes(op))) {
+                return;
             }
 
-            if (term) {
-                fieldConfig.term = term;
+            var operator;
+            if (op) {
+                operator = searchConfig.operators[op];
+            } else {
+                operator = searchConfig.operators[searchConfig.types[field.type].operators[0]];
             }
 
-            if (shouldEscape !== undefined) {
-                fieldConfig.escapeSpecialChars = shouldEscape;
-            }
+            that.queries.push({ field: field, operator: operator, term: term });
 
-            if (operator) {
-                //Lookup the operator in the operators available on the field
-                var operatorData = fieldConfig.field.operators.find(function(operatorItem) {
-                    return operatorItem.solr_query === operator;
-                });
-
-                //If we found the given operator in the fields possible operators, set it
-                if (operatorData) {
-                    //Set the selected operator
-                    fieldConfig.operator = operatorData.solr_query;
-                }
-                else {
-                    console.warn('Trying to set operator: ' + operator + ' but it is not found in the possible operators on the field');
-                }
-            }
-            //Select the first in the list
-            else {
-                fieldConfig.operator = fieldConfig.field.operators[0].solr_query;
-            }
-            //add the field configuration
-            $scope.config.push(fieldConfig);
         };
+
+        // a field must be associated with all selected collections to be shown
+        // TODO update to use that
+        $scope.fieldCollectionFilter = function(value, index, array) {
+            var found = true;
+
+            angular.forEach(that.collections, function (col, colId) {
+                var colInField = value.collections.indexOf(parseInt(colId)) !== -1;
+                if (!colInField && col.selected) {
+                    found = false;
+                }
+            });
+
+            return found;
+        }
 
         /**
         * Remove a given row, based on its index in the array
         */
-        $scope.removeField = function removeField(fieldIndex, event) {
+        that.removeField = function removeField(fieldIndex, event) {
             event.preventDefault();
-            $scope.config.splice(fieldIndex, 1);
+            that.queries.splice(fieldIndex, 1);
         };
-
-        /**
-        * Toggle between sorting desc and asc
-        */
-        $scope.toggleSortDirection = function toggleSortDirection() {
-
-            var params = {};
-
-            if ($scope.sortDirection === 'desc') {
-                $scope.sortDirection = 'asc';
-            } else {
-                $scope.sortDirection = 'desc';
-            }
-
-            //Store selected direction in rootscope, so we have a value if we revisit the list
-            $rootScope.sortDirection = $scope.sortDirection;
-
-            params = {
-                sort: $scope.sortByField.name + ' ' + $scope.sortDirection,
-                start: $scope.currentPage
-            };
-
-            //Trigger new search
-            $scope.doSearch(undefined, undefined, params);
-        }
-
-        /**
-        * Build data object for facets, based on the facet array given from the backend
-        */
-        function buildFacetData(facetDataObject) {
-
-            var facetData = [];
-
-            for (var facetArray in facetDataObject) {
-                if (facetDataObject.hasOwnProperty(facetArray)) {
-
-                    facetDataObject[facetArray].forEach(function(facet, index, arr) {
-                        if (typeof facet === 'string'){
-                            facetData.push({
-                                field: facetArray,
-                                name: getNiceName(facetArray),
-                                data: facet,
-                                count: arr[index +1]
-                            });
-                        }
-                    });
-
-                }
-            }
-
-            return facetData;
-
-        }
-
-        /**
-        * Get the nice name based on a solr_name property
-        */
-        function getNiceName(solrName) {
-
-            var found = $scope.fields.find(function(field) {
-                return field.solr_name === solrName;
-            });
-
-            return found.name;
-        }
 
 
         //TODO move this to a directive
-        $scope.submitSearch = function submitSearch(event) {
-
+        that.submitSearch = function submitSearch(event) {
             //Enter key
             if (event.charCode === 13) {
                $scope.startNewSearch();
@@ -202,251 +146,174 @@ define([
 
         };
 
-        //Trigger serach and reset indexes
+        //Trigger search and reset indexes
+        // TODO update to use that
         $scope.startNewSearch = function startNewSearch() {
-
-            $rootScope.currentIndex = 0;
-            $rootScope.currentPage = 0;
-
-            $scope.currentIndex = 0;
-            $scope.currentPage = 0;
-
+            $rootScope.page = 0;
+            that.page = 0;
             $scope.doSearch();
         }
 
         /**
-        * Facet clicked, do a filtered search
-        */
-        $scope.$on('filterSearch', function(event, params) {
+         *
+         */
+        that.collectionsChange = function(collection) {
 
-            searchService.filterQuery($scope.config, params).then(function(response) {
-                $scope.results = response.response;
+            // prevent deselection of last collection
+            if (collection.selected === false) {
+                var anySelected = false;
+                angular.forEach(that.collections, function (collection) {
+                    anySelected = anySelected || collection.selected;
+                });
 
-                if (response.facet_counts) {
-                    $scope.facets = response.facet_counts.facet_fields;
+                if (!anySelected) {
+                    collection.selected = true;
+                    return;
                 }
+            }
 
-            })
-            .catch(function(err) {
-                console.log('Error filtering: ', err);
-
+            // set up query rows of rows that are undefined due to
+            // the collection, that the field exists in, has been unselected
+            angular.forEach(that.queries, function(row) {
+                if (!row.field) {
+                    that.clearRow(row);
+                }
             });
-        });
 
-        /**
-        * Watch for changes in facets, and broadcast any changes
-        */
-        $scope.$watch('facets', function(newVal, oldVal) {
-            $rootScope.$broadcast('facetsUpdated', buildFacetData(newVal) );
-        });
+        };
 
-        function buildPaginationItem(index) {
-            return  {
-                label: index + 1,
-                index: index
-            }
-        }
-
-        function buildPagination(results, currentIndex) {
-
-            var arr = [],
-                lastPage = Math.ceil(results.numFound / 10);
-
-            //If we are on the first or second page, just show 1-5
-            if (currentIndex < 2) {
-                for (var i=0; i <= 4; i++) {
-                    arr.push(buildPaginationItem(i));
-                }
-            }
-            //We are nearing the end, ie. on one of the last 5 pages
-            else if(currentIndex > lastPage - 5) {
-                arr.push(buildPaginationItem(lastPage - 5));
-                arr.push(buildPaginationItem(lastPage - 4));
-                arr.push(buildPaginationItem(lastPage - 3));
-                arr.push(buildPaginationItem(lastPage - 2));
-                arr.push(buildPaginationItem(lastPage - 1));
-            }
-            //Otherwise, show current page, and two before and two after
-            else {
-                arr.push(buildPaginationItem(currentIndex - 2));
-                arr.push(buildPaginationItem(currentIndex - 1));
-                arr.push(buildPaginationItem(currentIndex));
-                arr.push(buildPaginationItem(currentIndex + 1));
-                arr.push(buildPaginationItem(currentIndex + 2));
-            }
-
-            $scope.pagination = {
-                total: Math.ceil(results.numFound / 10),
-                pages: arr
-            };
-
-        }
-
-        $scope.$watch('results', function(newval, oldval) {
-            buildPagination(newval, $scope.currentIndex);
-        });
-
-        $scope.$watch('currentIndex', function(newval, oldval) {
-            buildPagination($scope.results, newval);
-        });
-
-        $scope.$watch('sortByField.name', function(newval, oldval) {
-
-            var params= {};
-
-            params.sort = newval;
-            params.start = $scope.currentIndex;
-
-            //Store value in rootscope, to make it available if we go back to the overview page
-            $rootScope.sortByField = newval;
-
-            if ($scope.results.docs && $scope.results.docs.length > 0 && newval) {
-                console.log('sort by fieldname triggered', params)
-                $scope.doSearch(undefined, undefined, params);
-            }
-        });
-
+        $scope.resetSearch = function(){
+            solrService.clearSearchData();
+            searchService.currentSearch = null;
+            that.queries = [];
+            that.filterQueries = [];
+            initSearchFields();
+        };
 
         /**
         * Execute the search
+        // TODO update to use that
         */
-        $scope.doSearch = function doSearch(query, facets, params) {
+        $scope.doSearch = function doSearch() {
 
-            $scope.searching = true;
+            solrService.clearSearchData();
 
-            // If we dont have any parameters, and no set sort field, reset sort field to the default
-            if (!params && !$scope.sortByField) {
-                $scope.sortByField = { name: 'lastname' };
-            }
+            Analytics.trackEvent('person_search', 'start_search');
 
-            query = query || $scope.config;
-            facets = facets || $scope.fields;
-            params = params || {};
-
-            if ($scope.sortByField.name) {
-                params.sort = $scope.sortByField.name + ' ' + $scope.sortDirection;
-            }
-
-            searchService.search(query, facets, params).then(function(response) {
-
-                $scope.scrambleConfig();
-                $scope.results = response.response;
-                //$scope.facets = response.facet_counts.facet_fields;
-
-            }).catch(function(err) {
-                console.log('Error in search:', err);
-                //Error handling
-            }).finally(function() {
-                $scope.searching = false;
+            var colIds = [];
+            // Only set the collections that are currently selected
+            angular.forEach(that.collections, function(collection, id) {
+                if (collection.selected) {
+                    colIds.push(collection.id);
+                }
             });
+
+            // Prepare search configuration
+            var thisSearch = {
+                queries: that.queries,
+                filterQueries: that.filterQueries,
+                collections: colIds,
+                sortField: that.sortField,
+                sortDirection: that.sortDirection,
+                postsPrPage: that.postsPrPage,
+                page: that.page
+            };
+
+            searchService.currentSearch = thisSearch;
+            // Set the configuration in the service
+            searchService.setSearch(thisSearch);
+
+            // Go to the results state to search and show results
+            $state.go('.results');
 
         };
 
-        $scope.goToPage = function goToPage(index) {
+        that.init = function init() {
 
-            $scope.currentIndex = index;
-            $scope.currentPage = index * 10;
+            // for selects in template
+            $scope.fieldIndex = searchConfig.fields;
+            $scope.fields = Object.values(searchConfig.fields);
+            $scope.types = searchConfig.types;
+            $scope.operators = searchConfig.operators;
 
-            $rootScope.currentIndex = index;
-            $rootScope.currentPage = index * 10;
+            // Clean entry
+            if (!searchService.currentSearch && !searchService.urlParamsExist()) {
 
-            searchService.currentSearchConfig.params.start = $scope.currentPage;
+                initSearchFields();
 
-            $scope.doSearch(searchService.currentSearchConfig.query, searchService.currentSearchConfig.facets, searchService.currentSearchConfig.params);
-        }
+            }
+            // entry from URL
+            else if (!searchService.currentSearch && searchService.urlParamsExist()) {
 
-        /**
-        * Encodes the current search config, and adds it as a url parameter
-        */
-        $scope.scrambleConfig = function scrambleConfig() {
+                var urlSearch = searchService.getSearch(searchConfig);
 
-            var cleanedConfig = [];
+                that.queries = [];
+                angular.forEach(urlSearch.queries, function(item) {
+                    that.queries.push(item);
+                });
 
-            $scope.config.each(function(item, index) {
-
-                var obj = {};
-                obj.solr_name = item.field.solr_name;
-                obj.term = encodeURIComponent(item.term);
-                obj.operator = encodeURIComponent(item.operator);
-                obj.escapeSpecialChars = item.escapeSpecialChars;
-
-                cleanedConfig.push(obj);
-
-            })
-
-            var stringed = {};
-
-            stringed.config = cleanedConfig;
-            //Store sort direction
-            stringed.sortDirection = $scope.sortDirection;
-            //Store sort key
-            stringed.sortKey = $scope.sortByField;
-
-            stringed.currentIndex = $scope.currentIndex;
-            stringed.currentPage = $scope.currentPage;
-
-            stringed = JSON.stringify(stringed);
-
-            $state.go($state.current, {search: stringed}, {notify:false, reload:false});
-
-        }
-
-        $scope.init = function init() {
-
-            $scope.fields = availableFields;
-
-            if ($scope.config.length === 0 && $stateParams.search) {
-
-                var savedConfig = JSON.parse($stateParams.search);
-
-                var params = {};
-
-                savedConfig.config.each(function(item, index) {
-                    $scope.addField(item.solr_name, decodeURIComponent(item.term), decodeURIComponent(item.operator), item.escapeSpecialChars);
+                that.filterQueries = [];
+                angular.forEach(urlSearch.filterQueries, function(filterQuery) {
+                    that.filterQueries.push(filterQuery);
                 });
 
                 //Get saved sort direction and sort key
-                $scope.sortDirection = savedConfig.sortDirection;
-                $scope.sortByField = savedConfig.sortKey;
-                $scope.currentIndex = savedConfig.currentIndex;
-                $scope.currentPage = savedConfig.currentPage;
+                that.sortDirection = urlSearch.sortDirection;
+                if (urlSearch.sortField.collections.some(function(colId) {
+                    return urlSearch.collections.indexOf(colId) != -1;
+                })) {
+                    that.sortField = urlSearch.sortField;
+                } else {
+                    that.sortField = searchConfig.fields["lastname"];
+                }
+                that.postsPrPage = urlSearch.postsPrPage;
+                that.page = urlSearch.page;
 
-                params.sort = $scope.sortByField.name + ' ' + $scope.sortDirection;
-                params.start = $scope.currentPage;
-
-                //Trigger new search
-                $scope.doSearch(undefined, undefined, params);
-
-            }
-
-            //Add empty row if no config exist
-            else if ($scope.config.length === 0) {
-                $scope.addField('firstnames');
-            }
-            else {
-
-                //because the contents of the field dropdown have been updated, the field reference in the existing config object
-                //does not point to the same objects, so we need to readd.
-
-                //Store current config in a tmp property as a copy
-                var tmp = angular.copy($scope.config);
-                //clear current config
-                $scope.config = [];
-
-                //add fields from the tmp copy
-                tmp.each(function(item, index) {
-                    $scope.addField(item.field.solr_name, item.term, item.operator, item.escapeSpecialChars);
+                that.collections = angular.copy(searchConfig.collections);
+                angular.forEach(urlSearch.collections, function(id) {
+                    if (that.collections[id]) {
+                        that.collections[id].selected = true;
+                    }
                 });
+
+            }
+            // Entry into page that is already configured
+            else {
+                if (!searchService.currentSearch.sortField.collections.some(function(colId) {
+                    return searchService.currentSearch.collections.indexOf(colId) != -1;
+                })) {
+                    searchService.currentSearch.sortField = searchConfig.fields["lastname"];
+                }
+
+                // Add current search config to the url query param
+                searchService.setSearch(searchService.currentSearch);
+
+                searchService.currentSearch.queries.each(function(item, index) {
+                    that.addField(item.field.name, item.term, item.operator.op)
+                });
+
+                that.filterQueries = [];
+                searchService.currentSearch.filterQueries.each(function(filterQuery) {
+                    that.filterQueries.push(filterQuery);
+                });
+
+                that.page = searchService.currentSearch.page;
+                that.postsPrPage = searchService.currentSearch.postsPrPage;
+                that.collections = angular.copy(searchConfig.collections);
+                angular.forEach(searchService.currentSearch.collections, function(id) {
+                    if (that.collections[id]) {
+                        that.collections[id].selected = true;
+                    }
+                });
+
             }
 
             $timeout(function() {
-                $scope.initialized = true;
+                that.initialized = true;
             });
-
-
         };
 
-        $scope.init();
+        that.init();
 
     };
 

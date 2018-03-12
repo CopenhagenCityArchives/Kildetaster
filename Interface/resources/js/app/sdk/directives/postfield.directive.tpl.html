@@ -10,9 +10,14 @@
 
             <strong>{{field.label}}</strong>
 
-            <span ng-hide="errorReporting && !field.error">
-                {{realValue(field) || 'Dette felt er ikke udfyldt'}}
-            </span>
+            <div ng-if="field.html">
+                <p>...<ng-bind-html ng-bind-html="field.value"></ng-bind-html>...</p>
+            </div>
+            <div ng-if="!field.html">
+                <span ng-hide="errorReporting && !field.error">
+                    {{realValue(field) || 'Dette felt er ikke udfyldt'}}
+                </span>
+            </div>
 
             <a href ng-if="errorReporting && !field.error" class="postfield__report-link" ng-class="{ postfield__reporting: field.showErrorForm }" ng-click="toggleErrorReporting(field)">
                 <span>{{realValue(field) || 'Dette felt er ikke udfyldt'}}</span>
