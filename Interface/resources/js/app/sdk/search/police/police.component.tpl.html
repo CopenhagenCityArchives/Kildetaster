@@ -13,22 +13,22 @@
                     <span class="post__collection">Politiets registerblade</span>
                 </h2>
                 <div class="post__infogroup">
-                    <p ng-if="$ctrl.data.person_type_text">Persontype: {{$ctrl.data.person_type_text}}</p>
+                    <p ng-if="$ctrl.data.person_type_text"><strong>Persontype:</strong> {{$ctrl.data.person_type_text}}</p>
                 </div>
                 <div class="post__infogroup">
-                    <p ng-if="$ctrl.data.dateOfBirth">Født: {{$ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
-                    <p ng-if="$ctrl.data.dateOfDeath">Død: {{$ctrl.data.dateOfDeath | date: 'dd-MM-yyyy' }}</p>
+                    <p ng-if="$ctrl.data.dateOfBirth"><strong>Født:</strong> {{$ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
+                    <p ng-if="$ctrl.data.dateOfDeath"><strong>Død:</strong> {{$ctrl.data.dateOfDeath | date: 'dd-MM-yyyy' }}</p>
                 </div>
                 <div class="post__infogroup">
                     <p><span ng-if="$ctrl.data.civilstand">{{$ctrl.data.civilstand}}</span><span ng-if="$ctrl.data.civilstand && $ctrl.data.sex">, </span><text-gender type="$ctrl.data.sex"></text-gender></p>
                 </div>
                 <div class="post__infogroup">
                     <div ng-repeat="position in $ctrl.data.positions">
-                        <span>{{position.position}}</span><span ng-if="!$last">, </span>
+                            <strong ng-if="$first">Erhverv: </strong><span>{{position.position}}</span><span ng-if="!$last">, </span>
                     </div>
                 </div>
                 <div class="post__infogroup">
-                    <p ng-if="$ctrl.data.person_comment">Indtasters kommentar: {{$ctrl.data.person_comment}}</p>
+                    <p ng-if="$ctrl.data.person_comment"><strong>Indtasters kommentar:</strong> {{$ctrl.data.person_comment}}</p>
                 </div>
 
                 <!-- Error reports -->
@@ -44,7 +44,7 @@
             </div>
             <div class="post__sharelink">
                 <label for="permalink">Permalink</label>
-                <input id="permalink" class="input" type="text" ng-value="$ctrl.permalink"/><button ng-click="$ctrl.copy()" class="button">kopier</button><span class="confirm">Kopieret</span>
+                <input id="permalink" class="input" type="text" ng-value="$ctrl.permalink"/><button ng-click="$ctrl.copy()" class="button">Kopier</button><span class="confirm">Kopieret</span>
             </div>
 
         </div>
@@ -61,7 +61,7 @@
         <div class="post__item" ng-if="$ctrl.data.spouses.length > 0 || $ctrl.data.children.length > 0 || $ctrl.data.parent">
             <h3 class="post__sectionheader">Andre personer</h3>
             <div ng-if="$ctrl.data.parent">
-                Forælder: {{$ctrl.data.parent.firstnames}} {{$ctrl.data.parent.lastname}}
+                <strong>Forælder:</strong> {{$ctrl.data.parent.firstnames}} {{$ctrl.data.parent.lastname}}
                 <p ng-if="$ctrl.data.parent.birthDate">Født: {{$ctrl.data.parent.birthDate | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.parent.birthplace"> i {{$ctrl.data.parent.birthplace}}</span></p>
                 <a target="_blank" ui-sref="search.page.result.post({postId:$ctrl.data.parent.post_id})">Vis person</a>
             </div>
@@ -71,7 +71,7 @@
                 <a target="_blank" ui-sref="search.page.result.post({postId:spouse.post_id})">Vis person</a>
             </div>
             <div ng-repeat="child in $ctrl.data.children">
-                Barn: {{child.firstnames}} {{child.lastname}}
+                <strong>Barn:</strong> {{child.firstnames}} {{child.lastname}}
                 <p ng-if="child.dateOfBirth">Født: {{child.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="child.birthplace"> i {{child.birthplace}}</span></p>
                 <a target="_blank" ui-sref="search.page.result.post({postId:child.post_id})">Vis person</a>
             </div>

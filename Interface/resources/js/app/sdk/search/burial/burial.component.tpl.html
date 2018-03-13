@@ -27,7 +27,7 @@
                 </div>
                 <div class="post__infogroup">
                     <div ng-repeat="position in $ctrl.data.positions">
-                        <text-position position="position"></text-position>
+                        <strong ng-if="$first">Erhverv: </strong><span>{{position.position}}</span><span ng-if="!$last">, </span>
                     </div>
                 </div>
 
@@ -44,7 +44,7 @@
             </div>
             <div class="post__sharelink">
                 <label for="permalink">Permalink</label>
-                <input id="permalink" class="input" type="text" ng-value="$ctrl.permalink"/><button ng-click="$ctrl.copy()" class="button">kopier</button><span class="confirm">Kopieret</span>
+                <input id="permalink" class="input" type="text" ng-value="$ctrl.permalink"/><button ng-click="$ctrl.copy()" class="button">Kopier</button><span class="confirm">Kopieret</span>
             </div>
 
         </div>
