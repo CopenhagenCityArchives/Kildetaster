@@ -22,6 +22,9 @@ define([
 
         that.queries = [];
 
+        that.sectionAdvanced = true;
+        that.sectionFree = false;
+
         // The index of the current page
         that.page = 0;
         // How many posts to show on a page
@@ -32,6 +35,27 @@ define([
 
         //Default field to sort by, use value from rootScope if we have it, otherwise default ot lastname
         that.sortField = $rootScope.sortField ? $rootScope.sortField : searchConfig.fields['lastname'];
+
+        $scope.toggle = function(section) {
+            if(section == 'sectionFree') {
+                if(that.sectionFree == true) {
+                    that.sectionFree = false;
+                } else {
+                    that.sectionAdvanced = false;
+                    that.sectionFree = true;
+                }
+            }
+            if(section == 'sectionAdvanced') {
+                if(that.sectionAdvanced == true) {
+                    that.sectionAdvanced = false;
+                } else {
+                    that.sectionAdvanced = true;
+                    that.sectionFree = false;
+                }
+            }
+
+        };
+
 
         //Private method used to init/reset search fields
         var initSearchFields = function(){
