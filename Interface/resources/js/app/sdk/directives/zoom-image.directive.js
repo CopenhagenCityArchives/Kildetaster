@@ -87,7 +87,7 @@ define([
                         zoomInButton: "zoom-in-" + $scope.num,
                         zoomOutButton: "zoom-out-" + $scope.num,
                         homeButton: "home",
-                        fullPageButton: "full-page",
+                        fullPageButton: "full-page-" + $scope.num,
                         nextButton: "next",
                         previousButton: "previous",
 
