@@ -37,7 +37,7 @@ define([], function() {
 
         this.$onInit = function() {
 
-            that.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id + "/";
+            that.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id;
 
             that.imageUrl = helpers.getImageUrlByPostId(this.data.post_id);
 
