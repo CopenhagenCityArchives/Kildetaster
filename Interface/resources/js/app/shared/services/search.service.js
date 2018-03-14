@@ -31,6 +31,11 @@ define([], function() {
                 return !angular.equals($location.search(), {});
             },
 
+            getAdvanced: function() {
+                var params = $location.search();
+                return params.type == "advanced";
+            },
+
             getSearch: function(searchConfig) {
 
                 var queries = {};
@@ -135,6 +140,13 @@ define([], function() {
                     angular.forEach(searchConfig.collections, function(collection, id) { colIds.push(id); });
                 }
 
+                // is it an Advanced Search
+                if($location.search().type == "advanced") {
+                    this.isAdvanced = true;
+                } else {
+                    this.isAdvanced = false;
+                }
+
                 var newConfig = {
                     queries: validQueries,
                     filterQueries: validFilterQueries,
@@ -142,7 +154,8 @@ define([], function() {
                     sortDirection: this.sortDirection,
                     sortField: sortField,
                     postsPrPage: this.postsPrPage,
-                    page: this.page
+                    page: this.page,
+                    isAdvanced: this.isAdvanced
                 };
 
                 this.currentSearch = newConfig;
@@ -152,6 +165,7 @@ define([], function() {
 
             setSearch: function(search) {
 
+                
                 $location.search({});
 
                 // add queries
@@ -201,6 +215,10 @@ define([], function() {
 
                 if (search.collections && search.collections.length > 0) {
                     $location.search('collections', search.collections.join(","));
+                }
+
+                if (search.isAdvanced) {
+                    $location.search('type', 'advanced');
                 }
             }
         };

@@ -9,6 +9,7 @@ define([
         $scope,
         $stateParams,
         $state,
+        $anchorScroll,
         $rootScope,
         solrService,
         searchService,
@@ -21,6 +22,8 @@ define([
         that.initialized = false;
 
         that.queries = [];
+
+        that.isAdvanced = false;
 
         that.filterQueries = [];
         that.noSelectedFilters = true;
@@ -191,10 +194,12 @@ define([
                 sortField: that.sortField,
                 sortDirection: that.sortDirection,
                 postsPrPage: that.postsPrPage,
-                page: that.page
+                page: that.page,
+                isAdvanced: that.isAdvanced
             };
 
             searchService.currentSearch = thisSearch;
+
             searchService.setSearch(thisSearch);
         };
 
@@ -205,6 +210,8 @@ define([
             searchService.currentSearch.page = page;
 
             $scope.doSearch(true);
+
+            $anchorScroll('results-start');
         }
 
         that.setPostsPrPage = function setPostsPrPage(count) {
@@ -254,6 +261,7 @@ define([
                 }
                 that.postsPrPage = urlSearch.postsPrPage;
                 that.page = urlSearch.page;
+                that.isAdvanced = urlSearch.isAdvanced;
 
                 that.collections = angular.copy(searchConfig.collections);
                 angular.forEach(urlSearch.collections, function (id) {
@@ -284,6 +292,7 @@ define([
 
                 that.page = searchService.currentSearch.page;
                 that.postsPrPage = searchService.currentSearch.postsPrPage;
+                that.isAdvanced = searchService.currentSearch.isAdvanced;
 
                 that.collections = angular.copy(searchConfig.collections);
                 angular.forEach(searchService.currentSearch.collections, function (id) {
@@ -292,6 +301,10 @@ define([
                     }
                 });
                 $scope.doSearch();
+
+                console.log("hejhej");
+                $anchorScroll('results-start');
+
             }
 
             $timeout(function () {
