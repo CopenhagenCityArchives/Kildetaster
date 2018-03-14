@@ -20,10 +20,13 @@ define([
 
         that.initialized = false;
 
+        // Search params
         that.queries = [];
+        that.simpleQuery = [];
 
+        // Set which search section opens
         that.sectionAdvanced = true;
-        that.sectionFree = false;
+        that.sectionSimple = false;
 
         // The index of the current page
         that.page = 0;
@@ -36,13 +39,15 @@ define([
         //Default field to sort by, use value from rootScope if we have it, otherwise default ot lastname
         that.sortField = $rootScope.sortField ? $rootScope.sortField : searchConfig.fields['lastname'];
 
+
+        // Toggle for opening and closing simple-search and advanced-search sections
         $scope.toggle = function(section) {
-            if(section == 'sectionFree') {
-                if(that.sectionFree == true) {
-                    that.sectionFree = false;
+            if(section == 'sectionSimple') {
+                if(that.sectionSimple == true) {
+                    that.sectionSimple = false;
                 } else {
                     that.sectionAdvanced = false;
-                    that.sectionFree = true;
+                    that.sectionSimple = true;
                 }
             }
             if(section == 'sectionAdvanced') {
@@ -50,10 +55,9 @@ define([
                     that.sectionAdvanced = false;
                 } else {
                     that.sectionAdvanced = true;
-                    that.sectionFree = false;
+                    that.sectionSimple = false;
                 }
             }
-
         };
 
 
@@ -61,6 +65,8 @@ define([
         var initSearchFields = function(){
             // Add default search config field for firstnames
             that.addField('firstnames', '', 'eq');
+            that.addSimple('freetext_store', '', 'in_multivalued');
+
             // Build collections
             that.collections = angular.copy(searchConfig.collections);
 
@@ -137,6 +143,29 @@ define([
 
         };
 
+        that.addSimple = function addSimple(defaultFieldName, term, op) {
+            // verify and set default field
+            if (!searchConfig.fields.hasOwnProperty(defaultFieldName)) {
+                return;
+            }
+            var field = searchConfig.fields[defaultFieldName];
+
+            // verify
+            if (!searchConfig.types.hasOwnProperty(field.type) ||
+                (op && !searchConfig.types[field.type].operators.includes(op))) {
+                return;
+            }
+
+            var operator;
+            if (op) {
+                operator = searchConfig.operators[op];
+            } else {
+                operator = searchConfig.operators[searchConfig.types[field.type].operators[0]];
+            }
+
+            that.simpleQuery.push({ field: field, operator: operator, term: term });
+        }
+
         // a field must be associated with all selected collections to be shown
         // TODO update to use that
         $scope.fieldCollectionFilter = function(value, index, array) {
@@ -167,7 +196,6 @@ define([
             if (event.charCode === 13) {
                $scope.startNewSearch();
             }
-
         };
 
         //Trigger search and reset indexes
@@ -175,7 +203,12 @@ define([
         $scope.startNewSearch = function startNewSearch() {
             $rootScope.page = 0;
             that.page = 0;
-            $scope.doSearch();
+
+            if (that.sectionAdvanced === false) {
+                $scope.doSimpleSearch();
+            } else {
+                $scope.doAdvancedSearch();
+            }
         }
 
         /**
@@ -210,15 +243,51 @@ define([
             solrService.clearSearchData();
             searchService.currentSearch = null;
             that.queries = [];
+            $scope.simpleQuery = [];
             that.filterQueries = [];
             initSearchFields();
         };
 
         /**
-        * Execute the search
+        * Execute the Simple Search
         // TODO update to use that
         */
-        $scope.doSearch = function doSearch() {
+       $scope.doSimpleSearch = function doSimpleSearch() {
+
+        solrService.clearSearchData();
+
+        Analytics.trackEvent('person_search', 'start_search');
+
+        var colIds = [];
+        // Set all collections for simple search
+        angular.forEach(that.collections, function(collection, id) {
+                colIds.push(collection.id);
+        });
+        // Prepare search configuration
+        var thisSearch = {
+            queries: that.simpleQuery,
+            filterQueries: that.filterQueries,
+            collections: colIds,
+            sortField: that.sortField,
+            sortDirection: that.sortDirection,
+            postsPrPage: that.postsPrPage,
+            page: that.page
+        };
+
+        searchService.currentSearch = thisSearch;
+        // Set the configuration in the service
+        searchService.setSearch(thisSearch);
+
+        // Go to the results state to search and show results
+        $state.go('.results');
+
+    };
+
+        /**
+        * Execute the Advanced Search
+        // TODO update to use that
+        */
+        $scope.doAdvancedSearch = function doAdvancedSearch() {
 
             solrService.clearSearchData();
 
@@ -231,7 +300,6 @@ define([
                     colIds.push(collection.id);
                 }
             });
-
             // Prepare search configuration
             var thisSearch = {
                 queries: that.queries,
@@ -246,6 +314,7 @@ define([
             searchService.currentSearch = thisSearch;
             // Set the configuration in the service
             searchService.setSearch(thisSearch);
+
 
             // Go to the results state to search and show results
             $state.go('.results');

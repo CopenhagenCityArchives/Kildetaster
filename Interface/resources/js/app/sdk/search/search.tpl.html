@@ -28,13 +28,15 @@
         <hr class="sdk-search__divider">
         <div class="row-fluid with-padding">
             <div class="span12">
-                <div ng-class="{'sdk-search__section--open' : ctrl.sectionFree}" class="sdk-search__section sdk-search__section--closed">
+                <div ng-class="{'sdk-search__section--open' : ctrl.sectionSimple}" class="sdk-search__section sdk-search__section--closed">
 
-                    <h2 ng-click="toggle('sectionFree')" class="sdk-search__section-header"><div class="sdk-search__foldout"></div>Fritekst</h2>
+                    <h2 ng-click="toggle('sectionSimple')" class="sdk-search__section-header"><div class="sdk-search__foldout"></div>Fritekst søgning</h2>
 
-                    <div class="sdk-search__freesearch">
+                    <div class="sdk-search__simplesearch">
                         <p>Her kan du søge efter personer i bl.a. Politiets registerblade og de københavnske begravelsesprotokoller.</p>
-                        <input placeholder="Navn, adresse eller fritekst" type="text" /><button type="button" class="button" ng-click="startNewSearch()" ng-disabled="searching">SØG</button>
+                        <div ng-repeat="row in ctrl.simpleQuery">
+                            <input ng-model="row.term" placeholder="Navn, adresse eller fritekst" type="text" ng-keypress="ctrl.submitSearch($event)"/><button type="button" class="button" ng-click="startNewSearch()" ng-disabled="searching">SØG</button>
+                        </div>
                     </div>
 
                 </div>
@@ -45,7 +47,7 @@
             <div class="span12">
                 <div ng-class="{'sdk-search__section--open' : ctrl.sectionAdvanced}" class="sdk-search__section sdk-search__section--closed">
 
-                    <h2 ng-click="toggle('sectionAdvanced')" class="sdk-search__section-header"><div class="sdk-search__foldout"></div>Avanceret</h2>
+                    <h2 ng-click="toggle('sectionAdvanced')" class="sdk-search__section-header"><div class="sdk-search__foldout"></div>Avanceret søgning</h2>
                     <div class="sdk-search__dom-content" get-dom-content="search-app-upper-text"></div>
                     <div class="collection">
                         <div class="collection__item" ng-repeat="collection in ctrl.collections">
