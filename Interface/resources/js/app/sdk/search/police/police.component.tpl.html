@@ -12,23 +12,26 @@
                     <text-name firstnames="$ctrl.data.firstnames" lastname="$ctrl.data.lastname" birthname="$ctrl.data.birthname"></text-name>
                     <span class="post__collection">Politiets registerblade</span>
                 </h2>
-                <div class="post__infogroup">
-                    <p ng-if="$ctrl.data.person_type_text"><strong>Persontype:</strong> {{$ctrl.data.person_type_text}}</p>
+                <div class="post__infogroup" ng-if="$ctrl.data.person_type_text">
+                    <p><strong>Persontype:</strong> {{$ctrl.data.person_type_text}}</p>
                 </div>
-                <div class="post__infogroup">
+                <div class="post__infogroup" ng-if="$ctrl.data.dateOfBirth || $ctrl.data.dateOfDeath">
                     <p ng-if="$ctrl.data.dateOfBirth"><strong>Født:</strong> {{$ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
                     <p ng-if="$ctrl.data.dateOfDeath"><strong>Død:</strong> {{$ctrl.data.dateOfDeath | date: 'dd-MM-yyyy' }}</p>
                 </div>
-                <div class="post__infogroup">
-                    <p><span ng-if="$ctrl.data.civilstand">{{$ctrl.data.civilstand}}</span><span ng-if="$ctrl.data.civilstand && $ctrl.data.sex">, </span><text-gender type="$ctrl.data.sex"></text-gender></p>
+                <div class="post__infogroup" ng-if="$ctrl.data.civilstand">
+                    <p><strong>Civilstand: </strong>{{$ctrl.data.civilstand}}</p>
+                </div>
+                <div class="post__infogroup" ng-if="$ctrl.data.sex">
+                    <p><strong>Køn: </strong><text-gender type="$ctrl.data.sex"></text-gender></p>
                 </div>
                 <div class="post__infogroup">
-                    <div ng-repeat="position in $ctrl.data.positions">
+                    <span ng-repeat="position in $ctrl.data.positions">
                             <strong ng-if="$first">Erhverv: </strong><span>{{position.position}}</span><span ng-if="!$last">, </span>
-                    </div>
+                    </span>
                 </div>
-                <div class="post__infogroup">
-                    <p ng-if="$ctrl.data.person_comment"><strong>Indtasters kommentar:</strong> {{$ctrl.data.person_comment}}</p>
+                <div class="post__infogroup" ng-if="$ctrl.data.person_comment">
+                    <p><strong>Indtasters kommentar:</strong> {{$ctrl.data.person_comment}}</p>
                 </div>
 
                 <!-- Error reports -->
@@ -43,7 +46,7 @@
                 
             </div>
             <div class="post__sharelink">
-                <label for="permalink">Permalink</label>
+                <label for="permalink">Permalink:</label>
                 <input id="permalink" class="input" type="text" ng-value="$ctrl.permalink"/><button ng-click="$ctrl.copy()" class="button">Kopier</button><span class="confirm">Kopieret</span>
             </div>
 

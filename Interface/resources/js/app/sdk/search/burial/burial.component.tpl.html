@@ -12,7 +12,7 @@
                     <text-name firstnames="$ctrl.data.firstnames" lastname="$ctrl.data.lastname" birthname="$ctrl.data.birthname"></text-name>
                     <span class="post__collection">Begravelse</span>
                 </h2>
-                <div class="post__infogroup">
+                <div class="post__infogroup" ng-if="$ctrl.data.dateOfBirth || $ctrl.data.yearOfBirth || $ctrl.data.dateOfDeath">
                     <p ng-if="$ctrl.data.dateOfBirth"><strong>Født:</strong> {{ $ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
                     <p ng-if="isNumber($ctrl.data.yearOfBirth)"><strong>Fødselsår:</strong> {{$ctrl.data.yearOfBirth}}</p>
                     <p>
@@ -22,8 +22,11 @@
                 <div class="post__infogroup">
                     <p><text-age prefix="'Alder: '" years="$ctrl.data.ageYears" months="$ctrl.data.ageMonth" weeks="$ctrl.data.ageWeeks" days="$ctrl.data.ageDays" hours="$ctrl.data.ageHours"></text-age></p>
                 </div>
-                <div class="post__infogroup">
-                    <p><span ng-if="$ctrl.data.civilstatus">{{ $ctrl.data.civilstatus }}<span ng-if="$ctrl.data.civilstatus && $ctrl.data.sex">,</span><span ng-if="$ctrl.data.sex">{{ $ctrl.data.sex }}</span></p>
+                <div class="post__infogroup" ng-if="$ctrl.data.civilstatus">
+                    <p><strong>Civilstand: </strong>{{$ctrl.data.civilstatus}}</p>
+                </div>
+                <div class="post__infogroup" ng-if="$ctrl.data.sex">
+                    <p><strong>Køn: </strong>{{ $ctrl.data.sex }}</p>
                 </div>
                 <div class="post__infogroup">
                     <div ng-repeat="position in $ctrl.data.positions">
@@ -43,7 +46,7 @@
 
             </div>
             <div class="post__sharelink">
-                <label for="permalink">Permalink</label>
+                <label for="permalink">Permalink:</label>
                 <input id="permalink" class="input" type="text" ng-value="$ctrl.permalink"/><button ng-click="$ctrl.copy()" class="button">Kopier</button><span class="confirm">Kopieret</span>
             </div>
 
