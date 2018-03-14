@@ -302,7 +302,6 @@ define([
                 });
                 $scope.doSearch();
 
-                console.log("hejhej");
                 $anchorScroll('results-start');
 
             }
