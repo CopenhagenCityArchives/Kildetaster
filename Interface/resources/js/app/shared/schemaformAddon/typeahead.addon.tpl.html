@@ -20,8 +20,8 @@
             handle the limit, it will not clear/reset the options correctly -->
         <ui-select-choices
             repeat="option in options track by $index" refresh="getData(form.schema.datasource, $select.search, form.schema.datasourceValueField)"
-            refresh-delay="750"
-            minimum-input-length="0">
+            refresh-delay="0"
+            minimum-input-length="2">
             <div ng-bind-html="option | highlight: $select.search"></div>
         </ui-select-choices>
         <ui-select-no-choice>
