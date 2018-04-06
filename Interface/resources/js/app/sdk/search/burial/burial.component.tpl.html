@@ -50,8 +50,8 @@
 
         <div class="post__item">
             <h3 class="post__sectionheader">Adresse</h3>
-            <span ng-if="$ctrl.data.addresses.addressOutsideCph">
-                {{$ctrl.data.address.addressOutsideCph}}
+            <span ng-if="$ctrl.data.adressOutsideCph">
+                {{$ctrl.data.adressOutsideCph}}
             </span>
             <text-address address="$ctrl.data.addresses"></text-address>
         </div>
@@ -78,7 +78,7 @@
         <div class="post__item">
             <h3 class="post__sectionheader">Om kilden</h3>
             <p>{{ $ctrl.data.collection_info }} {{ $ctrl.data.unit_description }} s. {{ $ctrl.data.page_number }}</p>
-            <p ng-if="$ctrl.data.burials.record_number"><strong>Løbenummer:</strong> {{ $ctrl.data.burials.record_number }}</p>
+            <p ng-if="$ctrl.data.burials.number"><strong>Løbenummer:</strong> {{ $ctrl.data.burials.number }}</p>
         </div>
 
         <div class="post__item">
