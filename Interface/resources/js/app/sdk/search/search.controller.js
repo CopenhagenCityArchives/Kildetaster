@@ -66,6 +66,9 @@ define([
         var initSearchFields = function(){
             // Add default search config field for firstnames
             that.addField('firstnames', '', 'eq');
+
+            //Add default freetext_store field in simple query
+            that.simpleQuery = [];
             that.addSimple('freetext_store', '', 'in_multivalued');
 
             // Build collections
@@ -246,6 +249,7 @@ define([
             that.queries = [];
             $scope.simpleQuery = [];
             that.filterQueries = [];
+
             initSearchFields();
         };
 
@@ -336,7 +340,7 @@ define([
             if (!searchService.currentSearch && !searchService.urlParamsExist()) {
 
                 initSearchFields();
-                
+
             }
             // entry from URL
             else if (!searchService.currentSearch && searchService.urlParamsExist()) {
@@ -409,7 +413,7 @@ define([
                 that.postsPrPage = urlSearch.postsPrPage;
                 that.page = urlSearch.page;
 
-                $anchorScroll('search-start');  
+                $anchorScroll('search-start');
 
             }
             // Entry into page that is already configured
