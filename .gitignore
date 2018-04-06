@@ -8,3 +8,5 @@ Interface/resources/js/app/shared/templates.js
 Interface/resources/js/app/shared/sdk-templates.js
 Interface/resources/js/app/shared/constants.js
 *.ftppass
+
+package-lock.json

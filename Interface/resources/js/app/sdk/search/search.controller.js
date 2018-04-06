@@ -10,6 +10,7 @@ define([
         $stateParams,
         $state,
         $rootScope,
+        $anchorScroll,
         solrService,
         searchService,
         searchConfig,
@@ -20,7 +21,13 @@ define([
 
         that.initialized = false;
 
+        // Search params
         that.queries = [];
+        that.simpleQuery = [];
+
+        // Set which search section opens
+        that.sectionAdvanced = false;
+        that.sectionSimple = true;
 
         // The index of the current page
         that.page = 0;
@@ -33,10 +40,37 @@ define([
         //Default field to sort by, use value from rootScope if we have it, otherwise default ot lastname
         that.sortField = $rootScope.sortField ? $rootScope.sortField : searchConfig.fields['lastname'];
 
+
+        // Toggle for opening and closing simple-search and advanced-search sections
+        $scope.toggle = function(section) {
+            if(section == 'sectionSimple') {
+                if(that.sectionSimple == true) {
+                    that.sectionSimple = false;
+                } else {
+                    that.sectionAdvanced = false;
+                    that.sectionSimple = true;
+                }
+            }
+            if(section == 'sectionAdvanced') {
+                if(that.sectionAdvanced == true) {
+                    that.sectionAdvanced = false;
+                } else {
+                    that.sectionAdvanced = true;
+                    that.sectionSimple = false;
+                }
+            }
+        };
+
+
         //Private method used to init/reset search fields
         var initSearchFields = function(){
             // Add default search config field for firstnames
             that.addField('firstnames', '', 'eq');
+
+            //Add default freetext_store field in simple query
+            that.simpleQuery = [];
+            that.addSimple('freetext_store', '', 'in_multivalued');
+
             // Build collections
             that.collections = angular.copy(searchConfig.collections);
 
@@ -113,6 +147,29 @@ define([
 
         };
 
+        that.addSimple = function addSimple(defaultFieldName, term, op) {
+            // verify and set default field
+            if (!searchConfig.fields.hasOwnProperty(defaultFieldName)) {
+                return;
+            }
+            var field = searchConfig.fields[defaultFieldName];
+
+            // verify
+            if (!searchConfig.types.hasOwnProperty(field.type) ||
+                (op && !searchConfig.types[field.type].operators.includes(op))) {
+                return;
+            }
+
+            var operator;
+            if (op) {
+                operator = searchConfig.operators[op];
+            } else {
+                operator = searchConfig.operators[searchConfig.types[field.type].operators[0]];
+            }
+
+            that.simpleQuery.push({ field: field, operator: operator, term: term });
+        }
+
         // a field must be associated with all selected collections to be shown
         // TODO update to use that
         $scope.fieldCollectionFilter = function(value, index, array) {
@@ -143,7 +200,6 @@ define([
             if (event.charCode === 13) {
                $scope.startNewSearch();
             }
-
         };
 
         //Trigger search and reset indexes
@@ -151,7 +207,12 @@ define([
         $scope.startNewSearch = function startNewSearch() {
             $rootScope.page = 0;
             that.page = 0;
-            $scope.doSearch();
+
+            if (that.sectionAdvanced === false) {
+                $scope.doSimpleSearch();
+            } else {
+                $scope.doAdvancedSearch();
+            }
         }
 
         /**
@@ -186,15 +247,53 @@ define([
             solrService.clearSearchData();
             searchService.currentSearch = null;
             that.queries = [];
+            $scope.simpleQuery = [];
             that.filterQueries = [];
+
             initSearchFields();
         };
 
         /**
-        * Execute the search
+        * Execute the Simple Search
         // TODO update to use that
         */
-        $scope.doSearch = function doSearch() {
+        $scope.doSimpleSearch = function doSimpleSearch() {
+
+            solrService.clearSearchData();
+
+            Analytics.trackEvent('person_search', 'start_search');
+
+            var colIds = [];
+            // Set all collections for simple search
+            angular.forEach(that.collections, function(collection, id) {
+                    colIds.push(collection.id);
+            });
+            // Prepare search configuration
+            var thisSearch = {
+                queries: that.simpleQuery,
+                filterQueries: that.filterQueries,
+                collections: colIds,
+                sortField: that.sortField,
+                sortDirection: that.sortDirection,
+                postsPrPage: that.postsPrPage,
+                page: that.page,
+                isAdvanced: false
+            };
+
+            searchService.currentSearch = thisSearch;
+            // Set the configuration in the service
+            searchService.setSearch(thisSearch);
+
+            // Go to the results state to search and show results
+            $state.go('.results');
+
+        };
+
+        /**
+        * Execute the Advanced Search
+        // TODO update to use that
+        */
+        $scope.doAdvancedSearch = function doAdvancedSearch() {
 
             solrService.clearSearchData();
 
@@ -207,7 +306,6 @@ define([
                     colIds.push(collection.id);
                 }
             });
-
             // Prepare search configuration
             var thisSearch = {
                 queries: that.queries,
@@ -216,11 +314,13 @@ define([
                 sortField: that.sortField,
                 sortDirection: that.sortDirection,
                 postsPrPage: that.postsPrPage,
-                page: that.page
+                page: that.page,
+                isAdvanced: true
             };
 
-            searchService.currentSearch = thisSearch;
             // Set the configuration in the service
+            searchService.currentSearch = thisSearch;
+
             searchService.setSearch(thisSearch);
 
             // Go to the results state to search and show results
@@ -248,9 +348,53 @@ define([
                 var urlSearch = searchService.getSearch(searchConfig);
 
                 that.queries = [];
-                angular.forEach(urlSearch.queries, function(item) {
-                    that.queries.push(item);
+                that.simpleQuery = [];
+
+                // Set collections and check those from prev search
+                that.collections = angular.copy(searchConfig.collections);
+                angular.forEach(urlSearch.collections, function(id) {
+                    if (that.collections[id]) {
+                        that.collections[id].selected = true;
+                    }
                 });
+
+                // Check to see which section is relevant
+                if (urlSearch.isAdvanced) {
+
+                    // Open advanced search, and set default on simple
+                    that.addSimple('freetext_store', '', 'in_multivalued');
+                    that.sectionAdvanced = true;
+                    that.sectionSimple = false;
+
+                    // Push advanced fields
+                    angular.forEach(urlSearch.queries, function(item) {
+                        that.queries.push(item);
+                    });
+
+                } else if(urlSearch.queries.length === 1 && urlSearch.queries[0].field.name === "freetext_store" && Object.keys(that.collections).length === urlSearch.collections.length) {
+
+                    // Open simple search, and set default on advanced
+                    that.addField('firstnames', '', 'eq');
+                    that.sectionAdvanced = false;
+                    that.sectionSimple = true;
+
+                    // Push simple field
+                    that.simpleQuery.push(urlSearch.queries[0]);
+
+                } else {
+
+                    // Open advanced search, and set default on simple
+                    that.addSimple('freetext_store', '', 'in_multivalued');
+                    that.sectionAdvanced = true;
+                    that.sectionSimple = false;
+
+                    // Push advanced fields
+                    angular.forEach(urlSearch.queries, function(item) {
+                        that.queries.push(item);
+                    });
+
+                }
+
 
                 that.filterQueries = [];
                 angular.forEach(urlSearch.filterQueries, function(filterQuery) {
@@ -269,12 +413,7 @@ define([
                 that.postsPrPage = urlSearch.postsPrPage;
                 that.page = urlSearch.page;
 
-                that.collections = angular.copy(searchConfig.collections);
-                angular.forEach(urlSearch.collections, function(id) {
-                    if (that.collections[id]) {
-                        that.collections[id].selected = true;
-                    }
-                });
+                $anchorScroll('search-start');
 
             }
             // Entry into page that is already configured
@@ -288,9 +427,52 @@ define([
                 // Add current search config to the url query param
                 searchService.setSearch(searchService.currentSearch);
 
-                searchService.currentSearch.queries.each(function(item, index) {
-                    that.addField(item.field.name, item.term, item.operator.op)
+                // Set collections and check those from prev search
+                that.collections = angular.copy(searchConfig.collections);
+                angular.forEach(searchService.currentSearch.collections, function(id) {
+                    if (that.collections[id]) {
+                        that.collections[id].selected = true;
+                    }
                 });
+
+
+                // Check to see which section is relevant
+                if (searchService.currentSearch.isAdvanced) {
+
+                    // Open advanced search, and set default on simple
+                    that.addSimple('freetext_store', '', 'in_multivalued');
+                    that.sectionAdvanced = true;
+                    that.sectionSimple = false;
+
+                    // Set advanced fields
+                    searchService.currentSearch.queries.each(function(item, index) {
+                        that.addField(item.field.name, item.term, item.operator.op)
+                    });
+
+                } else if(searchService.currentSearch.queries.length === 1 && searchService.currentSearch.queries[0].field.name === "freetext_store" && Object.keys(that.collections).length === searchService.currentSearch.collections.length) {
+
+                    // Open simple search, and set default on advanced
+                    that.addField('firstnames', '', 'eq');
+                    that.sectionAdvanced = false;
+                    that.sectionSimple = true;
+
+                    // Set simple field
+                    that.addSimple('freetext_store', searchService.currentSearch.queries[0].term, 'in_multivalued');
+
+                } else {
+
+                    // Open advanced search, and set default on simple
+                    that.addSimple('freetext_store', '', 'in_multivalued');
+                    that.sectionAdvanced = true;
+                    that.sectionSimple = false;
+
+                    // Set advanced fields
+                    searchService.currentSearch.queries.each(function(item, index) {
+                        that.addField(item.field.name, item.term, item.operator.op)
+                    });
+
+                }
+
 
                 that.filterQueries = [];
                 searchService.currentSearch.filterQueries.each(function(filterQuery) {
@@ -299,12 +481,9 @@ define([
 
                 that.page = searchService.currentSearch.page;
                 that.postsPrPage = searchService.currentSearch.postsPrPage;
-                that.collections = angular.copy(searchConfig.collections);
-                angular.forEach(searchService.currentSearch.collections, function(id) {
-                    if (that.collections[id]) {
-                        that.collections[id].selected = true;
-                    }
-                });
+
+                $anchorScroll('search-start');
+
 
             }
 
