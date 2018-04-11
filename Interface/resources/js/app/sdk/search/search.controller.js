@@ -40,6 +40,39 @@ define([
         //Default field to sort by, use value from rootScope if we have it, otherwise default ot lastname
         that.sortField = $rootScope.sortField ? $rootScope.sortField : searchConfig.fields['lastname'];
 
+        that.canSearchAdvanced = false;
+
+        //Check for changes in quries, and update ability to search
+        $scope.$watch(
+            function(){
+                return that.queries;
+            },
+            function(newValue, oldValue) {
+                that.canSearchAdvanced = true;
+                angular.forEach(that.queries, function(key, index){
+                    if(!key.term || (key.term && key.term.trim() == '')){
+                        that.canSearchAdvanced = false;
+                        return;
+                    }
+                });
+        },true);
+
+        that.canSearchSimple = false;
+
+        $scope.$watch(
+            function(){
+                if(that.simpleQuery && that.simpleQuery[0]){
+                    return that.simpleQuery[0];
+                }
+            },
+            function(newValue, oldValue){
+                if(newValue && newValue.term && newValue.term.trim() !== ""){
+                    that.canSearchSimple = true;
+                }
+                else{
+                    that.canSearchSimple = false;
+                }
+        },true);
 
         // Toggle for opening and closing simple-search and advanced-search sections
         $scope.toggle = function(section) {
