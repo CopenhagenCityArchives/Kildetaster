@@ -90,7 +90,7 @@ define([
                         component: 'post'
                     }
                 },
-                // Scroll the browser to the top 
+                // Scroll the browser to the top
                 onEnter: function() {
                     jQuery('html, body').animate({ scrollTop: 0 }, 100);
                 },
@@ -113,7 +113,7 @@ define([
                             else {
                                 deferred.resolve(undefined)
                             }
-                            
+
                         })
                         .then(function (userData) {
                             deferred.resolve(userData);
@@ -164,15 +164,16 @@ define([
                             }
                             // We somehow did not find the post we wanted
                             else {
+                                console.log("error! could not find post by id" + $stateParams.postId);
                                 deferred.reject('Post not found in saved search data!');
                             }
                         }
                         // Fetch new post data
                         else {
-                            
+
                             // Get current search config
                             searchService.getConfigPromise()
-                                .then(function(response) {                   
+                                .then(function(response) {
                                     return response;
                                 })
                                 .then(function(config) {
@@ -189,10 +190,10 @@ define([
 
                                     // Call solr with the config and query
                                     return solrService.search(
-                                        queries, 
-                                        parsedConfig.filterQueries, 
-                                        parsedConfig.collections, 
-                                        parsedConfig.sortField, 
+                                        queries,
+                                        parsedConfig.filterQueries,
+                                        parsedConfig.collections,
+                                        parsedConfig.sortField,
                                         parsedConfig.sortDirection,
                                         0,
                                         1
