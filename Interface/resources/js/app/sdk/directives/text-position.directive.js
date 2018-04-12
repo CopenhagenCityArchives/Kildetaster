@@ -10,11 +10,11 @@ define([
             templateUrl: 'sdk/directives/text-position.directive.tpl.html',
 
             scope: {
-                position: '='
+                positions: '='
             },
 
             link: function(scope, element, attr) {
-                
+
             }
         };
 

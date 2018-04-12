@@ -29,9 +29,7 @@
                     <p><strong>Køn: </strong>{{ $ctrl.data.sex }}</p>
                 </div>
                 <div class="post__infogroup">
-                    <div ng-repeat="position in $ctrl.data.positions">
-                        <strong ng-if="$first">Erhverv: </strong><span>{{position.position}}</span><span ng-if="!$last">, </span>
-                    </div>
+                    <text-position positions="$ctrl.data.positions"></text-position>
                 </div>
 
                 <!-- Error reports -->

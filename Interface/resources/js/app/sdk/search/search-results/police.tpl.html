@@ -8,7 +8,7 @@
         </div>
         <span ng-if="$ctrl.data.birthplace"><strong>Fødested:</strong> {{$ctrl.data.birthplace}}</span>
         <text-date prefix="Født" date="$ctrl.data.dateOfBirth"></text-date>
-        <text-position position="position" ng-repeat="position in $ctrl.data.positions"></text-position>
+        <text-position positions="$ctrl.data.positions"></text-position>
     </div>
 </div>
 
