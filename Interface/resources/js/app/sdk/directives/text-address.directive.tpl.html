@@ -1,3 +1,3 @@
 <div>
-    {{address.streetAndHood}} {{address.number}}{{address.letter}}<span ng-if="address.floor">, {{address.floor}}</span> {{address.institution}}<span ng-if="address.addressOutsideCph">{{address.addressOutsideCph}}</span>
+    <span ng-if="address.street">{{address.street ? address.street : address.institution }}</span> {{address.number}}{{address.letter}}<span ng-if="address.floor">, {{address.floor}}</span> {{address.institution}}<span ng-if="address.adressOutsideCph">{{address.adressOutsideCph}}</span>
 </div>
