@@ -1,0 +1,50 @@
+<section class="post">
+
+    <div class="post__head">
+        <div class="post__item post__main post__alternate">
+
+            <div class="post__tools">
+                <a href="" ng-click="$ctrl.openErrorReporting()">Rapporter fejl</a>
+            </div>
+
+            <div class="post__header">
+                <h2>
+                    <span class="post__collection">Politiets Efterretninger</span>
+                </h2>
+
+                <!-- Error reports -->
+                <div ng-if="$ctrl.postErrors.length > 0" class="post__error">
+                    <div>Denne post er fejlmeldt</div>
+                    <a href ng-click="$ctrl.toggleErrorReports()">Læs mere</a>
+
+                    <div ng-repeat="error in $ctrl.postErrors" ng-if="$ctrl.showErrorReports">
+                        {{ error.label || 'Ukendt felt' }}: {{error.comment}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="post__item post__viewer">
+            <div class="post__links">
+                <a ng-href="{{$ctrl.getAssetHref()}}" target="_blank" class="button">Link til efterretningsdokument</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="post__col">
+        <div class="post__item" ng-if="$ctrl.data.highlighting.erindring_document_text">
+            <h3 class="post__sectionheader">Søgekontekst</h3>
+            <p ng-repeat="highlight in $ctrl.data.highlighting.erindring_document_text">
+                ...<span ng-bind-html="highlight"></span>...
+            </p>
+        </div>
+    </div>
+
+    <div class="post__col post__alternate">
+
+        <div class="post__item">
+            <h3 class="post__sectionheader">Om kilden</h3>
+            <p>Efterretningsnummer {{ $ctrl.data.number }}<span ng-if="$ctrl.data.date">, {{ $ctrl.data.date }}</span></p>
+        </div>
+    </div>
+
+</section>

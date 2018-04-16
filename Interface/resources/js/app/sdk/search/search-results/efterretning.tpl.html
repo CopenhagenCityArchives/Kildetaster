@@ -1,0 +1,34 @@
+
+<div class="search-container__item"></div>
+
+<div class="search-container__item"></div>
+
+<div class="search-container__item">
+    <div>
+        <div ng-if="$ctrl.data.position_parent">
+            <strong>Forældres stilling:</strong>
+            <div>{{ $ctrl.data.position_parent }}</div>
+        </div>
+        <div ng-if="$ctrl.data.description">
+            <strong>Beskrivelse</strong>
+            <div>{{ $ctrl.data.description }}</div>
+        </div>
+    </div>
+</div>
+
+<div class="search-container__item">
+    <div>
+        <div>
+            <strong>Politiets Efterretninger</strong>
+        </div>
+        <div>
+            <strong>Nr.:</strong> {{ $ctrl.data.number }}
+        </div>
+        <div ng-if="$ctrl.data.date">
+            <strong>Dato:</strong> {{ $ctrl.data.date }}
+        </div>
+        <div class="search-container__link">
+            <span>Til kilden</span>
+        </div>
+    </div>
+</div>

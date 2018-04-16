@@ -39,6 +39,10 @@ define([], function() {
                 else if (this.data.collection_id == 100) {
                     this.templateUrl = 'sdk/search/search-results/school.tpl.html';
                 }
+                // Efterretninger
+                else if (this.data.collection_id == 19) {
+                    this.templateUrl = 'sdk/search/search-results/efterretning.tpl.html';
+                }
             }
 
         };

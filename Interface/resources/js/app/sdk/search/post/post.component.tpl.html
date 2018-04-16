@@ -27,8 +27,17 @@
     post-errors="$ctrl.postErrors">
 </post-erindring>
 
+<post-efterretning
+    ng-if="$ctrl.data.collection_id == 19"
+    data="$ctrl.data"
+    open-error-reporting="$ctrl.open()"
+    toggle-error-reports="$ctrl.toggleErrorReports()"
+    show-error-reports="$ctrl.showErrorReports"
+    post-errors="$ctrl.postErrors">
+</post-efterretning>
+
 <post-school
-    ng-if="$ctrl.data.collection_id == 100" 
+    ng-if="$ctrl.data.collection_id == 100"
     data="$ctrl.data"
     open-error-reporting="$ctrl.open()"
     toggle-error-reports="$ctrl.toggleErrorReports()"

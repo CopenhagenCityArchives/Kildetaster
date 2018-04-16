@@ -71,6 +71,7 @@ define([
     'app/sdk/search/police/police.component',
     'app/sdk/search/burial/burial.component',
     'app/sdk/search/erindring/erindring.component',
+    'app/sdk/search/efterretning/efterretning.component',
     'app/sdk/search/school/school.component',
 
     'app/sdk/filters/formatStringNumber.filter',
@@ -150,6 +151,7 @@ define([
     postPoliceComponent,
     postBurialComponent,
     postErindringComponent,
+    postEfterretningComponent,
     postSchoolComponent,
 
     formatStringNumberFilter,
@@ -232,6 +234,7 @@ define([
     searchApp.component('postPolice', postPoliceComponent);
     searchApp.component('postBurial', postBurialComponent);
     searchApp.component('postErindring', postErindringComponent);
+    searchApp.component('postEfterretning', postEfterretningComponent);
     searchApp.component('postSchool', postSchoolComponent);
 
 
