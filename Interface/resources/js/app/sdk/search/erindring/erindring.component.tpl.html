@@ -9,14 +9,14 @@
 
             <div class="post__header">
                 <h2>
-                    {{ $ctrl.data.firstnames }} {{ $ctrl.data.lastname }} <span ng-if="$ctrl.data.birthname">{{$ctrl.data.birthname}}</span></span>
+                    {{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} <span ng-if="$ctrl.data.birthname">{{$ctrl.data.birthname}}</span>
                     <span class="post__collection">Erindring</span>
                 </h2>
-
+                <p ng-if="$ctrl.data.period"><strong>Omhandler årene:</strong> {{ $ctrl.data.period }}</p>
                 <p ng-if="$ctrl.data.yearOfBirth"><strong>Født:</strong> {{ $ctrl.data.yearOfBirth }}</p>
-                <p>{{ $ctrl.data.civilstatus }}{{ $ctrl.data.civilstatus && $ctrl.data.sex ? ', ' : '' }}</span><span ng-if="$ctrl.data.sex">{{ $ctrl.data.civilstatus ? 'køn' : 'Køn' }}: {{ $ctrl.data.sex }}</span></p>
-                <p>{{ $ctrl.data.position }}</p>
-                <p ng-if="$ctrl.data.position_parent"><strong>Forældres stilling:</strong> {{ $ctrl.data.position_parent }}</p>
+                <p>
+                  <span ng-if="$ctrl.data.sex">{{$ctrl.data.sex}}</span><span ng-if="$ctrl.data.sex && $ctrl.data.civilstatus">, {{$ctrl.data.civilstatus}}</span><span ng-if="!$ctrl.data.sex && $ctrl.data.civilstatus">{{ $ctrl.data.civilstatus }}</span>
+                </p>
 
                 <!-- Error reports -->
                 <div ng-if="$ctrl.postErrors.length > 0" class="post__error">
@@ -29,25 +29,34 @@
                 </div>
             </div>
         </div>
+
         <div class="post__item post__viewer">
             <div class="post__links">
-                <a ng-href="{{$ctrl.getAssetHref()}}" target="_blank" class="button">Link til erindringsdokument</a>
-                <a ng-if="$ctrl.data.transcribed" ng-href="{{$ctrl.getTranscribedAssetHref()}}" target="_blank" class="button">Link til transkribering</a>
+                <a ng-href="{{$ctrl.getAssetHref()}}" target="_blank" class="button">Erindring</a>
+                <a ng-if="$ctrl.data.transcribed" ng-href="{{$ctrl.getTranscribedAssetHref()}}" target="_blank" class="button">Renskrift</a>
             </div>
         </div>
     </div>
 
     <div class="post__col">
+
+        <div class="post__item" ng-if="$ctrl.data.position || $ctrl.data.position_parent ||$ctrl.data.position_spouse" >
+            <h3 class="post__sectionheader">Erhverv</h3>
+            <p ng-if="$ctrl.data.position"><strong>Erhverv:</strong> {{$ctrl.data.position}}</p>
+            <p ng-if="$ctrl.data.position_parent"><strong>Forældres erhverv:</strong> {{$ctrl.data.position_parent}}</p>
+            <p ng-if="$ctrl.data.position_spouse"><strong>Ægtefælles erhverv:</strong> {{$ctrl.data.position_spouse}}</p>
+        </div>
+
         <div class="post__item" ng-if="$ctrl.data.highlighting.erindring_document_text">
-            <h3 class="post__sectionheader">Søgekontekst</h3>
+            <h3 class="post__sectionheader">Dit søgeord er fundet i denne kontekst</h3>
             <p ng-repeat="highlight in $ctrl.data.highlighting.erindring_document_text">
-                ...<span ng-bind-html="highlight"></span>...
+                &hellip;<span ng-bind-html="highlight"></span>&hellip;
             </p>
         </div>
 
         <div class="post__item" ng-if="$ctrl.data.keywords && $ctrl.data.keywords.length > 0">
-            <h3 class="post__sectionheader">Emneord</h3>
-            <p><span ng-repeat="keyword in $ctrl.data.keywords track by $index">{{ keyword }}{{ $last ? '' : ', ' }}</span></p>
+            <h3 class="post__sectionheader">Erindringen omhandler</h3>
+            <p><span ng-repeat="keyword in $ctrl.data.keywords track by $index">{{keyword}}{{ $last ? '' : ', ' }}</span></p>
         </div>
 
         <div class="post__item" ng-if="$ctrl.data.description">
@@ -60,9 +69,10 @@
 
         <div class="post__item">
             <h3 class="post__sectionheader">Om kilden</h3>
-            <p>Erindringsnummer {{ $ctrl.data.erindring_number }}<span ng-if="$ctrl.data.writtenYear">, skrevet i {{ $ctrl.data.writtenYear }}</span></p>
-            <p><strong>Omfang:</strong> {{ $ctrl.data.extent }}</p>
-            <p ng-if="$ctrl.data.writeMethod">{{ $ctrl.data.writeMethod }}</p>
+            <p ng-if="$ctrl.data.collectedYear"><strong>Afleveret til arkivet i:</strong> {{ $ctrl.data.collectedYear }}</p>
+            <p><strong>Nr.:</strong> {{$ctrl.data.erindring_number}}</p>
+            <p><strong>Omfang:</strong> {{$ctrl.data.extent}}<span ng-if="$ctrl.data.writeMethod">, {{$ctrl.data.writeMethod}}</span></p>
+            <p ng-if="$ctrl.data.containsPhotos"><strong>Indeholder fotos</strong></p>
         </div>
     </div>
 
