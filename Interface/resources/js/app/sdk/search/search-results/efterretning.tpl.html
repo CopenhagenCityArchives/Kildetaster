@@ -4,16 +4,14 @@
 <div class="search-container__item"></div>
 
 <div class="search-container__item">
-    <div>
-        <div ng-if="$ctrl.data.position_parent">
-            <strong>Forældres stilling:</strong>
-            <div>{{ $ctrl.data.position_parent }}</div>
-        </div>
-        <div ng-if="$ctrl.data.description">
-            <strong>Beskrivelse</strong>
-            <div>{{ $ctrl.data.description }}</div>
-        </div>
-    </div>
+  <div ng-if="$ctrl.highlighting.erindring_document_text">
+      <div>
+        <strong>Søgeord fundet i denne kontekst:</strong>
+      </div>
+      <p ng-repeat="highlight in $ctrl.highlighting.erindring_document_text">
+          &hellip;<span ng-bind-html="highlight"></span>&hellip;
+      </p>
+  </div>
 </div>
 
 <div class="search-container__item">
