@@ -43,7 +43,7 @@
 
         <div class="post__item">
             <h3 class="post__sectionheader">Om kilden</h3>
-            <p>Efterretningsnummer {{ $ctrl.data.number }}<span ng-if="$ctrl.data.date">, {{ $ctrl.data.date }}</span></p>
+            <p>Efterretningsnummer {{ $ctrl.data.number }}<span ng-if="$ctrl.data.date">, {{ $ctrl.formatDate($ctrl.data.date) }}</span></p>
         </div>
     </div>
 

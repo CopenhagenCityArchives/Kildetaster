@@ -47,7 +47,9 @@ define([], function() {
 
         };
 
-
+        this.formatDate = function(datestring) {
+          return moment(datestring).format("LL");
+        }
     };
     return searchResultController;
 });

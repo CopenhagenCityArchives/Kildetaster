@@ -19,6 +19,10 @@ define([], function() {
             return API + "/asset/" + id;
         }
 
+        this.formatDate = function(datestring) {
+          return moment(datestring).format("LL");
+        }
+
     };
 
     return efterretningController;
