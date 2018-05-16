@@ -31,7 +31,7 @@
                 <div ng-class="{'sdk-search__section--open' : ctrl.sectionSimple}" class="sdk-search__section sdk-search__section--closed">
 
                     <h2 ng-click="toggle('sectionSimple')" class="sdk-search__section-header"><div class="sdk-search__foldout"></div>Fritekst søgning</h2>
-
+                    <div class="sdk-search__dom-content" get-dom-content="search-app-simple-search-text"></div>
                     <div class="sdk-search__simplesearch">
                         <p>Her kan du søge efter personer i bl.a. Politiets registerblade og de københavnske begravelsesprotokoller.</p>
                         <div ng-repeat="row in ctrl.simpleQuery">
