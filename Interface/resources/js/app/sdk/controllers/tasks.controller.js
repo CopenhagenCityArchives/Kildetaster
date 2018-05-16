@@ -53,7 +53,7 @@ define([
                 //Only show closed tasks
                 else if (!data.showOpen && data.showFinished) {
                     $scope.units = response.filter(function(unit) {
-                        return unit.pages_done === unit.pages;
+                        return unit.pages_done >= unit.pages;
                     });
                 }
 
