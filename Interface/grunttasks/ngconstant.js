@@ -74,7 +74,7 @@ module.exports = {
             EDITORURL: '/kildetaster',
             RESSOURCEURL: 'https://www.kbhkilder.dk/software/kildetaster/resources/',
             SDKCSSURL: 'https://www.kbhkilder.dk/software/kildetaster/resources/css/sdk.css',
-            API: 'https://www.kbhkilder.dk/1508/stable',
+            API: 'https://www.kbhkilder.dk/api',
             SOLRAPI: 'https://aws.kbhkilder.dk/solr/apacs_core/select',
             SEARCHCONFIGURL: 'https://kbhkilder.dk/1508/stable/searchconfig',
             ERRORREPORCONFIGURL: 'https://kbhkilder.dk/1508/stable/errorreportconfig',
