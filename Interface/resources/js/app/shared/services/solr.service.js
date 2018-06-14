@@ -60,7 +60,25 @@ define([
                     break;
                 //Special case used for string matching in multivalued fields (freetext_store)
                 case "in_multivalued":
-                    term = "(*" + term.split(' ').join('* AND *') + "*)";
+                    parts = [];
+                    inside = false;
+                    term.split("\"").forEach(function(part) {
+                        parts.push({ p: part, q: inside });
+                        inside = !inside;
+                    });
+                    terms = [];
+                    parts.forEach(function(p) {
+                        if (p.q) {
+                            terms.push("\"" + p.p + "\"");
+                        } else {
+                            p.p.split(" ").forEach(function (part) {
+                                if (part !== "") {
+                                    terms.push("*" + part + "*");
+                                }
+                            });
+                        }
+                    });
+                    term = "(" + terms.join(' AND ') + ")";
                     //term = "(*" + term.replace(' ', '* AND *') + "*)";
                     break;
                 default:
@@ -100,7 +118,7 @@ define([
                 }
             });
             if (!freetextRowTooShort && freetextRowLongEnough) {
-                return "?wt=json&hl=on&hl.fl=erindring_document_text&hl.snippets=3&hl.simple.pre=<b>&hl.simple.post=</b>&json.facet=" + JSON.stringify(facetConfig);
+                return "?wt=json&hl=on&hl.fl=erindring_document_text&hl.snippets=3&hl.simple.pre=<b>&hl.simple.post=</b>&hl.usePhraseHighligher=true&json.facet=" + JSON.stringify(facetConfig);
             }
             return "?wt=json&json.facet=" + JSON.stringify(facetConfig);
         }
