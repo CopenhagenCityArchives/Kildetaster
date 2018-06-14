@@ -48,6 +48,28 @@ module.exports = {
         }
     },
 
+    prototypeNoAuthLocal: {
+        constants: {
+            JSONURL: '/resources/mock/',
+            EDITORURL: 'http://localhost:1508',
+            RESSOURCEURL: '/resources/',
+            SDKCSSURL: '/resources/css/sdk.css',
+            //API: 'http://www.kbhkilder.dk/1508/stable',
+            //API: 'http://www.kbhkilder.dk/1508/stable_noauth',
+            API: 'https://www.kbhkilder.dk/1508/experimental',
+            SOLRAPI: 'http://localhost:8989/solr/apacs_core/select',
+            SEARCHCONFIGURL: 'http://localhost:8000/searchconfig',
+            ERRORREPORCONFIGURL: 'https://kbhkilder.dk/1508/experimental/errorreportconfig',
+            MAINDOMAIN: 'https://www.kbharkiv.dk',
+            TOKENURL: 'https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
+            ERRORURL: 'https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
+            SEARCHURL: 'https://www.kbharkiv.dk/permalink',
+            BYPASSAUTH: true,
+            //Number of items to fetch when working with typeahead data fields
+            TYPEAHEADMAXIUMUM: 75
+        }
+    },
+
     development: {
         constants: {
             JSONURL: 'https://kildetaster.dev9.1508test.dk/resources/mock/',

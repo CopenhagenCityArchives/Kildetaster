@@ -38,6 +38,20 @@ sdk:
     - 'open:sdk'
     - 'watchSdk'
 
+sdkLocal:
+    - 'clean:sdk'
+    - 'html2js:sdk'
+    - 'ngconstant:prototypeNoAuthLocal'
+    - 'copy:sdk'
+    - 'sass:sdk'
+    - 'postcss:sdk'
+    - 'bake:sdk'
+#    - 'karma:prototype'
+    - 'express:prototype'
+    - 'express:sdk'
+    - 'open:sdk'
+    - 'watchSdk'
+
 dev:
     - 'clean:development'
     - 'html2js:editor'
