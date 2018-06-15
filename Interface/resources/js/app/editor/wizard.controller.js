@@ -168,11 +168,6 @@ define([
 
             $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
 
-            //If we are showing step 1, enable area selection
-            if ($scope.currentStep === 1) {
-                $scope.makeSelectable();
-            }
-
             //TODO: Remove this!
             //Hack to force focus on button and not links in header
             $timeout(function() {
@@ -310,6 +305,12 @@ define([
          * Move to previous step
          */
         $scope.prevStep = function prevStep() {
+            
+            //If we are step 1, return to outside the form, and restore selectable area
+            if ($scope.currentStep === 1) {
+                $scope.makeSelectable();
+                $state.go('^');
+            }
 
             //Validate the form
             $scope.$broadcast('schemaFormValidate');
@@ -319,10 +320,8 @@ define([
                 return;
             }
 
-            //If we are moving from step 1, make area selectable (since that is step 1)
-            if ($scope.currentStep == 2) {
-                $scope.makeSelectable();
-            }
+            
+
             //Update the search variable
             $location.search({
                 stepId: parseInt($scope.currentStep) - 1
@@ -330,13 +329,7 @@ define([
         };
 
         $scope.goToStep = function goToStep(stepId) {
-
-            if ($scope.currentStep === 1) {
-                Flash.create('warning', 'Du skal vælge et område før du kan gå videre');
-            } else {
                 $state.go('.', { stepId: stepId });
-            }
-
         };
 
         $scope.postDone = function postDone() {
@@ -442,8 +435,17 @@ define([
 
             $scope.mainProperty = response.keyName;
 
-            //Stepdata, including form config
+            //TODO: Remove the check if backend removes the step, so that id 1 can be used once again
+            //Test if Step id 1 exists, as it is skipped and handle stepdata accordingly
+            if(response.steps.some(function(element) {
+                return element.id === "1"
+            })) {
+                $scope.steps = response.steps.filter(function(element) {
+                    return element.id !== "1";
+                });
+            } else {
             $scope.steps = response.steps;
+            }
 
             //Take note of the total number of steps
             $scope.numSteps = $scope.steps.length;
@@ -457,6 +459,7 @@ define([
 
         $scope.init = function() {
             $rootScope.$broadcast('zoom-to-selection');
+            $scope.acceptArea();
         };
 
     };
