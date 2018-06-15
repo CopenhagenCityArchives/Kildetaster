@@ -103,9 +103,6 @@ define([
                         $scope.postId = response.data.post_id;
                     }
 
-                    if ($scope.currentStep === 1) {
-                        $scope.nextStep();
-                    }
                     //http://stackoverflow.com/questions/12729122/angularjs-prevent-error-digest-already-in-progress-when-calling-scope-apply
                     $timeout(function() {
                         $scope.showSelectionControls = false;
