@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var pageNewController = /*@ngInject*/ function pageNewController(taskData, pageData, $rootScope, pageService, $timeout, $state) {
+    var pageNewController = /*@ngInject*/ function pageNewController($uibModal, taskData, pageData, $scope, $rootScope, pageService, $timeout, $state) {
 
         this.nextPost = pageData.next_post;
         this.posts = pageData.posts;
@@ -14,7 +14,7 @@ define([
             var taskIdOne = this.tasks.find(function(element) {
                 return element.tasks_id === 1;
             });
-            
+
             if(this.posts.length == 6 && taskIdOne.is_done == 0) {
                 //If 6 posts are filled, go to next page
                 this.goToNextAvailablePage();
@@ -48,6 +48,23 @@ define([
                         $timeout(function() {
                             $state.go('editor.page', { pageId: response.pages_id});
                         }, 0);
+                    } else {
+                        $uibModal.open({
+
+                            templateUrl: 'editor/missing.modal.tpl.html',
+                            //The type of modal. The error modal makes more room for the error text
+                            windowClass: 'modal--error',
+        
+                            //Make wizard scope available to the modal
+                            scope: $scope,
+        
+                            controller: ['$scope', function($scope) {
+                                $scope.dismiss = function() {
+                                    $scope.$dismiss();
+                                };
+                            }]
+                        });
+
                     }
                 });
 
