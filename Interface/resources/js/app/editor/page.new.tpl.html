@@ -17,8 +17,11 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <button id="nextPost-button" type="button" class="btn btn-primary btn-block" ng-disabled="!$ctrl.nextPost" tabindex="1" ui-sref=".wizard({stepId: 1})">Området er placeret - næste</button>
-            <br />
+            <button id="nextPost-button" type="button" class="btn btn-primary btn-block" ng-disabled="!$ctrl.nextPost" tabindex="1" ui-sref=".wizard({stepId: 1})">Området er placeret - næste</button>    
+        </div>        
+    </div>
+    <div class="row wizard-bottom">
+        <div class="col-sm-12">            
             <p>Meld siden færdig, hvis alle poster er indtastede</p>
             <button id="nextPage-button" type="button" class="btn btn-default btn-block" tabindex="2" ng-click="$ctrl.goToNextAvailablePage()">Siden er færdig</button>
         </div>

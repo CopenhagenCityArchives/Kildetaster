@@ -1,4 +1,14 @@
 .wizard-done {
+    position: relative;
+
+    height: 100%;
     margin-left: -80px;
     padding: 20px;
+}
+
+.wizard-bottom {
+    position: absolute;
+    bottom: 0;
+
+    width: calc(100% - 10px);
 }
