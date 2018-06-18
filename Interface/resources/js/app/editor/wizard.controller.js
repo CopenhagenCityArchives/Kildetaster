@@ -385,9 +385,13 @@ define([
                 var key = e.which || e.keyCode;
 
                 if (e.shiftKey && key == 38) {
-                    $scope.goToStep(parseInt($scope.currentStep) - 1);
+                    if ($scope.currentStep > 1) {
+                        $scope.goToStep(parseInt($scope.currentStep) - 1);
+                    }
                 } else if (e.shiftKey && key == 40) {
-                    $scope.goToStep(parseInt($scope.currentStep) + 1);
+                    if ($scope.currentStep < $scope.numSteps) {
+                        $scope.goToStep(parseInt($scope.currentStep) + 1);
+                    }
                 } 
               };
         }
