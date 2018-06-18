@@ -8,7 +8,7 @@
             <h2>{{currentStepData.name}}</h2>
             <p>{{currentStepData.description}}</p>
 
-            <form name="stepForm" sf-schema="schema" sf-form="currentStepData.fields" sf-model="values" sf-options="sfDefaults"></form>
+            <form id="step-form" name="stepForm" sf-schema="schema" sf-form="currentStepData.fields" sf-model="values" sf-options="sfDefaults"></form>
 
         </div>
     </div>
@@ -210,7 +210,7 @@
         </div>
         <div class="row" ng-if="entrySaved">
             <div class="col-sm-12">
-                <button tabindex="1" type="button" class="btn btn-primary btn-block" ng-click="postDone()">Fortsæt</button>
+                <button id="done-button" tabindex="1" type="button" class="btn btn-primary btn-block" ng-click="postDone()">Fortsæt</button>
             </div>
         </div>
 

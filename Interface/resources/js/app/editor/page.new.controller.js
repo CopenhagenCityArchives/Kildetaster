@@ -5,9 +5,19 @@ define([
     var editorController = /*@ngInject*/ function editorController(taskData, pageData, $rootScope, pageService, $timeout, $state) {
 
         this.init = function() {
+            $scope = this;
             $rootScope.$broadcast('zoom-out');
+            
+            //Preselect a button, based on if nextPost is available, for quick navigation to advanced users. 
+            $timeout(function() {
+                if ($scope.nextPost) {
+                    $('#nextPost-button').focus();
+                } else {
+                    $('#nextPage-button').focus();
+                }
+            });
         };
-
+        
         this.nextPost = pageData.next_post;
 
         /**

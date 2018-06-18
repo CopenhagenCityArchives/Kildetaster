@@ -165,6 +165,7 @@ define([
 
             $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
 
+            
             //TODO: Remove this!
             //Hack to force focus on button and not links in header
             $timeout(function() {
@@ -256,6 +257,11 @@ define([
                 //If the reqeust was ok from the server, assume everything is allright
                 $scope.entrySaved = true;
                 $scope.shareLinkId = response.data.solr_id;
+
+                //Continue Step, so focus on continue button
+                $timeout(function() {
+                    $('#done-button').focus();
+                });
 
             }).catch(function(err) {
 
@@ -451,6 +457,14 @@ define([
             $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
 
             $scope.summaryFields = helpers.prepareSummaryData(response.steps, response.schema, response.keyName);
+
+            //Set focus in first field of schema, if its step 1
+            $timeout(function() {
+                if($scope.currentStep === 1) {
+                    //First step needs focus in first field.
+                    $('#step-form').find('input').first().focus();
+                }
+            });
 
         });
 
