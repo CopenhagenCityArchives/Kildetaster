@@ -1,0 +1,79 @@
+.dropdown-menu {
+    right: 0;
+    left: auto !important;
+
+    overflow-y: scroll;
+
+    max-height: 200px;
+}
+
+.ui-select-container.loading:after {
+    position: absolute;
+    z-index: 10;
+    right: 10px;
+    bottom: 31%;
+
+    width: 20px;
+    height: 20px;
+    margin: -20px 0 0 -20px;
+
+    content: "";
+    animation: spin 1s infinite linear;
+
+    border: solid rgba(9, 62, 78, 0.2);
+    border-width: 2px;
+    border-top-color: $dark-blue;
+    border-radius: 50%;
+}
+
+//because of issues with animations, opacity is not handled correct in the current version of ui-select (0.19.6)
+// @see https://github.com/angular-ui/ui-select/issues/1731
+.ui-select-bootstrap > .ui-select-choices {
+    display: block;
+
+    width: auto;
+    min-width: 100%;
+
+    opacity: 1 !important;
+}
+
+//Prevent very long selected items to flow outside the 'input field'
+.ui-select-bootstrap .ui-select-match-text {
+    overflow: hidden;
+}
+
+.ui-select-bootstrap .ui-select-choices-row > span {
+    line-height: 1.2;
+
+    padding-top: 5px;
+    padding-bottom: 5px;
+
+    white-space: inherit;
+}
+.ui-select-toggle {
+    font-size: 13px;
+    line-height: 30px;
+
+    width: 100%;
+    height: 40px;
+
+    background-color: #efefef;
+    background-image: none;
+
+    &:hover {
+        background-color: #efefef;
+    }
+}
+.ui-select-container {
+    input {
+        font-size: 13px;
+
+        width: calc(100% - 12px);
+
+        color: #000000;
+        background-color: #efefef;
+    }
+}
+.ui-select-choices {
+    background-color: #efefef;
+}
