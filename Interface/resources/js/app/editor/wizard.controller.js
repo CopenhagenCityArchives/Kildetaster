@@ -330,17 +330,18 @@ define([
                 stepId: parseInt($scope.currentStep) - 1
             });
         };
-
+        
         $scope.goToStep = function goToStep(stepId) {
-                $state.go('.', { stepId: stepId });
+            $state.go('.', { stepId: stepId });
         };
-
+        
         $scope.postDone = function postDone() {
             $state.go('editor.page.new', {}, { reload: true });
         };
 
+        
         $scope.$on('okToSetPageDone', function(event) {
-
+            
             pageService.pageIsDone({
                 page_id: pageData.id,
                 task_id: taskData.id
@@ -352,9 +353,9 @@ define([
             .catch(function(err) {
                 console.log('Err', err);
             });
-
+            
         });
-
+        
         /**
          * Tell the app that we want to place/replace the area
          */
@@ -364,27 +365,48 @@ define([
             //Show controls to accept new area
             $scope.showSelectionControls = true;
         };
-
+        
         $scope.toggleShareLink = function() {
             $scope.buildShareLink($scope.shareLinkId);
             $scope.showShareLink = !$scope.showShareLink;
         };
 
+
         /**
-        * Lookup the value of a specifik object path in the $scope.values object
-        *
-        * @param key {string|array} The path to the value
-        *
-        * @return The value found, or an empty string if none were found
-        */
+         * Create keyboard shortcuts for shifting between tabs in the wizard
+         * 
+         * Shift + Arrow Up     : Go one tab up/back
+         * Shift + Arrow Down   : Go one tab down/forward
+         * 
+         */
+        $scope.keyboardShortcuts = function keyboardShortcuts() {
+            document.onkeyup = function(e) {
+                //For cross-browser compability
+                var key = e.which || e.keyCode;
+
+                if (e.shiftKey && key == 38) {
+                    $scope.goToStep(parseInt($scope.currentStep) - 1);
+                } else if (e.shiftKey && key == 40) {
+                    $scope.goToStep(parseInt($scope.currentStep) + 1);
+                } 
+              };
+        }
+        
+        /**
+         * Lookup the value of a specifik object path in the $scope.values object
+         *
+         * @param key {string|array} The path to the value
+         *
+         * @return The value found, or an empty string if none were found
+         */
         $scope.lookupFieldValue = function lookupFieldValue(key) {
             return helpers.lookupFieldValue(key, $scope.values);
         };
-
+        
         /**
-        * Delete value on the given key from the values object
-        *
-        * @param key {string|array} The path to the value
+         * Delete value on the given key from the values object
+         *
+         * @param key {string|array} The path to the value
         * @param subkey {string} The property name to look for in an array type field
         * @param index {int} The index of the field, ie. the index of the field in the array object
         */
@@ -471,6 +493,7 @@ define([
         $scope.init = function() {
             $rootScope.$broadcast('zoom-to-selection');
             $scope.acceptArea();
+            $scope.keyboardShortcuts();
         };
 
     };
