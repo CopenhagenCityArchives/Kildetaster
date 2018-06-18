@@ -23,7 +23,7 @@
                     <div>Denne post er fejlmeldt</div>
                     <a href ng-click="$ctrl.toggleErrorReports()">Læs mere</a>
 
-                    <div ng-repeat="error in $ctrl.postErrors" ng-if="$ctrl.showErrorReports">
+                    <div class="post__error__message" ng-repeat="error in $ctrl.postErrors" ng-if="$ctrl.showErrorReports">
                         {{ error.label || 'Ukendt felt' }}: {{error.comment}}
                     </div>
                 </div>

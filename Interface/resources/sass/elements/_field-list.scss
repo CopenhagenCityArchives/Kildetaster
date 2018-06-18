@@ -114,6 +114,7 @@
         opacity: 1;
 
         align-items: flex-start;
+        flex-wrap: wrap;
         justify-content: space-between;
 
         &.ng-leave-active {
@@ -121,13 +122,17 @@
         }
 
         > span {
+            display: block;
+
+            width: 100%;
+
+            word-wrap: break-word;
+
             align-self: center;
         }
     }
 
     .field-list__button {
-        margin-left: 20px;
-
         flex: 0 0 100px;
     }
 }

@@ -142,6 +142,12 @@
         div, span {
             color: currentColor;
         }
+
+        &__message {
+            margin-bottom: 14px;
+
+            word-wrap: break-word;
+        }
     }
     &__sharelink {
         position: relative;
