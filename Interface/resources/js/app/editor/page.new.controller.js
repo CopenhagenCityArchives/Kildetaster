@@ -2,15 +2,20 @@ define([
 
 ], function() {
 
-    var editorController = /*@ngInject*/ function editorController(taskData, pageData, $rootScope, pageService, $timeout, $state) {
+    var pageNewController = /*@ngInject*/ function pageNewController(taskData, pageData, $rootScope, pageService, $timeout, $state) {
 
         this.nextPost = pageData.next_post;
         this.posts = pageData.posts;
+        this.tasks = pageData.task_page;
 
         this.init = function() {
             $rootScope.$broadcast('zoom-out');
             
-            if(this.posts.length == 6) {
+            var taskIdOne = this.tasks.find(function(element) {
+                return element.tasks_id === 1;
+            });
+            
+            if(this.posts.length == 6 && taskIdOne.is_done == 0) {
                 //If 6 posts are filled, go to next page
                 this.goToNextAvailablePage();
             } else if (this.nextPost) {
@@ -55,6 +60,6 @@ define([
 
     };
 
-    return editorController;
+    return pageNewController;
 
 });
