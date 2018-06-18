@@ -4,21 +4,23 @@ define([
 
     var editorController = /*@ngInject*/ function editorController(taskData, pageData, $rootScope, pageService, $timeout, $state) {
 
+        this.nextPost = pageData.next_post;
+        this.posts = pageData.posts;
+
         this.init = function() {
-            $scope = this;
             $rootScope.$broadcast('zoom-out');
             
-            //Preselect a button, based on if nextPost is available, for quick navigation to advanced users. 
-            $timeout(function() {
-                if ($scope.nextPost) {
+            if(this.posts.length == 6) {
+                //If 6 posts are filled, go to next page
+                this.goToNextAvailablePage();
+            } else if (this.nextPost) {
+                //Preselect button, based on if nextPost is available. 
+                $timeout(function() {
                     $('#nextPost-button').focus();
-                } else {
-                    $('#nextPage-button').focus();
-                }
-            });
+                });
+            }
         };
         
-        this.nextPost = pageData.next_post;
 
         /**
         * Get next available page, based on unitId, taskId and the current page number
