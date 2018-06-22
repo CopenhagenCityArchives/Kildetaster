@@ -172,6 +172,10 @@ define([
                 if ($scope.currentStep == $scope.steps.length) {
                     //Last step, so focus on the save button
                     $('#save-button').focus();
+                } else if ($scope.currentStep == 2) {
+                    $('#step-form').find('.ui-select-match').first().children().focus();
+                } else {
+                    $('#step-form').find('input').first().focus();
                 }
             });
 
