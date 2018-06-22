@@ -32,7 +32,8 @@ define([
                 //Options to show when rendered as a typeahead or select
                 $scope.options = [];
 
-                $scope.lastField = undefined;
+                $scope.lastTerm = undefined;
+                // $scope.lastField = undefined;
 
                 //Default placeholder
                 $scope.placeholder = 'Søgeterm';
@@ -57,7 +58,10 @@ define([
                         return;
                     }
 
-                    // Store used field name, for next getData call
+
+                    // Store used term, for next getData call
+                    $scope.lastTerm = term;
+                    // // Store used field name, for next getData call
                     $scope.lastField = field.name;
 
                     // Remove options, before populating the list again
