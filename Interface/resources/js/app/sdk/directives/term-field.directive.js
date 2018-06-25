@@ -32,7 +32,7 @@ define([
                 //Options to show when rendered as a typeahead or select
                 $scope.options = [];
 
-                $scope.lastTerm = undefined;
+                //$scope.lastTerm = undefined;
                 // $scope.lastField = undefined;
 
                 //Default placeholder
@@ -54,15 +54,15 @@ define([
                     }
 
                     // If the field name is the same as the last field, do nothing
-                    if(field.name === $scope.lastField) {
+                    /*if(field.name === $scope.lastField) {
                         return;
-                    }
+                    }*/
 
 
                     // Store used term, for next getData call
-                    $scope.lastTerm = term;
+                    //$scope.lastTerm = term;
                     // // Store used field name, for next getData call
-                    $scope.lastField = field.name;
+                    //$scope.lastField = field.name;
 
                     // Remove options, before populating the list again
                     $scope.options = [];
