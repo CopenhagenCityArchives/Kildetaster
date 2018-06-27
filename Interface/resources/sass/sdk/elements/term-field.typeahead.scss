@@ -74,7 +74,9 @@
 
 //Prevent very long selected items to flow outside the 'input field'
 .ui-select-bootstrap .ui-select-match-text {
-    overflow: hidden;
+    overflow: auto;
+
+    white-space: nowrap;
 }
 
 .ui-select-bootstrap .ui-select-choices-row > span {
@@ -101,4 +103,4 @@
 
 .select2-search input.select2-active {
     background-image: none; //inline("../bower_components/select2/select2-spinner.gif");
-}
+}
