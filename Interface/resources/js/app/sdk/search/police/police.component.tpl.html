@@ -7,7 +7,7 @@
                 <a href="" ng-click="$ctrl.openErrorReporting()">Rapporter fejl</a>
             </div>
 
-            <div class="post__header">
+            <div class="post__header" itemscope itemtype="http://schema.org/Person">
                 <h2>
                     <text-name firstnames="$ctrl.data.firstnames" lastname="$ctrl.data.lastname" birthname="$ctrl.data.birthname"></text-name>
                     <span class="post__collection">Politiets registerblade</span>
@@ -57,7 +57,7 @@
     </div>
 
     <div class="post__col">
-        <div class="post__item">
+        <div class="post__item" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
             <h3 class="post__sectionheader" ng-if="$ctrl.data.addresses">Adresse</h3>
             <text-address-police address="address" date="true" ng-repeat="address in $ctrl.data.addresses"></text-address-police>
        </div>
