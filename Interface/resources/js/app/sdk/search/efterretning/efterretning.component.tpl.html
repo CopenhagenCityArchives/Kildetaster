@@ -9,6 +9,7 @@
 
             <div class="post__header">
                 <h2>
+                    <div class="sdk-name"><strong>{{ $ctrl.data.efterretning_type }}</strong></div>
                     <span class="post__collection">Politiets Efterretninger</span>
                 </h2>
 
@@ -43,7 +44,7 @@
 
         <div class="post__item">
             <h3 class="post__sectionheader">Om kilden</h3>
-            <p>Efterretningsnummer {{ $ctrl.data.number }}<span ng-if="$ctrl.data.date">, {{ $ctrl.formatDate($ctrl.data.date) }}</span></p>
+            <p>Nummer {{ $ctrl.data.number }}<span ng-if="$ctrl.data.date">, {{ $ctrl.formatDate($ctrl.data.date) }}.</span></p>
         </div>
     </div>
 
