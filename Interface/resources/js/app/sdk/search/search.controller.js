@@ -274,6 +274,23 @@ define([
                 }
             });
 
+            // check sort field validity
+            var sortFieldValid = that.sortField.collections.some(function(collection) {
+                return that.collections[collection].selected;
+            });
+            if (!sortFieldValid) {
+                var keys = Object.keys(searchConfig.fields);
+                for (i = 0; i < keys.length; i++) {
+                    var valid = searchConfig.fields[keys[i]].collections.some(function(collection) {
+                        return that.collections[collection].selected;
+                    });
+                    if (valid) {
+                        that.sortField = searchConfig.fields[keys[i]];
+                        $rootScope.sortField = that.sortField;
+                        break;
+                    }
+                }
+            }
         };
 
         $scope.resetSearch = function(){
