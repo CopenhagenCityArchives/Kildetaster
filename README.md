@@ -20,7 +20,7 @@ Then run `grunt prototype` to start the prototype. This will build all frontend 
 
 Then run `grunt prototypeNoAuth` to start the prototype. This will build all frontend files, and start a local webserver to host the solution
 
-The editor can be hit at http://localhost:1508/#/task/1/page/1/?stepId=1
+The editor can be hit at http://localhost:1508/#/task/1/page/108250
 
 ### Development of prototype of the Joomla SDK
 
