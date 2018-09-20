@@ -98,7 +98,7 @@ define([
         //Private method used to init/reset search fields
         var initSearchFields = function(){
             // Add default search config field for firstnames
-            that.addField('firstnames', '', 'eq');
+            that.addField('freetext_store', '', 'in_multivalued');
 
             //Add default freetext_store field in simple query
             that.simpleQuery = [];
