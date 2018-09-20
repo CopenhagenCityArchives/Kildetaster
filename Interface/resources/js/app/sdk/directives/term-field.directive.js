@@ -111,11 +111,12 @@ define([
                             rtn = 'sdk/directives/term-field.directive--date.tpl.html';
                             break;
                         case 'string':
+                        case 'string_multivalued':
+                        case 'number':
+                        default:
                             $scope.placeholder = 'Søgeterm';
                             rtn = 'sdk/directives/term-field.directive--string.tpl.html';
                             break;
-                        default:
-                            rtn = 'sdk/directives/term-field.directive--string.tpl.html';
                     }
 
                     return rtn;
