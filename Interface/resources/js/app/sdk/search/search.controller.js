@@ -50,7 +50,7 @@ define([
             function(newValue, oldValue) {
                 that.canSearchAdvanced = true;
                 angular.forEach(that.queries, function(key, index){
-                    if(!key.term || (key.term && !key.term.label && key.term.trim() == ''){
+                    if(!key.term || (key.term && !key.term.label && key.term.trim() == '')){
                         that.canSearchAdvanced = false;
                         return;
                     }
