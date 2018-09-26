@@ -248,6 +248,25 @@ define([
             }
         }
 
+        that.sortFieldValid = function() {
+            var sortFieldValid = that.sortField.collections.some(function(collection) {
+                return that.collections[collection].selected;
+            });
+            if (!sortFieldValid) {
+                var keys = Object.keys(searchConfig.fields);
+                for (i = 0; i < keys.length; i++) {
+                    var valid = searchConfig.fields[keys[i]].sortable && searchConfig.fields[keys[i]].collections.some(function(collection) {
+                        return that.collections[collection].selected;
+                    });
+                    if (valid) {
+                        that.sortField = searchConfig.fields[keys[i]];
+                        $rootScope.sortField = that.sortField;
+                        break;
+                    }
+                }
+            }
+        }
+
         /**
          *
          */
@@ -274,23 +293,7 @@ define([
                 }
             });
 
-            // check sort field validity
-            var sortFieldValid = that.sortField.collections.some(function(collection) {
-                return that.collections[collection].selected;
-            });
-            if (!sortFieldValid) {
-                var keys = Object.keys(searchConfig.fields);
-                for (i = 0; i < keys.length; i++) {
-                    var valid = searchConfig.fields[keys[i]].collections.some(function(collection) {
-                        return that.collections[collection].selected;
-                    });
-                    if (valid) {
-                        that.sortField = searchConfig.fields[keys[i]];
-                        $rootScope.sortField = that.sortField;
-                        break;
-                    }
-                }
-            }
+            that.sortFieldValid();
         };
 
         $scope.resetSearch = function(){
@@ -390,7 +393,6 @@ define([
             if (!searchService.currentSearch && !searchService.urlParamsExist()) {
 
                 initSearchFields();
-
             }
             // entry from URL
             else if (!searchService.currentSearch && searchService.urlParamsExist()) {
@@ -432,7 +434,6 @@ define([
                     that.simpleQuery.push(urlSearch.queries[0]);
 
                 } else {
-
                     // Open advanced search, and set default on simple
                     that.addSimple('freetext_store', '', 'in_multivalued');
                     that.sectionAdvanced = true;
@@ -457,9 +458,8 @@ define([
                     return urlSearch.collections.indexOf(colId) != -1;
                 })) {
                     that.sortField = urlSearch.sortField;
-                } else {
-                    that.sortField = searchConfig.fields["lastname"];
                 }
+                that.sortFieldValid();
                 that.postsPrPage = urlSearch.postsPrPage;
                 that.page = urlSearch.page;
 
@@ -471,7 +471,7 @@ define([
                 if (!searchService.currentSearch.sortField.collections.some(function(colId) {
                     return searchService.currentSearch.collections.indexOf(colId) != -1;
                 })) {
-                    searchService.currentSearch.sortField = searchConfig.fields["lastname"];
+                    searchService.currentSearch.sortField = searchConfig.fields['lastname'];
                 }
 
                 // Add current search config to the url query param
@@ -496,13 +496,17 @@ define([
 
                     // Set advanced fields
                     searchService.currentSearch.queries.each(function(item, index) {
-                        that.addField(item.field.name, item.term, item.operator.op)
+                        that.addField(item.field.name, item.term, item.operator.op);
                     });
 
                 } else if(searchService.currentSearch.queries.length === 1 && searchService.currentSearch.queries[0].field.name === "freetext_store" && Object.keys(that.collections).length === searchService.currentSearch.collections.length) {
 
                     // Open simple search, and set default on advanced
-                    that.addField('firstnames', '', 'eq');
+                    if ($scope.fieldCollectionFilter(searchConfig.fields['firstnames'])) {
+                        that.addField('firstnames', '', 'eq');
+                    } else {
+                        that.addField('freetext_store', searchService.currentSearch.queries[0].term, searchService.currentSearch.queries[0].operator.op)
+                    }
                     that.sectionAdvanced = false;
                     that.sectionSimple = true;
 
