@@ -81,6 +81,13 @@
         color: $black !important;
     }
 
+
+    &__highlight {
+        word-wrap: break-word;
+
+        overflow-wrap: break-word;
+    }
+
     /* Portrait and Landscape */
     @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
         .search-container {
