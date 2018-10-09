@@ -116,6 +116,7 @@ define([
                         default:
                             $scope.placeholder = 'Søgeterm';
                             rtn = 'sdk/directives/term-field.directive--string.tpl.html';
+                            break;
                     }
 
                     return rtn;

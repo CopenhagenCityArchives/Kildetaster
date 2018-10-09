@@ -100,6 +100,12 @@
         margin-bottom: 8px !important;  // !important because of Joomla styling
     }
 
+    &__highlight {
+        word-wrap: break-word;
+
+        overflow-wrap: break-word;
+    }
+
     &__links {
         display: flex;
         flex-direction: row;
