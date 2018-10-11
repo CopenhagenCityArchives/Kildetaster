@@ -12,11 +12,17 @@
                     {{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} <span ng-if="$ctrl.data.birthname">{{$ctrl.data.birthname}}</span>
                     <span class="post__collection">Erindring</span>
                 </h2>
-                <p ng-if="$ctrl.data.period"><strong>Omhandler årene:</strong> {{ $ctrl.data.period }}</p>
-                <p ng-if="$ctrl.data.yearOfBirth"><strong>Født:</strong> {{ $ctrl.data.yearOfBirth }}</p>
-                <p>
-                  <span ng-if="$ctrl.data.sex">{{$ctrl.data.sex}}</span><span ng-if="$ctrl.data.sex && $ctrl.data.civilstatus">, {{$ctrl.data.civilstatus}}</span><span ng-if="!$ctrl.data.sex && $ctrl.data.civilstatus">{{ $ctrl.data.civilstatus }}</span>
-                </p>
+                <div class="post__infogroup">
+                    <p ng-if="$ctrl.data.period"><strong>Omhandler årene:</strong> {{ $ctrl.data.period }}</p>
+                </div>
+                <div class="post__infogroup">
+                    <p ng-if="$ctrl.data.yearOfBirth"><strong>Født:</strong> {{ $ctrl.data.yearOfBirth }}</p>
+                </div>
+                <div class="post__infogroup">
+                    <p>
+                        <span ng-if="$ctrl.data.sex"><strong>Køn:</strong> {{$ctrl.data.sex}}</span><span ng-if="$ctrl.data.sex && $ctrl.data.civilstatus">, {{$ctrl.data.civilstatus}}</span><span ng-if="!$ctrl.data.sex && $ctrl.data.civilstatus">{{ $ctrl.data.civilstatus }}</span>
+                    </p>
+                </div>
 
                 <!-- Error reports -->
                 <div ng-if="$ctrl.postErrors.length > 0" class="post__error">

@@ -25,6 +25,13 @@ define([], function() {
           return moment(datestring).format("LL");
         }
 
+        this.copy = function() {
+            var copyText = document.querySelector("#permalink");
+            copyText.select();
+            document.execCommand("copy");
+            copyText.className = "input copied"
+            copyText.blur();
+        };
     };
 
     return efterretningController;
