@@ -23,6 +23,11 @@
                     </div>
                 </div>
             </div>
+
+            <div class="post__sharelink">
+                <label for="permalink">Permalink:</label>
+                <input id="permalink" class="input" type="text" ng-value="$ctrl.permalink"/><button ng-click="$ctrl.copy()" class="button">Kopier</button><span class="confirm">Kopieret</span>
+            </div>
         </div>
         <div class="post__item post__viewer">
             <div class="post__links">

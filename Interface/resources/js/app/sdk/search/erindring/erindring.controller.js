@@ -7,6 +7,7 @@ define([], function() {
         this.$onInit = function() {
             that.imageUrl = helpers.getImageUrlByPostId(this.data.post_id);
 
+            that.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id;
             //Determine the editor link visibility based on wether or not the user can edit
             that.showEditorLink = that.data.user_can_edit;
 
