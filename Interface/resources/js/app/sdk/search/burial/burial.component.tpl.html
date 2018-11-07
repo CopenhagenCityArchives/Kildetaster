@@ -13,14 +13,18 @@
                     <span class="post__collection">Begravelse</span>
                 </h2>
                 <div class="post__infogroup" ng-if="$ctrl.data.dateOfBirth || $ctrl.data.yearOfBirth || $ctrl.data.dateOfDeath">
-                    <p ng-if="$ctrl.data.dateOfBirth"><strong>Født:</strong> {{ $ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
+                    <p ng-if="$ctrl.data.dateOfBirth"><strong>Født:</strong> {{ $ctrl.data.dateOfBirth | date:
+                        'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
                     <p ng-if="isNumber($ctrl.data.yearOfBirth)"><strong>Fødselsår:</strong> {{$ctrl.data.yearOfBirth}}</p>
                     <p>
                         <text-date prefix="Død" date="$ctrl.data.dateOfDeath"></text-date>
                     </p>
                 </div>
                 <div class="post__infogroup">
-                    <p><text-age prefix="'Alder: '" years="$ctrl.data.ageYears" months="$ctrl.data.ageMonth" weeks="$ctrl.data.ageWeeks" days="$ctrl.data.ageDays" hours="$ctrl.data.ageHours"></text-age></p>
+                    <p>
+                        <text-age prefix="'Alder: '" years="$ctrl.data.ageYears" months="$ctrl.data.ageMonth" weeks="$ctrl.data.ageWeeks"
+                            days="$ctrl.data.ageDays" hours="$ctrl.data.ageHours"></text-age>
+                    </p>
                 </div>
                 <div class="post__infogroup" ng-if="$ctrl.data.civilstatus">
                     <p><strong>Civilstand: </strong>{{$ctrl.data.civilstatus}}</p>
@@ -45,7 +49,8 @@
             </div>
             <div class="post__sharelink">
                 <label for="permalink">Permalink:</label>
-                <input id="permalink" class="input" type="text" ng-value="$ctrl.permalink"/><button ng-click="$ctrl.copy()" class="button">Kopier</button><span class="confirm">Kopieret</span>
+                <input id="permalink" class="input" type="text" ng-value="$ctrl.permalink" /><button ng-click="$ctrl.copy()"
+                    class="button">Kopier</button><span class="confirm">Kopieret</span>
             </div>
 
         </div>
@@ -53,7 +58,8 @@
             <zoom-image image-url="$ctrl.imageUrl"></zoom-image>
             <div class="post__links">
                 <a ng-href="{{$ctrl.data.kildeviser_url}}" target="_blank" class="button">Vis i kildeviser</a>
-                <a href ng-if="$ctrl.showEditorLink" ng-href="{{ $ctrl.editorUrl }}" target="_blank" class="button">Vis i kildetaster</a>
+                <a href ng-if="$ctrl.showEditorLink" ng-href="{{ $ctrl.editorUrl }}" target="_blank" class="button">Vis
+                    i kildetaster</a>
             </div>
         </div>
     </div>
@@ -96,7 +102,8 @@
         <div class="post__item">
             <h3 class="post__sectionheader">Om indtastningen</h3>
             <!--<p>Indtastet: <span style="color: red">Data mangler, eller er det 'last_update'?</span> af {{ $ctrl.data.user_name }}</p>-->
-            <p>Sidst opdateret <!--{{ $ctrl.data.last_update | date: 'dd-MM-yyyy' }}--> af {{ $ctrl.data.user_name }}</p>
+            <p>Sidst opdateret
+                <!--{{ $ctrl.data.last_update | date: 'dd-MM-yyyy' }}--> af {{ $ctrl.data.user_name }}</p>
             <!--<p>Fejl, fejlentitet, kommentar: <span style="color: red">Mangler info</span></p>-->
         </div>
 
