@@ -16,18 +16,23 @@
                     <p><strong>Persontype:</strong> {{$ctrl.data.person_type_text}}</p>
                 </div>
                 <div class="post__infogroup" ng-if="$ctrl.data.dateOfBirth || $ctrl.data.dateOfDeath">
-                    <p ng-if="$ctrl.data.dateOfBirth"><strong>Født:</strong> {{$ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
-                    <p ng-if="$ctrl.data.dateOfDeath"><strong>Død:</strong> {{$ctrl.data.dateOfDeath | date: 'dd-MM-yyyy' }}</p>
+                    <p ng-if="$ctrl.data.dateOfBirth"><strong>Født:</strong> {{$ctrl.data.dateOfBirth | date:
+                        'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
+                    <p ng-if="$ctrl.data.dateOfDeath"><strong>Død:</strong> {{$ctrl.data.dateOfDeath | date:
+                        'dd-MM-yyyy' }}</p>
                 </div>
                 <!--<div class="post__infogroup" ng-if="$ctrl.data.civilstand">
                     <p><strong>Civilstand: </strong>{{$ctrl.data.civilstand}}</p>
                 </div>-->
                 <div class="post__infogroup" ng-if="$ctrl.data.sex">
-                    <p><strong>Køn: </strong><text-gender type="$ctrl.data.sex"></text-gender></p>
+                    <p><strong>Køn: </strong>
+                        <text-gender type="$ctrl.data.sex"></text-gender>
+                    </p>
                 </div>
                 <div class="post__infogroup">
                     <span ng-repeat="position in $ctrl.data.positions">
-                            <strong ng-if="$first">Erhverv: </strong><span>{{position.position}}</span><span ng-if="!$last">, </span>
+                        <strong ng-if="$first">Erhverv: </strong><span>{{position.position}}</span><span ng-if="!$last">,
+                        </span>
                     </span>
                 </div>
                 <div class="post__infogroup" ng-if="$ctrl.data.person_comment">
@@ -47,7 +52,8 @@
             </div>
             <div class="post__sharelink">
                 <label for="permalink">Permalink:</label>
-                <input id="permalink" class="input" type="text" ng-value="$ctrl.permalink"/><button ng-click="$ctrl.copy()" class="button">Kopier</button><span class="confirm">Kopieret</span>
+                <input id="permalink" class="input" type="text" ng-value="$ctrl.permalink" /><button ng-click="$ctrl.copy()"
+                    class="button">Kopier</button><span class="confirm">Kopieret</span>
             </div>
 
         </div>
@@ -60,22 +66,25 @@
         <div class="post__item" itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
             <h3 class="post__sectionheader" ng-if="$ctrl.data.addresses">Adresse</h3>
             <text-address-police address="address" date="true" ng-repeat="address in $ctrl.data.addresses"></text-address-police>
-       </div>
+        </div>
         <div class="post__item" ng-if="$ctrl.data.spouses.length > 0 || $ctrl.data.children.length > 0 || $ctrl.data.parent">
             <h3 class="post__sectionheader">Andre personer</h3>
             <div ng-if="$ctrl.data.parent">
                 <strong>Forælder:</strong> {{$ctrl.data.parent.firstnames}} {{$ctrl.data.parent.lastname}}
-                <p ng-if="$ctrl.data.parent.birthDate">Født: {{$ctrl.data.parent.birthDate | date: 'dd-MM-yyyy' }} <span ng-if="$ctrl.data.parent.birthplace"> i {{$ctrl.data.parent.birthplace}}</span></p>
+                <p ng-if="$ctrl.data.parent.birthDate">Født: {{$ctrl.data.parent.birthDate | date: 'dd-MM-yyyy' }}
+                    <span ng-if="$ctrl.data.parent.birthplace"> i {{$ctrl.data.parent.birthplace}}</span></p>
                 <a target="_blank" ui-sref="search.page.result.post({postId:$ctrl.data.parent.post_id})">Vis person</a>
             </div>
             <div ng-repeat="spouse in $ctrl.data.spouses">
                 <strong>Ægtefælle:</strong> {{spouse.firstnames}} {{spouse.lastname}}
-                <p ng-if="spouse.dateOfBirth">Født: {{spouse.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="spouse.birthplace"> i {{spouse.birthplace}}</span></p>
+                <p ng-if="spouse.dateOfBirth">Født: {{spouse.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="spouse.birthplace">
+                        i {{spouse.birthplace}}</span></p>
                 <a target="_blank" ui-sref="search.page.result.post({postId:spouse.post_id})">Vis person</a>
             </div>
             <div ng-repeat="child in $ctrl.data.children">
                 <strong>Barn:</strong> {{child.firstnames}} {{child.lastname}}
-                <p ng-if="child.dateOfBirth">Født: {{child.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="child.birthplace"> i {{child.birthplace}}</span></p>
+                <p ng-if="child.dateOfBirth">Født: {{child.dateOfBirth | date: 'dd-MM-yyyy' }} <span ng-if="child.birthplace">
+                        i {{child.birthplace}}</span></p>
                 <a target="_blank" ui-sref="search.page.result.post({postId:child.post_id})">Vis person</a>
             </div>
         </div>
@@ -83,10 +92,12 @@
 
     <div class="post__col post__alternate">
         <div class="post__item">
-                <h3 class="post__sectionheader">Om kilden</h3>
-                <p>Station {{$ctrl.data.station}}. Filmrulle {{$ctrl.data.film}}. Registerblad {{$ctrl.data.number}} (unikt id. {{$ctrl.data.registerblad_id}})</p>
-                <p ng-if="$ctrl.data.dateOfCompletion">Registerbladet er udfyldt: {{$ctrl.data.dateOfCompletion | date: 'dd-MM-yyyy' }}</p>
-                <p ng-if="$ctrl.data.specialComment">Særlige bemærkninger: {{$ctrl.data.specialComment}}</p>
+            <h3 class="post__sectionheader">Om kilden</h3>
+            <p>Station {{$ctrl.data.station}}. Filmrulle {{$ctrl.data.film}}. Registerblad {{$ctrl.data.number}} (unikt
+                id. {{$ctrl.data.registerblad_id}})</p>
+            <p ng-if="$ctrl.data.dateOfCompletion">Registerbladet er udfyldt: {{$ctrl.data.dateOfCompletion | date:
+                'dd-MM-yyyy' }}</p>
+            <p ng-if="$ctrl.data.specialRemarks">Særlige bemærkninger: {{$ctrl.data.specialRemarks}}</p>
         </div>
         <div class="post__item" ng-if="$ctrl.data.last_changed">
             <h3 class="post__sectionheader">Om indtastningen</h3>
