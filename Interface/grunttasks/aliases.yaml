@@ -65,7 +65,7 @@ dev:
     # Add angular annotations
     - 'ngAnnotate:development'
 
-    - 'uglify:development'
+    # - 'uglify:development'
     - 'bake:development'
     - 'cachebreaker:development'
     - 'sass:development'
