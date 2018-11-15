@@ -1,8 +1,8 @@
 define([
 
-], function() {
+], function () {
 
-    var postClountDirective =  /*@ngInject*/ function() {
+    var postClountDirective =  /*@ngInject*/ function () {
 
         return {
 
@@ -16,7 +16,7 @@ define([
                 postsPrPage: '='
             },
 
-            link: function(scope, element, attr) {
+            link: function (scope, element, attr) {
 
                 function updateValues(newval) {
                     //currentIndex is zerobased
@@ -37,19 +37,19 @@ define([
                 * Watch for changes to currently selected page, and build a string to show the user exactly what postsPrPage
                 * they are being presented
                 */
-                scope.$watch('page', function(newval, oldval) {
+                scope.$watch('page', function (newval, oldval) {
                     updateValues(newval);
                 });
 
                 /**
                 * Watch for changes to the total amount, and update if its new
                 */
-                scope.$watch('total', function(newval, oldval) {
+                scope.$watch('total', function (newval, oldval) {
                     updateValues(scope.page);
                 });
 
-                scope.$watch('postsPrPage', function(newval, oldval) {
-                    updateValues(0);
+                scope.$watch('postsPrPage', function (newval, oldval) {
+                    updateValues(scope.page);
                 })
 
             }
