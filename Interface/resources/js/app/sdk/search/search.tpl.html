@@ -31,9 +31,9 @@
                 <div ng-class="{'sdk-search__section--open' : ctrl.sectionSimple}" class="sdk-search__section sdk-search__section--closed">
 
                     <h2 ng-click="toggle('sectionSimple')" class="sdk-search__section-header"><div class="sdk-search__foldout"></div>Fritekst søgning</h2>
-                    <div class="sdk-search__dom-content" get-dom-content="search-app-simple-search-text"></div>
+                    
                     <div class="sdk-search__simplesearch">
-                        <p>Her kan du søge efter personer i bl.a. Politiets registerblade og de københavnske begravelsesprotokoller.</p>
+                        <div class="sdk-search__dom-content" get-dom-content="search-app-simple-search-text"></div>
                         <div ng-repeat="row in ctrl.simpleQuery">
                             <input ng-model="row.term" placeholder="Navn, adresse eller fritekst" type="text" ng-keypress="ctrl.submitSearch($event)"/><button type="button" class="button" ng-click="startNewSearch()" ng-disabled="!ctrl.canSearchSimple">SØG</button>
                         </div>
@@ -60,8 +60,8 @@
                                 <label for="col_{{collection.id}}">{{collection.name}}</label>
                         </div>
                     </div>
+                    
                     <div class="sdk-search__dom-content" get-dom-content="search-app-lower-text"></div>
-
                     <div ng-repeat="row in ctrl.queries">
                         <div class="row-fluid redform-form sdk-search__config">
                             <div class="span3">
@@ -90,6 +90,7 @@
                                     </label>
                                 </div>
                             </div>
+                            
                             <div class="span6">
                                 <div class="field">
                                     <term-field type="row.field.type" data="row" submit-func="ctrl.submitSearch(event)"></term-field>
@@ -100,6 +101,7 @@
                             </a>
                         </div>
                     </div>
+                    
 
                     <a href class="sdk-search__add" ng-click="ctrl.addField('firstnames')">Tilføj et felt</a>
 
@@ -108,7 +110,11 @@
                     </div>
 
                 </div>
+                <div ng-hide="ctrl.sectionAdvanced" class="sdk-search__section">
+                    <div class="sdk-search__dom-content" get-dom-content="search-app-advanced-search-lower"></div>
+                </div>
             </div>
+            
         </div>
         <hr class="sdk-search__divider sdk-search__divider--noshow">
     </section>
