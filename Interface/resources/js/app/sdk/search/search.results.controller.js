@@ -13,7 +13,8 @@ define([
         $rootScope,
         solrService,
         searchService,
-        searchConfig
+        searchConfig,
+        Analytics
     ) {
 
         var that = this;
@@ -72,6 +73,8 @@ define([
 
             //Trigger new search
             $scope.doSearch(true);
+
+            Analytics.trackEvent('person_search', 'toggle_sort_direction', that.sortDirection);
         }
 
         // TODO update to use that
@@ -90,6 +93,7 @@ define([
             searchService.currentSearch.page = 0;
 
             $scope.doSearch(true);
+            Analytics.trackEvent('person_search', 'change_facet', facet);
         }
 
         //TODO move this to a directive
@@ -212,6 +216,8 @@ define([
             $scope.doSearch(true);
 
             $anchorScroll('results-start');
+
+            Analytics.trackEvent('person_search', 'go_to_result_page', page);
         }
 
         that.setPostsPrPage = function setPostsPrPage(count) {
@@ -223,6 +229,8 @@ define([
             searchService.currentSearch.page = 0;
 
             $scope.doSearch(true);
+
+            Analytics.trackEvent('person_search', 'set_posts_per_page', count);
         }
 
         that.init = function init() {
@@ -314,12 +322,16 @@ define([
         $scope.$watch(angular.bind(that, function () {
             return that.sortField;
         }), function (newval, oldval) {
+            if(newval == oldval){
+                return;
+            }
             //Store value in rootscope, to make it available if we go back to the overview page
             //TODO store in service, not rootscope
             $rootScope.sortField = newval;
             if (that.results && that.results.docs && that.results.docs.length > 0 && newval) {
                 $scope.doSearch(true);
             }
+            Analytics.trackEvent('person_search', 'change_sorting', newval);
         });
 
         $scope.$watchCollection(angular.bind(that, function () {

@@ -76,11 +76,17 @@ define([
         'angular-google-analytics'
         ]);
 
-    sdkApp.run(run);
-
-    sdkApp.config(function($httpProvider) {
+    sdkApp.config(['$httpProvider','AnalyticsProvider', function ($httpProvider, AnalyticsProvider) {
         $httpProvider.interceptors.push('tokenFactory');
-    });
+
+    
+        // Add configuration code as desired
+        AnalyticsProvider.setAccount('UA-45125468-1');  //UU-XXXXXXX-X should be your tracking code
+        AnalyticsProvider.trackPages(true);
+        AnalyticsProvider.ignoreFirstPageLoad(true);
+    }]);
+
+    sdkApp.run(run);
 
     sdkApp.controller('mypageController', mypageController);
     sdkApp.controller('tasksController', tasksController);
@@ -101,10 +107,7 @@ define([
     sdkApp.directive('user', userDirective);
     sdkApp.directive('shareLink', shareLinkDirective);
 
-    sdkApp.config(['AnalyticsProvider', function (AnalyticsProvider) {
-       // Add configuration code as desired
-       AnalyticsProvider.setAccount('UA-45125468-1');  //UU-XXXXXXX-X should be your tracking code
-    }]).run(['Analytics', function(Analytics) { }]);
+    
 
     angular.element(document).ready(function() {
         angular.bootstrap(angular.element('[data-sdk-app]'), ['sdk']);

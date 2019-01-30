@@ -92,6 +92,7 @@ define([
                     that.sectionSimple = false;
                 }
             }
+            Analytics.trackEvent('person_search', 'toggle_search_type', section);
         };
 
 
@@ -126,7 +127,7 @@ define([
             if (!that.initialized) {
                 return
             }
-
+            
             if (!row.field) {
                 row.field = Object.values(searchConfig.fields).find(function(field) {
                     var fieldInAllSelectedCollections = true;
@@ -161,6 +162,7 @@ define([
             if (!searchConfig.fields.hasOwnProperty(defaultFieldName)) {
                 return;
             }
+
             var field = searchConfig.fields[defaultFieldName];
 
             // verify
@@ -177,6 +179,8 @@ define([
             }
 
             that.queries.push({ field: field, operator: operator, term: term });
+
+            Analytics.trackEvent('person_search', 'add_field', defaultFieldName);
 
         };
 
@@ -224,6 +228,8 @@ define([
         that.removeField = function removeField(fieldIndex, event) {
             event.preventDefault();
             that.queries.splice(fieldIndex, 1);
+
+            Analytics.trackEvent('person_search', 'remove_field');
         };
 
 
@@ -271,7 +277,7 @@ define([
          *
          */
         that.collectionsChange = function(collection) {
-
+            
             // prevent deselection of last collection
             if (collection.selected === false) {
                 var anySelected = false;
@@ -294,6 +300,8 @@ define([
             });
 
             that.sortFieldValid();
+
+            Analytics.trackEvent('person_search', 'change_collection');
         };
 
         $scope.resetSearch = function(){
@@ -304,6 +312,8 @@ define([
             that.filterQueries = [];
 
             initSearchFields();
+
+            Analytics.trackEvent('person_search', 'reset_search');
         };
 
         /**
@@ -314,7 +324,7 @@ define([
 
             solrService.clearSearchData();
 
-            Analytics.trackEvent('person_search', 'start_search');
+            Analytics.trackEvent('person_search', 'start_search_simple');
 
             var colIds = [];
             // Set all collections for simple search
@@ -350,8 +360,6 @@ define([
 
             solrService.clearSearchData();
 
-            Analytics.trackEvent('person_search', 'start_search');
-
             var colIds = [];
             // Only set the collections that are currently selected
             angular.forEach(that.collections, function(collection, id) {
@@ -375,6 +383,8 @@ define([
             searchService.currentSearch = thisSearch;
 
             searchService.setSearch(thisSearch);
+
+            Analytics.trackEvent('person_search', 'start_search_advanced', colIds.join());
 
             // Go to the results state to search and show results
             $state.go('.results');

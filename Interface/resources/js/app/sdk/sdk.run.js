@@ -2,7 +2,31 @@ define([
 
 ], function() {
 
-    var sdkRun = /*@ngInject*/ function sdkRun(SDKCSSURL, $state, $trace) {
+    var sdkRun = /*@ngInject*/ function sdkRun(SDKCSSURL, $state, Analytics, $transitions) {
+
+        //Track all changes in state in order to track event with Google Analytics
+        $transitions.onStart({ }, function(trans) {
+            trans.promise.finally(function(){
+                
+                //dont track entry on search.page as this is done with the Joomla GA
+                if(trans.from().name == '' && trans.to().name == 'search.page'){
+                    return;
+                }
+
+                //avoid double tracking when entering search results from main search page
+                if(trans.from().name == 'search.page.results' && trans.to().name == 'search.page.results'){
+                    return;
+                }
+
+                console.log('page view, transition success ' + trans.to().name);
+                console.log('from' + trans.from().name);
+                
+
+                Analytics.trackPage(trans.to().name);
+
+            });
+          });
+
 
         // Enable this to get debug info about transitions in the console
         // https://ui-router.github.io/ng1/docs/1.0.0/enums/trace.category.html

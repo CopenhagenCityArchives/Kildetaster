@@ -11,6 +11,7 @@ define([
     'angular-ui-select',
     'angular-filter',
     'angular-animate',
+    'angular-google-analytics',
 
     'app/shared/sdk-templates',
 
@@ -90,6 +91,7 @@ define([
     uiSelect,
     angularFilter,
     angularAnimate,
+    angularGoogleAnalytics,
 
     sdkTemplates,
 
