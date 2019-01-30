@@ -89,7 +89,7 @@ define([
         'angular-google-analytics'
     ]);
 
-    editorApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'AnalyticsProvider', editorConfig]);
+    editorApp.config(editorConfig);
     editorApp.run(editorRun);
 
     editorApp.controller('taskController', taskController);
