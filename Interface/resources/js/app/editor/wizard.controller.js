@@ -4,7 +4,7 @@ define([
 
 ], function(Clipboard) {
 
-    var wizardController = /*@ngInject*/ function wizardController($uibModal, helpers, $scope, $rootScope, postService, stepService, $stateParams, pageData, taskData, $location, $state, $timeout, $http, Flash, API, pageService, SEARCHURL) {
+    var wizardController = /*@ngInject*/ function wizardController($uibModal, helpers, $scope, $rootScope, postService, stepService, $stateParams, pageData, taskData, $location, $state, $timeout, $http, Flash, API, pageService, SEARCHURL, Analytics) {
 
         //Indicates if we should show the controls for accepting a new area (used on all other steps than the first)
         $scope.showSelectionControls = false;
@@ -136,6 +136,7 @@ define([
                 .finally(function() {
                     //Done saving post
                     $scope.savingPost = false;
+                    Analytics.trackEvent('kildetaster','save_post');
                 });
 
         });
@@ -160,12 +161,17 @@ define([
          * listen for changes to the location.search
          */
         $rootScope.$on('$locationChangeSuccess', function(event) {
+            var newStepId = parseInt($location.search().stepId);
+
+            if(newStepId == $scope.currentStep){
+                return;
+            }
+            
             //Make sure we treat currentStep value as an integer
-            $scope.currentStep = parseInt($location.search().stepId);
+            $scope.currentStep = newStepId;
 
             $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
 
-            
             //TODO: Remove this!
             //Hack to force focus on button and not links in header
             $timeout(function() {
@@ -290,6 +296,7 @@ define([
             })
             .finally(function() {
                 $scope.saving = false;
+                Analytics.trackEvent('kildetaster','save_data');
             })
 
         };
@@ -302,6 +309,7 @@ define([
             $location.search({
                 stepId: parseInt($scope.currentStep) + 1
             });
+            Analytics.trackEvent('kildetaster','next_step');
         };
 
         $scope.makeSelectable = function makeSelectable() {
@@ -313,6 +321,8 @@ define([
          */
         $scope.prevStep = function prevStep() {
             
+            Analytics.trackEvent('kildetaster','prev_step');
+
             //If we are step 1, return to outside the form, and restore selectable area
             if ($scope.currentStep === 1) {
                 $scope.makeSelectable();
@@ -336,10 +346,12 @@ define([
         };
         
         $scope.goToStep = function goToStep(stepId) {
+            Analytics.trackEvent('kildetaster','go_to_step', stepId);
             $state.go('.', { stepId: stepId });
         };
         
         $scope.postDone = function postDone() {
+            Analytics.trackEvent('kildetaster','post_done');
             $state.go('editor.page.new', {}, { reload: true });
         };
 
@@ -462,6 +474,8 @@ define([
          * Load step data from the server
          */
         stepService.getData(taskData.id).then(function(response) {
+
+            Analytics.trackEvent('kildetaster','get_task_config');
 
             //The schema setup
             $scope.schema = response.schema;

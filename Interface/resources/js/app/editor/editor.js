@@ -10,6 +10,7 @@ define([
     'angular-sanitize',
     'angular-animate',
     'angular-flash',
+    'angular-google-analytics',
 
     'schemaForm',
     'angular-schema-form-bootstrap',
@@ -47,6 +48,7 @@ define([
     ngSanitize,
     ngAnimate,
     angularFlashAlert,
+    angularGoogleAnalytics,
 
     angularSchemaForm,
     angularSchemaFormBootstrap,
@@ -83,10 +85,11 @@ define([
         'ngSanitize',
         'ngAnimate',
         'flash',
-        'schemaForm'
+        'schemaForm',
+        'angular-google-analytics'
     ]);
 
-    editorApp.config(editorConfig);
+    editorApp.config(['$stateProvider', '$urlRouterProvider', '$locationProvider', 'AnalyticsProvider', editorConfig]);
     editorApp.run(editorRun);
 
     editorApp.controller('taskController', taskController);
