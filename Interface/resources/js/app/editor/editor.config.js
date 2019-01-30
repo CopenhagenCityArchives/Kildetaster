@@ -3,7 +3,12 @@ define([
 
 ], function() {
 
-    var editorConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider, $locationProvider, sfPathProvider, schemaFormProvider, schemaFormDecoratorsProvider, sfBuilderProvider) {
+    var editorConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider, $locationProvider, AnalyticsProvider, sfPathProvider, schemaFormProvider, schemaFormDecoratorsProvider, sfBuilderProvider) {
+
+        // Add configuration code as desired
+        AnalyticsProvider.setAccount('UA-45125468-1');  //UU-XXXXXXX-X should be your tracking code
+        AnalyticsProvider.trackPages(true);
+        AnalyticsProvider.ignoreFirstPageLoad(false);
 
         // Prevent default use of !# hash bang urls
         // @see https://stackoverflow.com/questions/41226122/url-hash-bang-prefix-instead-of-simple-hash-in-angular-1-6
