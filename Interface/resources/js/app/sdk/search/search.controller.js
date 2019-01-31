@@ -179,8 +179,10 @@ define([
             }
 
             that.queries.push({ field: field, operator: operator, term: term });
-
-            Analytics.trackEvent('person_search', 'add_field', defaultFieldName);
+            
+            if(that.queries.length > 1){
+                Analytics.trackEvent('person_search', 'add_field', defaultFieldName);
+            }
 
         };
 
