@@ -309,6 +309,8 @@ define([
          * Move to next step
          */
         $scope.nextStep = function nextStep() {
+            newStep = $scope.currentStep + 1;
+            Analytics.trackEvent('kildetaster','next_step', 'step.'+newStep);
 
             $state.go('.', { stepId: newStep });
         };
@@ -317,8 +319,8 @@ define([
          * Move to previous step
          */
         $scope.prevStep = function prevStep() {
-            
-            Analytics.trackEvent('kildetaster','prev_step');
+            newStep = $scope.currentStep - 1;
+            Analytics.trackEvent('kildetaster','prev_step', 'step.' + newStep);
 
             //If we are step 1, return to outside the form, and restore selectable area
             if ($scope.currentStep === 1) {
@@ -341,10 +343,14 @@ define([
         };
         
         $scope.goToStep = function goToStep(stepId) {
-            Analytics.trackEvent('kildetaster','go_to_step', stepId);
+            Analytics.trackEvent('kildetaster','go_to_specific_step', 'step.' + stepId);
             $state.go('.', { stepId: stepId });
-        };
-        
+        }; 
+     
+        $scope.makeSelectable = function makeSelectable() {
+            $rootScope.$broadcast('makeSelectable');
+        };       
+
         $scope.postDone = function postDone() {
             Analytics.trackEvent('kildetaster','post_done');
             $state.go('editor.page.new', {}, { reload: true });
@@ -353,6 +359,8 @@ define([
         
         $scope.$on('okToSetPageDone', function(event) {
             
+            Analytics.trackEvent('kildetaster','page_done');
+
             pageService.pageIsDone({
                 page_id: pageData.id,
                 task_id: taskData.id
@@ -470,7 +478,7 @@ define([
          */
         stepService.getData(taskData.id).then(function(response) {
 
-            Analytics.trackEvent('kildetaster','get_task_config');
+            Analytics.trackEvent('kildetaster','load_task_config');
 
             //The schema setup
             $scope.schema = response.schema;

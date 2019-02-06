@@ -181,7 +181,7 @@ define([
             that.queries.push({ field: field, operator: operator, term: term });
             
             if(that.queries.length > 1){
-                Analytics.trackEvent('person_search', 'add_field', defaultFieldName);
+                Analytics.trackEvent('person_search', 'add_field', 'add_field.' + defaultFieldName);
             }
 
         };
@@ -303,7 +303,9 @@ define([
 
             that.sortFieldValid();
 
-            Analytics.trackEvent('person_search', 'change_collection');
+            var analyticsCollections = [];
+            angular.forEach(that.collections, function(value, key){if(value.selected) { analyticsCollections.push(value.id);}});
+            Analytics.trackEvent('person_search', 'change_collection', 'change_collections.' + analyticsCollections.join(','));
         };
 
         $scope.resetSearch = function(){
@@ -386,7 +388,7 @@ define([
 
             searchService.setSearch(thisSearch);
 
-            Analytics.trackEvent('person_search', 'start_search_advanced', colIds.join());
+            Analytics.trackEvent('person_search', 'start_search_advanced', 'start_advanced_search_collections.'+colIds.join());
 
             // Go to the results state to search and show results
             $state.go('.results');

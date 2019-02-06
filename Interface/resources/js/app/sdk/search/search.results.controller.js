@@ -73,8 +73,6 @@ define([
 
             //Trigger new search
             $scope.doSearch(true);
-
-            Analytics.trackEvent('person_search', 'toggle_sort_direction', that.sortDirection);
         }
 
         // TODO update to use that
@@ -93,7 +91,7 @@ define([
             searchService.currentSearch.page = 0;
 
             $scope.doSearch(true);
-            Analytics.trackEvent('person_search', 'change_facet', facet);
+            Analytics.trackEvent('person_search', 'change_facet', 'change_facet.'+facet.field);
         }
 
         //TODO move this to a directive
@@ -217,7 +215,7 @@ define([
 
             $anchorScroll('results-start');
 
-            Analytics.trackEvent('person_search', 'go_to_result_page', page);
+            Analytics.trackEvent('person_search', 'go_to_result_page', 'go_to_result_page.'+page);
         }
 
         that.setPostsPrPage = function setPostsPrPage(count) {
@@ -230,7 +228,7 @@ define([
 
             $scope.doSearch(true);
 
-            Analytics.trackEvent('person_search', 'set_posts_per_page', count);
+            Analytics.trackEvent('person_search', 'set_posts_per_page', 'set_posts_per_page.' + count);
         }
 
         that.init = function init() {
@@ -322,7 +320,7 @@ define([
         $scope.$watch(angular.bind(that, function () {
             return that.sortField;
         }), function (newval, oldval) {
-            if(newval == oldval){
+            if(newval.name == oldval.name){
                 return;
             }
             //Store value in rootscope, to make it available if we go back to the overview page
@@ -331,9 +329,9 @@ define([
             if (that.results && that.results.docs && that.results.docs.length > 0 && newval) {
                 $scope.doSearch(true);
             }
-            Analytics.trackEvent('person_search', 'change_sorting', newval);
+            Analytics.trackEvent('person_search', 'change_sorting', 'change_sorting.'+newval.name);
         });
-
+ 
         $scope.$watchCollection(angular.bind(that, function () {
             return that.filterQueries;
         }), function (newval, oldval) {
