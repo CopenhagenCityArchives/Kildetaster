@@ -18,6 +18,11 @@ define([
                     return;
                 }
 
+                //avoid double tracking when entering search page from another web page or Joomla
+                if(trans.from().name == '' && trans.to().name == 'search.page.results'){
+                    return;
+                }
+
                 console.log('page view, transition success ' + trans.to().name);
                 console.log('from' + trans.from().name);
                 

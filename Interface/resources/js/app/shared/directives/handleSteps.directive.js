@@ -25,7 +25,7 @@ define([
                     time;
 
                 //When we have a location change
-                scope.$on('$locationChangeSuccess', function(event) {
+                scope.$on('$stateChangeSuccess', function(event) {
 
                     //And we are allowed to automatically set focus
                     if (!noAuto) {

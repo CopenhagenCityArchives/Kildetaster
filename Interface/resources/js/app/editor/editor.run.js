@@ -6,13 +6,14 @@ define([
 
         //Track all changes in state in order to track event with Google Analytics
         $transitions.onStart({ }, function(trans) {
+
             //The state should redirect, so we append stepId, to force the first step to be the default value
             if (trans.params().redirectTo) {
                 event.preventDefault();
                 params.stepId = 1;
                 $state.go(trans.params().redirectTo, params);
             }             
-          });
+        });
 
           //Editor analytics are tracked using events in wizard.controller
           /*$transitions.onSuccess({}, function(trans){
@@ -32,8 +33,8 @@ define([
          * @see https://ui-router.github.io/guide/ng1/migrate-to-1_0
          */
         $transitions.onError({}, function(transition) {
-            console.log("State change error", transition.from().name);
-            console.log('editor.run:', transition.error);
+            //console.log("State change error", transition.from().name);
+            console.log('editor.run:', transition.error());
 
             //$state.go('editor.page.notfound');
         });

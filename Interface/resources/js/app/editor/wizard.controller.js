@@ -4,7 +4,7 @@ define([
 
 ], function(Clipboard) {
 
-    var wizardController = /*@ngInject*/ function wizardController($uibModal, helpers, $scope, $rootScope, postService, stepService, $stateParams, pageData, taskData, $location, $state, $timeout, $http, Flash, API, pageService, SEARCHURL, Analytics) {
+    var wizardController = /*@ngInject*/ function wizardController($uibModal, helpers, $scope, $rootScope, postService, stepService, pageData, taskData, $state, $timeout, $http, API, pageService, SEARCHURL, Analytics, $transitions) {
 
         //Indicates if we should show the controls for accepting a new area (used on all other steps than the first)
         $scope.showSelectionControls = false;
@@ -13,7 +13,7 @@ define([
 
         $scope.numSteps = null;
 
-        $scope.currentStep = $stateParams.stepId || 1;
+        $scope.currentStep = $state.params.stepId || 1;
 
         $scope.comment = '';
         $scope.showComment = false;
@@ -22,7 +22,7 @@ define([
 
         $scope.postId = undefined;
         $scope.shareLink = '';
-        $scope.shareLinkId = undefined;
+        $scope.shareLinkId = undefined; 
 
         //Will hold the inputted values
         $scope.values = {};
@@ -143,8 +143,11 @@ define([
 
         /**
         * Test if the current form is valid before allowing to change location
-        */
-        $rootScope.$on('$locationChangeStart', function(event, toUrl, fromUrl) {
+        */ 
+        $transitions.onStart({ on : 'editor.page.new.wizard'}, function(event, toState, toParams, fromState, fromParams){
+       // $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+
+    
 
             //Validate the form
             $scope.$broadcast('schemaFormValidate');
@@ -152,23 +155,24 @@ define([
             //If the form is not valid, prevent changing the location variable and thus
             //going to the next step
             if ($scope.stepForm && $scope.stepForm.$invalid) {
-                event.preventDefault();
+                Analytics.trackEvent('kildetaster','input_error', 'step.' + $state.params.stepId);
+                return false;
             }
-        });
+        }); 
 
         /**
          * Because we do not trigger the ui.route logic (see.editor.config.js),
          * listen for changes to the location.search
-         */
-        $rootScope.$on('$locationChangeSuccess', function(event) {
-            var newStepId = parseInt($location.search().stepId);
+         */ 
+        $transitions.onSuccess({ on: 'editor.page.new.wizard'}, function(event, toState, toParams, fromState, fromParams){
+         //$rootScope.$on('$stateChangeSuccess', function(event) {
 
-            if(newStepId == $scope.currentStep){
-                return;
+            if($state.params.stepId == $scope.currentStep){
+                return false;
             }
-            
+
             //Make sure we treat currentStep value as an integer
-            $scope.currentStep = newStepId;
+            $scope.currentStep = $state.params.stepId;
 
             $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
 
@@ -253,7 +257,7 @@ define([
             var postData = $scope.values;
 
             postData.page_id = pageData.id;
-            postData.task_id = $stateParams.taskId;
+            postData.task_id = $state.params.taskId;
             postData.post_id = $scope.postId;
 
             $scope.saving = true;
@@ -306,14 +310,7 @@ define([
          */
         $scope.nextStep = function nextStep() {
 
-            $location.search({
-                stepId: parseInt($scope.currentStep) + 1
-            });
-            Analytics.trackEvent('kildetaster','next_step');
-        };
-
-        $scope.makeSelectable = function makeSelectable() {
-            $rootScope.$broadcast('makeSelectable');
+            $state.go('.', { stepId: newStep });
         };
 
         /**
@@ -340,9 +337,7 @@ define([
             
 
             //Update the search variable
-            $location.search({
-                stepId: parseInt($scope.currentStep) - 1
-            });
+            $state.go('.', { stepId: newStep });
         };
         
         $scope.goToStep = function goToStep(stepId) {
