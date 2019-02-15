@@ -1,6 +1,7 @@
 <div class="search-container__item">
     <div>
         <text-name firstnames="$ctrl.data.firstnames" lastname="$ctrl.data.lastname"></text-name>
+        <text-date prefix="Født" date="$ctrl.data.dateOfBirth"></text-date>
         <text-age years="$ctrl.data.ageYears"></text-age>
     </div>
 </div>
@@ -12,7 +13,18 @@
 
 <div class="search-container__item">
     <div>
-
+        <div ng-if="!$ctrl.data.dateOfEntry && $ctrl.data.collected_year">
+            <strong>Indskrivningsår</strong>
+        </div>
+        <div ng-if="!$ctrl.data.dateOfEntry && $ctrl.data.collected_year">
+            {{$ctrl.data.collected_year}}
+        </div>
+        <div ng-if="$ctrl.data.dateOfEntry">
+            <strong>Indskrivningsdato</strong>
+        </div>
+        <div ng-if="$ctrl.data.dateOfEntry">
+            {{ $ctrl.formatDate($ctrl.data.dateOfEntry) }}
+        </div>
     </div>
 </div>
 
