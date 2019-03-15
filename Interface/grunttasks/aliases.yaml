@@ -73,6 +73,27 @@ dev:
     - 'postcss:sdk'
 #    - 'watchDevelopment'
 
+dev_public_beta:
+    - 'clean:development'
+    - 'html2js:editor'
+    - 'html2js:sdk'
+    - 'ngconstant:developmentPublicBeta'
+    - 'copy:development'
+    # bundle up files
+    - 'requirejs:development'
+    - 'requirejs:sdk'
+
+    # Add angular annotations
+    - 'ngAnnotate:development'
+
+    # - 'uglify:development'
+    - 'bake:development_public_beta'
+    - 'cachebreaker:development'
+    - 'sass:development'
+    - 'postcss:development'
+    - 'postcss:sdk'
+#    - 'watchDevelopment'
+
 build:
     - 'clean:production'
     - 'html2js:editor'
@@ -99,6 +120,10 @@ build:
 deploy_dev:
     - 'ftp-deploy:deploy_resources_dev'
     - 'ftp-deploy:deploy_index_dev'
+
+deploy_dev_public_beta:
+    - 'ftp-deploy:deploy_resources_dev_public_beta'
+    - 'ftp-deploy:deploy_index_dev_public_beta'
 
 deploy_prod:
     - 'ftp-deploy:deploy_resources_prod'

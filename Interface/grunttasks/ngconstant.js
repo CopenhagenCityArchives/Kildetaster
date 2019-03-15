@@ -90,6 +90,26 @@ module.exports = {
         }
     },
 
+    developmentPublicBeta: {
+        constants: {
+            JSONURL: 'https://kildetaster.dev9.1508test.dk/resources/mock/',
+            EDITORURL: '/kildetaster-public-beta',
+            RESSOURCEURL: 'https://www.kbhkilder.dk/software/kildetaster-public-beta/resources/',
+            SDKCSSURL: 'https://www.kbhkilder.dk/software/kildetaster-public-beta/resources/css/sdk.css',
+            API: 'https://www.kbhkilder.dk/1508/public_beta',
+            SOLRAPI: 'https://aws.kbhkilder.dk/solr/apacs_core/select',
+            SEARCHCONFIGURL: 'https://kbhkilder.dk/1508/public_beta/searchconfig',
+            ERRORREPORCONFIGURL: 'https://kbhkilder.dk/1508/public_beta/errorreportconfig',
+            MAINDOMAIN: 'https://www.kbharkiv.dk',
+            TOKENURL: 'https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
+            ERRORURL: 'https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
+            SEARCHURL: 'https://www.kbharkiv.dk/permalink',
+            BYPASSAUTH: false,
+            //Number of items to fetch when working with typeahead data fields
+            TYPEAHEADMAXIUMUM: 75
+        }
+    },
+
     production: {
         constants: {
             JSONURL: 'http://kildetaster.dev9.1508test.dk/resources/mock/',

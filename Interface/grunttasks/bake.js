@@ -42,6 +42,17 @@ module.exports = {
         ]
     },
 
+    development_public_beta: {
+
+        options: {},
+
+        files: [{
+            src: '<%= package.html %>/index_public_beta.html',
+            dest: '<%= package.build %>/index.html'
+        }
+        ]
+    },
+
     production: {
 
         options: {},

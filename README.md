@@ -46,6 +46,12 @@ Run `grunt dev` and `grunt deploy_dev`
 
 This will build a development package and deploy it to the two deployment sites (kbhkilder.dk/software/kildetaster-development and kbharkiv.dk/kildetaster-development)
 
+## How to deploy to public beta environment
+Run `grunt dev_public_beta` and `grunt deploy_dev_public_beta`
+
+This will build a development package and deploy it to the two deployment sites (kbhkilder.dk/software/kildetaster-public-beta and kbharkiv.dk/kildetaster-public-beta)
+
+
 ## How to deploy to production
 Run `grunt` and `grunt deploy_prod`
 
