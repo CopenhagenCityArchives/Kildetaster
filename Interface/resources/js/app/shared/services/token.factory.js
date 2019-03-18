@@ -11,7 +11,7 @@ define([
             request: function($config) {
 
 
-                if ($config.url !== MAINDOMAIN + '/index.php') {
+                if ($config.url !== MAINDOMAIN + '/index.php' && $config.url.indexOf('aws.kbhkilder.dk') == -1) {
 
                     if ($sessionStorage.tokenData) {
                         //Fetch token from cookie
@@ -21,6 +21,8 @@ define([
                         $config.headers['Authorization'] = 'Bearer ' + token;
                     }
 
+                }else{
+                    console.log("request sent to MAINURL or Solr, skipping authorization header");
                 }
 
                 return $config;
