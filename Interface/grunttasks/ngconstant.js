@@ -59,7 +59,7 @@ module.exports = {
             API: 'https://www.kbhkilder.dk/1508/experimental',
             SOLRAPI: 'http://localhost:8989/solr/apacs_core/select',
             SEARCHCONFIGURL: 'http://localhost:8000/searchconfig',
-            ERRORREPORCONFIGURL: 'https://kbhkilder.dk/1508/experimental/errorreportconfig',
+            ERRORREPORCONFIGURL: 'http://localhost:8000/errorreportconfig',
             MAINDOMAIN: 'https://www.kbharkiv.dk',
             TOKENURL: 'https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERRORURL: 'https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
