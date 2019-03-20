@@ -3,9 +3,9 @@
     <div class="post__head">
         <div class="post__item post__main post__alternate">
 
-            <!--<div class="post__tools">
+            <div class="post__tools">
                 <a href="" ng-click="$ctrl.openErrorReporting()">Rapporter fejl</a>
-            </div>-->
+            </div>
 
             <div class="post__header">
                 <h2>
@@ -17,6 +17,9 @@
                 <p ng-if="$ctrl.data.dateOfBirth">
                     <text-date prefix="Født" date="$ctrl.data.dateOfBirth"></text-date>
                 </p>
+                <p ng-if="!$ctrl.data.dateOfBirth && $ctrl.data.yearOfBirth">
+                    <strong>Født:</strong> {{ $ctrl.data.yearOfBirth }}
+                </p>
 
                 <p>
                     <text-age prefix="'Alder: '" years="$ctrl.data.ageYears"></text-age>
@@ -27,14 +30,15 @@
                 </p>
 
                 <!-- Error reports -->
-                <!--<div ng-if="$ctrl.postErrors.length > 0" class="post__error">
+                <div ng-if="$ctrl.postErrors.length > 0" class="post__error">
                     <div>Denne post er fejlmeldt</div>
                     <a href ng-click="$ctrl.toggleErrorReports()">Læs mere</a>
 
-                    <div class="post__error__message" ng-repeat="error in $ctrl.postErrors" ng-if="$ctrl.showErrorReports">
+                    <div class="post__error__message" ng-repeat="error in $ctrl.postErrors"
+                        ng-if="$ctrl.showErrorReports">
                         {{ error.label || 'Ukendt felt' }}: {{error.comment}}
                     </div>
-                </div>-->
+                </div>
 
             </div>
 

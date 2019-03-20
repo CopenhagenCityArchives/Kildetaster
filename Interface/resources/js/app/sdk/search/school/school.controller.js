@@ -6,7 +6,9 @@ define([], function () {
 
         $scope.isNumber = angular.isNumber;
 
-        that.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id;
+        this.$onInit = function () {
+            that.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id;
+        }
 
     };
 
