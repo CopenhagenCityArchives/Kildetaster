@@ -1,17 +1,17 @@
 define([
 
-], function() {
+], function () {
 
     //Create a http interceptor factory
-    var accessTokenHttpInterceptor = /*@ngInject*/ function accessTokenHttpInterceptor(MAINDOMAIN, $sessionStorage) {
+    var accessTokenHttpInterceptor = /*@ngInject*/ function accessTokenHttpInterceptor(MAINDOMAIN, SOLRAPI, $sessionStorage) {
 
         return {
 
             //For each request the interceptor will set the bearer token header.
-            request: function($config) {
+            request: function ($config) {
 
 
-                if ($config.url !== MAINDOMAIN + '/index.php' && $config.url.indexOf('aws.kbhkilder.dk') == -1) {
+                if ($config.url !== MAINDOMAIN + '/index.php' && $config.url.indexOf(SOLRAPI) == -1) {
 
                     if ($sessionStorage.tokenData) {
                         //Fetch token from cookie
@@ -21,7 +21,7 @@ define([
                         $config.headers['Authorization'] = 'Bearer ' + token;
                     }
 
-                }else{
+                } else {
                     console.log("request sent to MAINURL or Solr, skipping authorization header");
                 }
 
@@ -29,7 +29,7 @@ define([
 
             },
 
-            response: function(response) {
+            response: function (response) {
                 //if you get a token back in your response you can use
                 //the response interceptor to update the token in the
                 //stored in the cookie
