@@ -9,7 +9,8 @@
 
             <div class="post__header">
                 <h2>
-                    {{ $ctrl.data.firstnames }} {{ $ctrl.data.lastname }} <span ng-if="$ctrl.data.birthname">{{$ctrl.data.birthname}}</span></span>
+                    {{ $ctrl.data.firstnames }} {{ $ctrl.data.lastname }} <span
+                        ng-if="$ctrl.data.birthname">{{$ctrl.data.birthname}}</span></span>
                     <span class="post__collection">Skoleprotokol</span>
                 </h2>
 
@@ -35,6 +36,12 @@
                     </div>
                 </div>-->
 
+            </div>
+
+            <div class="post__sharelink">
+                <label for="permalink">Permalink:</label>
+                <input id="permalink" class="input" type="text" ng-value="$ctrl.permalink" /><button
+                    ng-click="$ctrl.copy()" class="button">Kopier</button><span class="confirm">Kopieret</span>
             </div>
 
         </div>
@@ -67,7 +74,8 @@
         <div class="post__item">
             <h3 class="post__sectionheader">Om indtastningen</h3>
             <!--<p>Indtastet: <span style="color: red">Data mangler, eller er det 'last_update'?</span> af {{ $ctrl.data.user_name }}</p>-->
-            <p>Skoleprotokollerne er indtastet af <a href="https://www.danishfamilysearch.dk/">Danish Family Search</a></p>
+            <p>Skoleprotokollerne er indtastet af <a href="https://www.danishfamilysearch.dk/">Danish Family Search</a>
+            </p>
             <!--<p>Fejl, fejlentitet, kommentar: <span style="color: red">Mangler info</span></p>-->
         </div>
 
