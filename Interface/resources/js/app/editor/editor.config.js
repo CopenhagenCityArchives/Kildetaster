@@ -121,6 +121,10 @@ define([
                             return obj.tasks_id === taskData.id;
                         });
 
+                        if(task == undefined){
+                            throw "No pages found for task " + taskData.id;
+                        }
+
                         if (task.is_done === 1) {
 
                             $timeout(function() {
