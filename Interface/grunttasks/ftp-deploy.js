@@ -35,7 +35,7 @@ module.exports = {
   },
   deploy_index_dev: {
     auth: {
-      host: 'kbharkiv.dk',
+      host: 'phvh-190204.cust.powerhosting.dk',
       port: 21,
       authKey: 'kbharkiv'
     },
@@ -46,7 +46,7 @@ module.exports = {
   },
   deploy_index_dev_public_beta: {
     auth: {
-      host: 'kbharkiv.dk',
+      host: 'phvh-190204.cust.powerhosting.dk',
       port: 21,
       authKey: 'kbharkiv'
     },
@@ -57,7 +57,7 @@ module.exports = {
   },
   deploy_index_prod: {
     auth: {
-      host: 'kbharkiv.dk',
+      host: 'phvh-190204.cust.powerhosting.dk',
       port: 21,
       authKey: 'kbharkiv'
     },
