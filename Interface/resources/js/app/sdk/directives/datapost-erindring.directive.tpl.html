@@ -1,9 +1,9 @@
 <div>
-    <div class="row-fluid">
-        <div class="span9">
+    <div class="row">
+        <div class="col-md-9">
             <h1 class="post__header">Erindring nr. {{ metadata.erindring_number }}</h1>
         </div>
-        <div class="span3 text-right post__tools">
+        <div class="col-md-3 text-right post__tools">
             <a href ng-hide="errorReportingEnabled" ng-click="toggleErrorReporting()" title="Rapporter fejl">
                 Rapportér fejl <i class="sdk-icon report-error"></i>
             </a>
@@ -18,16 +18,16 @@
         </div>
     </div>
 
-    <div class="row-fluid">
+    <div class="row">
 
-        <div class="span5">
+        <div class="col-md-5">
             <div ng-repeat="field in post">
                 <post-category ng-if="field.fields.length === 0" data="field" report="report(fieldData)" show-empty-fields="emptyFieldsEnabled" error-reporting="errorReportingEnabled"></post-category>
                 <post-field ng-if="field.fields.length > 0" data="field" report="report(fieldData)" show-empty-fields="emptyFieldsEnabled" error-reporting="errorReportingEnabled"></post-field>
             </div>
         </div>
 
-        <div class="span7">
+        <div class="col-md-7">
             <div class="post__image">
                 <canvas></canvas>
                 <span class="post__caption">Erindring nr. {{metadata.erindring_number}}, s. {{pageNum}} ud af {{pdfDoc.numPages}}</span>

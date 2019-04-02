@@ -26,13 +26,13 @@
             </div>
 
             <div class="error-reporting" ng-if="errorReporting && data.showErrorForm">
-                <div class="row-fluid">
-                    <div class="span12">
+                <div class="row">
+                    <div class="col-md-12">
                         <textarea ng-model="data.comment"></textarea>
                     </div>
                 </div>
-                <div class="row-fluid">
-                    <div class="span12 text-right">
+                <div class="row">
+                    <div class="col-md-12 text-right">
                         <button class="button" ng-click="doReport(data)">Indberet fejl</button>
                         <a href ng-click="toggleErrorReporting()">Fortryd</a>
                     </div>

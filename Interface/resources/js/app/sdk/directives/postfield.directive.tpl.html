@@ -34,13 +34,13 @@
             </div>
 
             <div class="error-reporting" ng-if="errorReporting && field.showErrorForm">
-                <div class="row-fluid">
-                    <div class="span12">
+                <div class="row">
+                    <div class="col-md-12">
                         <textarea ng-model="field.comment"></textarea>
                     </div>
                 </div>
-                <div class="row-fluid">
-                    <div class="span12 text-right">
+                <div class="row">
+                    <div class="col-md-12 text-right">
                         <button class="button" ng-click="doReport(data, field)">Indberet fejl</button>
                         <a href ng-click="toggleErrorReporting(field)">Fortryd</a>
                     </div>
@@ -74,13 +74,13 @@
                 </div>
 
                 <div class="error-reporting" ng-if="errorReporting && subfield.showErrorForm">
-                    <div class="row-fluid">
-                        <div class="span12">
+                    <div class="row">
+                        <div class="col-md-12">
                             <textarea ng-model="subfield.comment"></textarea>
                         </div>
                     </div>
-                    <div class="row-fluid">
-                        <div class="span12 text-right">
+                    <div class="row">
+                        <div class="col-md-12 text-right">
                             <button class="button" ng-click="doReport(data, subfield)">Indberet fejl</button>
                             <a href ng-click="toggleErrorReporting(subfield)">Fortryd</a>
                         </div>

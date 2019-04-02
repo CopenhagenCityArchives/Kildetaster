@@ -1,7 +1,7 @@
 <div ng-controller="errorsController">
 
-    <div class="row-fluid" ng-if="isSuperUser">
-        <div class="span12">
+    <div class="row" ng-if="isSuperUser">
+        <div class="col-md-12">
             <h2>Mine fejlmeldinger - Superbruger</h2>
             <ul class="unstyled task-list">
                 <li>
@@ -53,8 +53,8 @@
 
     </div>
 
-    <div class="row-fluid" ng-if="!isSuperUser">
-        <div class="span12">
+    <div class="row" ng-if="!isSuperUser">
+        <div class="col-md-12">
             <h2>Mine fejlmeldinger</h2>
             <ul class="unstyled task-list">
                 <li>
