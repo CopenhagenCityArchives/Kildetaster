@@ -1,5 +1,6 @@
 .facet {
     overflow: hidden;
+    margin: 0 -15px;
 
     &__header {
         font-family: verdana, sans-serif;
@@ -48,6 +49,7 @@
 
         max-height: 0;
         margin: 0;
+        padding: 0; // override weird 40px left padding
 
         list-style: none;
 

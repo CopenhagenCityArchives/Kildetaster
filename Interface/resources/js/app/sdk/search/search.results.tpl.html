@@ -134,12 +134,12 @@
             </div>
         </div>
 
-        <section class="row with-padding sdk-search__footer">
-            <div class="col-md-5">
+        <section class="row sdk-search__footer">
+            <div class="col-md-7">
                 <jump-to-page change-page="ctrl.goToPage(page)" ng-if="ctrl.results.numFound > ctrl.postsPrPage">
                 </jump-to-page>
             </div>
-            <div class="col-md-7" ng-if="ctrl.results.numFound > ctrl.postsPrPage">
+            <div class="col-md-5" ng-if="ctrl.results.numFound > ctrl.postsPrPage">
                 <pagination current-page="ctrl.page" results="ctrl.results" posts-pr-page="ctrl.postsPrPage"
                     go-to-page="ctrl.goToPage(page)">
                 </pagination>
