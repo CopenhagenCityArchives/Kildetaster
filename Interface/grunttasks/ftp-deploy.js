@@ -8,7 +8,7 @@ module.exports = {
     forceVerbose: true,
     src: '<%= package.build %>',
     dest: 'public_html/software/kildetaster-development',
-    exclusions : [ '<%= package.build %>' + '/index.html']
+    exclusions: ['<%= package.build %>' + '/index.html']
   },
   deploy_resources_dev_public_beta: {
     auth: {
@@ -19,7 +19,7 @@ module.exports = {
     forceVerbose: true,
     src: '<%= package.build %>',
     dest: 'public_html/software/kildetaster-public-beta',
-    exclusions : [ '<%= package.build %>' + '/index.html']
+    exclusions: ['<%= package.build %>' + '/index.html']
   },
   deploy_resources_prod: {
     auth: {
@@ -30,7 +30,7 @@ module.exports = {
     forceVerbose: true,
     src: '<%= package.build %>',
     dest: 'public_html/software/kildetaster',
-    exclusions : [ '<%= package.build %>' + '/index.html']
+    exclusions: ['<%= package.build %>' + '/index.html']
 
   },
   deploy_index_dev: {
@@ -39,10 +39,10 @@ module.exports = {
       port: 21,
       authKey: 'kbharkiv'
     },
-    forceVerbose : true,
+    forceVerbose: true,
     src: '<%= package.build %>',
     dest: 'public_html/kildetaster-development',
-    exclusions : [ '<%= package.build %>' + '/resources/**', '<%= package.build %>' + '/resources']
+    exclusions: ['<%= package.build %>' + '/resources/**', '<%= package.build %>' + '/resources']
   },
   deploy_index_dev_public_beta: {
     auth: {
@@ -50,10 +50,10 @@ module.exports = {
       port: 21,
       authKey: 'kbharkiv'
     },
-    forceVerbose : true,
+    forceVerbose: true,
     src: '<%= package.build %>',
     dest: 'public_html/kildetaster-public-beta',
-    exclusions : [ '<%= package.build %>' + '/resources/**', '<%= package.build %>' + '/resources']
+    exclusions: ['<%= package.build %>' + '/resources/**', '<%= package.build %>' + '/resources']
   },
   deploy_index_prod: {
     auth: {
@@ -61,9 +61,9 @@ module.exports = {
       port: 21,
       authKey: 'kbharkiv'
     },
-    forceVerbose : true,
+    forceVerbose: true,
     src: '<%= package.build %>',
     dest: 'public_html/kildetaster',
-    exclusions : [ '<%= package.build %>' + '/resources/**', '<%= package.build %>' + '/resources']
+    exclusions: ['<%= package.build %>' + '/resources/**', '<%= package.build %>' + '/resources']
   }
 }
