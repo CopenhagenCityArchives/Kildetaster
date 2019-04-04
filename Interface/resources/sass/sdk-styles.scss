@@ -39,8 +39,3 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
-
-// re-add old joomla background
-section#main {
-    background-color: $white;
-}
