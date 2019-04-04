@@ -17,10 +17,14 @@
             <div class="col-md-12">
                 <div class="sdk-search__section sdk-search__section--flex">
                     <div>
-                        <div class="sdk-search__arrow"></div><a class="sdk-search__external-link" href="https://www.kbharkiv.dk/sog-i-arkivet/sog-i-indtastede-kilder/hjaelp-til-sogning-i-indtastede-kilder">Hjælp til søgning</a>
+                        <div class="sdk-search__arrow"></div><a class="sdk-search__external-link"
+                            href="https://www.kbharkiv.dk/sog-i-arkivet/sog-i-indtastede-kilder/hjaelp-til-sogning-i-indtastede-kilder">Hjælp
+                            til søgning</a>
                     </div>
                     <div>
-                        <button class="button" ng-click="resetSearch()" ng-disabled="!ctrl.canSearchSimple && !ctrl.canSearchAdvanced">Nulstil søgning<div class="sdk-search__reset"></div></button>
+                        <button class="button" ng-click="resetSearch()"
+                            ng-disabled="!ctrl.canSearchSimple && !ctrl.canSearchAdvanced">Nulstil søgning<div
+                                class="sdk-search__reset"></div></button>
                     </div>
                 </div>
             </div>
@@ -28,14 +32,19 @@
         <hr class="sdk-search__divider">
         <div class="row with-padding">
             <div class="col-md-12">
-                <div ng-class="{'sdk-search__section--open' : ctrl.sectionSimple}" class="sdk-search__section sdk-search__section--closed">
+                <div ng-class="{'sdk-search__section--open' : ctrl.sectionSimple}"
+                    class="sdk-search__section sdk-search__section--closed">
 
-                    <h2 ng-click="toggle('sectionSimple')" class="sdk-search__section-header"><div class="sdk-search__foldout"></div>Fritekst søgning</h2>
-                    
+                    <h2 ng-click="toggle('sectionSimple')" class="sdk-search__section-header">
+                        <div class="sdk-search__foldout"></div>Fritekst søgning
+                    </h2>
+
                     <div class="sdk-search__simplesearch">
                         <div class="sdk-search__dom-content" get-dom-content="search-app-simple-search-text"></div>
                         <div ng-repeat="row in ctrl.simpleQuery">
-                            <input ng-model="row.term" placeholder="Navn, adresse eller fritekst" type="text" ng-keypress="ctrl.submitSearch($event)"/><button type="button" class="button" ng-click="startNewSearch()" ng-disabled="!ctrl.canSearchSimple">SØG</button>
+                            <input ng-model="row.term" placeholder="Navn, adresse eller fritekst" type="text"
+                                ng-keypress="ctrl.submitSearch($event)" /><button type="button" class="button"
+                                ng-click="startNewSearch()" ng-disabled="!ctrl.canSearchSimple">SØG</button>
                         </div>
                     </div>
 
@@ -45,22 +54,21 @@
         <hr class="sdk-search__divider">
         <div class="row with-padding">
             <div class="col-md-12">
-                <div ng-class="{'sdk-search__section--open' : ctrl.sectionAdvanced}" class="sdk-search__section sdk-search__section--closed">
+                <div ng-class="{'sdk-search__section--open' : ctrl.sectionAdvanced}"
+                    class="sdk-search__section sdk-search__section--closed">
 
-                    <h2 ng-click="toggle('sectionAdvanced')" class="sdk-search__section-header"><div class="sdk-search__foldout"></div>Avanceret søgning</h2>
+                    <h2 ng-click="toggle('sectionAdvanced')" class="sdk-search__section-header">
+                        <div class="sdk-search__foldout"></div>Avanceret søgning
+                    </h2>
                     <div class="sdk-search__dom-content" get-dom-content="search-app-upper-text"></div>
                     <div class="collection">
                         <div class="collection__item" ng-repeat="collection in ctrl.collections">
-                            <input
-                                id="col_{{collection.id}}"
-                                type="checkbox"
-                                value="{{collection.id}}"
-                                ng-model="collection.selected"
-                                ng-change="ctrl.collectionsChange(collection)">
-                                <label for="col_{{collection.id}}">{{collection.name}}</label>
+                            <input id="col_{{collection.id}}" type="checkbox" value="{{collection.id}}"
+                                ng-model="collection.selected" ng-change="ctrl.collectionsChange(collection)">
+                            <label for="col_{{collection.id}}">{{collection.name}}</label>
                         </div>
                     </div>
-                    
+
                     <div class="sdk-search__dom-content" get-dom-content="search-app-lower-text"></div>
                     <div ng-repeat="row in ctrl.queries">
                         <div class="row redform-form sdk-search__config">
@@ -69,9 +77,7 @@
                                 <div class="field">
                                     <label>
                                         Felt
-                                        <select
-                                            ng-model="row.field"
-                                            ng-change="ctrl.clearRow(row)"
+                                        <select ng-model="row.field" ng-change="ctrl.clearRow(row)"
                                             ng-options="field.view_name for field in fields | filter:{searchable:true} | filter:fieldCollectionFilter">
                                         </select>
                                     </label>
@@ -83,30 +89,31 @@
                                         Operator
                                         <select
                                             ng-options="operators[operator] as operators[operator].label for operator in types[row.field.type].operators"
-                                            ng-model="row.operator"
-                                            ng-change="shouldEscape(row, row.operator)">
+                                            ng-model="row.operator" ng-change="shouldEscape(row, row.operator)">
                                             <option>Vælg</option>
                                         </select>
                                     </label>
                                 </div>
                             </div>
-                            
                             <div class="col-md-6">
                                 <div class="field">
-                                    <term-field type="row.field.type" data="row" submit-func="ctrl.submitSearch(event)"></term-field>
+                                    <term-field type="row.field.type" data="row" submit-func="ctrl.submitSearch(event)">
+                                    </term-field>
                                 </div>
                             </div>
-                            <a href class="sdk-search__remove" title="Fjern række" ng-click="ctrl.removeField($index, $event)" ng-if="ctrl.queries.length > 1">
+                            <a href class="sdk-search__remove" title="Fjern række"
+                                ng-click="ctrl.removeField($index, $event)" ng-if="ctrl.queries.length > 1">
                                 <span class="sdk-icon delete"></span>
                             </a>
                         </div>
                     </div>
-                    
+
 
                     <a href class="sdk-search__add" ng-click="ctrl.addField('firstnames')">Tilføj et felt</a>
 
                     <div>
-                        <button type="button" class="button" ng-click="startNewSearch()" ng-disabled="!ctrl.canSearchAdvanced">SØG</button>
+                        <button type="button" class="button" ng-click="startNewSearch()"
+                            ng-disabled="!ctrl.canSearchAdvanced">SØG</button>
                     </div>
 
                 </div>
@@ -114,7 +121,7 @@
                     <div class="sdk-search__dom-content" get-dom-content="search-app-advanced-search-lower"></div>
                 </div>
             </div>
-            
+
         </div>
         <hr class="sdk-search__divider sdk-search__divider--noshow">
     </section>

@@ -15,11 +15,15 @@
                         {{activity.description}}
                     </div>
                     <div ng-if="activity.task_unit_pages_done < activity.unit_pages" class="task-list__item">
-                       s. {{activity.page_number}}
+                        s. {{activity.page_number}}
                     </div>
-                    <div ng-if="activity.task_unit_pages_done == activity.unit_pages"><p >Protokollen er tastet færdig</p></div>
+                    <div ng-if="activity.task_unit_pages_done == activity.unit_pages">
+                        <p>Protokollen er tastet færdig</p>
+                    </div>
                     <div class="task-list__item text-right">
-                        <a target="_blank" ng-show="activity.task_unit_pages_done < activity.unit_pages" ng-href="{{EDITORURL}}/#/task/{{activity.task_id}}/page/{{activity.page_id}}" class="button">Fortsæt</a>
+                        <a target="_blank" ng-show="activity.task_unit_pages_done < activity.unit_pages"
+                            ng-href="{{EDITORURL}}/#/task/{{activity.task_id}}/page/{{activity.page_id}}"
+                            class="button">Fortsæt</a>
                     </div>
                 </li>
             </ul>

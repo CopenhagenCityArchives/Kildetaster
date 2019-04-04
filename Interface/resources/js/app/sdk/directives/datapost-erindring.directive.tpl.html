@@ -22,15 +22,18 @@
 
         <div class="col-md-5">
             <div ng-repeat="field in post">
-                <post-category ng-if="field.fields.length === 0" data="field" report="report(fieldData)" show-empty-fields="emptyFieldsEnabled" error-reporting="errorReportingEnabled"></post-category>
-                <post-field ng-if="field.fields.length > 0" data="field" report="report(fieldData)" show-empty-fields="emptyFieldsEnabled" error-reporting="errorReportingEnabled"></post-field>
+                <post-category ng-if="field.fields.length === 0" data="field" report="report(fieldData)"
+                    show-empty-fields="emptyFieldsEnabled" error-reporting="errorReportingEnabled"></post-category>
+                <post-field ng-if="field.fields.length > 0" data="field" report="report(fieldData)"
+                    show-empty-fields="emptyFieldsEnabled" error-reporting="errorReportingEnabled"></post-field>
             </div>
         </div>
 
         <div class="col-md-7">
             <div class="post__image">
                 <canvas></canvas>
-                <span class="post__caption">Erindring nr. {{metadata.erindring_number}}, s. {{pageNum}} ud af {{pdfDoc.numPages}}</span>
+                <span class="post__caption">Erindring nr. {{metadata.erindring_number}}, s. {{pageNum}} ud af
+                    {{pdfDoc.numPages}}</span>
             </div>
             <div class="post__links">
                 <a ng-click="onPrevPage()" class="button">Forrige side</a>
