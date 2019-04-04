@@ -3,6 +3,7 @@
     // the bootstrap styling of pages
     margin-right: -15px;
     margin-left: -15px;
+    background-color: $white;
 
     // Utility class to adjust styling of our custom design
     .with-padding {
@@ -250,19 +251,19 @@
     &__col {
         margin: 0 !important;
 
-        &.span3 {
+        &.col-md-3 {
             width: 25%;
             margin-right: -1px !important;
 
             border-right: 1px solid $gray-border;
         }
 
-        &.span9 {
+        &.col-md-9 {
             width: calc(75% + 1px);
         }
 
         @media (max-width: 767px) {
-            &.span3, &.span9 {
+            &.col-md-3, &.col-md-9 {
                 width: 100%;
             }
         }
@@ -394,4 +395,5 @@
         clear: both;
 
         border-top: 1px solid $gray-border;
- 
+    }
+}
