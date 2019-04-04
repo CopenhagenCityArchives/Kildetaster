@@ -20,6 +20,10 @@
         border: 1px solid $gray-dark;
     }
 
+    button {
+        vertical-align: middle;
+    }
+
     select, input[type="text"] {
         font-size: 13px;
         //Overwrite default joomla styling
