@@ -4,12 +4,30 @@
     margin-right: -15px;
     margin-left: -15px;
 
+    > div > section {
+        background-color: $white;
+    }
+
     // Utility class to adjust styling of our custom design
     .with-padding {
         padding-right: 20px;
         padding-left: 20px;
     }
 
+    // Override joomla label font-weight
+    label {
+        font-weight: normal;
+    }
+
+    // Add borders to inputs and selects
+    input, select {
+        border: 1px solid $gray-dark;
+    }
+
+    // 
+    button {
+        vertical-align: middle;
+    }
 
     select, input[type="text"] {
         font-size: 13px;
@@ -49,8 +67,8 @@
         }
         &::after {
             position: absolute;
-            top: 1px;
-            left: 1px;
+            top: 0px;
+            left: 0px;
 
             display: none;
 
@@ -229,26 +247,26 @@
     }
 
     &__subheader {
-        margin-top: 10px;
+        margin: 10px -15px 0;
     }
 
     // Overwrites of default bootstrap grid, to make columns fit without margins
     &__col {
         margin: 0 !important;
 
-        &.span3 {
+        &.col-md-3 {
             width: 25%;
             margin-right: -1px !important;
 
             border-right: 1px solid $gray-border;
         }
 
-        &.span9 {
+        &.col-md-9 {
             width: calc(75% + 1px);
         }
 
         @media (max-width: 767px) {
-            &.span3, &.span9 {
+            &.col-md-3, &.col-md-9 {
                 width: 100%;
             }
         }
@@ -331,6 +349,9 @@
 
         padding: 15px 20px;
 
+        margin: 0 -15px;
+        line-height: 20px; // fixes vertical alignment between filter column, and search result column
+
         text-decoration: underline;
 
         border-bottom: 1px solid $gray-border;
@@ -378,6 +399,7 @@
 
     &__footer {
         clear: both;
+        margin: 0 15px;
 
         border-top: 1px solid $gray-border;
     }

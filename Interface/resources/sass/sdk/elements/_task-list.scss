@@ -5,6 +5,8 @@
 
     table-layout: fixed;
 
+    padding: 0;
+
     li {
         display: table-row;
     }
@@ -38,10 +40,14 @@
         button {
             margin-top: 8px;
         }
+
+        .progress {
+            margin-left: -15px; // override column padding
+        }
     }
     &__header, &__item {
         &:first-child {
-            width: 45%;
+            width: 40%;
         }
     }
 
@@ -51,6 +57,10 @@
         width: auto;
 
         color: $black;
+
+        border: 1px solid $gray-dark;
+
+        margin-bottom: 3px;
     }
 
     &__icon {

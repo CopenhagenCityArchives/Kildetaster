@@ -3,18 +3,22 @@
     <div class="post__head">
         <div class="post__item post__main post__alternate">
 
-            <!--<div class="post__tools">
+            <div class="post__tools">
                 <a href="" ng-click="$ctrl.openErrorReporting()">Rapporter fejl</a>
-            </div>-->
+            </div>
 
             <div class="post__header">
                 <h2>
-                    {{ $ctrl.data.firstnames }} {{ $ctrl.data.lastname }} <span ng-if="$ctrl.data.birthname">{{$ctrl.data.birthname}}</span></span>
+                    {{ $ctrl.data.firstnames }} {{ $ctrl.data.lastname }} <span
+                        ng-if="$ctrl.data.birthname">{{$ctrl.data.birthname}}</span></span>
                     <span class="post__collection">Skoleprotokol</span>
                 </h2>
 
                 <p ng-if="$ctrl.data.dateOfBirth">
                     <text-date prefix="Født" date="$ctrl.data.dateOfBirth"></text-date>
+                </p>
+                <p ng-if="!$ctrl.data.dateOfBirth && $ctrl.data.yearOfBirth">
+                    <strong>Født:</strong> {{ $ctrl.data.yearOfBirth }}
                 </p>
 
                 <p>
@@ -26,15 +30,22 @@
                 </p>
 
                 <!-- Error reports -->
-                <!--<div ng-if="$ctrl.postErrors.length > 0" class="post__error">
+                <div ng-if="$ctrl.postErrors.length > 0" class="post__error">
                     <div>Denne post er fejlmeldt</div>
                     <a href ng-click="$ctrl.toggleErrorReports()">Læs mere</a>
 
-                    <div class="post__error__message" ng-repeat="error in $ctrl.postErrors" ng-if="$ctrl.showErrorReports">
+                    <div class="post__error__message" ng-repeat="error in $ctrl.postErrors"
+                        ng-if="$ctrl.showErrorReports">
                         {{ error.label || 'Ukendt felt' }}: {{error.comment}}
                     </div>
-                </div>-->
+                </div>
 
+            </div>
+
+            <div class="post__sharelink">
+                <label for="permalink">Permalink:</label>
+                <input id="permalink" class="input" type="text" ng-value="$ctrl.permalink" /><button
+                    ng-click="$ctrl.copy()" class="button">Kopier</button><span class="confirm">Kopieret</span>
             </div>
 
         </div>
@@ -67,7 +78,8 @@
         <div class="post__item">
             <h3 class="post__sectionheader">Om indtastningen</h3>
             <!--<p>Indtastet: <span style="color: red">Data mangler, eller er det 'last_update'?</span> af {{ $ctrl.data.user_name }}</p>-->
-            <p>Skoleprotokollerne er indtastet af <a href="https://www.danishfamilysearch.dk/">Danish Family Search</a></p>
+            <p>Skoleprotokollerne er indtastet af <a href="https://www.danishfamilysearch.dk/">Danish Family Search</a>
+            </p>
             <!--<p>Fejl, fejlentitet, kommentar: <span style="color: red">Mangler info</span></p>-->
         </div>
 

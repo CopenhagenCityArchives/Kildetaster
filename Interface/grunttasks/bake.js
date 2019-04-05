@@ -25,7 +25,7 @@ module.exports = {
         files: [{
             src: '<%= package.html %>/index_stadsdump.html',
             dest: '<%= package.sdk %>/index.html'
-        },{
+        }, {
             src: '<%= package.html %>/search.html',
             dest: '<%= package.sdk %>/search.html'
         }]

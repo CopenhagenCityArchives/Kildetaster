@@ -3,8 +3,13 @@
 
     margin: 20px auto 10px;
 
+    // Override joomla pagination margin
+    > ul {
+        margin: 0;
+    }
+
     li > a {
-        line-height: 22px;
+        line-height: 16px;
 
         min-width: 36px;
         height: 30px;

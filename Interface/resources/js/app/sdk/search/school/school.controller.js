@@ -1,4 +1,4 @@
-define([], function() {
+define([], function () {
 
     var schoolController = /*@ngInject*/ function schoolController(helpers, $scope) {
 
@@ -6,6 +6,17 @@ define([], function() {
 
         $scope.isNumber = angular.isNumber;
 
+        this.$onInit = function () {
+            that.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id;
+        }
+
+        this.copy = function () {
+            var copyText = document.querySelector("#permalink");
+            copyText.select();
+            document.execCommand("copy");
+            copyText.className = "input copied"
+            copyText.blur();
+        };
     };
 
     return schoolController;

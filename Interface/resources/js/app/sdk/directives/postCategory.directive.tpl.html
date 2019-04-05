@@ -11,7 +11,8 @@
 
             <span ng-hide="errorReporting && !data.error">Dette felt er ikke udfyldt</span>
 
-            <a href ng-show="errorReporting && !data.error" class="postfield__report-link" ng-class="{ postfield__reporting: data.showErrorForm }" ng-click="toggleErrorReporting()">
+            <a href ng-show="errorReporting && !data.error" class="postfield__report-link"
+                ng-class="{ postfield__reporting: data.showErrorForm }" ng-click="toggleErrorReporting()">
                 <span>Dette felt er ikke udfyldt</span>
                 <i class="sdk-icon pencil"></i>
             </a>

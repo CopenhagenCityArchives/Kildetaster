@@ -8,8 +8,7 @@
                     <div class="task-list__header">Kilde</div>
                     <div class="task-list__header">
                         Bruger
-                        <select class="task-list__filter"
-                            ng-model="filtered.username"
+                        <select class="task-list__filter" ng-model="filtered.username"
                             ng-options="name as name for name in userList"
                             ng-change="dropdownChanged('username', filtered.username)">
                             <option value="">Vælg</option>
@@ -17,15 +16,15 @@
                     </div>
                     <div class="task-list__header">
                         Felter
-                        <select class="task-list__filter"
-                            ng-model="filtered.label"
+                        <select class="task-list__filter" ng-model="filtered.label"
                             ng-options="field as field for field in fieldList"
                             ng-change="dropdownChanged('label', filtered.label)">
                             <option value="">Vælg</option>
                         </select>
                     </div>
                 </li>
-                <li ng-repeat="error in errorList | filter: selectedFilter" ng-class="{ odd: $odd }" ng-if="errorList.length > 0">
+                <li ng-repeat="error in errorList | filter: selectedFilter" ng-class="{ odd: $odd }"
+                    ng-if="errorList.length > 0">
 
                     <div class="task-list__item">
                         {{error.unit_description}}
@@ -77,7 +76,7 @@
                     </div>
                     <div class="task-list__item text-right">
                         <a href ng-click="goToEditor(error)" class="button">Ret</a>
-                      <!--  <div ng-if="error.corrected">{{error.corrected.date}}</div>-->
+                        <!--  <div ng-if="error.corrected">{{error.corrected.date}}</div>-->
                     </div>
                 </li>
             </ul>
