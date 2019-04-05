@@ -17,8 +17,8 @@
                     <div ng-if="activity.task_unit_pages_done < activity.unit_pages" class="task-list__item">
                         s. {{activity.page_number}}
                     </div>
-                    <div ng-if="activity.task_unit_pages_done == activity.unit_pages">
-                        <p>Protokollen er tastet færdig</p>
+                    <div ng-if="activity.task_unit_pages_done == activity.unit_pages" class="task-list__item">
+                        Protokollen er tastet færdig
                     </div>
                     <div class="task-list__item text-right">
                         <a target="_blank" ng-show="activity.task_unit_pages_done < activity.unit_pages"
