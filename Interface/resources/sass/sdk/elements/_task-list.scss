@@ -40,10 +40,14 @@
         button {
             margin-top: 8px;
         }
+
+        .progress {
+            margin-left: -15px; // override column padding
+        }
     }
     &__header, &__item {
         &:first-child {
-            width: 45%;
+            width: 40%;
         }
     }
 

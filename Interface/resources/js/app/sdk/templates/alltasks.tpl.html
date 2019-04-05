@@ -1,5 +1,4 @@
-<div ng-controller="tasksController" ng-init="init({taskId: 1, showOpen: true, showFinished: true})"">
-
+<div ng-controller="tasksController" ng-init="init({taskId: 1, showOpen: true, showFinished: true})">
     <ul class="unstyled task-list">
         <li>
             <div class="task-list__header">Protokolnavn</div>
@@ -15,10 +14,10 @@
             </div>
             <div class="task-list__item">
                 <div class="row">
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <progress-bar total-pages="unit.pages" done-pages="unit.pages_done"></progress-bar>
                     </div>
-                    <div class="col-md-4 text-center">
+                    <div class="col-md-5 text-center">
                         <span>{{unit.pages_done}}/{{unit.pages}}</span>
                     </div>
                 </div>
