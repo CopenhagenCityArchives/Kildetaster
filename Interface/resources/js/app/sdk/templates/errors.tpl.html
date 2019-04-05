@@ -16,12 +16,13 @@
                     </div>
                     <div class="task-list__header">
                         Felter
-                        <select class="task-list__filter" ng-model="filtered.label"
+                        <select class="task-list__filter extra-column" ng-model="filtered.label"
                             ng-options="field as field for field in fieldList"
                             ng-change="dropdownChanged('label', filtered.label)">
                             <option value="">Vælg</option>
                         </select>
                     </div>
+                    <div class="task-list__header"></div>
                 </li>
                 <li ng-repeat="error in errorList | filter: selectedFilter" ng-class="{ odd: $odd }"
                     ng-if="errorList.length > 0">
