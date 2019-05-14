@@ -1,0 +1,108 @@
+.task-overview {
+    display: block;
+
+    &__row {
+        display: block;
+
+        width: 100%;
+        height: 20px;
+        margin-bottom: 1px;
+    }
+
+    &__rows {
+        display: block;
+        float: right;
+
+        width: calc(100% - 80px);
+    }
+
+    &__rowheaders {
+        display: block;
+        float: left;
+
+        width: 80px;
+    }
+
+    &__rowheader {
+        display: block;
+
+        height: 20px;
+        margin-bottom: 1px;
+    }
+
+    &__item {
+        display: inline-block;
+
+        height: 20px;
+
+        border-right: 1px solid $white;
+    }
+
+    &__tooltip {
+        position: relative;
+
+        width: 100%;
+        height: 100%;
+    }
+
+    &__tooltip &__tooltip-text {
+        position: absolute;
+        z-index: 1;
+        bottom: 100%;
+        left: 50%;
+
+        visibility: hidden;
+        // tooltip above
+
+        width: 200px;
+        margin-left: -100px;
+        padding: 5px;
+
+        text-align: center;
+
+        color: $white;
+        border-radius: 4px;
+        background-color: $dark-blue;
+    }
+
+    &__tooltip &__tooltip-text > p {
+        margin: 0;
+
+        color: $white;
+    }
+
+    // arrow
+    &__tooltip &__tooltip-text::after {
+        position: absolute;
+        top: 100%;
+        left: 50%;
+
+        margin-left: -5px;
+
+        content: " ";
+
+        border-width: 5px;
+        border-style: solid;
+        border-color: $dark-blue transparent transparent transparent;
+    }
+
+    &__tooltip:hover &__tooltip-text {
+        visibility: visible;
+    }
+
+    .task-progress-done {
+        background-color: $bluegreen;
+    }
+
+    .task-progress-finishing {
+        background-color: $light-bluegreen;
+    }
+
+    .task-progress-starting {
+        background-color: $lighter-bluegreen;
+    }
+
+    .task-progress-none {
+        background-color: $superlight-bluegreen;
+    }
+}

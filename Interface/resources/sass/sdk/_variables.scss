@@ -1,4 +1,9 @@
 
+$bluegreen: #008194;
+$light-bluegreen: #5fb4b3;
+$lighter-bluegreen: lighten($light-bluegreen, 10%);
+$superlight-bluegreen: lighten($lighter-bluegreen, 10%);
+$purple: #5f5f79;
 $gray: #efefef;
 $gray-dark: #c0c0c0;
 $gray-border: #d7d7d7;
@@ -15,8 +20,9 @@ $dark-blue: #3f5381;
 $light-blue: #b4c6d6;
 $dark-yellow: #ffc61e;
 $light-yellow: lighten($dark-yellow, 20%);
-$primary: #008194;
+$primary: $bluegreen;
 $search-primary: #128193;
+
 
 // Used by loading-spinner
 $blue-border: $white;
