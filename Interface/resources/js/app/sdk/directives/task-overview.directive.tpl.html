@@ -1,0 +1,23 @@
+<div class="task-overview">
+    <div class="task-overview__rowheaders">
+        <p ng-repeat="(decade, units) in decades" class="task-overview__rowheader">
+            {{ decade }}&ndash;{{ ((decade - 0) + 9) }}
+        </p>
+    </div>
+
+    <div class="task-overview__rows">
+        <div ng-repeat="(decade, units) in decades" class="task-overview__row">
+            <div ng-repeat="unit in units"
+                ng-class="{ 'task-progress-done': unit.pages_done == unit.pages, 'task-progress-none': unit.pages_done == 0, 'task-progress-starting': unit.pages_done != unit.pages && unit.pages_done > 0 && unit.pages / unit.pages_done < 0.5, 'task-progress-finishing': unit.pages_done != unit.pages && unit.pages_done > 0 && unit.pages / unit.pages_done >= 0.5 }"
+                class="task-overview__item" style="width: {{ getWidth(decade) }}%">
+                <div class="task-overview__tooltip">
+                    <div class="task-overview__tooltip-text">
+                        <p>{{ unit.description }}</p>
+                        <p>Status: {{ unit.pages_done }} / {{ unit.pages }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+</div>
