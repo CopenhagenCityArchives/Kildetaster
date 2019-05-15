@@ -38,6 +38,18 @@
         border-right: 1px solid $white;
     }
 
+    &__legend {
+        padding-top: 5px;
+    }
+
+    &__legend &__item {
+        float: right;
+
+        padding: 0 5px 0 5px;
+
+        color: $white;
+    }
+
     &__tooltip {
         position: relative;
 
