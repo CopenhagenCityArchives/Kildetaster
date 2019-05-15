@@ -8,6 +8,7 @@ define([], function () {
 
             scope: {
                 'taskId': '=',
+                'legend': '=',
                 'yearPattern': '@'
             },
 
@@ -31,6 +32,27 @@ define([], function () {
                         }
                     });
                 });
+
+                // Ensure sorting of units within decades
+                Object.keys(scope.decades).forEach(function (decade) {
+                    scope.decades[decade].reverse();
+                });
+
+                scope.done = function (unit) {
+                    return unit.pages == unit.pages_done;
+                }
+
+                scope.pending = function (unit) {
+                    return unit.pages == 0;
+                }
+
+                scope.starting = function (unit) {
+                    return !scope.pending(unit) && unit.pages_done / unit.pages < 0.5;
+                }
+
+                scope.finishing = function (unit) {
+                    return !scope.done(unit) && unit.pages_done / unit.pages >= 0.5;
+                }
 
                 scope.getWidth = function (decade) {
                     return 100 / scope.decades[decade].length;
