@@ -1,9 +1,9 @@
 define([
 
 
-], function() {
+], function () {
 
-    var taskService = /*@ngInject*/ function taskService($http, $cacheFactory, $q, $filter, JSONURL, API) {
+    var taskService = /*@ngInject*/ function taskService($http, $cacheFactory, $q, $filter, API) {
 
         var cache = $cacheFactory('taskCache');
 
@@ -11,17 +11,14 @@ define([
          * Load all available task details, store in cache for quick retrieval
          */
         function getTaskData() {
-            
-
-            var endPoint = useReal ? API + '/tasks': JSONURL + 'tasks.json';
 
             return $http({
                 method: 'GET',
-                url: endPoint,
+                url: API + '/tasks',
                 params: {
 
                 }
-            }).then(function(response) {
+            }).then(function (response) {
 
                 cache.put('all', response.data);
                 return response.data;
@@ -41,19 +38,19 @@ define([
                 var deferred = $q.defer(),
                     url = API + '/tasks/';
 
-                $http.get(url + id).then(function(response) {
+                $http.get(url + id).then(function (response) {
                     deferred.resolve(response.data);
                 });
 
                 return deferred.promise;
-            },           
+            },
 
             getTasks: function getProjects() {
-                
+
                 var deferred = $q.defer();
 
                 if (angular.isUndefined(cache.get('all'))) {
-                    getTaskData().then(function(response) {
+                    getTaskData().then(function (response) {
                         deferred.resolve(response);
                     });
                 } else {
@@ -68,18 +65,18 @@ define([
                 var deferred = $q.defer();
 
                 params.index_active = 1;
-                
+
                 $http({
                     url: API + '/tasksunits',
                     method: 'GET',
                     params: params
                 })
-                .then(function(response) {
-                    deferred.resolve(response.data);
-                })
-                .catch(function(err) {
-                    console.log('Error getting units', err);
-                });
+                    .then(function (response) {
+                        deferred.resolve(response.data);
+                    })
+                    .catch(function (err) {
+                        console.log('Error getting units', err);
+                    });
 
                 return deferred.promise;
 
