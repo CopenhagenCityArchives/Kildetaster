@@ -17,7 +17,6 @@ define([], function () {
 
                 taskService.getTask(scope.taskId)
                     .then(function (response) {
-                        console.log(response);
                         scope.task = response;
                     });
 
