@@ -48,7 +48,7 @@ module.exports = {
         }
     },
 
-    prototypeNoAuthLocal: {
+    localNoAuth: {
         constants: {
             JSONURL: '/resources/mock/',
             EDITORURL: 'http://localhost:1508',
@@ -56,10 +56,10 @@ module.exports = {
             SDKCSSURL: '/resources/css/sdk.css',
             //API: 'http://www.kbhkilder.dk/1508/stable',
             //API: 'http://www.kbhkilder.dk/1508/stable_noauth',
-            API: 'https://www.kbhkilder.dk/1508/experimental',
+            API: 'http://localhost:8080',
             SOLRAPI: 'http://localhost:8989/solr/apacs_core/select',
-            SEARCHCONFIGURL: 'http://localhost:8000/searchconfig',
-            ERRORREPORCONFIGURL: 'http://localhost:8000/errorreportconfig',
+            SEARCHCONFIGURL: 'http://localhost:8080/searchconfig',
+            ERRORREPORCONFIGURL: 'http://localhost:8080/errorreportconfig',
             MAINDOMAIN: 'https://www.kbharkiv.dk',
             TOKENURL: 'https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERRORURL: 'https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
