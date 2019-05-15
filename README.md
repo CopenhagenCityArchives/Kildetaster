@@ -8,10 +8,13 @@ Remember to run `npm install` and `bower install` to get all dependencies.
 
 Dependencies: node.js, npm and Grunt (`npm install -g grunt-cli`)
 
-## How to start local prototype
+## Development ##
 
 Start with running `npm install`and `bower install` to get all dependencies
 from the main folder.
+
+### Development of sdk and editor using local backend ###
+Run ``grunt sdkProtoTypeLocal``
 
 ### Start prototype of the editor with Authorization
 
@@ -30,6 +33,7 @@ The editor can be hit at `http://localhost:1508/#/task/1/page/108250`
 In order to start the prototype for sdk parts, you need to run `grunt sdk`.
 That will start a local webserver on port 1510. Joomla parts will be visible
 on the page that is automatically opened in the browser.
+
 
 #### Local version of the search
 
