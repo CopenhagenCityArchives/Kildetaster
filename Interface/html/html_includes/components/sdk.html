@@ -40,13 +40,10 @@
             <div data-sdk-app ng-include="'sdk/templates/useractivities.tpl.html'"></div>
 
             <h2>Åbne indtastninger</h2>
-            <div data-sdk-app ng-include="'sdk/templates/opentasks.tpl.html'"></div>
-
-            <h2>Færdige indtastninger</h2>
-            <div data-sdk-app ng-include="'sdk/templates/finishedtasks.tpl.html'"></div>
-
-            <h2>Alle indtastninger</h2>
-            <div data-sdk-app ng-include="'sdk/templates/alltasks.tpl.html'"></div>
+            <div data-sdk-app>
+                <taskunits-list task-id="1">
+                </taskunits-list>
+            </div>
         </div>
     </div>
 
