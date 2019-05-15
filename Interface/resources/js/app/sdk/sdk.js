@@ -25,6 +25,7 @@ define([
     'app/shared/services/error.service',
     'app/shared/services/user.service',
 
+    'app/sdk/directives/taskunits-list.directive',
     'app/sdk/directives/task-status.directive',
     'app/sdk/directives/task-progress-plot.directive',
     'app/sdk/directives/progressbar.directive',
@@ -60,6 +61,7 @@ define([
     errorService,
     userService,
 
+    taskunitsListDirective,
     taskStatusDirective,
     taskProgressPlotDirective,
     progressbarDirective,
@@ -104,6 +106,7 @@ define([
         sdkApp.service('errorService', errorService);
         sdkApp.service('userService', userService);
 
+        sdkApp.directive('taskunitsList', taskunitsListDirective);
         sdkApp.directive('taskStatus', taskStatusDirective);
         sdkApp.directive('taskProgressPlot', taskProgressPlotDirective);
         sdkApp.directive('progressBar', progressbarDirective);
