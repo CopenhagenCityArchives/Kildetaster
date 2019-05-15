@@ -25,7 +25,7 @@ define([
     'app/shared/services/error.service',
     'app/shared/services/user.service',
 
-    'app/sdk/directives/task-overview.directive',
+    'app/sdk/directives/task-progress-plot.directive',
     'app/sdk/directives/progressbar.directive',
     'app/shared/directives/user.directive',
     'app/shared/directives/shareLink.directive',
@@ -59,7 +59,7 @@ define([
     errorService,
     userService,
 
-    taskOverviewDirective,
+    taskProgressPlotDirective,
     progressbarDirective,
     userDirective,
     shareLinkDirective,
@@ -102,7 +102,7 @@ define([
         sdkApp.service('errorService', errorService);
         sdkApp.service('userService', userService);
 
-        sdkApp.directive('taskOverview', taskOverviewDirective);
+        sdkApp.directive('taskProgressPlot', taskProgressPlotDirective);
         sdkApp.directive('progressBar', progressbarDirective);
         sdkApp.directive('user', userDirective);
         sdkApp.directive('shareLink', shareLinkDirective);

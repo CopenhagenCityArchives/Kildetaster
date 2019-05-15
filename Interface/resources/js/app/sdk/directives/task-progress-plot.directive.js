@@ -1,10 +1,10 @@
 define([], function () {
 
-    var taskOverviewDirective =  /*@ngInject*/ function (taskService) {
+    var taskProgressPlotDirective =  /*@ngInject*/ function (taskService) {
         return {
             restrict: 'E',
 
-            templateUrl: 'sdk/directives/task-overview.directive.tpl.html',
+            templateUrl: 'sdk/directives/task-progress-plot.directive.tpl.html',
 
             scope: {
                 'taskId': '=',
@@ -61,6 +61,6 @@ define([], function () {
         };
     };
 
-    return taskOverviewDirective;
+    return taskProgressPlotDirective;
 
 });
