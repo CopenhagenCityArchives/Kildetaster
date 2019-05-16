@@ -3,6 +3,7 @@ define([
     'angular',
     'app/shared/shared',
     'angular-ui-router',
+    'angular-bootstrap',
     // Polyfill for ui-router events being deprecated @see https://ui-router.github.io/guide/ng1/migrate-to-1_0
     'angular-ui-router/stateEvents',
     'angular-ui-select',
@@ -40,6 +41,7 @@ define([
 
     ang,
     shared,
+    angBootstrap,
     uiRouter,
     uiRouterStateevents,
     uiSelect,
@@ -76,6 +78,7 @@ define([
 
         var editorApp = angular.module('editor', [
             'shared',
+            'ui.bootstrap',
             'ui.router',
             'ui.router.state.events',
             'ui.select',
