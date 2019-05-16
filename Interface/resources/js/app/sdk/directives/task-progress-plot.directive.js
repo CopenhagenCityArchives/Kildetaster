@@ -43,7 +43,7 @@ define([], function () {
                 }
 
                 scope.pending = function (unit) {
-                    return unit.pages == 0;
+                    return unit.pages_done == 0;
                 }
 
                 scope.starting = function (unit) {
