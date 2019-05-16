@@ -11,8 +11,6 @@ define([
 
     'app/sdk/search/search',
 
-    'app/sdk/controllers/mypage.controller',
-    'app/sdk/controllers/tasks.controller',
     'app/sdk/controllers/errors.controller',
     'app/sdk/controllers/useractivities.controller',
     'app/sdk/controllers/fritekst-search.controller',
@@ -47,8 +45,6 @@ define([
 
     searchApp,
 
-    mypageController,
-    tasksController,
     errorsController,
     useractivitiesController,
     fritekstSearchController,
@@ -91,8 +87,6 @@ define([
 
         sdkApp.run(run);
 
-        sdkApp.controller('mypageController', mypageController);
-        sdkApp.controller('tasksController', tasksController);
         sdkApp.controller('errorsController', errorsController);
         sdkApp.controller('useractivitiesController', useractivitiesController);
         sdkApp.controller('fritekstSearchController', fritekstSearchController);
