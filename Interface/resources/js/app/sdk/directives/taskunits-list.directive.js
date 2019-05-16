@@ -10,6 +10,7 @@ define([], function () {
             },
 
             link: function (scope, element, attr) {
+                scope.loading = true;
                 scope.units = [];
                 taskService.getUnits({
                     task_id: scope.taskId
@@ -17,6 +18,8 @@ define([], function () {
                     scope.units = response.filter(function (unit) {
                         return unit.pages_done < unit.pages;
                     });
+                }).finally(function () {
+                    scope.loading = false;
                 });
 
                 /**
