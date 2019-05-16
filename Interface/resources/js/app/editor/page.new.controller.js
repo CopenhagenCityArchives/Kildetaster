@@ -12,10 +12,10 @@ define([
             $rootScope.$broadcast('zoom-out');
             
             var taskIdOne = this.tasks.find(function(element) {
-                return element.tasks_id === 1;
+                return element.tasks_id === taskData.id;
             });
 
-            if(this.posts.length == 6 && taskIdOne.is_done == 0) {
+            if(this.posts.length == 6 && taskData.is_done == 0) {
                 //If 6 posts are filled, go to next page
                 this.goToNextAvailablePage();
             } else if (this.nextPost) {
