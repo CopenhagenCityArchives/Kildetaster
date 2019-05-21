@@ -9,7 +9,7 @@ requirejs.config({
         'almond': '../bower_components/almond/almond',
 
         'angular': '../bower_components/angular/angular.min',
-        'angular-bootstrap': '../bower_components/angular-bootstrap/ui-bootstrap.min',
+        'angular-bootstrap': '../bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
         'angular-animate': '../bower_components/angular-animate/angular-animate.min',
         'angular-sanitize': '../bower_components/angular-sanitize/angular-sanitize.min',
         'angular-cookies': '../bower_components/angular-cookies/angular-cookies.min',
