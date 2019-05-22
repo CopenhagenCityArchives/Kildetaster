@@ -39,6 +39,7 @@
     }
 
     &__legend {
+        margin-bottom: 20px;
         padding-top: 5px;
     }
 
@@ -46,8 +47,11 @@
         float: right;
 
         padding: 0 5px 0 5px;
+    }
 
-        color: $white;
+    &__legend &__item > span {
+        position: relative;
+        top: 20px;
     }
 
     &__tooltip {
@@ -56,7 +60,6 @@
         width: 100%;
         height: 100%;
     }
-
     &__tooltip &__tooltip-text {
         position: absolute;
         z-index: 1;
@@ -103,18 +106,18 @@
     }
 
     .task-progress-done {
-        background-color: $bluegreen;
+        background-color: $progress-done;
     }
 
     .task-progress-finishing {
-        background-color: $light-bluegreen;
+        background-color: $progress-finishing;
     }
 
     .task-progress-starting {
-        background-color: $lighter-bluegreen;
+        background-color: $progress-starting;
     }
 
     .task-progress-none {
-        background-color: $superlight-bluegreen;
+        background-color: $progress-none;
     }
 }
