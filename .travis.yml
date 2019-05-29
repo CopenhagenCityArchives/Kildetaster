@@ -5,4 +5,6 @@ install:
   - npm install -g bower
   - bower install
 script:
-  - grunt dev
+  - grunt dev_public_beta
+after_script:
+  - grunt deploy_dev_public_beta
