@@ -4,7 +4,7 @@ node_js:
 cache:
   - npm
 install:
-  - apt-get install lftp
+  - sudo apt-get install lftp
   - npm install
   - npm install -g grunt-cli
   - npm install -g bower
