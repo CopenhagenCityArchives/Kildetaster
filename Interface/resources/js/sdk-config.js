@@ -15,6 +15,8 @@ requirejs.config({
         'angular-google-analytics': '../bower_components/angular-google-analytics/dist/angular-google-analytics.min',
         'angular-cookies': '../bower_components/angular-cookies/angular-cookies.min',
 
+        'angular-bootstrap'     : '../bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
+
         'angularjs-datepicker': '../bower_components/angularjs-datepicker/dist/angular-datepicker',
         'moment': '../bower_components/moment/min/moment-with-locales',
 
@@ -43,6 +45,8 @@ requirejs.config({
             exports: 'angular'
         },
 
+        'bootstrap': ['jquery'],
+        'angular-bootstrap': ['angular'],
         'angular-ui-router': ['angular'],
         'angular-ui-select': ['angular'],
         'angular-sanitize': ['angular'],
