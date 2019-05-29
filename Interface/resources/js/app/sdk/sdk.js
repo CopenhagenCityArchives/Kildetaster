@@ -1,6 +1,7 @@
 define([
 
     'angular',
+    'angular-bootstrap',
 
     'ngstorage',
     'angular-google-analytics',
@@ -35,6 +36,7 @@ define([
 ], function (
 
     ang,
+    angularBootstrap,
 
     ngStorage,
     angularGoogleAnalytics,
@@ -63,11 +65,12 @@ define([
     progressbarDirective,
     userDirective,
     shareLinkDirective,
-
+ 
     constants
 ) {
 
         var sdkApp = angular.module('sdk', [
+            'ui.bootstrap',
             'sdk-templates',
             'search',
             'constants',
