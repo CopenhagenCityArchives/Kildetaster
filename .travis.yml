@@ -9,14 +9,8 @@ install:
   - npm install -g grunt-cli
   - npm install -g bower
   - bower install
-script:
-  script: 
-  on:
-      branch: task2-mypage
 deploy:
     # deploy develop to the staging environment
   - provider: script
     script: lftp -c "set ftp:ssl-force true;set sftp:auto-confirm true; set log:enabled true; open sftp://${KBHKILDER_FTP_HOST} -u ${KBHKILDER_FTP_USER},${KBHKILDER_FTP_PASSWORD}; ls -l; mirror -R --delete --no-empty-dirs --depth-first --use-pget-n=15 --verbose=3 ./ ${PUBLIC_BETA_FTP_PATH}; quit;"
     skip_cleanup: true
-    on:
-      branch: task2-mypage
