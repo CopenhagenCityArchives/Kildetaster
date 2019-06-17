@@ -9,21 +9,29 @@
 
             <div class="post__header">
                 <h2>
-                    <text-name firstnames="$ctrl.data.firstnames" lastname="$ctrl.data.lastname" birthname="$ctrl.data.birthname"></text-name>
+                    <text-name firstnames="$ctrl.data.firstnames" lastname="$ctrl.data.lastname"
+                        birthname="$ctrl.data.birthname"></text-name>
                     <span class="post__collection">Begravelse</span>
                 </h2>
-                <div class="post__infogroup" ng-if="$ctrl.data.dateOfBirth || $ctrl.data.yearOfBirth || $ctrl.data.dateOfDeath">
-                    <p ng-if="$ctrl.data.dateOfBirth"><strong>Født:</strong> {{ $ctrl.data.dateOfBirth | date:
-                        'dd-MM-yyyy' }} <span ng-if="$ctrl.data.birthplace"> i {{$ctrl.data.birthplace}}</span></p>
-                    <p ng-if="isNumber($ctrl.data.yearOfBirth)"><strong>Fødselsår:</strong> {{$ctrl.data.yearOfBirth}}</p>
+                <div class="post__infogroup"
+                    ng-if="$ctrl.data.dateOfBirth || $ctrl.data.yearOfBirth || $ctrl.data.dateOfDeath">
+                    <p ng-if="$ctrl.data.dateOfBirth">
+                        <strong>Født:</strong> {{ $ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }}
+                    </p>
+                    <p ng-if="!$ctrl.data.dateOfBirth && isNumber($ctrl.data.yearOfBirth)">
+                        <strong>Udregnet fødselsår:</strong> {{$ctrl.data.yearOfBirth}}
+                    </p>
+                    <p ng-if="$ctrl.data.birthplace">
+                        <strong>Fødested:</strong> {{$ctrl.data.birthplace}}</p>
                     <p>
                         <text-date prefix="Død" date="$ctrl.data.dateOfDeath"></text-date>
                     </p>
                 </div>
                 <div class="post__infogroup">
                     <p>
-                        <text-age prefix="'Alder: '" years="$ctrl.data.ageYears" months="$ctrl.data.ageMonth" weeks="$ctrl.data.ageWeeks"
-                            days="$ctrl.data.ageDays" hours="$ctrl.data.ageHours"></text-age>
+                        <text-age prefix="'Alder: '" years="$ctrl.data.ageYears" months="$ctrl.data.ageMonth"
+                            weeks="$ctrl.data.ageWeeks" days="$ctrl.data.ageDays" hours="$ctrl.data.ageHours">
+                        </text-age>
                     </p>
                 </div>
                 <div class="post__infogroup" ng-if="$ctrl.data.civilstatus">
@@ -41,7 +49,8 @@
                     <div>Denne post er fejlmeldt</div>
                     <a href ng-click="$ctrl.toggleErrorReports()">Læs mere</a>
 
-                    <div class="post__error__message" ng-repeat="error in $ctrl.postErrors" ng-if="$ctrl.showErrorReports">
+                    <div class="post__error__message" ng-repeat="error in $ctrl.postErrors"
+                        ng-if="$ctrl.showErrorReports">
                         {{ error.label || 'Ukendt felt' }}: {{error.comment}}
                     </div>
                 </div>
@@ -49,8 +58,8 @@
             </div>
             <div class="post__sharelink">
                 <label for="permalink">Permalink:</label>
-                <input id="permalink" class="input" type="text" ng-value="$ctrl.permalink" /><button ng-click="$ctrl.copy()"
-                    class="button">Kopier</button><span class="confirm">Kopieret</span>
+                <input id="permalink" class="input" type="text" ng-value="$ctrl.permalink" /><button
+                    ng-click="$ctrl.copy()" class="button">Kopier</button><span class="confirm">Kopieret</span>
             </div>
 
         </div>
@@ -76,7 +85,8 @@
 
         <div class="post__item">
             <h3 class="post__sectionheader">Om dødsfaldet/begravelsen</h3>
-            <p ng-if="$ctrl.data.deathcauses"><strong>Dødsårsag:</strong> <span ng-repeat="deathcause in $ctrl.data.deathcauses">
+            <p ng-if="$ctrl.data.deathcauses"><strong>Dødsårsag:</strong> <span
+                    ng-repeat="deathcause in $ctrl.data.deathcauses">
                     {{deathcause.deathcause}}<span ng-if="!$last">, </span>
                 </span>
             </p>
@@ -86,7 +96,8 @@
 
             <p ng-if="$ctrl.data.burials.chapel"><strong>Fra (kapel):</strong> {{ $ctrl.data.burials.chapel }}</p>
             <p ng-if="$ctrl.data.burials.parish"><strong>Sogn:</strong> {{ $ctrl.data.burials.parish }}</p>
-            <p ng-if="$ctrl.data.burials.cemetary"><strong>Til (kirkegård):</strong> {{ $ctrl.data.burials.cemetary }}</p>
+            <p ng-if="$ctrl.data.burials.cemetary"><strong>Til (kirkegård):</strong> {{ $ctrl.data.burials.cemetary }}
+            </p>
             <p ng-if="$ctrl.data.comment"><strong>Kommentar:</strong> {{ $ctrl.data.comment }}</p>
         </div>
     </div>
