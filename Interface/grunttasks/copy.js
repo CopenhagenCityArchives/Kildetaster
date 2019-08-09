@@ -77,14 +77,19 @@ module.exports = {
         	cwd: '<%= package.html %>/dump/index_files/',
         	src: ['**/*.*'],
         	dest: '<%= package.sdkresources %>/dump_files'
+        }, {
+        	//dump files
+        	expand: true,
+        	cwd: '<%= package.html %>/dump/search_files/',
+        	src: ['**/*.*'],
+        	dest: '<%= package.sdkresources %>/search_files'
         },{
             //.htaccess files for resources
             expand: true,
             cwd: '<%= package.resources %>/',
             src: ['.htaccess'],
             dest: '<%= package.sdkresources %>/'
-        }
-    ]
+        }]
     },
 
     development: {
