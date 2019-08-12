@@ -19,7 +19,7 @@
                         <strong>Født:</strong> {{ $ctrl.data.dateOfBirth | date: 'dd-MM-yyyy' }}
                     </p>
                     <p ng-if="!$ctrl.data.dateOfBirth && isNumber($ctrl.data.yearOfBirth)">
-                        <strong>Udregnet fødselsår:</strong> {{$ctrl.data.yearOfBirth}}
+                        <strong>Anslået fødselsår:</strong> {{$ctrl.data.yearOfBirth}}
                     </p>
                     <p ng-if="$ctrl.data.birthplace">
                         <strong>Fødested:</strong> {{$ctrl.data.birthplace}}</p>
