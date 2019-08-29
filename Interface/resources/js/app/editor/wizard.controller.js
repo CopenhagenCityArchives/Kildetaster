@@ -96,7 +96,7 @@ define([
             }
 
             //Create or update post
-            postService[postServiceMethod](data, $scope.postId)
+            postService[postServiceMethod]($state.params.taskId, data, $scope.postId)
                 .then(function(response) {
 
                     if (response.data && response.data.post_id) {
