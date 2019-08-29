@@ -64,7 +64,9 @@ define([
 
                 var deferred = $q.defer();
 
-                params.index_active = 1;
+                if (params.index_active === undefined || params.index_active === null) {
+                    params.index_active = 1;
+                }
 
                 $http({
                     url: API + '/tasksunits',
