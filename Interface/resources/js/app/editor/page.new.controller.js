@@ -2,11 +2,13 @@ define([
 
 ], function() {
 
-    var pageNewController = /*@ngInject*/ function pageNewController($uibModal, taskData, pageData, $scope, $rootScope, pageService, $timeout, $state) {
+    var pageNewController = /*@ngInject*/ function pageNewController($uibModal, taskData, taskUnitData, pageData, $scope, $rootScope, pageService, $timeout, $state) {
 
         this.nextPost = pageData.next_post;
         this.posts = pageData.posts;
         this.tasks = pageData.task_page;
+
+        this.postsPrPage = taskUnitData.columns * taskUnitData.rows;
 
         this.init = function() {
             $rootScope.$broadcast('zoom-out');
@@ -15,7 +17,7 @@ define([
                 return element.tasks_id === taskData.id;
             });
 
-            if(this.posts.length == 6 && taskData.is_done == 0) {
+            if(this.posts.length == this.postsPrPage && taskData.is_done == 0) {
                 //If 6 posts are filled, go to next page
                 this.goToNextAvailablePage();
             } else if (this.nextPost) {

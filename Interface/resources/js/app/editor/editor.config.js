@@ -136,6 +136,24 @@ define([
                         }
 
                         return true;
+                    }],
+
+                    taskUnitData: ['$q', 'taskService', 'taskData', 'pageData', function ($q, taskService, taskData, pageData) {
+                        var deferred = $q.defer();
+
+                        taskService.getUnits({ unit_id: pageData.unit_id, task_id: taskData.id })
+                        .then(function(taskUnits) {
+                            if (taskUnits.length === 1) {
+                                deferred.resolve(taskUnits[0]);
+                            } else {
+                                deferred.reject('must be exactly one unit');
+                            }
+                        })
+                        .catch(function(err) {
+                            deferred.reject(err);
+                        });
+
+                        return deferred.promise;
                     }]
                 }
             })
