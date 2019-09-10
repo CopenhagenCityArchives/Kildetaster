@@ -58,7 +58,7 @@ define([
                         var deferred = $q.defer(),
                             data;
 
-                        pageService.getPageById($stateParams.pageId).then(function (response) {
+                        pageService.getPageById($stateParams.pageId, $stateParams.taskId).then(function (response) {
 
                             if (response) {
 
@@ -115,27 +115,17 @@ define([
                 resolve: {
 
                     //Determine if the page is marked as done, and if it is, show the pageDone state
-                    isDone: ['$state', 'taskData', '$timeout', '$stateParams', 'pageData', function ($state, taskData, $timeout, $stateParams, pageData) {
+                    isDone: ['$q', 'pageData', function ($q, pageData) {
 
-                        var task = pageData.task_page.find(function (obj) {
-                            return obj.tasks_id === taskData.id;
-                        });
+                        var deferred = $q.defer();
 
-                        if (task == undefined) {
-                            throw "No pages found for task " + taskData.id;
+                        if (pageData.task_page == undefined) {
+                            deferred.reject('could not find task page');
                         }
 
-                        if (task.is_done === 1) {
+                        deferred.resolve(pageData.task_page.is_done === 1);
 
-                            $timeout(function () {
-                                $state.go('editor.page.pageDone', {
-                                    taskId: $stateParams.taskId,
-                                    pageId: pageData.id
-                                });
-                            }, 0);
-                        }
-
-                        return true;
+                        return deferred.promise;
                     }],
 
                     taskUnitData: ['$q', 'taskService', 'taskData', 'pageData', function ($q, taskService, taskData, pageData) {
