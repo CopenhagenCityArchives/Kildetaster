@@ -18,7 +18,9 @@ define([
         $scope.valueCopy = {};
 
         //Build a direct link to this post
-        $scope.shareLink = SEARCHURL + '/post/' + postData.entryData.solr_id;
+        //$scope.shareLink = SEARCHURL + '/post/' + postData.entryData.solr_id;
+
+        $scope.shareLink = SEARCHURL + '/post/' + postData.entryData.task_id + '-' + postData.entryData.concrete_entries_id;
 
         $scope.errorReports = postData.errorReports;
 
