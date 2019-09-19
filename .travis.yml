@@ -6,8 +6,12 @@ node_js:
 cache:
   - npm
 
+addons:
+  apt:
+    packages:
+    - sshpass
+
 install:
-  - sudo apt-get install sshpass lftp
   - npm install
   - npm install -g grunt-cli
   - npm install -g bower
@@ -19,12 +23,14 @@ install:
 deploy:
     # deploy develop to the staging environment
   - provider: script
-    script: sshpass -p${KBHKILDER_SSH_PASSWORD} scp -o LogLevel=Verbose -o StrictHostKeyChecking=no -r ./kbh/resources/ ${KBHKILDER_SSH_USER}@${KBHKILDER_SSH_HOST}:${KBHKILDER_PATH}/kildetaster-development/
+    script: sshpass -p${KBHKILDER_SSH_PASSWORD} scp -o LogLevel=Verbose -o StrictHostKeyChecking=no -r ./kbh/resources/ ${KBHKILDER_SSH_USER}@${KBHKILDER_SSH_HOST}:${KBHKILDER_SSH_PATH}
     skip_cleanup: true
     on:
-      branch: development
+      all_branches: true
+      condition: $TRAVIS_BRANCH =~ ^(master|development|public-beta)$
   - provider: script
-    script: lftp -d ${KBHARKIV_FTP_HOST} -e "set dns:order inet; set ftp:ssl-allow no; user ${KBHARKIV_FTP_USER} ${KBHARKIV_FTP_PASSWORD}; put -O ${KBHARKIV_PATH}/kildetaster-development/ ./kbh/index.html; quit" 
+    script: SSHPASS=${KBHARKIV_SSH_PASSWORD} sshpass -e scp -o LogLevel=Verbose -o StrictHostKeyChecking=no ./kbh/index.html ${KBHARKIV_SSH_USER}@${KBHARKIV_SSH_HOST}:${KBHARKIV_SSH_PATH}
     skip_cleanup: true
     on:
-      branch: development
+      all_branches: true
+      condition: $TRAVIS_BRANCH =~ ^(master|development|public-beta)$
