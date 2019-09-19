@@ -7,7 +7,7 @@
                 <li>
                     <div class="task-list__header">Kilde</div>
                     <div class="task-list__header">
-                        Bruger
+                        <div>Bruger</div>
                         <select class="task-list__filter" ng-model="filtered.username"
                             ng-options="name as name for name in userList"
                             ng-change="dropdownChanged('username', filtered.username)">
@@ -15,7 +15,7 @@
                         </select>
                     </div>
                     <div class="task-list__header">
-                        Felter
+                        <div>Felter</div>
                         <select class="task-list__filter extra-column" ng-model="filtered.label"
                             ng-options="field as field for field in fieldList"
                             ng-change="dropdownChanged('label', filtered.label)">

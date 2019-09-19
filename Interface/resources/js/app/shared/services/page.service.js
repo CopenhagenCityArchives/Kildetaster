@@ -30,11 +30,12 @@ define([
             *
             * @return {promise} That resolves with the data for the project
             */
-            getPageById: function getPage(id) {
+            getPageById: function getPage(id, taskId) {
 
                 var deferred = $q.defer();
                 getPageData({
-                    page_id: id
+                    page_id: id,
+                    task_id: taskId
                 }).then(function(response) {
                     deferred.resolve(response);
                 });
@@ -50,13 +51,14 @@ define([
             *
             * @return {promise} That resolves with the data for the project
             */
-            getPageByNumber: function(pageNumber, unitId) {
+            getPageByNumber: function(taskId, pageNumber, unitId) {
 
                 var deferred = $q.defer();
 
                 getPageData({
                     page_number: pageNumber,
-                    unit_id: unitId
+                    unit_id: unitId,
+                    task_id: taskId
                 }).then(function(response) {
                     deferred.resolve(response);
                 }).catch(function(err) {

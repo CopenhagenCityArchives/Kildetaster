@@ -58,7 +58,7 @@ define([
                         var deferred = $q.defer(),
                             data;
 
-                        pageService.getPageById($stateParams.pageId).then(function (response) {
+                        pageService.getPageById($stateParams.pageId, $stateParams.taskId).then(function (response) {
 
                             if (response) {
 
@@ -115,27 +115,35 @@ define([
                 resolve: {
 
                     //Determine if the page is marked as done, and if it is, show the pageDone state
-                    isDone: ['$state', 'taskData', '$timeout', '$stateParams', 'pageData', function ($state, taskData, $timeout, $stateParams, pageData) {
+                    isDone: ['$q', 'pageData', function ($q, pageData) {
 
-                        var task = pageData.task_page.find(function (obj) {
-                            return obj.tasks_id === taskData.id;
+                        var deferred = $q.defer();
+
+                        if (pageData.task_page == undefined) {
+                            deferred.reject('could not find task page');
+                        }
+
+                        deferred.resolve(pageData.task_page.is_done === 1);
+
+                        return deferred.promise;
+                    }],
+
+                    taskUnitData: ['$q', 'taskService', 'taskData', 'pageData', function ($q, taskService, taskData, pageData) {
+                        var deferred = $q.defer();
+
+                        taskService.getUnits({ unit_id: pageData.unit_id, task_id: taskData.id })
+                        .then(function(taskUnits) {
+                            if (taskUnits.length === 1) {
+                                deferred.resolve(taskUnits[0]);
+                            } else {
+                                deferred.reject('must be exactly one unit');
+                            }
+                        })
+                        .catch(function(err) {
+                            deferred.reject(err);
                         });
 
-                        if (task == undefined) {
-                            throw "No pages found for task " + taskData.id;
-                        }
-
-                        if (task.is_done === 1) {
-
-                            $timeout(function () {
-                                $state.go('editor.page.pageDone', {
-                                    taskId: $stateParams.taskId,
-                                    pageId: pageData.id
-                                });
-                            }, 0);
-                        }
-
-                        return true;
+                        return deferred.promise;
                     }]
                 }
             })
