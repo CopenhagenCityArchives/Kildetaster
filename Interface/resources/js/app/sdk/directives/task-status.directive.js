@@ -28,7 +28,7 @@ define([], function () {
                     scope.activeUnitsCount = response.length;
 
                     // compute done and doing counts
-                    response.forEach(unit => {
+                    response.forEach(function(unit) {
                         if (unit.pages_done == unit.pages)
                             scope.unitsDoneCount++;
                         else if (unit.pages_done > 0)

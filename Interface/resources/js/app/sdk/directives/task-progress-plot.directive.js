@@ -26,7 +26,7 @@ define([], function () {
                         task_id: scope.taskId,
                         index_active: 1
                     }).then(function (activeResponse) {
-                        response.forEach(unit => {
+                        response.forEach(function(unit) {
                             var result = yearRegex.exec(unit.description);
                             if (result && result.length == 2) {
                                 var year = parseInt(result[1]);
@@ -40,7 +40,7 @@ define([], function () {
                             }
                         });
                         
-                        activeResponse.forEach(unit => {
+                        activeResponse.forEach(function(unit) {
                             var result = yearRegex.exec(unit.description);
                             if (result && result.length == 2) {
                                 var year = parseInt(result[1]);
