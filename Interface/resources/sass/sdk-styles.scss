@@ -1,7 +1,6 @@
 @import "sdk/variables";
 
 @import "../bower_components/angular-ui-select/dist/select";
-@import "../bower_components/select2/select2";
 
 //components
 @import "sdk/components/modal";
@@ -33,6 +32,8 @@
 @import "sdk/elements/name";
 @import "sdk/elements/label";
 @import "sdk/elements/typeahead";
+@import "sdk/elements/task-progress-plot";
+@import "sdk/elements/task-status";
 
 @import "elements/loading-spinner";
 

@@ -2,8 +2,8 @@ define([
 
     'angular',
     'app/shared/shared',
-    'angular-bootstrap',
     'angular-ui-router',
+    'angular-bootstrap',
     // Polyfill for ui-router events being deprecated @see https://ui-router.github.io/guide/ng1/migrate-to-1_0
     'angular-ui-router/stateEvents',
     'angular-ui-select',
@@ -37,7 +37,7 @@ define([
     'app/shared/schemaformAddon/customArray.addon'
 
 
-], function(
+], function (
 
     ang,
     shared,
@@ -76,38 +76,38 @@ define([
 
 ) {
 
-    var editorApp = angular.module('editor', [
-        'shared',
-        'ui.bootstrap',
-        'ui.router',
-        'ui.router.state.events',
-        'ui.select',
-        'ngSanitize',
-        'ngAnimate',
-        'flash',
-        'schemaForm',
-        'angular-google-analytics'
-    ]);
+        var editorApp = angular.module('editor', [
+            'shared',
+            'ui.bootstrap',
+            'ui.router',
+            'ui.router.state.events',
+            'ui.select',
+            'ngSanitize',
+            'ngAnimate',
+            'flash',
+            'schemaForm',
+            'angular-google-analytics'
+        ]);
 
-    editorApp.config(editorConfig);
-    editorApp.run(editorRun);
+        editorApp.config(editorConfig);
+        editorApp.run(editorRun);
 
-    editorApp.controller('taskController', taskController);
-    editorApp.controller('pageController', pageController);
-    editorApp.controller('wizardController', wizardController);
-    editorApp.controller('wizardDoneController', wizardDoneController);
-    editorApp.controller('feedbackController', feedbackController);
-    editorApp.controller('updateFieldsController', updateFieldsController);
-    editorApp.controller('updateFieldsSelectionController', updateFieldsSelectionController);
-    editorApp.controller('updateFieldsDoneController', updateFieldsDoneController);
-    editorApp.controller('pageNewController', pageNewController);
-    editorApp.controller('pageDoneController', pageDoneController);
-    editorApp.controller('pageFooterController', pageFooterController);
+        editorApp.controller('taskController', taskController);
+        editorApp.controller('pageController', pageController);
+        editorApp.controller('wizardController', wizardController);
+        editorApp.controller('wizardDoneController', wizardDoneController);
+        editorApp.controller('feedbackController', feedbackController);
+        editorApp.controller('updateFieldsController', updateFieldsController);
+        editorApp.controller('updateFieldsSelectionController', updateFieldsSelectionController);
+        editorApp.controller('updateFieldsDoneController', updateFieldsDoneController);
+        editorApp.controller('pageNewController', pageNewController);
+        editorApp.controller('pageDoneController', pageDoneController);
+        editorApp.controller('pageFooterController', pageFooterController);
 
-    angular.element(document).ready(function() {
-        angular.bootstrap(angular.element('[data-editor-app]'), ['editor']);
+        angular.element(document).ready(function () {
+            angular.bootstrap(angular.element('[data-editor-app]'), ['editor']);
+        });
+
+        return editorApp;
+
     });
-
-    return editorApp;
-
-});

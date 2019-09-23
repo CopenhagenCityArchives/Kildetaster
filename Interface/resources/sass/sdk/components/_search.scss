@@ -67,8 +67,8 @@
         }
         &::after {
             position: absolute;
-            top: 0px;
-            left: 0px;
+            top: 0;
+            left: 0;
 
             display: none;
 
@@ -343,14 +343,14 @@
     }
 
     &__configtoggle {
+        line-height: 20px; // fixes vertical alignment between filter column, and search result column
+
         position: relative;
 
         display: block;
 
-        padding: 15px 20px;
-
         margin: 0 -15px;
-        line-height: 20px; // fixes vertical alignment between filter column, and search result column
+        padding: 15px 20px;
 
         text-decoration: underline;
 
@@ -399,6 +399,7 @@
 
     &__footer {
         clear: both;
+
         margin: 0 15px;
 
         border-top: 1px solid $gray-border;

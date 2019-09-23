@@ -1,7 +1,7 @@
 define([
 
 
-], function() {
+], function () {
 
     var editorConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider, $locationProvider, AnalyticsProvider, sfPathProvider, schemaFormProvider, schemaFormDecoratorsProvider, sfBuilderProvider) {
 
@@ -33,19 +33,19 @@ define([
 
                 resolve: {
 
-                    requestToken: ['$q', 'tokenService', function($q, tokenService) {
+                    requestToken: ['$q', 'tokenService', function ($q, tokenService) {
                         return tokenService.requestToken();
                     }],
 
                     /**
                      * Load project data and pass it to the controller
                      */
-                    taskData: ['$stateParams', 'taskService', '$q', function($stateParams, taskService, $q) {
+                    taskData: ['$stateParams', 'taskService', '$q', function ($stateParams, taskService, $q) {
 
                         var deferred = $q.defer(),
                             data;
 
-                        return taskService.getTask($stateParams.taskId).then(function(response) {
+                        return taskService.getTask($stateParams.taskId).then(function (response) {
                             return response;
                         });
                     }],
@@ -53,12 +53,12 @@ define([
                     /**
                      * Load page data and pass it to the controller
                      */
-                    pageData: ['$stateParams', 'pageService', 'unitService', '$q', '$state', '$timeout', function($stateParams, pageService, unitService, $q, $state, $timeout) {
+                    pageData: ['$stateParams', 'pageService', 'unitService', '$q', '$state', '$timeout', function ($stateParams, pageService, unitService, $q, $state, $timeout) {
 
                         var deferred = $q.defer(),
                             data;
 
-                        pageService.getPageById($stateParams.pageId).then(function(response) {
+                        pageService.getPageById($stateParams.pageId, $stateParams.taskId).then(function (response) {
 
                             if (response) {
 
@@ -79,11 +79,11 @@ define([
                             return unitService.getUnit(response.unit_id);
 
                         })
-                        .then(function(response) {
-                            data.unitData = response;
+                            .then(function (response) {
+                                data.unitData = response;
 
-                            deferred.resolve(data);
-                        });
+                                deferred.resolve(data);
+                            });
 
                         return deferred.promise;
 
@@ -115,27 +115,35 @@ define([
                 resolve: {
 
                     //Determine if the page is marked as done, and if it is, show the pageDone state
-                    isDone: ['$state', 'taskData', '$timeout', '$stateParams', 'pageData', function($state, taskData, $timeout, $stateParams, pageData) {
+                    isDone: ['$q', 'pageData', function ($q, pageData) {
 
-                        var task = pageData.task_page.find(function(obj) {
-                            return obj.tasks_id === taskData.id;
+                        var deferred = $q.defer();
+
+                        if (pageData.task_page == undefined) {
+                            deferred.reject('could not find task page');
+                        }
+
+                        deferred.resolve(pageData.task_page.is_done === 1);
+
+                        return deferred.promise;
+                    }],
+
+                    taskUnitData: ['$q', 'taskService', 'taskData', 'pageData', function ($q, taskService, taskData, pageData) {
+                        var deferred = $q.defer();
+
+                        taskService.getUnits({ unit_id: pageData.unit_id, task_id: taskData.id })
+                        .then(function(taskUnits) {
+                            if (taskUnits.length === 1) {
+                                deferred.resolve(taskUnits[0]);
+                            } else {
+                                deferred.reject('must be exactly one unit');
+                            }
+                        })
+                        .catch(function(err) {
+                            deferred.reject(err);
                         });
 
-                        if(task == undefined){
-                            throw "No pages found for task " + taskData.id;
-                        }
-
-                        if (task.is_done === 1) {
-
-                            $timeout(function() {
-                                $state.go('editor.page.pageDone', {
-                                    taskId: $stateParams.taskId,
-                                    pageId: pageData.id
-                                });
-                            }, 0);
-                        }
-
-                        return true;
+                        return deferred.promise;
                     }]
                 }
             })
@@ -150,14 +158,14 @@ define([
                 },
                 resolve: {
 
-                    postData: ['$stateParams','$q', 'entryService', 'postService', 'errorService', function($stateParams, $q, entryService, postService, errorService) {
+                    postData: ['$stateParams', '$q', 'entryService', 'postService', 'errorService', function ($stateParams, $q, entryService, postService, errorService) {
 
                         var deferred = $q.defer(),
                             data = {
                                 postId: $stateParams.postId
                             };
 
-                        postService.getData($stateParams.postId).then(function(response) {
+                        postService.getData($stateParams.postId).then(function (response) {
 
                             //Get the entry id from the first item in the array
                             //All items in the array have the same entryId
@@ -167,22 +175,22 @@ define([
                             return entryService.getEntry(data.entryId);
 
                         })
-                        .then(function(response) {
+                            .then(function (response) {
 
-                            data.entryData = response;
+                                data.entryData = response;
 
-                            return errorService.getErrorReports({
-                                task_id: $stateParams.taskId,
-                                post_id: $stateParams.postId
+                                return errorService.getErrorReports({
+                                    task_id: $stateParams.taskId,
+                                    post_id: $stateParams.postId
+                                });
+
+                            })
+                            .then(function (response) {
+
+                                data.errorReports = response;
+
+                                deferred.resolve(data);
                             });
-
-                        })
-                        .then(function(response) {
-
-                            data.errorReports = response;
-
-                            deferred.resolve(data);
-                        });
 
                         return deferred.promise;
 
@@ -215,7 +223,7 @@ define([
                 views: {
                     '@editor': {
                         templateUrl: 'editor/page.notfound.tpl.html',
-                        controller: function() {
+                        controller: function () {
                             alert('Page not found');
                         }
                     },
@@ -241,11 +249,11 @@ define([
                     * We can do this because the route is set to not to reload on search. The changes
                     * are instead handled via a watcher in the wizardController
                     */
-                    fromStart: ['$q', '$stateParams', '$location', function($q, $stateParams, $location) {
+                    fromStart: ['$q', '$stateParams', '$location', function ($q, $stateParams, $location) {
                         var deferred = $q.defer();
 
-                        if ($stateParams.stepId !== 1) {
-                            $location.search({ stepId: 1 });
+                        if ($stateParams.stepId !== undefined) {
+                            $location.search({});
                         }
                         deferred.resolve();
 
@@ -256,23 +264,23 @@ define([
 
             .state('editor.page.new.wizard.confirm', {
 
-                onEnter: ['$stateParams', '$state', '$uibModal', function($stateParams, $state, $uibModal) {
+                onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
                     $uibModal.open({
 
                         templateUrl: 'editor/confirm.modal.tpl.html',
                         windowClass: 'modal--center',
 
-                        controller: ['$scope', '$rootScope', function($scope, $rootScope) {
-                            $scope.dismiss = function() {
+                        controller: ['$scope', '$rootScope', function ($scope, $rootScope) {
+                            $scope.dismiss = function () {
                                 $scope.$dismiss();
                             };
 
-                            $scope.continue = function() {
+                            $scope.continue = function () {
                                 $rootScope.$broadcast('okToSetPageDone');
                                 $scope.$dismiss();
                             };
                         }]
-                    }).result.finally(function() {
+                    }).result.finally(function () {
                         //Go back to previous state
                         $state.go('^');
                     });
@@ -313,7 +321,7 @@ define([
             .state('error', {
                 url: '/error',
                 templateUrl: 'editor/error.tpl.html',
-                controller: ['ERRORURL', function(ERRORURL) {
+                controller: ['ERRORURL', function (ERRORURL) {
                     //Redirect to a page on KBH joomla
                     window.location.href = ERRORURL;
                 }]

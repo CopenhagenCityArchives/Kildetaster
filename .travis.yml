@@ -1,9 +1,36 @@
 language: node_js
+
 node_js:
-  - "node"
-before_script:
-  - 'npm install'
-  - 'npm install -g grunt-cli'
-  - 'npm install -g bower'
-  - 'bower install'
-  - 'grunt travis'
+  - "11.9"
+
+cache:
+  - npm
+
+addons:
+  apt:
+    packages:
+    - sshpass
+
+install:
+  - npm install
+  - npm install -g grunt-cli
+  - npm install -g bower
+  - bower install
+  - if [ "$TRAVIS_BRANCH" = "development" ]; then grunt dev; fi
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then grunt build; fi
+  - if [ "$TRAVIS_BRANCH" = "public-beta" ]; then grunt dev_public_beta; fi
+
+deploy:
+    # deploy develop to the staging environment
+  - provider: script
+    script: sshpass -p${KBHKILDER_SSH_PASSWORD} scp -o LogLevel=Verbose -o StrictHostKeyChecking=no -r ./kbh/resources/ ${KBHKILDER_SSH_USER}@${KBHKILDER_SSH_HOST}:${KBHKILDER_SSH_PATH}
+    skip_cleanup: true
+    on:
+      all_branches: true
+      condition: $TRAVIS_BRANCH =~ ^(master|development|public-beta)$
+  - provider: script
+    script: SSHPASS=${KBHARKIV_SSH_PASSWORD} sshpass -e scp -o LogLevel=Verbose -o StrictHostKeyChecking=no ./kbh/index.html ${KBHARKIV_SSH_USER}@${KBHARKIV_SSH_HOST}:${KBHARKIV_SSH_PATH}
+    skip_cleanup: true
+    on:
+      all_branches: true
+      condition: $TRAVIS_BRANCH =~ ^(master|development|public-beta)$

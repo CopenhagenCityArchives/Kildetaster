@@ -38,7 +38,7 @@ define([
                 deferredOverlays: convertedPosts
             },
             //If the page is marked as done, do not show selection, eventhough next_post might contain a valid position overlay object
-            next_post: pageData.task_page[0].is_done === 1 ? false : pageData.next_post
+            next_post: pageData.task_page.is_done === 1 ? false : pageData.next_post
 
         };
 

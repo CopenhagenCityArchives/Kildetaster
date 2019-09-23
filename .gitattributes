@@ -1,22 +1,14 @@
 # Auto detect text files and perform LF normalization
-* text eol=crlf
-
-
-# Custom for Visual Studio
-*.cs     diff=csharp
-
-# Standard to msysgit
-*.doc	 diff=astextplain
-*.DOC	 diff=astextplain
-*.docx diff=astextplain
-*.DOCX diff=astextplain
-*.dot  diff=astextplain
-*.DOT  diff=astextplain
-*.pdf  diff=astextplain
-*.PDF	 diff=astextplain
-*.rtf	 diff=astextplain
-*.RTF	 diff=astextplain
+*.js   text eol=crlf
+*.yml  text eol=crlf
+*.yaml text eol=crlf
+*.css  text eol=crlf
+*.scss text eol=crlf
 
 *.jpg   binary
 *.png	binary
 *.gif	binary
+*.woff  binary
+*.woff2 binary
+*.ttf   binary
+*.svg   binary

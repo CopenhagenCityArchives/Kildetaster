@@ -9,7 +9,7 @@
 
     <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle()}" for="{{form.key.slice(-1)[0]}}">
         {{form.title}}
-        <span class="required" ng-if="form.schema.isRequired === '1'">*</span>
+        <span class="required" ng-if="form.schema.isRequired === 1">*</span>
         <span
             class="icon icon__help"
             uib-tooltip="{{form.description}}"

@@ -2,21 +2,28 @@ define([
 
 ], function() {
 
-    var pageNewController = /*@ngInject*/ function pageNewController($uibModal, taskData, pageData, $scope, $rootScope, pageService, $timeout, $state) {
+    var pageNewController = /*@ngInject*/ function pageNewController($uibModal, taskData, taskUnitData, pageData, isDone, $scope, $rootScope, pageService, $timeout, $state) {
 
         this.nextPost = pageData.next_post;
         this.posts = pageData.posts;
-        this.tasks = pageData.task_page;
+        this.postsPrPage = taskUnitData.columns * taskUnitData.rows;
 
         this.init = function() {
-            $rootScope.$broadcast('zoom-out');
-            
-            var taskIdOne = this.tasks.find(function(element) {
-                return element.tasks_id === 1;
-            });
+            if (isDone) {
+                $timeout(function () {
+                    $state.go('editor.page.pageDone', {
+                        taskId: taskData.id,
+                        pageId: pageData.id
+                    });
+                }, 0);
+                return;
+            }
 
-            if(this.posts.length == 6 && taskIdOne.is_done == 0) {
-                //If 6 posts are filled, go to next page
+            $rootScope.$broadcast('zoom-out');
+
+            // We can assume isDone is false
+            if(this.posts.length == this.postsPrPage) {
+                // If the posts are filled, go to next page
                 this.goToNextAvailablePage();
             } else if (this.nextPost) {
                 //Preselect button, based on if nextPost is available. 

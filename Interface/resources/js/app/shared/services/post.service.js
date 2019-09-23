@@ -21,6 +21,9 @@ define([
             /**
             * Create new post
             *
+            * @param taskId {int}
+            *   The task id.
+            * 
             * @param data {object}
             *   Format:
             *       {
@@ -34,25 +37,33 @@ define([
             *
 
             */
-            create: function create(data) {
+            create: function create(taskId, data) {
 
                 var deferred = $q.defer();
 
-                $http.post(API + '/posts/', data)
-                    .then(function(response) {
-                        deferred.resolve(response);
-                        return response;
-                    })
-                    .catch(function(err) {
-                        deferred.reject(err);
-                    });
+                $http({
+                    method: "post",
+                    url: API + '/posts/',
+                    params: {task_id: taskId},
+                    data: data
+                })
+                .then(function(response) {
+                    deferred.resolve(response);
+                    return response;
+                })
+                .catch(function(err) {
+                    deferred.reject(err);
+                });
 
                 return deferred.promise;
             },
 
             /**
             * Update a given post, with new data
-            *
+            * 
+            * @param taskId {int}
+            *   The task id.
+            * 
             * @param data {object}
             *   Format:
             *       {
@@ -66,18 +77,23 @@ define([
             *
             * @return {Promise}
             */
-            update: function update(data, postId) {
+            update: function update(taskId, data, postId) {
 
                 var deferred = $q.defer();
 
-                $http.patch(API + '/posts/' + postId, data)
-                    .then(function(response) {
-                        deferred.resolve(response);
-                        return response;
-                    })
-                    .catch(function(err) {
-                        deferred.reject(err);
-                    });
+                $http({
+                    method: "patch",
+                    url: API + '/posts/' + postId,
+                    params: {task_id: taskId},
+                    data: data
+                })
+                .then(function(response) {
+                    deferred.resolve(response);
+                    return response;
+                })
+                .catch(function(err) {
+                    deferred.reject(err);
+                });
 
                 return deferred.promise;
             },

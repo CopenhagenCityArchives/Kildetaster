@@ -7,22 +7,21 @@
                 <li>
                     <div class="task-list__header">Protokol / Kilde</div>
                     <div class="task-list__header">Nået til</div>
+                    <div class="task-list__header">Projekt</div>
                     <div class="task-list__header"></div>
                 </li>
                 <li ng-repeat="activity in activities" ng-class="{ odd: $odd }" ng-if="activities.length > 0">
-
                     <div class="task-list__item">
                         {{activity.description}}
                     </div>
-                    <div ng-if="activity.task_unit_pages_done < activity.unit_pages" class="task-list__item">
+                    <div class="task-list__item">
                         s. {{activity.page_number}}
                     </div>
-                    <div ng-if="activity.task_unit_pages_done == activity.unit_pages" class="task-list__item">
-                        Protokollen er tastet færdig
+                    <div class="task-list__item">
+                        {{tasks[activity.task_id].name}}
                     </div>
                     <div class="task-list__item text-right">
-                        <a target="_blank" ng-show="activity.task_unit_pages_done < activity.unit_pages"
-                            ng-href="{{EDITORURL}}/#/task/{{activity.task_id}}/page/{{activity.page_id}}"
+                        <a target="_blank" ng-href="{{EDITORURL}}/#/task/{{activity.task_id}}/page/{{activity.page_id}}"
                             class="button">Fortsæt</a>
                     </div>
                 </li>
