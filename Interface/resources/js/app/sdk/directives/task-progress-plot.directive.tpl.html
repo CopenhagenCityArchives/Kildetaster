@@ -9,7 +9,7 @@
         <div ng-repeat="(decade, units) in decades" class="task-progress-plot__row">
             <div ng-repeat="unit in units"
                 ng-class="{ 'task-progress-done': done(unit), 'task-progress-none': pending(unit), 'task-progress-starting': starting(unit), 'task-progress-finishing': finishing(unit), 'task-progress-inactive': inactive(unit) }"
-                class="task-progress-plot__item" style="width: {{ getWidth(decade) }}%">
+                class="task-progress-plot__item" ng-style="{ 'width': getWidth(decade) + '%' }">
                 <div class="task-progress-plot__tooltip">
                     <div class="task-progress-plot__tooltip-text">
                         <p>{{ unit.description }}</p>
