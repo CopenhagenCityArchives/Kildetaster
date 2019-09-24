@@ -22,7 +22,8 @@
                         <strong>Anslået fødselsår:</strong> {{$ctrl.data.yearOfBirth}}
                     </p>
                     <p ng-if="$ctrl.data.birthplace">
-                        <strong>Fødested:</strong> {{$ctrl.data.birthplace}}</p>
+                        <strong>Fødested:</strong> {{$ctrl.data.birthplace}} ({{$ctrl.data.birthplace_free}})
+                    </p>
                     <p>
                         <text-date prefix="Død" date="$ctrl.data.dateOfDeath"></text-date>
                     </p>
