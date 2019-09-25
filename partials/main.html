@@ -67,12 +67,33 @@
                 <input type="button" value="Lås side op" class="btn btn-default" ng-disabled="!model.hasPageId" ng-click="unlockPage()"></input>
         </div>
 
+        <!-- New Delete functionallity -->
+
+        <div class="col-md-6 separator">
+            <h3>Slet Post</h3>
+            <p>DENNE FUNKTION TESTES OG MÅ KUN BRUGES AF STADSARKIVETS ANSATTE</p>
+            <h4>Post-id</h4>
+                <input value="indtast post-id" ng-model="model.deleteValue" class="form-control" style="width: 400px;"></input>
+                <p>Indtast et post-id, som kan findes i URL'en i kildetasteren.</p>                         
+                <input type="button" value="Find post" class="btn btn-default" ng-disabled="!model.canDeletePost" ng-click="getDelete()"></input>
+            </div>
+
+        <div ng-hide="model.foundPost==''" class="col-md-6 separator">
+            <p>Fornavn: {{model.foundPost.firstnames}}</p>
+            <p>Efternavn: {{model.foundPost.lastname}}</p>
+            <p>Født: {{model.foundPost.yearOfBirth}}</p>
+            <p>Død: {{model.foundPost.dateOfDeath}}</p>
+            <input type="button" value="SLET POST" class="btn btn-default" ng-disabled="!model.canDeletePost" ng-click="delete()"></input>
+
+        </div>
+
         <div class="col-md-12">
             <h4 ng-hide="model.status!==''" style="color:green;" class="text-center">&nbsp;</h4>
             <h4 ng-hide="model.status==''" ng-class="{status_success: model.statusType == 'success', status_error: model.statusType == 'error'}" class="text-center">{{model.status}}</h4>
             <p>&nbsp;</p>
             <h4 class="text-center" ng-hide="model.history.length == 0">Historik</h4>
             <div ng-repeat="x in model.history">
+            <div ng-if="x.deletedPost">Du slettede post med id: <b>{{x.deletedPost}}</b></div>
             <div ng-if="x.pageId">Du låste siden <b>{{x.pageId}}</b> op</div>
             <div ng-if="!x.oldValue && x.newValue">Du tilføjede værdien <b>{{x.newValue}}</b></div>
             <div ng-if="x.oldValue && !x.newValue">Du ændrede værdien <b>{{x.oldValue}}</b> til <b>{{x.newValue}}</b></div>

@@ -1,18 +1,19 @@
 {
-  "name": "APACS datasource editor",
+  "name": "apacs_datasource_editor",
   "version": "0.0.1",
   "description": "",
   "main": "Gruntfile.js",
-  "dependencies": {},
+  "dependencies": {
+    "grunt": "^1.0.4"
+  },
   "devDependencies": {
-    "grunt": "^1.0.1",
     "grunt-contrib-clean": "^1.1.0",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-uglify": "^3.0.1",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-ftp-deploy": "^0.1.10",
-    "grunt-html2js": "^0.5.1",
+    "grunt-html2js": "^0.6.0",
     "grunt-jsbeautifier": "^0.2.13",
     "grunt-replace": "^1.0.1",
     "grunt-wiredep": "^3.0.1",

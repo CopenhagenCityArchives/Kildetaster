@@ -61,9 +61,12 @@ app.config(function($httpProvider) {
     $httpProvider.interceptors.push('httpRequestInterceptor');
 });
 
-//app.constant('API', 'http://localhost:8000/datasource');
-app.constant('API', 'https://kbhkilder.dk/api/datasource');
-app.constant('PageAPI', 'https://kbhkilder.dk/api/taskspages');
+//app.constant('DeleteAPI', 'http://localhost:8080/posts');
+//app.constant('PageAPI', 'https://kbhkilder.dk/api/taskspages');
+//app.constant('API', 'https://kbhkilder.dk/api/datasource');
+app.constant('API', 'http://localhost:8080/datasource');
+app.constant('PageAPI', 'http://localhost:8080/taskspages');
+app.constant('DeleteAPI', 'https://kbhkilder.dk/1508/public_beta/posts');
 
 app.service('PagesService', ['$http', '$q', 'PageAPI', function($http, $q, PageAPI) {
     var pubs = {};
@@ -89,7 +92,7 @@ app.service('PagesService', ['$http', '$q', 'PageAPI', function($http, $q, PageA
 }]);
 
 //Loading and saving files
-app.service('Datasource', ['$http', '$q', 'API', function($http, $q, API) {
+app.service('Datasource', ['$http', '$q', 'API', 'DeleteAPI', function($http, $q, API, DeleteAPI) {
     var pubs = {};
 
     pubs.getValuesByQuery = function(datasourceId, query) {
@@ -124,11 +127,12 @@ app.service('Datasource', ['$http', '$q', 'API', function($http, $q, API) {
         return deferred.promise;
     };
 
-    pubs.update = function(datasourceId, valueId, value) {
+    pubs.update = function(datasourceId, valueId, newValue, oldValue) {
         var deferred = $q.defer();
         $http.patch(API + "/" + datasourceId, {
             id: valueId,
-            value: value
+            value: newValue,
+            change: "OldValue: " + oldValue + " -> " + "NewValue: " + newValue
         }).then(
             function(resdata, status, headers) {
                 deferred.resolve(resdata, status, headers);
@@ -156,6 +160,35 @@ app.service('Datasource', ['$http', '$q', 'API', function($http, $q, API) {
 
         return deferred.promise;
     };
+    //Get post for deletion, so user can verify the found post
+    pubs.getPost = function(postId) {
+        var deferred = $q.defer();
+        $http.get(DeleteAPI + "/" + postId).then(
+            function(resdata, status, headers) {
+                deferred.resolve(resdata);
+                console.log('getPost: ' + resdata);
+            },
+            function(resdata, status, headers) {
+                deferred.reject(null);
+            }
+        );
+        return deferred.promise;
+    }
+    //Makes the delete API call.
+    pubs.deletePost = function(postId) {
+        var deferred = $q.defer();
+        $http.delete(DeleteAPI + "/" + postId).then(
+            function(resdata, status, headers) {
+                deferred.resolve(resdata);
+                console.log('deletePost: ' + resdata);
+            },
+            function(resdata, status, headers) {
+                deferred.reject(null);
+            }
+        );
+
+        return deferred.promise;
+    }
 
     return pubs;
 }]);
@@ -237,26 +270,42 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
     scope.model.canUpdateValue = false;
     scope.model.canCreateValue = false;
 
+    scope.model.deleteValue = "";
+    scope.model.deletePostId = "";
+    scope.model.canDeletePost = false;
+    scope.model.foundPost = '';
+
     scope.model.status = "";
     scope.model.statusType = 'success';
 
     scope.model.loginStatus = false;
-
+    //Feedback Values for user
     scope.model.history = [];
 
+    //RET EKSISTERENDE VÆRDI
+
+    //Watches the 'Ret eksisternde værdier' inputfield
     scope.$watch(function() {
+            //The HTML triggers scope.getValuesByQuery() with the input, ensuring a valid json-object is fetched from the db
+            //The scope is updated with the json-object
             return scope.model.selectedValue;
         },
+        //if a datasource has been selected: update the changeValue variable with the selectedValue,
+        //getting a default value, and trigger valuefield in scope/html.
         function(changeValue) {
             if (scope.model.selected_datasource) {
                 scope.model.changeValue = changeValue[scope.model.selected_datasource.valueField];
             }
         }
     );
-
+    //watches the 'changeValue' inputfield
     scope.$watch(function() {
+        //updates scope
         return scope.model.changeValue;
     }, function(changeValue) {
+        //changes the 'canUpdateValue bool, if changeValue exists & isn't the same as the selectedvalue
+        //This then activeates the Button 'Gem Værdi' to be clickable and trigger scope.save()
+        //It also deactivates the 'opræt ny værdi' inputværdi
         scope.model.canUpdateValue = scope.model.changeValue && scope.model.changeValue !== scope.model.selectedValue[scope.model.selected_datasource.valueField];
         scope.model.newValue = undefined;
         if (changeValue) {
@@ -265,6 +314,8 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
         }
     });
 
+    //ORÆT NY VÆRDI
+    //Watch if newValue is changed in scope, update canCreateValue variable.
     scope.$watch(function() {
         return scope.model.newValue;
     }, function(newValue) {
@@ -276,9 +327,28 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
         }
     });
 
+    //if Delete input field is triggered
+    scope.$watch(function() {
+        return scope.model.deleteValue;
+    }, function(deleteValue) {
+        //if input can be parsed as int
+        if (deleteValue && parseInt(deleteValue)) {
+            scope.model.canDeletePost = true;
+            scope.model.status = "";
+            scope.model.statusType = 'success';
+        } else {
+            scope.model.canDeletePost = false;
+        }
+    });
+
+    //Unlock Page
+    //If 'Side-Id' inputfield has been triggered
+    //Update scope if newValue are a compatible integers
+    //This also activates the button 'Lås side op' that triggers scope.unlockPage()
     scope.$watch(function() {
         return scope.model.pageId;
     }, function(newValue) {
+        //if the inserted value can be parsed to int
         if (newValue && parseInt(newValue)) {
             scope.model.hasPageId = true;
             scope.model.status = "";
@@ -287,6 +357,63 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
             scope.model.hasPageId = false;
         }
     });
+
+    //Delete logic
+    //Empties foundPost of earlier inputs, hiding the old result (if any)
+    scope.getDelete = function() {
+        scope.model.foundPost = '';
+        var input = scope.model.deleteValue;
+        //calls getPost() with input, and receives the json response
+        //json is tunred into a more usable js object and updtaes personInfo in scope with created obj
+        Datasource.getPost(input).then(function(resdata) {
+                var json = resdata
+                var person = json;
+                var arr = person.data.data[0].fields;
+                const personinfo = {};
+
+                for (let i = 0; i < arr.length; i++) {
+                    personinfo[arr[i].field_name] = arr[i].value;
+                }
+
+                scope.model.foundPost = personinfo;
+            },
+            function(error) {
+                scope.model.statusType = 'error';
+                if (error == null) {
+                    scope.model.status = "Fejl i sletningen: Ingen post fundet";
+                } else {
+                    console.log("error: " + error);
+                    scope.model.status = "Fejl i sletningen";
+                }
+            }
+        );
+    }
+
+    //calls deletePost() and receives feedback that is given to the user
+    scope.delete = function() {
+        var input = scope.model.deleteValue;
+        Datasource.deletePost(input).then(
+            function() {
+                scope.model.history.push({
+                    type: "delete",
+                    deletedPost: input
+                });
+                scope.reset();
+                scope.model.status = "Sletningen blev gennemført";
+                scope.model.statusType = 'success';
+            },
+            function(error) {
+                scope.model.statusType = 'error';
+                if (error == null) {
+                    scope.model.status = "Fejl i sletningen: Ingen post fundet";
+                } else {
+                    console.log("error: " + error);
+                    scope.model.status = "Fejl i sletningen";
+                }
+            }
+        );
+    }
+
 
     scope.unlockPage = function() {
         var input = scope.model.pageId;
@@ -306,8 +433,9 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
     };
 
     scope.save = function() {
+        //If 'Ret eksisterende værdier' 
         if (scope.model.selectedValue.id && (scope.model.changeValue != "" && scope.model.changeValue != undefined)) {
-            Datasource.update(scope.model.selected_datasource.id, scope.model.selectedValue.id, scope.model.changeValue).then(
+            Datasource.update(scope.model.selected_datasource.id, scope.model.selectedValue.id, scope.model.changeValue, scope.model.selectedValue[scope.model.selected_datasource.valueField]).then(
                 function(resdata) {
                     scope.model.history.push({
                         type: "update",
@@ -324,6 +452,7 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
                     scope.model.statusType = 'error';
                 }
             );
+            //If 'Opret nye værdier'
         } else {
             Datasource.create(scope.model.selected_datasource.id, scope.model.newValue).then(
                 function() {
@@ -344,7 +473,7 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
             );
         }
     };
-
+    //Resets Scope/inputfields for the user.
     scope.reset = function() {
         scope.model.changeValue = undefined;
         scope.model.newValue = undefined;
