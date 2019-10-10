@@ -127,12 +127,14 @@ app.service('Datasource', ['$http', '$q', 'API', 'DeleteAPI', function($http, $q
         return deferred.promise;
     };
 
-    pubs.update = function(datasourceId, valueId, newValue, oldValue) {
+    pubs.update = function(datasourceId, valueId, newValue, oldValue, json) {
         var deferred = $q.defer();
+        console.log(json);
         $http.patch(API + "/" + datasourceId, {
             id: valueId,
             value: newValue,
-            change: "OldValue: " + oldValue + " -> " + "NewValue: " + newValue
+            oldValue: oldValue,
+            backup: json,
         }).then(
             function(resdata, status, headers) {
                 deferred.resolve(resdata, status, headers);
@@ -414,7 +416,6 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
         );
     }
 
-
     scope.unlockPage = function() {
         var input = scope.model.pageId;
 
@@ -435,7 +436,7 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
     scope.save = function() {
         //If 'Ret eksisterende værdier' 
         if (scope.model.selectedValue.id && (scope.model.changeValue != "" && scope.model.changeValue != undefined)) {
-            Datasource.update(scope.model.selected_datasource.id, scope.model.selectedValue.id, scope.model.changeValue, scope.model.selectedValue[scope.model.selected_datasource.valueField]).then(
+            Datasource.update(scope.model.selected_datasource.id, scope.model.selectedValue.id, scope.model.changeValue, scope.model.selectedValue[scope.model.selected_datasource.valueField], scope.model.selectedValue).then(
                 function(resdata) {
                     scope.model.history.push({
                         type: "update",
