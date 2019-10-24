@@ -417,14 +417,17 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
     }
 
     scope.unlockPage = function() {
-        var input = scope.model.pageId;
+        var pageId = scope.model.pageId;
+        var taskId = scope.model.taskId;
 
-        PagesService.unlock(1, input).then(function(resdata) {
+        PagesService.unlock(taskId, pageId).then(function(resdata) {
                 scope.model.history.push({
                     type: "page_unlock",
-                    pageId: input
+                    pageId: pageId,
+                    taskId: taskId
                 });
                 scope.model.pageId = undefined;
+                scope.model.taskId = undefined;
             },
             function(error) {
                 console.log(error);
