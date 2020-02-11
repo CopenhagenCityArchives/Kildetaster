@@ -55,7 +55,7 @@
                     <div class="row update-schema-form" ng-if="isEditing(field.key + values[mainProperty].id)">
 
                         <div class="col-sm-12">
-                            <form name="singleFieldForm" sf-schema="schema" sf-form="[field.key]" sf-model="valueCopy[field.key]" sf-options="sfDefaults"></form>
+                            <form name="singleFieldForm" sf-schema="schema" sf-form="[field.key]" sf-model="valueCopy[field.key]" sf-options="sfDefaults" ng-submit="updateValues(field.key, values[mainProperty].id)"></form>
                         </div>
 
                         <div class="col-sm-12 text-right">
@@ -104,7 +104,7 @@
                     <div class="row update-schema-form" ng-if="isEditing(field.key)">
 
                         <div class="col-sm-12">
-                            <form name="singleFieldForm" sf-schema="schema" sf-form="[field.key]" sf-options="sfDefaults" sf-model="valueCopy[field.key]"></form>
+                            <form name="singleFieldForm" sf-schema="schema" sf-form="[field.key]" sf-options="sfDefaults" sf-model="valueCopy[field.key]" ng-submit="updateValues(field.key)"></form>
                         </div>
 
                         <div class="col-sm-12 text-right">
@@ -163,7 +163,7 @@
                                 <div class="row update-schema-form" ng-if="isEditing(field.key)">
 
                                     <div class="col-sm-12">
-                                        <form name="singleFieldForm" sf-schema="schema" sf-form="[field.key]" sf-model="valueCopy[field.key]" sf-options="sfDefaults"></form>
+                                        <form name="singleFieldForm" sf-schema="schema" sf-form="[field.key]" sf-model="valueCopy[field.key]" sf-options="sfDefaults" ng-submit="updateValues(field.key)"></form>
                                     </div>
 
                                     <div class="col-sm-12 text-right">
