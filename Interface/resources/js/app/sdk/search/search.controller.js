@@ -410,7 +410,6 @@ define([
             }
             // entry from URL
             else if (!searchService.currentSearch && searchService.urlParamsExist()) {
-
                 var urlSearch = searchService.getSearch(searchConfig);
 
                 that.queries = [];
@@ -426,7 +425,6 @@ define([
 
                 // Check to see which section is relevant
                 if (urlSearch.isAdvanced) {
-
                     // Open advanced search, and set default on simple
                     that.addSimple('freetext_store', '', 'in_multivalued');
                     that.sectionAdvanced = true;
@@ -436,6 +434,9 @@ define([
                     angular.forEach(urlSearch.queries, function(item) {
                         that.queries.push(item);
                     });
+        
+                    //Push the fields added into advanced query fields as standard
+                    that.queries.push(that.simpleQuery[0]);
 
                 } else if(urlSearch.queries.length === 1 && urlSearch.queries[0].field.name === "freetext_store" && Object.keys(that.collections).length === urlSearch.collections.length) {
 
@@ -502,7 +503,6 @@ define([
 
                 // Check to see which section is relevant
                 if (searchService.currentSearch.isAdvanced) {
-
                     // Open advanced search, and set default on simple
                     that.addSimple('freetext_store', '', 'in_multivalued');
                     that.sectionAdvanced = true;
@@ -528,7 +528,6 @@ define([
                     that.addSimple('freetext_store', searchService.currentSearch.queries[0].term, 'in_multivalued');
 
                 } else {
-
                     // Open advanced search, and set default on simple
                     that.addSimple('freetext_store', '', 'in_multivalued');
                     that.sectionAdvanced = true;
