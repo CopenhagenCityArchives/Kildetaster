@@ -161,11 +161,43 @@ define([
         }); 
 
         /**
+         * Traverses a schemaform field to find the leaf field (ie. not an array or fieldset).
+         *
+         * @param   {object}  field  The schemaform field.
+         *
+         * @return  {object}         The leaf of the schemaform field tree.
+         */
+        $scope.findFirstField = function(field) {
+            while (field.type == "array" || field.type == "fieldset") {
+                if (field.items.length > 0) {
+                    field = field.items[0];
+                }
+            }
+            return field;
+        }
+
+        /**
+         * Set proper focus when the schemaform is rendered.
+         */
+        $scope.$on('sf-render-finished', function (ev, arg) {
+            $timeout(function() {
+                var firstField = $scope.findFirstField($scope.currentStepData.fields[0]);
+                if ($scope.currentStep == $scope.steps.length) {
+                    $('#save-button').focus();
+                } else if (firstField.type == "typeahead") {
+                    var focusElem = $('.ui-select-focusser').first();
+                    focusElem.focus();
+                }
+            });
+        });
+
+        /**
          * Because we do not trigger the ui.route logic (see.editor.config.js),
          * listen for changes to the location.search
          */ 
         $transitions.onSuccess({ on: 'editor.page.new.wizard'}, function(event, toState, toParams, fromState, fromParams){
          //$rootScope.$on('$stateChangeSuccess', function(event) {
+
 
             if($state.params.stepId == $scope.currentStep){
                 return false;
@@ -175,20 +207,6 @@ define([
             $scope.currentStep = $state.params.stepId;
 
             $scope.currentStepData = $scope.steps[$scope.currentStep - 1];
-
-            //TODO: Remove this!
-            //Hack to force focus on button and not links in header
-            $timeout(function() {
-                if ($scope.currentStep == $scope.steps.length) {
-                    //Last step, so focus on the save button
-                    $('#save-button').focus();
-                } else if ($scope.currentStep == 2) {
-                    $('#step-form').find('.ui-select-match').first().children().focus();
-                } else {
-                    $('#step-form').find('input').first().focus();
-                }
-            });
-
         });
 
         $scope.acceptArea = function acceptArea() {
