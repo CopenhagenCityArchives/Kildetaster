@@ -115,19 +115,31 @@ define([
         $scope.$on('sf-render-finished', function(event, schemaform) {
             $timeout(function() {
                 // find relevant element -- input elements are handled natively
-                let element = $(schemaform).find('.ui-select-focusser').first();
+                let element = $(schemaform).find('.ui-select-focusser');
                 if (element.length == 0) {
-                    element = $(schemaform).find('select').first();
+                    element = $(schemaform).find('select');
                 }
 
                 // trigger submit on enter key down in order to use the event
                 // handler set in the template
                 if (element.length != 0) {
-                    element.on('keydown', function (event) { 
-                        if (event.keyCode == 13) {
-                            $(schemaform).trigger('submit');
-                        }
-                     });
+                    let arrayElement = element.parents('.schema-form-array');
+                    if (arrayElement.length == 0) {
+                        element.on('keydown', function (event) { 
+                            if (event.keyCode == 13) {
+                                console.log("triggering submit on ", schemaform);
+                                $(schemaform).trigger('submit');
+                            }
+                        });
+                    } else {
+                        let button = arrayElement.find('button.btn-default');
+                        element.on('keydown', function (event) { 
+                            if (event.keyCode == 13) {
+                                console.log("triggering click on ", button)
+                                $(button).trigger('click');
+                            }
+                        });
+                    }
                 }
 
                 // set focus on relevant element - here we include input elements
@@ -135,7 +147,7 @@ define([
                     element = $(schemaform).find('input').first();
                 }
                 
-                element.focus();
+                element.first().focus();
             });
         });
 
