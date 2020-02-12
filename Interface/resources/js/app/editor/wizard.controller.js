@@ -4,7 +4,7 @@ define([
 
 ], function(Clipboard) {
 
-    var wizardController = /*@ngInject*/ function wizardController($uibModal, helpers, $scope, $rootScope, postService, stepService, pageData, taskData, $state, $timeout, $http, API, pageService, SEARCHURL, Analytics, $transitions) {
+    var wizardController = /*@ngInject*/ function wizardController($uibModal, helpers, $scope, $rootScope, postService, stepService, pageData, taskData, $state, $timeout, $http, API, pageService, SEARCHURL, Analytics, $transitions, $q) {
 
         //Indicates if we should show the controls for accepting a new area (used on all other steps than the first)
         $scope.showSelectionControls = false;
@@ -272,6 +272,8 @@ define([
         */
         $scope.save = function save() {
 
+            var deferred = $q.defer();
+
             var postData = $scope.values;
 
             postData.page_id = pageData.id;
@@ -285,6 +287,7 @@ define([
                 url: API + '/entries/',
                 data: postData
             }).then(function(response) {
+                deferred.resolve(response);
 
                 //If the reqeust was ok from the server, assume everything is allright
                 $scope.entrySaved = true;
@@ -294,8 +297,8 @@ define([
                 $timeout(function() {
                     $('#done-button').focus();
                 });
-
             }).catch(function(err) {
+                deferred.reject(err);
 
                 $scope.error = err;
 
@@ -320,6 +323,7 @@ define([
                 $scope.saving = false;
                 Analytics.trackEvent('kildetaster','save_data');
             })
+            return deferred.promise;
         };
 
         /**
@@ -409,14 +413,12 @@ define([
 
         $scope.saveAndDone = function saveAndDone() {
             try {
-                const save = $scope.save();
-                $scope.postDone();
+               $scope.save()
+               .then(function(response) {
+                   $scope.postDone();
+               });
             } catch (error) {
                 console.log(error)
-            }
-            finally {
-                $state.go('editor.page.new', {}, { reload: false });
-                location.reload();
             }
         };
 
