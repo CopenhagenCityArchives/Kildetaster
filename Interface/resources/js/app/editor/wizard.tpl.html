@@ -190,13 +190,16 @@
                 <button type="button" class="btn btn-default btn-block" ng-click="prevStep()">{{TEXT.BUTTON.PREV}}</button>
             </div>
             <div class="btn-group">
-                <button id="save-button" type="button" class="btn btn-primary btn-block" ng-disabled="entrySaved || saving" ng-click="save()">
+                <button id="save-button" type="button" class="btn btn-primary btn-block" ng-disabled="entrySaved || saving" ng-click="saveAndDone()">
                     <span ng-show="saving" class="loading-spinner"></span>
                     <span ng-hide="saving">{{TEXT.BUTTON.SAVEPOST}}</span>
                 </button>
             </div>
         </div>
 
+        
+        <!-- Removed the "del" page
+        
         <div class="row" ng-if="entrySaved">
             <div class="col-sm-12">
 
@@ -213,6 +216,7 @@
                 <button id="done-button" tabindex="1" type="button" class="btn btn-primary btn-block" ng-click="postDone()">Fortsæt</button>
             </div>
         </div>
+        -->
 
     </div>
 
