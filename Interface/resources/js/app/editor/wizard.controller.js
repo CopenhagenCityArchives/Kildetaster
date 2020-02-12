@@ -407,59 +407,16 @@ define([
             $scope.showShareLink = !$scope.showShareLink;
         };
 
-        $scope.savePromise = function savePromise() {
-            $scope.saving = true;
-            let promise = new Promise(function(resolve,reject) {
-                var postData = $scope.values;
-                postData.page_id = pageData.id;
-                postData.task_id = $state.params.taskId;
-                postData.post_id = $scope.postId;
-
-                $http({
-                    method: 'POST',
-                    url: API + '/entries/',
-                    data: postData
-                }).then(function(response) {
-                    //If the reqeust was ok from the server, assume everything is allright
-                    $scope.entrySaved = true;
-                    $scope.shareLinkId = response.data.solr_id;
-                    //Continue Step, so focus on continue button
-                    $timeout(function() {
-                        $('#done-button').focus();
-                    });
-                }).catch(function(err) {
-                    $scope.error = err;
-                    $uibModal.open({
-                        templateUrl: 'editor/error.modal.tpl.html',
-                        //The type of modal. The error modal makes more room for the error text
-                        windowClass: 'modal--error',
-                        //Make wizard scope available to the modal
-                        scope: $scope,
-                        controller: ['$scope', function($scope) {
-                            $scope.dismiss = function() {
-                                $scope.$dismiss();
-                            };
-                        }]
-                    });
-                })
-                .finally(function() {
-                    $scope.saving = false;
-                    Analytics.trackEvent('kildetaster','save_data');
-                })
-            })
-            return promise
-        };
-
-        $scope.saveAndDone = async function saveAndDone() {
+        $scope.saveAndDone = function saveAndDone() {
             try {
-                const save = await $scope.save();
-                await $scope.postDone();
+                const save = $scope.save();
+                $scope.postDone();
             } catch (error) {
                 console.log(error)
             }
             finally {
-                await $state.go('editor.page.new', {}, { reload: false });
-                await location.reload();
+                $state.go('editor.page.new', {}, { reload: false });
+                location.reload();
             }
         };
 
