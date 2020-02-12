@@ -109,6 +109,37 @@ define([
         };
 
         /**
+         * When a schemaform is rendered, we set up event handlers to trigger submit on
+         * enter key down, and we focus the form input element.
+         */
+        $scope.$on('sf-render-finished', function(event, schemaform) {
+            $timeout(function() {
+                // find relevant element -- input elements are handled natively
+                let element = $(schemaform).find('.ui-select-focusser').first();
+                if (element.length == 0) {
+                    element = $(schemaform).find('select').first();
+                }
+
+                // trigger submit on enter key down in order to use the event
+                // handler set in the template
+                if (element.length != 0) {
+                    element.on('keydown', function (event) { 
+                        if (event.keyCode == 13) {
+                            $(schemaform).trigger('submit');
+                        }
+                     });
+                }
+
+                // set focus on relevant element - here we include input elements
+                if (element.length == 0) {
+                    element = $(schemaform).find('input').first();
+                }
+                
+                element.focus();
+            });
+        });
+
+        /**
          * Toggle wether or not we should show edit field for a given field config
          */
         $scope.toggleEditExistingValue = function toggleEditExistingValue(value, id) {
