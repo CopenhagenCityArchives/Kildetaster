@@ -1,0 +1,21 @@
+<div>
+    <div ng-if="loading" class="alert alert-info">
+        Indlæser brugerstatistik.
+    </div>
+
+    <ul ng-if="!error && !loading" class="unstyled user-statistics">
+        <li>
+            <div class="user-statistics__header">Brugernavn</div>
+            <div class="user-statistics__header">Point</div>
+        </li>
+
+        <li ng-repeat="stat in stats" ng-class="{ odd: $odd }">
+            <div class="user-statistics__item">{{ stat.user_name }}</div>
+            <div class="user-statistics__item">{{ stat.count }}</div>
+        </li>
+    </ul>
+
+    <div ng-if="error" class="alert alert-warning">
+        En fejl opstod under indlæsningen af brugerstatistikken.
+    </div>
+</div>
