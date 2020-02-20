@@ -3,11 +3,21 @@ define([], function () {
         return {
             restrict: 'E',
             templateUrl: 'sdk/directives/user-statistics.directive.tpl.html',
-            scope: {},
+            scope: {
+                'sinceDays': '='
+            },
             
             link: function(scope, element, attr) {
                 scope.loading = true;
-                userService.getUserStatistics()
+                scope.error = false;
+
+                if (!scope.sinceDays) {
+                    scope.sinceDays = 1;
+                }
+
+                var unix = Math.floor(new Date().getTime() / 1000) - scope.sinceDays * 24 * 60 * 60;
+
+                userService.getUserStatistics(unix)
                 .then(function(stats) {
                     scope.stats = stats;
                 })
