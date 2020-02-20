@@ -1,7 +1,10 @@
 .user-statistics {
-    display: table;
-
-    table-layout: fixed;
+    ul {
+        display: table;
+        padding-left: 0px;
+    
+        table-layout: fixed;
+    }
 
     li {
         display: table-row;
