@@ -4,18 +4,23 @@ define([], function () {
             restrict: 'E',
             templateUrl: 'sdk/directives/user-statistics.directive.tpl.html',
             scope: {
-                'sinceDays': '='
+                'sinceDays': '=',
+                'sinceUnix': '='
             },
             
             link: function(scope, element, attr) {
                 scope.loading = true;
                 scope.error = false;
-
-                if (!scope.sinceDays) {
-                    scope.sinceDays = 1;
+                
+                var unix = undefined;
+                if (scope.sinceUnix) {
+                    unix = scope.sinceUnix;
+                } else {
+                    if (!scope.sinceDays) {
+                        scope.sinceDays = 1;
+                    }
+                    unix = Math.floor(new Date().getTime() / 1000) - scope.sinceDays * 24 * 60 * 60;
                 }
-
-                var unix = Math.floor(new Date().getTime() / 1000) - scope.sinceDays * 24 * 60 * 60;
 
                 userService.getUserStatistics(unix)
                 .then(function(stats) {

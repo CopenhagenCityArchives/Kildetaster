@@ -5,13 +5,15 @@
 
     <ul ng-if="!error && !loading" class="unstyled">
         <li>
-            <div class="user-statistics__header">Brugernavn</div>
-            <div class="user-statistics__header">Point</div>
+            <div class="user-statistics__header text-right">#</div>
+            <div class="user-statistics__header">Bruger</div>
+            <div class="user-statistics__header text-right">Antal</div>
         </li>
 
         <li ng-repeat="stat in stats" ng-class="{ odd: $odd }">
+            <div class="user-statistics__item text-right">{{ $index + 1 }}.</div>
             <div class="user-statistics__item">{{ stat.username }}</div>
-            <div class="user-statistics__item">{{ stat.count }}</div>
+            <div class="user-statistics__item text-right">{{ stat.count }}</div>
         </li>
     </ul>
 
