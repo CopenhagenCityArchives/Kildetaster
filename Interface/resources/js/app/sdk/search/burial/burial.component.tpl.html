@@ -99,7 +99,8 @@
             <p ng-if="$ctrl.data.burials.parish"><strong>Sogn:</strong> {{ $ctrl.data.burials.parish }}</p>
             <p ng-if="$ctrl.data.burials.cemetary"><strong>Til (kirkegård):</strong> {{ $ctrl.data.burials.cemetary }}
             </p>
-            <p ng-if="$ctrl.data.comment"><strong>Kommentar:</strong> {{ $ctrl.data.comment }}</p>
+            <p ng-if="$ctrl.data.comment"><strong>Kommentar:</strong> <p ng-bind-html="$ctrl.data.comment | linky:_blank" > {{ $ctrl.data.comment }} <p></p>
+            
         </div>
     </div>
 
