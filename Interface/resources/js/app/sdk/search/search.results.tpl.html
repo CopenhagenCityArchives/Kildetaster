@@ -7,10 +7,12 @@
 </section>
 
 <!-- Status messages -->
-<section class="row with-padding" ng-if="ctrl.results.docs.length === 0">
-    <div class="col-md-12">
-        <div get-dom-content="search-app-no-results"></div>
-        <a href="" ui-sref="^" class="sdk-search__configtoggle">Rediger din søgning</a>
+<section ng-if="ctrl.results.docs.length === 0">
+    <div class="row with-padding">
+        <div class="col-md-12">
+            <div get-dom-content="search-app-no-results"></div>
+            <a href="" ui-sref="^" class="sdk-search__configtoggle">Rediger din søgning</a>
+        </div>
     </div>
 </section>
 
