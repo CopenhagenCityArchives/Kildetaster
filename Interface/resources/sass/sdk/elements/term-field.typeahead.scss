@@ -37,6 +37,8 @@
     }
 
     ul {
+        z-index: 1001; // raise above joomla footer
+
         margin-left: 0;
     }
 
@@ -103,4 +105,4 @@
 
 .select2-search input.select2-active {
     background-image: none; //inline("../bower_components/select2/select2-spinner.gif");
-}
+}
