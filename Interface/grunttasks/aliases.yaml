@@ -49,7 +49,7 @@ sdk:
     - 'open:sdk'
     - 'watchSdk'
 
-sdkProtoTypeLocal:
+sdkLocalNoAuth:
     - 'clean:prototype'
     - 'html2js:editor'
     - 'ngconstant:localNoAuth'
