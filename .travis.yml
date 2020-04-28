@@ -13,7 +13,7 @@ addons:
 
 before_install:
   - openssl aes-256-cbc -K $deploy_key_aes_key -iv $deploy_key_aes_iv
-    -in deploy_key.enc -out .\\deploy_key -d
+    -in deploy_key.enc -out ./deploy_key -d
 
 install:
 - npm install
