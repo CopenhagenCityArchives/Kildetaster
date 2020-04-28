@@ -1,37 +1,46 @@
 language: node_js
 
 node_js:
-  - "11.9"
+- '11.9'
 
 cache:
-  - npm
+- npm
 
 addons:
   apt:
     packages:
     - sshpass
 
+before_install:
+      - openssl aes-256-cbc -K $encrypted_84e789dbaabb_key -iv $encrypted_84e789dbaabb_iv
+        -in deploy_key.enc -out .\\deploy_key -d
+
 install:
-  - npm install
-  - npm install -g grunt-cli
-  - npm install -g bower
-  - bower install
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then grunt build; fi
-  - if [ "$TRAVIS_BRANCH" = "development" ]; then grunt dev; fi
-  - if [ "$TRAVIS_BRANCH" = "public-beta" ]; then grunt dev_public_beta; fi
-  - if [ "$TRAVIS_BRANCH" = "new-site" ]; then grunt build; fi
+- npm install
+- npm install -g grunt-cli
+- npm install -g bower
+- bower install
+- if [ "$TRAVIS_BRANCH" = "master" ]; then grunt build; fi
+- if [ "$TRAVIS_BRANCH" = "development" ]; then grunt dev; fi
+- if [ "$TRAVIS_BRANCH" = "public-beta" ]; then grunt dev_public_beta; fi
+- if [ "$TRAVIS_BRANCH" = "new-site" ]; then grunt build; fi
 
 deploy:
-    # deploy develop to the staging environment
-  - provider: script
-    script: sshpass -p${KBHKILDER_SSH_PASSWORD} scp -o LogLevel=Verbose -o StrictHostKeyChecking=no -r ./kbh/resources/ ${KBHKILDER_SSH_USER}@${KBHKILDER_SSH_HOST}:${KBHKILDER_SSH_PATH}
-    skip_cleanup: true
-    on:
-      all_branches: true
-      condition: $TRAVIS_BRANCH =~ ^(master|development|public-beta|new-site)$
-  - provider: script
-    script: SSHPASS=${KBHARKIV_SSH_PASSWORD} sshpass -e scp -o LogLevel=Verbose -o StrictHostKeyChecking=no ./kbh/index.html ${KBHARKIV_SSH_USER}@${KBHARKIV_SSH_HOST}:${KBHARKIV_SSH_PATH}
-    skip_cleanup: true
-    on:
-      all_branches: true
-      condition: $TRAVIS_BRANCH =~ ^(master|development|public-beta|new-site)$
+- provider: script
+  script: sshpass -p${KBHKILDER_SSH_PASSWORD} scp -o LogLevel=Verbose -o StrictHostKeyChecking=no
+    -r ./kbh/resources/ ${KBHKILDER_SSH_USER}@${KBHKILDER_SSH_HOST}:${KBHKILDER_SSH_PATH}
+  skip_cleanup: true
+  on:
+    all_branches: true
+    condition: "$TRAVIS_BRANCH =~ ^(master|development|public-beta|new-site)$"
+
+- provider: script
+  script:
+    - eval "$(ssh-agent -s)"
+    - chmod 600 ./deploy_key
+    - ssh-add ./deploy_key
+    - scp -i ./deploy_key -p ${KBHARKIV_SSH_PORT} -o LogLevel=Verbose -o StrictHostKeyChecking=no ./kbh/index.html ${KBHARKIV_SSH_USER}@${KBHARKIV_SSH_HOST}:${KBHARKIV_SSH_PATH}
+  skip_cleanup: true
+  on:
+    all_branches: true
+    condition: "$TRAVIS_BRANCH =~ ^(master|development|public-beta|new-site)$"
