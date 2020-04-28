@@ -12,8 +12,8 @@ addons:
     - sshpass
 
 before_install:
-      - openssl aes-256-cbc -K $deploy_key_aes_key -iv $deploy_key_aes_iv
-        -in deploy_key.enc -out .\\deploy_key -d
+  - openssl aes-256-cbc -K $deploy_key_aes_key -iv $deploy_key_aes_iv
+    -in deploy_key.enc -out .\\deploy_key -d
 
 install:
 - npm install
@@ -35,11 +35,7 @@ deploy:
     condition: "$TRAVIS_BRANCH =~ ^(master|development|public-beta|new-site)$"
 
 - provider: script
-  script:
-    - eval "$(ssh-agent -s)"
-    - chmod 600 ./deploy_key
-    - ssh-add ./deploy_key
-    - scp -i ./deploy_key -p ${KBHARKIV_SSH_PORT} -o LogLevel=Verbose -o StrictHostKeyChecking=no ./kbh/index.html ${KBHARKIV_SSH_USER}@${KBHARKIV_SSH_HOST}:${KBHARKIV_SSH_PATH}
+  script: scp -i ./deploy_key -p ${KBHARKIV_SSH_PORT} -o LogLevel=Verbose -o StrictHostKeyChecking=no ./kbh/index.html ${KBHARKIV_SSH_USER}@${KBHARKIV_SSH_HOST}:${KBHARKIV_SSH_PATH}
   skip_cleanup: true
   on:
     all_branches: true
