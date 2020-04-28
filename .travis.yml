@@ -16,9 +16,10 @@ install:
   - npm install -g grunt-cli
   - npm install -g bower
   - bower install
-  - if [ "$TRAVIS_BRANCH" = "development" ]; then grunt dev; fi
   - if [ "$TRAVIS_BRANCH" = "master" ]; then grunt build; fi
+  - if [ "$TRAVIS_BRANCH" = "development" ]; then grunt dev; fi
   - if [ "$TRAVIS_BRANCH" = "public-beta" ]; then grunt dev_public_beta; fi
+  - if [ "$TRAVIS_BRANCH" = "new-site" ]; then grunt build; fi
 
 deploy:
     # deploy develop to the staging environment
@@ -27,10 +28,10 @@ deploy:
     skip_cleanup: true
     on:
       all_branches: true
-      condition: $TRAVIS_BRANCH =~ ^(master|development|public-beta)$
+      condition: $TRAVIS_BRANCH =~ ^(master|development|public-beta|new-site)$
   - provider: script
     script: SSHPASS=${KBHARKIV_SSH_PASSWORD} sshpass -e scp -o LogLevel=Verbose -o StrictHostKeyChecking=no ./kbh/index.html ${KBHARKIV_SSH_USER}@${KBHARKIV_SSH_HOST}:${KBHARKIV_SSH_PATH}
     skip_cleanup: true
     on:
       all_branches: true
-      condition: $TRAVIS_BRANCH =~ ^(master|development|public-beta)$
+      condition: $TRAVIS_BRANCH =~ ^(master|development|public-beta|new-site)$
