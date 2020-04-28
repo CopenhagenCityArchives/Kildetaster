@@ -119,7 +119,7 @@ define([
                             deferred.resolve(userData);
                         })
                         .catch(function (err) {
-                            deferred.reject(err);
+                            deferred.resolve(undefined);
                         });
 
                         return deferred.promise;
