@@ -35,7 +35,7 @@ deploy:
     condition: "$TRAVIS_BRANCH =~ ^(master|development|public-beta|new-site)$"
 
 - provider: script
-  script: scp -i ./deploy_key -p ${KBHARKIV_SSH_PORT} -o LogLevel=Verbose -o StrictHostKeyChecking=no ./kbh/index.html ${KBHARKIV_SSH_USER}@${KBHARKIV_SSH_HOST}:${KBHARKIV_SSH_PATH}
+  script: scp -i ./deploy_key -o LogLevel=Verbose -o StrictHostKeyChecking=no -P ${KBHARKIV_SSH_PORT} ./kbh/index.html ${KBHARKIV_SSH_USER}@${KBHARKIV_SSH_HOST}:${KBHARKIV_SSH_PATH}
   skip_cleanup: true
   on:
     all_branches: true
