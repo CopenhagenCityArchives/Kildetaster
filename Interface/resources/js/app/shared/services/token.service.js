@@ -115,7 +115,7 @@ define([
 
                     })
                     .catch(function(err) {
-                        console.log('err', err);
+                        deferred.reject(err);
                     });
 
                 return deferred.promise;
