@@ -74,9 +74,9 @@ module.exports = {
         }, {
         	//dump files
         	expand: true,
-        	cwd: '<%= package.html %>/dump/index_files/',
+        	cwd: '<%= package.html %>/dump/wordpress-kbharkiv_files/',
         	src: ['**/*.*'],
-        	dest: '<%= package.sdkresources %>/dump_files'
+        	dest: '<%= package.sdkresources %>/wordpress-kbharkiv_files/'
         }, {
         	//dump files
         	expand: true,

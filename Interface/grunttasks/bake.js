@@ -23,10 +23,10 @@ module.exports = {
         options: {},
 
         files: [{
-            src: '<%= package.html %>/index_stadsdump.html',
+            src: '<%= package.html %>/index_sdk_wordpress-kbharkiv.html',
             dest: '<%= package.sdk %>/index.html'
         }, {
-            src: '<%= package.html %>/search.html',
+            src: '<%= package.html %>/search_wordpress-kbharkiv.html',
             dest: '<%= package.sdk %>/search.html'
         }]
     },
