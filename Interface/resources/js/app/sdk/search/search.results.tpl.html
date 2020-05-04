@@ -145,10 +145,10 @@
             go-to-page="ctrl.goToPage(page)">
         </pagination>
 
-        <form class="go-to-page form-inline" role="form" aria-labelledby="go-to-page-label">
+        <form class="go-to-page form-inline" role="form" aria-labelledby="go-to-page-label" ng-submit="ctrl.goToPage(ctrl.pageNumber)">
             <div class="form-group mr-2">
                 <label for="go-to-page" id="go-to-page-label" class="mr-3">Spring til side</label>
-                <input type="number" class="form-control" id="go-to-page" placeholder="Sidetal">
+                <input type="number" class="form-control" id="go-to-page" placeholder="Sidetal" ng-model="ctrl.pageNumber">
             </div>
             <button type="submit" class="btn btn-primary">Gå</button>
         </form>

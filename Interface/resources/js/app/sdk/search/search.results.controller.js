@@ -36,6 +36,7 @@ define([
 
         // The index of the current page
         that.page = 0;
+        that.pageNumber = 1;
         // How many posts to show on a page
         that.postsPrPage = 10;
 
@@ -240,16 +241,16 @@ define([
         };
 
         that.goToPage = function goToPage(page) {
-            that.page = page;
+            that.page = page - 1;
 
             // Store current page in the search service
-            searchService.currentSearch.page = page;
+            searchService.currentSearch.page = that.page;
 
             $scope.doSearch(true);
 
             $anchorScroll('results-start');
 
-            Analytics.trackEvent('person_search', 'go_to_result_page', 'go_to_result_page.'+page);
+            Analytics.trackEvent('person_search', 'go_to_result_page', 'go_to_result_page.'+ that.page);
         }
 
         that.setPostsPrPage = function setPostsPrPage() {
