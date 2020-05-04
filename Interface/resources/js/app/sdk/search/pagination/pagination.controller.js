@@ -33,36 +33,29 @@ define([], function () {
         };
 
         this.buildPagination = function buildPagination() {
+            var pagination = [];
 
-            var arr = [],
-                numPages = Math.ceil(that.results.numFound / that.postsPrPage),
-                maxPages = numPages > 5 ? 5 : numPages;
+            that.total = Math.ceil(that.results.numFound / that.postsPrPage);
+            var startPage = that.currentPage - 2;
+            var endPage = that.currentPage + 2;
+
+            if (startPage < 0) {
+                endPage -= startPage;
+                startPage = 0;
+            }
+
+            if (endPage > that.total - 1) {
+                if (startPage - (endPage - (that.total - 1)) > 0) {
+                    startPage -= endPage - (that.total - 1);
+                }
+                endPage = that.total - 1;
+            }
             
-            that.total = numPages;
-           
-            // We are on one of the first three pages
-            if (that.currentPage < 3) {
-                for (var i = 0; maxPages > i; i++) {
-                    arr.push({ label: i + 1, page: i });
-                }
-            }
-            // We are on one of the last three pages
-            else if (that.total - that.currentPage < (maxPages - 2)) {
-                for (var i = maxPages; 0 < i; i--) {
-                    arr.push({ label: (that.total - i) + 1, page: that.total - i });
-                }
-            }
-            // Everything in between
-            else {
-                var maxPageNumber = that.currentPage + 3,
-                    firstPageNumber = that.currentPage - 2;
-
-                for (var i = firstPageNumber; i < maxPageNumber; i++) {
-                    arr.push({ label: i + 1, page: i});
-                }
+            for (let i = startPage; i <= endPage; i++) {
+                pagination.push({ label: i + 1, page: i });
             }
 
-            that.pagination = arr;     
+            that.pagination = pagination;
         }
 
         this.$onInit = function () {

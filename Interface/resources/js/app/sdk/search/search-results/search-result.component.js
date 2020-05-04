@@ -13,7 +13,7 @@ define([
             //The page (in pagination) we are currently on
             page: '<'
         },
-        template: '<div ng-click="$ctrl.goToPost()" ng-include="$ctrl.templateUrl"></div>',
+        template: '<tr tabindex="0" ng-click="$ctrl.goToPost()" ng-include="$ctrl.templateUrl"></tr>',
         controller: controller
     };
 

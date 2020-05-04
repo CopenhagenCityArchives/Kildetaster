@@ -1,117 +1,30 @@
 .facet {
-    overflow: hidden;
+    &__offcanvas {
+        position: fixed;
+        z-index: 1200;
+        top: 0;
+        left: 0;
 
-    margin: 0 -15px;
+        overflow-x: hidden;
+        overflow-y: scroll;
 
-    &__header {
-        font-family: verdana, sans-serif;
-        font-size: 12px;
-        font-weight: 600;
-        line-height: 50px;
+        width: 375px;
+        max-width: 100%;
+        height: 100%;
 
-        position: relative;
-        z-index: 100;
+        transition: transform 400ms ease;
+        transform: translateX(-100%);
 
-        margin: 0;
-        padding: 0 20px;
+        background-color: white;
 
-        cursor: pointer;
-
-        border-bottom: 1px solid $light-gray;
-        background-color: $white;
-
-        &:after {
-            position: absolute;
-            top: 50%;
-            right: 20px;
-
-            display: inline-block;
-
-            width: 0;
-            height: 0;
-
-            content: "";
-            transition: transform 100ms ease-in;
-            transform: translateY(-50%);
-
-            border-width: 10px 6px 0 6px;
-            border-style: solid;
-            border-color: $font-color transparent transparent transparent;
-
-            .active & {
-                transform: translateY(-50%) rotateX(180deg);
-            }
-        }
+        -webkit-overflow-scrolling: touch;
     }
 
-    &__group {
-        position: relative;
-        z-index: 50;
-
-        max-height: 0;
-        margin: 0;
-        padding: 0; // override weird 40px left padding
-
-        list-style: none;
-
-        transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
-
-        .active & {
-            max-height: 9000px;
-
-            transition: max-height 1s ease-in-out;
-        }
+    &__offcanvas.active {
+        transform: translateX(0);
     }
 
-
-    &__item {
-        font-size: 14px;
-
-        display: flex;
-        flex-direction: column;
-
-        min-height: 50px;
-        padding: 8px 20px;
-
-        cursor: pointer;
-        text-transform: capitalize;
-
-        border-bottom: 1px solid $light-gray;
-        background-color: $lighter-gray;
-
-        justify-content: center;
-
-        /* ngAnimate */
-        &.ng-enter {
-            transition: 0.5s all linear;
-
-            opacity: 0;
-        }
-        &.ng-enter.ng-enter-active {
-            opacity: 1;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        a:hover {
-            text-decoration: none;
-        }
-    }
-
-    &__more {
-        font-weight: 600;
-    }
-
-    &__count {
-        font-size: 11px;
-
-        margin-left: 4px;
-        padding: 1px 8px 2px 8px;
-
-        color: $white;
-        border-radius: 5px;
-        background-color: $light-blue;
+    &__offcanvas .list-group .list-group .list-group-item:not(.active) {
+        background-color: rgba(0, 0, 0, 0.05);
     }
 }

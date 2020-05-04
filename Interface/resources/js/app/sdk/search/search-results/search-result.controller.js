@@ -1,5 +1,5 @@
 define([], function() {
-    var searchResultController = /*@ngInject*/ function searchResultController($state) {
+    var searchResultController = /*@ngInject*/ function searchResultController($state, $scope) {
 
         var that = this;
 
@@ -10,6 +10,8 @@ define([], function() {
         };
 
         this.$onInit = function() {
+
+            console.log('onInit');
 
             if (this.result && this.result.jsonObj) {
 
@@ -43,6 +45,11 @@ define([], function() {
                 else if (this.data.collection_id == 19) {
                     this.templateUrl = 'sdk/search/search-results/efterretning.tpl.html';
                 }
+
+                $scope.getTemplateUrl = function() {
+                    console.log("getting template url");
+                    return this.templateUrl;
+                };
             }
 
         };

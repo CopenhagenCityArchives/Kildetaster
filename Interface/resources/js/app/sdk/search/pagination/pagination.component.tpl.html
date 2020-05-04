@@ -1,50 +1,28 @@
-<div class="pagination sdk-pagination">
-
-    <ul>
-        <!-- arrows -->
-        <li class="sdk-pagination__arrow sdk-pagination__prev-double" ng-class="{'disabled': $ctrl.currentPage === 0}">
-            <a href="" ng-click="$ctrl.goToFirst()">
-                <i class="sdk-icon arrow"></i>
-                <i class="sdk-icon arrow"></i>               
+<nav class="nav-pagination" aria-label="Paginering under resultater">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" ng-class="{'disabled': $ctrl.currentPage === 0}" href ng-click="$ctrl.prev()">
+                <span class="sr-only">Tilbage</span>
+                <i width="16px" height="16px" data-feather="arrow-left"></i>
             </a>
         </li>
-
-        <li class="sdk-pagination__arrow sdk-pagination__prev" ng-class="{'disabled': $ctrl.currentPage === 0}">
-            <a href="" ng-click="$ctrl.prev()">
-                <i class="sdk-icon arrow"></i>
+        <li ng-if="$ctrl.currentPage > 2" class="page-item"><a class="page-link" href ng-click="$ctrl.goToPage({page: 0})">1</a></li>
+        <li ng-if="$ctrl.currentPage > 2" class="page-item disabled">
+            <div class="page-link"> — </div>
+        </li>
+        <li class="page-item" ng-repeat="page in $ctrl.pagination"
+            ng-class="{ 'active': $ctrl.currentPage === page.page }">
+            <a class="page-link" href ng-click="$ctrl.goToPage({page: page.page})">{{ page.label }}</a>
+        </li>
+        <li ng-if="$ctrl.currentPage + 2 < $ctrl.total" class="page-item disabled">
+            <div class="page-link"> — </div>
+        </li>
+        <li ng-if="$ctrl.currentPage + 2 < $ctrl.total" class="page-item"><a class="page-link" href ng-click="$ctrl.goToPage({page: $ctrl.total - 1})">{{ $ctrl.total }}</a></li>
+        <li class="page-item">
+            <a class="page-link" href ng-click="$ctrl.next()">
+                <span class="sr-only">Frem</span>
+                <i width="16px" height="16px" data-feather="arrow-right"></i>
             </a>
         </li>
-        <li class="sdk-pagination__divider disabled" ng-if="$ctrl.currentPage > 2">
-            <a href="">...</a>
-            </span>
-        </li>
-
-        <!-- pages -->
-        <li ng-repeat="page in $ctrl.pagination" ng-class="{ 'active': $ctrl.currentPage === page.page }">
-            <a href="" ng-click="$ctrl.goToPage({page: page.page})">{{ page.label }}</a>
-        </li>
-
-        <li>
-            {{  }}
-        </li>
-
-        <!-- arrows -->
-        <li class="sdk-pagination__divider disabled" 
-        ng-if="$ctrl.currentPage !== $ctrl.total - 5 && ($ctrl.total - 3) - $ctrl.currentPage > 0">
-            <a href="">...</a>
-            </span>
-        </li>
-        <li class="sdk-pagination__arrow sdk-pagination__next" ng-class="{'disabled': $ctrl.currentPage === $ctrl.total - 1}">
-            <a href="" ng-click="$ctrl.next()">
-                <i class="sdk-icon arrow"></i>
-            </a>
-        </li>
-        <li class="sdk-pagination__arrow sdk-pagination__next-double" ng-class="{'disabled': $ctrl.currentPage === $ctrl.total - 1}">
-            <a href="" ng-click="$ctrl.goToLast()">
-                <i class="sdk-icon arrow"></i>
-                <i class="sdk-icon arrow"></i>
-            </a>
-        </li>
-
     </ul>
-</div>
+</nav>

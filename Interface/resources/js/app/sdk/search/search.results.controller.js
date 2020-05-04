@@ -19,6 +19,9 @@ define([
 
         var that = this;
 
+        $scope.allFacetsExpanded = false;
+        $scope.facetsShown = false;
+
         that.loading = false;
         that.initialized = false;
 
@@ -54,6 +57,12 @@ define([
 
             return found;
         }
+      
+        $scope.goToPost = function (result) {
+            $state.go('search.page.result.post', {
+                postId: result.id
+            });
+        };
 
         /**
         * Toggle between sorting desc and asc
@@ -74,6 +83,31 @@ define([
             //Trigger new search
             $scope.doSearch(true);
         }
+
+        $scope.expandFacets = function() {
+            for (var i = 0; i < that.facets.length; i++) {
+                that.facets[i].expanded = true;
+            }
+            $scope.allFacetsExpanded = true;
+            $scope.facetsShown = true;
+        }
+
+        $scope.expandFacet = function(facet) {
+            for (var i = 0; i < that.facets.length; i++) {
+                that.facets[i].expanded = false;
+            }
+            facet.expanded = true;
+            $scope.facetsShown = true;
+        }
+
+        $scope.collapseFacets = function() {
+            for (var i = 0; i < that.facets.length; i++) {
+                that.facets[i].expanded = false;
+            }
+            $scope.allFacetsExpanded = false;
+            $scope.facetsShown = false;
+        }
+
 
         // TODO update to use that
         $scope.toggleFilter = function toggleFilter(facet, bucket) {
@@ -218,17 +252,16 @@ define([
             Analytics.trackEvent('person_search', 'go_to_result_page', 'go_to_result_page.'+page);
         }
 
-        that.setPostsPrPage = function setPostsPrPage(count) {
-            that.postsPrPage = count;
+        that.setPostsPrPage = function setPostsPrPage() {
             // Set page to show the first of the new set (0-based)
             that.page = 0;
 
-            searchService.currentSearch.postsPrPage = count;
+            searchService.currentSearch.postsPrPage = that.postsPrPage;
             searchService.currentSearch.page = 0;
 
             $scope.doSearch(true);
 
-            Analytics.trackEvent('person_search', 'set_posts_per_page', 'set_posts_per_page.' + count);
+            Analytics.trackEvent('person_search', 'set_posts_per_page', 'set_posts_per_page.' + that.postsPrPage);
         }
 
         that.init = function init() {
@@ -291,7 +324,7 @@ define([
 
                 that.filterQueries = [];
                 if (searchService.currentSearch.filterQueries) {
-                    searchService.currentSearch.filterQueries.each(function (filterQuery) {
+                    searchService.currentSearch.filterQueries.forEach(function (filterQuery) {
                         that.filterQueries.push(filterQuery);
                     });
                 }

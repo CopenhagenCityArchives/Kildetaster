@@ -63,6 +63,7 @@ define([
     'app/sdk/components/jumpToPage/jumpToPage.component',
     'app/sdk/components/numPages/numPages.component',
 
+    'app/sdk/search/search-results/search-result-row.directive',
     'app/sdk/search/search-results/search-result.component',
     'app/sdk/search/search-config-text/search-config-text.component',
 
@@ -144,6 +145,7 @@ define([
     jumpToPageComponent,
     numPagesComponent,
 
+    searchResultRowDirective,
     searchResultComponent,
     searchConfigTextComponent,
 
@@ -227,6 +229,7 @@ define([
     searchApp.component('numPages', numPagesComponent);
 
     // Search results
+    searchApp.directive('searchResultRow', searchResultRowDirective);
     searchApp.component('searchResult', searchResultComponent);
     searchApp.component('searchConfigText', searchConfigTextComponent);
 

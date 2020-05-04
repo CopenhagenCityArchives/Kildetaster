@@ -509,7 +509,7 @@ define([
                     that.sectionSimple = false;
 
                     // Set advanced fields
-                    searchService.currentSearch.queries.each(function(item, index) {
+                    searchService.currentSearch.queries.forEach(function(item, index) {
                         that.addField(item.field.name, item.term, item.operator.op);
                     });
 
@@ -534,7 +534,7 @@ define([
                     that.sectionSimple = false;
 
                     // Set advanced fields
-                    searchService.currentSearch.queries.each(function(item, index) {
+                    searchService.currentSearch.queries.forEach(function(item, index) {
                         that.addField(item.field.name, item.term, item.operator.op)
                     });
 
@@ -542,7 +542,7 @@ define([
 
 
                 that.filterQueries = [];
-                searchService.currentSearch.filterQueries.each(function(filterQuery) {
+                searchService.currentSearch.filterQueries.forEach(function(filterQuery) {
                     that.filterQueries.push(filterQuery);
                 });
 
