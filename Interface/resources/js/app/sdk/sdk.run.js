@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var sdkRun = /*@ngInject*/ function sdkRun(SDKCSSURL, $state, Analytics, $transitions) {
+    var sdkRun = /*@ngInject*/ function sdkRun(SDKCSSURL, $state, $window, Analytics, $transitions) {
 
         //Track all changes in state in order to track event with Google Analytics
         $transitions.onStart({ }, function(trans) {
@@ -51,6 +51,26 @@ define([
             // This is a naive example of how to silence the default error handler.
             window.myAppErrorLog.push(error);
         });
+
+        if(!$window.Cookiebot){
+            console.log("Cookiebot not loaded. Error!");
+        }
+        if($window.Cookiebot.consent.statistics){
+            Analytics.registerScriptTags();
+            Analytics.registerTrackers();
+            Analytics.offline(false);
+        }   
+        else{
+            $window.addEventListener('CookiebotOnAccept', function (e) {
+                if ($window.Cookiebot.consent.statistics)
+                    {
+                        Analytics.registerScriptTags();
+                        Analytics.registerTrackers();
+                        Analytics.offline(false);
+                    }
+                }, false);
+        }
+        
 
     };
 
