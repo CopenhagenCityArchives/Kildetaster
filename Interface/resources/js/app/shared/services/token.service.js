@@ -60,19 +60,35 @@ define([
 
                 //Should be able to send as json and object, see mail from Bo
                 $http({
-                        method: 'GET',
+                        method: 'POST',
 
-                        url: 'https://kbharkiv.eu.auth0.com/authorize',
+                        url: MAINDOMAIN + '/index.php',
                         headers: {
+                            //'Content-Type': undefined //'application/x-www-form-urlencoded'
                             'Content-Type': 'application/json'
                         },
                         transformRequest: angular.identity,
+                        // transformRequest: function(obj) {
+                        //     var str = [];
+                        //     for (var p in obj)
+                        //         str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+                        //     return str.join("&");
+                        // },
                         params: {
-                            audience: "kbharkiv.dk",
-                            response_type: "token",
-                            client_id: "uNrqzxblFnPrzQWpqMMBiB8h0VppBesM",
-                            state: "STATE"
-                        }
+                            option: 'authorize',
+                            response_type: 'token',
+                            client_id: 'kbhkilder',
+                            api: 'oauth2'
+                        },
+                        //data: formData
+                        // data: {
+                        //     authorized: 1,
+                        //     state: 'kildetaster'
+                        // }
+                        data: JSON.stringify({
+                            authorized: 1,
+                            state: 'kildetaster'
+                        })
                     })
                     .then(function(response) {
 
