@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>Kildetaster</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <script src="https://cdn.auth0.com/js/auth0-spa-js/1.7/auth0-spa-js.production.js"></script>
+    <script type="module">
+        var test = async function(){
+            var auth0 = await createAuth0Client({
+            domain: 'kbharkiv.eu.auth0.com',
+            client_id: 'uNrqzxblFnPrzQWpqMMBiB8h0VppBesM'
+        });
+
+        // either with async/await
+        document.getElementById('login').addEventListener('click', async () => {
+            await auth0.loginWithRedirect({
+                redirect_uri: 'http://localhost:1508'
+            });
+            //logged in. you can get the user profile like this:
+            const user = await auth0.getUser();
+            console.log(user);
+        });
+
+        document.getElementById('logout').addEventListener('click', () => {
+          auth0.logout();
+        });
+    }
+    test();
+       
+    </script>
+</head>
+
+
+<body>
+    <div class="container-fluid">
+        <button id="login">Click to Login</button>
+        <button id="logout">Logout</button>
+    </div>
+</body>
