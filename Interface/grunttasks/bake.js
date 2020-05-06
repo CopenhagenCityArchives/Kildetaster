@@ -28,6 +28,9 @@ module.exports = {
         }, {
             src: '<%= package.html %>/search.html',
             dest: '<%= package.sdk %>/search.html'
+        }, {
+            src: '<%= package.html %>/login.html',
+            dest: '<%= package.sdk %>/login.html'
         }]
     },
 
