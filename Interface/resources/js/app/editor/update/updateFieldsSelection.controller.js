@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var updateFieldsSelectionController = /*@ngInject*/ function updateFieldsSelectionController($scope, $uibModal, pageData, postData, postService, $rootScope, $timeout, $state) {
+    var updateFieldsSelectionController = /*@ngInject*/ function updateFieldsSelectionController($scope, $uibModal, taskData, pageData, postData, postService, $rootScope, $timeout, $state) {
 
         $scope.saving = false;
 
@@ -40,8 +40,9 @@ define([
 
             data.page_id = pageData.id;
 
+
             //Create or update post
-            postService.update(data, postData.postId )
+            postService.update(taskData.id, data, postData.postId)
                 .then(function(response) {
                     $state.go('^');
                 })

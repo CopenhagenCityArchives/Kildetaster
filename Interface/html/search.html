@@ -1,24 +1,5 @@
-<!--(bake html_includes/pageparts/page_top_stadsdump.html)-->
-
-<!-- Search box -->
-<script type="text/javascript">var submitFormApacs = function(){
-
-var term = document.getElementById("apacs_search_term").value;
-if(term && term != ''){
-console.log('searching', term);
-var newUrl = "http://localhost:1510/search.html" + '#/results?q1.f=freetext_store&q1.op=in_multivalued&q1.t=' + term + '&sortField=lastname&sortDirection=asc&postsPrPage=10&collections=1,17,18';
-console.log(newUrl);
-window.location.href=newUrl;
-}
-else{
-console.log('could not search, no term', term);
-}
-return false;
-};</script>
-<h2>Find personer i indtastede kilder</h2>
-<div class="apacs_freetext_search"><form class="apacs_freetext_search__form" onsubmit="return submitFormApacs()"><input id="apacs_search_term" type="text" title="Navn, adresse eller fritekst" placeholder="Navn, adresse eller fritekst" /> <button value="søg" class="button">Søg</button></form></div>
-<div>&nbsp;</div>
+<!--(bake html_includes/pageparts/page_top_newdump.html)-->
 
 <!--(bake html_includes/components/search.component.html)-->
 
-<!--(bake html_includes/pageparts/page_bottom_stadsdump.html)-->
+<!--(bake html_includes/pageparts/page_bottom_newdump.html)-->

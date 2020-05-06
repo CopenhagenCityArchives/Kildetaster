@@ -18,7 +18,8 @@ define([
         $scope.valueCopy = {};
 
         //Build a direct link to this post
-        $scope.shareLink = SEARCHURL + '/post/' + postData.entryData.solr_id;
+
+        $scope.shareLink = SEARCHURL + '/post/' + taskData.collection_id + '-' + postData.entryData.concrete_entries_id;
 
         $scope.errorReports = postData.errorReports;
 
@@ -106,6 +107,37 @@ define([
                 add: 'Tilføj'
             }
         };
+
+        /**
+         * When a schemaform is rendered, we set up event handlers to trigger submit on
+         * enter key down, and we focus the form input element.
+         */
+        $scope.$on('sf-render-finished', function(event, schemaform) {
+            $timeout(function() {
+                // find relevant element -- input elements are handled natively
+                let element = $(schemaform).find('.ui-select-focusser');
+                if (element.length == 0) {
+                    element = $(schemaform).find('select');
+                }
+
+                // trigger submit on enter key down in order to use the event
+                // handler set in the template
+                if (element.length != 0) {
+                    element.on('keydown', function (event) { 
+                        if (event.keyCode == 13) {
+                            $(schemaform).trigger('submit');
+                        }
+                    });
+                }
+
+                // set focus on relevant element - here we include input elements
+                if (element.length == 0) {
+                    element = $(schemaform).find('input').first();
+                }
+                
+                element.first().focus();
+            });
+        });
 
         /**
          * Toggle wether or not we should show edit field for a given field config

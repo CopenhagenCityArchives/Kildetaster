@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var userService = /*@ngInject*/ function userService($http, API) {
+    var userService = /*@ngInject*/ function userService($q, $http, API) {
 
         return {
 
@@ -68,6 +68,22 @@ define([
                 .catch(function(err) {
                     console.log('Error getting user info', err);
                 });
+            },
+
+            getUserStatistics: function(since) {
+                var deferred = $q.defer();
+
+                $http({
+                    url: API + '/events/create/' + since,
+                    method: 'GET',
+                    cache: true
+                }).then(function(response) {
+                    deferred.resolve(response.data);
+                }).catch(function(err) {
+                    deferred.reject(err);
+                });
+
+                return deferred.promise;
             }
 
         };

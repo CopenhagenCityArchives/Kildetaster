@@ -32,10 +32,7 @@ define([
             $scope.isSuperUser = response.super_user_tasks.length > 0;
 
             //Initialize logic
-            $scope.init({
-                //TODO remove hardcoded value for a specific taskId
-                taskId: 1
-            });
+            $scope.init({});
         });
 
         $scope.$watch('errorList', function(newval) {
@@ -86,12 +83,9 @@ define([
 
             $scope.loading = true;
 
-            var taskId = options.taskId || 1;
-
             //Get error reports for a given user
             errorService.getErrorReports({
-                relevant_user_id: $scope.userId,
-                task_id: taskId
+                relevant_user_id: $scope.userId
             }).then(function(response) {
                 $scope.errorList = response;
             }).finally(function() {

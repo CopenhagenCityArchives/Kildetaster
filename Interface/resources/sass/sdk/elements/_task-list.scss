@@ -2,10 +2,9 @@
     display: table;
 
     width: 100%;
+    padding: 0;
 
     table-layout: fixed;
-
-    padding: 0;
 
     li {
         display: table-row;
@@ -55,12 +54,10 @@
         font-size: inherit;
 
         width: auto;
+        margin-bottom: 3px;
 
         color: $black;
-
         border: 1px solid $gray-dark;
-
-        margin-bottom: 3px;
 
         &.extra-column {
             max-width: 200%;

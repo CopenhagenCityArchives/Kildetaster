@@ -27,6 +27,7 @@
     &__item {
         width: 50%;
         padding: 20px;
+        word-break: break-word;
 
 
 
@@ -160,8 +161,10 @@
 
         label {
             font-weight: bold;
-            margin-bottom: 0;
+
             display: block;
+
+            margin-bottom: 0;
         }
 
         input[type="text"].input {

@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var termFieldDirective = /* @ngInject */ function($http, $sce, TYPEAHEADMAXIUMUM) {
+    var termFieldDirective = /* @ngInject */ function($http, $sce, API, TYPEAHEADMAXIUMUM) {
         return {
 
             restrict: 'E',
@@ -53,25 +53,18 @@ define([
                         return [];
                     }
 
-                    // If the field name is the same as the last field, do nothing
-                    /*if(field.name === $scope.lastField) {
-                        return;
-                    }*/
-
-
-                    // Store used term, for next getData call
-                    //$scope.lastTerm = term;
-                    // // Store used field name, for next getData call
-                    //$scope.lastField = field.name;
-
                     // Remove options, before populating the list again
                     $scope.options = [];
 
                     //Indicate that we are about to load new options
                     $scope.loading = true;
 
+                    var datasourceUrl = field.datasource.url + encodeURIComponent(term);
+                    if (!datasourceUrl.startsWith('http')) {
+                        datasourceUrl = API + '/' + datasourceUrl;
+                    }
                     return $http({
-                        url: field.datasource.url + encodeURIComponent(term),
+                        url: datasourceUrl,
                         method: 'GET',
                         cache: false
                     }).then(function(response) {

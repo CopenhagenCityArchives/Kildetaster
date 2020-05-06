@@ -16,7 +16,7 @@ define([
                 var pageNumber = $event.target.value,
                     unitId = pageData.unit_id;
 
-                pageService.getPageByNumber(pageNumber, unitId).then(function(response) {
+                pageService.getPageByNumber(taskData.id, pageNumber, unitId).then(function(response) {
 
                     if (angular.isArray(response) && response.length === 0) {
                         Flash.create('warning', 'Siden med nummer ' + pageNumber +  ' findes ikke');
@@ -74,7 +74,7 @@ define([
             var pageNumber = parseInt(pageData.page_number) + 1,
                 unitId = pageData.unit_id;
 
-            pageService.getPageByNumber(pageNumber, unitId).then(function(response) {
+            pageService.getPageByNumber(taskData.id, pageNumber, unitId).then(function(response) {
 
                 if (angular.isArray(response) && response.length === 0) {
                     Flash.create('warning', 'Siden med nummer ' + pageNumber +  ' findes ikke');
@@ -98,7 +98,7 @@ define([
                 return;
             }
 
-            pageService.getPageByNumber(pageNumber, unitId).then(function(response) {
+            pageService.getPageByNumber(taskData.id, pageNumber, unitId).then(function(response) {
 
                 if (angular.isArray(response) && response.length === 0) {
                     Flash.create('warning', 'Siden med nummer ' + pageNumber +  ' findes ikke');

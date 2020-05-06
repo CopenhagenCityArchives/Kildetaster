@@ -1,0 +1,31 @@
+<div class="task-progress-plot">
+    <div class="task-progress-plot__rowheaders">
+        <p ng-repeat="(decade, units) in decades" class="task-progress-plot__rowheader">
+            {{ decade }}&ndash;{{ ((decade - 0) + 9) }}
+        </p>
+    </div>
+
+    <div class="task-progress-plot__rows">
+        <div ng-repeat="(decade, units) in decades" class="task-progress-plot__row">
+            <div ng-repeat="unit in units"
+                ng-class="{ 'task-progress-done': done(unit), 'task-progress-none': pending(unit), 'task-progress-starting': starting(unit), 'task-progress-finishing': finishing(unit), 'task-progress-inactive': inactive(unit) }"
+                class="task-progress-plot__item" ng-style="{ 'width': getWidth(decade) + '%' }">
+                <div class="task-progress-plot__tooltip">
+                    <div class="task-progress-plot__tooltip-text">
+                        <p>{{ unit.description }}</p>
+                        <p ng-if="!inactive(unit)">Status: {{ unit.pages_done }} / {{ unit.pages }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div ng-if="legend" class="task-progress-plot__row task-progress-plot__legend">
+            <div class="task-progress-plot__item task-progress-done"><span>Færdig</span></div>
+            <div class="task-progress-plot__item task-progress-finishing"><span>Over halvvejs</span></div>
+            <div class="task-progress-plot__item task-progress-starting"><span>Under halvvejs</span></div>
+            <div class="task-progress-plot__item task-progress-none"><span>Ikke påbegyndt</span></div>
+            <div class="task-progress-plot__item task-progress-inactive"><span>Ikke til indtastning</span></div>
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+</div>

@@ -1,5 +1,4 @@
-<div ng-controller="tasksController" ng-init="init({taskId: 1, showOpen: false, showFinished: true})">
-
+<div>
     <ul class="unstyled task-list">
         <li>
             <div class="task-list__header">Protokolnavn</div>
@@ -9,11 +8,15 @@
         <li ng-repeat="unit in units" ng-class="{ odd: $odd }" ng-show="units.length > 0">
             <div class="task-list__item">
                 <span>{{unit.description}}</span>
+                <button type="button" ng-click="goToEditor(unit)" class="button">Start indtastning</button>
             </div>
             <div class="task-list__item">
                 <div class="row">
-                    <div class="col-md-12">
-                        <span title="Færdig" class="task-list__icon sdk-icon green-checkmark"></span>
+                    <div class="col-md-8">
+                        <progress-bar total-pages="unit.pages" done-pages="unit.pages_done"></progress-bar>
+                    </div>
+                    <div class="col-md-4 text-center">
+                        <span>{{unit.pages_done}}/{{unit.pages}}</span>
                     </div>
                 </div>
             </div>
@@ -26,7 +29,10 @@
             </div>
         </li>
     </ul>
-    <div ng-if="units.length == 0" class="alert text-center">
-        Henter data
+    <div ng-if="loading" class="alert text-center">
+        Henter data.
+    </div>
+    <div ng-if="!loading && units.length == 0" class="alert text-center">
+        Fandt ingen protokoller.
     </div>
 </div>
