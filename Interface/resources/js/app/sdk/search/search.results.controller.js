@@ -250,7 +250,7 @@ define([
         };
 
         that.goToPage = function goToPage(page) {
-            that.page = page - 1;
+            that.page = page;
 
             // Store current page in the search service
             searchService.currentSearch.page = that.page;
