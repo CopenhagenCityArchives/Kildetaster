@@ -20,8 +20,8 @@
 
 <td ng-if="type == 'burial'">
     <h5 class="d-md-none">Andre oplysninger</h5>
-    <h6 ng-if="data.deathcauses">Dødsårsag:</h6>
-    <ul ng-if="data.deathcauses">
+    <h6 ng-if="data.deathcauses.length > 0">Dødsårsag:</h6>
+    <ul ng-if="data.deathcauses.length > 0">
         <li ng-repeat="deathcause in data.deathcauses">
             <p>{{ deathcause.deathcause }}</p>
         </li>
@@ -85,27 +85,34 @@
 </td>
 <td ng-if="type == 'police'">
     <h5 class="d-md-none">Adresse(r)</h5>
-    <ul ng-if="data.addresses">
+    <ul ng-if="data.addresses.length > 0">
         <li ng-repeat="address in data.addresses |limitTo:5">
-            <text-address address="address" date="false">
+            <text-address ng-if="!address.frameldt" address="address" date="false">
             </text-address>
+            <span class="text-muted" ng-if="address.frameldt">Frameldt</span>
         </li>
     </ul>
 </td>
 <td ng-if="type == 'police'">
     <h5 class="d-md-none">Andre oplysninger</h5>
-    <h6>Ægtefælle</h6>
-    <text-person-name person="spouse" ng-repeat="spouse in data.spouses"></text-person-name>
+    <h6 ng-if="data.spouses.length > 0">Ægtefælle</h6>
+    <ul ng-if="data.spouses.length > 0">
+        <li ng-repeat="spouse in data.spouses">
+            {{ spouse.firstnames }} {{ spouse.lastname }}
+        </li>
+    </ul>
 
-    <h6 ng-if="data.children">Børn</h6>
-    <ul ng-if="data.children">
+    <h6 ng-if="data.children.length > 0">Børn</h6>
+    <ul ng-if="data.children.length > 0">
         <li ng-repeat="child in data.children">
-            <text-person-name person="child"></text-person-name>
+            {{ child.firstnames }} {{ child.lastname }}
         </li>
     </ul>
 
     <h6 ng-if="data.parent">Forælder</h6>
-    <text-person-name ng-if="data.parent" person="data.parent"></text-person-name>
+    <p ng-if="data.parent">
+        {{ data.parent.firstnames }} {{ data.parent.lastname }}
+    </p>
 </td>
 <td ng-if="type == 'police'">
     <h5 class="d-md-none">Kilde</h5>
