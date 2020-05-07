@@ -81,12 +81,10 @@
                 </div>
                 <!--<button type="submit" class="btn btn-primary sr-only sr-only-focusable">Sorter</button>-->
             </form>
-            <!-- <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false"
-                autocomplete="off">
-                <i width="16px" height="16px" data-feather="arrow-down"></i>
-            </button> -->
-            <a href ng-click="ctrl.toggleSortDirection()" class="sorting__direction"
-               title="{{ctrl.sortDirection}}" ng-class="ctrl.sortDirection"></a>
+            <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false"
+                autocomplete="off" ng-click="ctrl.toggleSortDirection()">
+                <svg feather-icon icon="ctrl.sortDirection == 'desc' ? 'arrow-down' : 'arrow-up'"></svg>
+            </button>
         </section>
 
         <pagination
@@ -174,7 +172,6 @@
             buckets="ctrl.facetFields[facet.field].buckets" add-filter="toggleFilter"
             class="collapse" aria-labelledby="filter-{{facet.field}}-label"></facet>
 
-        <button type="button" id="filter-close" class="list-group-item list-group-item-action" ng-click="collapseFacets()">Luk <i width="16px"
-                height="16px" data-feather="x"></i></button>
+        <button type="button" id="filter-close" class="list-group-item list-group-item-action" ng-click="collapseFacets()">Luk <svg feather-icon icon="'x'"></svg></button>
     </div>
 </div>
