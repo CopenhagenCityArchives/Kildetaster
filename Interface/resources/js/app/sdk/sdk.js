@@ -34,7 +34,7 @@ define([
     'app/shared/constants'
 
 
-], function (
+], function(
 
     ang,
     angularBootstrap,
@@ -67,58 +67,59 @@ define([
     progressbarDirective,
     userDirective,
     shareLinkDirective,
- 
+
     constants
 ) {
 
-        var sdkApp = angular.module('sdk', [
-            'ui.bootstrap',
-            'sdk-templates',
-            'search',
-            'constants',
-            'ngStorage',
-            'angular-google-analytics'
-        ]);
+    var sdkApp = angular.module('sdk', [
+        'ui.bootstrap',
+        'sdk-templates',
+        'search',
+        'constants',
+        'ngStorage',
+        'angular-google-analytics'
+    ]);
 
-        sdkApp.config(['$httpProvider', 'AnalyticsProvider', function ($httpProvider, AnalyticsProvider) {
-            $httpProvider.interceptors.push('tokenFactory');
-
-
-            // Add configuration code as desired
-            AnalyticsProvider.setAccount('UA-45125468-1');  //UU-XXXXXXX-X should be your tracking code
-            AnalyticsProvider.trackPages(true);
-            AnalyticsProvider.ignoreFirstPageLoad(true);
-        }]);
-
-        sdkApp.run(run);
-
-        sdkApp.controller('errorsController', errorsController);
-        sdkApp.controller('useractivitiesController', useractivitiesController);
-        sdkApp.controller('fritekstSearchController', fritekstSearchController);
-
-        //sdkApp.factory('accessTokenHttpInterceptor', tokenFactory);
-        sdkApp.service('tokenService', tokenService);
-        sdkApp.factory('tokenFactory', tokenFactory);
-
-        sdkApp.service('pageService', pageService);
-        sdkApp.service('taskService', taskService);
-        sdkApp.service('errorService', errorService);
-        sdkApp.service('userService', userService);
-
-        sdkApp.directive('userStatistics', userStatisticsDirective);
-        sdkApp.directive('taskunitsList', taskunitsListDirective);
-        sdkApp.directive('taskStatus', taskStatusDirective);
-        sdkApp.directive('taskProgressPlot', taskProgressPlotDirective);
-        sdkApp.directive('progressBar', progressbarDirective);
-        sdkApp.directive('user', userDirective);
-        sdkApp.directive('shareLink', shareLinkDirective);
+    sdkApp.config(['$httpProvider', 'AnalyticsProvider', function($httpProvider, AnalyticsProvider) {
+        $httpProvider.interceptors.push('tokenFactory');
 
 
+        // Add configuration code as desired
+        AnalyticsProvider.setAccount('UA-45125468-1'); //UU-XXXXXXX-X should be your tracking code
+        AnalyticsProvider.trackPages(true);
+        AnalyticsProvider.ignoreFirstPageLoad(true);
+        AnalyticsProvider.startOffline(true);
+    }]);
 
-        angular.element(document).ready(function () {
-            angular.bootstrap(angular.element('[data-sdk-app]'), ['sdk']);
-        });
+    sdkApp.run(run);
 
-        return sdkApp;
+    sdkApp.controller('errorsController', errorsController);
+    sdkApp.controller('useractivitiesController', useractivitiesController);
+    sdkApp.controller('fritekstSearchController', fritekstSearchController);
 
+    //sdkApp.factory('accessTokenHttpInterceptor', tokenFactory);
+    sdkApp.service('tokenService', tokenService);
+    sdkApp.factory('tokenFactory', tokenFactory);
+
+    sdkApp.service('pageService', pageService);
+    sdkApp.service('taskService', taskService);
+    sdkApp.service('errorService', errorService);
+    sdkApp.service('userService', userService);
+
+    sdkApp.directive('userStatistics', userStatisticsDirective);
+    sdkApp.directive('taskunitsList', taskunitsListDirective);
+    sdkApp.directive('taskStatus', taskStatusDirective);
+    sdkApp.directive('taskProgressPlot', taskProgressPlotDirective);
+    sdkApp.directive('progressBar', progressbarDirective);
+    sdkApp.directive('user', userDirective);
+    sdkApp.directive('shareLink', shareLinkDirective);
+
+
+
+    angular.element(document).ready(function() {
+        angular.bootstrap(angular.element('[data-sdk-app]'), ['sdk']);
     });
+
+    return sdkApp;
+
+});
