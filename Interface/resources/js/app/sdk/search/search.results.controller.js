@@ -87,16 +87,16 @@ define([
 
         $scope.expandFacets = function() {
             for (var i = 0; i < that.facets.length; i++) {
-                that.facets[i].expanded = true;
+                that.facets[i].enabled = true;
+                that.facets[i].expanded = false;
             }
             $scope.allFacetsExpanded = true;
             $scope.facetsShown = true;
         }
 
         $scope.expandFacet = function(facet) {
-            for (var i = 0; i < that.facets.length; i++) {
-                that.facets[i].expanded = false;
-            }
+            $scope.collapseFacets();
+            facet.enabled = true;
             facet.expanded = true;
             $scope.facetsShown = true;
         }
@@ -104,6 +104,7 @@ define([
         $scope.collapseFacets = function() {
             for (var i = 0; i < that.facets.length; i++) {
                 that.facets[i].expanded = false;
+                that.facets[i].enabled = false;
             }
             $scope.allFacetsExpanded = false;
             $scope.facetsShown = false;
@@ -127,6 +128,14 @@ define([
 
             $scope.doSearch(true);
             Analytics.trackEvent('person_search', 'change_facet', 'change_facet.'+facet.field);
+        }
+
+        $scope.clearFilters = function() {
+            // clear filter queries array in-place
+            that.filterQueries.splice(0, that.filterQueries.length);
+
+            $scope.doSearch(true);
+            // TODO: Add analytics event for this?
         }
 
         //TODO move this to a directive
@@ -370,7 +379,7 @@ define([
             return that.filterQueries;
         }), function (newval, oldval) {
             //Test if the selectedFilters object is empty, and set a property to indicate that fact
-            if (angular.equals({}, that.filterQueries)) {
+            if (angular.equals([], that.filterQueries)) {
                 that.noSelectedFilters = true;
             }
             else {

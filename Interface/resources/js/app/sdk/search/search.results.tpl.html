@@ -66,6 +66,7 @@
             <filter-link ng-repeat="(field, filterQuery) in ctrl.filterQueries" facet="filterQuery.facet"
                 bucket="filterQuery.bucket" url="filter.filterQuery" remove-func="toggleFilter">
             </filter-link>
+            <button ng-if="!ctrl.noSelectedFilters" class="btn btn-link" ng-click="clearFilters()">Fjern filtre</button>
         </div>
     </section>
 
@@ -164,11 +165,12 @@
         <!-- start repeat -->
 
         <button ng-repeat-start="facet in ctrl.facets" type="button" id="filter-{{facet.field}}-label" class="list-group-item list-group-item-action"
-            data-toggle="collapse" data-target="#filter-{{facet.field}}" aria-expanded="true"
+            ng-class="{'d-none': !facet.enabled}"
+            data-toggle="collapse" data-target="#filter-{{facet.field}}" aria-expanded="{{facet.expanded}}"
             aria-controls="filter-{{facet.field}}">{{ ctrl.fieldIndex[facet.field].view_name }}</button>
 
         <facet ng-repeat-end id="filter-{{facet.field}}" field="ctrl.fieldIndex[facet.field]"
-            filter-queries="ctrl.filterQueries" facet="facet" ng-class="{show:facet.expanded}"
+            filter-queries="ctrl.filterQueries" facet="facet" ng-class="{show: facet.expanded}"
             buckets="ctrl.facetFields[facet.field].buckets" add-filter="toggleFilter"
             class="collapse" aria-labelledby="filter-{{facet.field}}-label"></facet>
 

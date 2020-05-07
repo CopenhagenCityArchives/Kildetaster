@@ -18,25 +18,24 @@ define([
                 filterQueries: '='
             },
 
+            controller: ['$scope', function($scope) {
+                // figure out if bucket was selected or unselected
+                $scope.isBucketInFilterQueries = function(facet, bucket) {
+                    return $scope.filterQueries.findIndex(function(filterQuery) {
+                        return filterQuery.bucket.val == bucket.val && filterQuery.facet.field == facet.field
+                    }) != -1;
+                }
+
+                angular.forEach($scope.buckets, function(bucket) {
+                    bucket.selected = $scope.isBucketInFilterQueries(facet, bucket);
+                });
+            }],
+
             link: function(scope, element, attr) {
 
                 var defaultNumberOfItems = 10;
 
                 scope.numberOfItems = defaultNumberOfItems;
-
-                scope.notSelectedBucket = function(value, index, array) {
-                    var bucketSelected = false;
-
-                    angular.forEach(scope.filterQueries, function (filterQuery) {
-                        if (scope.facet.field === filterQuery.facet.field) {
-                            if (value.val === filterQuery.bucket.val) {
-                                bucketSelected = true;
-                            }
-                        }
-                    });
-
-                    return !bucketSelected;
-                };
 
                 scope.showMore = function(fieldName) {
                     scope.numberOfItems = scope.numberOfItems + defaultNumberOfItems;
@@ -44,6 +43,9 @@ define([
 
                 scope.callAddFilter = function(facet, bucket) {
                     scope.addFilter()(facet, bucket);
+
+                    bucket.selected = scope.isBucketInFilterQueries(facet, bucket);
+
                     // collapse when selecting a filter
                     scope.toggle();
                 }
