@@ -53,9 +53,9 @@ define([
         });
 
         if (!$window.Cookiebot) {
-            console.log("Cookiebot not loaded. Error!");
+            console.log("Cookiebot not loaded. Ignoring.");
         }
-        if ($window.Cookiebot.consent.statistics) {
+        if ($window.Cookiebot && $window.Cookiebot.consent.statistics) {
             Analytics.registerScriptTags();
             Analytics.registerTrackers();
             Analytics.offline(false);
