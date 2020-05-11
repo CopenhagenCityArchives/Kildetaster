@@ -2,10 +2,10 @@ define([
 
 ], function() {
 
-    var updateFieldsDoneController = /*@ngInject*/ function updateFieldsDoneController(SEARCHURL, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService, $rootScope, $sessionStorage, errorService, $state) {
+    var updateFieldsDoneController = /*@ngInject*/ function updateFieldsDoneController(SEARCH_PERMALINK_URL, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService, $rootScope, $sessionStorage, errorService, $state) {
 
         //Build a direct link to this post
-        $scope.shareLink = SEARCHURL + '/post/' + postData.entryData.solr_id;
+        $scope.shareLink = SEARCH_PERMALINK_URL + '/post/' + postData.entryData.solr_id;
 
         $scope.nextErrorReport = null;
         $scope.userId = $sessionStorage.tokenData.user_id;

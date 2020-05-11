@@ -5,7 +5,7 @@ define([
 
 ], function(ang, Clipboard) {
 
-    var shareLinkDirective = /*@ngInject*/ function shareLinkDirective(SEARCHURL) {
+    var shareLinkDirective = /*@ngInject*/ function shareLinkDirective(SEARCH_PERMALINK_URL) {
 
         return {
 
@@ -24,7 +24,7 @@ define([
             link: function(scope, element, attrs) {
                 //Build unique id
                 scope.id = new Date().getTime();
-                scope.shareLink = scope.shareLinkId ? SEARCHURL + scope.shareLinkId : scope.shareLink;
+                scope.shareLink = scope.shareLinkId ? SEARCH_PERMALINK_URL + scope.shareLinkId : scope.shareLink;
                 scope.buttonText = scope.buttonText || 'Del';
 
                 new Clipboard('#shareLink_' + scope.id + '_btn');

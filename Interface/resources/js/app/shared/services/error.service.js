@@ -3,14 +3,14 @@ define([
 
 ], function() {
 
-    var errorService = /*@ngInject*/ function errorService($http, $q, $filter, API, JSONURL, ERRORREPORCONFIGURL) {
+    var errorService = /*@ngInject*/ function errorService($http, $q, $filter, API_ENDPOINT, JSON_URL, ERROR_REPORT_CONFIG_URL) {
 
         return {
 
             
             getConfig: function getConfig() {
 
-                return $http.get(ERRORREPORCONFIGURL)
+                return $http.get(ERROR_REPORT_CONFIG_URL)
                     .then(function(response){
                         return response.data;
                     })
@@ -27,7 +27,7 @@ define([
                 var deferred = $q.defer();
 
                 $http({
-                    url: API + '/errorreports',
+                    url: API_ENDPOINT + '/errorreports',
                     method: 'POST',
                     data: params
                 })
@@ -49,7 +49,7 @@ define([
             getErrorReports: function getErrorReports(params) {
 
                 return $http({
-                    url: API + '/errorreports',
+                    url: API_ENDPOINT + '/errorreports',
                     method: 'GET',
                     params: params
                 })
@@ -76,7 +76,7 @@ define([
                 var deferred = $q.defer();
 
                 $http({
-                    url: API + '/errorreports',
+                    url: API_ENDPOINT + '/errorreports',
                     method: 'PATCH',
                     data: params
                 })

@@ -3,14 +3,14 @@ define([
 
 ], function() {
 
-    var pageService = /*@ngInject*/ function pageService($http, $q, $filter, API, JSONURL) {
+    var pageService = /*@ngInject*/ function pageService($http, $q, $filter, API_ENDPOINT, JSON_URL) {
 
         /**
         * Load all available page details
         */
         function getPageData(params) {
             
-            var endPoint = API + '/pages';
+            var endPoint = API_ENDPOINT + '/pages';
 
             return $http({
                 method: 'GET',
@@ -74,7 +74,7 @@ define([
                 var deferred = $q.defer(),
                     found;
 
-                $http.get(JSONURL + 'pageEditArea.json').then(function(response) {
+                $http.get(JSON_URL + 'pageEditArea.json').then(function(response) {
                     found = $filter('filter')(response.data, function(project) {
                             return project.id === id;
                         });
@@ -91,7 +91,7 @@ define([
                 var deferred = $q.defer();
 
                 $http({
-                    url: API + '/pages/nextavailable',
+                    url: API_ENDPOINT + '/pages/nextavailable',
                     params: params
                 })
 
@@ -109,7 +109,7 @@ define([
             pageIsDone: function pageIsDone(params) {
 
                 return $http({
-                    url: API + '/taskspages',
+                    url: API_ENDPOINT + '/taskspages',
                     method: 'PATCH',
                     params: params,
                     data: {

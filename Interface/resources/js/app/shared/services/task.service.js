@@ -3,7 +3,7 @@ define([
 
 ], function () {
 
-    var taskService = /*@ngInject*/ function taskService($http, $cacheFactory, $q, $filter, API) {
+    var taskService = /*@ngInject*/ function taskService($http, $cacheFactory, $q, $filter, API_ENDPOINT) {
 
         var cache = $cacheFactory('taskCache');
 
@@ -14,7 +14,7 @@ define([
 
             return $http({
                 method: 'GET',
-                url: API + '/tasks',
+                url: API_ENDPOINT + '/tasks',
                 params: {
 
                 }
@@ -36,7 +36,7 @@ define([
             getTask: function getTask(id) {
 
                 var deferred = $q.defer(),
-                    url = API + '/tasks/';
+                    url = API_ENDPOINT + '/tasks/';
 
                 $http.get(url + id).then(function (response) {
                     deferred.resolve(response.data);
@@ -69,7 +69,7 @@ define([
                 }
 
                 $http({
-                    url: API + '/tasksunits',
+                    url: API_ENDPOINT + '/tasksunits',
                     method: 'GET',
                     params: params
                 })

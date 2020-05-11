@@ -316,9 +316,9 @@ define([
             .state('error', {
                 url: '/error',
                 templateUrl: 'editor/error.tpl.html',
-                controller: ['ERRORURL', function (ERRORURL) {
+                controller: ['ERROR_URL', function (ERROR_URL) {
                     //Redirect to a page on KBH joomla
-                    window.location.href = ERRORURL;
+                    window.location.href = ERROR_URL;
                 }]
 
             });

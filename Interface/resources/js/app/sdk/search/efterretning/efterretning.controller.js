@@ -1,6 +1,6 @@
 define([], function() {
 
-    var efterretningController = /*@ngInject*/ function erindringController(helpers, API, EDITORURL) {
+    var efterretningController = /*@ngInject*/ function erindringController(helpers, API_ENDPOINT, EDITOR_URL) {
 
         var that = this;
 
@@ -12,13 +12,13 @@ define([], function() {
             //Determine the editor link visibility based on wether or not the user can edit
             that.showEditorLink = that.data.user_can_edit;
 
-            that.editorUrl = EDITORURL + '/#/task/' + that.data.task_id + '/page/' + that.data.page_id + '/post/' + that.data.post_id;
+            that.editorUrl = EDITOR_URL + '/#/task/' + that.data.task_id + '/page/' + that.data.page_id + '/post/' + that.data.post_id;
 
         };
 
         this.getAssetHref = function() {
             var id = that.data.id.split("-")[1];
-            return API + "/asset/" + id;
+            return API_ENDPOINT + "/asset/" + id;
         }
 
         this.formatDate = function(datestring) {

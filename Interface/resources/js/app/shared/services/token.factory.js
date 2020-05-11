@@ -3,7 +3,7 @@ define([
 ], function () {
 
     //Create a http interceptor factory
-    var accessTokenHttpInterceptor = /*@ngInject*/ function accessTokenHttpInterceptor(MAINDOMAIN, SOLRAPI, $sessionStorage) {
+    var accessTokenHttpInterceptor = /*@ngInject*/ function accessTokenHttpInterceptor(MAIN_DOMAIN, SOLR_API_ENDPOINT, $sessionStorage) {
 
         return {
 
@@ -11,7 +11,7 @@ define([
             request: function ($config) {
 
 
-                if ($config.url !== MAINDOMAIN + '/index.php' && $config.url.indexOf(SOLRAPI) == -1) {
+                if ($config.url !== MAIN_DOMAIN + '/index.php' && $config.url.indexOf(SOLR_API_ENDPOINT) == -1) {
 
                     if ($sessionStorage.tokenData) {
                         //Fetch token from cookie

@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var useractivitiesController = /*@ngInject*/ function mypageController($scope, tokenService, EDITORURL, userService) {
+    var useractivitiesController = /*@ngInject*/ function mypageController($scope, tokenService, EDITOR_URL, userService) {
 
         $scope.loading = false;
         $scope.activities = [];
@@ -16,7 +16,7 @@ define([
             $scope.init();
         });
 
-        $scope.EDITORURL = EDITORURL;        
+        $scope.EDITOR_URL = EDITOR_URL;
 
         $scope.init = function() {
 

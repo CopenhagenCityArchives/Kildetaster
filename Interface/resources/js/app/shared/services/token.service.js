@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var tokenService = /*@ngInject*/ function tokenService($q, MAINDOMAIN, BYPASSAUTH, $http, $sessionStorage) {
+    var tokenService = /*@ngInject*/ function tokenService($q, MAIN_DOMAIN, BYPASS_AUTH, $http, $sessionStorage) {
 
         return {
 
@@ -20,7 +20,7 @@ define([
 
                 doNotForceLogin = doNotForceLogin || false;
 
-                if (BYPASSAUTH && BYPASSAUTH === true) {
+                if (BYPASS_AUTH && BYPASS_AUTH === true) {
                     var fakeResponse = {
                         "access_token": "283ce01470f6bc30cf8833a4467cb54655d014c3",
                         "client_id": "kbhkilder",
@@ -62,7 +62,7 @@ define([
                 $http({
                         method: 'POST',
 
-                        url: MAINDOMAIN + '/index.php',
+                        url: MAIN_DOMAIN + '/index.php',
                         headers: {
                             //'Content-Type': undefined //'application/x-www-form-urlencoded'
                             'Content-Type': 'application/json'
@@ -105,7 +105,7 @@ define([
                         else {
                             //We are not logged in, and should force login, point users to min-side
                             if (!doNotForceLogin) {
-                                window.location.href = MAINDOMAIN + '/min-side';
+                                window.location.href = MAIN_DOMAIN + '/min-side';
                             }
                             else {
                                 deferred.resolve(undefined);

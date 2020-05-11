@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var errorsController = /*@ngInject*/ function mypageController($scope, tokenService, userService, errorService, helpers, EDITORURL) {
+    var errorsController = /*@ngInject*/ function mypageController($scope, tokenService, userService, errorService, helpers, EDITOR_URL) {
 
         $scope.loading = false;
         $scope.errorList = [];
@@ -76,7 +76,7 @@ define([
         });
 
         $scope.goToEditor = function(errorData) {
-            window.open(EDITORURL + '/#/task/' + errorData.tasks_id + '/page/' + errorData.pages_id + '/post/' + errorData.posts_id, '_blank');
+            window.open(EDITOR_URL + '/#/task/' + errorData.tasks_id + '/page/' + errorData.pages_id + '/post/' + errorData.posts_id, '_blank');
         };
 
         $scope.init = function(options) {

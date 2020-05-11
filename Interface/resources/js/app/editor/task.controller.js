@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var editorController = /*@ngInject*/ function editorController(MAINDOMAIN, RESSOURCEURL, $scope, $state, taskData, pageData, requestToken, userService, $interval, $location, $timeout, taskService, pageService) {
+    var editorController = /*@ngInject*/ function editorController(MAIN_DOMAIN, RESOURCE_URL, $scope, $state, taskData, pageData, requestToken, userService, $interval, $location, $timeout, taskService, pageService) {
 
         $scope.protocol = taskData.name;
 
@@ -18,13 +18,13 @@ define([
 
         $scope.activeUser = requestToken.tokenData.profile;
 
-        $scope.MAINDOMAIN = MAINDOMAIN;
-        $scope.RESSOURCEURL = RESSOURCEURL;
+        $scope.MAIN_DOMAIN = MAIN_DOMAIN;
+        $scope.RESOURCE_URL = RESOURCE_URL;
 
         $scope.unit = pageData.unitData;
 
         $scope.buildSource = function() {
-            return MAINDOMAIN + RESSOURCEURL + "/ugle.gif";
+            return MAIN_DOMAIN + RESOURCE_URL + "/ugle.gif";
         };
 
 

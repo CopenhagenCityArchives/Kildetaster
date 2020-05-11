@@ -3,13 +3,13 @@ define([
 
 ], function() {
 
-    var postService = /*@ngInject*/ function postService($http, API, $q) {
+    var postService = /*@ngInject*/ function postService($http, API_ENDPOINT, $q) {
 
         return {
 
             getData: function getData(postId) {
 
-                return $http.get(API + '/posts/' + postId)
+                return $http.get(API_ENDPOINT + '/posts/' + postId)
                     .then(function(response) {
                         return response.data;
                     })
@@ -43,7 +43,7 @@ define([
 
                 $http({
                     method: "post",
-                    url: API + '/posts/',
+                    url: API_ENDPOINT + '/posts/',
                     params: {task_id: taskId},
                     data: data
                 })
@@ -83,7 +83,7 @@ define([
 
                 $http({
                     method: "patch",
-                    url: API + '/posts/' + postId,
+                    url: API_ENDPOINT + '/posts/' + postId,
                     params: {task_id: taskId},
                     data: data
                 })

@@ -21,7 +21,7 @@ define([], function() {
 
                 //HACK START
                 // takes the dateOfDeath from the data and overwrites the wrongfully formatted dateOfDeath in the jsonObj data
-                //This should be removed when the API is updated to return the correct date format (a timestamp)
+                //This should be removed when the API_ENDPOINT is updated to return the correct date format (a timestamp)
                 //this.data.dateOfDeath = this.result.dateOfDeath;
                 //HACK END
 

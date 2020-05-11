@@ -40,12 +40,12 @@ on the page that is automatically opened in the browser.
 After starting the SDK prototype, go to the url
 `http://localhost:1510/search.html`
 
-## API endpoint
+## API_ENDPOINT endpoint
 
 The api endpoints can be changed by editing the constant in
 `Interface/grunttasks/ngconstant.js`.
 
-Look for the properties `API` and `SOLRAPI`.
+Look for the properties `API_ENDPOINT` and `SOLR_API_ENDPOINT`.
 
 ## Deployment using grunt
 

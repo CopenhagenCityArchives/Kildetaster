@@ -8,7 +8,7 @@ define([
 
     var schemaForm = angular.module('schemaForm');
 
-    schemaForm.controller('sfTypeahead', /*@ngInject*/  function($scope, API, $templateCache, $http, $filter, TYPEAHEADMAXIUMUM) {
+    schemaForm.controller('sfTypeahead', /*@ngInject*/  function($scope, API_ENDPOINT, $templateCache, $http, $filter, TYPEAHEAD_MAXIUMUM) {
 
         $scope.options = [];
 
@@ -40,7 +40,7 @@ define([
             $scope.loading = true;
             var datasourceUrl = datasource + encodeURIComponent(term);
             if (!datasourceUrl.startsWith('http')) {
-                datasourceUrl = API + '/' + datasourceUrl;
+                datasourceUrl = API_ENDPOINT + '/' + datasourceUrl;
             }
             return $http({
                 url: datasourceUrl,
@@ -53,7 +53,7 @@ define([
                 });
 
                 //Only show a set number of hits
-                $scope.options = arr.slice(0, TYPEAHEADMAXIUMUM);
+                $scope.options = arr.slice(0, TYPEAHEAD_MAXIUMUM);
 
             }).finally(function() {
                 //Done loading
