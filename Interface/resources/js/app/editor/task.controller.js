@@ -24,7 +24,7 @@ define([
         $scope.unit = pageData.unitData;
 
         $scope.buildSource = function() {
-            return MAINDOMAIN + SDKCSSURL + "/ugle.gif";
+            return MAINDOMAIN + RESSOURCEURL + "/ugle.gif";
         };
 
 
