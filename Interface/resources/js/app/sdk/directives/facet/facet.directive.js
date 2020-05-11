@@ -27,7 +27,7 @@ define([
                 }
 
                 angular.forEach($scope.buckets, function(bucket) {
-                    bucket.selected = $scope.isBucketInFilterQueries(facet, bucket);
+                    bucket.selected = $scope.isBucketInFilterQueries($scope.facet, bucket);
                 });
             }],
 
