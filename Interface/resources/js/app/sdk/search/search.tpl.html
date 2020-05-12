@@ -1,129 +1,153 @@
-<div>
+<div class="container-fluid">
+    <header class="row">
+    <div class="col-lg-4">
+        <h1>Søg person</h1>
+    </div>
+    <div class="col-lg-6">
+        <div>Underrubrik</div>
+    </div>
+    <div class="col-lg-2">
+        <a href="#" class="btn btn-primary float-lg-right">Ret søgning</a>
+    </div>
+    <div class="col-12">
+        <nav aria-label="Brødkrummesti">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Hjem</a></li>
+            <li class="breadcrumb-item"><a href="#">Søg</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Søg person</li>
+        </ol>
+        </nav>
+    </div>
+    </header>
 
-    <!-- Search config -->
-    <section>
-
-        <div class="row with-padding">
-            <div class="col-md-12">
-                <div class="sdk-search__section">
-
-                    <h1 id="search-start">Søg i indtastede kilder</h1>
-
+    <section class="search-type">
+    <div class="list-group list-group-flush">
+        <button type="button" id="simple-label" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3" data-toggle="collapse" data-target="#simple" aria-expanded="true" aria-controls="simple">
+        Fritekst søgning
+        <svg feather-icon icon="'chevron-down'"></svg>
+        </button>
+        <div id="simple" class="collapse show" aria-labelledby="simple-label" data-parent=".search-type">
+        <div class="mx-3 my-4">
+            <p id="simple-desc">Søg på tværs af flere kilder fx begravelser, politiets registerblade og politiets efterretninger.</p>
+            <form class="advanced-search-fields" aria-describedby="simple-desc">
+            <div class="input-group input-group-lg mb-3">
+                <input type="text" class="form-control" placeholder="Navn, adresse eller fritekst" aria-label="Fritekst søgning">
+                <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">Søg</button>
                 </div>
             </div>
+            </form>
         </div>
-        <hr class="sdk-search__divider">
-        <div class="row with-padding">
-            <div class="col-md-12">
-                <div class="sdk-search__section sdk-search__section--flex">
-                    <div>
-                        <div class="sdk-search__arrow"></div><a class="sdk-search__external-link"
-                            href="https://www.kbharkiv.dk/sog-i-arkivet/sog-i-indtastede-kilder/hjaelp-til-sogning-i-indtastede-kilder">Hjælp
-                            til søgning</a>
-                    </div>
-                    <div>
-                        <button class="button" ng-click="resetSearch()"
-                            ng-disabled="!ctrl.canSearchSimple && !ctrl.canSearchAdvanced">Nulstil søgning<div
-                                class="sdk-search__reset"></div></button>
-                    </div>
-                </div>
-            </div>
+
         </div>
-        <hr class="sdk-search__divider">
-        <div class="row with-padding">
-            <div class="col-md-12">
-                <div ng-class="{'sdk-search__section--open' : ctrl.sectionSimple}"
-                    class="sdk-search__section sdk-search__section--closed">
+        <button type="button" id="advanced-label" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3" data-toggle="collapse" data-target="#advanced" aria-expanded="false" aria-controls="advanced">
+        Avanceret søgning
+        <svg feather-icon icon="'chevron-down'"></svg>
+        </button>
+        <div id="advanced" class="collapse" aria-labelledby="advanced-label" data-parent=".search-type">
+        <div class="mx-3 my-4">
+            <p id="advanced-desc">Søg specifikt i en enkelt eller flere kilder - på et eller flere definerede søgefelter.</p>
 
-                    <h2 ng-click="toggle('sectionSimple')" class="sdk-search__section-header">
-                        <div class="sdk-search__foldout"></div>Fritekst søgning
-                    </h2>
+            <form class="advanced-search-fields" aria-describedby="advanced-desc">
 
-                    <div class="sdk-search__simplesearch">
-                        <div class="sdk-search__dom-content" get-dom-content="search-app-simple-search-text"></div>
-                        <div ng-repeat="row in ctrl.simpleQuery">
-                            <input ng-model="row.term" placeholder="Navn, adresse eller fritekst" type="text"
-                                ng-keypress="ctrl.submitSearch($event)" /><button type="button" class="button"
-                                ng-click="startNewSearch()" ng-disabled="!ctrl.canSearchSimple">SØG</button>
-                        </div>
-                    </div>
-
+            <div role="group" aria-label="Søg specifikt i en enkelt eller flere kilder.">
+                <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="begravelsesprotokoller" checked>
+                <label class="form-check-label" for="begravelsesprotokoller">
+                    Begravelsesprotokoller
+                </label>
                 </div>
-            </div>
-        </div>
-        <hr class="sdk-search__divider">
-        <div class="row with-padding">
-            <div class="col-md-12">
-                <div ng-class="{'sdk-search__section--open' : ctrl.sectionAdvanced}"
-                    class="sdk-search__section sdk-search__section--closed">
-
-                    <h2 ng-click="toggle('sectionAdvanced')" class="sdk-search__section-header">
-                        <div class="sdk-search__foldout"></div>Avanceret søgning
-                    </h2>
-                    <div class="sdk-search__dom-content" get-dom-content="search-app-upper-text"></div>
-                    <div class="collection">
-                        <div class="collection__item" ng-repeat="collection in ctrl.collections">
-                            <input id="col_{{collection.id}}" type="checkbox" value="{{collection.id}}"
-                                ng-model="collection.selected" ng-change="ctrl.collectionsChange(collection)">
-                            <label for="col_{{collection.id}}">{{collection.name}}</label>
-                        </div>
-                    </div>
-
-                    <div class="sdk-search__dom-content" get-dom-content="search-app-lower-text"></div>
-                    <div ng-repeat="row in ctrl.queries">
-                        <div class="row redform-form sdk-search__config">
-                            <div class="col-md-3">
-
-                                <div class="field">
-                                    <label>
-                                        Felt
-                                        <select ng-model="row.field" ng-change="ctrl.clearRow(row)"
-                                            ng-options="field.view_name for field in fields | filter:{searchable:true} | filter:fieldCollectionFilter">
-                                        </select>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="field">
-                                    <label>
-                                        Operator
-                                        <select
-                                            ng-options="operators[operator] as operators[operator].label for operator in types[row.field.type].operators"
-                                            ng-model="row.operator" ng-change="shouldEscape(row, row.operator)">
-                                            <option>Vælg</option>
-                                        </select>
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="field">
-                                    <term-field type="row.field.type" data="row" submit-func="ctrl.submitSearch(event)">
-                                    </term-field>
-                                </div>
-                            </div>
-                            <a href class="sdk-search__remove" title="Fjern række"
-                                ng-click="ctrl.removeField($index, $event)" ng-if="ctrl.queries.length > 1">
-                                <span class="sdk-icon delete"></span>
-                            </a>
-                        </div>
-                    </div>
-
-
-                    <a href class="sdk-search__add" ng-click="ctrl.addField('firstnames')">Tilføj et felt</a>
-
-                    <div>
-                        <button type="button" class="button" ng-click="startNewSearch()"
-                            ng-disabled="!ctrl.canSearchAdvanced">SØG</button>
-                    </div>
-
+                <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="politiets-registerblade" checked>
+                <label class="form-check-label" for="politiets-registerblade">
+                    Politiets Registerblade
+                </label>
                 </div>
-                <div ng-hide="ctrl.sectionAdvanced" class="sdk-search__section">
-                    <div class="sdk-search__dom-content" get-dom-content="search-app-advanced-search-lower"></div>
+                <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="erindringer" checked>
+                <label class="form-check-label" for="erindringer">
+                    Erindringer
+                </label>
+                </div>
+                <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="politiets-efterretninger" checked>
+                <label class="form-check-label" for="politiets-efterretninger">
+                    Politiets Efterretninger
+                </label>
                 </div>
             </div>
 
+            <div class="form-row" role="group" aria-label="1. søgeparameter">
+
+                <div class="form-group col-md-4">
+                <label for="field-1">Felt</label>
+                <select class="form-control" id="field-1">
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                    <option>Option 4</option>
+                    <option>Option 5</option>
+                </select>
+                </div>
+                <div class="form-group col-md-4">
+                <label for="operator-1">Operator</label>
+                <select class="form-control" id="operator-1">
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                    <option>Option 4</option>
+                    <option>Option 5</option>
+                </select>
+                </div>
+                <div class="form-group col-md-3">
+                <label for="search-1">Søgeterm</label>
+                <input class="form-control" id="search-1" type="text" placeholder="Søgeterm">
+                </div>
+                <div class="form-group col-md-1">
+                <button class="btn btn btn-outline-danger btn-icon" type="button"><svg feather-icon icon="'trash-2'"></svg><span class="sr-only">Fjern rækken</span></button>
+                </div>
+            </div>
+
+            <div class="form-row" role="group" aria-label="2. søgeparameter">
+                <div class="form-group col-md-4">
+                <label for="field-2">Felt</label>
+                <select class="form-control" id="field-2">
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                    <option>Option 4</option>
+                    <option>Option 5</option>
+                </select>
+                </div>
+                <div class="form-group col-md-4">
+                <label for="operator-2">Operator</label>
+                <select class="form-control" id="operator-2">
+                    <option>Option 1</option>
+                    <option>Option 2</option>
+                    <option>Option 3</option>
+                    <option>Option 4</option>
+                    <option>Option 5</option>
+                </select>
+                </div>
+                <div class="form-group col-md-3">
+                <label for="search-2">Søgeterm</label>
+                <input class="form-control" id="search-2" type="text" placeholder="Søgeterm">
+                </div>
+                <div class="form-group col-md-1">
+                <button class="btn btn btn-outline-danger btn-icon" type="button"><svg feather-icon icon="'trash-2'"></svg><span class="sr-only">Fjern rækken</span></button>
+                </div>
+            </div>
+            <div class="form-row mb-4">
+                <div class="col">
+                <button class="btn btn-outline-secondary" type="button">Tilføj en række</button>
+                </div>
+            </div>
+
+            <button class="btn btn-primary btn-lg" type="submit">Søg</button>
+
+            </form>
         </div>
-        <hr class="sdk-search__divider sdk-search__divider--noshow">
+        </div>
+    </div>
     </section>
-
 </div>
