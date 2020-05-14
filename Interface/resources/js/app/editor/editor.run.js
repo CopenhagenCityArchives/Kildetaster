@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var editorRun = /*@ngInject*/ function editorRun($state, $transitions, Analytics) {
+    var editorRun = /*@ngInject*/ function editorRun($state, $transitions, $window,Analytics) {
 
         //Track all changes in state in order to track event with Google Analytics
         $transitions.onStart({ }, function(trans) {
@@ -15,17 +15,29 @@ define([
             }             
         });
 
-          //Editor analytics are tracked using events in wizard.controller
-          /*$transitions.onSuccess({}, function(trans){
-            trans.promise.finally(function(){
-                if(trans.from().name == trans.to().name){
-                    return;
+        if (!$window.Cookiebot) {
+            console.log("Cookiebot not loaded. Ignoring.");
+        }
+        if ($window.Cookiebot && $window.Cookiebot.consent.statistics) {
+            Analytics.registerScriptTags();
+            Analytics.registerTrackers();
+            Analytics.offline(false);
+        } else {
+            $window.addEventListener('CookiebotOnAccept', function(e) {
+                if ($window.Cookiebot.consent.statistics) {
+                    Analytics.registerScriptTags();
+                    Analytics.registerTrackers();
+                    Analytics.offline(false);
                 }
-                console.log('page view, transition success ' + trans.to().name);
-                
-                Analytics.trackEvent(trans.to().name);
-            });
-          });*/
+            }, false);
+            $window.addEventListener('CookiebotOnDecline', function(e) {
+                if ($window.Cookiebot.consent.statistics) {
+                    Analytics.registerScriptTags();
+                    Analytics.registerTrackers();
+                    Analytics.offline(false);
+                }
+            }, false);
+        }
 
         /**
          * If state change, show page not found error
