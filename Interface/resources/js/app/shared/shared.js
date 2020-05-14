@@ -4,6 +4,8 @@ define([
 
     'ngstorage',
 
+    'angular-google-analytics',
+
     'app/shared/templates',
     'app/shared/constants',
 
@@ -47,6 +49,7 @@ define([
     ang,
 
     ngStorage,
+    AnalyticsProvider,
     templates,
     constants,
 
@@ -86,7 +89,7 @@ define([
 
     ) {
 
-    var sharedApp = angular.module('shared', ['templates', 'constants', 'ngStorage']);
+    var sharedApp = angular.module('shared', ['templates', 'constants', 'ngStorage','angular-google-analytics']);
 
     sharedApp.directive('user', userDirective);
     sharedApp.directive('imageViewer', imageViewerDirective);
@@ -128,6 +131,17 @@ define([
     sharedApp.config(function($httpProvider) {
         $httpProvider.interceptors.push('tokenFactory');
     });
+
+    sharedApp.config(['$httpProvider', 'AnalyticsProvider', function($httpProvider, AnalyticsProvider) {
+        $httpProvider.interceptors.push('tokenFactory');
+
+
+        // Add configuration code as desired
+        AnalyticsProvider.setAccount('UA-45125468-1'); //UU-XXXXXXX-X should be your tracking code
+        AnalyticsProvider.trackPages(true);
+        AnalyticsProvider.ignoreFirstPageLoad(true);
+        AnalyticsProvider.startOffline(true);
+    }]);
 
 
     return sharedApp;
