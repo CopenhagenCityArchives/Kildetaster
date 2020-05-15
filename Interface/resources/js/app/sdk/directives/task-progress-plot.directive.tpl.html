@@ -5,17 +5,10 @@
         <div class="d-flex flex-column flex-lg-row align-items-lg-center status-progress">
             <div class="h4 mr-4 mb-0">{{ decade }} - {{ ((decade - 0) + 9) }} </div>
 
-            <div class="flex-grow-1">
+            <div class="flex-grow-1 progress">
                 <div ng-repeat="unit in units"
-                    ng-class="{ 'task-progress-done': done(unit), 'task-progress-none': pending(unit), 'task-progress-starting': starting(unit), 'task-progress-finishing': finishing(unit), 'task-progress-inactive': inactive(unit) }"
-                    class="task-progress-plot__item" ng-style="{ 'width': getWidth(decade) + '%' }">
-
-                    <div class="task-progress-plot__tooltip">
-                        <div class="task-progress-plot__tooltip-text">
-                            {{ unit.description }}
-                            <p ng-if="!inactive(unit)">Status: {{ unit.pages_done }} / {{ unit.pages }}</p>
-                        </div>
-                    </div>
+                    ng-class="{ 'status-5': done(unit), 'status-2': pending(unit), 'status-3': starting(unit), 'status-4': finishing(unit), 'status-1': inactive(unit) }"
+                    class="progress-bar" role="progressbar" tooltip-placement="top" uib-tooltip="{{unit.description}}"W ng-style="{ 'width': getWidth(decade) + '%' }">
                 </div>
             </div>
 
@@ -25,23 +18,23 @@
 
     <div class="d-flex flex-wrap flex-row-reverse" aria-hidden="true">
         <div class="d-flex align-items-center ml-5">
-          <figure class="task-progress-done status-5 mb-0 mr-2" style="width: 1.5rem; height: 1.5rem;"></figure>
+          <figure class="status-5 mb-0 mr-2" style="width: 1.5rem; height: 1.5rem;"></figure>
           Færdig
         </div>
         <div class="d-flex align-items-center ml-5">
-          <figure class="task-progress-finishing status-4 mb-0 mr-2" style="width: 1.5rem; height: 1.5rem;"></figure>
+          <figure class="status-4 mb-0 mr-2" style="width: 1.5rem; height: 1.5rem;"></figure>
           Over halvvejs
         </div>
         <div class="d-flex align-items-center ml-5">
-          <figure class="task-progress-starting status-3 mb-0 mr-2" style="width: 1.5rem; height: 1.5rem;"></figure>
+          <figure class="status-3 mb-0 mr-2" style="width: 1.5rem; height: 1.5rem;"></figure>
           Under halvvejs
         </div>
         <div class="d-flex align-items-center ml-5">
-          <figure class="task-progress-none status-2 mb-0 mr-2" style="width: 1.5rem; height: 1.5rem;"></figure>
+          <figure class="status-2 mb-0 mr-2" style="width: 1.5rem; height: 1.5rem;"></figure>
           Ikke påbegyndt
         </div>
         <div class="d-flex align-items-center ml-5">
-          <figure class="task-progress-inactive mb-0 mr-2" style="width: 1.5rem; height: 1.5rem;"></figure>
+          <figure class="status-1 mb-0 mr-2" style="width: 1.5rem; height: 1.5rem;"></figure>
           Ikke til indtastning
         </div>
       </div>

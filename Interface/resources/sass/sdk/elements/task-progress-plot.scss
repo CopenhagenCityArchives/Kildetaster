@@ -124,4 +124,20 @@
     .task-progress-inactive {
         background-color: $progress-inactive;
     }
+
+    .status-1 {
+        background-color: rgba(0, 12, 46, 0.08);
+    }
+    .status-2 {
+        background-color: rgba(0, 12, 46, 0.24);
+    }
+    .status-3 {
+        background-color: rgba(0, 12, 46, 0.48);
+    }
+    .status-4 {
+        background-color: rgba(0, 12, 46, 0.72);
+    }
+    .status-5 {
+        background-color: rgb(0, 12, 46);
+    }
 }
