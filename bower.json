@@ -36,7 +36,9 @@
     "openseadragon": "~2.1.0",
     "angular-ui-router": "^1.0.10",
     "angular-google-analytics": "^1.1.9",
-    "ui-select": "angular-ui-select#~0.19.6"
+    "ui-select": "angular-ui-select#~0.19.6",
+    "angular-auth0": "^3.0.6",
+    "auth0.js": "^9.13.2"
   },
   "devDependencies": {
     "angular-mocks": "~1.6.6"
