@@ -160,7 +160,7 @@ define([
         // TODO update to use that
         */
         $scope.doSearch = function doSearch(forceNew) {
-
+            console.log("done did search");
             if (forceNew) {
                 solrService.clearSearchData();
             }
@@ -173,17 +173,21 @@ define([
 
             var colIds = [];
             angular.forEach(that.collections, function (collection, id) {
+                console.log("push it");
                 if (collection.selected) {
                     colIds.push(collection.id);
+                    console.log("to the limit");
                 }
             });
 
             searchService.currentSearch.collections = colIds;
 
+            console.log(that.queries);
+            console.log(that.filterQueries);
+
             // Update current search settings
             searchService.currentSearch.queries = that.queries;
             searchService.currentSearch.filterQueries = that.filterQueries;
-
             solrService.search(
                 that.queries,
                 that.filterQueries,
@@ -194,6 +198,7 @@ define([
                 that.postsPrPage
             )
                 .then(function (response) {
+                    console.log("Then what!?");
                     that.results = response.response;
 
                     //Reset page number and search again if no results are found on current page
@@ -224,7 +229,8 @@ define([
                         }
                     }, that.facetFields);
 
-                    //console.log(response.facets, that.facetFields);
+                    console.log("response.facets, that.facetFields");
+                    console.log(response.facets, that.facetFields);
                 }).catch(function (err) {
                     console.log('Error in search:', err);
                     that.error = true;

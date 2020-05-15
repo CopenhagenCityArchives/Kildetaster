@@ -158,8 +158,10 @@ define([
         * TODO update to use that
         */
         that.addField = function addField(defaultFieldName, term, op) {
+            console.log("Add field");
             // verify and set default field
             if (!searchConfig.fields.hasOwnProperty(defaultFieldName)) {
+                console.log("fail 1");
                 return;
             }
 
@@ -168,6 +170,7 @@ define([
             // verify
             if (!searchConfig.types.hasOwnProperty(field.type) ||
                 (op && !searchConfig.types[field.type].operators.includes(op))) {
+                    console.log("fail 2");
                 return;
             }
 
@@ -325,7 +328,7 @@ define([
         // TODO update to use that
         */
         $scope.doSimpleSearch = function doSimpleSearch() {
-
+            console.log("Now that is a simple search");
             solrService.clearSearchData();
 
             Analytics.trackEvent('person_search', 'start_search_simple');
@@ -347,10 +350,14 @@ define([
                 isAdvanced: false
             };
 
+            console.log("This is a config:");
+            console.log(thisSearch);
+
             searchService.currentSearch = thisSearch;
             // Set the configuration in the service
             searchService.setSearch(thisSearch);
-
+            console.log("wow");
+            console.log($state);
             // Go to the results state to search and show results
             $state.go('.results');
 
