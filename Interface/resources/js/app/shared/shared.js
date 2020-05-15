@@ -3,7 +3,7 @@ define([
     'angular',
 
     'ngstorage',
-
+    'angular-auth0',
     'app/shared/templates',
     'app/shared/constants',
 
@@ -47,6 +47,7 @@ define([
     ang,
 
     ngStorage,
+    angularAuth0,
     templates,
     constants,
 
@@ -86,7 +87,7 @@ define([
 
     ) {
 
-    var sharedApp = angular.module('shared', ['templates', 'constants', 'ngStorage']);
+    var sharedApp = angular.module('shared', ['templates', 'constants', 'ngStorage','angular-google-analytics','auth0.auth0']);
 
     sharedApp.directive('user', userDirective);
     sharedApp.directive('imageViewer', imageViewerDirective);
@@ -129,6 +130,20 @@ define([
         $httpProvider.interceptors.push('tokenFactory');
     });
 
+    sharedApp.config(['$httpProvider', 'AnalyticsProvider', 'angularAuth0Provider', function($httpProvider, AnalyticsProvider, angularAuth0Provider) {
+        $httpProvider.interceptors.push('tokenFactory');
+
+        angularAuth0Provider.init({
+            clientID: 'uNrqzxblFnPrzQWpqMMBiB8h0VppBesM',
+            domain: 'kbharkiv.eu.auth0.com'
+        });
+
+        // Add configuration code as desired
+        AnalyticsProvider.setAccount('UA-45125468-1'); //UU-XXXXXXX-X should be your tracking code
+        AnalyticsProvider.trackPages(true);
+        AnalyticsProvider.ignoreFirstPageLoad(true);
+        AnalyticsProvider.startOffline(true);
+    }]);
 
     return sharedApp;
 
