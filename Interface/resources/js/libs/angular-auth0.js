@@ -2,17 +2,14 @@
  This is a slim wrapper for Auth0.js which exposes Auth0 as an Angular
  module. Based on this file: https://github.com/Chansen88/angular-auth0/blob/master/dist/angular-auth0.js
 */
-const Auth0 = require(['auth0.auth0']);
+define(['auth0.auth0', 'angular'],
 
-(function() {
-
-  'use strict';
-
+function(Auth0, angular) {
   angular
     .module('auth0.auth0', [])
     .provider('angularAuth0', angularAuth0);
 
-  function angularAuth0() {
+    function angularAuth0() {
     if (!angular.isFunction(Auth0)) {
       throw new Error('Auth0 must be loaded.');
     }
@@ -60,4 +57,4 @@ const Auth0 = require(['auth0.auth0']);
       return auth0;
     }];
   }
-})();
+});
