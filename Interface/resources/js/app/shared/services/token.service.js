@@ -14,7 +14,12 @@ define([
              *                               Is not required in the sdk part of the solution
              */
             requestToken: function(doNotForceLogin) {
-
+              /*  angularAuth0.authorize({
+                    audience: 'https://mystore.com/api/v2',
+                    scope: 'read:order write:order',
+                    responseType: 'token',
+                    redirectUri: 'http://localhost'
+                });*/
                 var deferred = $q.defer();
                 var formData = new FormData();
 
