@@ -9,6 +9,7 @@ define([
     'app/shared/sdk-templates',
 
     'app/sdk/sdk.run',
+    'app/shared/analyticsBootstrap',
 
     'app/sdk/search/search',
 
@@ -44,7 +45,8 @@ define([
 
     sdkTemplates,
 
-    run,
+    sdkRun,
+    analyticsBootstrap,
 
     searchApp,
 
@@ -80,7 +82,10 @@ define([
         'angular-google-analytics'
     ]);
 
-    sdkApp.run(run);
+    sdkApp.run(sdkRun);
+    sdkApp.run(analyticsBootstrap.run);
+    
+    sdkApp.config(analyticsBootstrap.config);
 
     sdkApp.controller('errorsController', errorsController);
     sdkApp.controller('useractivitiesController', useractivitiesController);

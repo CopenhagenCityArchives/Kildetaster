@@ -17,6 +17,7 @@ define([
 
     'app/editor/editor.config',
     'app/editor/editor.run',
+    'app/shared/analyticsBootstrap',
 
     'app/editor/task.controller',
     'app/editor/page.controller',
@@ -55,6 +56,7 @@ define([
 
     editorConfig,
     editorRun,
+    analyticsBootstrap,
 
     taskController,
     pageController,
@@ -90,7 +92,9 @@ define([
         ]);
 
         editorApp.config(editorConfig);
+        editorApp.config(analyticsBootstrap.config);
         editorApp.run(editorRun);
+        editorApp.run(analyticsBootstrap.run);
 
         editorApp.controller('taskController', taskController);
         editorApp.controller('pageController', pageController);

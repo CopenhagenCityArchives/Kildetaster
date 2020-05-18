@@ -15,30 +15,6 @@ define([
             }             
         });
 
-        if (!$window.Cookiebot) {
-            console.log("Cookiebot not loaded. Ignoring.");
-        }
-        if ($window.Cookiebot && $window.Cookiebot.consent.statistics) {
-            Analytics.registerScriptTags();
-            Analytics.registerTrackers();
-            Analytics.offline(false);
-        } else {
-            $window.addEventListener('CookiebotOnAccept', function(e) {
-                if ($window.Cookiebot.consent.statistics) {
-                    Analytics.registerScriptTags();
-                    Analytics.registerTrackers();
-                    Analytics.offline(false);
-                }
-            }, false);
-            $window.addEventListener('CookiebotOnDecline', function(e) {
-                if ($window.Cookiebot.consent.statistics) {
-                    Analytics.registerScriptTags();
-                    Analytics.registerTrackers();
-                    Analytics.offline(false);
-                }
-            }, false);
-        }
-
         /**
          * If state change, show page not found error
          * NOTE: This works because we include a polyfill for ui-router to mimic the old state events,
