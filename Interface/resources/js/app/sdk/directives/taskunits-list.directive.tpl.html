@@ -11,9 +11,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="unit in units" ng-class="{ odd: $odd }" ng-show="units.length > 0">
+            <tr ng-repeat="unit in units" ng-class="{ odd: $odd }" ng-show="units.length > 0" tabindex="0" role="button" aria-labelledby="protocol-{{$index  + 1}}">
                 <td>
-                    <h5 class="d-md-none">Protokolnavn</h5>
+                    <h5 class="d-md-none">Protokolnavn </h5>
                     <h4 id="protocol-1">{{unit.description}}</h4>
                 </td>
                 <td>

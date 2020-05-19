@@ -25,6 +25,7 @@ define([
     'app/shared/services/error.service',
     'app/shared/services/user.service',
 
+    'app/sdk/directives/tooltip.directive',
     'app/sdk/directives/feather-icon.directive',
     'app/sdk/directives/user-statistics.directive',
     'app/sdk/directives/taskunits-list.directive',
@@ -63,6 +64,7 @@ define([
     errorService,
     userService,
 
+    tooltipDirective,
     featherIconDirective,
     userStatisticsDirective,
     taskunitsListDirective,
@@ -102,6 +104,7 @@ define([
     sdkApp.service('errorService', errorService);
     sdkApp.service('userService', userService);
 
+    sdkApp.directive('tooltip', tooltipDirective);
     sdkApp.directive('featherIcon', featherIconDirective);
     sdkApp.directive('userStatistics', userStatisticsDirective);
     sdkApp.directive('taskunitsList', taskunitsListDirective);
