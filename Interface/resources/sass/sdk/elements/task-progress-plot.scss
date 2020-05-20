@@ -105,6 +105,14 @@
         visibility: visible;
     }
 
+    .progress-bar {
+        border-right: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .progress-bar:last-child {
+        border: 0 !important;
+    }
+
     .task-progress-done {
         background-color: $progress-done;
     }
