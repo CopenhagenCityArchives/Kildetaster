@@ -14,8 +14,7 @@ define([
     var run = /*@ngInject*/ function run($window, Analytics){
         if (!$window.Cookiebot) {
             console.log("Cookiebot not loaded. Ignoring.");
-        }
-        if ($window.Cookiebot && $window.Cookiebot.consent.statistics) {
+        } else if ($window.Cookiebot.consent.statistics) {
             Analytics.registerScriptTags();
             Analytics.registerTrackers();
             Analytics.offline(false);
