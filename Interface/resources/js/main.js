@@ -121,43 +121,36 @@ if (!Array.prototype.findIndex) {
     });
 }
 
-requirejs([
-    
-    'jquery',
+import $ from 'jquery';
+import editorApp from './app/editor/editor';
 
-    'app/editor/editor'
+'use strict';
 
-], function ($, editorApp) {
-    
-    'use strict';
+var onReady, onResize, afterResize, timer;
 
-    var onReady, onResize, afterResize, timer;
+/* Hookups
+----------------------------*/
+onReady = function () {
+    //
+};
 
-    /* Hookups
-    ----------------------------*/
-    onReady = function () {
-        //
-    };
+onResize = function () {
+    //
+};
 
-    onResize = function () {
-        //
-    };
-
-    afterResize = function () {
-        //
-    };
+afterResize = function () {
+    //
+};
 
 
 //http://stackoverflow.com/questions/34545875/how-to-store-authentication-bearer-token-in-browser-cookie-using-angularjs
 //http://stackoverflow.com/questions/22537311/angular-ui-router-login-authentication
 
-    /* Attach events
-    ----------------------------*/
-    $(onReady); //Document ready
-    $(window).resize(function () {
-        onResize();
-        clearTimeout(timer);
-        timer = setTimeout(afterResize, 50);
-    });
-
+/* Attach events
+----------------------------*/
+$(onReady); //Document ready
+$(window).resize(function () {
+    onResize();
+    clearTimeout(timer);
+    timer = setTimeout(afterResize, 50);
 });
