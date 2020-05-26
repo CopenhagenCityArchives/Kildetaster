@@ -33,7 +33,11 @@ module.exports = {
             'angular-flash': path.resolve(__dirname, 'Interface/resources/bower_components/angular-flash-alert/dist/angular-flash'),
 
             'openseadragon': path.resolve(__dirname, 'Interface/resources/bower_components/openseadragon/built-openseadragon/openseadragon/openseadragon.min'),
-
+            'libs/openseadragonselection': path.resolve(__dirname, 'Interface/resources/js/libs', 'openseadragonselection'),
+            'libs/openseadragon-filtering': path.resolve(__dirname, 'Interface/resources/js/libs', 'openseadragon-filtering'),
+            'libs/openseadragon-imaginghelper': path.resolve(__dirname, 'Interface/resources/js/libs', 'openseadragon-imaginghelper'),
+            'libs/openseadragon-viewerinputhook': path.resolve(__dirname, 'Interface/resources/js/libs', 'openseadragon-viewerinputhook'),
+    
             //Libs
             'jquery': path.resolve(__dirname, 'Interface/resources/bower_components/jquery/dist/jquery.min'),
             'jquery.cookie': path.resolve(__dirname, 'Interface/resources/js/libs/jquery.cookie'),
@@ -43,4 +47,16 @@ module.exports = {
         filename: 'editor.js',
         path: path.resolve(__dirname, 'dist'),
     },
+    module: {
+        rules: [
+            {
+                test: /openseadragon[^-s]/,
+                use: 'exports-loader?openseadragon'
+            },
+            {
+                test: /openseadragon(-|s)\w+/,
+                use: ['imports-loader?openseadragon', 'exports-loader?[name]']
+            }
+        ]
+    }
 };
