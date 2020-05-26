@@ -1,7 +1,7 @@
 define([
 
     'angular',
-    'app/shared/shared',
+    '../shared/shared',
     'angular-ui-router',
     'angular-bootstrap',
     // Polyfill for ui-router events being deprecated @see https://ui-router.github.io/guide/ng1/migrate-to-1_0
@@ -15,27 +15,27 @@ define([
     'schemaForm',
     'angular-schema-form-bootstrap',
 
-    'app/editor/editor.config',
-    'app/editor/editor.run',
-    'app/shared/analyticsBootstrap',
+    './editor.config',
+    './editor.run',
+    '../shared/analyticsBootstrap',
 
-    'app/editor/task.controller',
-    'app/editor/page.controller',
-    'app/editor/wizard.controller',
-    'app/editor/wizard.done.controller',
-    'app/editor/page.new.controller',
-    'app/editor/page.done.controller',
-    'app/editor/page.footer.controller',
+    './task.controller',
+    './page.controller',
+    './wizard.controller',
+    './wizard.done.controller',
+    './page.new.controller',
+    './page.done.controller',
+    './page.footer.controller',
 
-    'app/editor/feedback/feedback.controller',
-    'app/editor/update/updateFields.controller',
-    'app/editor/update/updateFieldsSelection.controller',
-    'app/editor/update/updateFieldsDone.controller',
+    './feedback/feedback.controller',
+    './update/updateFields.controller',
+    './update/updateFieldsSelection.controller',
+    './update/updateFieldsDone.controller',
 
-    'app/shared/schemaformAddon/typeahead.addon',
-    'app/shared/schemaformAddon/customInput.addon',
-    'app/shared/schemaformAddon/customSelect.addon',
-    'app/shared/schemaformAddon/customArray.addon'
+    '../shared/schemaformAddon/typeahead.addon',
+    '../shared/schemaformAddon/customInput.addon',
+    '../shared/schemaformAddon/customSelect.addon',
+    '../shared/schemaformAddon/customArray.addon'
 
 
 ], function (

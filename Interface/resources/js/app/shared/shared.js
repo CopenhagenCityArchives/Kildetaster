@@ -6,43 +6,43 @@ define([
 
     'angular-google-analytics',
 
-    'app/shared/templates',
-    'app/shared/constants',
+    './templates',
+    './constants',
 
-    'app/shared/directives/user.directive',
-    'app/shared/directives/imageViewer.directive',
-    'app/shared/directives/imageViewerOverlay.directive',
-    'app/shared/directives/stepOf.directive',
-    'app/shared/directives/stepIndicator.directive',
-    'app/shared/directives/capitalizeFirst.directive',
-    'app/shared/directives/progressbar.directive',
-    'app/shared/directives/stringifyArray.directive',
-    'app/shared/directives/shareLink.directive',
+    './directives/user.directive',
+    './directives/imageViewer.directive',
+    './directives/imageViewerOverlay.directive',
+    './directives/stepOf.directive',
+    './directives/stepIndicator.directive',
+    './directives/capitalizeFirst.directive',
+    './directives/progressbar.directive',
+    './directives/stringifyArray.directive',
+    './directives/shareLink.directive',
 
-    'app/shared/directives/handleSteps.directive',
+    './directives/handleSteps.directive',
 
-    'app/shared/services/step.service',
-    'app/shared/services/task.service',
-    'app/shared/services/page.service',
-    'app/shared/services/user.service',
-    'app/shared/services/update.service',
+    './services/step.service',
+    './services/task.service',
+    './services/page.service',
+    './services/user.service',
+    './services/update.service',
 
-    'app/shared/services/error.service',
-    'app/shared/services/entry.service',
+    './services/error.service',
+    './services/entry.service',
 
-    'app/shared/services/post.service',
+    './services/post.service',
 
-    'app/shared/services/unit.service',
+    './services/unit.service',
 
-    'app/shared/services/token.service',
-    'app/shared/services/token.factory',
+    './services/token.service',
+    './services/token.factory',
 
-    'app/shared/services/helpers.service',
+    './services/helpers.service',
 
-    'app/shared/filters/nameFromObject.filter',
-    'app/shared/filters/capitalize.filter',
+    './filters/nameFromObject.filter',
+    './filters/capitalize.filter',
 
-    'app/shared/constants/text.constant'
+    './constants/text.constant'
 
 ], function(
 
