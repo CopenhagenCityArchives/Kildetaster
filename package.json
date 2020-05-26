@@ -1,5 +1,5 @@
 {
-  "name": "Kildetaster",
+  "name": "kildetaster",
   "version": "0.0.1",
   "private": true,
   "siteName": "kbh",
@@ -51,7 +51,9 @@
     "phantomjs": "^1.9.19",
     "postcss-assets": "^4.2.0",
     "requirejs": "^2.3.5",
-    "time-grunt": "^1.2.1"
+    "time-grunt": "^1.2.1",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11"
   },
   "scripts": {
     "xtest": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
