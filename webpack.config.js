@@ -15,7 +15,7 @@ module.exports = {
 
             'angular-google-analytics': path.resolve(__dirname, 'Interface/resources/bower_components/angular-google-analytics/dist/angular-google-analytics.min'),
 
-            'angular-ui-router': path.resolve(__dirname, 'Interface/resources/bower_components/angular-ui-router/release/angular-ui-router.min'),
+            'angular-ui-router$': path.resolve(__dirname, 'Interface/resources/bower_components/angular-ui-router/release/angular-ui-router.min'),
             // Polyfill for ui-router events being deprecated @see https://ui-router.github.io/guide/ng1/migrate-to-1_0
             'angular-ui-router/stateEvents': path.resolve(__dirname, 'Interface/resources/bower_components/angular-ui-router/release/stateEvents'),
 
