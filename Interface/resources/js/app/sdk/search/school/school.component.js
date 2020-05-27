@@ -1,6 +1,6 @@
 define([
 
-    'app/sdk/search/school/school.controller',
+    './school.controller',
 
 ], function(controller) {
 
@@ -12,7 +12,7 @@ define([
             showErrorReports: '<',
             toggleErrorReports: '&'
         },
-        templateUrl: 'sdk/search/school/school.component.tpl.html',
+        templateUrl: './school.component.tpl.html',
         controller: controller
     };
 

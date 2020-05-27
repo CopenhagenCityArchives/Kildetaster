@@ -1,6 +1,6 @@
 define([
 
-    'app/sdk/search/search-results/search-result.controller',
+    './search-result.controller',
 
 ], function (controller) {
 

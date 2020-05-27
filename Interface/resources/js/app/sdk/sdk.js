@@ -6,33 +6,33 @@ define([
     'ngstorage',
     'angular-google-analytics',
 
-    'app/shared/sdk-templates',
+    '../shared/sdk-templates',
 
-    'app/sdk/sdk.run',
-    'app/shared/analyticsBootstrap',
+    './sdk.run',
+    '../shared/analyticsBootstrap',
 
-    'app/sdk/search/search',
+    './search/search',
 
-    'app/sdk/controllers/errors.controller',
-    'app/sdk/controllers/useractivities.controller',
-    'app/sdk/controllers/fritekst-search.controller',
+    './controllers/errors.controller',
+    './controllers/useractivities.controller',
+    './controllers/fritekst-search.controller',
 
-    'app/shared/services/token.service',
-    'app/shared/services/token.factory',
+    '../shared/services/token.service',
+    '../shared/services/token.factory',
 
-    'app/shared/services/page.service',
-    'app/shared/services/task.service',
-    'app/shared/services/error.service',
-    'app/shared/services/user.service',
+    '../shared/services/page.service',
+    '../shared/services/task.service',
+    '../shared/services/error.service',
+    '../shared/services/user.service',
 
-    'app/sdk/directives/user-statistics.directive',
-    'app/sdk/directives/taskunits-list.directive',
-    'app/sdk/directives/task-status.directive',
-    'app/sdk/directives/task-progress-plot.directive',
-    'app/sdk/directives/progressbar.directive',
-    'app/shared/directives/user.directive',
-    'app/shared/directives/shareLink.directive',
-    'app/shared/constants'
+    './directives/user-statistics.directive',
+    './directives/taskunits-list.directive',
+    './directives/task-status.directive',
+    './directives/task-progress-plot.directive',
+    './directives/progressbar.directive',
+    '../shared/directives/user.directive',
+    '../shared/directives/shareLink.directive',
+    '../shared/constants'
 
 
 ], function(

@@ -13,70 +13,70 @@ define([
     'angular-animate',
     'angular-google-analytics',
 
-    'app/shared/sdk-templates',
+    '../../shared/sdk-templates',
 
-    'app/shared/services/search.service',
-    'app/shared/services/solr.service',
-    'app/shared/services/error.service',
-    'app/shared/services/helpers.service',
-    'app/shared/services/token.service',
-    'app/shared/services/user.service',
+    '../../shared/services/search.service',
+    '../../shared/services/solr.service',
+    '../../shared/services/error.service',
+    '../../shared/services/helpers.service',
+    '../../shared/services/token.service',
+    '../../shared/services/user.service',
 
-    'app/shared/services/token.factory',
+    '../../shared/services/token.factory',
 
-    'app/sdk/search/search.config',
-    'app/sdk/search/search.run',
+    './search.config',
+    './search.run',
 
-    'app/sdk/search/search.controller',
-    'app/sdk/search/search.results.controller',
+    './search.controller',
+    './search.results.controller',
 
-    'app/sdk/search/error-report/error-report.controller',
+    './error-report/error-report.controller',
 
-    'app/sdk/directives/datapost-erindring.directive',
+    '../directives/datapost-erindring.directive',
 
-    'app/sdk/directives/postfield.directive',
-    'app/sdk/directives/postCategory.directive',
-    'app/sdk/directives/zoom-image.directive',
-    'app/sdk/directives/post-count.directive',
+    '../directives/postfield.directive',
+    '../directives/postCategory.directive',
+    '../directives/zoom-image.directive',
+    '../directives/post-count.directive',
 
-    'app/sdk/directives/term-field.directive',
-    'app/sdk/directives/term-field-date.directive',
+    '../directives/term-field.directive',
+    '../directives/term-field-date.directive',
 
-    'app/sdk/directives/format-input.directive',
-    'app/sdk/directives/format-date.directive',
+    '../directives/format-input.directive',
+    '../directives/format-date.directive',
 
-    'app/sdk/directives/text-name.directive',
-    'app/sdk/directives/text-date.directive',
-    'app/sdk/directives/text-position.directive',
-    'app/sdk/directives/text-address.directive',
-    'app/sdk/directives/text-deathcause.directive',
-    'app/sdk/directives/text-age.directive',
-    'app/sdk/directives/text-person-name.directive',
-    'app/sdk/directives/text-address-police.directive',
-    'app/sdk/directives/text-gender.directive',
+    '../directives/text-name.directive',
+    '../directives/text-date.directive',
+    '../directives/text-position.directive',
+    '../directives/text-address.directive',
+    '../directives/text-deathcause.directive',
+    '../directives/text-age.directive',
+    '../directives/text-person-name.directive',
+    '../directives/text-address-police.directive',
+    '../directives/text-gender.directive',
 
-    'app/sdk/directives/filterLink/filterLink.directive',
-    'app/sdk/directives/facet/facet.directive',
+    '../directives/filterLink/filterLink.directive',
+    '../directives/facet/facet.directive',
 
-    'app/sdk/search/getDomContent/getDomContent.directive',
+    './getDomContent/getDomContent.directive',
 
-    'app/sdk/components/jumpToPage/jumpToPage.component',
-    'app/sdk/components/numPages/numPages.component',
+    '../components/jumpToPage/jumpToPage.component',
+    '../components/numPages/numPages.component',
 
-    'app/sdk/search/search-results/search-result.component',
-    'app/sdk/search/search-config-text/search-config-text.component',
+    './search-results/search-result.component',
+    './search-config-text/search-config-text.component',
 
-    'app/sdk/search/post/post.component',
-    'app/sdk/search/navigation/navigation.component',
-    'app/sdk/search/pagination/pagination.component',
-    'app/sdk/search/police/police.component',
-    'app/sdk/search/burial/burial.component',
-    'app/sdk/search/erindring/erindring.component',
-    'app/sdk/search/efterretning/efterretning.component',
-    'app/sdk/search/school/school.component',
+    './post/post.component',
+    './navigation/navigation.component',
+    './pagination/pagination.component',
+    './police/police.component',
+    './burial/burial.component',
+    './erindring/erindring.component',
+    './efterretning/efterretning.component',
+    './school/school.component',
 
-    'app/sdk/filters/formatStringNumber.filter',
-    'app/shared/constants'
+    '../filters/formatStringNumber.filter',
+    '../../shared/constants'
 
 ], function(
 

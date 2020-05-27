@@ -1,6 +1,6 @@
 define([
 
-    'app/sdk/search/efterretning/efterretning.controller',
+    './efterretning.controller',
 
 ], function(controller) {
 
@@ -12,7 +12,7 @@ define([
             showErrorReports: '<',
             toggleErrorReports: '&'
         },
-        templateUrl: 'sdk/search/efterretning/efterretning.component.tpl.html',
+        templateUrl: './efterretning.component.tpl.html',
         controller: controller
     };
 

@@ -1,6 +1,6 @@
 define([
 
-    'app/sdk/search/navigation/navigation.controller',
+    './navigation.controller',
 
 ], function (controller) {
 
@@ -8,7 +8,7 @@ define([
         bindings: {
             searchData: '<'
         },
-        templateUrl: 'sdk/search/navigation/navigation.component.tpl.html',
+        templateUrl: './navigation.component.tpl.html',
         controller: controller
     };
 

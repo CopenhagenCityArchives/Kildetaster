@@ -1,6 +1,6 @@
 define([
     
-    'app/sdk/search/erindring/erindring.controller',
+    './erindring.controller',
 
 ], function(controller) {
     
@@ -12,7 +12,7 @@ define([
             showErrorReports: '<',
             toggleErrorReports: '&'
         },
-        templateUrl: 'sdk/search/erindring/erindring.component.tpl.html',
+        templateUrl: './erindring.component.tpl.html',
         controller: controller
     };
 

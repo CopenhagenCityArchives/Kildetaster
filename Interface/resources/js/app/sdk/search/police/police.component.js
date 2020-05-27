@@ -1,6 +1,6 @@
 define([
     
-    'app/sdk/search/police/police.controller',
+    './police.controller',
 
 ], function(controller) {
     
@@ -12,7 +12,7 @@ define([
             showErrorReports: '<',
             toggleErrorReports: '&'
         },
-        templateUrl: 'sdk/search/police/police.component.tpl.html',
+        templateUrl: './police.component.tpl.html',
         controller: controller
     };
 

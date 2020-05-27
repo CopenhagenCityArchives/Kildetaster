@@ -121,42 +121,33 @@ if (!Array.prototype.findIndex) {
     });
 }
 
-define('jquery', function() { return jQuery; });
+import $ from 'jquery';
+import sdkApp from './app/sdk/sdk';
 
-requirejs([
-    
-    'jquery',
+'use strict';
 
-    'app/sdk/sdk'
+var onReady, onResize, afterResize, timer;
 
-], function ($, editorApp, apiApp) {
-    
-    'use strict';
+/* Hookups
+----------------------------*/
+onReady = function () {
+    //
+};
 
-    var onReady, onResize, afterResize, timer;
+onResize = function () {
+    //
+};
 
-    /* Hookups
-    ----------------------------*/
-    onReady = function () {
-        //
-    };
-
-    onResize = function () {
-        //
-    };
-
-    afterResize = function () {
-        //
-    };
+afterResize = function () {
+    //
+};
 
 
-    /* Attach events
-    ----------------------------*/
-    $(onReady); //Document ready
-    $(window).resize(function () {
-        onResize();
-        clearTimeout(timer);
-        timer = setTimeout(afterResize, 50);
-    });
-
+/* Attach events
+----------------------------*/
+$(onReady); //Document ready
+$(window).resize(function () {
+    onResize();
+    clearTimeout(timer);
+    timer = setTimeout(afterResize, 50);
 });

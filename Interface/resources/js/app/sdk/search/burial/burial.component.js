@@ -1,6 +1,6 @@
 define([
     
-    'app/sdk/search/burial/burial.controller',
+    './burial.controller',
 
 ], function(controller) {
     
@@ -13,7 +13,7 @@ define([
             showErrorReports: '<',
             toggleErrorReports: '&'
         },
-        templateUrl: 'sdk/search/burial/burial.component.tpl.html',
+        templateUrl: './burial.component.tpl.html',
         controller: controller
     };
 

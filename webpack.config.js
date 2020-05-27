@@ -1,7 +1,10 @@
 const path = require('path');
 
 module.exports = {
-    entry: './Interface/resources/js/main.js',
+    entry: {
+        editor: './Interface/resources/js/main.js',
+        sdk: './Interface/resources/js/sdk-main.js'
+    },
     resolve: {
         alias: {
             'almond': path.resolve(__dirname, 'Interface/resources/bower_components/almond/almond'),
@@ -20,13 +23,15 @@ module.exports = {
             'angular-ui-router/stateEvents': path.resolve(__dirname, 'Interface/resources/bower_components/angular-ui-router/release/stateEvents'),
 
             'angular-ui-select': path.resolve(__dirname, 'Interface/resources/bower_components/angular-ui-select/dist/select'),
+            'angularjs-datepicker': path.resolve(__dirname, 'Interface/resources/bower_components/angularjs-datepicker/dist/angular-datepicker'),
+            'angular-filter': path.resolve(__dirname, 'Interface/resources/bower_components/angular-filter/dist/angular-filter.min'),
 
             //Angular json form
             'tv4': path.resolve(__dirname, 'Interface/resources/bower_components/tv4/tv4'),
             'objectpath': path.resolve(__dirname, 'Interface/resources/bower_components/objectpath/lib/ObjectPath'),
             'schemaForm': path.resolve(__dirname, 'Interface/resources/bower_components/angular-schema-form/dist/schema-form.min'),
             'angular-schema-form-bootstrap': path.resolve(__dirname, 'Interface/resources/bower_components/angular-schema-form/dist/bootstrap-decorator'),
-
+            'moment': path.resolve(__dirname, 'Interface/resources/bower_components/moment/min/moment-with-locales'),
             //Copy /paste library
             'clipboard': path.resolve(__dirname, 'Interface/resources/bower_components/clipboard/dist/clipboard.min'),
 
@@ -37,14 +42,16 @@ module.exports = {
             'libs/openseadragon-filtering': path.resolve(__dirname, 'Interface/resources/js/libs', 'openseadragon-filtering'),
             'libs/openseadragon-imaginghelper': path.resolve(__dirname, 'Interface/resources/js/libs', 'openseadragon-imaginghelper'),
             'libs/openseadragon-viewerinputhook': path.resolve(__dirname, 'Interface/resources/js/libs', 'openseadragon-viewerinputhook'),
+            'query-string': path.resolve(__dirname, 'Interface/resources/bower_components/query-string/query-string'),
     
             //Libs
             'jquery': path.resolve(__dirname, 'Interface/resources/bower_components/jquery/dist/jquery.min'),
             'jquery.cookie': path.resolve(__dirname, 'Interface/resources/js/libs/jquery.cookie'),
+
         }
     },
     output: {
-        filename: 'editor.js',
+        filename: '[name].js',
         path: path.resolve(__dirname, 'dist'),
     },
     module: {

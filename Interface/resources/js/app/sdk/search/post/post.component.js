@@ -1,6 +1,6 @@
 define([
 
-    'app/sdk/search/post/post.controller',
+    './post.controller',
 
 ], function (controller) {
 
@@ -11,7 +11,7 @@ define([
             data: '<',
             errorReportingConfig: '<'
         },
-        templateUrl: 'sdk/search/post/post.component.tpl.html',
+        templateUrl: './post.component.tpl.html',
         controller: controller
     };
 

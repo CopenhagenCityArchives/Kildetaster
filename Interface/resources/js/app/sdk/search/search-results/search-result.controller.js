@@ -25,23 +25,23 @@ define([], function() {
 
                 // Begravelser
                 if (this.data.collection_id == 1) {
-                    this.templateUrl = 'sdk/search/search-results/burial.tpl.html';
+                    this.templateUrl = './burial.tpl.html';
                 }
                 // Politiets registerblade
                 else if (this.data.collection_id == 17) {
-                    this.templateUrl = 'sdk/search/search-results/police.tpl.html';
+                    this.templateUrl = './police.tpl.html';
                 }
                 // Erindringer
                 else if (this.data.collection_id == 18) {
-                    this.templateUrl = 'sdk/search/search-results/erindring.tpl.html';
+                    this.templateUrl = './erindring.tpl.html';
                 }
                 // Skoleprotokoller
                 else if (this.data.collection_id == 100) {
-                    this.templateUrl = 'sdk/search/search-results/school.tpl.html';
+                    this.templateUrl = './school.tpl.html';
                 }
                 // Efterretninger
                 else if (this.data.collection_id == 19) {
-                    this.templateUrl = 'sdk/search/search-results/efterretning.tpl.html';
+                    this.templateUrl = './efterretning.tpl.html';
                 }
             }
 

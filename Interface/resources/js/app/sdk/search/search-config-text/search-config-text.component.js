@@ -1,6 +1,6 @@
 define([
 
-    'app/sdk/search/search-config-text/search-config-text.controller',
+    './search-config-text.controller',
 
 ], function (controller) {
 
@@ -10,7 +10,7 @@ define([
             collections: '<'
         },
         transclude: true,
-        templateUrl: 'sdk/search/search-config-text/search-config-text.component.tpl.html',
+        templateUrl: './search-config-text.component.tpl.html',
         controller: controller
     };
 

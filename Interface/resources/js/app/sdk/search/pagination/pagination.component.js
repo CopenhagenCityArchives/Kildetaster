@@ -1,6 +1,6 @@
 define([
 
-    'app/sdk/search/pagination/pagination.controller',
+    './pagination.controller',
 
 ], function (controller) {
 
@@ -11,7 +11,7 @@ define([
             postsPrPage: '<',
             goToPage: '&'
         },
-        templateUrl: 'sdk/search/pagination/pagination.component.tpl.html',
+        templateUrl: './pagination.component.tpl.html',
         controller: controller
     };
 

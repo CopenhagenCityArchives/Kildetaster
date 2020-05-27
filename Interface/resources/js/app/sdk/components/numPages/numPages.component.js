@@ -1,6 +1,6 @@
 define([
     
-    'app/sdk/components/numPages/numPages.controller',
+    './numPages.controller',
 
 ], function(controller) {
     
@@ -9,7 +9,7 @@ define([
             selected: '<',
             changeCount: '&'
         },
-        templateUrl: 'sdk/components/numPages/numPages.component.tpl.html',
+        templateUrl: './numPages.component.tpl.html',
         controller: controller
     };
 

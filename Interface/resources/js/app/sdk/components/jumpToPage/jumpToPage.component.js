@@ -1,6 +1,6 @@
 define([
     
-    'app/sdk/components/jumpToPage/jumpToPage.controller',
+    './jumpToPage.controller',
 
 ], function(controller) {
     
