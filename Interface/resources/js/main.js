@@ -123,6 +123,7 @@ if (!Array.prototype.findIndex) {
 
 import $ from 'jquery';
 import editorApp from './app/editor/editor';
+import editorStyles from '../sass/styles';
 
 'use strict';
 

@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= htmlWebpackPlugin.options.title %></title>
+        <%= htmlWebpackPlugin.tags.headTags.filter((tag) => tag.tagName == 'link' && tag.attributes.href.startsWith('sdk')) %>
+    </head>
+    <body>
+        <div id="search-app-upper-text" ng-cloak>
+            <h2>This is the simple upper text</h2>
+            <p>And it is very nice</p>
+        </div>
+        <div id="search-app-lower-text" ng-cloak>
+            <h2>This is the simple lower text</h2>
+            <p>And as we can see, it is very much diffent than the other.</p>
+        </div>
+        <div id="search-app-simple-search-text" ng-cloak>
+            <h2>This is the simple search text</h2>
+            <p>And as we can see, it is very much diffent than the other.</p>
+        </div>
+        <div id="search-app-advanced-search-lower" ng-cloak>
+            <h2>This is the advanced lower text</h2>
+            <p>And as we can see, it is very much diffent than the other.</p>
+        </div>
+        
+        <div data-sdk-app class="sdk-search">
+            <div ui-view></div>
+        </div>
+
+        <%= htmlWebpackPlugin.tags.bodyTags.filter((tag) => tag.tagName == 'script' && tag.attributes.src.startsWith('sdk')) %>
+    </body>
+</html>

@@ -1,8 +1,8 @@
 
 //Local bootstrap variables
-@import "core/bootstrap-variables";
+@import "./core/bootstrap-variables";
 
-@import "core/variables";
+@import "./core/variables";
 
 
 //Bootstrap
@@ -10,41 +10,41 @@
 
 @import "../bower_components/angular-ui-select/dist/select";
 
-@import "core/core";
-@import "core/animations";
+@import "./core/core";
+@import "./core/animations";
 
-@import "core/mixins";
+@import "./core/mixins";
 
-@import "modules/modules";
+@import "./modules/modules";
 
 //Components
-@import "components/editor";
-@import "components/header";
-@import "components/footer";
-@import "components/modal";
-@import "components/page-details";
-@import "components/page-done";
-@import "components/update-fields";
-@import "components/wizard-done";
+@import "./components/editor";
+@import "./components/header";
+@import "./components/footer";
+@import "./components/modal";
+@import "./components/page-details";
+@import "./components/page-done";
+@import "./components/update-fields";
+@import "./components/wizard-done";
 
 //elements
-@import "elements/button";
-@import "elements/dynamic-form";
-@import "elements/editor-form-container";
-@import "elements/error-report-controls";
-@import "elements/field-list";
-@import "elements/icon";
-@import "elements/image-viewer";
-@import "elements/list-group-item";
-@import "elements/loading-spinner";
-@import "elements/progressbar";
-@import "elements/required";
-@import "elements/share-link";
-@import "elements/step-indicator";
-@import "elements/summary-item";
-@import "elements/typeahead";
-@import "elements/update-schema-form";
-@import "elements/user";
+@import "./elements/button";
+@import "./elements/dynamic-form";
+@import "./elements/editor-form-container";
+@import "./elements/error-report-controls";
+@import "./elements/field-list";
+@import "./elements/icon";
+@import "./elements/image-viewer";
+@import "./elements/list-group-item";
+@import "./elements/loading-spinner";
+@import "./elements/progressbar";
+@import "./elements/required";
+@import "./elements/share-link";
+@import "./elements/step-indicator";
+@import "./elements/summary-item";
+@import "./elements/typeahead";
+@import "./elements/update-schema-form";
+@import "./elements/user";
 
 @import "../bower_components/angular-flash-alert/dist/angular-flash";
 
@@ -61,4 +61,4 @@
 
     border-radius: 0;
 }
-
+

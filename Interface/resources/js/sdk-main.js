@@ -123,6 +123,7 @@ if (!Array.prototype.findIndex) {
 
 import $ from 'jquery';
 import sdkApp from './app/sdk/sdk';
+import sdkStyles from '../sass/sdk-styles';
 
 'use strict';
 

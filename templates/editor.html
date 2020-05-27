@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title><%= htmlWebpackPlugin.options.title %></title>
+        <%= htmlWebpackPlugin.tags.headTags.filter((tag) => tag.tagName == 'link' && tag.attributes.href.startsWith('editor')) %>
+    </head>
+    <body>
+        <section data-editor-app>
+    
+            <section ui-view></section>
+        
+        </section>
+        <%= htmlWebpackPlugin.tags.bodyTags.filter((tag) => tag.tagName == 'script' && tag.attributes.src.startsWith('editor')) %>
+    </body>
+</html>
