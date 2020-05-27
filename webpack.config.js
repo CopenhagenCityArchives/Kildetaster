@@ -1,6 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = (env, argv) => {
     DEV = argv.mode == 'development';
@@ -129,6 +130,7 @@ module.exports = (env, argv) => {
                 filename: DEV ? '[name].css' : '[name].[hash].css',
                 chunkFilename: DEV ? '[id].css' : '[id].[hash].css'
             }),
+            new CleanWebpackPlugin(),
             new HtmlWebpackPlugin({
                 filename: 'editor.html',
                 title: 'Editor',
