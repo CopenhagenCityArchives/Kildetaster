@@ -155,8 +155,8 @@ module.exports = (env, argv) => {
         devServer: {
             contentBase: [
                 './dist',
-                './Interface/html/dump/search_files',
-                './Interface/html/dump/index_files',
+                './devServer/search_files',
+                './devServer/dump/index_files',
                 './src/fonts'
             ],
             contentBasePublicPath: [
@@ -164,10 +164,13 @@ module.exports = (env, argv) => {
                 '/resources/search_files',
                 '/resources/index_files',
                 '/resources/fonts'
-            ]
+            ],
+            writeToDisk: true
         },
 
         plugins: [
+            new CleanWebpackPlugin(),
+            
             // CSS is extracted for production builds
             new MiniCssExtractPlugin({
                 filename: DEV ? '[name].css' : '[name].[hash].css',
@@ -178,7 +181,7 @@ module.exports = (env, argv) => {
             new HtmlWebpackPlugin({
                 filename: 'editor.html',
                 title: 'Editor',
-                template: 'templates/editor.html',
+                template: 'devServer/editor.html',
                 inject: false
             }),
 
@@ -186,7 +189,7 @@ module.exports = (env, argv) => {
             new HtmlWebpackPlugin({
                 filename: 'sdk.html',
                 title: 'SDK',
-                template: 'templates/sdk.html',
+                template: 'devServer/sdk.html',
                 inject: false
             }),
 
@@ -194,7 +197,7 @@ module.exports = (env, argv) => {
             new HtmlWebpackPlugin({
                 filename: 'search.html',
                 title: 'Search',
-                template: 'templates/search.html',
+                template: 'devServer/search.html',
                 inject: false
             })
         ]
