@@ -148,8 +148,8 @@ module.exports = (env, argv) => {
             ]
         },
 
-        // source maps for development
-        devtool: 'inline-source-map',
+        // inline source maps for development
+        devtool: DEV ? 'inline-source-map' : 'source-map',
 
         // configure webpack-dev-server to serve static dump files
         devServer: {
@@ -170,7 +170,7 @@ module.exports = (env, argv) => {
 
         plugins: [
             new CleanWebpackPlugin(),
-            
+
             // CSS is extracted for production builds
             new MiniCssExtractPlugin({
                 filename: DEV ? '[name].css' : '[name].[hash].css',
