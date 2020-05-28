@@ -162,7 +162,8 @@ module.exports = (env, argv) => {
         },
         devtool: 'inline-source-map',
         devServer: {
-            contentBase: './dist'
+            contentBase: ['./dist', './Interface/html/dump/search_files', './Interface/html/dump/index_files'  ],
+            contentBasePublicPath: ['/', '/resources/search_files', '/resources/index_files' ]
         },
         plugins: [
             new MiniCssExtractPlugin({
