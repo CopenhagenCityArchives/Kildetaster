@@ -1,5 +1,5 @@
 define([], function() {
-    var searchResultController = /*@ngInject*/ function searchResultController($state) {
+    var searchResultController = /*@ngInject*/ function searchResultController($scope, $state, $element, $compile) {
 
         var that = this;
 
@@ -25,24 +25,28 @@ define([], function() {
 
                 // Begravelser
                 if (this.data.collection_id == 1) {
-                    this.templateUrl = './burial.tpl.html';
+                    this.template = require('./burial.tpl.html');
                 }
                 // Politiets registerblade
                 else if (this.data.collection_id == 17) {
-                    this.templateUrl = './police.tpl.html';
+                    this.template = require('./police.tpl.html');
                 }
                 // Erindringer
                 else if (this.data.collection_id == 18) {
-                    this.templateUrl = './erindring.tpl.html';
+                    this.template = require('./erindring.tpl.html');
                 }
                 // Skoleprotokoller
                 else if (this.data.collection_id == 100) {
-                    this.templateUrl = './school.tpl.html';
+                    this.template = require('./school.tpl.html');
                 }
                 // Efterretninger
                 else if (this.data.collection_id == 19) {
-                    this.templateUrl = './efterretning.tpl.html';
+                    this.template = require('./efterretning.tpl.html');
+                } else {
+                    throw new Error('invalid result type');
                 }
+
+                $element.children().append($compile(this.template)($scope));
             }
 
         };
