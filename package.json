@@ -14,7 +14,6 @@
   "configs": "Interface/configs",
   "html": "Interface/html",
   "dependencies": {
-    "almond": "^0.3.3",
     "angular": "^1.6.10",
     "angular-animate": "^1.6.10",
     "angular-filter": "^0.5.8",
