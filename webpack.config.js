@@ -25,27 +25,13 @@ module.exports = (env, argv) => {
             extensions: ['.js', '.jsx', '.scss'],
 
             alias: {
-                'ngstorage': path.resolve(__dirname, 'Interface/resources/bower_components/ngstorage/ngStorage.min'),
-
-                // Polyfill for ui-router events being deprecated @see https://ui-router.github.io/guide/ng1/migrate-to-1_0
                 'angular-ui-router/stateEvents': path.resolve(__dirname, 'node_modules/angular-ui-router/release/stateEvents'),
-
-                'angularjs-datepicker': path.resolve(__dirname, 'Interface/resources/bower_components/angularjs-datepicker/dist/angular-datepicker'),
-
                 'angular-schema-form-bootstrap': path.resolve(__dirname, 'node_modules/angular-schema-form/dist/bootstrap-decorator'),
-                //Copy /paste library
                 'schemaForm': 'angular-schema-form',
-                'angular-flash': path.resolve(__dirname, 'Interface/resources/bower_components/angular-flash-alert/dist/angular-flash'),
-
-                'openseadragon': path.resolve(__dirname, 'Interface/resources/bower_components/openseadragon/built-openseadragon/openseadragon/openseadragon.min'),
                 'libs/openseadragonselection': path.resolve(__dirname, 'Interface/resources/js/libs', 'openseadragonselection'),
                 'libs/openseadragon-filtering': path.resolve(__dirname, 'Interface/resources/js/libs', 'openseadragon-filtering'),
                 'libs/openseadragon-imaginghelper': path.resolve(__dirname, 'Interface/resources/js/libs', 'openseadragon-imaginghelper'),
                 'libs/openseadragon-viewerinputhook': path.resolve(__dirname, 'Interface/resources/js/libs', 'openseadragon-viewerinputhook'),
-                'query-string': path.resolve(__dirname, 'Interface/resources/bower_components/query-string/query-string'),
-        
-                //Libs
-                'jquery.cookie': path.resolve(__dirname, 'Interface/resources/js/libs/jquery.cookie'),
             }
         },
 
@@ -154,8 +140,18 @@ module.exports = (env, argv) => {
 
         // configure webpack-dev-server to serve static dump files
         devServer: {
-            contentBase: ['./dist', './Interface/html/dump/search_files', './Interface/html/dump/index_files'  ],
-            contentBasePublicPath: ['/', '/resources/search_files', '/resources/index_files' ]
+            contentBase: [
+                './dist',
+                './Interface/html/dump/search_files',
+                './Interface/html/dump/index_files',
+                './Interface/resources/fonts'
+            ],
+            contentBasePublicPath: [
+                '/',
+                '/resources/search_files',
+                '/resources/index_files',
+                '/resources/fonts'
+            ]
         },
 
         plugins: [

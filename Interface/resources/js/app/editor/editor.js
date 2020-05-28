@@ -9,7 +9,7 @@ define([
     'ui-select',
     'angular-sanitize',
     'angular-animate',
-    'angular-flash',
+    'angular-flash-alert',
     'angular-google-analytics',
 
     'angular-schema-form',
