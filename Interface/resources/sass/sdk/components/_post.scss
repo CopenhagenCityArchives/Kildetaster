@@ -1,198 +1,25 @@
-.post {
-    font-size: 13px;
-
-    display: flex;
-
-    flex-wrap: wrap;
-
-    &__head {
-        display: flex;
-
-        width: 100%;
-
-        flex-wrap: wrap;
+#source-gallery-modal {
+    .modal-dialog {
+        max-width: 100%;
+        margin: 3rem 0;
     }
 
-    &__col {
-        display: flex;
-        flex-direction: column;
-
-        width: 50%;
-
-        @media (max-width: 767px) {
-            width: 100%;
-        }
+    .modal-content {
+        border: 0;
+        // overwrite in variables:
+        border-radius: 0;
+        background-color: transparent;
     }
+}
 
-    &__item {
-        width: 50%;
-        padding: 20px;
+.card {
+    background-color: #000c2e;
+}
 
-        word-break: break-word;
+.modal-backdrop {
+    background-color: #000c2e;
 
-
-
-        .post__col & {
-            width: 100%;
-        }
-
-        @media (max-width: 767px) {
-            width: 100%;
-        }
-
-        p {
-            margin-bottom: 0;
-        }
-        p, span, div, a {
-            color: $font-color;
-        }
-    }
-
-    &__main {
-        display: flex;
-        flex-direction: column;
-
-        justify-content: center;
-    }
-
-    &__alternate {
-        background-color: $light-gray;
-    }
-
-    &__viewer {
-        background-color: $gray-dark;
-    }
-
-    &__collection {
-        font-family: "amblelight_condensed";
-        font-size: 20px;
-
-        display: block;
-
-        margin-top: 4px;
-
-        color: $font-color;
-    }
-    &__infogroup {
-        margin-bottom: 20px;
-    }
-
-    &__header {
-        display: flex;
-        flex-direction: column;
-
-        height: 100%;
-        padding-top: 20px;
-
-        justify-content: center;
-
-        h2 {
-            font-size: 32px;
-
-            margin-bottom: 20px;
-
-            color: $font-color-dark;
-        }
-    }
-
-    &__sectionheader {
-        font-size: 1.5em !important; // !important because of Joomla styling
-        font-weight: 600;
-
-        margin-bottom: 8px !important;  // !important because of Joomla styling
-    }
-
-    &__highlight {
-        word-wrap: break-word;
-
-        overflow-wrap: break-word;
-    }
-
-    &__links {
-        display: flex;
-        flex-direction: row;
-
-        margin-top: 10px;
-
-        justify-content: space-between;
-
-        a {
-            font-size: 11px;
-
-            flex: 0 0 calc(50% - 5px);
-        }
-        .button {
-            color: $white;
-        }
-    }
-
-    &__error {
-        font-weight: 600;
-
-        margin-top: 20px;
-
-        color: $red;
-
-        a {
-            display: block;
-
-            margin-bottom: 14px;
-
-            text-decoration: underline;
-
-            color: currentColor;
-            &:hover {
-                text-decoration: none;
-            }
-        }
-
-        // joomla overwrite
-        div, span {
-            color: currentColor;
-        }
-
-        &__message {
-            margin-bottom: 14px;
-
-            word-wrap: break-word;
-        }
-    }
-    &__sharelink {
-        position: relative;
-
-        label {
-            font-weight: bold;
-
-            display: block;
-
-            margin-bottom: 0;
-        }
-
-        input[type="text"].input {
-            display: inline-block;
-
-            width: auto;
-            width: calc(100% - 91px);
-            margin: 0;
-
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-
-
-            &.copied + .button + .confirm {
-                opacity: 1;
-            }
-        }
-        .button {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-        .confirm {
-            position: absolute;
-            top: 0;
-            right: 0;
-
-            opacity: 0;
-        }
+    &.show {
+        opacity: 1;
     }
 }
