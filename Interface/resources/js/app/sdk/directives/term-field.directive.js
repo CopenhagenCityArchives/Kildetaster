@@ -1,6 +1,6 @@
 define([
-
-], function() {
+    'angular'
+], function(angular) {
 
     var termFieldDirective = /* @ngInject */ function($http, $sce, API, TYPEAHEADMAXIUMUM) {
 
@@ -16,9 +16,10 @@ define([
                 submitFunc: '&'
             },
 
-            template: template,
+            template: '<div></div>',
 
-            controller: /* @ngInject */ function($scope) {
+            controller: /* @ngInject */ function($scope, $compile, $element) {
+
 
                 /**
                 * Local proxy function to handle sending function parameters
@@ -109,6 +110,9 @@ define([
                             return require('./term-field.directive--string.tpl.html');
                     }
                 }
+
+                angular.element($element).replaceWith($compile($scope.getTemplate())($scope));
+
             }
 
         }
