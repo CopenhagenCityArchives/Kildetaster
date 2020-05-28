@@ -1,7 +1,7 @@
 define([
 
     'angular',
-    'angular-bootstrap',
+    'angular-ui-bootstrap',
 
     'ngstorage',
     'angular-google-analytics',

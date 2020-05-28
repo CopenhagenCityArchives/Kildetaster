@@ -8,7 +8,7 @@ define([
     'angular-sanitize',
 
     'angular-ui-router',
-    'angular-ui-select',
+    'ui-select',
     'angular-filter',
     'angular-animate',
     'angular-google-analytics',

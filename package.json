@@ -14,8 +14,19 @@
   "configs": "Interface/configs",
   "html": "Interface/html",
   "dependencies": {
+    "almond": "^0.3.3",
+    "angular": "^1.6.10",
+    "angular-animate": "^1.6.10",
+    "angular-filter": "^0.5.8",
+    "angular-google-analytics": "^1.1.8",
+    "angular-sanitize": "^1.6.10",
+    "angular-ui-bootstrap": "^1.2.5",
+    "angular-ui-router": "^1.0.10",
+    "clipboard": "^1.5.9",
     "jquery": "^3.2.1",
-    "request": "<=2.81.0"
+    "moment": "^2.18.1",
+    "request": "<=2.81.0",
+    "ui-select": "^0.19.4"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.6",

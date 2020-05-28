@@ -3,10 +3,10 @@ define([
     'angular',
     '../shared/shared',
     'angular-ui-router',
-    'angular-bootstrap',
+    'angular-ui-bootstrap',
     // Polyfill for ui-router events being deprecated @see https://ui-router.github.io/guide/ng1/migrate-to-1_0
     'angular-ui-router/stateEvents',
-    'angular-ui-select',
+    'ui-select',
     'angular-sanitize',
     'angular-animate',
     'angular-flash',
