@@ -11,8 +11,8 @@ module.exports = (env, argv) => {
 
         // entrypoints
         entry: {
-            editor: './Interface/resources/js/main.js',
-            sdk: './Interface/resources/js/sdk-main.js'
+            editor: './src/js/main.js',
+            sdk: './src/js/sdk-main.js'
         },
 
         // resulting bundles
@@ -28,10 +28,10 @@ module.exports = (env, argv) => {
                 'angular-ui-router/stateEvents': path.resolve(__dirname, 'node_modules/angular-ui-router/release/stateEvents'),
                 'angular-schema-form-bootstrap': path.resolve(__dirname, 'node_modules/angular-schema-form/dist/bootstrap-decorator'),
                 'schemaForm': 'angular-schema-form',
-                'libs/openseadragonselection': path.resolve(__dirname, 'Interface/resources/js/libs', 'openseadragonselection'),
-                'libs/openseadragon-filtering': path.resolve(__dirname, 'Interface/resources/js/libs', 'openseadragon-filtering'),
-                'libs/openseadragon-imaginghelper': path.resolve(__dirname, 'Interface/resources/js/libs', 'openseadragon-imaginghelper'),
-                'libs/openseadragon-viewerinputhook': path.resolve(__dirname, 'Interface/resources/js/libs', 'openseadragon-viewerinputhook'),
+                'libs/openseadragonselection': path.resolve(__dirname, 'src/js/libs', 'openseadragonselection'),
+                'libs/openseadragon-filtering': path.resolve(__dirname, 'src/js/libs', 'openseadragon-filtering'),
+                'libs/openseadragon-imaginghelper': path.resolve(__dirname, 'src/js/libs', 'openseadragon-imaginghelper'),
+                'libs/openseadragon-viewerinputhook': path.resolve(__dirname, 'src/js/libs', 'openseadragon-viewerinputhook'),
             }
         },
 
@@ -157,7 +157,7 @@ module.exports = (env, argv) => {
                 './dist',
                 './Interface/html/dump/search_files',
                 './Interface/html/dump/index_files',
-                './Interface/resources/fonts'
+                './src/fonts'
             ],
             contentBasePublicPath: [
                 '/',

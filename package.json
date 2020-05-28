@@ -10,7 +10,7 @@
   "prototyperesources": "_prototype/resources",
   "sdk": "_sdk",
   "sdkresources": "_sdk/resources",
-  "resources": "Interface/resources",
+  "resources": "src",
   "configs": "Interface/configs",
   "html": "Interface/html",
   "dependencies": {
@@ -23,6 +23,7 @@
     "angular-schema-form": "^0.8.13",
     "angular-ui-bootstrap": "^1.2.5",
     "angular-ui-router": "^1.0.10",
+    "bootstrap-sass": "^3.3.7",
     "clipboard": "^1.5.9",
     "jquery": "^3.2.1",
     "moment": "^2.18.1",
