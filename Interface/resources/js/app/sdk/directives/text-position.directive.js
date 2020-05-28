@@ -7,7 +7,7 @@ define([
         return {
             restrict: 'E',
 
-            templateUrl: 'sdk/directives/text-position.directive.tpl.html',
+            template: require('./text-position.directive.tpl.html'),
 
             scope: {
                 positions: '='

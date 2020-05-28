@@ -12,7 +12,7 @@ define([
             showErrorReports: '<',
             toggleErrorReports: '&'
         },
-        templateUrl: './erindring.component.tpl.html',
+        template: require('./erindring.component.tpl.html'),
         controller: controller
     };
 

@@ -4,7 +4,7 @@ define([], function () {
         return {
             restrict: 'E',
 
-            templateUrl: 'sdk/directives/task-status.directive.tpl.html',
+            template: require('./task-status.directive.tpl.html'),
 
             scope: {
                 'taskId': '='

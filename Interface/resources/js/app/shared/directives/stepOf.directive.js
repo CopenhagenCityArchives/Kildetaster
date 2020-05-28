@@ -15,7 +15,7 @@ define([
                 total: '='
             },
 
-            templateUrl: 'shared/directives/stepOf.directive.tpl.html',
+            template: require('./stepOf.directive.tpl.html'),
             
             link: function(scope, element, attrs) {
 

@@ -118,7 +118,7 @@ define([
 
                     $uibModal.open({
 
-                        templateUrl: 'editor/error.modal.tpl.html',
+                        template: require('./error.modal.tpl.html'),
                         //The type of modal. The error modal makes more room for the error text
                         windowClass: 'modal--error',
 
@@ -304,7 +304,7 @@ define([
 
                 $uibModal.open({
 
-                    templateUrl: 'editor/error.modal.tpl.html',
+                    template: require('./error.modal.tpl.html'),
                     //The type of modal. The error modal makes more room for the error text
                     windowClass: 'modal--error',
 

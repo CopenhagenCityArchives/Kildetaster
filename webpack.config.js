@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = (env, argv) => {
-    DEV = argv.mode == 'development';
+    let DEV = argv.mode == 'development';
+    let CONSTANTS = argv.constants ? argv.constants : 'development';
 
     return {
         entry: {
@@ -52,9 +53,7 @@ module.exports = (env, argv) => {
                 'query-string': path.resolve(__dirname, 'Interface/resources/bower_components/query-string/query-string'),
         
                 //Libs
-                'jquery': path.resolve(__dirname, 'Interface/resources/bower_components/jquery/dist/jquery.min'),
                 'jquery.cookie': path.resolve(__dirname, 'Interface/resources/js/libs/jquery.cookie'),
-
             }
         },
         output: {
@@ -63,14 +62,50 @@ module.exports = (env, argv) => {
         },
         module: {
             rules: [
-                // Shimming openseadragon
+                // Shimming
                 {
                     test: /openseadragon[^-s]/,
-                    use: 'exports-loader?openseadragon'
+                    use: 'exports-loader?OpenSeadragon=window.OpenSeadragon'
                 },
                 {
                     test: /openseadragon(-|s)\w+/,
-                    use: ['imports-loader?openseadragon', 'exports-loader?[name]']
+                    use: ['imports-loader?OpenSeadragon=openseadragon']
+                },
+                {
+                    test: /angular\.min\.js$/,
+                    use: ['exports-loader?angular']
+                },
+                
+                // Exposes jQuery for use outside Webpack build
+                {
+                    test: require.resolve('jquery'),
+                    use: [{
+                        loader: 'expose-loader',
+                        options: 'jQuery'
+                    }, {
+                        loader: 'expose-loader',
+                        options: '$'
+                    }]
+                },
+
+                // Constants
+                {
+                    test: path.resolve(__dirname, 'constants.json'),
+                    use: {
+                        loader: 'ng-package-constants-loader',
+                        options: {
+                            moduleName: 'constants',
+                            configKey: CONSTANTS + '.constants',
+                            wrap: 'es6'
+                        }
+                    },
+                    type: 'javascript/auto'
+                },
+
+                // Templates
+                {
+                    test: /\.tpl\.html$/,
+                    use: ['html-loader']
                 },
 
                 // SCSS module handling
@@ -125,12 +160,15 @@ module.exports = (env, argv) => {
                 }
             ]
         },
+        devtool: 'inline-source-map',
+        devServer: {
+            contentBase: './dist'
+        },
         plugins: [
             new MiniCssExtractPlugin({
                 filename: DEV ? '[name].css' : '[name].[hash].css',
                 chunkFilename: DEV ? '[id].css' : '[id].[hash].css'
             }),
-            new CleanWebpackPlugin(),
             new HtmlWebpackPlugin({
                 filename: 'editor.html',
                 title: 'Editor',

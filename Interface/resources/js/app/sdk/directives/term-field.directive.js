@@ -3,6 +3,9 @@ define([
 ], function() {
 
     var termFieldDirective = /* @ngInject */ function($http, $sce, API, TYPEAHEADMAXIUMUM) {
+
+        var template = "";
+
         return {
 
             restrict: 'E',
@@ -13,7 +16,7 @@ define([
                 submitFunc: '&'
             },
 
-            template: '<ng-include src="getTemplateUrl()"></ng-include>',
+            template: template,
 
             controller: /* @ngInject */ function($scope) {
 
@@ -85,34 +88,26 @@ define([
                 /**
                 *
                 */
-                $scope.getTemplateUrl = function getTemplateUrl() {
-
-                    var rtn;
-
+                $scope.getTemplate = function getTemplate() {
                     //Fields with enum are also identified as being of type typeahead, but we do not have a datasource for them
                     //we there fore change the type for these fields, and handle them in a different template
                     if ($scope.type === 'typeahead' && $scope.data.field.enum && $scope.data.field.enum.length > 0) {
-                        return 'sdk/directives/term-field.directive--select.tpl.html';
+                        return require('./term-field.directive--select.tpl.html');
                     }
 
                     switch ($scope.type) {
                         case 'typeahead':
-                            rtn = 'sdk/directives/term-field.directive--' + $scope.type + '.tpl.html';
-                            break;
+                            return require('./term-field.directive--' + $scope.type + '.tpl.html');
                         case 'date':
                             $scope.placeholder = 'dd-mm-åååå';
-                            rtn = 'sdk/directives/term-field.directive--date.tpl.html';
-                            break;
+                            return require('./term-field.directive--date.tpl.html');
                         case 'string':
                         case 'string_multivalued':
                         case 'number':
                         default:
                             $scope.placeholder = 'Søgeterm';
-                            rtn = 'sdk/directives/term-field.directive--string.tpl.html';
-                            break;
+                            return require('./term-field.directive--string.tpl.html');
                     }
-
-                    return rtn;
                 }
             }
 

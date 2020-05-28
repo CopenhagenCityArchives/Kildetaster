@@ -12,7 +12,7 @@ define([
             showErrorReports: '<',
             toggleErrorReports: '&'
         },
-        templateUrl: './efterretning.component.tpl.html',
+        template: require('./efterretning.component.tpl.html'),
         controller: controller
     };
 

@@ -12,7 +12,7 @@ define([
             showErrorReports: '<',
             toggleErrorReports: '&'
         },
-        templateUrl: './school.component.tpl.html',
+        template: require('./school.component.tpl.html'),
         controller: controller
     };
 

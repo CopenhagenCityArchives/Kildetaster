@@ -9,7 +9,7 @@ define([
 
             replace: true,
 
-            templateUrl: 'sdk/directives/filterLink/filterLink.tpl.html',
+            template: require('./filterLink.tpl.html'),
 
             scope: {
                 facet: '=',

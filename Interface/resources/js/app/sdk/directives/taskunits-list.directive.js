@@ -3,7 +3,7 @@ define([], function () {
         return {
             restrict: 'E',
 
-            templateUrl: 'sdk/directives/taskunits-list.directive.tpl.html',
+            template: require('./taskunits-list.directive.tpl.html'),
 
             scope: {
                 'taskId': '='

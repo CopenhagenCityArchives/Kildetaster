@@ -10,7 +10,7 @@ define([
             collections: '<'
         },
         transclude: true,
-        templateUrl: './search-config-text.component.tpl.html',
+        template: require('./search-config-text.component.tpl.html'),
         controller: controller
     };
 

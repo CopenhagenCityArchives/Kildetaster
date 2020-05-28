@@ -8,7 +8,7 @@ define([
         return {
             restrict: 'E',
 
-            templateUrl: 'sdk/directives/facet/facet.directive.tpl.html',
+            template: require('./facet.directive.tpl.html'),
 
             scope: {
                 field: '=',

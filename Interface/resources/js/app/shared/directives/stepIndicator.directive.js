@@ -18,7 +18,7 @@ define([
                 disabled: '='
             },
 
-            templateUrl: 'shared/directives/stepIndicator.directive.tpl.html',
+            template: require('./stepIndicator.directive.tpl.html'),
             
             link: function(scope, element, attrs) {
 

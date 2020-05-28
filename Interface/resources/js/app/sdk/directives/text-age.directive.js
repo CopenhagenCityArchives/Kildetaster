@@ -7,7 +7,7 @@ define([
         return {
             restrict: 'E',
 
-            templateUrl: 'sdk/directives/text-age.directive.tpl.html',
+            template: require('./text-age.directive.tpl.html'),
 
             scope: {
                 prefix: '=',

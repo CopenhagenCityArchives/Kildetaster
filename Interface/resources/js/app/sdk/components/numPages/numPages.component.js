@@ -9,7 +9,7 @@ define([
             selected: '<',
             changeCount: '&'
         },
-        templateUrl: './numPages.component.tpl.html',
+        template: require('./numPages.component.tpl.html'),
         controller: controller
     };
 

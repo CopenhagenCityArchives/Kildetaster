@@ -8,7 +8,7 @@ define([
         bindings: {
             changePage: '&'
         },
-        templateUrl: 'sdk/components/jumpToPage/jumpToPage.component.tpl.html',
+        template: require('./jumpToPage.component.tpl.html'),
         controller: controller
     };
 

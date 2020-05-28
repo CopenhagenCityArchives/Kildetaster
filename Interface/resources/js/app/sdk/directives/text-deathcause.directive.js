@@ -7,7 +7,7 @@ define([
         return {
             restrict: 'E',
 
-            templateUrl: 'sdk/directives/text-deathcause.directive.tpl.html',
+            template: require('./text-deathcause.directive.tpl.html'),
 
             scope: {
                 deathcause: '='

@@ -29,7 +29,7 @@ define([
                 var viewer;
 
                 //Prepare the template
-                var template = $compile($templateCache.get('sdk/directives/zoom-image.directive.tpl.html'))($scope);
+                var template = $compile(require('./zoom-image.directive.tpl.html'))($scope);
         
                 //Add template to the dom
                 angular.element($element).replaceWith(template);

@@ -19,7 +19,7 @@ define([
                 shareLinkId: '=?'
             },
 
-            templateUrl: 'shared/directives/shareLink.directive.tpl.html',
+            template: require('./shareLink.directive.tpl.html'),
 
             link: function(scope, element, attrs) {
                 //Build unique id

@@ -7,7 +7,7 @@ define([
         return {
             restrict: 'E',
 
-            templateUrl: 'sdk/directives/text-gender.directive.tpl.html',
+            template: require('./text-gender.directive.tpl.html'),
 
             scope: {
                 type: '='

@@ -13,7 +13,7 @@ define([
                 submitFunc: '&'
             },
 
-            templateUrl: 'sdk/directives/term-field.directive--date.tpl.html',
+            template: require('./term-field.directive--date.tpl.html'),
 
             controller: /* @ngInject */ function($scope) {
 

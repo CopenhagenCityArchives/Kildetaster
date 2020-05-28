@@ -6,8 +6,7 @@ define([
 
     'angular-google-analytics',
 
-    './templates',
-    './constants',
+    '../../../../../constants.json',
 
     './directives/user.directive',
     './directives/imageViewer.directive',
@@ -50,7 +49,6 @@ define([
 
     ngStorage,
     AnalyticsProvider,
-    templates,
     constants,
 
     userDirective,
@@ -89,7 +87,7 @@ define([
 
     ) {
 
-    var sharedApp = angular.module('shared', ['templates', 'constants', 'ngStorage','angular-google-analytics']);
+    var sharedApp = angular.module('shared', ['constants', 'ngStorage','angular-google-analytics']);
 
     sharedApp.directive('user', userDirective);
     sharedApp.directive('imageViewer', imageViewerDirective);

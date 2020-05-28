@@ -16,7 +16,7 @@ define([
                 pagesDone: '='
             },
 
-            templateUrl: 'shared/directives/progressbar.directive.tpl.html',
+            template: require('./progressbar.directive.tpl.html'),
             
             link: function(scope, element, attrs) {
 

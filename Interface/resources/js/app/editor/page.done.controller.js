@@ -23,7 +23,7 @@ define([
                 } else {
                     $uibModal.open({
 
-                        templateUrl: 'editor/missing.modal.tpl.html',
+                        template: require('./missing.modal.tpl.html'),
                         //The type of modal. The error modal makes more room for the error text
                         windowClass: 'modal--error',
     

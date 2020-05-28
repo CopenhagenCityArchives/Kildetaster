@@ -7,7 +7,7 @@ define([
         return {
             restrict: 'E',
 
-            templateUrl: 'sdk/directives/progressbar.directive.tpl.html',
+            template: require('./progressbar.directive.tpl.html'),
             
             scope: {
                 totalPages: '=',

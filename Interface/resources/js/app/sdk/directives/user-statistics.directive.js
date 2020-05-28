@@ -2,7 +2,7 @@ define([], function () {
     var userStatisticsDirective = /*@ngInject*/ function (userService) {
         return {
             restrict: 'E',
-            templateUrl: 'sdk/directives/user-statistics.directive.tpl.html',
+            template: require('./user-statistics.directive.tpl.html'),
             scope: {
                 'sinceDays': '=',
                 'sinceUnix': '='

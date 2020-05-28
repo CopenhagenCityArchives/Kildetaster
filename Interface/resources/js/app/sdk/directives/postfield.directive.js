@@ -7,7 +7,7 @@ define([
         return {
             restrict: 'E',
 
-            templateUrl: 'sdk/directives/postfield.directive.tpl.html',
+            template: require('./postfield.directive.tpl.html'),
 
             scope: {
                 data: '=',

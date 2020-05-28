@@ -6,8 +6,6 @@ define([
     'ngstorage',
     'angular-google-analytics',
 
-    '../shared/sdk-templates',
-
     './sdk.run',
     '../shared/analyticsBootstrap',
 
@@ -32,7 +30,7 @@ define([
     './directives/progressbar.directive',
     '../shared/directives/user.directive',
     '../shared/directives/shareLink.directive',
-    '../shared/constants'
+    '../../../../../constants.json'
 
 
 ], function(
@@ -42,8 +40,6 @@ define([
 
     ngStorage,
     angularGoogleAnalytics,
-
-    sdkTemplates,
 
     sdkRun,
     analyticsBootstrap,
@@ -75,7 +71,6 @@ define([
 
     var sdkApp = angular.module('sdk', [
         'ui.bootstrap',
-        'sdk-templates',
         'search',
         'constants',
         'ngStorage',

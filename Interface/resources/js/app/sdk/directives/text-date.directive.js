@@ -7,7 +7,7 @@ define([
         return {
             restrict: 'E',
 
-            templateUrl: 'sdk/directives/text-date.directive.tpl.html',
+            template: require('./text-date.directive.tpl.html'),
 
             scope: {
                 date: '=',

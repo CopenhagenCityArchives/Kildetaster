@@ -21,7 +21,7 @@ define([
                 views: {
 
                     '': {
-                        templateUrl: 'editor/task.tpl.html',
+                        template: require('./task.tpl.html'),
                         controller: 'taskController'
                     }
                 },
@@ -93,11 +93,11 @@ define([
                 redirectTo: 'editor.page.new',
                 views: {
                     '': {
-                        templateUrl: 'editor/page.tpl.html',
+                        template: require('./page.tpl.html'),
                         controller: 'pageController'
                     },
                     'pageFooter': {
-                        templateUrl: 'editor/page.footer.tpl.html',
+                        template: require('./page.footer.tpl.html'),
                         controller: 'pageFooterController as $ctrl'
                     }
                 }
@@ -105,7 +105,7 @@ define([
 
             .state('editor.page.new', {
                 url: '/new',
-                templateUrl: 'editor/page.new.tpl.html',
+                template: require('./page.new.tpl.html'),
                 controller: 'pageNewController as $ctrl',
                 resolve: {
 
@@ -147,7 +147,7 @@ define([
                 url: '/post/{postId:int}',
                 views: {
                     '': {
-                        templateUrl: 'editor/update/updateFields.tpl.html',
+                        template: require('./update/updateFields.tpl.html'),
                         controller: 'updateFieldsController',
                     }
                 },
@@ -197,7 +197,7 @@ define([
                 url: '/selection',
                 views: {
                     '@editor.page': {
-                        templateUrl: 'editor/update/updateFields.selection.tpl.html',
+                        template: require('./update/updateFields.selection.tpl.html'),
                         controller: 'updateFieldsSelectionController'
                     }
                 }
@@ -207,7 +207,7 @@ define([
                 url: '/done',
                 views: {
                     '@editor.page': {
-                        templateUrl: 'editor/update/updateFields.done.tpl.html',
+                        template: require('./update/updateFields.done.tpl.html'),
                         controller: 'updateFieldsDoneController'
                     }
                 }
@@ -217,7 +217,7 @@ define([
                 url: '',
                 views: {
                     '@editor': {
-                        templateUrl: 'editor/page.notfound.tpl.html',
+                        template: require('./page.notfound.tpl.html'),
                         controller: function () {
                             alert('Page not found');
                         }
@@ -233,7 +233,7 @@ define([
 
                 views: {
                     '@editor.page': {
-                        templateUrl: 'editor/wizard.tpl.html',
+                        template: require('./wizard.tpl.html'),
                         controller: 'wizardController',
                     }
                 },
@@ -257,37 +257,12 @@ define([
                 }
             })
 
-            .state('editor.page.new.wizard.confirm', {
-
-                onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
-                    $uibModal.open({
-
-                        templateUrl: 'editor/confirm.modal.tpl.html',
-                        windowClass: 'modal--center',
-
-                        controller: ['$scope', '$rootScope', function ($scope, $rootScope) {
-                            $scope.dismiss = function () {
-                                $scope.$dismiss();
-                            };
-
-                            $scope.continue = function () {
-                                $rootScope.$broadcast('okToSetPageDone');
-                                $scope.$dismiss();
-                            };
-                        }]
-                    }).result.finally(function () {
-                        //Go back to previous state
-                        $state.go('^');
-                    });
-                }]
-            })
-
             .state('editor.page.pageFull', {
 
                 url: '/full',
                 views: {
                     '@editor.page': {
-                        templateUrl: 'editor/wizard.done.tpl.html',
+                        template: require('./wizard.done.tpl.html'),
                         controller: 'wizardDoneController'
                     }
 
@@ -299,7 +274,7 @@ define([
                 url: '/done',
                 views: {
                     '': {
-                        templateUrl: 'editor/page.done.tpl.html',
+                        template: require('./page.done.tpl.html'),
                         controller: 'pageDoneController as $ctrl'
                     }
                 }
@@ -308,14 +283,14 @@ define([
             .state('feedback', {
 
                 url: '/feedback/{feedbackId:int}',
-                templateUrl: 'editor/feedback/feedback.tpl.html',
+                template: require('./feedback/feedback.tpl.html'),
                 controller: 'feedbackController'
             })
 
 
             .state('error', {
                 url: '/error',
-                templateUrl: 'editor/error.tpl.html',
+                template: require('./error.tpl.html'),
                 controller: ['ERRORURL', function (ERRORURL) {
                     //Redirect to a page on KBH joomla
                     window.location.href = ERRORURL;

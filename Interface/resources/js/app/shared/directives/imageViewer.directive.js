@@ -42,7 +42,7 @@ define([
                 //Openhttps://github.com/openseadragon/openseadragon/issues/759
 
                 //Prepare the template
-                var template = $compile($templateCache.get('shared/directives/imageViewer.directive.tpl.html'))($scope);
+                var template = $compile(require('./imageViewer.directive.tpl.html'))($scope);
 
                 //Add template to the dom
                 angular.element($element).replaceWith(template);

@@ -7,7 +7,7 @@ define([
         return {
             restrict: 'E',
 
-            templateUrl: 'sdk/directives/text-address.directive.tpl.html',
+            template: require('./text-address.directive.tpl.html'),
 
             scope: {
                 address: '='

@@ -11,7 +11,7 @@ define([
             postsPrPage: '<',
             goToPage: '&'
         },
-        templateUrl: './pagination.component.tpl.html',
+        template: require('./pagination.component.tpl.html'),
         controller: controller
     };
 

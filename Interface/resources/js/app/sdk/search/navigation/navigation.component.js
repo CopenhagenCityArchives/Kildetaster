@@ -8,7 +8,7 @@ define([
         bindings: {
             searchData: '<'
         },
-        templateUrl: './navigation.component.tpl.html',
+        template: require('./navigation.component.tpl.html'),
         controller: controller
     };
 

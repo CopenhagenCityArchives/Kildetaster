@@ -14,7 +14,7 @@ define([
                 data: '='
             },
 
-            templateUrl: 'shared/directives/user.directive.tpl.html',
+            template: require('./user.directive.tpl.html'),
 
             link: function(scope, element, attrs) {
 

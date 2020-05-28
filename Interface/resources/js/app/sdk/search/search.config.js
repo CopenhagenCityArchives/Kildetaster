@@ -24,7 +24,7 @@ define([
                 abstract: true,
                 views: {
                     '': {
-                        templateUrl: 'sdk/search/search.main.tpl.html'
+                        template: require('./search.main.tpl.html')
                     }
                 }
             })
@@ -34,7 +34,7 @@ define([
                 url: '',
                 views: {
                     '': {
-                        templateUrl: 'sdk/search/search.tpl.html',
+                        template: require('./search.tpl.html'),
                         controller: 'searchController as ctrl'
                     }
                 },
@@ -63,7 +63,7 @@ define([
                 url: 'results',
                 views: {
                     '@': {
-                        templateUrl: 'sdk/search/search.results.tpl.html',
+                        template: require('./search.results.tpl.html'),
                         controller: 'searchResultsController as ctrl'
                     }
                 }
@@ -74,7 +74,7 @@ define([
                 abstract: true,
                 views: {
                     '@': {
-                        templateUrl: 'sdk/search/search.post.tpl.html'
+                        template: require('./search.post.tpl.html')
                     }
                 }
 

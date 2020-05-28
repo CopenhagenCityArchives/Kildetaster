@@ -7,7 +7,7 @@ define([
         return {
             restrict: 'E',
 
-            templateUrl: 'sdk/directives/postCategory.directive.tpl.html',
+            template: require('./postCategory.directive.tpl.html'),
 
             scope: {
                 data: '=',

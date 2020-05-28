@@ -15,7 +15,7 @@ define([
                 highlighting: "="
             },
 
-            templateUrl: 'sdk/directives/datapost-erindring.directive.tpl.html',
+            template: require('./datapost-erindring.directive.tpl.html'),
 
             link: function(scope, element, attr) {
                 // Set up post information

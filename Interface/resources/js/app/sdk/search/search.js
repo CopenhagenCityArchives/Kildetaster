@@ -13,8 +13,6 @@ define([
     'angular-animate',
     'angular-google-analytics',
 
-    '../../shared/sdk-templates',
-
     '../../shared/services/search.service',
     '../../shared/services/solr.service',
     '../../shared/services/error.service',
@@ -93,8 +91,6 @@ define([
     angularAnimate,
     angularGoogleAnalytics,
 
-    sdkTemplates,
-
     searchService,
     solrService,
     errorService,
@@ -166,7 +162,6 @@ define([
     window.moment = moment;
 
     var searchApp = angular.module('search', [
-        'sdk-templates',
         'constants',
         'ui.router',
         'ui.select',

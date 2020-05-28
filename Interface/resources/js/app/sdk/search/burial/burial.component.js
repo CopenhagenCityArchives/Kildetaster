@@ -13,7 +13,7 @@ define([
             showErrorReports: '<',
             toggleErrorReports: '&'
         },
-        templateUrl: './burial.component.tpl.html',
+        template: require('./burial.component.tpl.html'),
         controller: controller
     };
 

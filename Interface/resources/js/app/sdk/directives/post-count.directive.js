@@ -8,7 +8,7 @@ define([
 
             restrict: 'E',
 
-            templateUrl: 'sdk/directives/post-count.directive.tpl.html',
+            template: require('./post-count.directive.tpl.html'),
 
             scope: {
                 page: '=',

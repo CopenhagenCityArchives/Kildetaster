@@ -15,7 +15,7 @@ define([
                 postId: '='
             },
 
-            templateUrl: 'shared/directives/imageViewer.directive.overlay.tpl.html',
+            template: require('./imageViewer.directive.overlay.tpl.html'),
 
 
             link: function(scope, element, attrs) {

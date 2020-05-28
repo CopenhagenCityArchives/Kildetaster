@@ -20,7 +20,7 @@ define([], function () {
 
             var modalInstance = $uibModal.open({
                 animation: true,
-                templateUrl: 'sdk/search/error-report/error-report.tpl.html',
+                template: require('../error-report/error-report.tpl.html'),
                 controller: 'errorReportController as $ctrl',
                 resolve: {
                     errorReportingConfig: function () {

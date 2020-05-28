@@ -11,7 +11,7 @@ define([
             data: '<',
             errorReportingConfig: '<'
         },
-        templateUrl: './post.component.tpl.html',
+        template: require('./post.component.tpl.html'),
         controller: controller
     };
 
