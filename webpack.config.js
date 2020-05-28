@@ -8,12 +8,22 @@ module.exports = (env, argv) => {
     let CONSTANTS = argv.constants ? argv.constants : 'development';
 
     return {
+
+        // entrypoints
         entry: {
             editor: './Interface/resources/js/main.js',
             sdk: './Interface/resources/js/sdk-main.js'
         },
+
+        // resulting bundles
+        output: {
+            filename: '[name].[hash].js',
+            path: path.resolve(__dirname, 'dist'),
+        },
+
         resolve: {
             extensions: ['.js', '.jsx', '.scss'],
+
             alias: {
                 'almond': path.resolve(__dirname, 'Interface/resources/bower_components/almond/almond'),
                 
@@ -56,10 +66,7 @@ module.exports = (env, argv) => {
                 'jquery.cookie': path.resolve(__dirname, 'Interface/resources/js/libs/jquery.cookie'),
             }
         },
-        output: {
-            filename: '[name].[hash].js',
-            path: path.resolve(__dirname, 'dist'),
-        },
+
         module: {
             rules: [
                 // Shimming
@@ -156,32 +163,43 @@ module.exports = (env, argv) => {
                             outputPath: 'fonts/'
                         }
                     }
-
                 }
             ]
         },
+
+        // source maps for development
         devtool: 'inline-source-map',
+
+        // configure webpack-dev-server to serve static dump files
         devServer: {
             contentBase: ['./dist', './Interface/html/dump/search_files', './Interface/html/dump/index_files'  ],
             contentBasePublicPath: ['/', '/resources/search_files', '/resources/index_files' ]
         },
+
         plugins: [
+            // CSS is extracted for production builds
             new MiniCssExtractPlugin({
                 filename: DEV ? '[name].css' : '[name].[hash].css',
                 chunkFilename: DEV ? '[id].css' : '[id].[hash].css'
             }),
+
+            // development webpage for editor app
             new HtmlWebpackPlugin({
                 filename: 'editor.html',
                 title: 'Editor',
                 template: 'templates/editor.html',
                 inject: false
             }),
+
+            // development webpage for sdk components and directives
             new HtmlWebpackPlugin({
                 filename: 'sdk.html',
                 title: 'SDK',
                 template: 'templates/sdk.html',
                 inject: false
             }),
+
+            // development webpage for search app
             new HtmlWebpackPlugin({
                 filename: 'search.html',
                 title: 'Search',
