@@ -75,7 +75,7 @@
             width: 20px;
             height: 20px;
 
-            content: inline("resources/images/icon_cross.svg");
+            content: url("../images/icon_cross.svg");
         }
     }
     input[type="checkbox"]:checked + label {
@@ -330,7 +330,7 @@
             height: 11px;
             margin-right: 10px;
 
-            content: inline("resources/images/icon_plus.svg");
+            content: url("../images/icon_plus.svg");
         }
     }
 

@@ -123,12 +123,25 @@ module.exports = (env, argv) => {
                 // Fonts
                 {
                     test: /\.(woff2?|ttf|eot|svg)$/,
+                    exclude: /images/,
                     use: 
                     {
                         loader: 'file-loader',
                         options: {
                             name: '[name].[ext]',
                             outputPath: 'fonts/'
+                        }
+                    }
+                },
+
+                // Images
+                {
+                    test: /\.(svg|png|gif)$/,
+                    use: {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath: 'images/'
                         }
                     }
                 }

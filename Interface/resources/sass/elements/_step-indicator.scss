@@ -56,7 +56,7 @@
                 width: 25px;
                 height: 25px;
 
-                content: inline("resources/images/checkmark.svg");
+                content: url("../images/checkmark.svg");
                 transform: translateY(-50%);
 
                 color: $white;
