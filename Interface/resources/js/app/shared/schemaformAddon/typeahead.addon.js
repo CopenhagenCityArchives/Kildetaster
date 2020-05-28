@@ -1,9 +1,7 @@
 define([
-
     'angular',
-    'schemaForm',
+    'angular-schema-form',
     'angular-schema-form-bootstrap'
-
 ], function(ang, sfForm, sfBootstrap) {
 
     var schemaForm = angular.module('schemaForm');

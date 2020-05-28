@@ -25,7 +25,6 @@ module.exports = (env, argv) => {
             extensions: ['.js', '.jsx', '.scss'],
 
             alias: {
-                'angular-cookies': path.resolve(__dirname, 'Interface/resources/bower_components/angular-cookies/angular-cookies.min'),
                 'ngstorage': path.resolve(__dirname, 'Interface/resources/bower_components/ngstorage/ngStorage.min'),
 
                 // Polyfill for ui-router events being deprecated @see https://ui-router.github.io/guide/ng1/migrate-to-1_0
@@ -33,13 +32,9 @@ module.exports = (env, argv) => {
 
                 'angularjs-datepicker': path.resolve(__dirname, 'Interface/resources/bower_components/angularjs-datepicker/dist/angular-datepicker'),
 
-                //Angular json form
-                'tv4': path.resolve(__dirname, 'Interface/resources/bower_components/tv4/tv4'),
-                'objectpath': path.resolve(__dirname, 'Interface/resources/bower_components/objectpath/lib/ObjectPath'),
-                'schemaForm': path.resolve(__dirname, 'Interface/resources/bower_components/angular-schema-form/dist/schema-form.min'),
-                'angular-schema-form-bootstrap': path.resolve(__dirname, 'Interface/resources/bower_components/angular-schema-form/dist/bootstrap-decorator'),
+                'angular-schema-form-bootstrap': path.resolve(__dirname, 'node_modules/angular-schema-form/dist/bootstrap-decorator'),
                 //Copy /paste library
-
+                'schemaForm': 'angular-schema-form',
                 'angular-flash': path.resolve(__dirname, 'Interface/resources/bower_components/angular-flash-alert/dist/angular-flash'),
 
                 'openseadragon': path.resolve(__dirname, 'Interface/resources/bower_components/openseadragon/built-openseadragon/openseadragon/openseadragon.min'),

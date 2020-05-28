@@ -12,7 +12,7 @@ define([
     'angular-flash',
     'angular-google-analytics',
 
-    'schemaForm',
+    'angular-schema-form',
     'angular-schema-form-bootstrap',
 
     './editor.config',
