@@ -3,7 +3,7 @@
         
         <head>
             <title><%= htmlWebpackPlugin.options.title %></title>
-            <%= htmlWebpackPlugin.tags.headTags.filter((tag) => tag.tagName == 'link' && tag.attributes.href.startsWith('sdk')) %>
+            <%= htmlWebpackPlugin.tags.headTags.filter(tag => tag.attributes.href.indexOf('sdk') != -1) %>
 
             <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="45617c96-571e-4b06-9521-9a417f327c48" data-blockingmode="auto" type="text/javascript"></script>
             <script type="text/plain" data-cookieconsent="statistics">
@@ -1269,7 +1269,7 @@
         </section>
 
 
-        <%= htmlWebpackPlugin.tags.bodyTags.filter((tag) => tag.tagName == 'script' && tag.attributes.src.startsWith('sdk')) %>
+        <%= htmlWebpackPlugin.tags.bodyTags.filter(tag => tag.attributes.src.indexOf('sdk') != -1) %>
                         </div>
                     </div>
                 </div>

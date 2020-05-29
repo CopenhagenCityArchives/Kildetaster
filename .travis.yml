@@ -13,12 +13,8 @@ addons:
 
 install:
   - npm install
-  - npm install -g grunt-cli
-  - npm install -g bower
-  - bower install
-  - if [ "$TRAVIS_BRANCH" = "development" ]; then grunt dev; fi
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then grunt build; fi
-  - if [ "$TRAVIS_BRANCH" = "public-beta" ]; then grunt dev_public_beta; fi
+  - if [ "$TRAVIS_BRANCH" = "development" ]; then npm run build --mode=development --constants development --publish=${PUBLISH_LOCATION}; fi
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then npm run build --mode=production --constants production --publish=${PUBLISH_LOCATION}; fi
 
 deploy:
     # deploy develop to the staging environment

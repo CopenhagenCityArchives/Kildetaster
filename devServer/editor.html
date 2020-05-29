@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8">
         <title><%= htmlWebpackPlugin.options.title %></title>
-        <%= htmlWebpackPlugin.tags.headTags.filter((tag) => tag.tagName == 'link' && tag.attributes.href.startsWith('editor')) %>
+        <%= htmlWebpackPlugin.tags.headTags.filter(tag => tag.attributes.href.indexOf('editor') != -1) %>
     </head>
     <body>
         <section data-editor-app>
@@ -12,6 +12,6 @@
             <section ui-view></section>
         
         </section>
-        <%= htmlWebpackPlugin.tags.bodyTags.filter((tag) => tag.tagName == 'script' && tag.attributes.src.startsWith('editor')) %>
+        <%= htmlWebpackPlugin.tags.bodyTags.filter(tag => tag.attributes.src.indexOf('editor') != -1) %>
     </body>
 </html>

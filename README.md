@@ -22,6 +22,9 @@ The project can be built using `--mode=production` or `--mode=development`. The
 production mode minifies the build, extracts CSS and uses external source maps.
 The development build is unminified, uses inline source maps.
 
+The `--publish=<PUBLISH LOCATION>` flag indicates a prefix put in front of the
+loaded source files in the built `index.html` file for the editor application.
+
 Select a set of constants (or configuration) with `--constants=<CONSTANTSET>`. It
 defaults to `development`.
 
@@ -33,6 +36,13 @@ Building
 
 ```
 npm run build
+```
+
+### Building for production
+
+To build for production, run
+```
+npm run build --mode=production --constants=production --publish=<PUBLISH LOCATION>
 ```
 
 Development

@@ -6,9 +6,10 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = (env, argv) => {
     let DEV = argv.mode == 'development';
     let CONSTANTSET = argv.constants ? argv.constants : 'development';
+    let PUBLISH = argv.mode == 'publish';
+    let DEVSERVER = /webpack-dev-server/.test(argv['$0'])
 
-    return {
-
+    var config = {
         // entrypoints
         entry: {
             editor: './src/js/main.js',
@@ -17,7 +18,9 @@ module.exports = (env, argv) => {
 
         // resulting bundles
         output: {
-            filename: '[name].[hash].js',
+            filename: (pathData) => {
+                return pathData.chunk.name == 'sdk' ? '[name].js' : '[name].[hash].js'
+            },
             path: path.resolve(__dirname, 'dist'),
         },
 
@@ -145,13 +148,11 @@ module.exports = (env, argv) => {
             contentBase: [
                 './dist',
                 './devServer/search_files',
-                './devServer/dump/index_files',
                 './src/fonts'
             ],
             contentBasePublicPath: [
                 '/',
                 '/resources/search_files',
-                '/resources/index_files',
                 '/resources/fonts'
             ],
             writeToDisk: true
@@ -162,33 +163,50 @@ module.exports = (env, argv) => {
 
             // CSS is extracted for production builds
             new MiniCssExtractPlugin({
-                filename: '[name].[hash].css',
+                filename: pathData => {
+                    return pathData.chunk.name == 'sdk' ? '[name].css' : '[name].[hash].css';
+                },
                 chunkFilename: '[id].[hash].css'
             }),
 
-            // development webpage for editor app
+            // Production index
             new HtmlWebpackPlugin({
-                filename: 'editor.html',
-                title: 'Editor',
-                template: 'devServer/editor.html',
-                inject: false
-            }),
-
-            // development webpage for sdk components and directives
-            new HtmlWebpackPlugin({
-                filename: 'sdk.html',
-                title: 'SDK',
-                template: 'devServer/sdk.html',
-                inject: false
-            }),
-
-            // development webpage for search app
-            new HtmlWebpackPlugin({
-                filename: 'search.html',
-                title: 'Search',
-                template: 'devServer/search.html',
-                inject: false
+                filename: 'index.html',
+                template: './src/html/index.html',
+                inject: false,
+                templateParameters: {
+                    'PUBLISH': 'https://www.kbhkilder.dk/'
+                }
             })
         ]
     };
+
+    // Only create test pages if running through dev server
+    if (DEVSERVER) {
+        // development webpage for editor app
+        config.plugins.push(new HtmlWebpackPlugin({
+            filename: 'editor.html',
+            title: 'Editor',
+            template: './devServer/editor.html',
+            inject: false
+        }));
+
+        // development webpage for sdk components and directives
+        config.plugins.push(new HtmlWebpackPlugin({
+            filename: 'sdk.html',
+            title: 'SDK',
+            template: './devServer/sdk.html',
+            inject: false
+        }));
+
+        // development webpage for search app
+        config.plugins.push(new HtmlWebpackPlugin({
+            filename: 'search.html',
+            title: 'Search',
+            template: './devServer/search.html',
+            inject: false
+        }));
+    }
+
+    return config;
 };
