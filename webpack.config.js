@@ -6,7 +6,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = (env, argv) => {
     let DEV = argv.mode == 'development';
     let CONSTANTSET = argv.constants ? argv.constants : 'development';
-    let PUBLISH = argv.mode == 'publish';
+    let PUBLISH = argv.publish ? argv.publish : '/';
     let DEVSERVER = /webpack-dev-server/.test(argv['$0'])
 
     var config = {
@@ -172,7 +172,7 @@ module.exports = (env, argv) => {
                 template: './src/html/index.html',
                 inject: false,
                 templateParameters: {
-                    'PUBLISH': 'https://www.kbhkilder.dk/'
+                    'PUBLISH': PUBLISH
                 }
             })
         ]
