@@ -2,10 +2,10 @@ define([
 
     'angular',
     'openseadragon',
-    'libs/openseadragonselection',
-    'libs/openseadragon-filtering',
-    'libs/openseadragon-imaginghelper',
-    'libs/openseadragon-viewerinputhook'
+    'openseadragonselection',
+    'openseadragon-filtering',
+    '@openseadragon-imaging/openseadragon-imaginghelper',
+    '@openseadragon-imaging/openseadragon-viewerinputhook'
 
 ], function(ang, OpenSeadragon, osdSelection, filtering, imagingHelper, hookHelper) {
 

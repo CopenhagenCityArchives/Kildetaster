@@ -2,8 +2,8 @@ define([
 
     'angular',
     'openseadragon',
-    'libs/openseadragonselection',
-    'libs/openseadragon-filtering'
+    'openseadragonselection',
+    'openseadragon-filtering'
 
 ], function(ang, OpenSeadragon, osdSelection, filtering) {
 

@@ -28,10 +28,7 @@ module.exports = (env, argv) => {
                 'angular-ui-router/stateEvents': path.resolve(__dirname, 'node_modules/angular-ui-router/release/stateEvents'),
                 'angular-schema-form-bootstrap': path.resolve(__dirname, 'node_modules/angular-schema-form/dist/bootstrap-decorator'),
                 'schemaForm': 'angular-schema-form',
-                'libs/openseadragonselection': path.resolve(__dirname, 'src/js/libs', 'openseadragonselection'),
-                'libs/openseadragon-filtering': path.resolve(__dirname, 'src/js/libs', 'openseadragon-filtering'),
-                'libs/openseadragon-imaginghelper': path.resolve(__dirname, 'src/js/libs', 'openseadragon-imaginghelper'),
-                'libs/openseadragon-viewerinputhook': path.resolve(__dirname, 'src/js/libs', 'openseadragon-viewerinputhook'),
+                'openseadragon': require.resolve('openseadragon'), // override openseadragonselection dependency
             }
         },
 
@@ -39,15 +36,7 @@ module.exports = (env, argv) => {
             rules: [
                 // Shimming
                 {
-                    test: /openseadragon[^-s]/,
-                    use: 'exports-loader?OpenSeadragon=window.OpenSeadragon'
-                },
-                {
-                    test: /openseadragon(-|s)\w+/,
-                    use: ['imports-loader?OpenSeadragon=openseadragon']
-                },
-                {
-                    test: /angular\.min\.js$/,
+                    test: require.resolve('angular'),
                     use: ['exports-loader?angular']
                 },
                 
@@ -173,8 +162,8 @@ module.exports = (env, argv) => {
 
             // CSS is extracted for production builds
             new MiniCssExtractPlugin({
-                filename: DEV ? '[name].css' : '[name].[hash].css',
-                chunkFilename: DEV ? '[id].css' : '[id].[hash].css'
+                filename: '[name].[hash].css',
+                chunkFilename: '[id].[hash].css'
             }),
 
             // development webpage for editor app

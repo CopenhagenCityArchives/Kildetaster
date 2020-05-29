@@ -14,6 +14,8 @@
   "configs": "Interface/configs",
   "html": "Interface/html",
   "dependencies": {
+    "@openseadragon-imaging/openseadragon-imaginghelper": "^2.1.1",
+    "@openseadragon-imaging/openseadragon-viewerinputhook": "^2.1.0",
     "angular": "^1.6.10",
     "angular-animate": "^1.6.10",
     "angular-filter": "^0.5.8",
@@ -29,6 +31,8 @@
     "moment": "^2.18.1",
     "ngstorage": "^0.3.10",
     "openseadragon": "^2.1.0",
+    "openseadragon-filtering": "github:usnistgov/OpenSeadragonFiltering",
+    "openseadragonselection": "^1.8.0",
     "request": "<=2.81.0",
     "ui-select": "^0.19.4"
   },
@@ -86,6 +90,9 @@
     "webpack-dev-server": "^3.11.0"
   },
   "scripts": {
-    "xtest": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS"
+    "xtest": "./node_modules/karma/bin/karma start --single-run --browsers PhantomJS",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server"
   }
 }
