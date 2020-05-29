@@ -63,3 +63,9 @@ pages can be visited:
 
 - `http://localhost:8080/editor.html#/task/<TASKID>/page/<PAGEID>/post/<POSTID>`
   contains the editor. Note that you need to fillout `TASKID`, `PAGEID` and `POSTID`.
+
+Remember that arguments can be passed to webpack, like so:
+
+```
+npm start -- --mode=production ...
+```
