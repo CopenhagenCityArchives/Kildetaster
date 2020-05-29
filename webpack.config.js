@@ -163,10 +163,7 @@ module.exports = (env, argv) => {
 
             // CSS is extracted for production builds
             new MiniCssExtractPlugin({
-                filename: pathData => {
-                    return pathData.chunk.name == 'sdk' ? '[name].css' : '[name].[hash].css';
-                },
-                chunkFilename: '[id].[hash].css'
+                moduleFilename: ({name}) => name == 'sdk' ? '[name].css' : '[name].[hash].css',
             }),
 
             // Production index
