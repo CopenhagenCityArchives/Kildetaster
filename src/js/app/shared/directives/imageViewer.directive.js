@@ -25,7 +25,7 @@ define([
                 editArea: '='
             },
 
-            controller: /*@ngInject*/ function($scope, $compile, $templateCache, $element, $rootScope, $timeout) {
+            controller: /*@ngInject*/ function(RESOURCE_URL, $scope, $compile, $templateCache, $element, $rootScope, $timeout) {
 
                 var
                     //Reference to the viewer instance
@@ -384,7 +384,7 @@ define([
                     //Center buttons?
                     styleConfirmDenyButtons: true,
 
-                    prefixUrl: '/resources/images/',
+                    prefixUrl: RESOURCE_URL + "/images/",
 
                     navImages: { // overwrites OpenSeadragon's options
                         selection: {

@@ -3,7 +3,7 @@
     "constants": {
       "JSONURL": "/resources/mock/",
       "EDITOR_URL": "http://localhost:8080/editor.html",
-      "RESOURCE_URL": "/resources/",
+      "RESOURCE_URL": "http://localhost:8080/",
       "API_URL": "https://www.kbhkilder.dk/api",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
       "SEARCH_CONFIG_URL": "https://www.kbhkilder.dk/1508/experimental/searchconfig",
@@ -20,7 +20,7 @@
     "constants": {
       "JSONURL": "/resources/mock/",
       "EDITOR_URL": "http://localhost:8080/editor.html",
-      "RESOURCE_URL": "/resources/",
+      "RESOURCE_URL": "http://localhost:8080/",
       "API_URL": "https://www.kbhkilder.dk/1508/experimental",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
       "SEARCH_CONFIG_URL": "https://www.kbhkilder.dk/1508/experimental/searchconfig",
