@@ -13,6 +13,8 @@ requirejs.config({
         'angular-sanitize': '../bower_components/angular-sanitize/angular-sanitize.min',
         'ngstorage': '../bower_components/ngstorage/ngStorage.min',
         'angular-google-analytics': '../bower_components/angular-google-analytics/dist/angular-google-analytics.min',
+        'auth0.auth0': '../bower_components/auth0.js/build/auth0',
+        'angular-auth0': 'libs/angular-auth0',
         'angular-cookies': '../bower_components/angular-cookies/angular-cookies.min',
 
         'angular-bootstrap'     : '../bower_components/angular-bootstrap/ui-bootstrap-tpls.min',
@@ -55,6 +57,7 @@ requirejs.config({
         'angular-cookies': ['angular'],
         'ngstorage': ['angular'],
         'angular-google-analytics': ['angular'],
+        'angular-auth0': ['angular', 'auth0.auth0'],
         'angularjs-datepicker': ['angular'],
 
         'app/shared/constants': ['angular'],

@@ -1,6 +1,8 @@
 define([
 
     'angular',
+    'app/shared/shared',
+    'angular-auth0',
     'angular-bootstrap',
 
     'ngstorage',
@@ -38,6 +40,8 @@ define([
 ], function(
 
     ang,
+    shared,
+    angularAuth0,
     angularBootstrap,
 
     ngStorage,
