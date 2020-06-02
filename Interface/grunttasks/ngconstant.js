@@ -64,7 +64,7 @@ module.exports = {
             TOKENURL: 'https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERRORURL: 'https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
             SEARCHURL: 'https://www.kbharkiv.dk/permalink',
-            BYPASSAUTH: true,
+            BYPASSAUTH: false,
             //Number of items to fetch when working with typeahead data fields
             TYPEAHEADMAXIUMUM: 75
         }
