@@ -106,7 +106,7 @@ define([
                         var deferred = $q.defer();
 
                         // Get token if the user is logged in
-                        tokenService.requestToken(true).then(function (response) {
+                        tokenService.requestToken().then(function (response) {
                             if (response) {
                                 return userService.getUserInfo(response.tokenData.user_id);
                             }
