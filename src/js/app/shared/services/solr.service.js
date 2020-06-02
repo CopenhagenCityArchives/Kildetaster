@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var solrService = /*@ngInject*/ function solrService($q, $http, API, SOLRAPI, JSONURL, searchService, $filter, $location) {
+    var solrService = /*@ngInject*/ function solrService($q, $http, API_URL, SOLR_API_URL, JSONURL, searchService, $filter, $location) {
 
         var that = this;
         /**
@@ -238,7 +238,7 @@ define([
                         // console.log('Fetching new data');
 
                         $http({
-                            url: SOLRAPI + buildSolrBaseQuery(searchConfig, queries) + '&' + buildQueryString(queries, filterQueries, collections, sortField, sortDirection, {
+                            url: SOLR_API_URL + buildSolrBaseQuery(searchConfig, queries) + '&' + buildQueryString(queries, filterQueries, collections, sortField, sortDirection, {
                                 start: index,
                                 // Number of posts to fetch
                                 rows: rows

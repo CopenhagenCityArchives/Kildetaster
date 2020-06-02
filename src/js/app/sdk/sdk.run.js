@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var sdkRun = /*@ngInject*/ function sdkRun(SDKCSSURL, $state, Analytics, $transitions) {
+    var sdkRun = /*@ngInject*/ function sdkRun($state, Analytics, $transitions) {
 
         //Track all changes in state in order to track event with Google Analytics
         $transitions.onStart({}, function(trans) {

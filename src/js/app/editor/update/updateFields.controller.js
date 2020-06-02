@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var updateFieldsController = /*@ngInject*/ function updateFieldsController($uibModal, SEARCHURL, Flash, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService, $rootScope, $sessionStorage, errorService, $state, helpers) {
+    var updateFieldsController = /*@ngInject*/ function updateFieldsController($uibModal, PERMALINK_URL, Flash, $scope, $location, $timeout, taskData, pageData, postData, stepService, entryService, $rootScope, $sessionStorage, errorService, $state, helpers) {
 
         $scope.values = postData.entryData;
 
@@ -19,7 +19,7 @@ define([
 
         //Build a direct link to this post
 
-        $scope.shareLink = SEARCHURL + '/post/' + taskData.collection_id + '-' + postData.entryData.concrete_entries_id;
+        $scope.shareLink = PERMALINK_URL + '/post/' + taskData.collection_id + '-' + postData.entryData.concrete_entries_id;
 
         $scope.errorReports = postData.errorReports;
 

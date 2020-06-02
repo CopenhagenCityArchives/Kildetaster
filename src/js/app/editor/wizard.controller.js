@@ -4,7 +4,7 @@ define([
 
 ], function(Clipboard) {
 
-    var wizardController = /*@ngInject*/ function wizardController($uibModal, helpers, $scope, $rootScope, postService, stepService, pageData, taskData, $state, $timeout, $http, API, pageService, SEARCHURL, Analytics, $transitions, $q) {
+    var wizardController = /*@ngInject*/ function wizardController($uibModal, helpers, $scope, $rootScope, postService, stepService, pageData, taskData, $state, $timeout, $http, API_URL, pageService, PERMALINK_URL, Analytics, $transitions, $q) {
 
         //Indicates if we should show the controls for accepting a new area (used on all other steps than the first)
         $scope.showSelectionControls = false;
@@ -284,7 +284,7 @@ define([
 
             $http({
                 method: 'POST',
-                url: API + '/entries/',
+                url: API_URL + '/entries/',
                 data: postData
             }).then(function(response) {
                 deferred.resolve(response);
@@ -498,7 +498,7 @@ define([
         $scope.$watch('shareLinkId', function(newVal) {
 
             if (newVal !== undefined) {
-                var link = SEARCHURL + '/post/' + newVal;
+                var link = PERMALINK_URL + '/post/' + newVal;
 
                 $scope.shareLink = link;
             }

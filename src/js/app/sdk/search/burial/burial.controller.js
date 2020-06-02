@@ -1,6 +1,6 @@
 define([], function() {
 
-    var policeController = /* @ngInject */ function policeController(helpers, EDITORURL, $scope) {
+    var policeController = /* @ngInject */ function policeController(helpers, EDITOR_URL, $scope) {
 
         var that = this;
 
@@ -44,7 +44,7 @@ define([], function() {
             //Determine the editor link visibility based on wether or not the user can edit
             that.showEditorLink = allowedToEdit();
 
-            that.editorUrl = EDITORURL + '/#/task/' + that.data.task_id + '/page/' + that.data.page_id + '/post/' + that.data.post_id;
+            that.editorUrl = EDITOR_URL + '#/task/' + that.data.task_id + '/page/' + that.data.page_id + '/post/' + that.data.post_id;
 
         };
 

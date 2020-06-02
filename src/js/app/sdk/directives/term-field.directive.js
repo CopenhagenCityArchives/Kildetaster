@@ -2,7 +2,7 @@ define([
     'angular'
 ], function(angular) {
 
-    var termFieldDirective = /* @ngInject */ function($http, $sce, API, TYPEAHEADMAXIUMUM) {
+    var termFieldDirective = /* @ngInject */ function($http, $sce, API_URL, TYPEAHEAD_MAX) {
 
         var template = "";
 
@@ -65,7 +65,7 @@ define([
 
                     var datasourceUrl = field.datasource.url + encodeURIComponent(term);
                     if (!datasourceUrl.startsWith('http')) {
-                        datasourceUrl = API + '/' + datasourceUrl;
+                        datasourceUrl = API_URL + '/' + datasourceUrl;
                     }
                     return $http({
                         url: datasourceUrl,
@@ -77,7 +77,7 @@ define([
                         });
 
                         //Only show a set number of hits
-                        $scope.options = arr.slice(0, TYPEAHEADMAXIUMUM);
+                        $scope.options = arr.slice(0, TYPEAHEAD_MAX);
 
                     }).finally(function() {
                         //Done loading

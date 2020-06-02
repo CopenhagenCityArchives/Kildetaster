@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var unitService = /*@ngInject*/ function unitService($http, $q, API) {
+    var unitService = /*@ngInject*/ function unitService($http, $q, API_URL) {
 
         return {
 
@@ -16,7 +16,7 @@ define([
                 //unit/ get metadata
    
                 return $http({
-                    url: API + '/units/' + unitId,
+                    url: API_URL + '/units/' + unitId,
                     method: 'GET',
                     params: params
                 })

@@ -3,12 +3,12 @@ define([
 
 ], function() {
 
-    var helpersService = /*@ngInject*/ function helpersService(API) {
+    var helpersService = /*@ngInject*/ function helpersService(API_URL) {
 
         return {
 
             getImageUrlByPostId: function(postId) {
-                return API + '/posts/' + postId + '/image';
+                return API_URL + '/posts/' + postId + '/image';
             },
 
             /**

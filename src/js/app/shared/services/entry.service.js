@@ -3,14 +3,14 @@ define([
 
 ], function() {
 
-    var entryService = /*@ngInject*/ function entryService($http, $q, $filter, API, Flash) {
+    var entryService = /*@ngInject*/ function entryService($http, $q, $filter, API_URL, Flash) {
 
         return {
 
             getEntry: function(entryId) {
 
                 return $http({
-                    url: API + '/entries/' + entryId,
+                    url: API_URL + '/entries/' + entryId,
                     method: 'GET'
                 })
                 .then(function(response) {
@@ -29,7 +29,7 @@ define([
                 var deferred = $q.defer();
 
                 $http({
-                    url: API + '/entries/' + entryId,
+                    url: API_URL + '/entries/' + entryId,
                     method: 'PUT',
                     data: data
                 })

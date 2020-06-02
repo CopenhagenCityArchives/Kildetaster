@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var userService = /*@ngInject*/ function userService($q, $http, API) {
+    var userService = /*@ngInject*/ function userService($q, $http, API_URL) {
 
         return {
 
@@ -17,7 +17,7 @@ define([
             getUsers: function getUsers(unitId, taskId) {
 
                 return $http({
-                    url: API + '/activeusers',
+                    url: API_URL + '/activeusers',
                     method: 'GET',
                     params: {
                         unit_id: unitId,
@@ -40,7 +40,7 @@ define([
             getUserActivities: function(params) {
 
                 return $http({
-                    url: API + '/useractivities',
+                    url: API_URL + '/useractivities',
                     method: 'GET',
                     params: params
                 })
@@ -59,7 +59,7 @@ define([
                 }
 
                 return $http({
-                    url: API + '/users/' + userId,
+                    url: API_URL + '/users/' + userId,
                     method: 'GET',
                     cache: true
                 }).then(function(response) {
@@ -74,7 +74,7 @@ define([
                 var deferred = $q.defer();
 
                 $http({
-                    url: API + '/events/create/' + since,
+                    url: API_URL + '/events/create/' + since,
                     method: 'GET',
                     cache: true
                 }).then(function(response) {

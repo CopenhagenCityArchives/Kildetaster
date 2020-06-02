@@ -1,5 +1,5 @@
 define([], function() {
-    var searchService = /*@ngInject*/ function searchService($q, $http, $location, SEARCHCONFIGURL) {
+    var searchService = /*@ngInject*/ function searchService($q, $http, $location, SEARCH_CONFIG_URL) {
 
         return {
             currentSearch: undefined,
@@ -12,7 +12,7 @@ define([], function() {
                 var deferred = $q.defer();
 
                 $http({
-                    url: SEARCHCONFIGURL,
+                    url: SEARCH_CONFIG_URL,
                     // Cache response, to prevent multiple requests to the config
                     cache: true,
                     method: 'GET'

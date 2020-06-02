@@ -3,14 +3,14 @@ define([
 
 ], function() {
 
-    var pageService = /*@ngInject*/ function pageService($http, $q, $filter, API, JSONURL) {
+    var pageService = /*@ngInject*/ function pageService($http, $q, $filter, API_URL, JSONURL) {
 
         /**
         * Load all available page details
         */
         function getPageData(params) {
             
-            var endPoint = API + '/pages';
+            var endPoint = API_URL + '/pages';
 
             return $http({
                 method: 'GET',
@@ -91,7 +91,7 @@ define([
                 var deferred = $q.defer();
 
                 $http({
-                    url: API + '/pages/nextavailable',
+                    url: API_URL + '/pages/nextavailable',
                     params: params
                 })
 
@@ -109,7 +109,7 @@ define([
             pageIsDone: function pageIsDone(params) {
 
                 return $http({
-                    url: API + '/taskspages',
+                    url: API_URL + '/taskspages',
                     method: 'PATCH',
                     params: params,
                     data: {

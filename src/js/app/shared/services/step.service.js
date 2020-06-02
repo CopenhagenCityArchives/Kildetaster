@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var stepService = /*@ngInject*/ function stepService(Flash, $timeout, $q, $http, API, $filter) {
+    var stepService = /*@ngInject*/ function stepService(Flash, $timeout, $q, $http, API_URL, $filter) {
 
         return {
 
@@ -13,7 +13,7 @@ define([
                     "title": "Udfyldt"
                 };
 
-                var jsonSource = API + '/taskschema/';
+                var jsonSource = API_URL + '/taskschema/';
 
                 return $http({
                     url: jsonSource,

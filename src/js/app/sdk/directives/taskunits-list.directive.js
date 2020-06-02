@@ -1,5 +1,5 @@
 define([], function () {
-    var taskunitsListDirective = /*@ngInject*/ function (taskService, pageService, EDITORURL) {
+    var taskunitsListDirective = /*@ngInject*/ function (taskService, pageService, EDITOR_URL) {
         return {
             restrict: 'E',
 
@@ -32,7 +32,7 @@ define([], function () {
                     }).then(function (response) {
                         if (response.pages_id) {
                             var pageId = response.pages_id;
-                            window.open(EDITORURL + '/#/task/' + unit.tasks_id + '/page/' + pageId, '_blank');
+                            window.open(EDITOR_URL + '#/task/' + unit.tasks_id + '/page/' + pageId, '_blank');
                         }
                     });
                 };
