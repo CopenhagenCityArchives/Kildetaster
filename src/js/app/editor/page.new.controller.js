@@ -7,6 +7,7 @@ define([
         this.nextPost = pageData.next_post;
         this.posts = pageData.posts;
         this.postsPrPage = taskUnitData.columns * taskUnitData.rows;
+        this.selectionImageUrl = require('../../../images/Cursor-Select-512.png').default;
 
         this.init = function() {
             if (isDone) {
