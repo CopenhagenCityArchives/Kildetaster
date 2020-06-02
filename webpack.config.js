@@ -2,13 +2,12 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const webpack = require('webpack');
 
 module.exports = (env, argv) => {
     let DEV = argv.mode == 'development';
     let CONSTANTSET = argv.constants ? argv.constants : 'development';
     let PUBLIC = argv.public ? argv.public : '/';
-    let DEVSERVER = /webpack-dev-server/.test(argv['$0'])
+    let DEVSERVER = /webpack-dev-server/.test(argv['$0']);
 
     var config = {
         // entrypoints
