@@ -19,10 +19,10 @@ before_install:
 install:
   - npm install
   - if [ "$TRAVIS_BRANCH" = "development" ] || [ "$TRAVIS_BRANCH" = "webpack" ]; then
-      npm run build -- --mode=development --constants development --publish=${PUBLISH_LOCATION};
+      npm run build -- --mode=development --constants development --public=${PUBLIC_LOCATION};
     fi
   - if [ "$TRAVIS_BRANCH" = "master" ]; then
-      npm run build -- --mode=production --constants production --publish=${PUBLISH_LOCATION};
+      npm run build -- --mode=production --constants production --public=${PUBLIC_LOCATION};
     fi
   - mv ./dist/index.html ./index.html
 

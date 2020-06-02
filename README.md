@@ -22,8 +22,10 @@ The project can be built using `--mode=production` or `--mode=development`. The
 production mode minifies the build, extracts CSS and uses external source maps.
 The development build is unminified, uses inline source maps.
 
-The `--publish=<PUBLISH LOCATION>` flag indicates a prefix put in front of the
-loaded source files in the built `index.html` file for the editor application.
+The `--public=<PUBLIC LOCATION>` flag indicates the location of the public
+project distribution, and all references to files of the project will be
+prefixed with the path (eg. source files referenced in `index.html` file for the
+editor application).
 
 Select a set of constants (or configuration) with `--constants=<CONSTANTSET>`. It
 defaults to `development`.

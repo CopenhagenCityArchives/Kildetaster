@@ -1228,7 +1228,7 @@
             <div ui-view></div>
         </div>
 
-        <%= htmlWebpackPlugin.tags.bodyTags.filter((tag) => tag.tagName == 'script' && tag.attributes.src.startsWith('sdk')) %>
+        <%= htmlWebpackPlugin.tags.bodyTags.filter(tag => tag.attributes.src.indexOf('sdk') != -1) %>
     </div>
 </div>
 </div>

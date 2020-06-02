@@ -2,11 +2,12 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = (env, argv) => {
     let DEV = argv.mode == 'development';
     let CONSTANTSET = argv.constants ? argv.constants : 'development';
-    let PUBLISH = argv.publish ? argv.publish : '/';
+    let PUBLIC = argv.public ? argv.public : '/';
     let DEVSERVER = /webpack-dev-server/.test(argv['$0'])
 
     var config = {
@@ -22,6 +23,7 @@ module.exports = (env, argv) => {
                 return pathData.chunk.name == 'sdk' ? '[name].js' : '[name].[hash].js'
             },
             path: path.resolve(__dirname, 'dist'),
+            publicPath: PUBLIC
         },
 
         resolve: {
@@ -84,7 +86,7 @@ module.exports = (env, argv) => {
                             loader: 'css-loader',
                             options: {
                                 modules: true,
-                                sourceMap: DEV
+                                sourceMap: DEV,
                             }
                         },
                         {
@@ -171,9 +173,6 @@ module.exports = (env, argv) => {
                 filename: 'index.html',
                 template: './src/html/index.html',
                 inject: false,
-                templateParameters: {
-                    'PUBLISH': PUBLISH
-                }
             })
         ]
     };

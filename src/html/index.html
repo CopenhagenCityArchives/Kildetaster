@@ -39,8 +39,7 @@
 
     <%=
         htmlWebpackPlugin.tags.bodyTags
-            .filter(tag => tag.attributes.src.startsWith('editor'))
-            .map(tag => { tag.attributes.src = PUBLISH + tag.attributes.src; return tag })
+            .filter(tag => tag.attributes.src.indexOf('editor') != -1)
     %>
 </body>
 </html>
