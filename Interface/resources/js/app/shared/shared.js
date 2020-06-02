@@ -3,6 +3,7 @@ define([
     'angular',
     'angular-auth0',
     'ngstorage',
+    'angular-ui-router',
     'app/shared/templates',
     'app/shared/constants',
 
@@ -46,6 +47,7 @@ define([
     ang,
     angularAuth0,
     ngStorage,
+    uiRouter,
     templates,
     constants,
 
@@ -84,8 +86,8 @@ define([
     textConstant
 
     ) {
-    console.log(angularAuth0);
-    var sharedApp = angular.module('shared', ['templates', 'constants', 'ngStorage','angular-google-analytics', 'auth0.auth0']);
+
+    var sharedApp = angular.module('shared', ['templates', 'constants', 'ngStorage', 'ui.router','angular-google-analytics', 'auth0.auth0']);
 
     sharedApp.directive('user', userDirective);
     sharedApp.directive('imageViewer', imageViewerDirective);
@@ -128,12 +130,37 @@ define([
         $httpProvider.interceptors.push('tokenFactory');
     });
 
-    sharedApp.config(['$httpProvider', 'AnalyticsProvider', 'angularAuth0Provider', function($httpProvider, AnalyticsProvider, angularAuth0Provider) {
+    sharedApp.config(['$httpProvider','AnalyticsProvider', 'angularAuth0Provider', '$stateProvider', '$locationProvider', function($httpProvider, AnalyticsProvider, angularAuth0Provider, $stateProvider, $locationProvider) {
         $httpProvider.interceptors.push('tokenFactory');
  
         angularAuth0Provider.init({
             clientID: 'uNrqzxblFnPrzQWpqMMBiB8h0VppBesM',
             domain: 'kbharkiv.eu.auth0.com'
+        });
+
+        // Prevent default use of !# hash bang urls
+        // @see https://stackoverflow.com/questions/41226122/url-hash-bang-prefix-instead-of-simple-hash-in-angular-1-6
+        $locationProvider.hashPrefix('');
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: true
+        });
+
+        // Global state for Auth0 login redirects
+        $stateProvider.state('callbackFromAuth0',{
+            url: '/login',
+            resolve: {
+                accessToken: ['tokenService', function(tokenService){
+                    return tokenService.getTokenFromCallBack();
+                }]
+            },
+            onEnter: ['accessToken', '$location', function(accessToken, $location){
+                if(accessToken){
+                    $location.url(accessToken.url);
+                    console.log("logged in");
+                    console.log(accessToken);
+                }
+            }]
         });
 
         // Add configuration code as desired

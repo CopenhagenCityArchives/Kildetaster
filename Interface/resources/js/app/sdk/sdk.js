@@ -1,6 +1,8 @@
 define([
 
     'angular',
+    'app/shared/shared',
+    'angular-auth0',
     'angular-bootstrap',
 
     'ngstorage',
@@ -37,6 +39,8 @@ define([
 ], function (
 
     ang,
+    shared,
+    angularAuth0,
     angularBootstrap,
 
     ngStorage,
@@ -72,22 +76,18 @@ define([
 ) {
 
         var sdkApp = angular.module('sdk', [
+            'shared',
             'ui.bootstrap',
             'sdk-templates',
             'search',
             'constants',
             'ngStorage',
-            'angular-google-analytics'
+            'angular-google-analytics',
+            'auth0.auth0'
         ]);
 
         sdkApp.config(['$httpProvider', 'AnalyticsProvider', function ($httpProvider, AnalyticsProvider) {
-            $httpProvider.interceptors.push('tokenFactory');
 
-
-            // Add configuration code as desired
-            AnalyticsProvider.setAccount('UA-45125468-1');  //UU-XXXXXXX-X should be your tracking code
-            AnalyticsProvider.trackPages(true);
-            AnalyticsProvider.ignoreFirstPageLoad(true);
         }]);
 
         sdkApp.run(run);

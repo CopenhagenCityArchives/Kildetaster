@@ -3,7 +3,7 @@ define([
 
 ], function () {
 
-    var editorConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider, $locationProvider, AnalyticsProvider, sfPathProvider, schemaFormProvider, schemaFormDecoratorsProvider, sfBuilderProvider) {
+    var editorConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider, $locationProvider, AnalyticsProvider) {
 
         // Add configuration code as desired
         AnalyticsProvider.setAccount('UA-45125468-1');  //UU-XXXXXXX-X should be your tracking code
@@ -13,12 +13,17 @@ define([
         // Prevent default use of !# hash bang urls
         // @see https://stackoverflow.com/questions/41226122/url-hash-bang-prefix-instead-of-simple-hash-in-angular-1-6
         $locationProvider.hashPrefix('');
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: true
+        });
 
         // For any unmatched url, redirect to /
         $urlRouterProvider.otherwise('/error');
 
         // Now set up the states
         $stateProvider
+       //     .state('callbackFromAuth0',tokenService.stateConfig)
 
             .state('editor', {
                 url: '/task/{taskId:int}/page/{pageId:int}',
@@ -323,7 +328,7 @@ define([
                 templateUrl: 'editor/error.tpl.html',
                 controller: ['ERRORURL', function (ERRORURL) {
                     //Redirect to a page on KBH joomla
-                    window.location.href = ERRORURL;
+                    //window.location.href = ERRORURL;
                 }]
 
             });
