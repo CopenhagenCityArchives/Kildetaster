@@ -3,7 +3,12 @@ define([
 
 ], function () {
 
-    var editorConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider, $locationProvider) {
+    var editorConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider, $locationProvider, AnalyticsProvider) {
+
+        // Add configuration code as desired
+        AnalyticsProvider.setAccount('UA-45125468-1');  //UU-XXXXXXX-X should be your tracking code
+        AnalyticsProvider.trackPages(true);
+        AnalyticsProvider.ignoreFirstPageLoad(false);
 
         // For any unmatched url, redirect to /
         $urlRouterProvider.otherwise('/error');

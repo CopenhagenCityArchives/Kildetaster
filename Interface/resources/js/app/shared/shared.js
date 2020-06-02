@@ -1,7 +1,7 @@
 define([
 
     'angular',
-
+    'angular-auth0',
     'ngstorage',
 
     'angular-google-analytics',
@@ -49,7 +49,7 @@ define([
 ], function(
 
     ang,
-
+    angularAuth0,
     ngStorage,
     AnalyticsProvider,
     angularAuth0,
