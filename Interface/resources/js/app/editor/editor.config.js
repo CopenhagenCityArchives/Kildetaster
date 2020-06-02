@@ -5,14 +5,6 @@ define([
 
     var editorConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider, $locationProvider) {
 
-        // Prevent default use of !# hash bang urls
-        // @see https://stackoverflow.com/questions/41226122/url-hash-bang-prefix-instead-of-simple-hash-in-angular-1-6
-        $locationProvider.hashPrefix('');
-        $locationProvider.html5Mode({
-            enabled: true,
-            requireBase: true
-        });
-
         // For any unmatched url, redirect to /
         $urlRouterProvider.otherwise('/error');
 
