@@ -10,23 +10,33 @@ addons:
   apt:
     packages:
     - sshpass
+    
+before_install:
+  - openssl aes-256-cbc -K $deploy_key_aes_key -iv $deploy_key_aes_iv
+    -in deploy_key.enc -out ./deploy_key -d
+  - chmod 600 ./deploy_key
 
 install:
   - npm install
-  - if [ "$TRAVIS_BRANCH" = "development" ]; then npm run build --mode=development --constants development --publish=${PUBLISH_LOCATION}; fi
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then npm run build --mode=production --constants production --publish=${PUBLISH_LOCATION}; fi
+  - if [ "$TRAVIS_BRANCH" = "development" ] || [ "$TRAVIS_BRANCH" = "webpack" ]; then
+      npm run build -- --mode=development --constants development --publish=${PUBLISH_LOCATION};
+    fi
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then
+      npm run build -- --mode=production --constants production --publish=${PUBLISH_LOCATION};
+    fi
+  - mv ./dist/index.html ./index.html
 
 deploy:
-    # deploy develop to the staging environment
   - provider: script
-    script: sshpass -p${KBHKILDER_SSH_PASSWORD} scp -o LogLevel=Verbose -o StrictHostKeyChecking=no -r ./kbh/resources/ ${KBHKILDER_SSH_USER}@${KBHKILDER_SSH_HOST}:${KBHKILDER_SSH_PATH}
+    script: sshpass -p${KBHKILDER_SSH_PASSWORD} scp -o LogLevel=Verbose -o StrictHostKeyChecking=no -r ./dist/ ${KBHKILDER_SSH_USER}@${KBHKILDER_SSH_HOST}:${KBHKILDER_SSH_PATH}
     skip_cleanup: true
     on:
       all_branches: true
-      condition: $TRAVIS_BRANCH =~ ^(master|development|public-beta)$
+      condition: $TRAVIS_BRANCH =~ ^(master|development|webpack)$
+     
   - provider: script
-    script: SSHPASS=${KBHARKIV_SSH_PASSWORD} sshpass -e scp -o LogLevel=Verbose -o StrictHostKeyChecking=no ./kbh/index.html ${KBHARKIV_SSH_USER}@${KBHARKIV_SSH_HOST}:${KBHARKIV_SSH_PATH}
+    script: scp -i ./deploy_key -o LogLevel=Verbose -o StrictHostKeyChecking=no -P ${KBHARKIV_SSH_PORT} ./index.html ${KBHARKIV_SSH_USER}@${KBHARKIV_SSH_HOST}:${KBHARKIV_SSH_PATH}
     skip_cleanup: true
     on:
       all_branches: true
-      condition: $TRAVIS_BRANCH =~ ^(master|development|public-beta)$
+      condition: "$TRAVIS_BRANCH =~ ^(master|development|webpack)$"
