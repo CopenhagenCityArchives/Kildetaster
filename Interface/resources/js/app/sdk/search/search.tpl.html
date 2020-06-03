@@ -28,16 +28,15 @@
             </button>
             <div id="simple" class="collapse show sdk-search__section sdk-search__section--closed" aria-labelledby="simple-label" data-parent=".search-type" ng-class="{'sdk-search__section--open' : ctrl.sectionSimple}">
                 <div class="mx-3 my-4">
-                    <p id="simple-desc">Søg på tværs af flere kilder fx begravelser, politiets registerblade og politiets efterretninger.</p>
-                    <form class="advanced-search-fields" aria-describedby="simple-desc">
+                    <form class="advanced-search-fields" role="search" aria-describedby="simple-desc">
+                        <label for="search-person">Søg person</label>
+                        <p class="small">Fritekstssøgning efter personer i indtastede kilder.</p> 
                         <div class="input-group input-group-lg mb-3 sdk-search__simplesearch">
                             <div class="input-group input-group-lg mb-3" ng-repeat="row in ctrl.simpleQuery">
-                                <input class="form-control" ng-model="row.term" placeholder="Navn, adresse eller fritekst" type="text" aria-label="Fritekst søgning" ng-keypress="ctrl.submitSearch($event)" />
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit" ng-click="startNewSearch()" ng-disabled="!ctrl.canSearchSimple">Søg</button>
-                                </div>
+                                <input class="form-control search-focusable" type="search" id="search-person" ng-model="row.term" placeholder="Søg person" type="text" aria-label="Fritekst søgning" ng-keypress="ctrl.submitSearch($event)" />
                             </div>
                         </div>
+                        <button class="btn btn-primary search-focusable" type="submit" ng-click="startNewSearch()" ng-disabled="!ctrl.canSearchSimple">Søg</button>
                     </form>
                 </div>
             </div>
