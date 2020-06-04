@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var pageService = /*@ngInject*/ function pageService($http, $q, $filter, API_ENDPOINT, JSON_URL) {
+    var pageService = /*@ngInject*/ function pageService($http, $q, API_ENDPOINT) {
 
         /**
         * Load all available page details
@@ -65,23 +65,6 @@ define([
                     console.log('Error getting page by number', err);
                 });
         
-                return deferred.promise;
-
-            },
-
-            getPageUpdate: function getPage(id, baseUrl) {
-
-                var deferred = $q.defer(),
-                    found;
-
-                $http.get(JSON_URL + 'pageEditArea.json').then(function(response) {
-                    found = $filter('filter')(response.data, function(project) {
-                            return project.id === id;
-                        });
-
-                    deferred.resolve(found[0]);
-                });
-
                 return deferred.promise;
 
             },

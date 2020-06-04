@@ -8,7 +8,7 @@ define([
 
     var schemaForm = angular.module('schemaForm');
 
-    schemaForm.controller('sfTypeahead', /*@ngInject*/  function($scope, API_ENDPOINT, $templateCache, $http, $filter, TYPEAHEAD_MAXIUMUM) {
+    schemaForm.controller('sfTypeahead', /*@ngInject*/  function($scope, API_ENDPOINT, $http, TYPEAHEAD_MAXIUMUM) {
 
         $scope.options = [];
 

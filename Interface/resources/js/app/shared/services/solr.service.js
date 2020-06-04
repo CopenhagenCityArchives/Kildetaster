@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var solrService = /*@ngInject*/ function solrService($q, $http, API_ENDPOINT, SOLR_API_ENDPOINT, JSON_URL, searchService, $filter, $location) {
+    var solrService = /*@ngInject*/ function solrService($q, $http, SOLR_API_ENDPOINT, searchService) {
 
         var that = this;
         /**

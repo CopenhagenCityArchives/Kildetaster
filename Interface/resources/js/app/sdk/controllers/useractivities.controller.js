@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var useractivitiesController = /*@ngInject*/ function mypageController($scope, tokenService, EDITOR_URL, userService, taskService) {
+    var useractivitiesController = /*@ngInject*/ function mypageController($scope, EDITOR_URL, userService, taskService) {
 
         $scope.loading = false;
         $scope.activities = [];

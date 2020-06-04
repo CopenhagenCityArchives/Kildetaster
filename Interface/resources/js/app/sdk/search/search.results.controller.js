@@ -198,7 +198,6 @@ define([
                 that.postsPrPage
             )
                 .then(function (response) {
-                    console.log("Then what!?");
                     that.results = response.response;
 
                     //Reset page number and search again if no results are found on current page
