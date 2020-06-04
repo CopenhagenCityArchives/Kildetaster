@@ -6,6 +6,7 @@ define([
 
         $scope.loading = false;
         $scope.activities = [];
+        $scope.tasks = [];
 
         $scope.userId = null;
 
