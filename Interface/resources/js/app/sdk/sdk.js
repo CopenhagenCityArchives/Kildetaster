@@ -115,7 +115,6 @@ define([
     sdkApp.directive('taskStatus', taskStatusDirective);
     sdkApp.directive('taskProgressPlot', taskProgressPlotDirective);
     sdkApp.directive('progressBar', progressbarDirective);
-    sdkApp.directive('user', userDirective);
     sdkApp.directive('shareLink', shareLinkDirective);
 
 
