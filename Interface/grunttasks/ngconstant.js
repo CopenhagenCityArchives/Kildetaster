@@ -7,7 +7,6 @@ module.exports = {
 
     prototype: {
         constants: {
-            JSON_URL: '/resources/mock/',
             EDITOR_URL: 'http://localhost:1508',
             RESOURCE_URL: '/resources/',
             API_ENDPOINT: 'https://www.kbhkilder.dk/api',
@@ -15,10 +14,8 @@ module.exports = {
             SEARCH_CONFIG_URL: 'https://www.kbhkilder.dk/1508/experimental/searchconfig',
             ERROR_REPORT_CONFIG_URL: 'https://www.kbhkilder.dk/1508/experimental/errorreportconfig',
             MAIN_DOMAIN: 'https://www.kbharkiv.dk',
-            TOKEN_URL: 'https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERROR_URL: 'https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
             SEARCH_PERMALINK_URL: 'https://www.kbharkiv.dk/permalink',
-            BYPASS_AUTH: false,
             //Number of items to fetch when working with typeahead data fields
             TYPEAHEAD_MAXIUMUM: 75
         }
@@ -26,7 +23,6 @@ module.exports = {
 
     prototypeNoAuth: {
         constants: {
-            JSON_URL: '/resources/mock/',
             EDITOR_URL: 'http://localhost:1508',
             RESOURCE_URL: '/resources/',
             API_ENDPOINT: 'https://www.kbhkilder.dk/1508/experimental',
@@ -34,10 +30,8 @@ module.exports = {
             SEARCH_CONFIG_URL: 'https://www.kbhkilder.dk/1508/experimental/searchconfig',
             ERROR_REPORT_CONFIG_URL: 'https://www.kbhkilder.dk/1508/experimental/errorreportconfig',
             MAIN_DOMAIN: 'https://www.kbharkiv.dk',
-            TOKEN_URL: 'https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERROR_URL: 'https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
             SEARCH_PERMALINK_URL: 'https://www.kbharkiv.dk/permalink',
-            BYPASS_AUTH: true,
             //Number of items to fetch when working with typeahead data fields
             TYPEAHEAD_MAXIUMUM: 75
         }
@@ -45,7 +39,6 @@ module.exports = {
 
     localNoAuth: {
         constants: {
-            JSON_URL: '/resources/mock/',
             EDITOR_URL: 'http://localhost:1508',
             RESOURCE_URL: '/resources/',
             API_ENDPOINT: 'http://localhost:8080',
@@ -53,10 +46,8 @@ module.exports = {
             SEARCH_CONFIG_URL: 'http://localhost:8080/searchconfig',
             ERROR_REPORT_CONFIG_URL: 'http://localhost:8080/errorreportconfig',
             MAIN_DOMAIN: 'https://www.kbharkiv.dk',
-            TOKEN_URL: 'https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERROR_URL: 'https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
             SEARCH_PERMALINK_URL: 'https://www.kbharkiv.dk/permalink',
-            BYPASS_AUTH: true,
             //Number of items to fetch when working with typeahead data fields
             TYPEAHEAD_MAXIUMUM: 75
         }
@@ -64,7 +55,6 @@ module.exports = {
 
     development: {
         constants: {
-            JSON_URL: 'https://kildetaster.dev9.1508test.dk/resources/mock/',
             EDITOR_URL: '/kildetaster-development',
             RESOURCE_URL: 'https://www.kbhkilder.dk/software/kildetaster-development/resources/',
             API_ENDPOINT: 'https://www.kbhkilder.dk/1508/experimental',
@@ -72,10 +62,8 @@ module.exports = {
             SEARCH_CONFIG_URL: 'https://www.kbhkilder.dk/1508/experimental/searchconfig',
             ERROR_REPORT_CONFIG_URL: 'https://www.kbhkilder.dk/1508/experimental/errorreportconfig',
             MAIN_DOMAIN: 'https://www.kbharkiv.dk',
-            TOKEN_URL: 'https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERROR_URL: 'https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
             SEARCH_PERMALINK_URL: 'https://www.kbharkiv.dk/permalink',
-            BYPASS_AUTH: false,
             //Number of items to fetch when working with typeahead data fields
             TYPEAHEAD_MAXIUMUM: 75
         }
@@ -83,7 +71,6 @@ module.exports = {
 
     developmentPublicBeta: {
         constants: {
-            JSON_URL: 'https://kildetaster.dev9.1508test.dk/resources/mock/',
             EDITOR_URL: '/kildetaster-public-beta',
             RESOURCE_URL: 'https://www.kbhkilder.dk/software/kildetaster-public-beta/resources/',
             API_ENDPOINT: 'https://www.kbhkilder.dk/1508/public_beta',
@@ -91,10 +78,8 @@ module.exports = {
             SEARCH_CONFIG_URL: 'https://www.kbhkilder.dk/1508/public_beta/searchconfig',
             ERROR_REPORT_CONFIG_URL: 'https://www.kbhkilder.dk/1508/public_beta/errorreportconfig',
             MAIN_DOMAIN: 'https://www.kbharkiv.dk',
-            TOKEN_URL: 'https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERROR_URL: 'https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
             SEARCH_PERMALINK_URL: 'https://www.kbharkiv.dk/permalink',
-            BYPASS_AUTH: false,
             //Number of items to fetch when working with typeahead data fields
             TYPEAHEAD_MAXIUMUM: 75
         }
@@ -102,7 +87,6 @@ module.exports = {
 
     production: {
         constants: {
-            JSON_URL: 'http://kildetaster.dev9.1508test.dk/resources/mock/',
             EDITOR_URL: '/kildetaster',
             RESOURCE_URL: 'https://www.kbhkilder.dk/software/kildetaster-new-site/resources/',
             API_ENDPOINT: 'https://www.kbhkilder.dk/api',
@@ -110,10 +94,8 @@ module.exports = {
             SEARCH_CONFIG_URL: 'https://www.kbhkilder.dk/api/searchconfig',
             ERROR_REPORT_CONFIG_URL: 'https://www.kbhkilder.dk/api/errorreportconfig',
             MAIN_DOMAIN: 'https://www.kbharkiv.dk',
-            TOKEN_URL: 'https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2',
             ERROR_URL: 'https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
             SEARCH_PERMALINK_URL: 'https://www.kbharkiv.dk/permalink',
-            BYPASS_AUTH: false,
             //Number of items to fetch when working with typeahead data fields
             TYPEAHEAD_MAXIUMUM: 75
         }
