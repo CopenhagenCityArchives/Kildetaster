@@ -25,8 +25,8 @@ define([
 
                 resolve: {
 
-                    requestToken: ['$q', 'tokenService', function ($q, tokenService) {
-                        return tokenService.requestToken();
+                    userData: ['tokenService', function (tokenService) {
+                        return tokenService.getUserData();
                     }],
 
                     /**

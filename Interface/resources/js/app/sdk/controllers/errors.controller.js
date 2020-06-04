@@ -17,16 +17,11 @@ define([
         //The config object to use for filtereing the errorList
         $scope.selectedFilter = {};
 
-        tokenService.requestToken()
+        userService.getUserInfo()
         .then(function(response) {
 
             //Store the users userId
-            $scope.userId = response.tokenData.user_id;
-
-            //Lookup more information on that user
-            return userService.getUserInfo($scope.userId);
-        })
-        .then(function(response) {
+            $scope.userId = response.user_id;
 
             //Determine if the user is a superuser of any task (arary contains something)
             $scope.isSuperUser = response.super_user_tasks.length > 0;

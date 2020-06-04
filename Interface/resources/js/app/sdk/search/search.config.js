@@ -103,26 +103,7 @@ define([
 
                     userData: ['userService', 'tokenService', '$q', function (userService, tokenService, $q) {
 
-                        var deferred = $q.defer();
-
-                        // Get token if the user is logged in
-                        tokenService.requestToken().then(function (response) {
-                            if (response) {
-                                return userService.getUserInfo(response.tokenData.user_id);
-                            }
-                            else {
-                                deferred.resolve(undefined)
-                            }
-
-                        })
-                        .then(function (userData) {
-                            deferred.resolve(userData);
-                        })
-                        .catch(function (err) {
-                            deferred.reject(err);
-                        });
-
-                        return deferred.promise;
+                        return userService.getUserInfo(true);
                     }],
 
                     errorReportingConfig: ['errorService', function (errorService) {
