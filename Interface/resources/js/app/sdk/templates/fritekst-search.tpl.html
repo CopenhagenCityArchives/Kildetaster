@@ -1,14 +1,14 @@
-<div class="sdk-fritekst-search">
-     
-    <form class="sdk-fritekst-search__form" ng-submit="search()">
-    <input 
-        type="text" 
+<form role="search" ng-submit="search()">
+  <div class="form-group">
+    <label for="search-person">Søg person</label>
+    <p class="small">Fritekstssøgning efter personer i indtastede kilder.</p> 
+    <input type="search"
         ng-model="$parent.term" 
-        name="searchterm" 
-        title="Navn, adresse eller fritekst" 
-        placeholder="Navn, adresse eller fritekst" />
+        class="form-control search-focusable"
+        id="search-person"
+        placeholder="Søg person"/>
+        
+  </div>
 
-        <button type="submit" class="button">Søg</button>
-    </form>
-    
-</div>
+  <button type="submit" class="btn btn-primary search-focusable">Søg</button>
+</form>
