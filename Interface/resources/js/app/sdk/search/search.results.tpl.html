@@ -23,8 +23,10 @@
 </section>
 
 <!-- New Results -->
-<div class="container-fluid" ng-if="ctrl.results.docs.length > 0 && !ctrl.error">
-    <header class="row">
+<div ng-if="ctrl.results.docs.length > 0 && !ctrl.error">
+    <header class="page-header">
+        <div class="container-fluid" >
+        <div class="row">
         <div class="col-lg-4">
             <h1>Søg person</h1>
         </div>
@@ -47,8 +49,11 @@
                 </ol>
             </nav>
         </div>
+        </div>
+        </div>
     </header>
 
+    <div class="container-fluid">
     <section class="filters float-lg-left">
         <button type="button" class="btn btn-primary d-block d-lg-none dropdown-toggle" ng-click="expandFacets()"
             aria-haspopup="true" aria-expanded="{{ allFacetsExpanded }}">Filtrer søgning</button>
@@ -153,6 +158,7 @@
             <button type="submit" class="btn btn-primary">Gå</button>
         </form>
     </div>
+</div>
 </div>
 
 <div class="facet__offcanvas" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="filter-label"
