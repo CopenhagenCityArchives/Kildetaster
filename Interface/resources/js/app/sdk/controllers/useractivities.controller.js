@@ -9,29 +9,28 @@ define([
 
         $scope.userId = null;
 
-        tokenService.requestToken().then(function(response) {
-            var data = response.tokenData;
-            $scope.userId = data.user_id;
-            //Initialize logic
-            $scope.init();
-        });
-
-        $scope.EDITOR_URL = EDITOR_URL;
+        $scope.EDITORURL = EDITORURL;
 
         $scope.init = function() {
 
             $scope.loading = true;
 
-            //Get error reports for a given user
-            userService.getUserActivities({
-                user_id: $scope.userId
-            }).then(function(response) {
-                $scope.activities = response;
-
-            }).finally(function() {
-                $scope.loading = false;
+            taskService.getTasks().then(function (response) {
+                response.forEach(function (task) {
+                    $scope.tasks[task.id] = task;
+                });
+                userService.getUserActivities().then(function (response) {
+                    $scope.activities = response.filter(function (activity) {
+                        return activity.task_unit_pages_done < activity.unit_pages;
+                    });
+                }).finally(function () {
+                    $scope.loading = false;
+                });
             });
         };
+
+        //Initialize logic
+        $scope.init();
 
     };
 

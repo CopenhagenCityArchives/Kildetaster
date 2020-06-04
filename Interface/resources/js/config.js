@@ -16,6 +16,9 @@ requirejs.config({
         'ngstorage': '../bower_components/ngstorage/ngStorage.min',
 
         'angular-google-analytics': '../bower_components/angular-google-analytics/dist/angular-google-analytics.min',
+        'auth0.auth0': '../bower_components/auth0.js/build/auth0',
+        'angular-auth0': 'libs/angular-auth0',
+
 
         'angular-ui-router': '../bower_components/angular-ui-router/release/angular-ui-router.min',
         // Polyfill for ui-router events being deprecated @see https://ui-router.github.io/guide/ng1/migrate-to-1_0
@@ -58,14 +61,14 @@ requirejs.config({
         'angular-cookies': ['angular'],
         'ngstorage': ['angular'],
         'angular-google-analytics': ['angular'],
+        'angular-auth0': ['angular', 'auth0.auth0'],
 
         'app/shared/constants': ['angular'],
 
         'libs/openseadragonselection': ['openseadragon'],
         'libs/openseadragon-filtering': ['openseadragon'],
         'libs/openseadragon-imaginghelper': ['openseadragon'],
-        'libs/openseadragon-viewerinputhook': ['openseadragon']
-
+        'libs/openseadragon-viewerinputhook': ['openseadragon'],
     },
 
     deps: ['main']

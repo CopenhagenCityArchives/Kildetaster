@@ -1,6 +1,8 @@
 define([
 
     'angular',
+    'app/shared/shared',
+    'angular-auth0',
     'angular-bootstrap',
 
     'ngstorage',
@@ -32,7 +34,6 @@ define([
     'app/sdk/directives/task-status.directive',
     'app/sdk/directives/task-progress-plot.directive',
     'app/sdk/directives/progressbar.directive',
-    'app/shared/directives/user.directive',
     'app/shared/directives/shareLink.directive',
     'app/shared/constants'
 
@@ -40,6 +41,8 @@ define([
 ], function(
 
     ang,
+    shared,
+    angularAuth0,
     angularBootstrap,
 
     ngStorage,
@@ -71,7 +74,6 @@ define([
     taskStatusDirective,
     taskProgressPlotDirective,
     progressbarDirective,
-    userDirective,
     shareLinkDirective,
 
     constants
@@ -83,7 +85,9 @@ define([
         'search',
         'constants',
         'ngStorage',
-        'angular-google-analytics'
+        'angular-google-analytics',
+        'auth0.auth0',
+        'shared'
     ]);
 
     sdkApp.run(sdkRun);

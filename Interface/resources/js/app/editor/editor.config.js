@@ -3,17 +3,14 @@ define([
 
 ], function () {
 
-    var editorConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider, $locationProvider) {
-
-        // Prevent default use of !# hash bang urls
-        // @see https://stackoverflow.com/questions/41226122/url-hash-bang-prefix-instead-of-simple-hash-in-angular-1-6
-        $locationProvider.hashPrefix('');
+    var editorConfig = /*@ngInject*/ function editorConfig($stateProvider, $urlRouterProvider) {
 
         // For any unmatched url, redirect to /
         $urlRouterProvider.otherwise('/error');
 
         // Now set up the states
         $stateProvider
+       //     .state('callbackFromAuth0',tokenService.stateConfig)
 
             .state('editor', {
                 url: '/task/{taskId:int}/page/{pageId:int}',
@@ -28,8 +25,8 @@ define([
 
                 resolve: {
 
-                    requestToken: ['$q', 'tokenService', function ($q, tokenService) {
-                        return tokenService.requestToken();
+                    userData: ['tokenService', function (tokenService) {
+                        return tokenService.getUserData();
                     }],
 
                     /**
@@ -318,7 +315,7 @@ define([
                 templateUrl: 'editor/error.tpl.html',
                 controller: ['ERROR_URL', function (ERROR_URL) {
                     //Redirect to a page on KBH joomla
-                    window.location.href = ERROR_URL;
+                    //window.location.href = ERRORURL;
                 }]
 
             });

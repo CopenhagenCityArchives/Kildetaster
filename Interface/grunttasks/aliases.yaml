@@ -57,7 +57,7 @@ sdkLocalNoAuth:
     - 'sass:prototype'
     - 'postcss:prototype'
     - 'bake:prototype'
-    - 'express:prototype'
+    - 'express:sdk'
 
     - 'clean:sdk'
     - 'html2js:sdk'

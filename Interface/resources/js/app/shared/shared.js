@@ -1,11 +1,12 @@
 define([
 
     'angular',
-
+    'angular-auth0',
     'ngstorage',
 
     'angular-google-analytics',
 
+    'angular-ui-router',
     'app/shared/templates',
     'app/shared/constants',
 
@@ -15,7 +16,6 @@ define([
     'app/shared/directives/stepOf.directive',
     'app/shared/directives/stepIndicator.directive',
     'app/shared/directives/capitalizeFirst.directive',
-    'app/shared/directives/progressbar.directive',
     'app/shared/directives/stringifyArray.directive',
     'app/shared/directives/shareLink.directive',
 
@@ -47,9 +47,10 @@ define([
 ], function(
 
     ang,
-
+    angularAuth0,
     ngStorage,
     AnalyticsProvider,
+    uiRouter,
     templates,
     constants,
 
@@ -59,7 +60,6 @@ define([
     stepOfDirective,
     stepIndicatorDirective,
     capitalizeFirst,
-    progressbarDirective,
     stringifyArray,
     shareLinkDirective,
 
@@ -89,7 +89,7 @@ define([
 
     ) {
 
-    var sharedApp = angular.module('shared', ['templates', 'constants', 'ngStorage','angular-google-analytics']);
+    var sharedApp = angular.module('shared', ['templates', 'constants', 'ngStorage', 'ui.router','angular-google-analytics', 'auth0.auth0']);
 
     sharedApp.directive('user', userDirective);
     sharedApp.directive('imageViewer', imageViewerDirective);
@@ -97,7 +97,6 @@ define([
     sharedApp.directive('stepOf', stepOfDirective);
     sharedApp.directive('stepIndicator', stepIndicatorDirective);
     sharedApp.directive('capitalizeFirst', capitalizeFirst);
-    sharedApp.directive('progressBar', progressbarDirective);
     sharedApp.directive('stringifyArray', stringifyArray);
     sharedApp.directive('shareLink', shareLinkDirective);
 
@@ -114,7 +113,7 @@ define([
     sharedApp.factory('postService', postService);
     sharedApp.factory('unitService', unitService);
 
-    sharedApp.factory('tokenService', tokenService);
+    sharedApp.factory('tokenService', tokenService); 
     sharedApp.factory('tokenFactory', tokenFactory);
 
     sharedApp.factory('helpers', helpersService);
@@ -132,9 +131,38 @@ define([
         $httpProvider.interceptors.push('tokenFactory');
     });
 
-    sharedApp.config(['$httpProvider', 'AnalyticsProvider', function($httpProvider, AnalyticsProvider) {
+    sharedApp.config(['$httpProvider','AnalyticsProvider', 'angularAuth0Provider', '$stateProvider', '$locationProvider', function($httpProvider, AnalyticsProvider, angularAuth0Provider, $stateProvider, $locationProvider) {
         $httpProvider.interceptors.push('tokenFactory');
+ 
+        angularAuth0Provider.init({
+            clientID: 'uNrqzxblFnPrzQWpqMMBiB8h0VppBesM',
+            domain: 'kbharkiv.eu.auth0.com'
+        });
 
+        // Prevent default use of !# hash bang urls
+        // @see https://stackoverflow.com/questions/41226122/url-hash-bang-prefix-instead-of-simple-hash-in-angular-1-6
+        $locationProvider.hashPrefix('');
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: true
+        });
+
+        // Global state for Auth0 login redirects
+        $stateProvider.state('callbackFromAuth0',{
+            url: '/login',
+            resolve: {
+                accessToken: ['tokenService', function(tokenService){
+                    return tokenService.getTokenFromCallBack();
+                }]
+            },
+            onEnter: ['accessToken', '$location', function(accessToken, $location){
+                if(accessToken){
+                    $location.url(accessToken.url);
+                    console.log("logged in");
+                    console.log(accessToken);
+                }
+            }]
+        });
 
         // Add configuration code as desired
         AnalyticsProvider.setAccount('UA-45125468-1'); //UU-XXXXXXX-X should be your tracking code
@@ -142,7 +170,6 @@ define([
         AnalyticsProvider.ignoreFirstPageLoad(true);
         AnalyticsProvider.startOffline(true);
     }]);
-
 
     return sharedApp;
 

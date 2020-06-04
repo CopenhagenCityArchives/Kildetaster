@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var userService = /*@ngInject*/ function userService($q, $http, API_ENDPOINT) {
+    var userService = /*@ngInject*/ function userService($q, $http, API, tokenService) {
 
         return {
 
@@ -23,51 +23,69 @@ define([
                         unit_id: unitId,
                         task_id: taskId
                     }
-                })
-                .then(function(response) {
+                }).then(function(response) {
                     return response.data;
-                })
-                .catch(function(err) {
+                }).catch(function(err) {
                     console.log('err', err);
 
                 });
-
             },
 
             /**
             *
             */
-            getUserActivities: function(params) {
+            getUserActivities: function() {
+                var deferred = $q.defer();
 
-                return $http({
-                    url: API_ENDPOINT + '/useractivities',
-                    method: 'GET',
-                    params: params
-                })
-                .then(function(response) {
-                    return response.data;
-                })
-                .catch(function(err) {
-                    console.log('Error getting user activities', err);
+                tokenService.getUserData()
+                .then(function(userData){
+                    $http({
+                        url: API + '/useractivities',
+                        method: 'GET',
+                        params: {user_id : userData.userId}
+                    }).then(function(response) {
+                        deferred.resolve(response.data);
+                    }).catch(function(err) {
+                        console.log('Error getting user activities', err);
+                        deferred.reject();
+                    });
+                }).catch(function(err){
+                    console.log('Error getting userData: ', err);
+                    deferred.reject();
                 });
+
+                return deferred.promise;
             },
 
-            getUserInfo: function getUserInfo(userId) {
+            getUserInfo: function(allowEmptyResponse) {
+                allowEmptyResponse = allowEmptyResponse || false;
+                var deferred = $q.defer();
 
-                if (!userId) {
-                    throw new Error('getUserInfo: No userId given');
-                }
-
-                return $http({
-                    url: API_ENDPOINT + '/users/' + userId,
-                    method: 'GET',
-                    cache: true
-                }).then(function(response) {
-                    return response.data;
-                })
-                .catch(function(err) {
-                    console.log('Error getting user info', err);
+                tokenService.getUserData(allowEmptyResponse)
+                .then(function(userData){
+                    if(allowEmptyResponse && userData == {}){
+                        deferred.resolve({});
+                    }
+                    return $http({
+                        url: API + '/users/' + userData.userId,
+                        method: 'GET',
+                        cache: true
+                    }).then(function(response) {
+                        deferred.resolve(response.data);
+                    }).catch(function(err) {
+                        if(allowEmptyResponse){
+                            console.log("Could not get user info, but empty response allowed. Returning {}");
+                            deferred.resolve({});
+                        }
+                        console.log('Error getting user info', err);
+                        deferred.reject();
+                    });
+                }).catch(function(err){
+                    console.log('Error getting userData', err);
+                    deferred.reject();
                 });
+
+                return deferred.promise;
             },
 
             getUserStatistics: function(since) {
