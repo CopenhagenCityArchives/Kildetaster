@@ -26,6 +26,7 @@ define([
     'app/editor/page.new.controller',
     'app/editor/page.done.controller',
     'app/editor/page.footer.controller',
+    'app/editor/progressbar.directive',
 
     'app/editor/feedback/feedback.controller',
     'app/editor/update/updateFields.controller',
@@ -65,6 +66,8 @@ define([
     pageNewController,
     pageDoneController,
     pageFooterController,
+    progressbarDirective,
+
 
     feedbackController,
     updateFieldsController,
@@ -107,6 +110,8 @@ define([
         editorApp.controller('pageNewController', pageNewController);
         editorApp.controller('pageDoneController', pageDoneController);
         editorApp.controller('pageFooterController', pageFooterController);
+        editorApp.directive('progressBar', progressbarDirective);
+
 
         angular.element(document).ready(function () {
             angular.bootstrap(angular.element('[data-editor-app]'), ['editor']);

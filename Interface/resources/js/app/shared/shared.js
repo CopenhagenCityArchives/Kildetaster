@@ -16,7 +16,6 @@ define([
     'app/shared/directives/stepOf.directive',
     'app/shared/directives/stepIndicator.directive',
     'app/shared/directives/capitalizeFirst.directive',
-    'app/shared/directives/progressbar.directive',
     'app/shared/directives/stringifyArray.directive',
     'app/shared/directives/shareLink.directive',
 
@@ -61,7 +60,6 @@ define([
     stepOfDirective,
     stepIndicatorDirective,
     capitalizeFirst,
-    progressbarDirective,
     stringifyArray,
     shareLinkDirective,
 
@@ -99,7 +97,6 @@ define([
     sharedApp.directive('stepOf', stepOfDirective);
     sharedApp.directive('stepIndicator', stepIndicatorDirective);
     sharedApp.directive('capitalizeFirst', capitalizeFirst);
-    sharedApp.directive('progressBar', progressbarDirective);
     sharedApp.directive('stringifyArray', stringifyArray);
     sharedApp.directive('shareLink', shareLinkDirective);
 
@@ -116,7 +113,7 @@ define([
     sharedApp.factory('postService', postService);
     sharedApp.factory('unitService', unitService);
 
-    sharedApp.factory('tokenService', tokenService);
+    sharedApp.factory('tokenService', tokenService); 
     sharedApp.factory('tokenFactory', tokenFactory);
 
     sharedApp.factory('helpers', helpersService);

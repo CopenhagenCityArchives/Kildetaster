@@ -32,7 +32,6 @@ define([
     'app/sdk/directives/task-status.directive',
     'app/sdk/directives/task-progress-plot.directive',
     'app/sdk/directives/progressbar.directive',
-    'app/shared/directives/user.directive',
     'app/shared/directives/shareLink.directive',
     'app/shared/constants'
 
@@ -71,7 +70,6 @@ define([
     taskStatusDirective,
     taskProgressPlotDirective,
     progressbarDirective,
-    userDirective,
     shareLinkDirective,
 
     constants
@@ -84,7 +82,8 @@ define([
         'constants',
         'ngStorage',
         'angular-google-analytics',
-        'auth0.auth0'
+        'auth0.auth0',
+        'shared'
     ]);
 
     sdkApp.run(sdkRun);
@@ -110,7 +109,6 @@ define([
     sdkApp.directive('taskStatus', taskStatusDirective);
     sdkApp.directive('taskProgressPlot', taskProgressPlotDirective);
     sdkApp.directive('progressBar', progressbarDirective);
-    sdkApp.directive('user', userDirective);
     sdkApp.directive('shareLink', shareLinkDirective);
 
 
