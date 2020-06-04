@@ -83,7 +83,8 @@ define([
         'search',
         'constants',
         'ngStorage',
-        'angular-google-analytics'
+        'angular-google-analytics',
+        'auth0.auth0'
     ]);
 
     sdkApp.run(sdkRun);

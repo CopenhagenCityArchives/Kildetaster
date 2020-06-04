@@ -6,7 +6,6 @@ define([
 
     'angular-google-analytics',
 
-    'angular-auth0',
     'angular-ui-router',
     'app/shared/templates',
     'app/shared/constants',
@@ -52,7 +51,6 @@ define([
     angularAuth0,
     ngStorage,
     AnalyticsProvider,
-    angularAuth0,
     uiRouter,
     templates,
     constants,
