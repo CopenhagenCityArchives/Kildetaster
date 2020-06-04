@@ -4,7 +4,7 @@ define([
 
 ], function() {
 
-    var tokenService = /*@ngInject*/ function tokenService($q, MAINDOMAIN, BYPASSAUTH, angularAuth0, $http, $sessionStorage, $state, $location) {
+    var tokenService = /*@ngInject*/ function tokenService($q, angularAuth0, $sessionStorage, $location) {
 
         return {
 

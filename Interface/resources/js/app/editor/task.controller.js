@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var editorController = /*@ngInject*/ function editorController(MAINDOMAIN, RESSOURCEURL, $scope, $state, taskData, pageData, userData, userService, $interval, $location, $timeout, taskService, pageService) {
+    var editorController = /*@ngInject*/ function editorController(MAIN_DOMAIN, RESOURCE_URL, $scope, taskData, pageData, userData, userService) {
 
         $scope.protocol = taskData.name;
 

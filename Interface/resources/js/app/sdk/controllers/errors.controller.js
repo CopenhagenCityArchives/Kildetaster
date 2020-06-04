@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var errorsController = /*@ngInject*/ function mypageController($scope, tokenService, userService, errorService, helpers, EDITOR_URL) {
+    var errorsController = /*@ngInject*/ function mypageController($scope, userService, errorService, helpers, EDITOR_URL) {
 
         $scope.loading = false;
         $scope.errorList = [];

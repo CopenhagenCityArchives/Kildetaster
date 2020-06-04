@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var userService = /*@ngInject*/ function userService($q, $http, API, tokenService) {
+    var userService = /*@ngInject*/ function userService($q, $http, API_ENDPOINT, tokenService) {
 
         return {
 
@@ -40,7 +40,7 @@ define([
                 tokenService.getUserData()
                 .then(function(userData){
                     $http({
-                        url: API + '/useractivities',
+                        url: API_ENDPOINT + '/useractivities',
                         method: 'GET',
                         params: {user_id : userData.userId}
                     }).then(function(response) {
@@ -67,10 +67,11 @@ define([
                         deferred.resolve({});
                     }
                     return $http({
-                        url: API + '/users/' + userData.userId,
+                        url: API_ENDPOINT + '/users/' + userData.userId,
                         method: 'GET',
                         cache: true
                     }).then(function(response) {
+                        response.data.user_id = response.data.id;
                         deferred.resolve(response.data);
                     }).catch(function(err) {
                         if(allowEmptyResponse){
