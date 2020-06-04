@@ -69,7 +69,6 @@ define([
     taskService,
     pageService,
     userService,
-    updateService,
 
     errorService,
     entryService,
@@ -106,7 +105,6 @@ define([
     sharedApp.factory('taskService', taskService);
     sharedApp.factory('pageService', pageService);
     sharedApp.factory('userService', userService);
-    sharedApp.factory('updateService', updateService);
     sharedApp.factory('errorService', errorService);
     sharedApp.factory('entryService', entryService);
 

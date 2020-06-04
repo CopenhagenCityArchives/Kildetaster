@@ -45,7 +45,7 @@ define([
                     /**
                      * Load page data and pass it to the controller
                      */
-                    pageData: ['$stateParams', 'pageService', 'unitService', '$q', '$state', '$timeout', function ($stateParams, pageService, unitService, $q, $state, $timeout) {
+                    pageData: /*@ngInject*/ function ($stateParams, pageService, unitService, $q) {
 
                         var deferred = $q.defer(),
                             data;
@@ -79,7 +79,7 @@ define([
 
                         return deferred.promise;
 
-                    }]
+                    }
 
                 }
 
@@ -107,7 +107,7 @@ define([
                 resolve: {
 
                     //Determine if the page is marked as done, and if it is, show the pageDone state
-                    isDone: ['$q', 'pageData', function ($q, pageData) {
+                    isDone: /*@ngInject*/ function ($q, pageData) {
 
                         var deferred = $q.defer();
 
@@ -118,9 +118,9 @@ define([
                         deferred.resolve(pageData.task_page.is_done === 1);
 
                         return deferred.promise;
-                    }],
+                    },
 
-                    taskUnitData: ['$q', 'taskService', 'taskData', 'pageData', function ($q, taskService, taskData, pageData) {
+                    taskUnitData: /*@ngInject*/ function ($q, taskService, taskData, pageData) {
                         var deferred = $q.defer();
 
                         taskService.getUnits({ unit_id: pageData.unit_id, task_id: taskData.id })
@@ -136,7 +136,7 @@ define([
                         });
 
                         return deferred.promise;
-                    }]
+                    }
                 }
             })
 
@@ -150,7 +150,7 @@ define([
                 },
                 resolve: {
 
-                    postData: ['$stateParams', '$q', 'entryService', 'postService', 'errorService', function ($stateParams, $q, entryService, postService, errorService) {
+                    postData: /*@ngInject*/ function ($stateParams, $q, entryService, postService, errorService) {
 
                         var deferred = $q.defer(),
                             data = {
@@ -186,7 +186,7 @@ define([
 
                         return deferred.promise;
 
-                    }]
+                    }
                 }
             })
 
@@ -241,7 +241,7 @@ define([
                     * We can do this because the route is set to not to reload on search. The changes
                     * are instead handled via a watcher in the wizardController
                     */
-                    fromStart: ['$q', '$stateParams', '$location', function ($q, $stateParams, $location) {
+                    fromStart: /*@ngInject*/ function ($q, $stateParams, $location) {
                         var deferred = $q.defer();
 
                         if ($stateParams.stepId !== undefined) {
@@ -250,19 +250,19 @@ define([
                         deferred.resolve();
 
                         return deferred.promise;
-                    }]
+                    }
                 }
             })
 
             .state('editor.page.new.wizard.confirm', {
 
-                onEnter: ['$stateParams', '$state', '$uibModal', function ($stateParams, $state, $uibModal) {
+                onEnter: /*@ngInject*/ function ($stateParams, $state, $uibModal) {
                     $uibModal.open({
 
                         templateUrl: 'editor/confirm.modal.tpl.html',
                         windowClass: 'modal--center',
 
-                        controller: ['$scope', '$rootScope', function ($scope, $rootScope) {
+                        controller: /*@ngInject*/ function ($scope, $rootScope) {
                             $scope.dismiss = function () {
                                 $scope.$dismiss();
                             };
@@ -271,12 +271,12 @@ define([
                                 $rootScope.$broadcast('okToSetPageDone');
                                 $scope.$dismiss();
                             };
-                        }]
+                        }
                     }).result.finally(function () {
                         //Go back to previous state
                         $state.go('^');
                     });
-                }]
+                }
             })
 
             .state('editor.page.pageFull', {
@@ -315,7 +315,7 @@ define([
                 templateUrl: 'editor/error.tpl.html',
                 controller: ['ERROR_URL', function (ERROR_URL) {
                     //Redirect to a page on KBH joomla
-                    //window.location.href = ERRORURL;
+                    //window.location.href = ERROR_URL;
                 }]
 
             });
