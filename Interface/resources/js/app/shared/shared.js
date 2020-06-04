@@ -25,7 +25,6 @@ define([
     'app/shared/services/task.service',
     'app/shared/services/page.service',
     'app/shared/services/user.service',
-    'app/shared/services/update.service',
 
     'app/shared/services/error.service',
     'app/shared/services/entry.service',
