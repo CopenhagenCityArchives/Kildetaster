@@ -10,7 +10,7 @@ define([
 
         $scope.userId = null;
 
-        $scope.EDITORURL = EDITORURL;
+        $scope.EDITORURL = EDITOR_URL;
 
         $scope.init = function() {
 
