@@ -16,7 +16,7 @@ requirejs.config({
         'ngstorage': '../bower_components/ngstorage/ngStorage.min',
 
         'angular-google-analytics': '../bower_components/angular-google-analytics/dist/angular-google-analytics.min',
-        'auth0.auth0': '../bower_components/auth0.js/build/auth0',
+        'auth0.auth0': '../bower_components/auth0.js/dist/auth0',
         'angular-auth0': 'libs/angular-auth0',
 
 
