@@ -2,27 +2,86 @@
 <link rel="stylesheet" id="sdk.css-css" href="/resources/css/sdk.css" type="text/css" media="all">
 
 <div class="container-fluid">
+    <header>
+        <h1>SDK Test</h1>
+    </header>
 
-    <div data-sdk-app ng-controller="fritekstSearchController"
-        ng-include="'sdk/templates/fritekst-search.tpl.html'"
-        ng-init="init({'searchUrl': 'https://www.kbharkiv.dk/deltag/kildetaster-test/sogning'});"></div>
+    <div class="row mb-5">
+        <div class="col-lg-6">
+            <section class="card mb-5">
+                <div class="card-header">
+                    Fritekstsøgning
+                </div>
+                <div class="card-body" data-sdk-app ng-controller="fritekstSearchController" ng-include="'sdk/templates/fritekst-search.tpl.html'"
+                ng-init="init({'searchUrl': 'https://www.kbharkiv.dk/deltag/kildetaster-test/sogning'});"></div>
+            </section>
 
-    <h2>Oversigt</h2>
-    <div data-sdk-app>
-        <task-status task-id="3"></task-status>
-        <task-progress-plot task-id="3" year-pattern="_s(_d_d_d_d)" legend="true">
-        </task-progress-plot>
+            <section class="card mb-5">
+                <div class="card-header" id="data-mine-indtastninger">
+                    Mine indtastninger
+                </div>
+                <div class="card-body">
+                    <a class="sr-only sr-only-focusable" href="#data-top-5">Spring mine indtastninger over</a>
+
+                    <div data-sdk-app ng-controller="useractivitiesController" ng-include="'sdk/templates/useractivities.tpl.html'" ng-init="init()"></div>
+                    
+                    <a href="#" class="btn btn-primary">Indtast flere</a>
+                </div>
+            </section>
+
+            <section class="card">
+                <div class="card-header" id="data-top-5">
+                    Top 5 indtastere
+                </div>
+                <div class="card-body">
+                    <div>
+            </section>
+        </div>
+
+        <div class="col-lg-6">
+            <section class="card error-reports">
+                <div class="card-header">
+                    Mine fejlmeldinger
+                </div>
+                <div class="card-body" data-sdk-app ng-include="'sdk/templates/errors.tpl.html'"></div>
+            </section>
+        </div>
     </div>
 
-    <div data-sdk-app ng-include="'sdk/templates/errors.tpl.html'"></div>
+    <div class="row mb-5">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    Oversigt
+                </div>
 
-    <div data-sdk-app ng-include="'sdk/templates/useractivities.tpl.html'"></div>
-
-    <h2>Åbne protokoller til indtastning</h2>
-    <div data-sdk-app>
-        <taskunits-list task-id="3">
-        </taskunits-list>
+                <div class="card-body" data-sdk-app>
+                    <task-status task-id="3"></task-status>
+                    <task-progress-plot task-id="3" year-pattern="_s(_d_d_d_d)" legend="true">
+                    </task-progress-plot>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    Åbne protokoller til indtastning
+                </div>
+
+                <div class="card-body" data-sdk-app>
+                    <taskunits-list task-id="3">
+                    </taskunits-list>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid">
 
     <h2>Statistik</h2>
     <div data-sdk-app>
