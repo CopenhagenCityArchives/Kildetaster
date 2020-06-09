@@ -117,12 +117,14 @@
             <tr search-result-row
                 ng-repeat="result in ctrl.results.docs"
                 ng-click="goToPost(result)"
+                ng-keydown="($event.keyCode === 13 || $event.keyCode === 32) && goToPost(result)"
                 result="result"
                 config="ctrl.fields"
                 index="$index"
                 collection-id="result.collection_id"
                 page="ctrl.page"
-                style="cursor: pointer">
+                style="cursor: pointer"
+                tabindex="0">
             </tr>
         </tbody>
     </table>
