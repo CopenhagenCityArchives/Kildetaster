@@ -7,6 +7,10 @@
         font-size: 14px;
     }
 
+    th, td {
+        padding: 1.5rem 1rem;
+    }
+
     td {
         display: block;
     }
@@ -26,6 +30,18 @@
     }
 
     .pagination {
+        margin-top: 0;
         margin-bottom: 0;
     }
+
+    .float-lg-right .pagination {
+        margin-top: 1rem;
+
+        justify-content: flex-end;
+    }
+
+    .filter-link {
+        margin: 1rem 0.5rem 0 0;
+    }
 }
+
