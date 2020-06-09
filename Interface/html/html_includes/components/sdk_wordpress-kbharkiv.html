@@ -1,31 +1,40 @@
-<div data-sdk-app ng-controller="fritekstSearchController"
-    ng-include="'sdk/templates/fritekst-search.tpl.html'"
-    ng-init="init({'searchUrl': 'https://www.kbharkiv.dk/deltag/kildetaster-test/sogning'});"></div>
+<base href="/">
+<link rel="stylesheet" id="sdk.css-css" href="/resources/css/sdk.css" type="text/css" media="all">
 
-<h2>Oversigt</h2>
-<div data-sdk-app>
-    <task-status task-id="3"></task-status>
-    <task-progress-plot task-id="3" year-pattern="_s(_d_d_d_d)" legend="true">
-    </task-progress-plot>
+<div class="container-fluid">
+
+    <div data-sdk-app ng-controller="fritekstSearchController"
+        ng-include="'sdk/templates/fritekst-search.tpl.html'"
+        ng-init="init({'searchUrl': 'https://www.kbharkiv.dk/deltag/kildetaster-test/sogning'});"></div>
+
+    <h2>Oversigt</h2>
+    <div data-sdk-app>
+        <task-status task-id="3"></task-status>
+        <task-progress-plot task-id="3" year-pattern="_s(_d_d_d_d)" legend="true">
+        </task-progress-plot>
+    </div>
+
+    <div data-sdk-app ng-include="'sdk/templates/errors.tpl.html'"></div>
+
+    <div data-sdk-app ng-include="'sdk/templates/useractivities.tpl.html'"></div>
+
+    <h2>Åbne protokoller til indtastning</h2>
+    <div data-sdk-app>
+        <taskunits-list task-id="3">
+        </taskunits-list>
+    </div>
+
+    <h2>Statistik</h2>
+    <div data-sdk-app>
+        <h3>Den sidste uge</h3>
+        <!-- Last 7 days -->
+        <user-statistics since-days="7"></user-statistics>
+
+        <h3>Siden primo 2017</h3>
+        <!-- Since 2017-01-01 -->
+        <user-statistics since-unix="1483228800"></user-statistics>
+    </div>
 </div>
 
-<div data-sdk-app ng-include="'sdk/templates/errors.tpl.html'"></div>
-
-<div data-sdk-app ng-include="'sdk/templates/useractivities.tpl.html'"></div>
-
-<h2>Åbne protokoller til indtastning</h2>
-<div data-sdk-app>
-    <taskunits-list task-id="3">
-    </taskunits-list>
-</div>
-
-<h2>Statistik</h2>
-<div data-sdk-app>
-    <h3>Den sidste uge</h3>
-    <!-- Last 7 days -->
-    <user-statistics since-days="7"></user-statistics>
-
-    <h3>Siden primo 2017</h3>
-    <!-- Since 2017-01-01 -->
-    <user-statistics since-unix="1483228800"></user-statistics>
-</div>
+<script data-main="/resources/js/sdk-main.js" src="/resources/js/libs/require.js" type="text/javascript"></script>
+<script type="text/javascript" src="/resources/js/sdk-config.js"></script>
