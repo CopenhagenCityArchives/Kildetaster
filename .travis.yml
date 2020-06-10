@@ -49,8 +49,8 @@ deploy:
   local-dir: "./kbh"
   upload-dir: kildetaster
   acl: public_read
+  region: eu-west-1
   on:
     repo: CopenhagenCityArchives/Kildetaster
     branch: new-site
-  skip_cleanup: 'true'
-  edge: true
+  skip_cleanup: true
