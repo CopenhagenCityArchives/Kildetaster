@@ -2,12 +2,6 @@
     overflow: hidden;
 }
 
-.fade {
-    transition: opacity 0.15s linear;
-
-    opacity: 0;
-}
-
 .fade.in {
     opacity: 1;
 }

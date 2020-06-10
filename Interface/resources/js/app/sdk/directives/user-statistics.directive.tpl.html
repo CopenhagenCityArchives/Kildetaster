@@ -1,23 +1,125 @@
-<div class="user-statistics">
-    <div ng-if="loading" class="alert alert-info">
-        Indlæser brugerstatistik.
+<ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link" ng-class="{ 'active': activeTab == 'day' }" id="seneste-dogn-tab" data-toggle="tab" href role="tab" ng-click="activeTab = 'day'" 
+            aria-controls="seneste-dogn" aria-selected="true"><span class="sr-only">Top 5 indtastere det </span>Seneste
+            døgn</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" ng-class="{ 'active': activeTab == 'week' }" id="seneste-uge-tab" data-toggle="tab" href role="tab" ng-click="activeTab = 'week'"
+            aria-controls="seneste-uge" aria-selected="false"><span class="sr-only">Top 5 indtastere den </span>Seneste
+            uge</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" ng-class="{ 'active': activeTab == 'ever' }" id="altid-tab" data-toggle="tab" href role="tab" aria-controls="altid" ng-click="activeTab = 'ever'" 
+            aria-selected="false"><span class="sr-only">Top 5 indtastere for </span>Altid</a>
+    </li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane fade" ng-class="{ 'active': activeTab == 'day', 'show': activeTab == 'day' }" id="seneste-dogn" role="tabpanel" aria-labelledby="seneste-dogn-tab">
+        <div ng-if="dayLoading" class="text-center w-100">
+            <svg class="large-icon spin" feather-icon icon="'loader'"></svg>
+            <div class="h4">Indlæser brugerstatistikker</div>
+        </div>
+        
+        <div ng-if="dayError" class="alert alert-danger text-center w-100">
+            <svg class="large-icon" aria-hidden="true" feather-icon icon="'alert-octagon'"></svg>
+            <div class="h4">En fejl opstod</div>
+            <p class="small">Kunne ikke hente data. Prøv venligst igen senere.</p>
+        </div>
+        
+        <table ng-if="!dayLoading && !dayError" class="table table-striped" aria-labelledby="seneste-dogn-tab">
+            <caption class="sr-only">Top 5 indtastere det seneste døgn</caption>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Bruger</th>
+                    <th scope="col">Antal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="stat in day | limitTo : 5 : 0">
+                    <td>
+                        {{ $index + 1}}
+                    </td>
+                    <td>
+                        {{ stat.username }}
+                    </td>
+                    <td>
+                        {{ stat.count }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+    <div class="tab-pane fade" ng-class="{ 'active': activeTab == 'week', 'show': activeTab == 'week' }" id="seneste-uge" role="tabpanel" aria-labelledby="seneste-uge-tab">
+        <div ng-if="weekLoading" class="text-center w-100">
+            <svg class="large-icon spin" feather-icon icon="'loader'"></svg>
+            <div class="h4">Indlæser brugerstatistikker</div>
+        </div>
+        
+        <div ng-if="weekError" class="alert alert-danger text-center w-100">
+            <svg class="large-icon" aria-hidden="true" feather-icon icon="'alert-octagon'"></svg>
+            <div class="h4">En fejl opstod</div>
+            <p class="small">Kunne ikke hente data. Prøv venligst igen senere.</p>
+        </div>
 
-    <ul ng-if="!error && !loading" class="unstyled">
-        <li>
-            <div class="user-statistics__header text-right">#</div>
-            <div class="user-statistics__header">Bruger</div>
-            <div class="user-statistics__header text-right">Antal</div>
-        </li>
-
-        <li ng-repeat="stat in stats" ng-class="{ odd: $odd }">
-            <div class="user-statistics__item text-right">{{ $index + 1 }}.</div>
-            <div class="user-statistics__item">{{ stat.username }}</div>
-            <div class="user-statistics__item text-right">{{ stat.count }}</div>
-        </li>
-    </ul>
-
-    <div ng-if="error" class="alert alert-warning">
-        En fejl opstod under indlæsningen af brugerstatistikken.
+        <table ng-if="!weekLoading && !weekError" class="table table-striped" aria-labelledby="seneste-uge-tab">
+            <caption class="sr-only">Top 5 indtastere den seneste uge</caption>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Bruger</th>
+                    <th scope="col">Antal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="stat in week | limitTo : 5 : 0">
+                    <td>
+                        {{ $index + 1}}
+                    </td>
+                    <td>
+                        {{ stat.username }}
+                    </td>
+                    <td>
+                        {{ stat.count }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane fade" ng-class="{ 'active': activeTab == 'ever', 'show': activeTab == 'ever' }" id="altid" role="tabpanel" aria-labelledby="altid-tab">
+        <div ng-if="everLoading" class="text-center w-100">
+            <svg class="large-icon spin" feather-icon icon="'loader'"></svg>
+            <div class="h4">Indlæser brugerstatistikker</div>
+        </div>
+        
+        <div ng-if="everError" class="alert alert-danger text-center w-100">
+            <svg class="large-icon" aria-hidden="true" feather-icon icon="'alert-octagon'"></svg>
+            <div class="h4">En fejl opstod</div>
+            <p class="small">Kunne ikke hente data. Prøv venligst igen senere.</p>
+        </div>
+        <table ng-if="!everLoading && !everError" class="table table-striped" aria-labelledby="altid-tab">
+            <caption class="sr-only">Top 5 indtastere for altid</caption>
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Bruger</th>
+                    <th scope="col">Antal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="stat in ever | limitTo : 5 : 0">
+                    <td>
+                        {{ $index + 1}}
+                    </td>
+                    <td>
+                        {{ stat.username }}
+                    </td>
+                    <td>
+                        {{ stat.count }}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
