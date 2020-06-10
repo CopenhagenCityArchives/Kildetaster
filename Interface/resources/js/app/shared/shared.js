@@ -130,7 +130,8 @@ define([
         //Let's allow resources from kbhkilder.dk
         $sceDelegateProvider.resourceUrlWhitelist([
             'self',
-            'https://*.kbhkilder.dk/**'
+            'https://*.kbhkilder.dk/**',
+            'https://*.kbharkiv.dk/**'
         ]);
 
         angularAuth0Provider.init({
