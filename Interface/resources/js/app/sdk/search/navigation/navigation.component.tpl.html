@@ -1,3 +1,31 @@
+
+<div class="container-fluid" ng-if="$ctrl.partOfSearch">
+    <header class="row">
+
+        <div class="col-lg-4">
+            <h1>Søg person</h1>
+        </div>
+
+        <div class="col-lg-6">
+            <span>Resultat {{ $ctrl.index }} af {{ $ctrl.numFound }}</span>
+        </div>
+
+        <div class="col-lg-2">
+            <a ui-sref="search.page.results" class="btn btn-primary float-lg-right">Tilbage</a>
+        </div>
+
+    </header>
+
+    <nav class="float-lg-right row">
+        <a href="#" class="btn btn-primary" ng-click="$ctrl.prev()" ng-disabled="$ctrl.disablePrev()">Forrige</a>
+        <a href="#" class="btn btn-primary" ng-click="$ctrl.next()" ng-disabled="$ctrl.disableNext()">Næste</a>
+    </nav>
+</div>
+
+
+
+
+<!--
 <div class="search-navigation" ng-if="$ctrl.partOfSearch">
     <div class="row">
         <div class="col-md-3">
@@ -18,3 +46,4 @@
         </div>
     </div>
 </div>
+-->

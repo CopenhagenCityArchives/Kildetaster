@@ -1,22 +1,13 @@
 <div class="container-fluid">
 
     <header class="row">
-        <div class="col-lg-4">
-            <h1>Søg person</h1>
-        </div>
-        <div class="col-lg-6">
-            <div>Viser 4. af 5.805 personer</div>
-        </div>
-        <div class="col-lg-2">
-            <a href="#" class="btn btn-primary float-lg-right">Tilbage</a>
-        </div>
         <div class="col-12">
             <nav aria-label="Brødkrummesti">
                 <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Hjem</a></li>
-                <li class="breadcrumb-item"><a href="#">Søg</a></li>
-                <li class="breadcrumb-item"><a href="#">Søg person</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Edmund August Abben</li>
+                    <li class="breadcrumb-item"><a href="#">Hjem</a></li>
+                    <li class="breadcrumb-item"><a href="#">Søg</a></li>
+                    <li class="breadcrumb-item"><a href="#">Søg person</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</li>
                 </ol>
             </nav>
         </div>
