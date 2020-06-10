@@ -60,7 +60,7 @@
         <div class="d-none d-lg-flex" aria-label="Filtrer søgning">
             <button class="btn btn-outline-secondary dropdown-toggle" type="button" aria-haspopup="true"
                 id="facet-button-{{facet.field}}"
-                aria-expanded="facet.expanded" ng-repeat="facet in ctrl.facets" ng-click="expandFacet(facet)">
+                aria-expanded="facet.expanded" ng-repeat="facet in ctrl.facets" ng-click="expandFacet(facet); $event.stopPropagation()">
                 {{ ctrl.fieldIndex[facet.field].view_name }}
             </button>
         </div>

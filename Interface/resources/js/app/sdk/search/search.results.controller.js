@@ -23,6 +23,8 @@ define([
         $scope.allFacetsExpanded = false;
         $scope.facetsShown = false;
 
+
+
         that.loading = false;
         that.initialized = false;
 
@@ -88,6 +90,15 @@ define([
 
         $scope.$firstTabbable = null;
         $scope.$lastTabbable = null;
+
+        // close filter menu on click outside
+        angular.element($element).on('click', function(e) {
+            var $target = angular.element(e.target);
+            var $offcanvas = angular.element($element.find('.facet__offcanvas'));
+            if ($scope.facetsShown && !$target.closest($offcanvas).length) {
+                $scope.collapseFacets();
+            }
+        });
         
         function expandFacetFocus() {
             var $offcanvas = angular.element($element).find(".facet__offcanvas");
