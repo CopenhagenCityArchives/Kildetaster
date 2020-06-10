@@ -55,7 +55,7 @@ module.exports = {
 
     development: {
         constants: {
-            EDITOR_URL: '/kildetaster-development',
+            EDITOR_URL: 'https://static.kbharkiv.dk/kildetaster-development',
             RESOURCE_URL: 'https://www.kbhkilder.dk/software/kildetaster-development/resources/',
             API_ENDPOINT: 'https://www.kbhkilder.dk/1508/experimental',
             SOLR_API_ENDPOINT: 'https://aws.kbhkilder.dk/solr/apacs_core/select',
@@ -71,7 +71,7 @@ module.exports = {
 
     developmentPublicBeta: {
         constants: {
-            EDITOR_URL: '/kildetaster-public-beta',
+            EDITOR_URL: 'https://static.kbharkiv.dk/kildetaster-development-public',
             RESOURCE_URL: 'https://www.kbhkilder.dk/software/kildetaster-public-beta/resources/',
             API_ENDPOINT: 'https://www.kbhkilder.dk/1508/public_beta',
             SOLR_API_ENDPOINT: 'https://aws.kbhkilder.dk/solr/apacs_core/select',
@@ -87,7 +87,7 @@ module.exports = {
 
     production: {
         constants: {
-            EDITOR_URL: '/kildetaster',
+            EDITOR_URL: 'https://static.kbharkiv.dk/kildetaster',
             RESOURCE_URL: 'https://www.kbhkilder.dk/software/kildetaster-new-site/resources/',
             API_ENDPOINT: 'https://www.kbhkilder.dk/api',
             SOLR_API_ENDPOINT: 'https://aws.kbhkilder.dk/solr/apacs_core/select',
