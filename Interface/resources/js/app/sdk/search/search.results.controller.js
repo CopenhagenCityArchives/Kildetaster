@@ -14,6 +14,7 @@ define([
         solrService,
         searchService,
         searchConfig,
+        $element,
         Analytics
     ) {
 
@@ -85,6 +86,43 @@ define([
             $scope.doSearch(true);
         }
 
+        $scope.$firstTabbable = null;
+        $scope.$lastTabbable = null;
+        
+        function expandFacetFocus() {
+            var $offcanvas = angular.element($element).find(".facet__offcanvas");
+
+            $offcanvas.off('keydown');
+            $offcanvas.on('keydown', function(e) {
+                if (e.which === 27) {
+                    e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+                    $timeout($scope.collapseFacets);
+                }
+            });
+
+            var $tabbable = $offcanvas.find("select, input, textarea, button, a").filter(":visible");
+            $scope.$firstTabbable = $tabbable.first();
+            $scope.$lastTabbable = $tabbable.last();
+
+            // Trap tab focus inside the filter menu. When last tabbable element is focussed the next will be the first tabbable elemenet
+            $scope.$lastTabbable.on("keydown", function (e) {
+                if (e.which === 9 && !e.shiftKey) {
+                    e.preventDefault ? e.preventDefault() : (e.returnValue = false);
+                    $scope.$firstTabbable.focus();
+                }
+            });
+
+            // Trap tab focus inside the filter menu. Same as above but in the other direction.
+            $scope.$firstTabbable.on("keydown", function (e) {
+                if (e.which === 9 && e.shiftKey) {
+                    e.preventDefault();
+                    $scope.$lastTabbable.focus();
+                }
+            });
+
+            $scope.$firstTabbable.focus();
+        }
+
         $scope.expandFacets = function() {
             for (var i = 0; i < that.facets.length; i++) {
                 that.facets[i].enabled = true;
@@ -92,6 +130,7 @@ define([
             }
             $scope.allFacetsExpanded = true;
             $scope.facetsShown = true;
+            $timeout(expandFacetFocus);
         }
 
         $scope.expandFacet = function(facet) {
@@ -99,15 +138,39 @@ define([
             facet.enabled = true;
             facet.expanded = true;
             $scope.facetsShown = true;
+            $timeout(expandFacetFocus);
         }
 
         $scope.collapseFacets = function() {
+            var restoreFocusFacet = null;
             for (var i = 0; i < that.facets.length; i++) {
+                // get facet for restoring focus
+                if (!restoreFocusFacet && that.facets[i].expanded) {
+                    restoreFocusFacet = that.facets[i];
+                }
+
                 that.facets[i].expanded = false;
                 that.facets[i].enabled = false;
             }
             $scope.allFacetsExpanded = false;
             $scope.facetsShown = false;
+
+            if ($scope.$firstTabbable) {
+                $scope.$firstTabbable.off('keydown');
+                $scope.$firstTabbable = null;
+            }
+
+            if ($scope.$lastTabbable) {
+                $scope.$lastTabbable.off('keydown');
+                $scope.$lastTabbable = null;
+            }
+
+            // restore focus
+            if (restoreFocusFacet) {
+                $timeout(function() {
+                    angular.element($element).find("#facet-button-" + restoreFocusFacet.field).focus();
+                })
+            }
         }
 
 
@@ -128,6 +191,9 @@ define([
 
             $scope.doSearch(true);
             Analytics.trackEvent('person_search', 'change_facet', 'change_facet.'+facet.field);
+
+            // save bucket and facet for restoring focus
+            $scope.restoreBucketFocus = { facet: facet, bucket: bucket };
         }
 
         $scope.clearFilters = function() {
@@ -228,8 +294,14 @@ define([
                         }
                     }, that.facetFields);
 
-                    console.log("response.facets, that.facetFields");
-                    console.log(response.facets, that.facetFields);
+                    // restore focus if we came from filtering
+                    if ($scope.restoreBucketFocus) {
+                        $timeout(function() {
+                            var restoreBucketElement = angular.element($element).find('#facet-bucket-' + $scope.restoreBucketFocus.facet.field + '-' + $scope.restoreBucketFocus.bucket.val.replace(' ', '-'));
+                            restoreBucketElement.focus();
+                        })
+                    }
+                    
                 }).catch(function (err) {
                     console.log('Error in search:', err);
                     that.error = true;

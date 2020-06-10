@@ -29,6 +29,14 @@ define([
                 angular.forEach($scope.buckets, function(bucket) {
                     bucket.selected = $scope.isBucketInFilterQueries($scope.facet, bucket);
                 });
+
+                $scope.cleanBucketValueForId = function(val) {
+                    if (typeof val === 'string') {
+                        return val.replace(' ', '-');
+                    } else {
+                        return val;
+                    }
+                }
             }],
 
             link: function(scope, element, attr) {

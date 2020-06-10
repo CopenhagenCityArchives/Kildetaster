@@ -6,25 +6,35 @@
         left: 0;
 
         overflow-x: hidden;
-        overflow-y: scroll;
+        overflow-y: auto;
 
         width: 375px;
         max-width: 100%;
         height: 100%;
 
-        transition: transform 400ms ease;
+        transition: transform 400ms ease, box-shadow 400ms ease;
         transform: translateX(-100%);
 
         background-color: white;
 
         -webkit-overflow-scrolling: touch;
-    }
 
-    &__offcanvas.active {
-        transform: translateX(0);
-    }
+        &.active {
+            transform: translateX(0);
 
-    &__offcanvas .list-group .list-group .list-group-item:not(.active) {
-        background-color: rgba(0, 0, 0, 0.05);
+            box-shadow: 0 0 0 5000px rgba($blue, 0.8);
+        }
+
+        .h3 {
+            padding: 2.5rem 1.25rem 1rem 1.25rem;
+        }
+
+        .list-group-item {
+            font-weight: 500;
+        }
+
+        .list-group .list-group .list-group-item:not(.active) {
+            background-color: rgba($cyan-light, 0.16);
+        }
     }
 }

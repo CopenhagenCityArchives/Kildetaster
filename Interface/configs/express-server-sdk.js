@@ -1,9 +1,9 @@
 var express = require('express');
 var app = express();
 
-app.use('*/resources', express.static('_sdk/resources'));
+app.use('/resources', express.static('_sdk/resources'));
 
-app.all('/search.html', function(req, res){
+app.all('/search*', function(req, res){
   res.sendFile('search.html', {root: '_sdk'});
 });
 

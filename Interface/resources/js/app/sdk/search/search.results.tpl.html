@@ -23,7 +23,7 @@
 </section>
 
 <!-- New Results -->
-<div ng-if="ctrl.results.docs.length > 0 && !ctrl.error">
+<div ng-if="ctrl.results.docs.length > 0 && !ctrl.error" class="search-results">
     <header class="page-header">
         <div class="container-fluid" >
         <div class="row">
@@ -58,7 +58,8 @@
         <button type="button" class="btn btn-primary d-block d-lg-none dropdown-toggle" ng-click="expandFacets()"
             aria-haspopup="true" aria-expanded="{{ allFacetsExpanded }}">Filtrer søgning</button>
         <div class="d-none d-lg-flex" aria-label="Filtrer søgning">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" aria-haspopup="true"<
+            <button class="btn btn-outline-secondary dropdown-toggle" type="button" aria-haspopup="true"
+                id="facet-button-{{facet.field}}"
                 aria-expanded="facet.expanded" ng-repeat="facet in ctrl.facets" ng-click="expandFacet(facet)">
                 {{ ctrl.fieldIndex[facet.field].view_name }}
             </button>
@@ -117,12 +118,14 @@
             <tr search-result-row
                 ng-repeat="result in ctrl.results.docs"
                 ng-click="goToPost(result)"
+                ng-keydown="($event.keyCode === 13 || $event.keyCode === 32) && goToPost(result)"
                 result="result"
                 config="ctrl.fields"
                 index="$index"
                 collection-id="result.collection_id"
                 page="ctrl.page"
-                style="cursor: pointer">
+                style="cursor: pointer"
+                tabindex="0">
             </tr>
         </tbody>
     </table>
@@ -150,7 +153,7 @@
             go-to-page="ctrl.goToPage(page)">
         </pagination>
 
-        <form class="go-to-page form-inline" role="form" aria-labelledby="go-to-page-label" ng-submit="ctrl.goToPage(ctrl.pageNumber)">
+        <form class="go-to-page form-inline"role="form" aria-labelledby="go-to-page-label" ng-submit="ctrl.goToPage(ctrl.pageNumber-1)">
             <div class="form-group mr-2">
                 <label for="go-to-page" id="go-to-page-label" class="mr-3">Spring til side</label>
                 <input type="number" class="form-control" id="go-to-page" placeholder="Sidetal" ng-model="ctrl.pageNumber">
