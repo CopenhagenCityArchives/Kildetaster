@@ -1,25 +1,32 @@
-define([], function() {
+define([
+
+    'clipboard'
+
+], function(Clipboard) {
 
     var policeController = /*@ngInject*/ function policeController() {
 
         var that = this;
+
+        console.log(this);
 
         this.$onInit = function() {
 
             that.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id;
             // Set up post information
             that.imageFront = "http://politietsregisterblade.dk/registerblade/" + that.data.station + "/" + that.data.film + "/" + that.data.file_front + ".jpg";
+            that.images = [that.imageFront];
             if (that.data.file_back !== 'noback') {
                 that.imageBack = "http://politietsregisterblade.dk/registerblade/" + that.data.station + "/" + that.data.film + "/" + that.data.file_back + ".jpg";
+                that.images = [that.imageFront, that.imageBack];
             }
         };
 
         this.copy = function() {
-            var copyText = document.querySelector("#permalink");
-            copyText.select();
-            document.execCommand("copy");
-            copyText.className = "input copied"
-            copyText.blur();
+            var clip = new Clipboard('#permalink_btn', {
+                container: document.getElementById('#permalink')
+            });
+            return clip;
         };
     };
 

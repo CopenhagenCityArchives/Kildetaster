@@ -18,11 +18,11 @@ define([
             restrict: 'E',
 
             scope: {
-                imageUrl: '='
+                images: '='
             },
 
             controller: /*@ngInject*/ function ($scope, $compile, $templateCache, $element, $timeout) {
-                
+            
                 // Store current unique number on the scope
                 $scope.num = num;
 
@@ -106,11 +106,10 @@ define([
                             pinchToZoom: true
                         },
 
-                        element: document.querySelector('#zoom-image-' + $scope.num),
-
+                        element: document.querySelector('#zoom-image-' + $scope.num + '-' + '0' ),
                         tileSources: {
                             type: 'image',
-                            url: $scope.imageUrl
+                            url: 'http://politietsregisterblade.dk/registerblade/6/0002/03161A.jpg'
                         },
                     });
 

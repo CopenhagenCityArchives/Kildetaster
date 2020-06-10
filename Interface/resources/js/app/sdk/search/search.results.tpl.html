@@ -26,30 +26,30 @@
 <div ng-if="ctrl.results.docs.length > 0 && !ctrl.error" class="search-results">
     <header class="page-header">
         <div class="container-fluid" >
-        <div class="row">
-        <div class="col-lg-4">
-            <h1>Søg person</h1>
-        </div>
-        <div class="col-lg-6">
-            <search-config-text class="search-config-text" config="ctrl.queries" collections="ctrl.collections">
-                <post-count page="ctrl.page" total="ctrl.results.numFound" posts-pr-page="ctrl.postsPrPage">
-                </post-count>
-            </search-config-text>
-        </div>
-        <div class="col-lg-2">
-            <a class="sr-only sr-only-focusable" href="#search-results">Gå direkte til søgeresultaterne</a>
-            <a href="" ui-sref="^" class="btn btn-primary float-lg-right">Ret søgning</a>
-        </div>
-        <div class="col-12">
-            <nav aria-label="Brødkrummesti">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Hjem</a></li>
-                    <li class="breadcrumb-item"><a href="#">Søg</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Søg person</li>
-                </ol>
-            </nav>
-        </div>
-        </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <h1>Søg person</h1>
+                </div>
+                <div class="col-lg-6">
+                    <search-config-text class="search-config-text" config="ctrl.queries" collections="ctrl.collections">
+                        <post-count page="ctrl.page" total="ctrl.results.numFound" posts-pr-page="ctrl.postsPrPage">
+                        </post-count>
+                    </search-config-text>
+                </div>
+                <div class="col-lg-2">
+                    <a class="sr-only sr-only-focusable" href="#search-results">Gå direkte til søgeresultaterne</a>
+                    <a href="" ui-sref="^" class="btn btn-primary float-lg-right">Ret søgning</a>
+                </div>
+                <div class="col-12">
+                    <nav aria-label="Brødkrummesti">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Hjem</a></li>
+                            <li class="breadcrumb-item"><a href="#">Søg</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Søg person</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
         </div>
     </header>
 
@@ -162,7 +162,7 @@
         </form>
     </div>
 </div>
-</div>
+<div>
 
 <div class="facet__offcanvas" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="filter-label"
     aria-describedby="filter-desc" ng-class="{active: facetsShown}">

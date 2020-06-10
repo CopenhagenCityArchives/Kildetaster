@@ -63,7 +63,9 @@ requirejs.config({
         'app/shared/constants': ['angular'],
 
         'libs/openseadragonselection': ['openseadragon'],
-        'libs/openseadragon-filtering': ['openseadragon']
+        'libs/openseadragon-filtering': ['openseadragon'],
+        'libs/openseadragon-imaginghelper': ['openseadragon'],
+        'libs/openseadragon-viewerinputhook': ['openseadragon'],
 
     },
 
