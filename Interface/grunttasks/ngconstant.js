@@ -69,10 +69,10 @@ module.exports = {
         }
     },
 
-    new_site: {
+    newSite: {
         constants: {
-            EDITOR_URL: 'https://static.kbharkiv.dk/kildetaster/index.html',
-            RESOURCE_URL: 'https://static.kbharkiv.dk/kildetaster/resources/',
+            EDITOR_URL: 'https://kildetaster.kbharkiv.dk',
+            RESOURCE_URL: 'https://kildetaster.kbharkiv.dk/resources/',
             API_ENDPOINT: 'https://www.kbhkilder.dk/api',
             SOLR_API_ENDPOINT: 'https://aws.kbhkilder.dk/solr/apacs_core/select',
             SEARCH_CONFIG_URL: 'https://www.kbhkilder.dk/api/searchconfig',

@@ -115,7 +115,7 @@ build_new_site:
     - 'clean:production'
     - 'html2js:editor'
     - 'html2js:sdk'
-    - 'ngconstant:new_site'
+    - 'ngconstant:newSite'
     - 'copy:production'
     - 'imagemin:production'
 
