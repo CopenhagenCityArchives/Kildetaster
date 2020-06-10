@@ -166,9 +166,11 @@ define([
             }
 
             // restore focus
-            $timeout(function() {
-                angular.element($element).find("#facet-button-" + restoreFocusFacet.field).focus();
-            })
+            if (restoreFocusFacet) {
+                $timeout(function() {
+                    angular.element($element).find("#facet-button-" + restoreFocusFacet.field).focus();
+                })
+            }
         }
 
 
@@ -189,6 +191,9 @@ define([
 
             $scope.doSearch(true);
             Analytics.trackEvent('person_search', 'change_facet', 'change_facet.'+facet.field);
+
+            // save bucket and facet for restoring focus
+            $scope.restoreBucketFocus = { facet: facet, bucket: bucket };
         }
 
         $scope.clearFilters = function() {
@@ -289,8 +294,14 @@ define([
                         }
                     }, that.facetFields);
 
-                    console.log("response.facets, that.facetFields");
-                    console.log(response.facets, that.facetFields);
+                    // restore focus if we came from filtering
+                    if ($scope.restoreBucketFocus) {
+                        $timeout(function() {
+                            var restoreBucketElement = angular.element($element).find('#facet-bucket-' + $scope.restoreBucketFocus.facet.field + '-' + $scope.restoreBucketFocus.bucket.val.replace(' ', '-'));
+                            restoreBucketElement.focus();
+                        })
+                    }
+                    
                 }).catch(function (err) {
                     console.log('Error in search:', err);
                     that.error = true;
