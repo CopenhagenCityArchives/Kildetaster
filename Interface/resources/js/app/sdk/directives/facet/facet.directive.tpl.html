@@ -1,10 +1,15 @@
 <div class="list-group list-group-flush">
     <button type="button" class="list-group-item list-group-item-action"
         ng-attr-id="facet-bucket-{{field.name}}-{{cleanBucketValueForId(bucket.val)}}"
-        ng-repeat="bucket in buckets"
+        ng-repeat="bucket in buckets | limitTo : bucketsLimit : 0"
         ng-class="{active: isBucketInFilterQueries(facet, bucket)}"
         ng-click="callAddFilter(facet, bucket)">
         <span ng-if="facet.type == 'range'">{{bucket.val}}-{{bucket.val+facet.gap}} ({{bucket.count}})</span>
         <span ng-if="facet.type == 'terms'">{{bucket.val}} ({{bucket.count}})</span>
+    </button>
+
+    <button type="button" class="list-group-item list-group-item-action text-center" ng-if="buckets.length > bucketsLimit" ng-click="increaseBucketsLimit()">
+        <span class='sr-only'>Indlæs flere filterværdier</span>
+        <svg feather-icon icon="'more-vertical'"></svg>
     </button>
 </div>

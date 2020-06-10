@@ -37,6 +37,12 @@ define([
                         return val;
                     }
                 }
+
+                $scope.increaseBucketsLimit = function() {
+                    $scope.bucketsLimit += 10;
+                }
+
+                $scope.bucketsLimit = 10;
             }],
 
             link: function(scope, element, attr) {
