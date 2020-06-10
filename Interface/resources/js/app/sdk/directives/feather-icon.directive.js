@@ -1,6 +1,6 @@
 
 define([], function() {
-    var featherIconDirective = /*@ngInject*/ function(RESOURCE_URL) {
+    var featherIconDirective = /*@ngInject*/ function($sce, RESOURCE_URL) {
         return {
             restrict: 'A',
             scope: {
@@ -11,7 +11,7 @@ define([], function() {
                 angular.element(element).addClass('feather');
 
                 scope.getIconUrl = function() {
-                    return RESOURCE_URL + 'images/feather-sprite.svg#' + scope.icon;
+                    return $sce.trustAsUrl(RESOURCE_URL + 'images/feather-sprite.svg#' + scope.icon);
                 }
             }
         }
