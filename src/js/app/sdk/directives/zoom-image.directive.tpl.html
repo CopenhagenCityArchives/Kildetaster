@@ -1,4 +1,52 @@
-<div class="zoom-image">
+<div class="module-gallery">
+    <div class="card text-white mb-3">
+        <div class="card-body">
+        <div ng-attr-id="{{ 'zoom-image-' + num + '-' + 0}}" class="zoom-image__target"></div>
+        <!-- <div id="source-gallery" class="carousel slide" data-ride="carousel">
+
+            <div class="carousel-inner">
+                
+                <a class="carousel-item" ng-class="{active : $index == 0}" role="button" ng-repeat="img in images" data-toggle="modal" data-target="#source-gallery-modal">
+                    <!--<img class="d-block w-100" src="{{img}}" alt="img 0">
+                    <div ng-attr-id="{{ 'zoom-image-' + num + '-' + $index}}" class="zoom-image__target"></div>
+                </a>
+                
+                <a class="carousel-control-prev" href="#source-gallery" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Forrige side af kilden</span>
+                </a>
+                <a class="carousel-control-next" href="#source-gallery" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Næste side af kilden</span>
+                </a>
+
+            </div> 
+        </div> -->
+
+        <div class="text-right">
+            <button type="button" class="btn btn-link"><i width="20px" height="20px" data-feather="zoom-out"></i><span class="sr-only">Zoom ud</span></button>
+            <button type="button" class="btn btn-link"><i width="20px" height="20px" data-feather="zoom-in"></i><span class="sr-only">Zoom ind</span></button>
+            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#source-gallery-modal"><i width="20px" height="20px" data-feather="maximize-2"></i><span class="sr-only">Åbn galleriet i fuld skærm</span></button>
+        </div>
+
+        <h5>Om kilden</h5>
+        <p>Nam porttitor blandit accumsan. Ut vel dictum sem, a pretium dui. In malesuada enim in dolor eui.</p>
+
+        <div class="row">
+            <div class="col">
+            <h6>Afleveret i arkivet</h6>
+            <p>2015</p>
+            </div>
+            <div class="col">
+            <h6>Løbenr.</h6>
+            <p>11.438</p>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="zoom-image">
 
     <div ng-attr-id="{{ 'zoom-image-' + num}}" class="zoom-image__target"></div>
 
@@ -24,4 +72,4 @@
         </a></li>
     </ul>
 
-</div>
+</div> -->
