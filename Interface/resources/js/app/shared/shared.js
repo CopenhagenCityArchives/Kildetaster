@@ -143,7 +143,7 @@ define([
         $locationProvider.hashPrefix('');
         $locationProvider.html5Mode({
             enabled: true,
-            requireBase: false
+            requireBase: true
         });
 
         // Global state for Auth0 login redirects
