@@ -124,13 +124,15 @@ define([
         $rootScope.TEXT = TEXT;
     });
 
-    sharedApp.config(function($httpProvider) {
-        $httpProvider.interceptors.push('tokenFactory');
-    });
-
-    sharedApp.config(['$httpProvider','AnalyticsProvider', 'angularAuth0Provider', '$stateProvider', '$locationProvider', function($httpProvider, AnalyticsProvider, angularAuth0Provider, $stateProvider, $locationProvider) {
+    sharedApp.config(/*ngInject*/ function($httpProvider, AnalyticsProvider, angularAuth0Provider, $stateProvider, $locationProvider,$sceDelegateProvider) {
         $httpProvider.interceptors.push('tokenFactory');
  
+        //Let's allow resources from kbhkilder.dk
+        $sceDelegateProvider.resourceUrlWhitelist([
+            'self',
+            'https://*.kbhkilder.dk/**'
+        ]);
+
         angularAuth0Provider.init({
             clientID: 'uNrqzxblFnPrzQWpqMMBiB8h0VppBesM',
             domain: 'kbharkiv.eu.auth0.com'
@@ -166,7 +168,7 @@ define([
         AnalyticsProvider.trackPages(true);
         AnalyticsProvider.ignoreFirstPageLoad(true);
         AnalyticsProvider.startOffline(true);
-    }]);
+    });
 
     return sharedApp;
 
