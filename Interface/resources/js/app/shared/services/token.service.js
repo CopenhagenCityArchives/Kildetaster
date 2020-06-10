@@ -62,11 +62,10 @@ define([
                     url = encodeURI($location.url());
                 }
 
-
                 angularAuth0.authorize({
                     audience: 'https://www.kbhkilder.dk/api',
                     responseType: 'token',
-                    redirectUri: $location.absUrl() + '/login?url=' + url 
+                    redirectUri: $location.absUrl() + 'login?url=' + url
                 });
                 return; 
             },
