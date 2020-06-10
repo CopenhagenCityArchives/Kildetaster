@@ -30,14 +30,14 @@ deploy:
 - provider: script
   script: sshpass -p${KBHKILDER_SSH_PASSWORD} scp -o LogLevel=Verbose -o StrictHostKeyChecking=no
     -r ./kbh/resources/ ${KBHKILDER_SSH_USER}@${KBHKILDER_SSH_HOST}:${KBHKILDER_SSH_PATH}
-  skip_cleanup: true
+  cleanup: false
   on:
     all_branches: true
     condition: "$TRAVIS_BRANCH =~ ^(master|development|public-beta|new-site)$"
 
 - provider: script
   script: scp -i ./deploy_key -o LogLevel=Verbose -o StrictHostKeyChecking=no -P ${KBHARKIV_SSH_PORT} ./kbh/index.html ${KBHARKIV_SSH_USER}@${KBHARKIV_SSH_HOST}:${KBHARKIV_SSH_PATH}
-  skip_cleanup: true
+  cleanup: false
   on:
     all_branches: true
     condition: "$TRAVIS_BRANCH =~ ^(master|development|public-beta|new-site)$"
@@ -46,11 +46,12 @@ deploy:
   secret_access_key:
     secure: fqxvfYDNQxIBXTYblNVPBlXd1S21pod9dLuN04iwOqjmyGQ3i0zdsoAetvfmzdUI/eMwlGLYquRtM0bbVC70O+8XYeQarpE0luKZpJhMh0wOGaqaqKlLFzfase82EXCvu8kfeQ7N0Mzaa3X2m3sYiXlFDMoaaLNqqFxLOHi/RWw5V452nzvNamGh9duYRvvvY0FXrLhVbK56LQ8A0Ooh9uAikq2sDsJkhEgSYvjeGkGJ9lkhOE/fxg01A57w0MI28s/Z8xqqxwb3dvQidU5GBVUD/Pwg5tKnGnSmiWRFAXZ0QrzuAX4+0su8XT3/yiOtH1trwAMVQzrFoECQmeU3PahcsK0p4UJXchtR0pHIvcTbHoXBowYa7pYvz/nTzqA95wTIfbGNZ8AYA4WA6zG6JTbgwvj0Xub9uf9iAtoiw9UQXD/zpoGabUfjhOuevKB2fEaRgneXcL7ivGcjTMGQuuUZ5pxhpgmE4BdIacLoMKtXK7Q7QyjvILWj5teabDSSd4Wa0/sezhKSrlS7bejEXiVaQ079mtXWaotVj1Mm4cn2OmfDOyhzdasEB0iaJGsfxssXr7dB0rtXrcWwsMrEZvKfqzQCFWll6rK5MRMspYsqlji8Y/c1tIZcaIHmGgOQ+jZegDHGebZ7xxpPUhdcw75PZRwSTbpSu5jy8dwTYUs=
   bucket: static.kbharkiv.dk
-  local-dir: "./kbh"
-  upload-dir: kildetaster
+  region: eu-west-1
+  local_dir: "./kbh"
+  upload_dir: kildetaster
   acl: public_read
   on:
     repo: CopenhagenCityArchives/Kildetaster
     branch: new-site
-  skip_cleanup: 'true'
+  cleanup: false
   edge: true
