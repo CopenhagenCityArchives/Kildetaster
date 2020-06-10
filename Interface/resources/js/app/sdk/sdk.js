@@ -15,7 +15,7 @@ define([
 
     'app/sdk/search/search',
 
-    'app/sdk/controllers/errors.controller',
+    'app/sdk/directives/errors/errors.directive',
     'app/sdk/directives/useractivities/useractivities.directive',
     'app/sdk/controllers/fritekst-search.controller',
 
@@ -55,7 +55,7 @@ define([
 
     searchApp,
 
-    errorsController,
+    errorsDirective,
     useractivitiesDirective,
     fritekstSearchController,
 
@@ -95,7 +95,7 @@ define([
     
     sdkApp.config(analyticsBootstrap.config);
 
-    sdkApp.controller('errorsController', errorsController);
+    sdkApp.directive('errors', errorsDirective);
     sdkApp.directive('useractivities', useractivitiesDirective);
     sdkApp.controller('fritekstSearchController', fritekstSearchController);
 

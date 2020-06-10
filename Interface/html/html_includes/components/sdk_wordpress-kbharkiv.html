@@ -33,8 +33,9 @@
                 <div class="card-header" id="data-top-5">
                     Top 5 indtastere
                 </div>
-                <div class="card-body">
-                    <div>
+                <div class="card-body" data-sdk-app>
+                    <user-statistics></user-statistics>
+                <div>
             </section>
         </div>
 
@@ -43,7 +44,9 @@
                 <div class="card-header">
                     Mine fejlmeldinger
                 </div>
-                <div class="card-body" data-sdk-app ng-include="'sdk/templates/errors.tpl.html'"></div>
+                <div class="card-body" data-sdk-app>
+                    <errors></errors>
+                </div>
             </section>
         </div>
     </div>

@@ -1,0 +1,88 @@
+<table class="row" ng-if="!loading && errorList.length > 0 && isSuperUser">
+    <thead>
+        <tr>
+            <th>Kilde</th>
+            <th>
+                <div>Bruger</div>
+                <select class="task-list__filter" ng-model="filtered.username"
+                    ng-options="name as name for name in userList"
+                    ng-change="dropdownChanged('username', filtered.username)">
+                    <option value="">Vælg</option>
+                </select>
+            </th>
+            <th>
+                <div>Felter</div>
+                <select class="task-list__filter extra-column" ng-model="filtered.label"
+                    ng-options="field as field for field in fieldList"
+                    ng-change="dropdownChanged('label', filtered.label)">
+                    <option value="">Vælg</option>
+                </select>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="error in errorList | filter: selectedFilter">
+            <td>
+                {{error.unit_description}}
+            </td>
+            <td>
+                {{error.username}}
+            </td>
+            <td>
+                {{error.label}}
+            </td>
+            <td>
+                <a href ng-click="goToEditor(error)" class="button">Ret</a>
+                <div ng-if="error.corrected">{{error.corrected.date}}</div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="table table-striped" ng-if="!loading && !isSuperUser && errorList.length > 0">
+    <caption class="sr-only">Mine fejlmeldinger</caption>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th sope="col">Kilde</th>
+            <th scope="col">Felt</th>
+            <th scope="col">Overgår til superbruger</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="error in errorList">
+            <td>
+                {{error.unit_description}}
+            </td>
+            <td>
+                {{error.label || error.entity_name_gui}}
+            </td>
+            <td>
+                <div ng-if="error.superUserTime">{{error.superUserTime | date:'dd-MM-yyyy HH:mm:ss'}}</div>
+            </td>
+            <td class="text-right">
+                <a href ng-click="goToEditor(error)" class="button">Ret</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div ng-if="error" class="alert alert-danger text-center w-100">
+    <svg class="large-icon" aria-hidden="true" feather-icon icon="'alert-octagon'"></svg>
+    <div class="h4">En fejl opstod</div>
+    <p class="small">Kunne ikke hente dine fejlmeldinger, prøv venligst igen senere.</p>
+</div>
+
+<div ng-if="loading" class="alert alert-info text-center w-100">
+    <svg class="large-icon spin" aria-hidden="true" feather-icon icon="'loader'"></svg>
+    <div class="h4">Indlæser fejlmeldinger</div>
+</div>
+
+<div ng-if="errorList.length == 0 && !loading && !error" class="alert alert-info text-center w-100">
+    <svg class="large-icon" aria-hidden="true" feather-icon icon="'alert-octagon'"></svg>
+    <div class="h4">Ingen fejlmeldinger</div>
+    <p class="small">Der er ingen der har fejlmeldt dine indtastninger.</p>
+    <a href="#" class="btn btn-primary">Meld en fejl</a>
+</div>
