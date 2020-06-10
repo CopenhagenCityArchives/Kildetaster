@@ -69,6 +69,22 @@ module.exports = {
         }
     },
 
+    new_site: {
+        constants: {
+            EDITOR_URL: 'https://static.kbharkiv.dk/kildetaster/index.html',
+            RESOURCE_URL: 'https://static.kbharkiv.dk/kildetaster/resources/',
+            API_ENDPOINT: 'https://www.kbhkilder.dk/api',
+            SOLR_API_ENDPOINT: 'https://aws.kbhkilder.dk/solr/apacs_core/select',
+            SEARCH_CONFIG_URL: 'https://www.kbhkilder.dk/api/searchconfig',
+            ERROR_REPORT_CONFIG_URL: 'https://www.kbhkilder.dk/api/errorreportconfig',
+            MAIN_DOMAIN: 'https://www.kbharkiv.dk',
+            ERROR_URL: 'https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale',
+            SEARCH_PERMALINK_URL: 'https://www.kbharkiv.dk/permalink',
+            //Number of items to fetch when working with typeahead data fields
+            TYPEAHEAD_MAXIUMUM: 75
+        }
+    },
+
     developmentPublicBeta: {
         constants: {
             EDITOR_URL: 'https://static.kbharkiv.dk/kildetaster-development-public',

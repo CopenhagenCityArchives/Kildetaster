@@ -111,6 +111,26 @@ dev_public_beta:
     - 'postcss:sdk'
 #    - 'watchDevelopment'
 
+build_new_site:
+    - 'clean:production'
+    - 'html2js:editor'
+    - 'html2js:sdk'
+    - 'ngconstant:new_site'
+    - 'copy:production'
+    - 'imagemin:production'
+
+    - 'requirejs:production'
+    - 'requirejs:sdkProduction'
+
+    - 'ngAnnotate:production'
+#    - 'uglify:production'
+    - 'bake:production'
+
+    - 'cachebreaker:production'
+    - 'sass:production'
+    - 'sass:sdk'
+    - 'postcss:production'
+
 build:
     - 'clean:production'
     - 'html2js:editor'

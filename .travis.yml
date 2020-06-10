@@ -24,7 +24,7 @@ install:
 - if [ "$TRAVIS_BRANCH" = "master" ]; then grunt build; fi
 - if [ "$TRAVIS_BRANCH" = "development" ]; then grunt dev; fi
 - if [ "$TRAVIS_BRANCH" = "public-beta" ]; then grunt dev_public_beta; fi
-- if [ "$TRAVIS_BRANCH" = "new-site" ]; then grunt build; fi
+- if [ "$TRAVIS_BRANCH" = "new-site" ]; then grunt build_new_site; fi
 
 deploy:
 - provider: script
