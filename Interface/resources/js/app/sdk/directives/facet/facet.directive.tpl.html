@@ -1,7 +1,7 @@
 <div class="list-group list-group-flush">
     <button type="button" class="list-group-item list-group-item-action"
         ng-attr-id="facet-bucket-{{field.name}}-{{cleanBucketValueForId(bucket.val)}}"
-        ng-repeat="bucket in buckets"
+        ng-repeat="bucket in buckets | limitTo : bucketsLimit : 0"
         ng-class="{active: isBucketInFilterQueries(facet, bucket)}"
         ng-click="callAddFilter(facet, bucket)">
         <span ng-if="facet.type == 'range'">{{bucket.val}}-{{bucket.val+facet.gap}} ({{bucket.count}})</span>
