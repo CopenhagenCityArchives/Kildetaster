@@ -16,7 +16,7 @@ define([
     'app/sdk/search/search',
 
     'app/sdk/controllers/errors.controller',
-    'app/sdk/controllers/useractivities.controller',
+    'app/sdk/directives/useractivities/useractivities.directive',
     'app/sdk/controllers/fritekst-search.controller',
 
     'app/shared/services/token.service',
@@ -56,7 +56,7 @@ define([
     searchApp,
 
     errorsController,
-    useractivitiesController,
+    useractivitiesDirective,
     fritekstSearchController,
 
     tokenService,
@@ -96,7 +96,7 @@ define([
     sdkApp.config(analyticsBootstrap.config);
 
     sdkApp.controller('errorsController', errorsController);
-    sdkApp.controller('useractivitiesController', useractivitiesController);
+    sdkApp.directive('useractivities', useractivitiesDirective);
     sdkApp.controller('fritekstSearchController', fritekstSearchController);
 
     //sdkApp.factory('accessTokenHttpInterceptor', tokenFactory);
