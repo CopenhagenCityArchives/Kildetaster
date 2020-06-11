@@ -51,6 +51,9 @@ define([
                         });
         
                         $scope.fieldList = helpers.uniqueBy(newval, function(item) {
+                            if (item.label === undefined) {
+                                item.label = 'Ikke angivet';
+                            }
                             return item.label;
                         })
                     }
