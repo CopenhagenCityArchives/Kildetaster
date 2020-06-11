@@ -1,29 +1,8 @@
 <!-- For Anchoring purposes -->
 <div id="results-start"></div>
-
-<!-- Initial loading spinner -->
-<section ng-if="ctrl.searching && !ctrl.results" style="position: relative; min-height: 200px">
-    <div class="loading-spinner"></div>
-</section>
-
-<!-- Status messages -->
-<section ng-if="ctrl.results.docs.length === 0">
-    <div class="row with-padding">
-        <div class="col-md-12">
-            <div get-dom-content="search-app-no-results"></div>
-            <a href="" ui-sref="^" class="sdk-search__configtoggle">Rediger din søgning</a>
-        </div>
-    </div>
-</section>
-
-<section class="row with-padding" ng-if="ctrl.error">
-    <div class="col-md-12">
-        <div get-dom-content="search-app-error"></div>
-    </div>
-</section>
-
+ 
 <!-- New Results -->
-<div ng-if="ctrl.results.docs.length > 0 && !ctrl.error" class="search-results">
+<div ng-if="!ctrl.error" class="search-results">
     <header class="page-header">
         <div class="container-fluid" >
         <div class="row">
@@ -32,8 +11,9 @@
         </div>
         <div class="col-lg-6">
             <search-config-text class="search-config-text" config="ctrl.queries" collections="ctrl.collections">
-                <post-count page="ctrl.page" total="ctrl.results.numFound" posts-pr-page="ctrl.postsPrPage">
+                <post-count ng-if="!ctrl.searching && ctrl.results" page="ctrl.page" total="ctrl.results.numFound" posts-pr-page="ctrl.postsPrPage">
                 </post-count>
+                <div ng-if="!ctrl.results && ctrl.searching" class="post-count text-muted">Søger...</div>
             </search-config-text>
         </div>
         <div class="col-lg-2">
@@ -53,115 +33,129 @@
         </div>
     </header>
 
-    <div class="container-fluid">
-    <section class="filters float-lg-left">
-        <button type="button" class="btn btn-primary d-block d-lg-none dropdown-toggle" ng-click="expandFacets()"
-            aria-haspopup="true" aria-expanded="{{ allFacetsExpanded }}">Filtrer søgning</button>
-        <div class="d-none d-lg-flex" aria-label="Filtrer søgning">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" aria-haspopup="true"
-                id="facet-button-{{facet.field}}"
-                aria-expanded="facet.expanded" ng-repeat="facet in ctrl.facets" ng-click="expandFacet(facet); $event.stopPropagation()">
-                {{ ctrl.fieldIndex[facet.field].view_name }}
-            </button>
-        </div>
-        <div aria-label="Valgte filtre">
-            <div class="filter-link">
-            <p ng-if="ctrl.noSelectedFilters" class="sr-only">
-                Ingen aktive filtre
-            </p>
-            <filter-link ng-repeat="(field, filterQuery) in ctrl.filterQueries" facet="filterQuery.facet"
-                bucket="filterQuery.bucket" url="filter.filterQuery" remove-func="toggleFilter">
-            </filter-link>
-            <button ng-if="!ctrl.noSelectedFilters" class="btn btn-link" ng-click="clearFilters()">Fjern filtre</button>
-        </div>
+  
+    <section ng-if="ctrl.searching && !ctrl.results" class="text-center">
+        <svg feather-icon class="large-icon spin" icon="'loader'"></svg>
     </section>
 
-    <div class="float-lg-right">
-        <section class="sort d-flex align-items-center justify-content-lg-end">
-            <form class="items-per-page form-inline mr-2" role="form" aria-labelledby="sort-by-label">
-                <div class="form-group">
-                    <label for="sort-by" id="sort-by-label" class="mr-3">Sorter efter</label>
-                    <select class="form-control" id="sort-by" ng-model="ctrl.sortField" ng-options="field as field.view_name for (fieldName, field) in ctrl.fields | filter:{searchable:true, sortable:true} | filter:ctrl.fieldCollectionFilter">
-                    </select>
-                        
-                </div>
-                <!--<button type="submit" class="btn btn-primary sr-only sr-only-focusable">Sorter</button>-->
-            </form>
-            <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false"
-                autocomplete="off" ng-click="ctrl.toggleSortDirection()">
-                <svg feather-icon icon="ctrl.sortDirection == 'desc' ? 'arrow-down' : 'arrow-up'"></svg>
-            </button>
+    <section ng-if="ctrl.results.docs.length === 0" class="container-fluid">
+        <div get-dom-content="search-app-no-results"></div>
+        <a href="" ui-sref="^" class="sdk-search__configtoggle">Rediger din søgning</a>
+    </section>
+
+    <section class="container-fluid" ng-if="ctrl.error">
+        <div get-dom-content="search-app-error"></div>
+    </section>
+    
+    <div class="container-fluid" ng-if="ctrl.results.docs.length > 0">
+        <section class="filters float-lg-left">
+            <button type="button" class="btn btn-primary d-block d-lg-none dropdown-toggle" ng-click="expandFacets()"
+                aria-haspopup="true" aria-expanded="{{ allFacetsExpanded }}">Filtrer søgning</button>
+            <div class="d-none d-lg-flex" aria-label="Filtrer søgning">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" aria-haspopup="true"
+                    id="facet-button-{{facet.field}}"
+                    aria-expanded="facet.expanded" ng-repeat="facet in ctrl.facets" ng-click="expandFacet(facet); $event.stopPropagation()">
+                    {{ ctrl.fieldIndex[facet.field].view_name }}
+                </button>
+            </div>
+            <div aria-label="Valgte filtre">
+                <div class="filter-link">
+                <p ng-if="ctrl.noSelectedFilters" class="sr-only">
+                    Ingen aktive filtre
+                </p>
+                <filter-link ng-repeat="(field, filterQuery) in ctrl.filterQueries" facet="filterQuery.facet"
+                    bucket="filterQuery.bucket" url="filter.filterQuery" remove-func="toggleFilter">
+                </filter-link>
+                <button ng-if="!ctrl.noSelectedFilters" class="btn btn-link" ng-click="clearFilters()">Fjern filtre</button>
+            </div>
         </section>
 
-        <pagination
-            current-page="ctrl.page"
-            results="ctrl.results"
-            posts-pr-page="ctrl.postsPrPage"
-            go-to-page="ctrl.goToPage(page)">
-        </pagination>
+        <div class="float-lg-right">
+            <section class="sort d-flex align-items-center justify-content-lg-end">
+                <form class="items-per-page form-inline mr-2" role="form" aria-labelledby="sort-by-label">
+                    <div class="form-group">
+                        <label for="sort-by" id="sort-by-label" class="mr-3">Sorter efter</label>
+                        <select class="form-control" id="sort-by" ng-model="ctrl.sortField" ng-options="field as field.view_name for (fieldName, field) in ctrl.fields | filter:{searchable:true, sortable:true} | filter:ctrl.fieldCollectionFilter">
+                        </select>
+                            
+                    </div>
+                    <!--<button type="submit" class="btn btn-primary sr-only sr-only-focusable">Sorter</button>-->
+                </form>
+                <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false"
+                    autocomplete="off" ng-click="ctrl.toggleSortDirection()">
+                    <svg feather-icon icon="ctrl.sortDirection == 'desc' ? 'arrow-down' : 'arrow-up'"></svg>
+                </button>
+            </section>
+
+            <pagination
+                current-page="ctrl.page"
+                results="ctrl.results"
+                posts-pr-page="ctrl.postsPrPage"
+                go-to-page="ctrl.goToPage(page)">
+            </pagination>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <table id="search-results" class="table table-striped table-hover my-4" role="navigation"
+            aria-label="Søgeresultater">
+            <caption class="sr-only" id="table-caption">Søgeresultater</caption>
+            <thead>
+                <tr class="d-none d-md-table-row">
+                    <th scope="col">Navn</th>
+                    <th scope="col">Adresse(r)</th>
+                    <th scope="col">Andre oplysninger</th>
+                    <th scope="col">Kilde</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr search-result-row
+                    ng-repeat="result in ctrl.results.docs"
+                    ng-click="goToPost(result)"
+                    ng-keydown="($event.keyCode === 13 || $event.keyCode === 32) && goToPost(result)"
+                    result="result"
+                    config="ctrl.fields"
+                    index="$index"
+                    collection-id="result.collection_id"
+                    page="ctrl.page"
+                    style="cursor: pointer"
+                    tabindex="0">
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="d-lg-flex align-items-center justify-content-between">
+            <form class="items-per-page form-inline" role="form" aria-labelledby="results-per-page-label">
+                <div class="form-group">
+                    <label for="per-page" id="results-per-page-label" class="mr-3">Personer per side</label>
+                    <select class="form-control" id="per-page"
+                        ng-change="ctrl.setPostsPrPage()" 
+                        ng-model="ctrl.postsPrPage"
+                        ng-options="option as option for option in [10, 20, 30, 40, 50, 100, 200]">
+                        <option>10</option>
+                        <option>20</option>
+                        <option>30</option>
+                        <option>40</option>
+                        <option>50</option>
+                        <option>100</option>
+                        <option>200</option>
+                    </select>
+                </div>
+            </form>
+
+            <pagination current-page="ctrl.page" results="ctrl.results" posts-pr-page="ctrl.postsPrPage"
+                go-to-page="ctrl.goToPage(page)">
+            </pagination>
+
+            <form class="go-to-page form-inline"role="form" aria-labelledby="go-to-page-label" ng-submit="ctrl.goToPage(ctrl.pageNumber-1)">
+                <div class="form-group mr-2">
+                    <label for="go-to-page" id="go-to-page-label" class="mr-3">Spring til side</label>
+                    <input type="number" class="form-control" id="go-to-page" placeholder="Sidetal" ng-model="ctrl.pageNumber">
+                </div>
+                <button type="submit" class="btn btn-primary">Gå</button>
+            </form>
+        </div>
     </div>
-
-    <div class="clearfix"></div>
-
-    <table id="search-results" class="table table-striped table-hover my-4" role="navigation"
-        aria-label="Søgeresultater">
-        <caption class="sr-only" id="table-caption">Søgeresultater</caption>
-        <thead>
-            <tr class="d-none d-md-table-row">
-                <th scope="col">Navn</th>
-                <th scope="col">Adresse(r)</th>
-                <th scope="col">Andre oplysninger</th>
-                <th scope="col">Kilde</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr search-result-row
-                ng-repeat="result in ctrl.results.docs"
-                ng-click="goToPost(result)"
-                ng-keydown="($event.keyCode === 13 || $event.keyCode === 32) && goToPost(result)"
-                result="result"
-                config="ctrl.fields"
-                index="$index"
-                collection-id="result.collection_id"
-                page="ctrl.page"
-                style="cursor: pointer"
-                tabindex="0">
-            </tr>
-        </tbody>
-    </table>
-
-    <div class="d-lg-flex align-items-center justify-content-between">
-        <form class="items-per-page form-inline" role="form" aria-labelledby="results-per-page-label">
-            <div class="form-group">
-                <label for="per-page" id="results-per-page-label" class="mr-3">Personer per side</label>
-                <select class="form-control" id="per-page"
-                    ng-change="ctrl.setPostsPrPage()" 
-                    ng-model="ctrl.postsPrPage"
-                    ng-options="option as option for option in [10, 20, 30, 40, 50, 100, 200]">
-                    <option>10</option>
-                    <option>20</option>
-                    <option>30</option>
-                    <option>40</option>
-                    <option>50</option>
-                    <option>100</option>
-                    <option>200</option>
-                </select>
-            </div>
-        </form>
-
-        <pagination current-page="ctrl.page" results="ctrl.results" posts-pr-page="ctrl.postsPrPage"
-            go-to-page="ctrl.goToPage(page)">
-        </pagination>
-
-        <form class="go-to-page form-inline"role="form" aria-labelledby="go-to-page-label" ng-submit="ctrl.goToPage(ctrl.pageNumber-1)">
-            <div class="form-group mr-2">
-                <label for="go-to-page" id="go-to-page-label" class="mr-3">Spring til side</label>
-                <input type="number" class="form-control" id="go-to-page" placeholder="Sidetal" ng-model="ctrl.pageNumber">
-            </div>
-            <button type="submit" class="btn btn-primary">Gå</button>
-        </form>
-    </div>
-</div>
 </div>
 
 <div class="facet__offcanvas" role="dialog" tabindex="-1" aria-hidden="true" aria-labelledby="filter-label"
