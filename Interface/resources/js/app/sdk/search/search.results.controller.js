@@ -227,7 +227,6 @@ define([
         // TODO update to use that
         */
         $scope.doSearch = function doSearch(forceNew) {
-            console.log("done did search");
             if (forceNew) {
                 solrService.clearSearchData();
             }
@@ -240,17 +239,12 @@ define([
 
             var colIds = [];
             angular.forEach(that.collections, function (collection, id) {
-                console.log("push it");
                 if (collection.selected) {
                     colIds.push(collection.id);
-                    console.log("to the limit");
                 }
             });
 
             searchService.currentSearch.collections = colIds;
-
-            console.log(that.queries);
-            console.log(that.filterQueries);
 
             // Update current search settings
             searchService.currentSearch.queries = that.queries;
@@ -298,7 +292,13 @@ define([
                     // restore focus if we came from filtering
                     if ($scope.restoreBucketFocus) {
                         $timeout(function() {
-                            var restoreBucketElement = angular.element($element).find('#facet-bucket-' + $scope.restoreBucketFocus.facet.field + '-' + $scope.restoreBucketFocus.bucket.val.replace(' ', '-'));
+                            var selector = '#facet-bucket-' + $scope.restoreBucketFocus.facet.field + '-';
+                            if (typeof $scope.restoreBucketFocus.bucket.val == 'string') {
+                                selector += $scope.restoreBucketFocus.bucket.val.replace(' ', '-');
+                            } else {
+                                selector += $scope.restoreBucketFocus.bucket.val;
+                            }
+                            var restoreBucketElement = angular.element($element).find(selector);
                             restoreBucketElement.focus();
                         })
                     }
