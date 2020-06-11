@@ -26,7 +26,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr tabindex="0" role="button" ng-repeat="activity in activities">
+        <tr tabindex="0" role="button" ng-repeat="activity in activities" ng-click="goToEditor(activity)">
             <td>
                 {{activity.description}}
             </td>

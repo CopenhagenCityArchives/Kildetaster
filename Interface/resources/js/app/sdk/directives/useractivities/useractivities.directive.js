@@ -1,7 +1,7 @@
 define([
 
 ], function() {
-    var useractivitiesDirective = /*@ngInject*/ function (EDITOR_URL, userService, taskService) {
+    var useractivitiesDirective = /*@ngInject*/ function (EDITOR_URL, userService, taskService, $window) {
         return {
             restrict: 'E',
 
@@ -16,8 +16,6 @@ define([
                 $scope.activities = [];
                 $scope.tasks = [];
         
-                $scope.EDITORURL = EDITOR_URL;
-    
                 taskService.getTasks().then(function (response) {
                     response.forEach(function (task) {
                         $scope.tasks[task.id] = task;
@@ -34,6 +32,10 @@ define([
                         $scope.loading = false;
                     });
                 });
+
+                $scope.goToEditor = function(activity) {
+                    $window.open(EDITOR_URL + "/#/task/" + activity.task_id + "/page/" + activity.page_id);
+                }
             }]
         }
     }
