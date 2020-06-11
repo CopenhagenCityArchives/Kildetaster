@@ -136,7 +136,6 @@ define([
         }
 
         $scope.expandFacet = function(facet) {
-            $scope.collapseFacets();
             facet.enabled = true;
             facet.expanded = true;
             $scope.facetsShown = true;
