@@ -122,7 +122,7 @@ define([
                 }
             });
 
-            $scope.$firstTabbable.focus();
+            $timeout($scope.$firstTabbable.focus);
         }
 
         $scope.expandFacets = function() {
