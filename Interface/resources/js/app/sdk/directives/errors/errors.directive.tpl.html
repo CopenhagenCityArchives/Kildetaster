@@ -1,8 +1,8 @@
-<table class="row" ng-if="!loading && errorList.length > 0 && isSuperUser">
+<table class="table table-striped" ng-if="!loading && errorList.length > 0 && isSuperUser">
     <thead>
         <tr>
-            <th>Kilde</th>
-            <th>
+            <th scope="col">Kilde</th>
+            <th scope="col">
                 <div>Bruger</div>
                 <select class="task-list__filter" ng-model="filtered.username"
                     ng-options="name as name for name in userList"
@@ -10,7 +10,7 @@
                     <option value="">Vælg</option>
                 </select>
             </th>
-            <th>
+            <th scope="col">
                 <div>Felter</div>
                 <select class="task-list__filter extra-column" ng-model="filtered.label"
                     ng-options="field as field for field in fieldList"
@@ -18,7 +18,7 @@
                     <option value="">Vælg</option>
                 </select>
             </th>
-            <th></th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
