@@ -4,7 +4,7 @@
 <!-- New Results -->
 <div ng-if="!ctrl.error" class="search-results">
     <header class="page-header">
-        <div class="container-fluid" >
+        <div class="container-fluid">
         <div class="row">
         <div class="col-lg-4">
             <h1>Søg person</h1>
@@ -20,19 +20,17 @@
             <a class="sr-only sr-only-focusable" href="#search-results">Gå direkte til søgeresultaterne</a>
             <a href="" ui-sref="^" class="btn btn-primary float-lg-right">Ret søgning</a>
         </div>
-        <div class="col-12">
-            <nav aria-label="Brødkrummesti">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="#">Hjem</a></li>
-                    <li class="breadcrumb-item"><a href="#">Søg</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Søg person</li>
-                </ol>
-            </nav>
-        </div>
         </div>
         </div>
     </header>
 
+    <nav class="breadcrumb-wrapper container-fluid" aria-label="Brødkrummesti">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#">Hjem</a></li>
+            <li class="breadcrumb-item"><a href="#">Søg</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Søg person</li>
+        </ol>
+    </nav>
   
     <section ng-if="ctrl.searching && !ctrl.results" class="text-center">
         <svg feather-icon class="large-icon spin" icon="'loader'"></svg>
