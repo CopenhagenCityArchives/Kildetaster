@@ -1,6 +1,7 @@
 <table class="table table-striped" ng-if="!loading && errorList.length > 0 && isSuperUser">
     <thead>
         <tr>
+            <th scope="col">#</th>
             <th scope="col">Kilde</th>
             <th scope="col">
                 <div>Bruger</div>
@@ -22,7 +23,10 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="error in errorList | filter: selectedFilter">
+        <tr tabindex="0" ng-repeat="error in errorList | filter: selectedFilter">
+            <td>
+                {{ $index }}
+            </td>
             <td>
                 {{error.unit_description}}
             </td>
@@ -45,13 +49,17 @@
     <thead>
         <tr>
             <th scope="col">#</th>
-            <th sope="col">Kilde</th>
+            <th scope="col">Kilde</th>
             <th scope="col">Felt</th>
             <th scope="col">Overgår til superbruger</th>
+            <th scope="col"></th>
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="error in errorList">
+        <tr tabindex="0" ng-repeat="error in errorList">
+            <td>
+                {{ $index }}
+            </td>
             <td>
                 {{error.unit_description}}
             </td>
