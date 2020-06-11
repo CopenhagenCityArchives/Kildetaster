@@ -47,7 +47,6 @@ requirejs.config({
             exports: 'angular'
         },
 
-        'bootstrap': ['jquery'],
         'angular-bootstrap': ['angular'],
         'angular-ui-router': ['angular'],
         'angular-ui-select': ['angular'],
