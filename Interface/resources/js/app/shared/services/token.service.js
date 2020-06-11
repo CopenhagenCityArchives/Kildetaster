@@ -35,8 +35,8 @@ define([
                             deferred.reject();
                             return;
                         }
-                        //TODO: Hardcoded user id
-                        user.userId = 1;
+                        //TODO: Hardcoded user id (Signe's user)
+                        user.userId = 601;
 
                         tokenData =  {
                             user: user,
