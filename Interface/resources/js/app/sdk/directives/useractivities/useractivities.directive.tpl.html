@@ -10,7 +10,7 @@
     <div class="h4">Indlæser indtastninger</div>
 </div>
 
-<div ng-if="activities.length == 0 && !loading" class="alert alert-info text-center w-100">
+<div ng-if="activities.length == 0 && !loading && !error" class="alert alert-info text-center w-100">
     <svg class="large-icon" aria-hidden="true" feather-icon icon="'alert-octagon'"></svg>
     <div class="h4">Fandt ingen indtastninger</div>
     <p class="small">Du skal have indtastet noget, før det vises her.</p>
