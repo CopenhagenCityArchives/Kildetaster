@@ -91,7 +91,8 @@ define([
         $scope.$firstTabbable = null;
         $scope.$lastTabbable = null;
         
-        function expandFacetFocus() {
+        function expandFacetFocus(facet) {
+            
             var $offcanvas = angular.element($element).find(".facet__offcanvas");
 
             $offcanvas.off('keydown');
@@ -102,9 +103,8 @@ define([
                 }
             });
 
-            var $tabbable = $offcanvas.find("select, input, textarea, button, a").filter(":visible");
-            $scope.$firstTabbable = $tabbable.first();
-            $scope.$lastTabbable = $tabbable.last();
+            $scope.$firstTabbable = $offcanvas.find("#filter-" + facet.field + "-label");
+            $scope.$lastTabbable = $offcanvas.find('#filter-close');
 
             // Trap tab focus inside the filter menu. When last tabbable element is focussed the next will be the first tabbable elemenet
             $scope.$lastTabbable.on("keydown", function (e) {
@@ -132,14 +132,14 @@ define([
             }
             $scope.allFacetsExpanded = true;
             $scope.facetsShown = true;
-            $timeout(expandFacetFocus);
+            $timeout(function() {expandFacetFocus(that.facets[0])});
         }
 
         $scope.expandFacet = function(facet) {
             facet.enabled = true;
             facet.expanded = true;
             $scope.facetsShown = true;
-            $timeout(expandFacetFocus);
+            $timeout(function() {expandFacetFocus(facet)});
         }
 
         $scope.collapseFacets = function() {
