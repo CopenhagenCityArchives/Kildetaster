@@ -37,4 +37,23 @@
             background-color: rgba($cyan-light, 0.16);
         }
     }
+
+    &__offcanvas_catcher {
+        position: fixed;
+        z-index: 1199;
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+
+        transform: translateX(-100%);
+
+        opacity: 0;
+
+        &.active {
+            transform: translateX(0);
+        }
+    }
 }
