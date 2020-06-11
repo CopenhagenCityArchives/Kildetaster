@@ -23,7 +23,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr tabindex="0" ng-repeat="error in errorList | filter: selectedFilter">
+        <tr tabindex="0" ng-repeat="error in errorList | filter: selectedFilter" style="cursor: pointer;" ng-click="goToEditor(error)">
             <td>
                 {{ $index }}
             </td>
@@ -37,7 +37,7 @@
                 {{error.label}}
             </td>
             <td>
-                <a href ng-click="goToEditor(error)" class="button">Ret</a>
+                <svg feather-icon icon="'circle'"></svg>
                 <div ng-if="error.corrected">{{error.corrected.date}}</div>
             </td>
         </tr>
@@ -56,7 +56,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr tabindex="0" ng-repeat="error in errorList">
+        <tr tabindex="0" ng-repeat="error in errorList" style="cursor: pointer;" ng-click="goToEditor(error)">
             <td>
                 {{ $index }}
             </td>
@@ -69,8 +69,8 @@
             <td>
                 <div ng-if="error.superUserTime">{{error.superUserTime | date:'dd-MM-yyyy HH:mm:ss'}}</div>
             </td>
-            <td class="text-right">
-                <a href ng-click="goToEditor(error)" class="button">Ret</a>
+            <td>
+                <svg feather-icon icon="'circle'"></svg>
             </td>
         </tr>
     </tbody>
