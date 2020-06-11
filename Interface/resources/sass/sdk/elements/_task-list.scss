@@ -51,17 +51,11 @@
     }
 
     &__filter {
-        font-size: inherit;
+        overflow: hidden;
 
-        width: auto;
-        margin-bottom: 3px;
+        max-width: 150px;
 
-        color: $black;
-        border: 1px solid $gray-dark;
-
-        &.extra-column {
-            max-width: 200%;
-        }
+        text-overflow: ellipsis;
     }
 
     &__icon {

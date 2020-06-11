@@ -14,7 +14,7 @@ define([
                 $scope.isSuperUser = false;
         
                 //Object to store selections from dropdown filters
-                $scope.filtered = {};
+                $scope.filtered = { label: null };
         
                 //The config object to use for filtereing the errorList
                 $scope.selectedFilter = {};
