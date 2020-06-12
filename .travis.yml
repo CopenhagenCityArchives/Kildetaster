@@ -23,9 +23,12 @@ before_install:
 
 install:
   - npm install
-  - if [ "$TRAVIS_BRANCH" = "development" ] || [ "$TRAVIS_BRANCH" = "new-site" ]; then
+  - if [ "$TRAVIS_BRANCH" = "development" ]; then
       npm run build -- --mode=development --constants development --public=${PUBLIC_PATH};
     fi
+    - if [ "$TRAVIS_BRANCH" = "new-site" ]; then
+    npm run build -- --mode=production --constants production --public=${PUBLIC_PATH};
+  fi
   - if [ "$TRAVIS_BRANCH" = "master" ]; then
       npm run build -- --mode=production --constants production --public=${PUBLIC_PATH};
     fi
