@@ -24,7 +24,6 @@ define([
     './services/task.service',
     './services/page.service',
     './services/user.service',
-    './services/update.service',
 
     './services/error.service',
     './services/entry.service',
@@ -69,7 +68,6 @@ define([
 
     errorService,
     entryService,
-    updateService,
 
     postService,
     unitService,
