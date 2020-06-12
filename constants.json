@@ -9,10 +9,8 @@
       "SEARCH_CONFIG_URL": "https://www.kbhkilder.dk/1508/experimental/searchconfig",
       "ERROR_REPORT_CONFIG_URL": "https://www.kbhkilder.dk/1508/experimental/errorreportconfig",
       "MAIN_DOMAIN": "https://www.kbharkiv.dk",
-      "TOKEN_URL": "https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2",
       "ERROR_URL": "https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale",
       "PERMALINK_URL": "https://www.kbharkiv.dk/permalink",
-      "BYPASS_AUTH": false,
       "TYPEAHEAD_MAX": 75
     }
   },
@@ -26,10 +24,8 @@
       "SEARCH_CONFIG_URL": "https://www.kbhkilder.dk/1508/experimental/searchconfig",
       "ERROR_REPORT_CONFIG_URL": "https://www.kbhkilder.dk/1508/experimental/errorreportconfig",
       "MAIN_DOMAIN": "https://www.kbharkiv.dk",
-      "TOKEN_URL": "https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2",
       "ERROR_URL": "https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale",
       "PERMALINK_URL": "https://www.kbharkiv.dk/permalink",
-      "BYPASS_AUTH": true,
       "TYPEAHEAD_MAX": 75
     }
   },
@@ -43,10 +39,8 @@
       "SEARCH_CONFIG_URL": "http://localhost:8080/searchconfig",
       "ERROR_REPORT_CONFIG_URL": "http://localhost:8080/errorreportconfig",
       "MAIN_DOMAIN": "https://www.kbharkiv.dk",
-      "TOKEN_URL": "https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2",
       "ERROR_URL": "https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale",
       "PERMALINK_URL": "https://www.kbharkiv.dk/permalink",
-      "BYPASS_AUTH": true,
       "TYPEAHEAD_MAX": 75
     }
   },
@@ -60,10 +54,8 @@
       "SEARCH_CONFIG_URL": "https://www.kbhkilder.dk/1508/experimental/searchconfig",
       "ERROR_REPORT_CONFIG_URL": "https://www.kbhkilder.dk/1508/experimental/errorreportconfig",
       "MAIN_DOMAIN": "https://www.kbharkiv.dk",
-      "TOKEN_URL": "https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2",
       "ERROR_URL": "https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale",
       "PERMALINK_URL": "https://www.kbharkiv.dk/permalink",
-      "BYPASS_AUTH": false,
       "TYPEAHEAD_MAX": 75
     }
   },
@@ -77,10 +69,8 @@
       "SEARCH_CONFIG_URL": "https://www.kbhkilder.dk/1508/public_beta/searchconfig",
       "ERROR_REPORT_CONFIG_URL": "https://www.kbhkilder.dk/1508/public_beta/errorreportconfig",
       "MAIN_DOMAIN": "https://www.kbharkiv.dk",
-      "TOKEN_URL": "https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2",
       "ERROR_URL": "https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale",
       "PERMALINK_URL": "https://www.kbharkiv.dk/permalink",
-      "BYPASS_AUTH": false,
       "TYPEAHEAD_MAX": 75
     }
   },
@@ -94,10 +84,8 @@
       "SEARCH_CONFIG_URL": "https://www.kbhkilder.dk/api/searchconfig",
       "ERROR_REPORT_CONFIG_URL": "https://www.kbhkilder.dk/api/errorreportconfig",
       "MAIN_DOMAIN": "https://www.kbharkiv.dk",
-      "TOKEN_URL": "https://www.kbharkiv.dk/index.php?option=authorize&response_type=token&client_id=kbhkilder&api=oauth2",
       "ERROR_URL": "https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale",
       "PERMALINK_URL": "https://www.kbharkiv.dk/permalink",
-      "BYPASS_AUTH": false,
       "TYPEAHEAD_MAX": 75
     }
   }
