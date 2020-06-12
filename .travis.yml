@@ -23,7 +23,7 @@ install:
     fi
     - if [ "$TRAVIS_BRANCH" = "new-site" ]; then
     npm run build -- --mode=production --constants production --public=${PUBLIC_PATH};
-  fi
+    fi
   - if [ "$TRAVIS_BRANCH" = "master" ]; then
       npm run build -- --mode=production --constants production --public=${PUBLIC_PATH};
     fi
