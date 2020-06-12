@@ -1,0 +1,47 @@
+.icon {
+    color: inherit;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    &:hover, &:active, &:focus {
+        text-decoration: none;
+
+        color: inherit;
+    }
+
+    &__edit {
+        display: inline-block;
+
+        width: 14px;
+        height: 14px;
+        margin-right: 4px;
+        margin-left: 4px;
+
+        background-image: url("../images/icon_edit.svg");
+    }
+
+    &__help {
+        display: inline-block;
+
+        width: 18px;
+        height: 18px;
+
+        background-image: url("../images/icon_help.svg");
+    }
+
+    &__cross {
+        display: inline-block;
+
+        width: 18px;
+        height: 18px;
+
+        background-image: url("../images/icon_cross.svg");
+    }
+
+    &__error {
+        position: relative;
+        top: 2px;
+
+        color: $red;
+    }
+}
