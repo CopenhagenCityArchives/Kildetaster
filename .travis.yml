@@ -22,7 +22,7 @@ install:
       npm run build -- --mode=development --constants development --public=${PUBLIC_PATH};
     fi
   - if [ "$TRAVIS_BRANCH" = "new-site" ]; then
-    npm run build -- --mode=production --constants production --public=${PUBLIC_PATH};
+    npm run build -- --mode=production --constants production --public=https://kildetaster.kbhkilder.dk/;
     fi
   - if [ "$TRAVIS_BRANCH" = "master" ]; then
       npm run build -- --mode=production --constants production --public=${PUBLIC_PATH};
