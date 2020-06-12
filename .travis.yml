@@ -50,11 +50,11 @@ deploy:
     secret_access_key:
       secure: fqxvfYDNQxIBXTYblNVPBlXd1S21pod9dLuN04iwOqjmyGQ3i0zdsoAetvfmzdUI/eMwlGLYquRtM0bbVC70O+8XYeQarpE0luKZpJhMh0wOGaqaqKlLFzfase82EXCvu8kfeQ7N0Mzaa3X2m3sYiXlFDMoaaLNqqFxLOHi/RWw5V452nzvNamGh9duYRvvvY0FXrLhVbK56LQ8A0Ooh9uAikq2sDsJkhEgSYvjeGkGJ9lkhOE/fxg01A57w0MI28s/Z8xqqxwb3dvQidU5GBVUD/Pwg5tKnGnSmiWRFAXZ0QrzuAX4+0su8XT3/yiOtH1trwAMVQzrFoECQmeU3PahcsK0p4UJXchtR0pHIvcTbHoXBowYa7pYvz/nTzqA95wTIfbGNZ8AYA4WA6zG6JTbgwvj0Xub9uf9iAtoiw9UQXD/zpoGabUfjhOuevKB2fEaRgneXcL7ivGcjTMGQuuUZ5pxhpgmE4BdIacLoMKtXK7Q7QyjvILWj5teabDSSd4Wa0/sezhKSrlS7bejEXiVaQ079mtXWaotVj1Mm4cn2OmfDOyhzdasEB0iaJGsfxssXr7dB0rtXrcWwsMrEZvKfqzQCFWll6rK5MRMspYsqlji8Y/c1tIZcaIHmGgOQ+jZegDHGebZ7xxpPUhdcw75PZRwSTbpSu5jy8dwTYUs=
     bucket: static.kbharkiv.dk
-    #local_dir: ./dist
+    local_dir: ./dist
     upload_dir: kildetaster
     acl: public_read
     region: eu-west-1
     on:
       repo: CopenhagenCityArchives/Kildetaster
       branch: new-site
-    cleanup: true
+    skip_cleanup: true
