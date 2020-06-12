@@ -31,17 +31,20 @@ install:
 deploy:
   - provider: script
     script: sshpass -p${KBHKILDER_SSH_PASSWORD} scp -o LogLevel=Verbose -o StrictHostKeyChecking=no -r ./dist/* ${KBHKILDER_SSH_USER}@${KBHKILDER_SSH_HOST}:${KBHKILDER_SSH_PATH}
-    cleanup: false
+    skip_cleanup: true
+    edge: false
     on:
       all_branches: true
       condition: $TRAVIS_BRANCH =~ ^(master|development|new-site)$
      
   - provider: script
     script: scp -i ./deploy_key -o LogLevel=Verbose -o StrictHostKeyChecking=no -P ${KBHARKIV_SSH_PORT} ./dist/index.html ${KBHARKIV_SSH_USER}@${KBHARKIV_SSH_HOST}:${KBHARKIV_SSH_PATH}
-    cleanup: false
+    skip_cleanup: true
+    edge: false
     on:
       all_branches: true
       condition: "$TRAVIS_BRANCH =~ ^(master|development|new-site)$"
+
   - provider: s3
     access_key_id: AKIAUDN3ZT2NDNDMRLJD
     secret_access_key:
