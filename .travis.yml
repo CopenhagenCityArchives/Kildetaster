@@ -16,11 +16,6 @@ before_install:
     -in deploy_key.enc -out ./deploy_key -d
   - chmod 600 ./deploy_key
 
-before_install:
-  - openssl aes-256-cbc -K $deploy_key_aes_key -iv $deploy_key_aes_iv
-    -in deploy_key.enc -out ./deploy_key -d
-  - chmod 600 ./deploy_key
-
 install:
   - npm install
   - if [ "$TRAVIS_BRANCH" = "development" ]; then
@@ -36,14 +31,14 @@ install:
 deploy:
   - provider: script
     script: sshpass -p${KBHKILDER_SSH_PASSWORD} scp -o LogLevel=Verbose -o StrictHostKeyChecking=no -r ./dist/* ${KBHKILDER_SSH_USER}@${KBHKILDER_SSH_HOST}:${KBHKILDER_SSH_PATH}
-    skip_cleanup: true
+    cleanup: false
     on:
       all_branches: true
       condition: $TRAVIS_BRANCH =~ ^(master|development|new-site)$
      
   - provider: script
     script: scp -i ./deploy_key -o LogLevel=Verbose -o StrictHostKeyChecking=no -P ${KBHARKIV_SSH_PORT} ./dist/index.html ${KBHARKIV_SSH_USER}@${KBHARKIV_SSH_HOST}:${KBHARKIV_SSH_PATH}
-    skip_cleanup: true
+    cleanup: false
     on:
       all_branches: true
       condition: "$TRAVIS_BRANCH =~ ^(master|development|new-site)$"
@@ -59,4 +54,4 @@ deploy:
     on:
       repo: CopenhagenCityArchives/Kildetaster
       branch: new-site
-    skip_cleanup: true
+    cleanup: false
