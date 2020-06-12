@@ -20,6 +20,7 @@ import pageService from '../shared/services/page.service';
 import taskService from '../shared/services/task.service';
 import errorService from '../shared/services/error.service';
 import userService from '../shared/services/user.service';
+import helpersService from '../shared/services/helpers.service';
 
 import userStatisticsDirective from './directives/user-statistics.directive';
 import taskunitsListDirective from './directives/taskunits-list.directive';
@@ -58,6 +59,7 @@ sdkApp.service('pageService', pageService);
 sdkApp.service('taskService', taskService);
 sdkApp.service('errorService', errorService);
 sdkApp.service('userService', userService);
+sdkApp.service('helpers', helpersService);
 
 sdkApp.directive('userStatistics', userStatisticsDirective);
 sdkApp.directive('taskunitsList', taskunitsListDirective);

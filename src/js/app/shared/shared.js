@@ -52,7 +52,6 @@ define([
     uiRouter,
     constants,
 
-    userDirective,
     imageViewerDirective,
     imageViewerOverlayDirective,
     stepOfDirective,
@@ -89,7 +88,6 @@ define([
 
     var sharedApp = angular.module('shared', ['constants', 'ngStorage', 'ui.router','angular-google-analytics', 'auth0.auth0']);
 
-    sharedApp.directive('user', userDirective);
     sharedApp.directive('imageViewer', imageViewerDirective);
     sharedApp.directive('imageViewerOverlay', imageViewerOverlayDirective);
     sharedApp.directive('stepOf', stepOfDirective);
@@ -145,23 +143,6 @@ define([
         $locationProvider.html5Mode({
             enabled: true,
             requireBase: true
-        });
-
-        // Global state for Auth0 login redirects
-        $stateProvider.state('callbackFromAuth0',{
-            url: '/login',
-            resolve: {
-                accessToken: ['tokenService', function(tokenService){
-                    return tokenService.getTokenFromCallBack();
-                }]
-            },
-            onEnter: ['accessToken', '$location', function(accessToken, $location){
-                if(accessToken){
-                    $location.url(accessToken.url);
-                    console.log("logged in");
-                    console.log(accessToken);
-                }
-            }]
         });
 
         // Add configuration code as desired

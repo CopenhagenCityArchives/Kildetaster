@@ -40,7 +40,7 @@ define([
                 tokenService.getUserData()
                 .then(function(userData){
                     $http({
-                        url: API_ENDPOINT + '/useractivities',
+                        url: API_URL + '/useractivities',
                         method: 'GET',
                         params: {user_id : userData.userId}
                     }).then(function(response) {
@@ -67,7 +67,7 @@ define([
                         deferred.resolve({});
                     }
                     return $http({
-                        url: API_ENDPOINT + '/users/' + userData.userId,
+                        url: API_URL + '/users/' + userData.userId,
                         method: 'GET',
                         cache: true
                     }).then(function(response) {

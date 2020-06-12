@@ -195,7 +195,7 @@ module.exports = (env, argv) => {
                 inject: false,
             }),
 
-            new webpack.ProvidePlugin({ auth0: 'auth0-js' })
+            new webpack.ProvidePlugin({auth0: 'auth0-js'})
         ]
     };
 
