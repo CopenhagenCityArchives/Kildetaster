@@ -88,7 +88,7 @@
     "constants": {
       "JSONURL": "http://kildetaster.dev9.1508test.dk/resources/mock/",
       "EDITOR_URL": "/kildetaster",
-      "RESOURCE_URL": "https://www.kbhkilder.dk/software/kildetaster/resources/",
+      "RESOURCE_URL": "https://kildetaster.kbharkiv.dk/resources/",
       "API_URL": "https://www.kbhkilder.dk/api",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
       "SEARCH_CONFIG_URL": "https://www.kbhkilder.dk/api/searchconfig",
