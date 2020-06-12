@@ -71,7 +71,7 @@
   },
   "production": {
     "constants": {
-      "EDITOR_URL": "/kildetaster",
+      "EDITOR_URL": "https://kildetaster.kbharkiv.dk",
       "RESOURCE_URL": "https://kildetaster.kbharkiv.dk/resources/",
       "API_URL": "https://www.kbhkilder.dk/api",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
