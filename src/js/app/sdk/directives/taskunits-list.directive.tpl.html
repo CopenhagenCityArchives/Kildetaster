@@ -14,7 +14,7 @@
             <tr ng-repeat="unit in units" ng-class="{ odd: $odd }" ng-show="units.length > 0" tabindex="0" role="button" aria-labelledby="protocol-{{$index  + 1}}">
                 <td>
                     <h5 class="d-md-none">Protokolnavn </h5>
-                    <h4 id="protocol-1">{{unit.description}}</h4>
+                    <h4 id="protocol-1"><span>{{unit.description}}</span></h4>
                 </td>
                 <td>
                     <h5 class="d-md-none">Status</h5>
@@ -31,7 +31,7 @@
                 </td>
                 <td >
                     <h5 class="d-md-none">Link</h5>
-                    <p ng-click="goToEditor(unit)"> Start indtastning <svg feather-icon icon="'arrow-right-circle'"></svg> </p>
+                    <p type="button" ng-click="goToEditor(unit)"> Start indtastning <svg feather-icon icon="'arrow-right-circle'"></svg> </p>
                 </td>
             </tr>
         </tbody>
