@@ -4,10 +4,15 @@ function galleryDirective() {
         restrict: 'E',
 
         scope: {
-            images: '='
+            images: '=',
+            data: '='
         },
 
         template: require('./gallery.directive.tpl.html'),
+        
 
+        
+        
     }
+
 }
