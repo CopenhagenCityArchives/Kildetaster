@@ -76,7 +76,7 @@ sdkApp.directive('gallery', galleryDirective);
 sdkApp.directive('featherIcon', featherIconDirective);
 
 angular.element(document).ready(function() {
-    angular.bootstrap(angular.element('[data-sdk-app]'), ['sdk']);
+    angular.bootstrap(angular.element('[data-sdk-app]'), ['sdk'], { strictDi: true });
 });
 
 export default sdkApp;
