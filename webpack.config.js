@@ -20,7 +20,7 @@ module.exports = (env, argv) => {
         // resulting bundles
         output: {
             filename: (pathData) => {
-                return pathData.chunk.name == 'sdk' ? '[name].js' : '[name].[hash].js'
+                return '[name].js'
             },
             path: path.resolve(__dirname, 'dist'),
             publicPath: PUBLIC
@@ -185,7 +185,7 @@ module.exports = (env, argv) => {
 
             // CSS is extracted for production builds
             new MiniCssExtractPlugin({
-                moduleFilename: ({name}) => name == 'sdk' ? '[name].css' : '[name].[hash].css',
+                moduleFilename: ({name}) => '[name].css',
             }),
 
             // Production index
