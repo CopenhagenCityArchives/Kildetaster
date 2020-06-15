@@ -3,7 +3,7 @@
     <div class="card text-white mb-3">
         <div class="card-body">
             <div id="source-gallery" class="carousel slide">
-                <ol class="carousel-indicators">
+                <ol ng-if="images.length > 1" class="carousel-indicators">
                     <li ng-repeat="img in images" data-target="#source-gallery" data-slide-to="{{$index}}" ng-class="{active : $index == 0}"></li>
                 </ol>
                 <div class="carousel-inner">
