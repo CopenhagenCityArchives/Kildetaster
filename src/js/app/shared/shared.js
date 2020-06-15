@@ -116,9 +116,9 @@ define([
 
     sharedApp.constant('TEXT', textConstant);
 
-    sharedApp.run(function ($rootScope, TEXT) {
+    sharedApp.run(['$rootScope', 'TEXT', function ($rootScope, TEXT) {
         $rootScope.TEXT = TEXT;
-    });
+    }]);
 
     sharedApp.config(['$httpProvider', 'AnalyticsProvider', 'angularAuth0Provider', '$stateProvider', '$locationProvider', '$sceDelegateProvider', function($httpProvider, AnalyticsProvider, angularAuth0Provider, $stateProvider, $locationProvider,$sceDelegateProvider) {
         console.log('configuring shared app');
