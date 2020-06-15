@@ -2,7 +2,7 @@ define([
 
 ], function () {
 
-    var postClountDirective =  /*@ngInject*/ function () {
+    var postClountDirective = function () {
 
         return {
 

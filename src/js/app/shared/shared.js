@@ -120,7 +120,8 @@ define([
         $rootScope.TEXT = TEXT;
     });
 
-    sharedApp.config(/*ngInject*/ function($httpProvider, AnalyticsProvider, angularAuth0Provider, $stateProvider, $locationProvider,$sceDelegateProvider) {
+    sharedApp.config(['$httpProvider', 'AnalyticsProvider', 'angularAuth0Provider', '$stateProvider', '$locationProvider', '$sceDelegateProvider', function($httpProvider, AnalyticsProvider, angularAuth0Provider, $stateProvider, $locationProvider,$sceDelegateProvider) {
+        console.log('configuring shared app');
         $httpProvider.interceptors.push('tokenFactory');
  
         //Let's allow resources from kbhkilder.dk
@@ -148,7 +149,7 @@ define([
         AnalyticsProvider.trackPages(true);
         AnalyticsProvider.ignoreFirstPageLoad(true);
         AnalyticsProvider.startOffline(true);
-    });
+    }]);
 
     return sharedApp;
 

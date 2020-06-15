@@ -2,7 +2,7 @@ define([
     'angular'
 ], function(angular) {
 
-    var termFieldDirective = /* @ngInject */ function($http, $sce, API_URL, TYPEAHEAD_MAX) {
+    var termFieldDirective = ['$http', '$sce', 'API_URL', 'TYPEAHEAD_MAX', function($http, $sce, API_URL, TYPEAHEAD_MAX) {
 
         var template = "";
 
@@ -18,7 +18,7 @@ define([
 
             template: '<div></div>',
 
-            controller: /* @ngInject */ function($scope, $compile, $element) {
+            controller: ['$scope', '$compile', '$element', function($scope, $compile, $element) {
 
 
                 /**
@@ -113,10 +113,10 @@ define([
 
                 angular.element($element).replaceWith($compile($scope.getTemplate())($scope));
 
-            }
+            }]
 
         }
-    };
+    }];
 
     return termFieldDirective;
 

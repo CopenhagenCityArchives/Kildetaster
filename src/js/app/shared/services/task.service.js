@@ -3,7 +3,7 @@ define([
 
 ], function () {
 
-    var taskService = /*@ngInject*/ function taskService($http, $cacheFactory, $q, $filter, API_URL) {
+    var taskService = ['$http', '$cacheFactory', '$q', '$filter', 'API_URL', function taskService($http, $cacheFactory, $q, $filter, API_URL) {
 
         var cache = $cacheFactory('taskCache');
 
@@ -97,7 +97,7 @@ define([
 
         };
 
-    };
+    }];
 
     return taskService;
 

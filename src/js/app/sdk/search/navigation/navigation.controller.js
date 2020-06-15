@@ -1,11 +1,16 @@
 define([], function() {
     
-    var navigationController = /*@ngInject*/ function navigationController(
-        $state, 
-        $stateParams, 
-        searchService,
-        solrService
-    ) {
+    var navigationController = [
+        '$state', 
+        '$stateParams', 
+        'searchService',
+        'solrService',
+        function navigationController(
+            $state, 
+            $stateParams, 
+            searchService,
+            solrService
+        ) {
 
         var that = this;
         
@@ -127,10 +132,8 @@ define([], function() {
                 that.partOfSearch = that.searchData.response.numFound !== undefined;
           
             }
-            
-
         }
+    }];
 
-    }
     return navigationController;
 })

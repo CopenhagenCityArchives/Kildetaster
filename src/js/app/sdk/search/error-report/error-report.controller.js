@@ -3,7 +3,7 @@ define([
 
 ], function () {
 
-    var errorReportController = /*@ngInject*/ function errorReportController($uibModalInstance, errorService, postData, errorReportingConfig) {
+    var errorReportController = ['$uibModalInstance', 'errorService', 'postData', 'errorReportingConfig', function errorReportController($uibModalInstance, errorService, postData, errorReportingConfig) {
 
         var that = this;
 
@@ -50,7 +50,7 @@ define([
             $uibModalInstance.dismiss('cancel');
         };
 
-    };
+    }];
 
     return errorReportController;
 

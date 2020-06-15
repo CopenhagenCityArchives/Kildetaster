@@ -1,7 +1,7 @@
 define([
 
 ], function() {
-    var errorsDirective = /*@ngInject*/ function(userService, errorService, helpers, EDITOR_URL) {
+    var errorsDirective = ['userService', 'errorService', 'helpers', 'EDITOR_URL', function(userService, errorService, helpers, EDITOR_URL) {
         return {
             restrict: 'E',
             scope: {},
@@ -87,7 +87,7 @@ define([
                 };
             }]
         }
-    };
+    }];
 
     return errorsDirective;
 });

@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var searchFacetController = /*@ngInject*/ function opentasksController($scope, $rootScope) {
+    var searchFacetController = ['$scope', '$rootScope', function opentasksController($scope, $rootScope) {
 
         $scope.selectedFacets = {};
 
@@ -28,7 +28,7 @@ define([
             $rootScope.$broadcast('filterSearch', $scope.selectedFacets);
         };
 
-    };
+    }];
 
     return searchFacetController;
 

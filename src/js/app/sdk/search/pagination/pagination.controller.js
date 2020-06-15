@@ -1,6 +1,6 @@
 define([], function () {
 
-    var paginationController = /*@ngInject*/ function paginationController() {
+    var paginationController = function paginationController() {
 
         var that = this;
 

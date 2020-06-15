@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var tokenService = /*@ngInject*/ function tokenService($q, angularAuth0, $sessionStorage, $location) {
+    var tokenService = ['$q', 'angularAuth0', '$sessionStorage', '$location', function tokenService($q, angularAuth0, $sessionStorage, $location) {
 
         return {
 
@@ -76,7 +76,7 @@ define([
             }
         };
 
-    };
+    }];
 
     return tokenService;
 

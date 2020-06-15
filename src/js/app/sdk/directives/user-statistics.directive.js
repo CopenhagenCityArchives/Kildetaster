@@ -1,5 +1,5 @@
 define([], function () {
-    var userStatisticsDirective = /*@ngInject*/ function (userService) {
+    var userStatisticsDirective = ['userService', function(userService) {
         return {
             restrict: 'E',
             template: require('./user-statistics.directive.tpl.html'),
@@ -62,7 +62,7 @@ define([], function () {
                 
             }
         };
-    };
+    }];
 
     return userStatisticsDirective;
 });

@@ -1,6 +1,6 @@
 var featherSprite = require('../../../../images/feather-sprite.svg');
 
-var featherIconDirective = /*@ngInject*/ function($sce, RESOURCE_URL) {
+var featherIconDirective = ['$sce', 'RESOURCE_URL', function($sce, RESOURCE_URL) {
     return {
         restrict: 'A',
         scope: {
@@ -14,7 +14,7 @@ var featherIconDirective = /*@ngInject*/ function($sce, RESOURCE_URL) {
             $element.append($symbol.children());
         }
     }
-}
+}]
 
 export default featherIconDirective;
 

@@ -6,7 +6,7 @@ define([
      * Prepare input value for use with solr searches regarding dates.
      * Will convert the date in the format of DD-MM-YYYY to standard utc
      */
-    var formatDateDirective = /* @ngInject */ function($parse) {
+    var formatDateDirective = ['$parse', function($parse) {
 
         return {
 
@@ -34,7 +34,7 @@ define([
             }
 
         }
-    };
+    }];
 
     return formatDateDirective;
 

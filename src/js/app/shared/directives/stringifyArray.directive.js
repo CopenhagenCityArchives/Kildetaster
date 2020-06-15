@@ -6,7 +6,7 @@ define([
 
 ], function() {
 
-    var stringifyArrayDirective = /*@ngInject*/ function() {
+    var stringifyArrayDirective = [function() {
 
         return {
 
@@ -42,7 +42,7 @@ define([
                 });
             }
         };
-    };
+    }];
 
     stringifyArrayDirective.$injet = ['$parse'];
 

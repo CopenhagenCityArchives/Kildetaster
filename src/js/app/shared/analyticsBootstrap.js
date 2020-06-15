@@ -3,15 +3,15 @@ define([
 
 ], function () {
 
-    var config = /*@ngInject*/ function config(AnalyticsProvider) {
+    var config = ['AnalyticsProvider', function config(AnalyticsProvider) {
         // Analytics config
         AnalyticsProvider.setAccount('UA-45125468-1'); //UU-XXXXXXX-X should be your tracking code
         AnalyticsProvider.trackPages(true);
         AnalyticsProvider.ignoreFirstPageLoad(true);
         AnalyticsProvider.startOffline(true);
-    };
+    }];
 
-    var run = /*@ngInject*/ function run($window, Analytics){
+    var run = ['$window', 'Analytics', function run($window, Analytics){
         if (!$window.Cookiebot) {
             console.log("Cookiebot not loaded. Ignoring.");
         } else if ($window.Cookiebot.consent.statistics) {
@@ -34,7 +34,7 @@ define([
                 }
             }, false);
         }
-    }
+    }];
 
     return {
         'config': config,

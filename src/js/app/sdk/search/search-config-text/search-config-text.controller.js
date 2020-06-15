@@ -1,5 +1,5 @@
 define([], function () {
-    var searchConfigTextController = /*@ngInject*/ function searchConfigTextController($filter) {
+    var searchConfigTextController = ['$filter', function searchConfigTextController($filter) {
 
         var that = this;
 
@@ -21,7 +21,7 @@ define([], function () {
                 }
             });
         }
+    }];
 
-    }
     return searchConfigTextController;
 });

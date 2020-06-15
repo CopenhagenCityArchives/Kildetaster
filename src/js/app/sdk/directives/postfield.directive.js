@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var postfieldDirective =  /*@ngInject*/ function() {
+    var postfieldDirective = function() {
 
         return {
             restrict: 'E',

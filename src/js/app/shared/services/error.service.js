@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var errorService = /*@ngInject*/ function errorService($http, $q, API_URL, ERROR_REPORT_CONFIG_URL) {
+    var errorService = ['$http', '$q', 'API_URL', 'ERROR_REPORT_CONFIG_URL', function errorService($http, $q, API_URL, ERROR_REPORT_CONFIG_URL) {
 
         return {
 
@@ -95,7 +95,7 @@ define([
 
         };
 
-    };
+    }];
 
     return errorService;
 

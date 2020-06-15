@@ -2,7 +2,7 @@ define([
 
 ], function () {
 
-    var fritekstSearchController = /*@ngInject*/ function fritekstSearchController($scope, Analytics) {
+    var fritekstSearchController = ['$scope', 'Analytics', function fritekstSearchController($scope, Analytics) {
 
         $scope.search = function search() {
             var term = encodeURIComponent($scope.term);
@@ -17,7 +17,7 @@ define([
             // Set url to search page
             $scope.searchUrl = options.searchUrl;
         }
-    };
+    }];
 
     return fritekstSearchController;
 

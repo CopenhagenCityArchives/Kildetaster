@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var userService = /*@ngInject*/ function userService($q, $http, API_URL, tokenService) {
+    var userService = ['$q', '$http', 'API_URL', 'tokenService', function userService($q, $http, API_URL, tokenService) {
 
         return {
 
@@ -107,7 +107,7 @@ define([
 
         };
 
-    };
+    }];
 
     return userService;
 

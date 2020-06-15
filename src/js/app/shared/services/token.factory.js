@@ -3,7 +3,7 @@ define([
 ], function () {
 
     //Create a http interceptor factory
-    var accessTokenHttpInterceptor = /*@ngInject*/ function accessTokenHttpInterceptor(MAIN_DOMAIN, SOLR_API_URL, $sessionStorage) {
+    var accessTokenHttpInterceptor = ['MAIN_DOMAIN', 'SOLR_API_URL', '$sessionStorage', function accessTokenHttpInterceptor(MAIN_DOMAIN, SOLR_API_URL, $sessionStorage) {
 
         return {
 
@@ -45,7 +45,7 @@ define([
                 return response;
             }
         };
-    };
+    }];
 
     return accessTokenHttpInterceptor;
 

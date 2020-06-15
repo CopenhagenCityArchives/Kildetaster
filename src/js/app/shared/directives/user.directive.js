@@ -4,7 +4,7 @@ define([
 
 ], function(ang) {
 
-    var userDirective = /*@ngInject*/ function userDirective() {
+    var userDirective = [function userDirective() {
 
         return {
 
@@ -24,7 +24,7 @@ define([
 
             }
         };
-    };
+    }];
 
     return userDirective;
 

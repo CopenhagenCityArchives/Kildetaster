@@ -22,7 +22,8 @@ define([
                 index: '='
             },
 
-            controller: /*@ngInject*/ function ($scope, $compile, $templateCache, $element, $timeout) {
+            controller: ['$scope', '$compile', '$templateCache', '$element', '$timeout', function($scope, $compile, $templateCache, $element, $timeout) {
+            
                 // Store current unique number on the scope
                 $scope.num = num;
                 var viewer;
@@ -80,7 +81,7 @@ define([
 
                 // Increment the counter for other instances of the directive
                 num++;
-            }
+            }]
 
         }
     };

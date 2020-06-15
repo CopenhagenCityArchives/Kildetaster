@@ -1,6 +1,6 @@
 define([], function () {
 
-    var taskProgressPlotDirective =  /*@ngInject*/ function (taskService, $q) {
+    var taskProgressPlotDirective = ['taskService', '$q', function(taskService, $q) {
         return {
             restrict: 'E',
 
@@ -93,7 +93,7 @@ define([], function () {
                 }
             }
         };
-    };
+    }];
 
     return taskProgressPlotDirective;
 

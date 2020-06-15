@@ -1,5 +1,5 @@
 define([], function () {
-    var taskunitsListDirective = /*@ngInject*/ function (taskService, pageService, EDITOR_URL) {
+    var taskunitsListDirective = ['taskService', 'pageService', 'EDITOR_URL', function(taskService, pageService, EDITOR_URL) {
         return {
             restrict: 'E',
 
@@ -38,7 +38,7 @@ define([], function () {
                 };
             }
         }
-    }
+    }]
 
     return taskunitsListDirective;
 });

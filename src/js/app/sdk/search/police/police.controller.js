@@ -4,7 +4,7 @@ define([
 
 ], function(Clipboard) {
 
-    var policeController = /*@ngInject*/ function policeController() {
+    var policeController = function policeController() {
 
         var that = this;
 

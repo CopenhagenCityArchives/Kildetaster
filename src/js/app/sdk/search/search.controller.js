@@ -3,19 +3,31 @@ define([
 
 ], function() {
 
-    var searchController = /*@ngInject*/ function searchController(
-        $q,
-        $timeout,
-        $scope,
-        $stateParams,
-        $state,
-        $rootScope,
-        $anchorScroll,
-        solrService,
-        searchService,
-        searchConfig,
-        Analytics
-    ) {
+    var searchController = [
+        '$q',
+        '$timeout',
+        '$scope',
+        '$stateParams',
+        '$state',
+        '$rootScope',
+        '$anchorScroll',
+        'solrService',
+        'searchService',
+        'searchConfig',
+        'Analytics',
+        function searchController(
+            $q,
+            $timeout,
+            $scope,
+            $stateParams,
+            $state,
+            $rootScope,
+            $anchorScroll,
+            solrService,
+            searchService,
+            searchConfig,
+            Analytics
+        ) {
 
         var that = this;
 
@@ -560,7 +572,7 @@ define([
 
         that.init();
 
-    };
+    }];
 
     return searchController;
 

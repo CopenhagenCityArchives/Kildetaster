@@ -1,6 +1,6 @@
 define([], function() {
 
-    var policeController = /* @ngInject */ function policeController(helpers, EDITOR_URL, $scope) {
+    var policeController = ['helpers', 'EDITOR_URL', '$scope', function policeController(helpers, EDITOR_URL, $scope) {
 
         var that = this;
 
@@ -56,7 +56,7 @@ define([], function() {
             copyText.blur();
         };
 
-    };
+    }];
 
     return policeController;
 });

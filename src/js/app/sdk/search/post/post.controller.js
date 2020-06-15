@@ -1,6 +1,6 @@
 define([], function () {
 
-    var postController = /*@ngInject*/ function postController(errorService, $uibModal) {
+    var postController = ['errorService', '$uibModal', function postController(errorService, $uibModal) {
 
         var that = this;
         var config = null;
@@ -63,7 +63,7 @@ define([], function () {
 
         this.$onDestroy = function() {};
 
-    };
+    }];
 
     return postController;
 });

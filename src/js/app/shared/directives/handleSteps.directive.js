@@ -8,7 +8,7 @@ define([
 
 ], function($) {
 
-    var handleStepsDirective = /*@ngInject*/ function handleStepsDirective($timeout) {
+    var handleStepsDirective = ['$timeout', function handleStepsDirective($timeout) {
 
         return {
             restrict: 'A',
@@ -129,7 +129,7 @@ define([
             }
         };
 
-    };
+    }];
 
     return handleStepsDirective;
 

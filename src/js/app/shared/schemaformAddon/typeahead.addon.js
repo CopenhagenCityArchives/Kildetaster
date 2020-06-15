@@ -6,7 +6,7 @@ define([
 
     var schemaForm = angular.module('schemaForm');
 
-    schemaForm.controller('sfTypeahead', /*@ngInject*/  function($scope, API_URL, $http, TYPEAHEAD_MAX) {
+    schemaForm.controller('sfTypeahead', ['$scope', 'API_URL', '$http', 'TYPEAHEAD_MAX', function($scope, API_URL, $http, TYPEAHEAD_MAX) {
 
         $scope.options = [];
 
@@ -60,10 +60,10 @@ define([
 
         };
 
-    });
+    }]);
 
 
-    schemaForm.config( /*@ngInject*/ function(schemaFormProvider, schemaFormDecoratorsProvider, sfPathProvider) {
+    schemaForm.config( ['schemaFormProvider', 'schemaFormDecoratorsProvider', 'sfPathProvider', function(schemaFormProvider, schemaFormDecoratorsProvider, sfPathProvider) {
 
         var typeahead = function(name, schema, options) {
             if (schema.type === 'typeahead' || (schema.type === 'string' && schema.format === 'typeahead')) {
@@ -88,6 +88,6 @@ define([
             'shared/schemaformAddon/typeahead.addon.tpl.html'
         );
 
-    });
+    }]);
 
 });

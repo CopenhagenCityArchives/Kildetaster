@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var searchConfig = /*@ngInject*/ function searchConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+    var searchConfig = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', function searchConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
 
         // Prevent default use of !# hash bang urls
         // @see https://stackoverflow.com/questions/41226122/url-hash-bang-prefix-instead-of-simple-hash-in-angular-1-6
@@ -192,7 +192,7 @@ define([
                     }]
                 }
             });
-    };
+    }];
 
     return searchConfig;
 

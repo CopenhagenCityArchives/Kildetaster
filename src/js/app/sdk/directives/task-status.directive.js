@@ -1,6 +1,6 @@
 define([], function () {
 
-    var taskStatusDirective =  /*@ngInject*/ function (taskService) {
+    var taskStatusDirective =  ['taskService', function(taskService) {
         return {
             restrict: 'E',
 
@@ -45,7 +45,7 @@ define([], function () {
                 });
             }
         };
-    };
+    }];
 
     return taskStatusDirective;
 

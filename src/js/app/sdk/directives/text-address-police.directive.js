@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var directive =  /*@ngInject*/ function() {
+    var directive =  function() {
 
         return {
             restrict: 'E',

@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var textGenderDirective =  /*@ngInject*/ function() {
+    var textGenderDirective =  function() {
 
         return {
             restrict: 'E',

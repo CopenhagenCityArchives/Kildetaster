@@ -4,7 +4,7 @@ define([
 
 ], function(ang) {
 
-    var imageViewerOverlayDirective = /*@ngInject*/ function imageViewerDirective($stateParams, $state, $window) {
+    var imageViewerOverlayDirective = ['$stateParams', '$state', '$window', function imageViewerDirective($stateParams, $state, $window) {
 
         return {
 
@@ -39,7 +39,7 @@ define([
                 }
             }
         };
-    };
+    }];
 
     return imageViewerOverlayDirective;
 

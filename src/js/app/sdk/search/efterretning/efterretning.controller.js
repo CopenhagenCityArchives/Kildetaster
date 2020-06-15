@@ -1,6 +1,6 @@
 define([], function() {
 
-    var efterretningController = /*@ngInject*/ function erindringController(helpers, API_URL, EDITOR_URL) {
+    var efterretningController = ['helpers', 'API_URL', 'EDITOR_URL', function erindringController(helpers, API_URL, EDITOR_URL) {
 
         var that = this;
 
@@ -32,7 +32,7 @@ define([], function() {
             copyText.className = "input copied"
             copyText.blur();
         };
-    };
+    }];
 
     return efterretningController;
 });

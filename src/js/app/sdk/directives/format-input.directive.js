@@ -7,7 +7,7 @@ define([
      * Will replaces spaces with *
      * And escape select special chars
      */
-    var formatInputDirective = /* @ngInject */ function($parse) {
+    var formatInputDirective = ['$parse', function($parse) {
 
         return {
 
@@ -66,7 +66,7 @@ define([
             }
 
         }
-    };
+    }];
 
     return formatInputDirective;
 
