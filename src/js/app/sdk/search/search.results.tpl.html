@@ -182,6 +182,7 @@
         <facet
             ng-repeat-end 
             ng-attr-id="filter-{{facet.field}}" 
+            ng-class="{show: facet.expanded}"
 
             field="ctrl.fieldIndex[facet.field]"
             filter-queries="ctrl.filterQueries" 
