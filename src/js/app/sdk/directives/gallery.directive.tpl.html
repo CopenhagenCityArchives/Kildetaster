@@ -1,0 +1,49 @@
+<h4>Kilden</h4>
+<div class="module-gallery">
+    <div class="card text-white mb-3">
+        <div class="card-body">
+            <div id="source-gallery" class="carousel slide">
+                <ol class="carousel-indicators">
+                    <li ng-repeat="img in images" data-target="#source-gallery" data-slide-to="{{$index}}" ng-class="{active : $index == 0}"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <a ng-repeat="img in images" class="carousel-item" ng-class="{active : $index == 0}" role="button" data-toggle="modal" data-target="#source-gallery-modal">
+                        <zoom-image class="d-block w-100" image="img" index="$index"></zoom-image>
+                    </a>
+                </div>
+
+                <a ng-if="images.length > 1" class="carousel-control-prev" href="#source-gallery" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Forrige side af kilden</span>
+                </a>
+                <a ng-if="images.length > 1"class="carousel-control-next" href="#source-gallery" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Næste side af kilden</span>
+                </a>
+
+            </div>
+
+            <div class="text-right">
+                <button type="button" class="btn btn-link"><svg feather-icon class="medium-icon" icon="'zoom-out'" style="color:white"><span class="sr-only">Zoom ud</span></svg></button>
+                <button type="button" class="btn btn-link"><svg feather-icon class="medium-icon" icon="'zoom-in'" style="color:white"><span class="sr-only">Zoom ind</span></svg></button>
+                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#source-gallery-modal"><svg feather-icon class="medium-icon" icon="'maximize-2'" style="color:white"></i><span class="sr-only">Åbn galleriet i fuld skærm</span></button>
+            </div>
+
+
+            <div ng-if="data.collection_id == 17">
+                <h5>Om kilden</h5>
+                <p>Station {{data.station}}. Filmrulle {{data.film}}. Registerblad {{data.number}} (uniktid. {{data.registerblad_id}})</p>
+                <p ng-if="data.dateOfCompletion">Registerbladet er udfyldt: {{data.dateOfCompletion | date:'dd-MM-yyyy' }}</p>
+                <p ng-if="data.specialRemarks">Særlige bemærkninger: {{data.specialRemarks}}</p>
+
+                <div ng-if="data.last_changed">
+                    <h3 class="post__sectionheader">Om indtastningen</h3>
+                    <p>Senest ændret: {{data.last_changed}}</p>
+                    <p ng-if="data.registerblad_comment">Indtasters kommentar: {{data.registerblad_comment}}</p>
+                </div>
+                <h6>Løbenr.</h6>
+                <p>{{data.registerblad_id}}</p>
+            </div>
+        </div>
+    </div>
+</div>

@@ -29,7 +29,9 @@ import taskProgressPlotDirective from './directives/task-progress-plot.directive
 import progressbarDirective from './directives/progressbar.directive';
 import userDirective from '../shared/directives/user.directive';
 import shareLinkDirective from '../shared/directives/shareLink.directive';
+import galleryDirective from './directives/gallery.directive';
 import constants from '../../../../constants.json';
+
 
 import featherIconDirective from './directives/feather-icon.directive';
 
@@ -68,6 +70,8 @@ sdkApp.directive('taskProgressPlot', taskProgressPlotDirective);
 sdkApp.directive('progressBar', progressbarDirective);
 sdkApp.directive('user', userDirective);
 sdkApp.directive('shareLink', shareLinkDirective);
+sdkApp.directive('gallery', galleryDirective);
+
 
 sdkApp.directive('featherIcon', featherIconDirective);
 
