@@ -11,9 +11,10 @@
         </div>
         <div class="col-lg-6">
             <search-config-text class="search-config-text" config="ctrl.queries" collections="ctrl.collections">
-                <post-count ng-if="!ctrl.searching || ctrl.results" page="ctrl.page" total="ctrl.results.numFound" posts-pr-page="ctrl.postsPrPage">
+                <post-count ng-if="!ctrl.error && ctrl.results" page="ctrl.page" total="ctrl.results.numFound" posts-pr-page="ctrl.postsPrPage">
                 </post-count>
-                <div ng-if="!ctrl.results && ctrl.searching" class="post-count text-muted">Søger...</div>
+                <div ng-if="!ctrl.error && !ctrl.results && ctrl.searching" class="post-count text-muted">Søger...</div>
+                <div ng-if="ctrl.error" class="post-count text-danger">En fejl opstod. Prøv igen.</div>
             </search-config-text>
         </div>
         <div class="col-lg-2">
@@ -145,13 +146,14 @@
                 go-to-page="ctrl.goToPage(page)">
             </pagination>
 
-            <form class="go-to-page form-inline"role="form" aria-labelledby="go-to-page-label" ng-submit="ctrl.goToPage(ctrl.pageNumber-1)">
+            <form class="go-to-page form-inline" role="form" aria-labelledby="go-to-page-label" ng-submit="ctrl.goToPage(ctrl.pageNumber-1)">
                 <div class="form-group mr-2">
                     <label for="go-to-page" id="go-to-page-label" class="mr-3">Spring til side</label>
                     <input type="number" class="form-control" id="go-to-page" placeholder="Sidetal" ng-model="ctrl.pageNumber">
                 </div>
                 <button type="submit" class="btn btn-primary">Gå</button>
             </form>
+
         </div>
     </div>
 </div>
@@ -164,14 +166,32 @@
     <div class="list-group list-group-flush">
         <!-- start repeat -->
 
-        <button ng-repeat-start="facet in ctrl.facets" type="button" id="filter-{{facet.field}}-label" class="list-group-item list-group-item-action"
-            ng-class="{'d-none': !facet.enabled}" ng-click="facet.expanded = !facet.expanded" aria-expanded="{{facet.expanded}}"
-            aria-controls="filter-{{facet.field}}">{{ ctrl.fieldIndex[facet.field].view_name }}</button>
+        <button
+            type="button"
+            class="list-group-item list-group-item-action"
+            aria-controls="filter-{{facet.field}}"
+            aria-expanded="{{facet.expanded}}"
+            data-target="#filter-{{facet.field}}"
+            data-toggle="collapse"
 
-        <facet ng-repeat-end id="filter-{{facet.field}}" field="ctrl.fieldIndex[facet.field]"
-            filter-queries="ctrl.filterQueries" facet="facet" ng-class="{show: facet.expanded}"
-            buckets="ctrl.facetFields[facet.field].buckets" add-filter="toggleFilter"
-            class="collapse" aria-labelledby="filter-{{facet.field}}-label"></facet>
+            ng-repeat-start="facet in ctrl.facets"
+            ng-attr-id="filter-{{facet.field}}-label"
+            ng-class="{'d-none': !facet.enabled}"
+            ng-click="facet.expanded = !facet.expanded">{{ ctrl.fieldIndex[facet.field].view_name }}</button>
+
+        <facet
+            ng-repeat-end 
+            ng-attr-id="filter-{{facet.field}}" 
+
+            field="ctrl.fieldIndex[facet.field]"
+            filter-queries="ctrl.filterQueries" 
+            facet="facet"
+            buckets="ctrl.facetFields[facet.field].buckets"
+            add-filter="toggleFilter"
+
+            class="collapse"
+            aria-labelledby="filter-{{facet.field}}-label">
+        </facet>
 
         <button type="button" id="filter-close" class="list-group-item list-group-item-action" ng-click="collapseFacets()">Luk <svg feather-icon icon="'x'"></svg></button>
     </div>
