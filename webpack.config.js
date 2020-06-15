@@ -159,7 +159,7 @@ module.exports = (env, argv) => {
                 './dist/search',
                 './dist/sdk',
 
-                './devServer/wordpress-kbharkiv_files',
+                './devServer/wordpress_files',
                 './src/fonts'
             ],
             contentBasePublicPath: [
@@ -167,7 +167,7 @@ module.exports = (env, argv) => {
                 '/search',
                 '/sdk',
                 
-                '/resources/wordpress-kbharkiv_files',
+                '/resources/wordpress_files',
                 '/resources/fonts'
             ],
             historyApiFallback: {
