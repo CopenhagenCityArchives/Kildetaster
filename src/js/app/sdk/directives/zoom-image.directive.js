@@ -18,14 +18,13 @@ define([
             restrict: 'E',
 
             scope: {
-                images: '='
+                image: '=',
+                index: '='
             },
 
             controller: /*@ngInject*/ function ($scope, $compile, $templateCache, $element, $timeout) {
-            
                 // Store current unique number on the scope
                 $scope.num = num;
-
                 var viewer;
 
                 //Prepare the template
@@ -34,47 +33,11 @@ define([
                 //Add template to the dom
                 angular.element($element).replaceWith(template);
 
-                var opts = angular.extend({}, {
-
-                    zoomInButton: "zoom-in",
-                    zoomOutButton: "zoom-out",
-                    homeButton: "home",
-                    fullPageButton: "full-page",
-                    nextButton: "next",
-                    previousButton: "previous",
-
-                    maxZoomPixelRatio: 4,
-
-                    gestureSettingsMouse: {
-                        scrollToZoom: true,
-                        clickToZoom: true,
-                        pinchToZoom: false
-
-                    },
-
-                    gestureSettingsTouch: {
-                        scrollToZoom: true,
-                        clickToZoom: true,
-                        pinchToZoom: true
-                    },
-
-                    //Prefix for image paths
-                    prefixUrl: '/resources/bower_components/openseadragon/built-openseadragon/openseadragon/images/',
-
-                    toggleButton: 'toggle-selection',
-
-                    navImages: {},
-
-                    debugMode: false,
-
-                    //The "zoom distance" per mouse scroll or touch pinch. Note: Setting this to 1.0 effectively disables the mouse-wheel zoom feature
-                    //(also see gestureSettings[Mouse|Touch|Pen].scrollToZoom}).
-                    //zoomPerScroll: 1.0
-
-                }, $scope.options);
-
                 $timeout(function() {
-
+                    console.log('#zoom-image-' + $scope.index );
+                    console.log($scope.image);
+                    console.log('num');
+                    console.log(num);
                     //Initialize the viewer
                     //viewer = OpenSeadragon(opts);
                     viewer = OpenSeadragon({
@@ -105,14 +68,14 @@ define([
                             clickToZoom: true,
                             pinchToZoom: true
                         },
-
-                        element: document.querySelector('#zoom-image-' + $scope.num + '-' + '0' ),
+                        
+                        //element: document.querySelector('#zoom-image-' + num + '-' + $scope.index ),
+                        element: document.querySelector('#zoom-image-' + $scope.index ),
                         tileSources: {
                             type: 'image',
-                            url: 'http://politietsregisterblade.dk/registerblade/6/0002/03161A.jpg'
+                            url: $scope.image
                         },
                     });
-
                 });
 
                 // Increment the counter for other instances of the directive
