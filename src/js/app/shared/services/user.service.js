@@ -63,24 +63,25 @@ define([
 
                 tokenService.getUserData(allowEmptyResponse)
                 .then(function(userData){
-                    if(allowEmptyResponse && userData == {}){
+                    if (allowEmptyResponse && !userData){
                         deferred.resolve({});
+                    } else {
+                        $http({
+                            url: API_URL + '/users/' + userData.userId,
+                            method: 'GET',
+                            cache: true
+                        }).then(function(response) {
+                            response.data.user_id = response.data.id;
+                            deferred.resolve(response.data);
+                        }).catch(function(err) {
+                            if (allowEmptyResponse){
+                                console.log("Could not get user info, but empty response allowed. Returning {}");
+                                deferred.resolve({});
+                            }
+                            console.log('Error getting user info', err);
+                            deferred.reject();
+                        });
                     }
-                    return $http({
-                        url: API_URL + '/users/' + userData.userId,
-                        method: 'GET',
-                        cache: true
-                    }).then(function(response) {
-                        response.data.user_id = response.data.id;
-                        deferred.resolve(response.data);
-                    }).catch(function(err) {
-                        if(allowEmptyResponse){
-                            console.log("Could not get user info, but empty response allowed. Returning {}");
-                            deferred.resolve({});
-                        }
-                        console.log('Error getting user info', err);
-                        deferred.reject();
-                    });
                 }).catch(function(err){
                     console.log('Error getting userData', err);
                     deferred.reject();

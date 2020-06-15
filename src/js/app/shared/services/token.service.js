@@ -10,7 +10,8 @@ define([
             /**
              * Check if the user is logged in, and return the access token if they are
              */
-            getToken: function() {
+            getToken: function(allowEmptyResponse) {
+                allowEmptyResponse = allowEmptyResponse || false;
                 var deferred = $q.defer();
 
                 var hashIndex = $location.absUrl().indexOf('access_token');
@@ -21,12 +22,14 @@ define([
 
                 if ($sessionStorage.tokenData) {
                     deferred.resolve($sessionStorage.tokenData);
-                } else if (hash == "") {
+                } else if (!allowEmptyResponse && hash == "") {
                     angularAuth0.authorize({
                         audience: 'https://www.kbhkilder.dk/api',
                         responseType: 'token',
                         redirectUri: $location.absUrl()
                     });
+                }  else if (allowEmptyResponse && hash == "") {
+                    deferred.resolve({ user: null });
                 } else {
                     angularAuth0.parseHash({ hash: hash }, function(err, authResult) {
                         if (err) {
@@ -64,7 +67,7 @@ define([
 
                 var deferred = $q.defer();
 
-                this.getToken()
+                this.getToken(allowEmptyResponse)
                 .then(function(tokenData) {
                     deferred.resolve(tokenData.user)
                 })

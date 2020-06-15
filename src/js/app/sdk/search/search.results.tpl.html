@@ -11,7 +11,7 @@
         </div>
         <div class="col-lg-6">
             <search-config-text class="search-config-text" config="ctrl.queries" collections="ctrl.collections">
-                <post-count ng-if="!ctrl.searching && ctrl.results" page="ctrl.page" total="ctrl.results.numFound" posts-pr-page="ctrl.postsPrPage">
+                <post-count ng-if="!ctrl.searching || ctrl.results" page="ctrl.page" total="ctrl.results.numFound" posts-pr-page="ctrl.postsPrPage">
                 </post-count>
                 <div ng-if="!ctrl.results && ctrl.searching" class="post-count text-muted">Søger...</div>
             </search-config-text>

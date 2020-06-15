@@ -100,9 +100,7 @@ define([
                 },
 
                 resolve: {
-
-                    userData: ['userService', 'tokenService', '$q', function (userService, tokenService, $q) {
-
+                    userData: ['userService', function (userService) {
                         return userService.getUserInfo(true);
                     }],
 
@@ -114,8 +112,7 @@ define([
                         return solrService.getSearchData();
                     }],
 
-                    data: ['$q','$stateParams', '$transition$', 'solrService', 'searchService', function ($q, $stateParams, $transition$, solrService, searchService) {
-
+                    data: ['$q','$stateParams', 'solrService', 'searchService', function ($q, $stateParams, solrService, searchService) {
                         var deferred = $q.defer(),
                             docs = null,
                             highlighting = null;
