@@ -1,4 +1,8 @@
-define([], function() {
+define([
+
+    'clipboard'
+
+], function(Clipboard) {
 
     var policeController = ['helpers', 'EDITOR_URL', '$scope', function policeController(helpers, EDITOR_URL, $scope) {
 
@@ -40,6 +44,7 @@ define([], function() {
             that.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id;
 
             that.imageUrl = helpers.getImageUrlByPostId(this.data.post_id);
+            that.images = [that.imageUrl];
 
             //Determine the editor link visibility based on wether or not the user can edit
             that.showEditorLink = allowedToEdit();
@@ -49,11 +54,9 @@ define([], function() {
         };
 
         this.copy = function() {
-            var copyText = document.querySelector("#permalink");
-            copyText.select();
-            document.execCommand("copy");
-            copyText.className = "input copied"
-            copyText.blur();
+            var clip = new Clipboard('#permalink_btn', {
+                container: document.getElementById('#permalink')});
+            return clip;
         };
 
     }];
