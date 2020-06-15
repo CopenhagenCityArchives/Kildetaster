@@ -24,61 +24,8 @@
         <div class="col-lg-6 order-lg-last">
             <gallery images='$ctrl.images' data="$ctrl.data"></gallery>
         </div>
-
-
-        <!--<div class="col-lg-6 order-lg-last">
-        <h4>Kilden</h4>
-            <div class="module-gallery">
-                <div class="card text-white mb-3">
-                    <div class="card-body">
-                        <div id="source-gallery" class="carousel slide">
-                            <ol class="carousel-indicators">
-                                <li ng-repeat="img in $ctrl.images" data-target="#source-gallery" data-slide-to="{{$index}}" ng-class="{active : $index == 0}"></li>
-                            </ol>
-                            <div class="carousel-inner">
-                                <a ng-repeat="img in $ctrl.images" class="carousel-item" ng-class="{active : $index == 0}" role="button" data-toggle="modal" data-target="#source-gallery-modal">
-                                    <zoom-image class="d-block w-100" image="img" index="$index"></zoom-image>
-                                </a>
-                            </div>
-                                
-                            <a class="carousel-control-prev" href="#source-gallery" role="button" data-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Forrige side af kilden</span>
-                            </a>
-                            <a class="carousel-control-next" href="#source-gallery" role="button" data-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="sr-only">Næste side af kilden</span>
-                            </a>
-
-                        </div>
-
-                        <div class="text-right">
-                            <button type="button" class="btn btn-link"><i width="20px" height="20px" data-feather="zoom-out"></i><span class="sr-only">Zoom ud</span></button>
-                            <button type="button" class="btn btn-link"><i width="20px" height="20px" data-feather="zoom-in"></i><span class="sr-only">Zoom ind</span></button>
-                            <button type="button" class="btn btn-link" data-toggle="modal" data-target="#source-gallery-modal"><i width="20px" height="20px" data-feather="maximize-2"></i><span class="sr-only">Åbn galleriet i fuld skærm</span></button>
-                        </div>
-
-                        <h5>Om kilden</h5>
-                        <p>Station {{$ctrl.data.station}}. Filmrulle {{$ctrl.data.film}}. Registerblad {{$ctrl.data.number}} (uniktid. {{$ctrl.data.registerblad_id}})</p>
-                        <p ng-if="$ctrl.data.dateOfCompletion">Registerbladet er udfyldt: {{$ctrl.data.dateOfCompletion | date:'dd-MM-yyyy' }}</p>
-                        <p ng-if="$ctrl.data.specialRemarks">Særlige bemærkninger: {{$ctrl.data.specialRemarks}}</p>
-
-                        <div ng-if="$ctrl.data.last_changed">
-                            <h3 class="post__sectionheader">Om indtastningen</h3>
-                            <p>Senest ændret: {{$ctrl.data.last_changed}}</p>
-                            <p ng-if="$ctrl.data.registerblad_comment">Indtasters kommentar: {{$ctrl.data.registerblad_comment}}</p>
-                        </div>
-                        <h6>Løbenr.</h6>
-                        <p>{{$ctrl.data.registerblad_id}}</p>
-
-                    </div>
-                </div>
-            </div>
-        </div>-->
-
         <div class="col-lg-6">
             <h4 id="data-personen">Personen</h4>
-            
             <table class="table table-striped" aria-labelledby="data-personen">
                 <caption class="sr-only">Data om personen</caption>
                 <tbody>
@@ -92,7 +39,7 @@
                     </tr>
                     <tr ng-if="$ctrl.data.dateOfBirth">
                         <th scope="row">
-                        Født
+                            Født
                         </th>
                         <td>
                             {{$ctrl.data.dateOfBirth | date:'dd-MM-yyyy' }}
@@ -106,7 +53,7 @@
                             <text-gender type="$ctrl.data.sex"></text-gender>
                         </td>
                     </tr>
-                    <tr ng-if="$ctrl.data.positions != []">
+                    <tr ng-if="$ctrl.data.positions.length > 0">
                         <th scope="row">
                             Erhverv
                         </th>
@@ -119,10 +66,9 @@
                             Permalink
                         </th>
                         <td>
-                            <!-- <p id="#permalink">{{$ctrl.permalink}}</p> -->
                             <span id="permalink" class="mr-2">{{$ctrl.permalink}}</span>
                             <a ng-attr-id="permalink_btn" ng-click="$ctrl.copy(); confirmed=true" class="btn btn-secondary btn-sm" ng-attr-data-clipboard-target="#permalink">Kopier <span class="sr-only"> permalink</span></a>
-                            <span ng-if="confirmed" class="mr-2">Kopieret</span>
+                            <span ng-if="confirmed" class="mr-2">Kopieret!</span>
                         </td>
                     </tr>
                 </tbody>
@@ -145,6 +91,7 @@
                         <td>
                             <text-address-police address="address" date="true"></text-address-police>
                         </td>
+                    </tr>
                 </tbody>
             </table>
 
