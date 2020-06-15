@@ -11,7 +11,7 @@
                         <zoom-image class="d-block w-100" image="img" index="$index"></zoom-image>
                     </a>
                 </div>
-
+                
                 <a ng-if="images.length > 1" class="carousel-control-prev" href="#source-gallery" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Forrige side af kilden</span>
@@ -23,12 +23,11 @@
 
             </div>
 
-            <div class="text-right">
-                <button type="button" class="btn btn-link"><svg feather-icon class="medium-icon" icon="'zoom-out'" style="color:white"><span class="sr-only">Zoom ud</span></svg></button>
-                <button type="button" class="btn btn-link"><svg feather-icon class="medium-icon" icon="'zoom-in'" style="color:white"><span class="sr-only">Zoom ind</span></svg></button>
-                <button type="button" class="btn btn-link" data-toggle="modal" data-target="#source-gallery-modal"><svg feather-icon class="medium-icon" icon="'maximize-2'" style="color:white"></i><span class="sr-only">Åbn galleriet i fuld skærm</span></button>
+            <div id="toolbarDiv" class="text-right">
+                <button id="zoom-out" type="button" class="btn btn-link"><svg feather-icon class="medium-icon" icon="'zoom-out'" style="color:white"><span class="sr-only">Zoom ud</span></svg></button>
+                <button id="zoom-in"  type="button" class="btn btn-link"><svg feather-icon class="medium-icon" icon="'zoom-in'" style="color:white"><span class="sr-only">Zoom ind</span></svg></button>
+                <button id="full-page" type="button" class="btn btn-link"><svg feather-icon class="medium-icon" icon="'maximize-2'" style="color:white"><span class="sr-only">Åbn galleriet i fuld skærm</span></svg></button>
             </div>
-
 
             <div ng-if="data.collection_id == 17">
                 <h5>Om kilden</h5>

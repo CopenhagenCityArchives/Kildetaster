@@ -8,10 +8,7 @@ function galleryDirective() {
             data: '='
         },
 
-        template: require('./gallery.directive.tpl.html'),
-        
-
-        
+        template: require('./gallery.directive.tpl.html'),        
         
     }
 

@@ -35,25 +35,29 @@ define([
                 angular.element($element).replaceWith(template);
 
                 $timeout(function() {
-                    console.log('#zoom-image-' + $scope.index );
-                    console.log($scope.image);
-                    console.log('num');
-                    console.log(num);
+                    console.log('#zoom-image-' + $scope.num + '-' + $scope.index );
                     //Initialize the viewer
-                    //viewer = OpenSeadragon(opts);
+
                     viewer = OpenSeadragon({
 
                         // Turn off default buttons on the viewer, as we dont need those
                         showNavigator: false,
                         showHomeControl: false,
                         showFullPageControl: true,
-
-                        zoomInButton: "zoom-in-" + $scope.num,
-                        zoomOutButton: "zoom-out-" + $scope.num,
+                        
+                        zoomInButton: "zoom-in",
+                        zoomOutButton: "zoom-out",
                         homeButton: "home",
-                        fullPageButton: "full-page-" + $scope.num,
+                        fullPageButton: "full-page",
                         nextButton: "next",
                         previousButton: "previous",
+
+                        /*zoomInButton: "zoom-in-" + $scope.num + '-' + $scope.index,
+                        zoomOutButton: "zoom-out-" + $scope.num + '-' + $scope.index,
+                        homeButton: "home",
+                        fullPageButton: "full-page-" + $scope.num + '-' + $scope.index,
+                        nextButton: "next",
+                        previousButton: "previous",*/
 
                         maxZoomPixelRatio: 4,
 
@@ -71,7 +75,7 @@ define([
                         },
                         
                         //element: document.querySelector('#zoom-image-' + num + '-' + $scope.index ),
-                        element: document.querySelector('#zoom-image-' + $scope.index ),
+                        element: document.querySelector('#zoom-image-' + $scope.num + '-' + $scope.index ),
                         tileSources: {
                             type: 'image',
                             url: $scope.image
