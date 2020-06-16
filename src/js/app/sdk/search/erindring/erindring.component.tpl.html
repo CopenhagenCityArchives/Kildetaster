@@ -3,7 +3,7 @@
     <header class="row">
         <div class="col-12">
             <nav aria-label="Brødkrummesti">
-                <ol class="breadcrumb">
+                <ol class="breadcrumb" style="display:block">
                     <li class="breadcrumb-item"><a href="#">Hjem</a></li>
                     <li class="breadcrumb-item"><a href="#">Søg</a></li>
                     <li class="breadcrumb-item"><a href="#">Søg person</a></li>
@@ -12,6 +12,7 @@
             </nav>
         </div>
     </header>
+    <br>
 
     <section class="float-lg-left">
          <h2>{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} <span ng-if="$ctrl.data.birthname">{{$ctrl.data.birthname}}</span></h2>
