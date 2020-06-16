@@ -3,7 +3,7 @@
     <header class="row">
         <div class="col-12">
             <nav aria-label="Brødkrummesti">
-                <ol class="breadcrumb">
+                <ol class="breadcrumb" style="display:block">
                     <li class="breadcrumb-item"><a href="#">Hjem</a></li>
                     <li class="breadcrumb-item"><a href="#">Søg</a></li>
                     <li class="breadcrumb-item"><a href="#">Søg person</a></li>
@@ -13,12 +13,12 @@
         </div>
     </header>
 
-
-
-    <nav class="float-lg-right">
-        <a href="#" class="btn btn-primary">Forrige</a>
-        <a href="#" class="btn btn-primary">Næste</a>
-    </nav>
+    <br>
+        
+    <section class="float-lg-left">
+        <h2>{{$ctrl.data.efterretning_type}}</h2>
+        <h3>Politiets Efterretninger</h3>
+    </section>
 
     <div class="clearfix"></div>
 
@@ -26,19 +26,17 @@
 
         <div class="col">            
             <table class="table table-striped" aria-labelledby="permalink">
+                <thead>
+                     <tr>
+                        <th scope="col">Permalink</th>
+                    </tr>
+                </thead>
                 <tbody>
                     <tr>
                         <th scope="row">
-                            <section>
-                                <h2>
-                                    Politiets Efterretninger
-                                </h2>
-                            </section>
-                            <br>
-                            Permalink:
-                            <br>
-                            <input id="permalink" class="input" type="text" ng-value="$ctrl.permalink" />
-                            <button ng-click="$ctrl.copy()" class="button">Kopier</button>
+                            <span id="permalink" class="mr-2">{{$ctrl.permalink}}</span>
+                            <a ng-attr-id="permalink_btn" ng-click="$ctrl.copy(); confirmed=true" class="btn btn-secondary btn-sm" ng-attr-data-clipboard-target="#permalink">Kopier <span class="sr-only"> permalink</span></a>
+                            <span ng-if="confirmed" class="mr-2">Kopieret!</span>
                         </th>
                         <td>
                             <div>

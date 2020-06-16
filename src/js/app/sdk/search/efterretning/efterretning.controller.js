@@ -26,11 +26,10 @@ define([], function() {
         }
 
         this.copy = function() {
-            var copyText = document.querySelector("#permalink");
-            copyText.select();
-            document.execCommand("copy");
-            copyText.className = "input copied"
-            copyText.blur();
+            var clip = new Clipboard('#permalink_btn', {
+                container: document.getElementById('#permalink')
+            });
+            return clip;
         };
     }];
 
