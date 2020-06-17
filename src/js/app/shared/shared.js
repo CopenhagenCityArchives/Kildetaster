@@ -121,7 +121,6 @@ define([
     }]);
 
     sharedApp.config(['$httpProvider', 'AnalyticsProvider', 'angularAuth0Provider', '$stateProvider', '$locationProvider', '$sceDelegateProvider', function($httpProvider, AnalyticsProvider, angularAuth0Provider, $stateProvider, $locationProvider,$sceDelegateProvider) {
-        console.log('configuring shared app');
         $httpProvider.interceptors.push('tokenFactory');
  
         //Let's allow resources from kbhkilder.dk
