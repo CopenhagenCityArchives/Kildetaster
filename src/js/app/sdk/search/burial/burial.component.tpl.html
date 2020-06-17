@@ -1,16 +1,4 @@
 <div class="container-fluid post">
-    <header class="row">
-        <div class="col-12">
-            <nav aria-label="Brødkrummesti">
-                <ol class="breadcrumb" style="display:block">
-                    <li class="breadcrumb-item"><a href="#">Hjem</a></li>
-                    <li class="breadcrumb-item"><a href="#">Søg</a></li>
-                    <li class="breadcrumb-item"><a href="#">Søg person</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</li>
-                </ol>
-            </nav>
-        </div>
-    </header>
 
     <section class="float-lg-left">
         <h2>{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</h2>
@@ -106,7 +94,7 @@
         </table>
 
         <div ng-if="$ctrl.data.deathcauses">
-            <h4 id="data-dødsfaldet-begravlsen">Om dødsfaldet/begravlsen</h4>
+            <h4 id="data-dødsfaldet/begravelsen">Om dødsfaldet/begravelsen</h4>
             <table class="table table-striped" aria-labelledby="data-dødsårsager">
                 <caption class="sr-only">Data om dødsårsager</caption>
                 <thead>
@@ -124,8 +112,8 @@
             </table>
         </div>
 
-        <table class="table table-striped" aria-labelledby="data-dødsfaldet-begravlsen">
-            <caption class="sr-only">Data om dødsfaldet/begravlsen</caption>
+        <table class="table table-striped" aria-labelledby="data-dødsfaldet/begravelsen">
+            <caption class="sr-only">Data om dødsfaldet/begravelsen</caption>
             <tbody>
                 <tr ng-if="$ctrl.data.deathplace">
                     <th scope="row">
