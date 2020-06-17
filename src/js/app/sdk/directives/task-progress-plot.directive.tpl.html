@@ -8,7 +8,7 @@
             <div class="flex-grow-1 progress">
                 <div ng-repeat="unit in units"
                     ng-class="{ 'status-5': done(unit), 'status-2': pending(unit), 'status-3': starting(unit), 'status-4': finishing(unit), 'status-1': inactive(unit) }"
-                    class="progress-bar" tabindex="0" role="progressbar" aria-valuenow="{{(unit.pages_done / unit.pages) * 100 }}%" aria-valuemin="0" aria-valuemax="100" data-toggle="tooltip" data-html="true" data-placement="top" data-original-title={{tooltip}} tooltip
+                    class="progress-bar" tabindex="0" role="progressbar" aria-valuenow="{{(unit.pages_done / unit.pages) * 100 }}%" aria-valuemin="0%" aria-valuemax="100%" data-toggle="tooltip" data-html="true" data-placement="top" data-original-title={{tooltip}} tooltip
                     ng-style="{ 'width': getWidth(decade) + '%'}"
                     >
                 </div>
