@@ -1,4 +1,4 @@
-<table class="table table-striped" ng-if="!loading && errorList.length > 0 && isSuperUser">
+<table class="table table-striped table-hover" ng-if="!loading && errorList.length > 0 && isSuperUser">
     <thead>
         <tr>
             <th scope="col">#</th>
@@ -44,7 +44,7 @@
     </tbody>
 </table>
 
-<table class="table table-striped" ng-if="!loading && !isSuperUser && errorList.length > 0">
+<table class="table table-striped table-hover" ng-if="!loading && !isSuperUser && errorList.length > 0">
     <caption class="sr-only">Mine fejlmeldinger</caption>
     <thead>
         <tr>
