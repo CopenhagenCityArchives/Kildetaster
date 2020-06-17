@@ -27,6 +27,7 @@
     "angular-ui-bootstrap": "^1.2.5",
     "angular-ui-router": "^1.0.10",
     "auth0-js": "^9.13.2",
+    "bootstrap": "^4.0.0",
     "bootstrap-sass": "^3.3.7",
     "clipboard": "^1.5.9",
     "jquery": "^3.2.1",
@@ -35,6 +36,7 @@
     "openseadragon": "^2.1.0",
     "openseadragon-filtering": "github:usnistgov/OpenSeadragonFiltering",
     "openseadragonselection": "^1.8.0",
+    "popper.js": "^1.12.9",
     "request": "<=2.81.0",
     "ui-select": "^0.19.4"
   },

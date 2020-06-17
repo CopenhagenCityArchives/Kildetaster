@@ -32,6 +32,7 @@ module.exports = (env, argv) => {
             alias: {
                 'angular-ui-router/stateEvents': path.resolve(__dirname, 'node_modules/angular-ui-router/release/stateEvents'),
                 'angular-schema-form-bootstrap': path.resolve(__dirname, 'node_modules/angular-schema-form/dist/bootstrap-decorator'),
+                'bootstrap-tooltip': path.resolve(__dirname, 'node_modules/bootstrap/js/src/tooltip'),
                 'schemaForm': 'angular-schema-form',
                 'openseadragon': require.resolve('openseadragon'), // override openseadragonselection dependency
             }
