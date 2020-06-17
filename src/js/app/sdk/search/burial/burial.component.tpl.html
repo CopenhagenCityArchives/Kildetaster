@@ -159,7 +159,7 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>
+                    <td  ng-bind-html="$ctrl.data.comment | linky:_blank">
                         {{$ctrl.data.comment}}
                     </td>
                 </tr>
