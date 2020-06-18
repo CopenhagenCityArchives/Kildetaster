@@ -11,7 +11,6 @@ define([], function () {
             },
 
             link: function (scope, element, attr) {
-                console.log(num);
                 scope.num = num;
                 scope.loading = true;
                 scope.units = [];
