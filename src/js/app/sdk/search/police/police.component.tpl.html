@@ -53,9 +53,10 @@
                             Permalink
                         </th>
                         <td>
-                            <span id="permalink" class="mr-2">{{$ctrl.permalink}}</span>
-                            <a ng-attr-id="permalink_btn" ng-click="$ctrl.copy(); confirmed=true" class="btn btn-secondary btn-sm" ng-attr-data-clipboard-target="#permalink">Kopier <span class="sr-only"> permalink</span></a>
-                            <span ng-if="confirmed" class="mr-2">Kopieret!</span>
+                            <span id="permalink" class="mr-2">
+                                {{$ctrl.permalink}}
+                            </span>
+                            <button ng-attr-id="permalink_btn" ng-click="$ctrl.copy();" class="btn btn-primary float-right" ng-attr-data-clipboard-target="#permalink">Kopier <span class="sr-only"> permalink</span></button>
                         </td>
                     </tr>
                 </tbody>

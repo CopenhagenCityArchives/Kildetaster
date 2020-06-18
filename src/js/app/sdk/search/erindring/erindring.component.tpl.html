@@ -1,7 +1,7 @@
 <div class="container-fluid post">
 
     <section class="float-lg-left">
-         <h2>{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} <span ng-if="$ctrl.data.birthname">{{$ctrl.data.birthname}}</span></h2>
+        <h2>{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} <span ng-if="$ctrl.data.birthname">{{$ctrl.data.birthname}}</span></h2>
         <h3>Erindring</h3>
     </section>
 
@@ -16,18 +16,19 @@
 
         <div class="col-lg-6 order-lg-last">
             <h4>Kilden</h4>
-            <div class="module-gallery">
                 <div class="card text-white mb-3">
-                    <div class="card-body">
-                        <div class="col">
-                            <a ng-href="{{$ctrl.getAssetHref()}}" target="_blank" class="button">Erindring</a>
-                            <a ng-if="$ctrl.data.transcribed" ng-href="{{$ctrl.getTranscribedAssetHref()}}" target="_blank" class="button">Renskrift</a>
+                    <div class="card-body d-block w-100">
+                        <div class="row">
+                            <a ng-href="{{$ctrl.getAssetHref()}}" target="_blank" class="btn btn-lg col erindring-btn">Erindring</a>
+                            <a ng-if="$ctrl.data.transcribed" ng-href="{{$ctrl.getTranscribedAssetHref()}}" target="_blank" class="btn btn-lg col erindring-btn">Renskrift</a>
                         </div>
-                        <div class="col">
-                            <h5>Om kilden</h5>
-                            <p>Omfang: {{$ctrl.data.extent}}<span ng-if="$ctrl.data.writeMethod">, {{$ctrl.data.writeMethod}}</span></p>
-                            <p ng-if="$ctrl.data.dateOfCompletion">Registerbladet er udfyldt: {{$ctrl.data.dateOfCompletion | date:'dd-MM-yyyy' }}</p>
-                            <p ng-if="$ctrl.data.specialRemarks">Særlige bemærkninger: {{$ctrl.data.specialRemarks}}</p>
+                        <div class="row">
+                            <div class="col">
+                                <h6>Om kilden</h6>
+                                <p>Omfang: {{$ctrl.data.extent}}<span ng-if="$ctrl.data.writeMethod">, {{$ctrl.data.writeMethod}}</span></p>
+                                <p ng-if="$ctrl.data.dateOfCompletion">Registerbladet er udfyldt: {{$ctrl.data.dateOfCompletion | date:'dd-MM-yyyy' }}</p>
+                                <p ng-if="$ctrl.data.specialRemarks">Særlige bemærkninger: {{$ctrl.data.specialRemarks}}</p>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col">
@@ -42,7 +43,6 @@
 
                     </div>
                 </div>
-            </div>
         </div>
 
         <div class="col-lg-6">
@@ -50,29 +50,37 @@
             <table class="table table-striped" aria-labelledby="data-personen">
                 <caption class="sr-only">Data om erindringen</caption>
                 <tbody>
-                    <tr>
+                    <tr ng-if="$ctrl.data.period">
                         <th scope="row">
                             Omhandler årene
                         </th>
                         <td>
-                            {{ $ctrl.data.period }}
+                            {{$ctrl.data.period}}
                         </td>
                     </tr>
-                    <tr>
+                    <tr ng-if="$ctrl.data.yearOfBirth">
                         <th scope="row">
                             Født
                         </th>
                         <td>
-                            {{ $ctrl.data.yearOfBirth }}
-                            {{$ctrl.data.dateOfBirth | date:'dd-MM-yyyy' }}
+                            {{$ctrl.data.yearOfBirth}}
+                            {{$ctrl.data.dateOfBirth | date:'dd-MM-yyyy'}}
                         </td>
                     </tr>
-                    <tr>
-                        <th ng-if="$ctrl.data.sex" scope="row">
+                    <tr ng-if="$ctrl.data.sex">
+                        <th scope="row">
                             Køn
                         </th>
                         <td>
-                            {{$ctrl.data.sex}}<span ng-if="$ctrl.data.sex && $ctrl.data.civilstatus">, {{$ctrl.data.civilstatus}}</span><span ng-if="!$ctrl.data.sex && $ctrl.data.civilstatus">{{ $ctrl.data.civilstatus }}</span>
+                            {{$ctrl.data.sex}}
+                        </td>
+                    </tr>
+                    <tr ng-if="$ctrl.data.civilstatus">
+                        <th scope="row">
+                            Civilstatus
+                        </th>
+                        <td>
+                            {{$ctrl.data.civilstatus}}
                         </td>
                     </tr>
                     <tr>
@@ -80,9 +88,10 @@
                             Permalink
                         </th>
                         <td>
-                            <span id="permalink" class="mr-2">{{$ctrl.permalink}}</span>
-                            <a ng-attr-id="permalink_btn" ng-click="$ctrl.copy(); confirmed=true" class="btn btn-secondary btn-sm" ng-attr-data-clipboard-target="#permalink">Kopier <span class="sr-only"> permalink</span></a>
-                            <span ng-if="confirmed" class="mr-2">Kopieret!</span>
+                            <span id="permalink" class="mr-2">
+                                {{$ctrl.permalink}}
+                            </span>
+                            <button ng-attr-id="permalink_btn" ng-click="$ctrl.copy();" class="btn btn-primary float-right" ng-attr-data-clipboard-target="#permalink">Kopier <span class="sr-only"> permalink</span></button>
                         </td>
                     </tr>
                 </tbody>
@@ -131,29 +140,33 @@
                 </tbody>
             </table>
 
-            <h4 id="data-sogekontekst" ng-if="$ctrl.data.keywords && $ctrl.data.keywords.length > 0">Erindringen omhandler</h4>
-            <table role="list" class="table table-striped" aria-labelledby="data-sogekontekst" ng-if="$ctrl.data.keywords && $ctrl.data.keywords.length > 0">
-                <caption class="sr-only">Teksten markeret med fed er det eller de ord, søgemaskinen har fundet</caption>
-                <tbody>
-                    <tr ng-repeat="keyword in $ctrl.data.keywords track by $index">
-                        <td role="listitem">
-                            {{keyword}}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div ng-if="$ctrl.data.keywords && $ctrl.data.keywords.length > 0">
+                <h4 id="data-sogekontekst">Erindringen omhandler</h4>
+                <table role="list" class="table table-striped" aria-labelledby="Erindringen omhandler">
+                    <caption class="sr-only">Erindringen omhandler</caption>
+                    <tbody>
+                        <tr>
+                            <td role="listitem">
+                                <p><span ng-repeat="keyword in $ctrl.data.keywords track by $index">{{keyword}}{{ $last ? '' : ', ' }}</span></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-            <h4 id="data-sogekontekst" ng-if="$ctrl.data.description">Beskrivelse</h4>
-            <table role="list" class="table table-striped" aria-labelledby="data-sogekontekst" ng-if="$ctrl.data.description">
-                <!-- <caption class="sr-only">Teksten markeret med fed er det eller de ord, søgemaskinen har fundet</caption> -->
-                <tbody>
-                    <tr>
-                        <td role="listitem">
-                            {{ $ctrl.data.description }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div ng-if="$ctrl.data.description">
+                <h4 id="data-sogekontekst">Beskrivelse</h4>
+                <table role="list" class="table table-striped" aria-labelledby="data-sogekontekst">
+                    <caption class="sr-only">Beskrivelse af erindringen</caption>
+                    <tbody>
+                        <tr>
+                            <td role="listitem">
+                                {{$ctrl.data.description}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
         </div>
 
