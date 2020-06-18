@@ -32,7 +32,7 @@
                         {{$ctrl.data.birthplace}} <span ng-if="$ctrl.data.birthplace_free">({{$ctrl.data.birthplace_free}}) </span>
                     </td>
                 </tr>
-                <tr>
+                <tr ng-if="$ctrl.data.dateOfDeath">
                     <th scope="row">
                         Død
                     </th>
@@ -40,7 +40,7 @@
                         <text-date prefix="" date="$ctrl.data.dateOfDeath"></text-date>
                     </td>
                 </tr>
-                <tr>
+                <tr ng-if="$ctrl.data.sex">
                     <th scope="row">
                         Køn
                     </th>
@@ -48,7 +48,7 @@
                         {{ $ctrl.data.sex }}
                     </td>
                 </tr>
-                <tr>
+                <tr ng-if="$ctrl.data.civilstatus">
                     <th scope="row">
                         Civilstand
                     </th>
