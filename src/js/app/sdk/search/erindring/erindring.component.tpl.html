@@ -5,11 +5,6 @@
         <h3>Erindring</h3>
     </section>
 
-    <nav class="float-lg-right">
-        <a href="#" class="btn btn-primary">Forrige</a>
-        <a href="#" class="btn btn-primary">Næste</a>
-    </nav>
-
     <div class="clearfix"></div>
 
     <section class="row">
@@ -47,7 +42,7 @@
 
         <div class="col-lg-6">
             
-            <table class="table table-striped" aria-labelledby="data-personen">
+            <table class="table table-striped" aria-labelledby="data-erindringen">
                 <caption class="sr-only">Data om erindringen</caption>
                 <tbody>
                     <tr ng-if="$ctrl.data.period">
@@ -141,7 +136,7 @@
             </table>
 
             <div ng-if="$ctrl.data.keywords && $ctrl.data.keywords.length > 0">
-                <h4 id="data-sogekontekst">Erindringen omhandler</h4>
+                <h4 id="data-erindringen-omhandler">Erindringen omhandler</h4>
                 <table role="list" class="table table-striped" aria-labelledby="Erindringen omhandler">
                     <caption class="sr-only">Erindringen omhandler</caption>
                     <tbody>
@@ -155,8 +150,8 @@
             </div>
 
             <div ng-if="$ctrl.data.description">
-                <h4 id="data-sogekontekst">Beskrivelse</h4>
-                <table role="list" class="table table-striped" aria-labelledby="data-sogekontekst">
+                <h4 id="data-beskrivelse">Beskrivelse</h4>
+                <table role="list" class="table table-striped" aria-labelledby="data-beskrivelse">
                     <caption class="sr-only">Beskrivelse af erindringen</caption>
                     <tbody>
                         <tr>
