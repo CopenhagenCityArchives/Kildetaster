@@ -31,6 +31,7 @@ import userDirective from '../shared/directives/user.directive';
 import shareLinkDirective from '../shared/directives/shareLink.directive';
 import galleryDirective from './directives/gallery.directive';
 import tooltipDirective from './directives/tooltip.directive';
+import focusDirective from './directives/focus.directive';
 import constants from '../../../../constants.json';
 
 
@@ -73,6 +74,7 @@ sdkApp.directive('user', userDirective);
 sdkApp.directive('shareLink', shareLinkDirective);
 sdkApp.directive('tooltip', tooltipDirective);
 sdkApp.directive('gallery', galleryDirective);
+sdkApp.directive('focus', focusDirective);
 
 
 sdkApp.directive('featherIcon', featherIconDirective);
