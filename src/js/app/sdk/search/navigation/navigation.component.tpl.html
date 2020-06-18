@@ -11,7 +11,7 @@
             </div>
 
             <div class="col-lg-2">
-                <a ui-sref="search.page.results" class="btn btn-primary float-lg-right">Tilbage</a>
+                <a ui-sref="search.page.results" class="btn btn-primary float-lg-right" focus>Tilbage</a>
             </div>
 
         </header>
@@ -23,16 +23,16 @@
     </div>
 </div>  
 
-    <div class="col-12">
-        <nav class="container-fluid" aria-label="Brødkrummesti">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Hjem</a></li>
-                <li class="breadcrumb-item"><a ui-sref="search.page">Søg</a></li>
-                <li class="breadcrumb-item"><a ui-sref="search.page.results">Søg person</a></li>
-                <li class="breadcrumb-item active" aria-current="page">{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</li>
-            </ol>
-        </nav>
-    </div>
+<div class="col-12">
+    <nav class="container-fluid" aria-label="Brødkrummesti">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="#" focus>Hjem</a></li>
+            <li class="breadcrumb-item"><a ui-sref="search.page">Søg</a></li>
+            <li class="breadcrumb-item"><a ui-sref="search.page.results">Søg person</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</li>
+        </ol>
+    </nav>
+</div>
 
 
 <!--
