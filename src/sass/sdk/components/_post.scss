@@ -1,4 +1,9 @@
 .post {
+    .erindring-btn {
+        color: #000c2e !important; 
+        background-color: #fff;
+        margin: 1.5rem;
+    }
     #source-gallery-modal {
         .modal-dialog {
             max-width: 100%;
@@ -23,12 +28,6 @@
         &.show {
             opacity: 1;
         }
-    }
-
-    .erindring-btn {
-        color: #000c2e;
-        background-color: #fff;
-        margin: 1.5rem;
     }
 
 }

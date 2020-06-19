@@ -47,14 +47,29 @@
 
             <!--Begravelsesprotokoller-->
             <div ng-if="data.collection_id == 1">
+                <div class="row">
+                    <div class="col">
+                        <button ng-href="{{$ctrl.data.kildeviser_url}}" target="_blank" class="btn btn-lg col erindring-btn">Vis i kildeviser</button>
+                    </div>
+                    <div class="col">
+                        <button ng-if="$ctrl.showEditorLink" ng-href="{{ $ctrl.editorUrl }}" target="_blank" class="btn btn-lg col erindring-btn">Vis i kildetaster</button>
+                    </div>
+                </div>
+
                 <h5>Om kilden</h5>
                 <p>{{ data.collection_info }} {{ data.unit_description }} s. {{ data.page_number }}</p>
                 <p ng-if="data.dateOfCompletion">Registerbladet er udfyldt: {{data.dateOfCompletion | date:'dd-MM-yyyy' }}</p>
 
-                <h5>Om Indtastningen</h5>
-                <p ng-if="data.created">Indtastet {{ data.created | date: 'dd-MM-yyyy HH:mm:ss' }} af {{ data.user_name }}</p>                
-                <h6>Løbenr.</h6>
-                <p ng-if="data.burials.number">{{ data.burials.number }}</p>
+                <div class="row">
+                    <div class="col">
+                        <h6>Indtastet</h6>
+                        <p ng-if="data.created">{{ data.created | date: 'dd-MM-yyyy HH:mm:ss' }} <span ng-if="dat.user_name"> af {{ data.user_name }}</span></p>
+                    </div>
+                    <div class="col">
+                        <h6>Løbenr.</h6>
+                        <p ng-if="data.burials.number">{{ data.burials.number }}</p>
+                    </div>
+                </div>
             </div>
 
 
