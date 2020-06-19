@@ -47,7 +47,7 @@
   "development": {
     "constants": {
       "EDITOR_URL": "/kildetaster-development",
-      "CALLBACK_URL": "http://kildetaster.kbharkiv.dk/callback/",
+      "CALLBACK_URL": "https://kildetaster.kbharkiv.dk/callback/",
       "RESOURCE_URL": "https://www.kbhkilder.dk/software/kildetaster-development/resources/",
       "API_URL": "https://www.kbhkilder.dk/1508/experimental",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
@@ -62,7 +62,7 @@
   "developmentPublicBeta": {
     "constants": {
       "EDITOR_URL": "/kildetaster-public-beta",
-      "CALLBACK_URL": "http://kildetaster.kbharkiv.dk/callback/",
+      "CALLBACK_URL": "https://kildetaster.kbharkiv.dk/callback/",
       "RESOURCE_URL": "https://www.kbhkilder.dk/software/kildetaster-public-beta/resources/",
       "API_URL": "https://www.kbhkilder.dk/1508/public_beta",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
@@ -77,7 +77,7 @@
   "production": {
     "constants": {
       "EDITOR_URL": "https://kildetaster.kbharkiv.dk",
-      "CALLBACK_URL": "http://kildetaster.kbharkiv.dk/callback/",
+      "CALLBACK_URL": "https://kildetaster.kbharkiv.dk/callback/",
       "RESOURCE_URL": "https://kildetaster.kbharkiv.dk/resources/",
       "API_URL": "https://www.kbhkilder.dk/api",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
