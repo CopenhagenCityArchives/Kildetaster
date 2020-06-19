@@ -79,15 +79,20 @@ define([
             }
         };
 
+
         schemaFormProvider.defaults.string.unshift(typeahead);
 
         //Add to the bootstrap directive
         schemaFormDecoratorsProvider.addMapping(
             'bootstrapDecorator',
             'typeahead',
-            'shared/schemaformAddon/typeahead.addon.tpl.html'
+            'schemaFormTypeahead.tpl.html'
         );
 
     }]);
+
+    schemaForm.run(['$templateCache', function($templateCache) {
+        $templateCache.put('schemaFormTypeahead.tpl.html', require('./typeahead.addon.tpl.html'));
+    }])
 
 });

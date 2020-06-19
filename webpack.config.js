@@ -159,6 +159,7 @@ module.exports = (env, argv) => {
                 './dist/editor',
                 './dist/search',
                 './dist/sdk',
+                './dist/callback',
 
                 './devServer/wordpress_files',
                 './src/fonts'
@@ -167,6 +168,7 @@ module.exports = (env, argv) => {
                 '/editor',
                 '/search',
                 '/sdk',
+                '/callback',
                 
                 '/resources/wordpress_files',
                 '/resources/fonts'
@@ -196,6 +198,12 @@ module.exports = (env, argv) => {
                 inject: false,
             }),
 
+            new HtmlWebpackPlugin({
+                filename: 'callback/index.html',
+                template: './src/html/callback.html',
+                inject: false
+            }),
+
             new webpack.ProvidePlugin({auth0: 'auth0-js'})
         ]
     };
@@ -204,7 +212,7 @@ module.exports = (env, argv) => {
     if (DEVSERVER) {
         // development webpage for editor app
         config.plugins.push(new HtmlWebpackPlugin({
-            filename: 'editor/editor.html',
+            filename: 'editor/index.html',
             title: 'Editor',
             template: './devServer/editor.html',
             inject: false

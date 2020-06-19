@@ -94,15 +94,20 @@ define([
         schemaFormDecoratorsProvider.addMapping(
             'bootstrapDecorator',
             'custominput',
-            'shared/schemaformAddon/customInput.addon.tpl.html'
+            'schemaFormCustomInput.tpl.html'
         );
 
         schemaFormDecoratorsProvider.addMapping(
             'bootstrapDecorator',
             'number',
-            'shared/schemaformAddon/customInput.addon.tpl.html'
+            'schemaFormCustomInput.tpl.html'
         );
     }]);
+
+    schemaForm.run(['$templateCache', function($templateCache) {
+        $templateCache.put('schemaFormCustomInput.tpl.html', require('./customInput.addon.tpl.html'));
+    }])
+
 
     return function() {};
 

@@ -32,10 +32,15 @@ define([
         schemaFormDecoratorsProvider.addMapping(
             'bootstrapDecorator',
             'customselect',
-            'shared/schemaformAddon/customSelect.addon.tpl.html'
+            'schemaFormCustomSelect.tpl.html'
         );
        
     }]);
+    
+    schemaForm.run(['$templateCache', function($templateCache) {
+        $templateCache.put('schemaFormCustomSelect.tpl.html', require('./customSelect.addon.tpl.html'));
+    }])
+
 
     return function() {};
 

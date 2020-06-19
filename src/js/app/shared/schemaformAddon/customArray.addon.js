@@ -73,11 +73,16 @@ define([
         schemaFormDecoratorsProvider.defineAddOn(
             'bootstrapDecorator', // Name of the decorator you want to add to.
             'array', // Form type that should render this add-on
-            'shared/schemaformAddon/customArray.addon.tpl.html', // Template name in $templateCache
+            'schemaFormCustomArray.tpl.html', // Template name in $templateCache
             sfBuilderProvider.stdBuilders // List of builder functions to apply.
         );
 
     }]);
+
+    schemaForm.run(['$templateCache', function($templateCache) {
+        $templateCache.put('schemaFormCustomSelect.tpl.html', require('./customSelect.addon.tpl.html'));
+    }])
+
 
     return function() {};
 

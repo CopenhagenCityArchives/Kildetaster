@@ -1,14 +1,5 @@
-define([
+var feedbackController = ['$scope', '$stateParams', function feedbackController($scope, $stateParams) {
+    console.log('params', $stateParams);
+}];
 
-
-], function(
-
-) {
-    
-    var feedbackController = /*@ngInject*/ function feedbackController($scope, $stateParams) {
-        console.log('params', $stateParams);
-    };
-
-    return feedbackController;
-
-});
+export default feedbackController;

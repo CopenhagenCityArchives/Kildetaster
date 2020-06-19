@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var tokenService = ['$q', 'angularAuth0', '$sessionStorage', '$location', function tokenService($q, angularAuth0, $sessionStorage, $location) {
+    var tokenService = ['$q', 'angularAuth0', '$sessionStorage', '$location', 'callbackService', function tokenService($q, angularAuth0, $sessionStorage, $location, callbackService) {
 
         return {
 
@@ -11,54 +11,89 @@ define([
              * Check if the user is logged in, and return the access token if they are
              */
             getToken: function(allowEmptyResponse) {
-                allowEmptyResponse = allowEmptyResponse || false;
                 var deferred = $q.defer();
+                allowEmptyResponse = allowEmptyResponse || false;
 
-                var hashIndex = $location.absUrl().indexOf('access_token');
-                var hash = "";
-                if (hashIndex != -1) {
-                    hash = $location.absUrl().substring(hashIndex, $location.absUrl().length);
-                }
+                this.getStoredToken()
+                .then(function(tokenData) {
+                    deferred.resolve(tokenData);
+                })
+                .catch(function() {
+                    if (allowEmptyResponse) {
+                        deferred.resolve({ user: null });
+                    } else {
+                        angularAuth0.authorize({
+                            audience: 'https://www.kbhkilder.dk/api',
+                            responseType: 'token',
+                            redirectUri: callbackService.getCallbackUrl()
+                        });
+                    }
+                })
+
+                return deferred.promise;
+            },
+
+            getStoredToken: function() {
+                var deferred = $q.defer();
 
                 if ($sessionStorage.tokenData) {
                     deferred.resolve($sessionStorage.tokenData);
-                } else if (!allowEmptyResponse && hash == "") {
-                    angularAuth0.authorize({
-                        audience: 'https://www.kbhkilder.dk/api',
-                        responseType: 'token',
-                        redirectUri: $location.absUrl()
-                    });
-                }  else if (allowEmptyResponse && hash == "") {
-                    deferred.resolve({ user: null });
                 } else {
-                    angularAuth0.parseHash({ hash: hash }, function(err, authResult) {
+                    deferred.reject('No token data stored.');
+                }
+
+                return deferred.promise;
+            },
+
+            getUrlToken: function() {
+                var deferred = $q.defer();
+                var search = $location.search();
+
+                var hash = Object.keys(search)
+                .filter(function(key) { 
+                    return key.startsWith('auth_');
+                })
+                .map(function(key) {
+                    return key.replace(/^auth_/, '') + "=" + encodeURIComponent(search[key]);
+                })
+                .join('&');
+
+                console.log(hash);
+
+                angularAuth0.parseHash({ hash: hash }, function(err, authResult) {
+                    if (err) {
+                        console.log('Could not parse hash: ',err);                        
+                        deferred.reject(err);
+                        return;
+                    }
+                
+                    angularAuth0.client.userInfo(authResult.accessToken, function(err, user) {
                         if (err) {
-                            console.log('Could not parse hash: ',err);                        
+                            console.log('Error: Could not get user info from Auth0: ',err);
                             deferred.reject(err);
                             return;
                         }
-                      
-                        angularAuth0.client.userInfo(authResult.accessToken, function(err, user) {
-                            if (err) {
-                                console.log('Error: Could not get user info from Auth0: ',err);
-                                deferred.reject(err);
-                                return;
-                            }
-                            //TODO: Hardcoded user id (Signe's user)
-                            user.userId = 601;
-    
-                            tokenData =  {
-                                user: user,
-                                access_token: authResult.accessToken,
-                                url: decodeURI($location.search().url)
-                            };
-    
-                            $sessionStorage.tokenData = tokenData;
-                            deferred.resolve(tokenData)
-                        });
-                    });
-                }
+                        //TODO: Hardcoded user id (Signe's user)
+                        user.userId = 601;
 
+                        tokenData =  {
+                            user: user,
+                            access_token: authResult.accessToken
+                        };
+
+                        $sessionStorage.tokenData = tokenData;
+
+                        // clean authorization search parameters
+                        Object.keys(search).forEach(function(key) {
+                            if (key.startsWith('auth_')) {
+                                $location.search(key, null);
+                            }
+                        })
+
+                        deferred.resolve(tokenData)
+                    });
+                });
+ 
                 return deferred.promise;
             },
 

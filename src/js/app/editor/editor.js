@@ -66,7 +66,7 @@ editorApp.controller('pageDoneController', pageDoneController);
 editorApp.controller('pageFooterController', pageFooterController);
 
 angular.element(document).ready(function () {
-    angular.bootstrap(angular.element('[data-editor-app]'), ['editor']);
+    angular.bootstrap(angular.element('[data-editor-app]'), ['editor'], { strictDi: true });
 });
 
 export default editorApp;

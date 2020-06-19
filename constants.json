@@ -2,6 +2,7 @@
   "prototype": {
     "constants": {
       "EDITOR_URL": "http://localhost:8080/editor/",
+      "CALLBACK_URL": "http://localhost:8080/callback/",
       "RESOURCE_URL": "http://localhost:8080/",
       "API_URL": "https://www.kbhkilder.dk/api",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
@@ -16,6 +17,7 @@
   "prototypeNoAuth": {
     "constants": {
       "EDITOR_URL": "http://localhost:8080/editor/",
+      "CALLBACK_URL": "http://localhost:8080/callback/",
       "RESOURCE_URL": "http://localhost:8080/",
       "API_URL": "https://www.kbhkilder.dk/1508/experimental",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
@@ -30,6 +32,7 @@
   "localNoAuth": {
     "constants": {
       "EDITOR_URL": "http://localhost:1508",
+      "CALLBACK_URL": "http://localhost:8080/callback/",
       "RESOURCE_URL": "/resources/",
       "API_URL": "http://localhost:8080",
       "SOLR_API_URL": "http://localhost:8989/solr/apacs_core/select",
@@ -44,6 +47,7 @@
   "development": {
     "constants": {
       "EDITOR_URL": "/kildetaster-development",
+      "CALLBACK_URL": "http://kildetaster.kbharkiv.dk/callback/",
       "RESOURCE_URL": "https://www.kbhkilder.dk/software/kildetaster-development/resources/",
       "API_URL": "https://www.kbhkilder.dk/1508/experimental",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
@@ -58,6 +62,7 @@
   "developmentPublicBeta": {
     "constants": {
       "EDITOR_URL": "/kildetaster-public-beta",
+      "CALLBACK_URL": "http://kildetaster.kbharkiv.dk/callback/",
       "RESOURCE_URL": "https://www.kbhkilder.dk/software/kildetaster-public-beta/resources/",
       "API_URL": "https://www.kbhkilder.dk/1508/public_beta",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
@@ -72,6 +77,7 @@
   "production": {
     "constants": {
       "EDITOR_URL": "https://kildetaster.kbharkiv.dk",
+      "CALLBACK_URL": "http://kildetaster.kbharkiv.dk/callback/",
       "RESOURCE_URL": "https://kildetaster.kbharkiv.dk/resources/",
       "API_URL": "https://www.kbhkilder.dk/api",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
