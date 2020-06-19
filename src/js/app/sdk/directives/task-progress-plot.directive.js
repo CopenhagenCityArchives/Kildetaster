@@ -64,27 +64,27 @@ define([], function () {
                 });
 
                 scope.inactive = function (unit) {
-                    scope.tooltip = unit.description + "<span class='sr-only'>: Ikke til indtastning</span>";
+                    //scope.tooltip = unit.description + "<br><span>Status: " + unit.pages_done + "/" + unit.pages + "</span> <span class='sr-only'>: Ikke til indtastning</span>";
                     return unit.index_active == 0;
                 }
 
                 scope.done = function (unit) {
-                    scope.tooltip = unit.description + "<span class='sr-only'>: Færdig</span>";
+                    //scope.tooltip = unit.description + "<br><span>Status: " + unit.pages_done + "/" + unit.pages + "</span> <span class='sr-only'>: Færdig</span>";
                     return !scope.inactive(unit) && unit.pages == unit.pages_done;
                 }
 
                 scope.pending = function (unit) {
-                    scope.tooltip = unit.description + "<span class='sr-only'>: Ikke påbegyndt</span>";
+                    //scope.tooltip = unit.description + "<br><span>Status: " + unit.pages_done + "/" + unit.pages + "</span> <span class='sr-only'>: Ikke påbegyndt</span>";
                     return !scope.inactive(unit) && unit.pages_done == 0;
                 }
 
                 scope.starting = function (unit) {
-                    scope.tooltip = unit.description + "<span class='sr-only'>: Under halvvejs</span>";
+                    //scope.tooltip = unit.description + "<br><span>Status: " + unit.pages_done + "/" + unit.pages + "</span> <span class='sr-only'>: Under halvvejs</span>";
                     return !scope.inactive(unit) && !scope.pending(unit) && unit.pages_done / unit.pages < 0.5;
                 }
 
                 scope.finishing = function (unit) {
-                    scope.tooltip = unit.description + "<span class='sr-only'>: Over halvvejs</span>";
+                    //scope.tooltip = unit.description + "<br><span>Status: " + unit.pages_done + "/" + unit.pages + "</span> <span class='sr-only'>: Over halvvejs</span>";
                     return !scope.inactive(unit) && !scope.done(unit) && unit.pages_done / unit.pages >= 0.5;
                 }
 
