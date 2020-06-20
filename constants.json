@@ -61,7 +61,7 @@
   },
   "developmentPublicBeta": {
     "constants": {
-      "EDITOR_URL": "/kildetaster-public-beta",
+      "EDITOR_URL": "https://kildetaster.kbharkiv.dk",
       "CALLBACK_URL": "https://kildetaster.kbharkiv.dk/callback/",
       "RESOURCE_URL": "https://www.kbhkilder.dk/software/kildetaster-public-beta/resources/",
       "API_URL": "https://www.kbhkilder.dk/1508/public_beta",
