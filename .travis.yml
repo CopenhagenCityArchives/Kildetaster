@@ -1,5 +1,9 @@
 language: node_js
 
+os: 'linux'
+
+dist: 'xenial'
+
 node_js:
 - '11.9'
 
@@ -33,7 +37,7 @@ deploy:
      
   - provider: script
     script: scp -i ./deploy_key -o LogLevel=Verbose -o StrictHostKeyChecking=no -P ${KBHARKIV_SSH_PORT} ./dist/index.html ${KBHARKIV_SSH_USER}@${KBHARKIV_SSH_HOST}:${KBHARKIV_SSH_PATH}
-    skip_cleanup: true
+    skip_cleanup: true  
     edge: false
     on:
       all_branches: true
@@ -52,4 +56,3 @@ deploy:
     on:
       repo: CopenhagenCityArchives/Kildetaster
       branch: new-site
-    skip_cleanup: true
