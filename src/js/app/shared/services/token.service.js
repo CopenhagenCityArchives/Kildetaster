@@ -22,11 +22,15 @@ define([
                     if (allowEmptyResponse) {
                         deferred.resolve({ user: null });
                     } else {
-                        angularAuth0.authorize({
-                            audience: 'https://www.kbhkilder.dk/api',
-                            responseType: 'token',
-                            redirectUri: callbackService.getCallbackUrl()
-                        });
+                        // TODO: This should ensures that two parallel
+                        // authorizations do not interfere. Find a better solution.
+                        if (!$location.search().auth_access_token) {
+                            angularAuth0.authorize({
+                                audience: 'https://www.kbhkilder.dk/api',
+                                responseType: 'token',
+                                redirectUri: callbackService.getCallbackUrl()
+                            });
+                        }
                     }
                 })
 
@@ -58,11 +62,11 @@ define([
                 })
                 .join('&');
 
-                console.log(hash);
+                console.log(hash, search);
 
                 angularAuth0.parseHash({ hash: hash }, function(err, authResult) {
-                    if (err) {
-                        console.log('Could not parse hash: ',err);                        
+                    if (err || !authResult) {
+                        console.log('Could not parse hash: ',err, hash);                        
                         deferred.reject(err);
                         return;
                     }
@@ -97,16 +101,23 @@ define([
                 return deferred.promise;
             },
 
-            getUserData: function(allowEmptyResponse){
+            getUserData: function(allowEmptyResponse) {
                 allowEmptyResponse = allowEmptyResponse || false;
-
                 var deferred = $q.defer();
+                var that = this;
 
-                this.getToken(allowEmptyResponse)
+                this.getStoredToken()
+                .catch(function(err) {
+                    return that.getUrlToken()
+                })
+                .catch(function(err) {
+                    return that.getToken(allowEmptyResponse)
+                })
                 .then(function(tokenData) {
                     deferred.resolve(tokenData.user)
                 })
                 .catch(function(err) {
+                    console.log('Error getting user data:', err)
                     deferred.reject(err);
                 });
 

@@ -82,21 +82,6 @@ sharedApp.config(['$httpProvider', 'AnalyticsProvider', 'angularAuth0Provider', 
         domain: 'kbharkiv.eu.auth0.com'
     });
 
-    $stateProvider.state('login', {
-        url: '/login',
-        controller: ['$location', 'tokenData', function($location, tokenData) {
-            var path = $location.search('path');
-            $location.search('path', null);
-            
-            $location.path(decodeURIComponent(path));
-        }],
-        resolve: {
-            tokenData: ['tokenService', function(tokenService) {
-                return tokenService.getUrlToken();
-            }]
-        }
-    })
-
     // Prevent default use of !# hash bang urls
     // @see https://stackoverflow.com/questions/41226122/url-hash-bang-prefix-instead-of-simple-hash-in-angular-1-6
     $locationProvider.hashPrefix('');

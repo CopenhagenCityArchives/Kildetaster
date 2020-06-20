@@ -1,13 +1,13 @@
 var callbackService = ['$location', 'CALLBACK_URL', function($location, CALLBACK_URL) {
     return {
         getCallbackUrl() {
-            var path = $location.path();
-            var search = $location.search();
-            var spaRoot = $location.absUrl().substring(0, $location.absUrl().indexOf(path));
+            var url = $location.absUrl();
 
-            var url = spaRoot;
-            url += '/login?AUTH_PARAMS&path=' + path;
-            url += '&' + Object.keys(search).map(function(key) {return key + '=' + search[key]});
+            if (url.indexOf('?') != -1) {
+                url = url.replace('?', '?AUTH_PARAMS&')
+            } else {
+                url = url + "?AUTH_PARAMS";
+            }
 
             return CALLBACK_URL + '?url=' + encodeURIComponent(url);
         }
