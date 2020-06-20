@@ -10,6 +10,10 @@ module.exports = (env, argv) => {
     let PUBLIC = argv.public ? argv.public : '/';
     let DEVSERVER = /webpack-dev-server/.test(argv['$0']);
 
+    console.log('Development:', DEV);
+    console.log('Constantset:', CONSTANTSET);
+    console.log('Public:', PUBLIC);
+
     var config = {
         // entrypoints
         entry: {
