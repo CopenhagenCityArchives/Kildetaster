@@ -131,6 +131,9 @@ define([
                 $scope.$watch('type', function() {
                     $scope.compile();
                 })
+
+                // and compile on init
+                $scope.compile();
             }]
 
         }
