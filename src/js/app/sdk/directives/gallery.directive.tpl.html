@@ -44,15 +44,15 @@
                 <h6>Løbenr.</h6>
                 <p>{{data.registerblad_id}}</p>
             </div>
-
+    
             <!--Begravelsesprotokoller-->
             <div ng-if="data.collection_id == 1">
                 <div class="row">
                     <div class="col">
-                        <button ng-href="{{$ctrl.data.kildeviser_url}}" target="_blank" class="btn btn-lg col erindring-btn">Vis i kildeviser</button>
+                        <button ng-href="data.kildeviser_url" target="_blank" class="btn btn-lg col erindring-btn">Vis i kildeviser</button>
                     </div>
                     <div class="col">
-                        <button ng-if="$ctrl.showEditorLink" ng-href="{{ $ctrl.editorUrl }}" target="_blank" class="btn btn-lg col erindring-btn">Vis i kildetaster</button>
+                        <button ng-if="data.showEditorLink" ng-href="data.editorUrl" target="_blank" class="btn btn-lg col erindring-btn">Vis i kildetaster</button>
                     </div>
                 </div>
 
