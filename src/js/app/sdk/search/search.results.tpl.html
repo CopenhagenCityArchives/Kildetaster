@@ -78,11 +78,11 @@
                         </select>
                             
                     </div>
-                    <!--<button type="submit" class="btn btn-primary sr-only sr-only-focusable">Sorter</button>-->
                 </form>
                 <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false"
                     autocomplete="off" ng-click="ctrl.toggleSortDirection()">
-                    <svg feather-icon icon="ctrl.sortDirection == 'desc' ? 'arrow-down' : 'arrow-up'"></svg>
+                    <svg ng-if="ctrl.sortDirection == 'desc'" feather-icon icon="'arrow-up'"></svg>
+                    <svg ng-if="ctrl.sortDirection != 'desc'" feather-icon icon="'arrow-down'"></svg>
                 </button>
             </section>
 
