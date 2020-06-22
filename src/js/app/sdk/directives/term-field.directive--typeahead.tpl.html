@@ -7,7 +7,8 @@
     <ui-select-choices
         repeat="option in options track by $index" refresh="getData(data.field, $select.search)"
         refresh-delay="200"
-        minimum-input-length="0">
+        minimum-input-length="0"
+        ng-class="{show: $select.open}">
         <div ng-bind-html="option.label | highlight: $select.search"></div>
     </ui-select-choices>
     <!-- <ui-select-no-choice>

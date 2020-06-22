@@ -2,7 +2,7 @@ define([
     'angular'
 ], function(angular) {
 
-    var termFieldDirective = ['$http', '$sce', 'API_URL', 'TYPEAHEAD_MAX', function($http, $sce, API_URL, TYPEAHEAD_MAX) {
+    var termFieldDirective = ['$http', '$sce', '$timeout', 'API_URL', 'TYPEAHEAD_MAX', function($http, $sce, $timeout, API_URL, TYPEAHEAD_MAX) {
 
         var template = "";
 
@@ -90,15 +90,14 @@ define([
                 *
                 */
                 $scope.getTemplate = function getTemplate() {
-                    //Fields with enum are also identified as being of type typeahead, but we do not have a datasource for them
-                    //we there fore change the type for these fields, and handle them in a different template
-                    if ($scope.type === 'typeahead' && $scope.data.field.enum && $scope.data.field.enum.length > 0) {
-                        return require('./term-field.directive--select.tpl.html');
-                    }
-
                     switch ($scope.type) {
                         case 'typeahead':
-                            return require('./term-field.directive--' + $scope.type + '.tpl.html');
+                            //Fields with enum are also identified as being of type typeahead, but we do not have a datasource for them
+                            //we there fore change the type for these fields, and handle them in a different template
+                            if ($scope.data.field.enum && $scope.data.field.enum.length > 0) {
+                                return require('./term-field.directive--select.tpl.html');
+                            }
+                            return require('./term-field.directive--typeahead.tpl.html');
                         case 'date':
                             $scope.placeholder = 'dd-mm-åååå';
                             return require('./term-field.directive--date.tpl.html');
@@ -111,8 +110,11 @@ define([
                     }
                 }
 
-                angular.element($element).replaceWith($compile($scope.getTemplate())($scope));
-
+                var $compiled = $compile($scope.getTemplate())($scope);
+                $element.replaceWith($compiled);
+                $timeout(function() {
+                    $compiled.find('.btn-default').addClass('btn-outline-secondary')
+                });
             }]
 
         }
