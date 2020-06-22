@@ -62,26 +62,28 @@
                 </tbody>
             </table>
 
-            <h4 id="data-adresser">Adresser</h4>
-            <table class="table table-striped" aria-labelledby="data-adresser">
-                <caption class="sr-only">Data om adresser</caption>
-                <thead>
-                    <tr>
-                        <th scope="col">Dato</th>
-                        <th scope="col">Adresse</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="address in $ctrl.data.addresses">
-                        <td>
-                            {{address.address_date | date: 'dd-MM-yyyy'}}
-                        </td>
-                        <td>
-                            <text-address-police address="address" date="true"></text-address-police>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div ng-if="$ctrl.$ctrl.data.addresses">
+                <h4 id="data-adresser">Adresser</h4>
+                <table class="table table-striped" aria-labelledby="data-adresser">
+                    <caption class="sr-only">Data om adresser</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Dato</th>
+                            <th scope="col">Adresse</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="address in $ctrl.data.addresses">
+                            <td>
+                                {{address.address_date | date: 'dd-MM-yyyy'}}
+                            </td>
+                            <td>
+                                <text-address-police address="address" date="true"></text-address-police>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
             <h4 id="data-andre-personer" ng-if="$ctrl.data.spouses.length > 0 || $ctrl.data.children.length > 0 || $ctrl.data.parent">Andre personer</h4>
             <table role="navigation" class="table table-striped table-hover" aria-labelledby="data-andre-personer" ng-if="$ctrl.data.spouses.length > 0 || $ctrl.data.children.length > 0 || $ctrl.data.parent">
@@ -93,7 +95,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr tabindex="0" role="button" ng-if="$ctrl.data.parent">
+                    <tr tabindex="0" role="button" ng-if="$ctrl.data.parent" ng-click="$ctrl.goToPost('search.page.result.post({postId:$ctrl.data.parent.post_id})'">
                         <td>
                             Forælder
                         </td>
