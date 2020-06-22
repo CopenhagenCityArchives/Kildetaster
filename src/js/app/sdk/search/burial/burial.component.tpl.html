@@ -104,9 +104,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="death in $ctrl.data.deathcauses">
+                    <tr>
                         <td>
-                            {{death.deathcause}}
+                            <span ng-repeat="deathcause in $ctrl.data.deathcauses">{{deathcause.deathcause}}<span ng-if="!$last">, </span></span>
                         </td>
                     </tr>
                 </tbody>
