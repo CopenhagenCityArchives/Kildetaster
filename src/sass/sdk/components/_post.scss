@@ -17,6 +17,19 @@
         background-color: #fff;
         margin: 1.5rem;
     }
+
+    .erindring-btn:focus {
+        outline-width: medium;
+        outline-style: dashed;
+        outline-color: invert($color: #000c2e);
+    }
+    
+    .btn-link:focus {
+        outline-width: medium;
+        outline-style: dashed;
+        outline-color: invert($color: #000c2e);
+    }
+
     #source-gallery-modal {
         .modal-dialog {
             max-width: 100%;
