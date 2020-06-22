@@ -11,25 +11,26 @@
             </div>
 
             <div class="col-lg-2">
-                <a ui-sref="search.page.results" class="btn btn-primary float-lg-right" focus>Tilbage</a>
+                <a ui-sref="search.page.results" class="btn btn-primary float-lg-right" focus>Tilbage til søgningen</a>
             </div>
 
         </header>
 
-        <nav class="float-lg-right row">
-            <a href="#" class="btn btn-primary" ng-click="$ctrl.prev()" ng-disabled="$ctrl.disablePrev()">Forrige</a>
-            <a href="#" class="btn btn-primary" ng-click="$ctrl.next()" ng-disabled="$ctrl.disableNext()">Næste</a>
-        </nav>
     </div>
 </div>
 
 <div class="col-12">
     <nav class="container-fluid" aria-label="Brødkrummesti">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/" focus><svg feather-icon class="medium-icon" icon="'home'"></svg><span class="sr-only">Hjem</span></a></li>
+            <li class="breadcrumb-item"><a href="{{$scope.main_domain}}" focus><svg feather-icon class="medium-icon" icon="'home'"></svg><span class="sr-only">Hjem</span></a></li>
             <li class="breadcrumb-item"><a ui-sref="search.page">Søg person</a></li>
             <li class="breadcrumb-item"><a ui-sref="search.page.results">Søgeresultat</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</li>
         </ol>
+        <nav ng-if="$ctrl.partOfSearch" class="float-lg-right row">
+            <a href="#" class="btn btn-primary mx-2" ng-click="$ctrl.prev()" ng-disabled="$ctrl.disablePrev()">Forrige</a>
+            <a href="#" class="btn btn-primary mx-2" ng-click="$ctrl.next()" ng-disabled="$ctrl.disableNext()">Næste</a>
+        </nav>
     </nav>
+       
 </div>
