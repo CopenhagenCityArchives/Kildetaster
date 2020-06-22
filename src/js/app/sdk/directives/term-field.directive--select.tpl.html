@@ -4,7 +4,7 @@
         <div ng-bind="$select.selected.label"></div>
     </ui-select-match>
 
-    <ui-select-choices repeat="option in data.field.enum track by $index">
+    <ui-select-choices repeat="option in data.field.enum track by $index" ng-class="{show: $select.open}">
         <div ng-bind-html="option.label | highlight: $select.search"></div>
     </ui-select-choices>
 </ui-select>
