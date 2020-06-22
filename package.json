@@ -33,7 +33,7 @@
     "jquery": "^3.2.1",
     "moment": "^2.18.1",
     "ngstorage": "^0.3.10",
-    "openseadragon": "^2.1.0",
+    "openseadragon": "^2.4.2",
     "openseadragon-filtering": "github:usnistgov/OpenSeadragonFiltering",
     "openseadragonselection": "^1.8.0",
     "popper.js": "^1.12.9",
