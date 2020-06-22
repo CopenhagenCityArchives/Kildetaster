@@ -447,8 +447,9 @@ define([
                     });
         
                     //Push the fields added into advanced query fields as standard
-                    that.queries.push(that.simpleQuery[0]);
-
+                    if (that.queries.length == 0) {
+                        that.queries.push(that.simpleQuery[0]);
+                    }
                 } else if(urlSearch.queries.length === 1 && urlSearch.queries[0].field.name === "freetext_store" && Object.keys(that.collections).length === urlSearch.collections.length) {
 
                     // Open simple search, and set default on advanced
