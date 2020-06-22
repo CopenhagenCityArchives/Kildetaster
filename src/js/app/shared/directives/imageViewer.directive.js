@@ -105,6 +105,9 @@ define([
 
                 }, $scope.options);
 
+                // Customize error message
+                OpenSeadragon.setString('Errors.OpenFailed', 'Der opstod en fejl under åbning af billedet. Prøv igen senere!');
+
                 //Initialize the viewer
                 viewer = OpenSeadragon(opts);
 
