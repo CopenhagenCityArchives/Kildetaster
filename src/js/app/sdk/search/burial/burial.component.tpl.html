@@ -1,10 +1,5 @@
 <div class="container-fluid post">
 
-    <section class="float-lg-left">
-        <h2>{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</h2>
-        <h3>Begravelsesprotokoller</h3>
-    </section>
-
     <div class="clearfix"></div>
 
     <section class="row">
@@ -95,6 +90,7 @@
         </table>
 
         <table class="table table-striped" aria-labelledby="data-dødsfaldet/begravelsen">
+        <h4 id="data-dødsfaldet/begravelsen">Om dødsfaldet/begravelsen</h4>
             <caption class="sr-only">Data om dødsfaldet/begravelsen</caption>
             <tbody>
                 <tr ng-if="$ctrl.data.deathcauses">

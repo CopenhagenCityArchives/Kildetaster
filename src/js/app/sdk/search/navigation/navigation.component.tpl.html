@@ -27,10 +27,20 @@
             <li class="breadcrumb-item"><a ui-sref="search.page.results">Søgeresultat</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</li>
         </ol>
-        <nav ng-if="$ctrl.partOfSearch" class="float-lg-right row">
-            <a href="#" class="btn btn-primary mx-2" ng-click="$ctrl.prev()" ng-disabled="$ctrl.disablePrev()">Forrige</a>
-            <a href="#" class="btn btn-primary mx-2" ng-click="$ctrl.next()" ng-disabled="$ctrl.disableNext()">Næste</a>
-        </nav>
-    </nav>
-       
+    </nav>       
+</div>
+
+<div class="container-fluid post">
+    <section class="row  mt-3">
+            <div ng-if="$ctrl.partOfSearch" class="col-lg-6 order-lg-last">
+                <div class="float-right">
+                    <a href="#" class="btn btn-primary mx-2" ng-click="$ctrl.prev()" ng-disabled="$ctrl.disablePrev()">Forrige</a>
+                    <a href="#" class="btn btn-primary mx-2" ng-click="$ctrl.next()" ng-disabled="$ctrl.disableNext()">Næste</a>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h2>{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</h2>
+                <h3>{{$ctrl.data.collection_info}}</h3>
+            </div>
+    </section>
 </div>
