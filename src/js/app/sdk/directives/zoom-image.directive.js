@@ -38,7 +38,6 @@ define([
                 OpenSeadragon.setString('Errors.OpenFailed', 'Der opstod en fejl under åbning af billedet. Prøv igen senere!');
                 
                 $timeout(function() {
-                    console.log('#zoom-image-' + $scope.num + '-' + $scope.index );
                     //Initialize the viewer
 
                     viewer = OpenSeadragon({
