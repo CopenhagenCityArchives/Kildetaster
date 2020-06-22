@@ -37,7 +37,7 @@
                 {{error.label}}
             </td>
             <td>
-                <svg feather-icon icon="'arrow-right-circle'"></svg>
+                <feather-icon icon='arrow-right-circle'></feather-icon>
                 <div ng-if="error.corrected">{{error.corrected.date}}</div>
             </td>
         </tr>
@@ -70,7 +70,7 @@
                 <div ng-if="error.superUserTime">{{error.superUserTime | date:'dd-MM-yyyy HH:mm:ss'}}</div>
             </td>
             <td>
-                <svg feather-icon icon="'arrow-right-circle'"></svg>
+                <feather-icon icon='arrow-right-circle'></feather-icon>
             </td>
         </tr>
     </tbody>
@@ -78,18 +78,18 @@
 
 
 <div ng-if="error" class="alert alert-danger text-center w-100">
-    <svg class="large-icon" aria-hidden="true" feather-icon icon="'alert-octagon'"></svg>
+    <feather-icon class="large-icon" aria-hidden="true" icon='alert-octagon'></feather-icon>
     <div class="h4">En fejl opstod</div>
     <p class="small">Kunne ikke hente dine fejlmeldinger, prøv venligst igen senere.</p>
 </div>
 
 <div ng-if="loading" class="alert alert-info text-center w-100">
-    <svg class="large-icon spin" aria-hidden="true" feather-icon icon="'loader'"></svg>
+    <feather-icon class="large-icon spin" aria-hidden="true" icon='loader'></feather-icon>
     <div class="h4">Indlæser fejlmeldinger</div>
 </div>
 
 <div ng-if="errorList.length == 0 && !loading && !error" class="alert alert-info text-center w-100">
-    <svg class="large-icon" aria-hidden="true" feather-icon icon="'alert-octagon'"></svg>
+    <feather-icon class="large-icon" aria-hidden="true" icon='alert-octagon'></feather-icon>
     <div class="h4">Ingen fejlmeldinger</div>
     <p class="small">Der er ingen der har fejlmeldt dine indtastninger.</p>
     <a href="#" class="btn btn-primary">Meld en fejl</a>

@@ -27,14 +27,14 @@
 
     <nav class="breadcrumb-wrapper container-fluid" aria-label="Brødkrummesti">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/" focus><svg feather-icon class="medium-icon" icon="'home'"></svg><span class="sr-only">Hjem</span></a></li>
+            <li class="breadcrumb-item"><a href="/" focus><feather-icon class="medium-icon" icon='home'></feather-icon><span class="sr-only">Hjem</span></a></li>
             <li class="breadcrumb-item"><a ui-sref="search.page">Søg person</a></li>
             <li class="breadcrumb-item active" aria-current="page">Søgeresultater</li>
         </ol>
     </nav>
   
     <section ng-if="ctrl.searching && !ctrl.results" class="text-center">
-        <svg feather-icon class="large-icon spin" icon="'loader'"></svg>
+        <feather-icon class="large-icon spin" icon='loader'></feather-icon>
     </section>
 
     <section ng-if="ctrl.results.docs.length === 0" class="container-fluid">
@@ -81,8 +81,8 @@
                 </form>
                 <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false"
                     autocomplete="off" ng-click="ctrl.toggleSortDirection()">
-                    <svg ng-if="ctrl.sortDirection == 'desc'" feather-icon icon="'arrow-up'"></svg>
-                    <svg ng-if="ctrl.sortDirection != 'desc'" feather-icon icon="'arrow-down'"></svg>
+                    <feather-icon ng-if="ctrl.sortDirection == 'desc'" icon='arrow-up'></feather-icon>
+                    <feather-icon ng-if="ctrl.sortDirection != 'desc'" icon='arrow-down'></feather-icon>
                 </button>
             </section>
 
@@ -194,7 +194,7 @@
             aria-labelledby="filter-{{facet.field}}-label">
         </facet>
 
-        <button type="button" id="filter-close" class="list-group-item list-group-item-action" ng-click="collapseFacets()">Luk <svg feather-icon icon="'x'"></svg></button>
+        <button type="button" id="filter-close" class="list-group-item list-group-item-action" ng-click="collapseFacets()">Luk <feather-icon icon='x'></feather-icon></button>
     </div>
 </div>
 

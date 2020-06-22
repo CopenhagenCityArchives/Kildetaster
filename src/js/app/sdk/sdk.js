@@ -9,9 +9,6 @@ import analyticsBootstrap from '../shared/analyticsBootstrap';
 import sharedApp from '../shared/shared';
 import searchApp from './search/search';
 
-import fritekstSearchController from './controllers/fritekst-search.controller';
-import useractivitiesDirective from './directives/useractivities/useractivities.directive';
-import errorsDirective from './directives/errors/errors.directive';
 
 import tokenService from '../shared/services/token.service';
 import tokenFactory from '../shared/services/token.factory';
@@ -22,6 +19,8 @@ import errorService from '../shared/services/error.service';
 import userService from '../shared/services/user.service';
 import helpersService from '../shared/services/helpers.service';
 
+import useractivitiesDirective from './directives/useractivities/useractivities.directive';
+import errorsDirective from './directives/errors/errors.directive';
 import userStatisticsDirective from './directives/user-statistics.directive';
 import taskunitsListDirective from './directives/taskunits-list.directive';
 import taskStatusDirective from './directives/task-status.directive';
@@ -52,9 +51,7 @@ sdkApp.run(analyticsBootstrap.run);
 
 sdkApp.config(analyticsBootstrap.config);
 
-sdkApp.controller('fritekstSearchController', fritekstSearchController);
-sdkApp.directive('errors', errorsDirective);
-sdkApp.directive('useractivities', useractivitiesDirective);
+
 
 sdkApp.service('tokenService', tokenService);
 sdkApp.factory('tokenFactory', tokenFactory);
@@ -65,6 +62,8 @@ sdkApp.service('errorService', errorService);
 sdkApp.service('userService', userService);
 sdkApp.service('helpers', helpersService);
 
+sdkApp.directive('errors', errorsDirective);
+sdkApp.directive('useractivities', useractivitiesDirective);
 sdkApp.directive('userStatistics', userStatisticsDirective);
 sdkApp.directive('taskunitsList', taskunitsListDirective);
 sdkApp.directive('taskStatus', taskStatusDirective);

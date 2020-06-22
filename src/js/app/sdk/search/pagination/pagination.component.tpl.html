@@ -3,7 +3,7 @@
         <li class="page-item">
             <a class="page-link" ng-class="{'disabled': $ctrl.currentPage === 0}" href ng-click="$ctrl.prev()">
                 <span class="sr-only">Tilbage</span>
-                <svg feather-icon icon="'arrow-left'"></svg>
+                <feather-icon icon='arrow-left'></feather-icon>
             </a>
         </li>
         <li ng-if="$ctrl.currentPage > 2" class="page-item"><a class="page-link" href ng-click="$ctrl.goToPage({page: 0})">1</a></li>
@@ -21,7 +21,7 @@
         <li class="page-item">
             <a class="page-link" href ng-click="$ctrl.next()">
                 <span class="sr-only">Frem</span>
-                <svg feather-icon icon="'arrow-right'"></svg>
+                <feather-icon icon='arrow-right'></feather-icon>
             </a>
         </li>
     </ul>
