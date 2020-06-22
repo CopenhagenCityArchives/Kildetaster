@@ -5,7 +5,7 @@
             <th scope="col">Kilde</th>
             <th scope="col">
                 <div>Bruger</div>
-                <select class="task-list__filter" ng-model="filtered.username"
+                <select class="task-list_filter" ng-model="filtered.username"
                     ng-options="name as name for name in userList"
                     ng-change="dropdownChanged('username', filtered.username)">
                     <option value="">Alle</option>
@@ -13,7 +13,7 @@
             </th>
             <th scope="col">
                 <div>Felter</div>
-                <select class="task-list__filter extra-column" ng-model="filtered.label"
+                <select class="task-list_filter" ng-model="filtered.label"
                     ng-options="field as field for field in fieldList"
                     ng-change="dropdownChanged('label', filtered.label)">
                     <option value="">Alle</option>
