@@ -1,6 +1,6 @@
 var featherSprite = require('../../../../images/feather-sprite.svg');
 
-var featherIconDirective = ['$sce', 'RESOURCE_URL', function($sce, RESOURCE_URL) {
+var featherIconDirective = [function() {
     return {
         restrict: 'A',
         scope: {
