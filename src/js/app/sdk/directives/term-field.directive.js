@@ -4,7 +4,7 @@ define([
 
     var termFieldDirective = ['$http', '$sce', '$timeout', 'API_URL', 'TYPEAHEAD_MAX', function($http, $sce, $timeout, API_URL, TYPEAHEAD_MAX) {
 
-        var template = "";
+        var $directiveElement = undefined;
 
         return {
 
@@ -19,6 +19,7 @@ define([
             template: '<div></div>',
 
             controller: ['$scope', '$compile', '$element', function($scope, $compile, $element) {
+                $directiveElement = $element;
 
 
                 /**
@@ -32,6 +33,7 @@ define([
                 $scope.ngModelOptions = {
                     updateOn: 'default'
                 };
+
 
                 //Options to show when rendered as a typeahead or select
                 $scope.options = [];
@@ -110,11 +112,25 @@ define([
                     }
                 }
 
-                var $compiled = $compile($scope.getTemplate())($scope);
-                $element.replaceWith($compiled);
-                $timeout(function() {
-                    $compiled.find('.btn-default').addClass('btn-outline-secondary')
-                });
+                $scope.compile = function() {
+                    var $compiled = $compile($scope.getTemplate())($scope);
+                    $directiveElement.replaceWith($compiled);
+
+                    // keep track of which element to replace, if we need to do it again
+                    $directiveElement = $compiled;
+
+                    // a dirty fix for bootstrap4 styling
+                    if ($scope.type == 'typeahead') {
+                        $timeout(function() {
+                            $compiled.find('.btn-default').addClass('btn-outline-secondary')
+                        });
+                    }
+                }
+
+                // recompile when type is changed
+                $scope.$watch('type', function() {
+                    $scope.compile();
+                })
             }]
 
         }
