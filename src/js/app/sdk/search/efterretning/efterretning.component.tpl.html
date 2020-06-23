@@ -4,35 +4,6 @@
 
     <section class="row">
 
-        <div class="col-lg-6 order-lg-last">
-            <div class="card text-white mb-3">
-                <div class="card-body d-block w-100">
-                    <div class="row">
-                        <a ng-href="{{$ctrl.getAssetHref()}}" target="_blank" class="btn btn-lg col erindring-btn">Efterretning</a>
-                        <a ng-if="$ctrl.data.transcribed" ng-href="{{$ctrl.getTranscribedAssetHref()}}" target="_blank" class="btn btn-lg col erindring-btn">Renskrift</a>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <h5>Om kilden</h5>
-                            <p>nummer {{ $ctrl.data.number }}<span ng-if="$ctrl.data.date">, {{ $ctrl.formatDate($ctrl.data.date) }}.</span></p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <h6>DATO</h6>
-                            <p>{{$ctrl.formatDate($ctrl.data.date)}}</p>
-                        </div>
-                        <div class="col">
-                            <h6>nr.</h6>
-                            <p>{{$ctrl.data.number}}</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
         <div class="col-lg-6">
             <table class="table table-striped" aria-labelledby="data-Efterretningen">
                 <caption class="sr-only">Data om Efterretningen</caption>
@@ -62,6 +33,35 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+
+        <div class="col-lg-6 order-lg-last">
+            <div class="card text-white mb-3">
+                <div class="card-body d-block w-100">
+                    <div class="row">
+                        <a ng-href="{{$ctrl.getAssetHref()}}" target="_blank" class="btn btn-lg col erindring-btn">Efterretning</a>
+                        <a ng-if="$ctrl.data.transcribed" ng-href="{{$ctrl.getTranscribedAssetHref()}}" target="_blank" class="btn btn-lg col erindring-btn">Renskrift</a>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <h5>Om kilden</h5>
+                            <p>nummer {{ $ctrl.data.number }}<span ng-if="$ctrl.data.date">, {{ $ctrl.formatDate($ctrl.data.date) }}.</span></p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <h6>DATO</h6>
+                            <p>{{$ctrl.formatDate($ctrl.data.date)}}</p>
+                        </div>
+                        <div class="col">
+                            <h6>nr.</h6>
+                            <p>{{$ctrl.data.number}}</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
 
     </section>
