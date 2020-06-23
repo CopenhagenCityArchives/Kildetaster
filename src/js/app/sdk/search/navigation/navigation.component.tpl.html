@@ -1,8 +1,11 @@
-<div class="page-header" >
-    <a class="sr-only sr-only-focusable float-lg-right" href="#permalink_btn" focus>Gå direkte til søgeresultaterne</a>
+<div class="page-header container-fluid" >
+    <div class="row">
+        <div class="col align-self-end">
+            <a class="sr-only sr-only-focusable float-lg-right" href="#permalink_btn" focus>Gå direkte til søgeresultaterne</a>
+        </div>
+    </div>
     <div class="container-fluid" ng-if="$ctrl.partOfSearch">
         <header class="row">
-
             <div class="col-lg-4">
                 <h1>Søg person</h1>
             </div>
@@ -12,10 +15,8 @@
             </div>
 
             <div class="col-lg-2">
-                
-                <a ui-sref="search.page.results" class="btn btn-primary float-lg-right">Tilbage til søgningen</a>
+                <a ui-sref="search.page.results" class="btn btn-primary float-lg-right">Tilbage til søgeresultat</a>
             </div>
-
         </header>
 
     </div>
@@ -26,7 +27,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/"><feather-icon class="medium-icon" icon='home'></feather-icon><span class="sr-only">Hjem</span></a></li>
             <li class="breadcrumb-item"><a ui-sref="search.page">Søg person</a></li>
-            <li class="breadcrumb-item"><a ui-sref="search.page.results">Søgeresultat</a></li>
+            <li class="breadcrumb-item"><a ui-sref="search.page.results">Søgeresultater</a></li>
             <li class="breadcrumb-item active" aria-current="page" tabindex='-1'>{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</li>
         </ol>
     </nav>       
