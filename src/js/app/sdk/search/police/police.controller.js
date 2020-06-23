@@ -4,7 +4,7 @@ define([
 
 ], function(Clipboard) {
 
-    var policeController = function policeController() {
+    var policeController = ['$state', function policeController($state) {
 
         var that = this;
 
@@ -26,7 +26,14 @@ define([
             });
             return clip;
         };
-    };
+
+        this.goToPost = function(params) {
+            console.log(params);
+
+            var url = $state.href('.', {postId: params.post_id});
+            window.open(url,'_blank');
+        }
+    }];
 
     return policeController;
 });

@@ -88,37 +88,31 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr tabindex="0" role="button" ng-if="$ctrl.data.parent" ng-click="$ctrl.goToPost('search.page.result.post({postId:$ctrl.data.parent.post_id})'">
+                    <tr tabindex="0" role="button" ng-if="$ctrl.data.parent" ui-sref="search.page.result.post({postId:$ctrl.data.parent.post_id})" ng-click="$ctrl.goToPost($ctrl.data.parent)" ng-keydown="($event.keyCode === 13 || $event.keyCode === 32) && $ctrl.goToPost($ctrl.data.parent)">
                         <td>
                             Forælder
                         </td>
                         <td>
-                            <a target="_blank" ui-sref="search.page.result.post({postId:$ctrl.data.parent.post_id})">
-                                {{$ctrl.data.parent.firstnames}} {{$ctrl.data.parent.lastname}}
-                                <feather-icon icon='arrow-right-circle'></feather-icon>
-                            </a>
+                            {{$ctrl.data.parent.firstnames}} {{$ctrl.data.parent.lastname}}
+                            <feather-icon icon='arrow-right-circle'></feather-icon>
                         </td>
                     </tr>
-                    <tr tabindex="0" role="button" ng-repeat="spouse in $ctrl.data.spouses">
+                    <tr tabindex="0" role="button" ng-repeat="spouse in $ctrl.data.spouses" ng-click="$ctrl.goToPost(spouse)" ng-keydown="($event.keyCode === 13 || $event.keyCode === 32) && $ctrl.goToPost(spouse)">
                         <td>
                             Ægtefælle
                         </td>
                         <td>
-                            <a target="_blank" ui-sref="search.page.result.post({postId:spouse.post_id})">
-                                {{spouse.firstnames}} {{spouse.lastname}}
-                                <feather-icon icon='arrow-right-circle'></feather-icon>
-                            </a>
+                            {{spouse.firstnames}} {{spouse.lastname}}
+                            <feather-icon icon='arrow-right-circle'></feather-icon>
                         </td>
                     </tr>
-                    <tr tabindex="0" role="button" ng-repeat="child in $ctrl.data.children">
+                    <tr tabindex="0" role="button" ng-repeat="child in $ctrl.data.children" ng-click="$ctrl.goToPost(child)" ng-keydown="($event.keyCode === 13 || $event.keyCode === 32) && $ctrl.goToPost(child)">
                         <td>
                             Barn
                         </td>
                         <td>
-                            <a target="_blank" ui-sref="search.page.result.post({postId:child.post_id})">
-                                {{child.firstnames}} {{child.lastname}}
-                                <feather-icon icon='arrow-right-circle'></feather-icon>
-                            </a>
+                            {{child.firstnames}} {{child.lastname}}
+                            <feather-icon icon='arrow-right-circle'></feather-icon>
                         </td>
                     </tr>
                 </tbody>
