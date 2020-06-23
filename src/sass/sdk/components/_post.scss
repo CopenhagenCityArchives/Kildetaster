@@ -20,14 +20,14 @@
 
     .erindring-btn:focus {
         outline-width: medium;
-        outline-style: dashed;
-        outline-color: invert($color: #000c2e);
+        outline-style: solid;
+        outline-color: grey
     }
     
     .btn-link:focus {
         outline-width: medium;
-        outline-style: dashed;
-        outline-color: invert($color: #000c2e);
+        outline-style: solid;
+        outline-color: grey
     }
 
     #source-gallery-modal {
