@@ -2,12 +2,14 @@ define([], function() {
     
     var navigationController = [
         '$state', 
-        '$stateParams', 
+        '$stateParams',
+        '$anchorScroll',
         'searchService',
         'solrService',
         function navigationController(
             $state, 
-            $stateParams, 
+            $stateParams,
+            $anchorScroll,
             searchService,
             solrService
         ) {
@@ -113,8 +115,14 @@ define([], function() {
                 });
             }
         };
+
+        this.jumpTo = function() {
+            $anchorScroll('post-start');
+        }
        
         this.$onInit = function() {
+
+            $anchorScroll('nav-start');
 
             if (that.searchData) {
                 // Get the index in the current result data
