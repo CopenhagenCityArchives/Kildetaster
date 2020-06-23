@@ -44,7 +44,10 @@
             </div>
             <div class="col-lg-6">
                 <h2>{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</h2>
-                <h3>{{$ctrl.data.collection_info}}</h3>
+                <h2 ng-if="$ctrl.data.collection_id === 19">Efterretninger</h2>
+                <h3 ng-if="$ctrl.data.collection_info">{{$ctrl.data.collection_info}}</h3>
+                <h3 ng-if="$ctrl.data.collection_id === 19">Politiets efterretninger</h3>
+                <h3 ng-if="$ctrl.data.collection_id === 18">Erindring</h3>
             </div>
     </section>
 </div>
