@@ -9,6 +9,7 @@
 @import "./sdk/components/search-container";
 
 //elements
+@import "./sdk/elements/typeahead";
 @import "./sdk/elements/button";
 @import "./sdk/elements/collection";
 @import "./sdk/elements/error-reporting";
@@ -26,11 +27,9 @@
 @import "./sdk/elements/search-navigation";
 @import "./sdk/elements/sorting";
 @import "./sdk/elements/zoom-image";
-@import "./sdk/elements/term-field.typeahead";
 @import "./sdk/elements/input-datepicker";
 @import "./sdk/elements/name";
 @import "./sdk/elements/label";
-@import "./sdk/elements/typeahead";
 @import "./sdk/elements/task-progress-plot";
 @import "./sdk/elements/task-status";
 @import "./sdk/elements/user-statistics";
