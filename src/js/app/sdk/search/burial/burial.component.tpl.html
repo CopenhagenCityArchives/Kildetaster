@@ -56,17 +56,6 @@
                             <span ng-repeat="position in $ctrl.data.positions">{{position.position}}<span ng-if="!$last">, </span></span>
                         </td>
                     </tr>
-                    <tr>
-                        <th scope="row">
-                            Permalink
-                        </th>
-                        <td>
-                            <span id="permalink" class="mr-2">
-                                {{$ctrl.permalink}}
-                            </span>
-                            <button ng-attr-id="permalink_btn" ng-click="$ctrl.copy();" class="btn btn-primary btn-sm" ng-attr-data-clipboard-target="#permalink">Kopier <span class="sr-only"> permalink</span></button>
-                        </td>
-                    </tr>
                     <tr ng-if="$ctrl.data.adressOutsideCph">
                         <th scope="row">
                             Adresse
@@ -81,6 +70,17 @@
                         </th>
                         <td>
                             <text-address address="$ctrl.data.addresses"></text-address>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            Permalink
+                        </th>
+                        <td>
+                            <span id="permalink" class="mr-2">
+                                {{$ctrl.permalink}}
+                            </span>
+                            <button ng-attr-id="permalink_btn" ng-click="$ctrl.copy();" class="btn btn-primary btn-sm" ng-attr-data-clipboard-target="#permalink">Kopier <span class="sr-only"> permalink</span></button>
                         </td>
                     </tr>
                 </tbody>
