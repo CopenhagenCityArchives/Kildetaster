@@ -9,7 +9,6 @@ function galleryDirective() {
         },
 
         template: require('./gallery.directive.tpl.html'),        
-        
     }
 
 }
