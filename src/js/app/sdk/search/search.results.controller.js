@@ -102,10 +102,13 @@ define([
 
         $scope.$firstTabbable = null;
         $scope.$lastTabbable = null;
+        $scope.firstTabbableObserver = null;
         
         function expandFacetFocus(facet) {
-            
             var $offcanvas = angular.element($element).find(".facet__offcanvas");
+            if ($scope.firstTabbableObserver) {
+                $scope.firstTabbableObserver.disconnect();
+            }
 
             $offcanvas.off('keydown');
             $offcanvas.on('keydown', function(e) {
@@ -134,9 +137,15 @@ define([
                 }
             });
 
-            $timeout(function() {
-                $scope.$firstTabbable.focus()
+            $scope.firstTabbableObserver = new MutationObserver(function(mutations) {
+                for (let mut of mutations) {
+                    if (mut.type == 'attributes' && mut.attributeName == 'class' && !mut.target.classList.contains('d-none')) {
+                        $scope.$firstTabbable.focus();
+                        $scope.firstTabbableObserver.disconnect();
+                    }
+                }
             });
+            $scope.firstTabbableObserver.observe($scope.$firstTabbable[0], { attributes: true });
         }
 
         $scope.expandFacets = function() {
@@ -146,14 +155,18 @@ define([
             }
             $scope.allFacetsExpanded = true;
             $scope.facetsShown = true;
-            $timeout(function() {expandFacetFocus(that.facets[0])});
+            $timeout(function() {
+                expandFacetFocus(that.facets[0])
+            });
         }
 
         $scope.expandFacet = function(facet) {
             facet.enabled = true;
             facet.expanded = true;
             $scope.facetsShown = true;
-            $timeout(function() {expandFacetFocus(facet)});
+            $timeout(function() {
+                expandFacetFocus(facet)
+            });
         }
 
         $scope.collapseFacets = function() {
