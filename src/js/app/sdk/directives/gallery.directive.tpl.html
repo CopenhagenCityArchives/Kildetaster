@@ -50,18 +50,23 @@
                     </div>
                 </div>
 
-                <h5>Om kilden</h5>
-                <p>{{ data.collection_info }} {{ data.unit_description }} s. {{ data.page_number }}</p>
-                <p ng-if="data.dateOfCompletion">Registerbladet er udfyldt: {{data.dateOfCompletion | date:'dd-MM-yyyy' }}</p>
+                <h6>Om kilden</h6>
+                <div class="row">
+                    <div class="col-8">
+                        <p>{{ data.collection_info }} {{ data.unit_description }} s. {{ data.page_number }}</p>
+                        <p ng-if="data.dateOfCompletion">Registerbladet er udfyldt: {{data.dateOfCompletion | date:'dd-MM-yyyy' }}</p>
+                    </div>
+                    <div class="col-4">
+                        <h6>Løbenr.</h6>
+                        <p ng-if="data.burials.number">{{ data.burials.number }}</p>
+                    </div>
+                </div>
 
                 <div class="row">
                     <div class="col">
-                        <h6>Indtastet</h6>
-                        <p ng-if="data.created">{{ data.created | date: 'dd-MM-yyyy HH:mm:ss' }} <span ng-if="dat.user_name"> af {{ data.user_name }}</span></p>
-                    </div>
-                    <div class="col">
-                        <h6>Løbenr.</h6>
-                        <p ng-if="data.burials.number">{{ data.burials.number }}</p>
+                        <h6>Om Indtastningen</h6>
+                        <p ng-if="data.created">Indtastet {{ data.created | date: 'dd-MM-yyyy HH:mm:ss' }} <span ng-if="data.user_name"> af {{ data.user_name }}</span></p>
+                        <p ng-if="data.last_update_user_name">Senest opdateret <span ng-if="data.updated">{{ data.updated | date: 'dd-MM-yyyy HH:mm:ss' }} </span> af {{ data.last_update_user_name }}</p>
                     </div>
                 </div>
             </div>

@@ -16,6 +16,14 @@
                             {{$ctrl.data.dateOfBirth | date:'dd-MM-yyyy' }}
                         </td>
                     </tr>
+                    <tr ng-if="!$ctrl.data.dateOfBirth && isNumber($ctrl.data.yearOfBirth)">
+                        <th scope="row">
+                            Anslået fødselsår
+                        </th>
+                        <td>
+                            {{$ctrl.data.yearOfBirth}}
+                        </td>
+                    </tr>
                     <tr ng-if="$ctrl.data.birthplace">   
                         <th scope="row">
                             Fødested
@@ -30,6 +38,15 @@
                         </th>
                         <td>
                             <text-date prefix="" date="$ctrl.data.dateOfDeath"></text-date>
+                        </td>
+                    </tr>
+                    <tr ng-if="$ctrl.data.dateOfDeath">
+                        <th scope="row">
+                            Alder
+                        </th>
+                        <td>
+                            <text-age prefix="" years="$ctrl.data.ageYears" months="$ctrl.data.ageMonth"
+                            weeks="$ctrl.data.ageWeeks" days="$ctrl.data.ageDays" hours="$ctrl.data.ageHours">
                         </td>
                     </tr>
                     <tr ng-if="$ctrl.data.sex">
@@ -48,12 +65,12 @@
                             {{ $ctrl.data.civilstatus }}
                         </td>
                     </tr>
-                    <tr ng-if="$ctrl.data.positions.length > 0">
+                    <tr ng-if="$ctrl.data.positions">
                         <th scope="row">
                             Erhverv
                         </th>
                         <td>
-                            <span ng-repeat="position in $ctrl.data.positions">{{position.position}}<span ng-if="!$last">, </span></span>
+                            <text-position positions="$ctrl.data.positions"></text-position>
                         </td>
                     </tr>
                     <tr ng-if="$ctrl.data.adressOutsideCph">
