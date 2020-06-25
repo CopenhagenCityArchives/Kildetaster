@@ -1,3 +1,6 @@
 <button type="button" class="btn btn-light chip" ng-click="remove()">
-    <span class="sr-only">Fjern </span><span ng-if="facet.type == 'range'">{{bucket.val}}-{{bucket.val+facet.gap}}</span><span ng-if="facet.type == 'terms'">{{bucket.val}}</span><i width="16px" height="16px" data-feather="x"></i>
+    <span class="sr-only">Fjern </span>
+    <span ng-if="facet.type == 'range'">{{bucket.val}}-{{bucket.val+facet.gap}}</span>
+    <span ng-if="facet.type == 'terms'">{{bucket.val}}</span>
+    <feather-icon icon='x'></feather-icon>
 </button>
