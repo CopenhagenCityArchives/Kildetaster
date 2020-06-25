@@ -77,7 +77,7 @@ sdkApp.directive('gallery', galleryDirective);
 sdkApp.directive('focus', focusDirective);
 
 
-sdkApp.directive('feather', featherIconDirective);
+sdkApp.directive('feather', featherDirective);
 
 angular.element(document).ready(function() {
     angular.bootstrap(angular.element('[data-sdk-app]'), ['sdk'], { strictDi: true });
