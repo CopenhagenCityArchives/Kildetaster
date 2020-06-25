@@ -10,7 +10,7 @@
 
 <nav class="breadcrumb-wrapper container-fluid" aria-label="Brødkrummesti">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="/"><feather-icon class="medium-icon" icon='home'></feather-icon><span class="sr-only">Hjem</span></a></li>
+        <li class="breadcrumb-item"><a href="/"><feather class="medium-icon" icon='home'></feather><span class="sr-only">Hjem</span></a></li>
         <li class="breadcrumb-item"><a href="#">Søg</a></li>
         <li class="breadcrumb-item active" aria-current="page">Søg person</li>
     </ol>
@@ -20,7 +20,7 @@
     <div class="list-group list-group-flush">
         <button type="button" id="simple-label" ng-click="toggle('sectionSimple')" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3" data-toggle="collapse" data-target="#simple" aria-expanded="true" aria-controls="simple">
             Fritekst søgning
-            <feather-icon icon='chevron-down'></feather-icon>
+            <feather icon='{{ ctrl.sectionSimple ? "chevron-up" : "chevron-down" }}'></feather>
         </button>
         <div id="simple" class="collapse" ng-class="{show: ctrl.sectionSimple}" aria-labelledby="simple-label" data-parent=".search-type">
             <div class="mx-3 my-4">
@@ -42,7 +42,7 @@
             <div>Avanceret søgning
                 <div id="advanced-desc" get-dom-content="search-app-advanced-search-lower"></div>
             </div>
-            <feather-icon icon='chevron-down'></feather-icon>
+            <feather icon='{{ ctrl.sectionAdvanced ? "chevron-up" : "chevron-down" }}'></feather>
         </button>
         <div id="advanced" class="collapse" ng-class="{show: ctrl.sectionAdvanced}" aria-labelledby="advanced-label" data-parent=".search-type">
             <div class="mx-3 my-4">
@@ -88,7 +88,7 @@
                                 </div>
                                 
                                 <div class="form-group col-md-1">
-                                    <button class="btn btn btn-outline-danger btn-icon" type="button" ng-click="ctrl.removeField($index, $event)" ng-if="ctrl.queries.length > 1"><feather-icon icon='trash-2'></feather-icon><span class="sr-only">Fjern rækken</span></button>
+                                    <button class="btn btn btn-outline-danger btn-icon" type="button" ng-click="ctrl.removeField($index, $event)" ng-if="ctrl.queries.length > 1"><feather icon='trash-2'></feather><span class="sr-only">Fjern rækken</span></button>
                                 </div>    
                         </div>
                     </div>

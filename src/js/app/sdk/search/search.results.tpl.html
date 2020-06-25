@@ -27,14 +27,14 @@
 
     <nav class="breadcrumb-wrapper container-fluid" aria-label="Brødkrummesti">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/"><feather-icon class="medium-icon" icon='home'></feather-icon><span class="sr-only">Hjem</span></a></li>
+            <li class="breadcrumb-item"><a href="/"><feather class="medium-icon" icon='home'></feather><span class="sr-only">Hjem</span></a></li>
             <li class="breadcrumb-item"><a ui-sref="search.page">Søg person</a></li>
             <li class="breadcrumb-item active" aria-current="page">Søgeresultater</li>
         </ol>
     </nav>
   
     <section ng-if="ctrl.searching && !ctrl.results" class="text-center">
-        <feather-icon class="large-icon spin" icon='loader'></feather-icon>
+        <feather class="large-icon spin" icon='loader'></feather>
     </section>
 
     <section ng-if="ctrl.results.docs.length === 0" class="container-fluid">
@@ -76,13 +76,11 @@
                         <label for="sort-by" id="sort-by-label" class="mr-3">Sorter efter</label>
                         <select class="form-control" id="sort-by" ng-model="ctrl.sortField" ng-options="field as field.view_name for (fieldName, field) in ctrl.fields | filter:{searchable:true, sortable:true} | filter:ctrl.fieldCollectionFilter">
                         </select>
-                            
                     </div>
                 </form>
                 <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false"
                     autocomplete="off" ng-click="ctrl.toggleSortDirection()">
-                    <feather-icon ng-if="ctrl.sortDirection == 'desc'" icon='arrow-up'></feather-icon>
-                    <feather-icon ng-if="ctrl.sortDirection != 'desc'" icon='arrow-down'></feather-icon>
+                    <feather icon="{{ ctrl.sortDirection == 'desc' ? 'arrow-up' : 'arrow-down' }}"></feather>
                 </button>
             </section>
 
@@ -194,7 +192,7 @@
             aria-labelledby="filter-{{facet.field}}-label">
         </facet>
 
-        <button type="button" id="filter-close" class="list-group-item list-group-item-action" ng-click="collapseFacets()"><feather-icon icon='x'></feather-icon> Luk</button>
+        <button type="button" id="filter-close" class="list-group-item list-group-item-action" ng-click="collapseFacets()"><feather icon='x'></feather> Luk</button>
     </div>
 </div>
 

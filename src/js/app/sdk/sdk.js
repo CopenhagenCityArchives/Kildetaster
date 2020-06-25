@@ -31,10 +31,11 @@ import shareLinkDirective from '../shared/directives/shareLink.directive';
 import galleryDirective from './directives/gallery.directive';
 import tooltipDirective from './directives/tooltip.directive';
 import focusDirective from './directives/focus.directive';
+import featherDirective from './directives/feather.directive';
+
 import constants from '../../../../constants.json';
 
 
-import featherIconDirective from './directives/feather-icon.directive';
 
 var sdkApp = angular.module('sdk', [
     'ui.bootstrap',
@@ -76,7 +77,7 @@ sdkApp.directive('gallery', galleryDirective);
 sdkApp.directive('focus', focusDirective);
 
 
-sdkApp.directive('featherIcon', featherIconDirective);
+sdkApp.directive('feather', featherIconDirective);
 
 angular.element(document).ready(function() {
     angular.bootstrap(angular.element('[data-sdk-app]'), ['sdk'], { strictDi: true });

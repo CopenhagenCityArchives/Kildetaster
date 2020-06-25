@@ -1,17 +1,17 @@
 
 <div ng-if="error" class="alert alert-danger text-center w-100">
-    <feather-icon class="large-icon" aria-hidden="true" icon='alert-octagon'></feather-icon>
+    <feather class="large-icon" aria-hidden="true" icon='alert-octagon'></feather>
     <div class="h4">En fejl opstod</div>
     <p class="small">Kunne ikke hente dine indtastninger, prøv venligst igen senere.</p>
 </div>
 
 <div ng-if="loading" class="alert alert-info text-center w-100">
-    <feather-icon class="large-icon spin" aria-hidden="true" icon='loader'></feather-icon>
+    <feather class="large-icon spin" aria-hidden="true" icon='loader'></feather>
     <div class="h4">Indlæser indtastninger</div>
 </div>
 
 <div ng-if="activities.length == 0 && !loading && !error" class="alert alert-info text-center w-100">
-    <feather-icon class="large-icon" aria-hidden="true" icon='alert-octagon'></feather-icon>
+    <feather class="large-icon" aria-hidden="true" icon='alert-octagon'></feather>
     <div class="h4">Fandt ingen indtastninger</div>
     <p class="small">Du skal have indtastet noget, før det vises her.</p>
 </div>
@@ -35,7 +35,7 @@
             </td>
             <td>
                 {{tasks[activity.task_id].name}}
-                <feather-icon icon='arrow-right-circle'></feather-icon>
+                <feather icon='arrow-right-circle'></feather>
             </td>
         </tr>
     </tbody>

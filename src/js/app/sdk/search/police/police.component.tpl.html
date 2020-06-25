@@ -94,7 +94,7 @@
                         </td>
                         <td>
                             {{$ctrl.data.parent.firstnames}} {{$ctrl.data.parent.lastname}}
-                            <feather-icon icon='arrow-right-circle'></feather-icon>
+                            <feather icon='arrow-right-circle'></feather>
                         </td>
                     </tr>
                     <tr tabindex="0" role="button" ng-repeat="spouse in $ctrl.data.spouses" ng-click="$ctrl.goToPost(spouse)" ng-keydown="($event.keyCode === 13 || $event.keyCode === 32) && $ctrl.goToPost(spouse)">
@@ -103,7 +103,7 @@
                         </td>
                         <td>
                             {{spouse.firstnames}} {{spouse.lastname}}
-                            <feather-icon icon='arrow-right-circle'></feather-icon>
+                            <feather icon='arrow-right-circle'></feather>
                         </td>
                     </tr>
                     <tr tabindex="0" role="button" ng-repeat="child in $ctrl.data.children" ng-click="$ctrl.goToPost(child)" ng-keydown="($event.keyCode === 13 || $event.keyCode === 32) && $ctrl.goToPost(child)">
@@ -112,7 +112,7 @@
                         </td>
                         <td>
                             {{child.firstnames}} {{child.lastname}}
-                            <feather-icon icon='arrow-right-circle'></feather-icon>
+                            <feather icon='arrow-right-circle'></feather>
                         </td>
                     </tr>
                 </tbody>
