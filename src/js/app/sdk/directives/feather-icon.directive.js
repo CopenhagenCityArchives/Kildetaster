@@ -7,7 +7,7 @@ var featherIconDirective = [function() {
             icon: '@'
         },
         link: function(scope, element) {
-            var $element = angular.element('<svg xmlns="http://www.w3.org/2000/svg">');
+            var $element = angular.element('<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg">');
 
             $element.addClass('feather');
             $element.addClass(angular.element(element).attr('class'));
