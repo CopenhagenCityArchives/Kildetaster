@@ -120,7 +120,7 @@ define([], function() {
 
         this.jumpTo = function() {
             
-            scrollFocusService.scrollTo('permalink_btn');
+            scrollFocusService.scrollTo('post-content', 'permalink_btn');
             //$anchorScroll('post-start');
         }
        
