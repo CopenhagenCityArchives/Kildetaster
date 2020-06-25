@@ -7,7 +7,7 @@ define([
     return {
         bindings: {
             currentPage: '<',
-            results: '<',
+            numFound: '<',
             postsPrPage: '<',
             goToPage: '&'
         },

@@ -1,6 +1,6 @@
 .search-container {
     & .ng-enter {
-        transition: opacity 300ms ease;
+        transition: opacity 150ms ease;
 
         opacity: 0;
         &.ng-enter-active {
@@ -9,11 +9,20 @@
     }
 
     &.ng-enter {
-        transition: opacity 300ms ease;
+        transition: opacity 400ms ease;
 
         opacity: 0;
         &.ng-enter-active {
             opacity: 1;
         }
     }
+
+    & .page-item > .page-link {
+        margin: 0px;
+    }
+
+    & .page-item:not(.active) > .page-link:not(:hover) {
+        background-color: transparent !important;
+        border-color: transparent !important;
+    }   
 }

@@ -35,7 +35,7 @@ define([], function () {
         this.buildPagination = function buildPagination() {
             var pagination = [];
 
-            that.total = Math.ceil(that.results.numFound / that.postsPrPage);
+            that.total = Math.ceil(that.numFound / that.postsPrPage);
             
             var startPage = that.currentPage - 2;
             var endPage = that.currentPage + 2;
