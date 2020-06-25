@@ -6,12 +6,14 @@ define([], function() {
         '$anchorScroll',
         'searchService',
         'solrService',
+        'scrollFocusService',
         function navigationController(
             $state, 
             $stateParams,
             $anchorScroll,
             searchService,
-            solrService
+            solrService,
+            scrollFocusService,
         ) {
 
         var that = this;
@@ -117,7 +119,9 @@ define([], function() {
         };
 
         this.jumpTo = function() {
-            $anchorScroll('post-start');
+            
+            scrollFocusService.scrollTo('permalink_btn');
+            //$anchorScroll('post-start');
         }
        
         this.$onInit = function() {

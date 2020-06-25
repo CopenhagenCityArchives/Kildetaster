@@ -18,6 +18,7 @@ import taskService from '../shared/services/task.service';
 import errorService from '../shared/services/error.service';
 import userService from '../shared/services/user.service';
 import helpersService from '../shared/services/helpers.service';
+import scrollFocusService from '../shared/services/scrollFocus.service';
 
 import useractivitiesDirective from './directives/useractivities/useractivities.directive';
 import errorsDirective from './directives/errors/errors.directive';
@@ -62,6 +63,7 @@ sdkApp.service('taskService', taskService);
 sdkApp.service('errorService', errorService);
 sdkApp.service('userService', userService);
 sdkApp.service('helpers', helpersService);
+sdkApp.service('scrollFocusService', scrollFocusService);
 
 sdkApp.directive('errors', errorsDirective);
 sdkApp.directive('useractivities', useractivitiesDirective);
