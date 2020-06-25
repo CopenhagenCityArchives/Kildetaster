@@ -12,7 +12,6 @@ define([
 
         // Counter for how many times the directive has been used, used to build unique id's
         var num = 0;
-        var imageArray = [];
 
         return {
 
@@ -27,11 +26,11 @@ define([
             
                 // Store current unique number on the scope
                 $scope.num = num;
-                $scope.imageArray = imageArray;
                 var viewer;
-
+                var imageArray = new Array();
+                $scope.imageArray = imageArray;
                 $scope.images.forEach(img => {
-                    $scope.imageArray.push({
+                    imageArray.push({
                         type: 'image',
                         url: img
                     })
@@ -45,7 +44,6 @@ define([
 
                 // Customize error message
                 OpenSeadragon.setString('Errors.OpenFailed', 'Der opstod en fejl under åbning af billedet. Prøv igen senere!');
-                console.log($scope.imageArray);
                 $timeout(function() {
                     //Initialize the viewer
 
@@ -86,14 +84,14 @@ define([
                             type: 'image',
                             url: $scope.image
                         },*/
-                        tileSources: $scope.imageArray
+                        tileSources: imageArray
                     });
                 });
 
                 // Increment the counter for other instances of the directive
                 num++;
-                imageArray = [];
-            }]
+                $scope.images = [];
+            }],
 
         }
     };

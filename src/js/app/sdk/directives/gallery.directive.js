@@ -9,12 +9,15 @@ define([
             scope: {
                 images: '=',
                 data: '=',
-                //editorUrl:  '='
             },
 
             template: require('./gallery.directive.tpl.html'),
             
             link: function(scope, element, attr) {
+                
+                scope.imageNum = scope.images.length;
+                console.log('imageNum');
+                console.log(scope.imageNum);
                 scope.editorUrl = EDITOR_URL + '#/task/' + scope.data.task_id + '/page/' + scope.data.page_id + '/post/' + scope.data.post_id;
             }
         }
