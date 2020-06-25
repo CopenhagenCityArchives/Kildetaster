@@ -12,13 +12,14 @@ define([
 
         // Counter for how many times the directive has been used, used to build unique id's
         var num = 0;
+        var imageArray = [];
 
         return {
 
             restrict: 'E',
 
             scope: {
-                image: '=',
+                images: '=',
                 index: '='
             },
 
@@ -26,7 +27,15 @@ define([
             
                 // Store current unique number on the scope
                 $scope.num = num;
+                $scope.imageArray = imageArray;
                 var viewer;
+
+                $scope.images.forEach(img => {
+                    $scope.imageArray.push({
+                        type: 'image',
+                        url: img
+                    })
+                });
 
                 //Prepare the template
                 var template = $compile(require('./zoom-image.directive.tpl.html'))($scope);
@@ -36,11 +45,14 @@ define([
 
                 // Customize error message
                 OpenSeadragon.setString('Errors.OpenFailed', 'Der opstod en fejl under åbning af billedet. Prøv igen senere!');
-                
+                console.log($scope.imageArray);
                 $timeout(function() {
                     //Initialize the viewer
 
                     viewer = OpenSeadragon({
+                        
+                        id: "zoom-image-" + $scope.num,
+                        sequenceMode: true,
 
                         // Turn off default buttons on the viewer, as we dont need those
                         showNavigator: false,
@@ -69,17 +81,18 @@ define([
                             pinchToZoom: true
                         },
                         
-                        //element: document.querySelector('#zoom-image-' + num + '-' + $scope.index ),
-                        element: document.querySelector('#zoom-image-' + $scope.num + '-' + $scope.index ),
-                        tileSources: {
+                        //element: document.querySelector('#zoom-image-' + $scope.num ),
+                        /*tileSources: {
                             type: 'image',
                             url: $scope.image
-                        },
+                        },*/
+                        tileSources: $scope.imageArray
                     });
                 });
 
                 // Increment the counter for other instances of the directive
                 num++;
+                imageArray = [];
             }]
 
         }

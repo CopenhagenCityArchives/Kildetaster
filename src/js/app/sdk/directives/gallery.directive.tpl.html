@@ -2,25 +2,20 @@
     <h4>Kilden</h4>
     <div class="card text-white mb-3">
         <div class="card-body">
+
             <div id="source-gallery" class="carousel slide">
-                <ol ng-if="images.length > 1" class="carousel-indicators">
-                    <li ng-repeat="img in images" data-target="#source-gallery" data-slide-to="{{$index}}" ng-class="{active : $index == 0}"></li>
-                </ol>
                 <div class="carousel-inner">
-                    <a ng-repeat="img in images" class="carousel-item" ng-class="{active : $index == 0}" role="button" data-toggle="modal" data-target="#source-gallery-modal">
-                        <zoom-image class="d-block w-100" image="img" index="$index"></zoom-image>
-                    </a>
+                    <zoom-image class="d-block w-100" images="images" index="$index"></zoom-image>
                 </div>
                 
-                <a ng-if="images.length > 1" class="carousel-control-prev" href="#source-gallery" role="button" data-slide="prev">
+                <a ng-if="images.length > 1" id="previous" class="carousel-control-prev d-flex position-absolute" href="#source-gallery" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Forrige side af kilden</span>
                 </a>
-                <a ng-if="images.length > 1"class="carousel-control-next" href="#source-gallery" role="button" data-slide="next">
+                <a ng-if="images.length > 1" id="next" class="carousel-control-next d-flex position-absolute" href="#source-gallery" role="button" data-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Næste side af kilden</span>
                 </a>
-
             </div>
 
             <div id="toolbarDiv" class="text-right">
@@ -31,7 +26,7 @@
 
             <!--Politiets registerblade-->
             <div ng-if="data.collection_id == 17">
-                <h5>Om kilden</h5>
+                <h6>Om kilden</h6>
                 <p>Station {{data.station}}. Filmrulle {{data.film}}. Registerblad {{data.number}} (uniktid. {{data.registerblad_id}})</p>
                 <p ng-if="data.dateOfCompletion">Registerbladet er udfyldt: {{data.dateOfCompletion | date:'dd-MM-yyyy' }}</p>
                 <p ng-if="data.specialRemarks">Særlige bemærkninger: {{data.specialRemarks}}</p>
