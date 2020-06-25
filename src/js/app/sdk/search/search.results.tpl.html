@@ -52,8 +52,8 @@
                 aria-haspopup="true" aria-expanded="{{ allFacetsExpanded }}">Filtrer søgning</button>
             <div class="d-none d-lg-flex" aria-label="Filtrer søgning">
                 <button class="btn btn-outline-secondary dropdown-toggle" type="button" aria-haspopup="true"
-                    id="facet-button-{{facet.field}}"  ng-class="{disabled: !ctrl.facetFields[facet.field].buckets.length }"
-                    aria-expanded="facet.expanded" ng-repeat="facet in ctrl.facets" ng-click="ctrl.facetFields[facet.field].buckets.length ? expandFacet(facet) : null; $event.stopPropagation()">
+                    id="facet-button-{{facet.field}}" aria-disabled="{{!ctrl.facetFields[facet.field].buckets.length}}" ng-class="{disabled: !ctrl.facetFields[facet.field].buckets.length }"
+                    aria-expanded="{{facet.expanded == true}}" ng-repeat="facet in ctrl.facets" ng-click="ctrl.facetFields[facet.field].buckets.length ? expandFacet(facet) : null; $event.stopPropagation()">
                     {{ ctrl.fieldIndex[facet.field].view_name }}
                 </button>
             </div>
