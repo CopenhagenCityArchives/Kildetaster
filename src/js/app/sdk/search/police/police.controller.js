@@ -28,7 +28,6 @@ define([
         };
 
         this.goToPost = function(params) {
-            console.log(params);
 
             var url = $state.href('.', {postId: params.post_id});
             window.open(url,'_blank');
