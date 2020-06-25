@@ -11,31 +11,22 @@ define([
     var zoomImageDirective = function zoomImageDirective() {
 
         // Counter for how many times the directive has been used, used to build unique id's
-        //var num = 0;
-        var imgArray = [];
+        var num = 0;
 
         return {
 
             restrict: 'E',
 
             scope: {
-                images: '=',
+                image: '=',
                 index: '='
             },
 
             controller: ['$scope', '$compile', '$templateCache', '$element', '$timeout', function($scope, $compile, $templateCache, $element, $timeout) {
             
                 // Store current unique number on the scope
-                //$scope.num = num;
-                $scope.imgArray = imgArray;
+                $scope.num = num;
                 var viewer;
-
-                $scope.images.forEach(img => {
-                    $scope.imgArray.push({
-                        type: 'image',
-                        url: img
-                    })
-                });
 
                 //Prepare the template
                 var template = $compile(require('./zoom-image.directive.tpl.html'))($scope);
@@ -50,22 +41,18 @@ define([
                     //Initialize the viewer
 
                     viewer = OpenSeadragon({
-                        
-                        id: "zoom-image",
-                        sequenceMode: true,
-                        
+
                         // Turn off default buttons on the viewer, as we dont need those
                         showNavigator: false,
                         showHomeControl: false,
                         showFullPageControl: true,
                         
-                        toolbar: "toolbarDiv",
                         zoomInButton: "zoom-in",
                         zoomOutButton: "zoom-out",
                         homeButton: "home",
                         fullPageButton: "full-page",
                         nextButton: "next",
-                        previousButton: "prev",
+                        previousButton: "previous",
 
                         maxZoomPixelRatio: 4,
 
@@ -82,12 +69,17 @@ define([
                             pinchToZoom: true
                         },
                         
-                        tileSources: $scope.imgArray
+                        //element: document.querySelector('#zoom-image-' + num + '-' + $scope.index ),
+                        element: document.querySelector('#zoom-image-' + $scope.num + '-' + $scope.index ),
+                        tileSources: {
+                            type: 'image',
+                            url: $scope.image
+                        },
                     });
                 });
 
                 // Increment the counter for other instances of the directive
-                //num++;
+                num++;
             }]
 
         }
