@@ -1,4 +1,5 @@
 <div class="module-gallery post">
+    <h4>Kilden</h4>
     <div class="card text-white mb-3">
         <div class="card-body">
             <div id="source-gallery" class="carousel slide">
@@ -31,7 +32,7 @@
                 <p ng-if="data.specialRemarks">Særlige bemærkninger: {{data.specialRemarks}}</p>
 
                 <div ng-if="data.last_changed">
-                    <h3 class="post__sectionheader">Om indtastningen</h3>
+                    <h3>Om indtastningen</h3>
                     <p>Senest ændret: {{data.last_changed}}</p>
                     <p ng-if="data.registerblad_comment">Indtasters kommentar: {{data.registerblad_comment}}</p>
                 </div>
@@ -43,10 +44,10 @@
             <div ng-if="data.collection_id == 1">
                 <div class="row">
                     <div class="col">
-                        <a ng-if="data.kildeviser_url" href="{{data.kildeviser_url}}" target="_blank" class="btn btn-lg col erindring-btn">Vis i kildeviser</a>
+                        <button ng-if="data.kildeviser_url" href="{{data.kildeviser_url}}" target="_blank" class="btn btn-lg col erindring-btn">Vis i kildeviser</button>
                     </div>
                     <div class="col">
-                        <button ng-if="data.showEditorLink" href="{{data.editorUrl}}" target="_blank" class="btn btn-lg col erindring-btn">Vis i kildetaster</button>
+                        <button ng-if="true" href="{{editorUrl}}" target="_blank" class="btn btn-lg col erindring-btn">Vis i kildetaster</button>
                     </div>
                 </div>
 
