@@ -1,22 +1,18 @@
 <div id="nav-start"></div>
 <div class="page-header">
-    <div class="row">
-        <div class="col align-self-end">
-            <a id="jumpTo" class="sr-only sr-only-focusable float-lg-right" tabindex="0" ng-click="$ctrl.jumpTo()">Gå direkte til indhold</a>
-        </div>
-    </div>
-    <div class="container-fluid" ng-if="$ctrl.partOfSearch">
+    <div class="container-fluid">
         <header class="row">
             <div class="col-lg-4">
-                <h1>Søg person</h1>
+                <h1 ng-if="$ctrl.partOfSearch">Søg person</h1>
             </div>
 
             <div class="col-lg-6">
-                <span>Resultat {{ $ctrl.index }} af {{ $ctrl.numFound }}</span>
+                <span ng-if="$ctrl.partOfSearch">Resultat {{ $ctrl.index }} af {{ $ctrl.numFound }}</span>
             </div>
 
             <div class="col-lg-2">
-                <a ui-sref="search.page.results" class="btn btn-primary float-lg-right">Tilbage til søgeresultat</a>
+                <a id="jumpTo" class="sr-only sr-only-focusable float-lg-right" tabindex="0" ng-click="$ctrl.jumpTo()">Gå direkte til indhold</a>
+                <a ng-if="$ctrl.partOfSearch" ui-sref="search.page.results" class="btn btn-primary float-lg-right">Tilbage til søgeresultat</a>
             </div>
         </header>
 
