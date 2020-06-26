@@ -25,7 +25,8 @@
             <li class="breadcrumb-item"><a href="/"><feather class="medium-icon" icon='home'></feather><span class="sr-only">Hjem</span></a></li>
             <li class="breadcrumb-item"><a ui-sref="search.page">Søg person</a></li>
             <li class="breadcrumb-item"><a ui-sref="search.page.results">Søgeresultater</a></li>
-            <li class="breadcrumb-item active" aria-current="page" tabindex='-1'>{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</li>
+            <li ng-if="$ctrl.data.firstnames || $ctrl.data.lastname || $ctrl.data.birthname" class="breadcrumb-item active" aria-current="page" tabindex='-1'>{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</li>
+            <li ng-if="$ctrl.data.date" class="breadcrumb-item active" aria-current="page" tablindex='-1'>Efterretning: {{$ctrl.formatDate($ctrl.data.date)}} </li>
         </ol>
     </nav>       
 </div>
@@ -38,8 +39,8 @@
                     <a href="#" class="btn btn-primary mx-2" ng-click="$ctrl.next()" ng-disabled="$ctrl.disableNext()">Næste</a>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <h2>{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</h2>
+            <div class="col-lg-6 my-4">
+                <h2 class="mb-2">{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</h2>
                 <h2 ng-if="$ctrl.data.collection_id === 19">Efterretninger</h2>
                 <h3 ng-if="$ctrl.data.collection_info">{{$ctrl.data.collection_info}}</h3>
                 <h3 ng-if="$ctrl.data.collection_id === 19">Politiets efterretninger</h3>

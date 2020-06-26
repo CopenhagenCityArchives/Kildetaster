@@ -5,8 +5,8 @@
     <section class="row">
 
         <div class="col-lg-6">
-            
-            <table class="table table-striped" aria-labelledby="data-erindringen">
+            <h4>Personen</h4>
+            <table class="table table-striped mb-5" aria-labelledby="data-erindringen">
                 <caption class="sr-only">Data om erindringen</caption>
                 <tbody>
                     <tr ng-if="$ctrl.data.period">
@@ -57,7 +57,7 @@
             </table>
 
             <h4 id="data-erhverv" ng-if="$ctrl.data.position || $ctrl.data.position_parent ||$ctrl.data.position_spouse"0>Erhverv</h4>
-            <table class="table table-striped" aria-labelledby="data-erhverv" ng-if="$ctrl.data.position || $ctrl.data.position_parent ||$ctrl.data.position_spouse" >
+            <table class="table table-striped mb-5" aria-labelledby="data-erhverv" ng-if="$ctrl.data.position || $ctrl.data.position_parent ||$ctrl.data.position_spouse" >
                 <caption class="sr-only">Data om Erhverv</caption>
                  <tbody>
                     <tr ng-if="$ctrl.data.position">
@@ -88,7 +88,7 @@
             </table>
 
             <h4 id="data-sogekontekst" ng-if="$ctrl.data.highlighting.erindring_document_text">Søgekontekst</h4>
-            <table role="list" class="table table-striped" aria-labelledby="data-sogekontekst" ng-if="$ctrl.data.highlighting.erindring_document_text">
+            <table role="list" class="table table-striped mb-5" aria-labelledby="data-sogekontekst" ng-if="$ctrl.data.highlighting.erindring_document_text">
                 <caption class="sr-only">Teksten markeret med fed er det eller de ord, søgemaskinen har fundet</caption>
                 <tbody>
                     <tr ng-repeat="highlight in $ctrl.data.highlighting.erindring_document_text">
@@ -101,7 +101,7 @@
 
             <div ng-if="$ctrl.data.keywords && $ctrl.data.keywords.length > 0">
                 <h4 id="data-erindringen-omhandler">Erindringen omhandler</h4>
-                <table role="list" class="table table-striped" aria-labelledby="Erindringen omhandler">
+                <table role="list" class="table table-striped mb-5" aria-labelledby="Erindringen omhandler">
                     <caption class="sr-only">Erindringen omhandler</caption>
                     <tbody>
                         <tr>
@@ -115,7 +115,7 @@
 
             <div ng-if="$ctrl.data.description">
                 <h4 id="data-beskrivelse">Beskrivelse</h4>
-                <table role="list" class="table table-striped" aria-labelledby="data-beskrivelse">
+                <table role="list" class="table table-striped mb-5" aria-labelledby="data-beskrivelse">
                     <caption class="sr-only">Beskrivelse af erindringen</caption>
                     <tbody>
                         <tr>
@@ -134,12 +134,14 @@
                 <div class="card text-white mb-3">
                     <div class="card-body d-block w-100">
                         <div class="row">
-                            <a ng-href="{{$ctrl.getAssetHref()}}" target="_blank" class="btn btn-lg col erindring-btn">Hent erindring som pdf</a>
-                            <a ng-if="$ctrl.data.transcribed" ng-href="{{$ctrl.getTranscribedAssetHref()}}" target="_blank" class="btn btn-lg col erindring-btn">Renskrift</a>
+                            <div class="col">
+                                <a ng-href="{{$ctrl.getAssetHref()}}" target="_blank" class="btn btn-block erindring-btn">Hent erindring som pdf</a>
+                                <a ng-if="$ctrl.data.transcribed" ng-href="{{$ctrl.getTranscribedAssetHref()}}" target="_blank" class="btn btn-block erindring-btn">Renskrift</a>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col">
-                                <h6>Om kilden</h6>
+                                <h4>Om kilden</h4>
                                 <p>Omfang: {{$ctrl.data.extent}}<span ng-if="$ctrl.data.writeMethod">, {{$ctrl.data.writeMethod}}</span></p>
                                 <p ng-if="$ctrl.data.dateOfCompletion">Registerbladet er udfyldt: {{$ctrl.data.dateOfCompletion | date:'dd-MM-yyyy' }}</p>
                                 <p ng-if="$ctrl.data.specialRemarks">Særlige bemærkninger: {{$ctrl.data.specialRemarks}}</p>

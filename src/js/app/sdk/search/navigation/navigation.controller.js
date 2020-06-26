@@ -118,6 +118,10 @@ define([], function() {
             }
         };
 
+        this.formatDate = function(datestring) {
+            return moment(datestring).format("LL");
+          }
+
         this.jumpTo = function() {
             
             scrollFocusService.scrollTo('post-content', 'permalink_btn');
