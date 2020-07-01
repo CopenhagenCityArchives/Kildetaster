@@ -1,5 +1,4 @@
-<!-- New Results -->
-<div ng-if="!ctrl.error" class="search-results">
+<div class="search-results">
     <header class="page-header">
         <div class="container-fluid">
             <div class="row">
@@ -10,8 +9,8 @@
                         <search-config-text class="search-config-text" config="ctrl.queries" collections="ctrl.collections">
                             <post-count ng-if="!ctrl.error && ctrl.results" page="ctrl.page" total="ctrl.results.numFound" posts-pr-page="ctrl.postsPrPage">
                             </post-count>
-                            <div ng-if="!ctrl.error && !ctrl.results && ctrl.searching" class="post-count text-muted">Søger...</div>
-                            <div ng-if="ctrl.error" class="post-count text-danger">En fejl opstod. Prøv igen.</div>
+                            <div ng-if="!ctrl.error && !ctrl.results && ctrl.searching" class="post-count text-muted">Henter resultater</div>
+                            <div ng-if="ctrl.error" class="post-count text-danger">En fejl opstod under hentningen af resultater</div>
                         </search-config-text>
                     </div>
                 <div class="col-lg-2">
@@ -43,7 +42,7 @@
         <div get-dom-content="search-app-error"></div>
     </section>
     
-    <div class="container-fluid search-container" ng-if="ctrl.results.docs.length > 0">
+    <div class="container-fluid search-container" ng-if="!ctrl.error && ctrl.results.docs.length > 0">
         <section class="filters float-lg-left">
             <button type="button" class="btn btn-primary d-block d-lg-none dropdown-toggle" ng-click="expandFacets()"
                 aria-haspopup="true" aria-expanded="{{ allFacetsExpanded }}">Filtrer søgning</button>
@@ -75,7 +74,7 @@
             <section class="sort d-flex align-items-center justify-content-lg-end">
                 <form class="items-per-page form-inline mr-2" role="form" aria-labelledby="sort-by-label">
                     <div class="form-group">
-                        <label for="sort-by" id="sort-by-label" class="mr-3">Sorter efter</label>
+                        <label for="sort-by" id="sort-by-label" class="mr-3">Sorter efter<span class="sr-only"> det valgte felt, straks når det vælges</span></label>
                         <select
                             class="form-control"
                             id="sort-by"
@@ -130,7 +129,7 @@
         <div class="d-lg-flex align-items-center justify-content-between">
             <form class="items-per-page form-inline" role="form" aria-labelledby="results-per-page-label">
                 <div class="form-group">
-                    <label for="per-page" id="results-per-page-label" class="mr-3">Personer per side</label>
+                    <label for="per-page" id="results-per-page-label" class="mr-3">Personer per side<span class="sr-only">, der vises straks når et tal vælges</span></label>
                     <select class="form-control" id="per-page"
                         ng-change="ctrl.setPostsPrPage()" 
                         ng-model="ctrl.postsPrPage"

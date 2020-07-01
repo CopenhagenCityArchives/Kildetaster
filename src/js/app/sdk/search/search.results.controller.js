@@ -3,6 +3,7 @@ define([
 
 ], function () {
     var searchResultsController = [
+        '$q',
         '$timeout',
         '$scope',
         '$state',
@@ -15,6 +16,7 @@ define([
         '$element',
         'Analytics',
         function searchResultsController(
+            $q,
             $timeout,
             $scope,
             $state,
@@ -252,6 +254,8 @@ define([
         // TODO update to use that
         */
         $scope.doSearch = function doSearch(forceNew) {
+            var deferred = $q.defer();
+
             if (forceNew) {
                 solrService.clearSearchData();
             }
@@ -283,58 +287,61 @@ define([
                 that.page * that.postsPrPage,
                 that.postsPrPage
             )
-                .then(function (response) {
-                    that.results = response.response;
+            .then(function(response) {
+                that.results = response.response;
 
-                    //Reset page number and search again if no results are found on current page
-                    if (that.results && that.results.numFound == 0 && that.page > 1) {
-                        that.page = 1;
-                        $scope.doSearch(true);
-                    }
+                //Reset page number and search again if no results are found on current page
+                if (that.results && that.results.numFound == 0 && that.page > 1) {
+                    that.page = 1;
+                    $scope.doSearch(true);
+                }
 
-                    if(that.results && that.results.numFound == 0 && that.filterQueries.length > 0) {
-                        that.filterQueries = [];
-                        $scope.doSearch(true);
-                    }
+                if(that.results && that.results.numFound == 0 && that.filterQueries.length > 0) {
+                    that.filterQueries = [];
+                    $scope.doSearch(true);
+                }
 
-                    // process documents
-                    angular.forEach(that.results.docs, function (doc, index) {
-                        // Add highlighting to individual documents
-                        angular.forEach(response.highlighting, function (highlights, docId) {
-                            if (doc.id === docId) {
-                                doc.highlighting = highlights;
-                            }
-                        });
-                    });
-
-                    that.facetFields = [];
-                    angular.forEach(response.facets, function(value, key) {
-                        if(response.facets[key].buckets && response.facets[key].buckets.length > 0){
-                            this[key] = response.facets[key];
+                // process documents
+                angular.forEach(that.results.docs, function (doc, index) {
+                    // Add highlighting to individual documents
+                    angular.forEach(response.highlighting, function (highlights, docId) {
+                        if (doc.id === docId) {
+                            doc.highlighting = highlights;
                         }
-                    }, that.facetFields);
-
-                    // restore focus if we came from filtering
-                    if ($scope.restoreBucketFocus) {
-                        $timeout(function() {
-                            var selector = '#facet-bucket-' + $scope.restoreBucketFocus.facet.field + '-';
-                            if (typeof $scope.restoreBucketFocus.bucket.val == 'string') {
-                                selector += $scope.restoreBucketFocus.bucket.val.replace(' ', '-');
-                            } else {
-                                selector += $scope.restoreBucketFocus.bucket.val;
-                            }
-                            var restoreBucketElement = angular.element($element).find(selector);
-                            restoreBucketElement.focus();
-                        })
-                    }
-                    
-                }).catch(function (err) {
-                    console.log('Error in search:', err);
-                    that.error = true;
-                    //Error handling
-                }).finally(function () {
-                    that.searching = false;
+                    });
                 });
+
+                that.facetFields = [];
+                angular.forEach(response.facets, function(value, key) {
+                    if(response.facets[key].buckets && response.facets[key].buckets.length > 0){
+                        this[key] = response.facets[key];
+                    }
+                }, that.facetFields);
+
+                // restore focus if we came from filtering
+                if ($scope.restoreBucketFocus) {
+                    $timeout(function() {
+                        var selector = '#facet-bucket-' + $scope.restoreBucketFocus.facet.field + '-';
+                        if (typeof $scope.restoreBucketFocus.bucket.val == 'string') {
+                            selector += $scope.restoreBucketFocus.bucket.val.replace(' ', '-');
+                        } else {
+                            selector += $scope.restoreBucketFocus.bucket.val;
+                        }
+                        var restoreBucketElement = angular.element($element).find(selector);
+                        restoreBucketElement.focus();
+                    })
+                }
+
+                deferred.resolve();
+            })
+            .catch(function (err) {
+                console.log('Error in search:', err);
+                that.error = true;
+                deferred.reject();
+            })
+            .finally(function () {
+                that.searching = false;
+            });
 
             var thisSearch = {
                 queries: that.queries,
@@ -350,11 +357,13 @@ define([
             searchService.currentSearch = thisSearch;
 
             searchService.setSearch(thisSearch);
+
+            return deferred.promise;
         };
 
         that.goToResults = function goToResults() {
             $location.hash('search-results');
-            $('#search-results').focus();
+            $('#search-results > tbody > tr:first-child').focus();
             $anchorScroll();
         }
 
@@ -364,7 +373,13 @@ define([
             // Store current page in the search service
             searchService.currentSearch.page = that.page;
 
-            $scope.doSearch(true);
+            $scope.doSearch(true)
+            .then(function() {
+                console.log('got results');
+                $timeout(function() {
+                    $('#search-results > tbody > tr:first-child').focus();
+                });
+            });
             Analytics.trackEvent('person_search', 'go_to_result_page', 'go_to_result_page.'+ that.page);
         }
 
