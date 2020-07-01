@@ -11,7 +11,7 @@
             </div>
 
             <div class="col-lg-2">
-                <a id="jumpTo" class="sr-only sr-only-focusable float-lg-right" tabindex="0" ng-click="$ctrl.jumpTo()" ng-keydown="($event.keyCode === 13 || $event.keyCode === 32) && $ctrl.jumpTo()">Gå direkte til indhold</a>
+                <a id="jumpTo" class="sr-only sr-only-focusable float-lg-right" tabindex="0" ng-click="$ctrl.jumpTo()" ng-keypress="($event.keyCode === 13 || $event.keyCode === 32) && $ctrl.jumpTo()">Gå direkte til indhold</a>
                 <a ng-if="$ctrl.partOfSearch" ui-sref="search.page.results" class="btn btn-primary float-lg-right">Tilbage til søgeresultat</a>
             </div>
         </header>
