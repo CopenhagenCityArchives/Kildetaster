@@ -70,35 +70,33 @@
                     <p id="advanced-lower-text" get-dom-content="search-app-lower-text"></p>
                     <div ng-repeat="row in ctrl.queries">
                         <div class="form-row" role="group" aria-label="{{$index + 1}}. søgeparameter">
-                                    <div class="form-group col-md-4">
-
-                                        <label for="field-{{$index + 1}}">Felt</label>
-                                        <select class="form-control" id="field-{{$index + 1}}"
-                                            ng-model="row.field" ng-change="ctrl.clearRow(row)"
-                                            ng-options="field.view_name for field in fields | filter:{searchable:true} | filter:fieldCollectionFilter">
-                                        </select>
-                                    </div>
+                            <div class="form-group col-md-4">
+                                <label for="field-{{$index + 1}}">Felt</label>
+                                <select class="form-control" ng-attr-id="field-{{$index + 1}}"
+                                    ng-model="row.field" ng-change="ctrl.clearRow(row)"
+                                    ng-options="field.view_name for field in fields | filter:{searchable:true} | filter:fieldCollectionFilter">
+                                </select>
+                            </div>
 
                             
-                                <div class="form-group col-md-4">
+                            <div class="form-group col-md-4">
+                                <label for="operator-{{$index + 1}}">Operator</label>
+                                <select class="form-control" ng-attr-id="operator-{{$index + 1}}"
+                                    ng-options="operators[operator] as operators[operator].label for operator in types[row.field.type].operators"
+                                    ng-model="row.operator" ng-change="shouldEscape(row, row.operator)">
+                                    <option>Vælg</option>
+                                </select>
+                            </div>
 
-                                    <label for="operator-{{$index + 1}}">Operator</label>
-                                    <select class="form-control" id="operator-{{$index + 1}}"
-                                        ng-options="operators[operator] as operators[operator].label for operator in types[row.field.type].operators"
-                                        ng-model="row.operator" ng-change="shouldEscape(row, row.operator)">
-                                            <option>Vælg</option>
-                                        </select>
-                                </div>
-
-                                <div class="form-group col-md-3">
-                                    <label for="search-{{$index + 1}}">Søgeterm</label>
-                                        <term-field id="search-{{$index + 1}}" type="row.field.type" data="row" submit-func="ctrl.submitSearch(event)">
-                                        </term-field>
-                                </div>
-                                
-                                <div class="form-group col-md-1">
-                                    <button class="btn btn btn-outline-danger btn-icon" type="button" ng-click="ctrl.removeField($index, $event)" ng-if="ctrl.queries.length > 1"><feather icon='trash-2'></feather><span class="sr-only">Fjern rækken</span></button>
-                                </div>    
+                            <div class="form-group col-md-3">
+                                <label for="search-{{$index + 1}}">Søgeterm</label>
+                                <term-field ng-attr-id="search-{{$index + 1}}" type="row.field.type" data="row" submit-func="ctrl.submitSearch(event)">
+                                </term-field>
+                            </div>
+                            
+                            <div class="form-group col-md-1">
+                                <button class="btn btn btn-outline-danger btn-icon" type="button" ng-click="ctrl.removeField($index, $event)" ng-if="ctrl.queries.length > 1"><feather icon='trash-2'></feather><span class="sr-only">Fjern rækken</span></button>
+                            </div>    
                         </div>
                     </div>
 

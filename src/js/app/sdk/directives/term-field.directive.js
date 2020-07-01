@@ -2,9 +2,10 @@ define([
     'angular'
 ], function(angular) {
 
-    var termFieldDirective = ['$http', '$sce', '$timeout', 'API_URL', 'TYPEAHEAD_MAX', function($http, $sce, $timeout, API_URL, TYPEAHEAD_MAX) {
+    var termFieldDirective = ['$http', '$sce', '$timeout', '$compile', 'API_URL', 'TYPEAHEAD_MAX', function($http, $sce, $timeout, $compile, API_URL, TYPEAHEAD_MAX) {
 
-        var $directiveElement = undefined;
+        var $directiveElement;
+        var domId;
 
         return {
 
@@ -18,10 +19,49 @@ define([
 
             template: '<div></div>',
 
-            controller: ['$scope', '$compile', '$element', function($scope, $compile, $element) {
-                $directiveElement = $element;
+            link: function(scope, el, attrs, controller) {
+                domId = attrs.id;
+                $directiveElement = angular.element(el);
 
+                scope.getTemplate = function getTemplate() {
+                    switch (scope.type) {
+                        case 'typeahead':
+                            //Fields with enum are also identified as being of type typeahead, but we do not have a datasource for them
+                            //we there fore change the type for these fields, and handle them in a different template
+                            if (scope.data.field.enum && scope.data.field.enum.length > 0) {
+                                return require('./term-field.directive--select.tpl.html');
+                            }
+                            return require('./term-field.directive--typeahead.tpl.html');
+                        case 'date':
+                            scope.placeholder = 'dd-mm-åååå';
+                            return require('./term-field.directive--date.tpl.html');
+                        case 'string':
+                        case 'string_multivalued':
+                        case 'number':
+                        default:
+                            scope.placeholder = 'Søgeterm';
+                            return require('./term-field.directive--string.tpl.html');
+                    }
+                };
 
+                scope.compile = function() {
+                    var $compiled = $compile(scope.getTemplate())(scope);
+                    $compiled.attr('id', domId);
+                    $directiveElement.replaceWith($compiled);
+                    $directiveElement = $compiled;
+
+                    // a dirty fix for bootstrap4 styling
+                    if (scope.type == 'typeahead') {
+                        $timeout(function() {
+                            $compiled.find('.btn-default').addClass('btn-outline-secondary')
+                        });
+                    }
+                };
+
+                scope.compile();
+            },
+
+            controller: ['$scope', function($scope) {
                 /**
                 * Local proxy function to handle sending function parameters
                 */
@@ -88,52 +128,10 @@ define([
 
                 };
 
-                /**
-                *
-                */
-                $scope.getTemplate = function getTemplate() {
-                    switch ($scope.type) {
-                        case 'typeahead':
-                            //Fields with enum are also identified as being of type typeahead, but we do not have a datasource for them
-                            //we there fore change the type for these fields, and handle them in a different template
-                            if ($scope.data.field.enum && $scope.data.field.enum.length > 0) {
-                                return require('./term-field.directive--select.tpl.html');
-                            }
-                            return require('./term-field.directive--typeahead.tpl.html');
-                        case 'date':
-                            $scope.placeholder = 'dd-mm-åååå';
-                            return require('./term-field.directive--date.tpl.html');
-                        case 'string':
-                        case 'string_multivalued':
-                        case 'number':
-                        default:
-                            $scope.placeholder = 'Søgeterm';
-                            return require('./term-field.directive--string.tpl.html');
-                    }
-                }
-
-                $scope.compile = function() {
-                    var $compiled = $compile($scope.getTemplate())($scope);
-                    $directiveElement.replaceWith($compiled);
-
-                    // keep track of which element to replace, if we need to do it again
-                    $directiveElement = $compiled;
-
-                    // a dirty fix for bootstrap4 styling
-                    if ($scope.type == 'typeahead') {
-                        $timeout(function() {
-                            $compiled.find('.btn-default').addClass('btn-outline-secondary')
-                        });
-                    }
-                }
-
                 // recompile when type is changed
                 $scope.$watch('type', function() {
                     $scope.compile();
                 })
-
-                // and compile on init
-                $scope.compile();
             }]
 
         }
