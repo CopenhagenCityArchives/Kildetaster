@@ -3,25 +3,30 @@
     <div class="card text-white mb-3">
         <div class="card-body">
 
-            <div id="source-gallery" class="carousel slide">
+            <div id="source-gallery" class="carousel slide" data-interval="false">
+                <ol ng-if="images.length > 1" class="carousel-indicators">
+                    <li ng-repeat="img in images" data-target="#source-gallery" data-slide-to="{{$index}}" ng-class="{active : $index == 0}"></li>
+                </ol>
                 <div class="carousel-inner">
-                    <zoom-image class="d-block w-100" images="images" index="$index"></zoom-image>
+                    <a ng-repeat="imageObj in imageObjects" class="carousel-item" ng-class="{active : $index == 0}" role="button" data-toggle="modal" data-target="#source-gallery-modal">
+                        <zoom-image zoom-out="imageObj.zoomOutFn" zoom-in="imageObj.zoomInFn" full-page="imageObj.fullPageFn" class="d-block w-100" image="imageObj.imageUrl" index="$index"></zoom-image>
+                    </a>
                 </div>
                 
-                <a ng-if="imageNum > 1" id="previous" class="carousel-control-prev d-flex position-absolute" href="#source-gallery" role="button" data-slide="prev">
+                <a ng-if="arrayLength > 1" id="previous" class="carousel-control-prev" href="#source-gallery" role="button" data-slide="prev" ng-click="setActiveImage('prev')">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Forrige side af kilden</span>
                 </a>
-                <a ng-if="imageNum > 1" id="next" class="carousel-control-next d-flex position-absolute" href="#source-gallery" role="button" data-slide="next">
+                <a ng-if="arrayLength > 1" id="next" class="carousel-control-next" href="#source-gallery" role="button" data-slide="next" ng-click="setActiveImage('next')">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Næste side af kilden</span>
                 </a>
             </div>
 
             <div id="toolbarDiv" class="text-right">
-                <button id="zoom-out" type="button" class="btn btn-link"><feather class="medium-icon text-white" icon='zoom-out' style="color:white"></feather><span class="sr-only">Zoom ud</span></button>
-                <button id="zoom-in"  type="button" class="btn btn-link"><feather class="medium-icon text-white" icon='zoom-in' style="color:white"></feather><span class="sr-only">Zoom ind</span></button>
-                <button id="full-page" type="button" class="btn btn-link"><feather class="medium-icon text-white" icon='maximize-2' style="color:white"></feather><span class="sr-only">Åbn galleriet i fuld skærm</span></button>
+                <button id="zoom-out-custom" type="button" ng-click="zoomOut()" class="btn btn-link"><feather class="medium-icon text-white" icon='zoom-out' style="color:white"></feather><span class="sr-only">Zoom ud</span></button>
+                <button id="zoom-in-custom"  type="button" ng-click="zoomIn()" class="btn btn-link"><feather class="medium-icon text-white" icon='zoom-in' style="color:white"></feather><span class="sr-only">Zoom ind</span></button>
+                <button id="fullPage-custom" type="button" ng-click="fullPage()" class="btn btn-link"><feather class="medium-icon text-white" icon='maximize-2' style="color:white"></feather><span class="sr-only">Åbn galleriet i fuld skærm</span></button>
             </div>
 
             <!--Politiets registerblade-->

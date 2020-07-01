@@ -3,7 +3,7 @@ define([
     'angular',
     'openseadragon',
     'openseadragonselection',
-    'openseadragon-filtering'
+    'openseadragon-filtering',
 
 ], function(ang, OpenSeadragon, osdSelection, filtering) {
 
@@ -18,23 +18,32 @@ define([
             restrict: 'E',
 
             scope: {
-                images: '=',
-                index: '='
+                image: '=',
+                index: '=',
+                zoomOut: '=',
+                zoomIn: '=',
+                fullPage: '=',
             },
 
             controller: ['$scope', '$compile', '$templateCache', '$element', '$timeout', function($scope, $compile, $templateCache, $element, $timeout) {
             
+
                 // Store current unique number on the scope
                 $scope.num = num;
+                
+                $scope.zoomOut = function() {
+                    viewer.viewport.zoomBy(0.9);
+                };
+
+                $scope.zoomIn = function() {
+                    viewer.viewport.zoomBy(1.1)
+                };
+
+                $scope.fullPage = function() {
+                    viewer.setFullScreen(true);
+                };
+                
                 var viewer;
-                var imageArray = new Array();
-                $scope.imageArray = imageArray;
-                $scope.images.forEach(img => {
-                    imageArray.push({
-                        type: 'image',
-                        url: img
-                    })
-                });
 
                 //Prepare the template
                 var template = $compile(require('./zoom-image.directive.tpl.html'))($scope);
@@ -49,9 +58,6 @@ define([
 
                     viewer = OpenSeadragon({
                         
-                        id: "zoom-image-" + $scope.num,
-                        sequenceMode: true,
-
                         // Turn off default buttons on the viewer, as we dont need those
                         showNavigator: false,
                         showHomeControl: false,
@@ -60,7 +66,7 @@ define([
                         zoomInButton: "zoom-in",
                         zoomOutButton: "zoom-out",
                         homeButton: "home",
-                        fullPageButton: "full-page",
+                        fullPageButton: "full-page-"+ $scope.num,
                         nextButton: "next",
                         previousButton: "previous",
 
@@ -79,18 +85,16 @@ define([
                             pinchToZoom: true
                         },
                         
-                        //element: document.querySelector('#zoom-image-' + $scope.num ),
-                        /*tileSources: {
+                        element: document.querySelector('#zoom-image-' + $scope.num),
+                        tileSources: {
                             type: 'image',
                             url: $scope.image
-                        },*/
-                        tileSources: imageArray
+                        }
                     });
                 });
 
                 // Increment the counter for other instances of the directive
                 num++;
-                $scope.images = [];
             }],
 
         }
