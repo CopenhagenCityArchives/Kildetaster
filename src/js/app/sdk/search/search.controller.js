@@ -171,20 +171,19 @@ define([
         */
         that.addField = function addField(defaultFieldName, term, op) {
             // verify and set default field
-            if (!searchConfig.fields.hasOwnProperty(defaultFieldName)) {
-                return;
+            if (!searchConfig.fields.hasOwnProperty(defaultFieldName) || !$scope.fieldCollectionFilter(searchConfig.fields[defaultFieldName])) {
+                defaultFieldName = "freetext_store";
             }
 
             var field = searchConfig.fields[defaultFieldName];
 
             // verify
-            if (!searchConfig.types.hasOwnProperty(field.type) ||
-                (op && !searchConfig.types[field.type].operators.includes(op))) {
+            if (!searchConfig.types.hasOwnProperty(field.type)) {
                 return;
             }
 
             var operator;
-            if (op) {
+            if (op && searchConfig.types[field.type].operators.includes(op)) {
                 operator = searchConfig.operators[op];
             } else {
                 operator = searchConfig.operators[searchConfig.types[field.type].operators[0]];
