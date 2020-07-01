@@ -27,15 +27,18 @@ define([
                 $scope.editorUrl = EDITOR_URL + '#/task/' + $scope.data.task_id + '/page/' + $scope.data.page_id + '/post/' + $scope.data.post_id;
                 $scope.arrayLength = $scope.images.length;
                 $scope.activeImage = 0;
-
+                
                 $scope.setActiveImage = function() {
+                    console.log("before slide: ", $scope.activeImage);
 
                     $("#source-gallery").on('slid.bs.carousel', function () {
                         var index = $('.carousel-item.active').index();
                         $scope.activeImage = index;
-                        console.log('index: ',$scope.activeImage);
+                        console.log('mid slide')
+                        console.log('index: ', $scope.activeImage);
                     });
 
+                    console.log("after slide: ", $scope.activeImage);
                 }
 
                 $scope.zoomOut = function() {
