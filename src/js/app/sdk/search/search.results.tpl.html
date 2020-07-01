@@ -59,11 +59,10 @@
                 </button>
             </div>
             <div aria-label="Valgte filtre">
-                <div class="filter-link">
                 <p ng-if="ctrl.noSelectedFilters" class="sr-only">
                     Ingen aktive filtre
                 </p>
-                <filter-link ng-repeat="(field, filterQuery) in ctrl.filterQueries" facet="filterQuery.facet"
+                <filter-link class="mr-2" ng-repeat="(field, filterQuery) in ctrl.filterQueries" field="ctrl.fieldIndex[filterQuery.facet.field]" facet="filterQuery.facet"
                     bucket="filterQuery.bucket" url="filter.filterQuery" remove-func="toggleFilter">
                 </filter-link>
                 <button ng-if="!ctrl.noSelectedFilters" class="btn btn-link" ng-click="clearFilters()">Fjern filtre</button>
