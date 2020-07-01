@@ -15,6 +15,7 @@ define([
             
             controller:  ['$scope', function($scope) {
                 $scope.imageObjects = $scope.images.map(function(image) {
+                    console.log("imageObject Refresh");
                     return {
                         zoomInFn: null,
                         zoomOutFn: null,
@@ -28,7 +29,7 @@ define([
                 $scope.activeImage = 0;
 
                 $scope.setActiveImage = function(direction) {
-
+                    
                     var index = $scope.activeImage;
                     //wait for the sliding to finish
                     //This is done to avoid index "getting out of sync" with the active image
@@ -49,11 +50,13 @@ define([
                             }
                         }
                         $scope.activeImage = index;
+                        console.log($scope.activeImage);
                     });
 
                 }
 
                 $scope.zoomOut = function() {
+                    console.log($scope.imageObjects);
                     $scope.imageObjects[$scope.activeImage].zoomOutFn();
                 }
 
