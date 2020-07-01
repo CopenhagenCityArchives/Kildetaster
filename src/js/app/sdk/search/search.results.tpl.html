@@ -72,7 +72,7 @@
 
         <div class="float-lg-right">
             <section class="sort d-flex align-items-center justify-content-lg-end">
-                <form class="items-per-page form-inline mr-2" role="form" aria-labelledby="sort-by-label">
+                <form class="items-per-page form-inline mr-2" aria-labelledby="sort-by-label">
                     <div class="form-group">
                         <label for="sort-by" id="sort-by-label" class="mr-3">Sorter efter<span class="sr-only"> det valgte felt, straks når det vælges</span></label>
                         <select
@@ -128,7 +128,7 @@
         </table>
 
         <div class="d-lg-flex align-items-center justify-content-between">
-            <form class="items-per-page form-inline" role="form" aria-labelledby="results-per-page-label">
+            <form class="items-per-page form-inline" aria-labelledby="results-per-page-label">
                 <div class="form-group">
                     <label for="per-page" id="results-per-page-label" class="mr-3">Personer per side<span class="sr-only">, der vises straks når et tal vælges</span></label>
                     <select class="form-control" id="per-page"
@@ -154,7 +154,7 @@
                 label="Paginering under resultater">
             </pagination>
 
-            <form class="go-to-page form-inline" role="form" aria-labelledby="go-to-page-label" ng-submit="ctrl.goToPage(ctrl.pageNumber-1)">
+            <form class="go-to-page form-inline" aria-labelledby="go-to-page-label" ng-submit="ctrl.goToPage(ctrl.pageNumber-1)">
                 <div class="form-group mr-2">
                     <label for="go-to-page" id="go-to-page-label" class="mr-3">Spring til side</label>
                     <input type="number" class="form-control" id="go-to-page" placeholder="Sidetal" ng-model="ctrl.pageNumber">
