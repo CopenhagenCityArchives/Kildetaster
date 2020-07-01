@@ -1,4 +1,4 @@
-<nav class="nav-pagination" aria-label="Paginering under resultater">
+<nav class="nav-pagination" aria-label="{{ $ctrl.label }}">
     <ul class="pagination">
         <li class="page-item">
             <a class="page-link" ng-class="{'disabled': $ctrl.currentPage === 0}" href ng-click="$ctrl.prev()">
