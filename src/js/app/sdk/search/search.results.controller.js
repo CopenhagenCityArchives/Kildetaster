@@ -3,12 +3,11 @@ define([
 
 ], function () {
     var searchResultsController = [
-        '$q',
         '$timeout',
         '$scope',
-        '$stateParams',
         '$state',
         '$anchorScroll',
+        '$location',
         '$rootScope',
         'solrService',
         'searchService',
@@ -16,12 +15,11 @@ define([
         '$element',
         'Analytics',
         function searchResultsController(
-            $q,
             $timeout,
             $scope,
-            $stateParams,
             $state,
             $anchorScroll,
+            $location,
             $rootScope,
             solrService,
             searchService,
@@ -354,6 +352,12 @@ define([
             searchService.setSearch(thisSearch);
         };
 
+        that.goToResults = function goToResults() {
+            $location.hash('search-results');
+            $('#search-results').focus();
+            $anchorScroll();
+        }
+
         that.goToPage = function goToPage(page) {
             that.page = page;
 
@@ -361,9 +365,6 @@ define([
             searchService.currentSearch.page = that.page;
 
             $scope.doSearch(true);
-
-            $anchorScroll('results-start');
-
             Analytics.trackEvent('person_search', 'go_to_result_page', 'go_to_result_page.'+ that.page);
         }
 
@@ -455,9 +456,6 @@ define([
                     }
                 });
                 $scope.doSearch();
-
-                $anchorScroll('results-start');
-
             }
 
             $timeout(function () {

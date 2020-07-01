@@ -1,6 +1,3 @@
-<!-- For Anchoring purposes -->
-<div id="results-start"></div>
- 
 <!-- New Results -->
 <div ng-if="!ctrl.error" class="search-results">
     <header class="page-header">
@@ -18,7 +15,7 @@
                         </search-config-text>
                     </div>
                 <div class="col-lg-2">
-                    <a class="sr-only sr-only-focusable" href="#search-results">Gå direkte til søgeresultatet</a>
+                    <button class="sr-only sr-only-focusable btn btn-link float-lg-right" tabindex="0" ng-click="ctrl.goToResults()">Gå direkte til søgeresultatet</button>
                     <a href="" ui-sref="^" class="btn btn-primary float-lg-right">Ret søgning</a>
                 </div>
             </div>
@@ -51,9 +48,14 @@
             <button type="button" class="btn btn-primary d-block d-lg-none dropdown-toggle" ng-click="expandFacets()"
                 aria-haspopup="true" aria-expanded="{{ allFacetsExpanded }}">Filtrer søgning</button>
             <div class="d-none d-lg-flex" aria-label="Filtrer søgning">
-                <button class="btn btn-outline-secondary dropdown-toggle" type="button" aria-haspopup="true"
-                    id="facet-button-{{facet.field}}" aria-disabled="{{!ctrl.facetFields[facet.field].buckets.length}}" ng-class="{disabled: !ctrl.facetFields[facet.field].buckets.length }"
-                    aria-expanded="{{facet.expanded == true}}" ng-repeat="facet in ctrl.facets" ng-click="ctrl.facetFields[facet.field].buckets.length ? expandFacet(facet) : null; $event.stopPropagation()">
+                <button
+                    class="btn btn-outline-secondary dropdown-toggle" type="button"
+                    aria-haspopup="true" aria-expanded="{{facet.expanded == true}}"
+                    aria-disabled="{{!ctrl.facetFields[facet.field].buckets.length}}"
+                    ng-attr-id="facet-button-{{facet.field}}"
+                    ng-class="{disabled: !ctrl.facetFields[facet.field].buckets.length }"
+                    ng-repeat="facet in ctrl.facets"
+                    ng-click="ctrl.facetFields[facet.field].buckets.length ? expandFacet(facet) : null; $event.stopPropagation()">
                     {{ ctrl.fieldIndex[facet.field].view_name }}
                 </button>
             </div>
@@ -74,7 +76,11 @@
                 <form class="items-per-page form-inline mr-2" role="form" aria-labelledby="sort-by-label">
                     <div class="form-group">
                         <label for="sort-by" id="sort-by-label" class="mr-3">Sorter efter</label>
-                        <select class="form-control" id="sort-by" ng-model="ctrl.sortField" ng-options="field as field.view_name for (fieldName, field) in ctrl.fields | filter:{searchable:true, sortable:true} | filter:ctrl.fieldCollectionFilter">
+                        <select
+                            class="form-control"
+                            id="sort-by"
+                            ng-model="ctrl.sortField"
+                            ng-options="field as field.view_name for (fieldName, field) in ctrl.fields | filter:{searchable:true, sortable:true} | filter:ctrl.fieldCollectionFilter">
                         </select>
                     </div>
                 </form>
@@ -95,7 +101,7 @@
         <div class="clearfix"></div>
 
         <table id="search-results" class="table table-striped table-hover my-4" role="navigation"
-            aria-label="Søgeresultater">
+            aria-label="Søgeresultater" tabindex="-1">
             <caption class="sr-only" id="table-caption">Søgeresultater</caption>
             <thead>
                 <tr class="d-none d-md-table-row">
@@ -162,8 +168,6 @@
     <div class="sr-only" id="filter-desc">Vælg de filtre du vil filtrere din søgning med. Når du er færdig, kommer du
         tilbage til søgeresultaterne ved at trykke på knappen luk eller trykke escape.</div>
     <div class="list-group list-group-flush">
-        <!-- start repeat -->
-
         <button
             type="button"
             class="list-group-item list-group-item-action"
@@ -178,12 +182,12 @@
             ng-click="facet.expanded = !facet.expanded">{{ ctrl.fieldIndex[facet.field].view_name }}</button>
 
         <facet
-            ng-repeat-end 
-            ng-attr-id="filter-{{facet.field}}" 
+            ng-repeat-end
+            ng-attr-id="filter-{{facet.field}}"
             ng-class="{show: facet.expanded}"
 
             field="ctrl.fieldIndex[facet.field]"
-            filter-queries="ctrl.filterQueries" 
+            filter-queries="ctrl.filterQueries"
             facet="facet"
             buckets="ctrl.facetFields[facet.field].buckets"
             add-filter="toggleFilter"
