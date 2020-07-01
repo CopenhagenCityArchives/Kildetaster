@@ -28,35 +28,19 @@ define([
                 $scope.arrayLength = $scope.images.length;
                 $scope.activeImage = 0;
 
-                $scope.setActiveImage = function(direction) {
-                    
-                    var index = $scope.activeImage;
-                    //wait for the sliding to finish
-                    //This is done to avoid index "getting out of sync" with the active image
-                    $("#source-gallery").on('slid.bs.carousel', function () {
-                        if (direction == 'prev') {
-                            if (index > 0) {
-                                index = $scope.imageObjects.length - 1;
-                            } else {
-                                index = index - 1;
-                            }
-                        }
+                $scope.setActiveImage = function() {
 
-                        else if (direction == 'next') {
-                            if (index == $scope.imageObjects.length - 1) {
-                                index = 0;
-                            } else {
-                                index = index + 1;
-                            }
-                        }
+                    $("#source-gallery").on('slid.bs.carousel', function () {
+                        var index = $('.carousel-item.active').index();
                         $scope.activeImage = index;
-                        console.log($scope.activeImage);
+                        console.log('index: ',$scope.activeImage);
                     });
 
                 }
 
                 $scope.zoomOut = function() {
                     console.log($scope.imageObjects);
+                    console.log($scope.imageObjects[$scope.activeImage]);
                     $scope.imageObjects[$scope.activeImage].zoomOutFn();
                 }
 
