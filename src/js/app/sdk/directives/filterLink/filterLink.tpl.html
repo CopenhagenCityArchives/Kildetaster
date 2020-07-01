@@ -1,6 +1,6 @@
 <button type="button" class="btn btn-light chip" ng-click="remove()">
-    <span class="sr-only">Fjern </span>
-    <span ng-if="facet.type == 'range'">{{bucket.val}}-{{bucket.val+facet.gap}}</span>
+    <span class="sr-only">Fjern filtrering af {{facet.field.name}} med værdien</span>
+    <span ng-if="facet.type == 'range'">{{bucket.val}}&ndash;{{bucket.val+facet.gap}}</span>
     <span ng-if="facet.type == 'terms'">{{bucket.val}}</span>
     <feather icon='x'></feather>
 </button>
