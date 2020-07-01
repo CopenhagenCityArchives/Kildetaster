@@ -15,7 +15,6 @@ define([
             
             controller:  ['$scope', function($scope) {
                 $scope.imageObjects = $scope.images.map(function(image) {
-                    console.log("imageObject Refresh");
                     return {
                         zoomInFn: null,
                         zoomOutFn: null,
