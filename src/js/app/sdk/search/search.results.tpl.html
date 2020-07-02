@@ -42,7 +42,7 @@
         <div get-dom-content="search-app-error"></div>
     </section>
     
-    <div class="container-fluid search-container" ng-if="!ctrl.error && ctrl.results.docs.length > 0">
+    <div class="container-fluid search-container" ng-class="{ 'searching': ctrl.searching }" ng-if="!ctrl.error && ctrl.results.docs.length > 0">
         <section class="filters float-lg-left">
             <button type="button" class="btn btn-primary d-block d-lg-none dropdown-toggle" ng-click="expandFacets()"
                 aria-haspopup="true" aria-expanded="{{ allFacetsExpanded }}">Filtrer søgning</button>

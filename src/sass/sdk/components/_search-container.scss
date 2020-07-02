@@ -26,6 +26,11 @@
         }
     }
 
+    &.searching {
+        transition: opacity 400ms ease;
+        opacity: 0.3;
+    }
+
     & .page-item > .page-link {
         margin: 0px;
     }
