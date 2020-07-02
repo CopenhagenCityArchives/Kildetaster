@@ -1,35 +1,26 @@
 define([], function () {
 
-    var paginationController = function paginationController() {
+    var paginationController = ['$element', function paginationController($element) {
 
         var that = this;
 
         that.pagination = [];
         that.total = null;
 
-        this.goToFirst = function goToFirst() {
-            if (that.currentPage !== 0) {
-                that.goToPage({ page: 0 })
-            } 
-        };
-
-        this.goToLast = function goToLast() {
-            if (that.currentPage !== that.total - 1) {
-                that.goToPage({ page: that.total - 1 })
-            }
-        };
+        this.goToPage = function(page) {
+            that.goToPageFn({ page: page, button: 'page', element: $element })
+        }
 
         this.prev = function prev() {
             if (that.currentPage !== 0) {
-                that.goToPage({ page: that.currentPage - 1 })
+                that.goToPageFn({ page: that.currentPage - 1, button: 'prev', element: $element })
             }
         };
 
         this.next = function next() {
             if (that.currentPage !== that.total - 1) {
-                that.goToPage({ page: that.currentPage + 1 })
+                that.goToPageFn({ page: that.currentPage + 1, button: 'next', element: $element })
             }
-
         };
 
         this.buildPagination = function buildPagination() {
@@ -67,6 +58,7 @@ define([], function () {
             that.buildPagination();
         }
 
-    }
+    }];
+    
     return paginationController;
 })

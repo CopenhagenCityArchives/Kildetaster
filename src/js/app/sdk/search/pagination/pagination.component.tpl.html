@@ -6,18 +6,18 @@
                 <feather icon='arrow-left'></feather>
             </a>
         </li>
-        <li ng-if="$ctrl.currentPage > 2" class="page-item"><a class="page-link" href ng-click="$ctrl.goToPage({page: 0})">1</a></li>
+        <li ng-if="$ctrl.currentPage > 2" class="page-item"><a class="page-link" href ng-click="$ctrl.goToPage(0)">1</a></li>
         <li ng-if="$ctrl.currentPage > 2" class="page-item disabled">
             <div class="page-link"> — </div>
         </li>
         <li class="page-item" ng-repeat="page in $ctrl.pagination"
             ng-class="{ 'active': $ctrl.currentPage === page.page }">
-            <a class="page-link" href ng-click="$ctrl.goToPage({page: page.page})">{{ page.label }}</a>
+            <a class="page-link" href ng-click="$ctrl.goToPage(page.page)">{{ page.label }}</a>
         </li>
         <li ng-if="$ctrl.currentPage < $ctrl.total - 3" class="page-item disabled">
             <div class="page-link"> — </div>
         </li>
-        <li ng-if="$ctrl.currentPage < $ctrl.total - 3" class="page-item"><a class="page-link" href ng-click="$ctrl.goToPage({page: $ctrl.total - 1})">{{ $ctrl.total }}</a></li>
+        <li ng-if="$ctrl.currentPage < $ctrl.total - 3" class="page-item"><a class="page-link" href ng-click="$ctrl.goToPage($ctrl.total - 1)">{{ $ctrl.total }}</a></li>
         <li class="page-item">
             <a class="page-link" href ng-click="$ctrl.next()">
                 <span class="sr-only">Frem</span>

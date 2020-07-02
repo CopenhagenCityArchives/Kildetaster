@@ -9,7 +9,7 @@ define([
             currentPage: '<',
             numFound: '<',
             postsPrPage: '<',
-            goToPage: '&',
+            goToPageFn: '&',
             label: '@'
         },
         template: require('./pagination.component.tpl.html'),

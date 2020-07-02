@@ -367,19 +367,19 @@ define([
             $anchorScroll();
         }
 
-        that.goToPage = function goToPage(page) {
+        that.goToPage = function goToPage(page, button, element) {
             that.page = page;
+
+            if (button == 'page') {
+                $timeout(function() {
+                    element.find('.active > a').focus();
+                });
+            }
 
             // Store current page in the search service
             searchService.currentSearch.page = that.page;
 
-            $scope.doSearch(true)
-            .then(function() {
-                console.log('got results');
-                $timeout(function() {
-                    $('#search-results > tbody > tr:first-child').focus();
-                });
-            });
+            $scope.doSearch(true);
             Analytics.trackEvent('person_search', 'go_to_result_page', 'go_to_result_page.'+ that.page);
         }
 

@@ -92,7 +92,7 @@
                 current-page="ctrl.page"
                 num-found="ctrl.results.numFound"
                 posts-pr-page="ctrl.postsPrPage"
-                go-to-page="ctrl.goToPage(page)"
+                go-to-page-fn="ctrl.goToPage(page, button, element)"
                 label="Paginering over resultater">
             </pagination>
         </div>
@@ -149,7 +149,7 @@
                 current-page="ctrl.page"
                 num-found="ctrl.results.numFound"
                 posts-pr-page="ctrl.postsPrPage"
-                go-to-page="ctrl.goToPage(page)"
+                go-to-page-fn="ctrl.goToPage(page, button, element)"
                 label="Paginering under resultater">
             </pagination>
 
