@@ -362,9 +362,9 @@ define([
         };
 
         that.goToResults = function goToResults() {
-                $location.hash('search-results');
-                $('#search-results > tbody > tr:first-child').focus();
-                $anchorScroll();
+            $location.hash('search-results');
+            $('#search-results > tbody > tr:first-child').focus();
+            $anchorScroll();
         }
 
         that.goToPage = function goToPage(page) {
@@ -469,10 +469,13 @@ define([
                         that.collections[id].selected = true;
                     }
                 });
-                $scope.doSearch()
-                .then(function() {
-                    that.goToResults();
-                });
+                $scope.doSearch();
+
+                $timeout(function() {
+                    $anchorScroll('search-results-wrapper');
+                    $('#search-results-wrapper').focus();
+                    console.log('set focus on', $('#search-results-wrapper'));
+                })
             }
 
             $timeout(function() {
