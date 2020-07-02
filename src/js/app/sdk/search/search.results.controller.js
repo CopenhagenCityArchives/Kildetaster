@@ -362,9 +362,9 @@ define([
         };
 
         that.goToResults = function goToResults() {
-            $location.hash('search-results');
-            $('#search-results > tbody > tr:first-child').focus();
-            $anchorScroll();
+                $location.hash('search-results');
+                $('#search-results > tbody > tr:first-child').focus();
+                $anchorScroll();
         }
 
         that.goToPage = function goToPage(page) {
@@ -442,9 +442,8 @@ define([
 
                 //Trigger new search
                 $scope.doSearch(true);
-            }
-            // Entry into page that is already configured
-            else {
+            } else {
+                // Entry into page that is already configured
                 if (searchService.currentSearch.sortField && !searchService.currentSearch.sortField.collections.some(function(colId) {
                     return searchService.currentSearch.collections.indexOf(colId) != -1;
                 })) {
@@ -470,10 +469,13 @@ define([
                         that.collections[id].selected = true;
                     }
                 });
-                $scope.doSearch();
+                $scope.doSearch()
+                .then(function() {
+                    that.goToResults();
+                });
             }
 
-            $timeout(function () {
+            $timeout(function() {
                 that.initialized = true;
             });
         };
