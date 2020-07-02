@@ -1,6 +1,7 @@
 define([
     'jquery',
-], function($) {
+    'bootstrap-carousel',
+], function($, bs) {
         
     var galleryDirective = ['EDITOR_URL', function galleryDirective(EDITOR_URL) {
         return {
@@ -14,8 +15,8 @@ define([
             template: require('./gallery.directive.tpl.html'),
             
             controller:  ['$scope', function($scope) {
+                
                 $scope.imageObjects = $scope.images.map(function(image) {
-                    console.log("imageObject Refresh");
                     return {
                         zoomInFn: null,
                         zoomOutFn: null,
