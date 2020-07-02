@@ -477,20 +477,23 @@ define([
                     }
                 });
 
+                var rowFocusIsSet = false;
                 $scope.doSearch()
                 .then(function() {
                     if (restoreFocusRowIndex !== undefined) {
                         $timeout(function() {
-                            var element = $('#search-results > tbody > tr:nth-child('+ (restoreFocusRowIndex + 1) +')')
-                            console.log('setting focus on row:', element);
-                            element.focus();
+                            rowFocusIsSet = true;
+
+                            $('#search-results > tbody > tr:nth-child('+ (restoreFocusRowIndex + 1) +')').focus();
                         });
                     }
                 });
 
                 $timeout(function() {
-                    $anchorScroll('search-results-wrapper');
-                    $('#search-results-wrapper').focus();
+                    if (!rowFocusIsSet) {
+                        $anchorScroll('search-results-wrapper');
+                        $('#search-results-wrapper').focus();
+                    }
                 })
             }
 

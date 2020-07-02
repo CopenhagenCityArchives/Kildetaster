@@ -114,7 +114,7 @@
                 <tr search-result-row
                     ng-repeat="result in ctrl.results.docs"
                     ng-click="goToPost(result, $index)"
-                    ng-keydown="($event.keyCode === 13 || $event.keyCode === 32) && goToPost(result)"
+                    ng-keydown="($event.keyCode === 13 || $event.keyCode === 32) && goToPost(result, $index)"
                     result="result"
                     config="ctrl.fields"
                     index="$index"
