@@ -74,7 +74,10 @@ define([
             return found;
         }
       
-        $scope.goToPost = function (result) {
+        $scope.goToPost = function(result, $index) {
+            // store index for restoring focus if navigating back to this page
+            $rootScope.searchResultRowIndex = $index;
+
             $state.go('search.page.result.post', {
                 postId: result.id
             });
@@ -396,6 +399,10 @@ define([
         }
 
         that.init = function init() {
+            // retrieve search result row index for restoring focus, and unset
+            // it in $rootScope.
+            var restoreFocusRowIndex = $rootScope.searchResultRowIndex;
+            $rootScope.searchResultRowIndex = undefined;
 
             that.fieldIndex = searchConfig.fields;
             that.fields = Object.values(searchConfig.fields);
@@ -469,12 +476,21 @@ define([
                         that.collections[id].selected = true;
                     }
                 });
-                $scope.doSearch();
+
+                $scope.doSearch()
+                .then(function() {
+                    if (restoreFocusRowIndex !== undefined) {
+                        $timeout(function() {
+                            var element = $('#search-results > tbody > tr:nth-child('+ (restoreFocusRowIndex + 1) +')')
+                            console.log('setting focus on row:', element);
+                            element.focus();
+                        });
+                    }
+                });
 
                 $timeout(function() {
                     $anchorScroll('search-results-wrapper');
                     $('#search-results-wrapper').focus();
-                    console.log('set focus on', $('#search-results-wrapper'));
                 })
             }
 
