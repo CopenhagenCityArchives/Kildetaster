@@ -13,11 +13,11 @@
                     </a>
                 </div>
                 
-                <a ng-if="arrayLength > 1" id="previous" class="carousel-control-prev" href="#source-gallery" role="button" data-slide="prev">
+                <a ng-if="arrayLength > 1" id="previous" class="carousel-control-prev" role="button" ng-click="slidePrev()">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Forrige side af kilden</span>
                 </a>
-                <a ng-if="arrayLength > 1" id="next" class="carousel-control-next" href="#source-gallery" role="button" data-slide="next">
+                <a ng-if="arrayLength > 1" id="next" class="carousel-control-next" role="button" ng-click="slideNext()">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="sr-only">Næste side af kilden</span>
                 </a>

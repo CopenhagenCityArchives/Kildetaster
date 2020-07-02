@@ -34,6 +34,13 @@ define([
                     $scope.activeImage = index;
                 });
 
+                $scope.slideNext = function() {
+                    angular.element('#source-gallery').carousel('next');
+                }
+
+                $scope.slidePrev = function() {
+                    angular.element('#source-gallery').carousel('prev');
+                }
 
                 $scope.zoomOut = function() {
                     $scope.imageObjects[$scope.activeImage].zoomOutFn();
