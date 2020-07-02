@@ -32,17 +32,10 @@ define([
                 $("#source-gallery").on('slid.bs.carousel', function () {
                     var index = $('.carousel-item.active').index();
                     $scope.activeImage = index;
-                    console.log('mid slide')
-                    console.log('index: ', $scope.activeImage);
                 });
 
-                $scope.testSlide = function() {
-                    angular.element('#source-gallery').carousel('next');
-                }
 
                 $scope.zoomOut = function() {
-                    console.log($scope.imageObjects);
-                    console.log($scope.imageObjects[$scope.activeImage]);
                     $scope.imageObjects[$scope.activeImage].zoomOutFn();
                 }
 
