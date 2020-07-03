@@ -2,10 +2,9 @@ define([
     'angular'
 ], function(angular) {
 
-    var termFieldDirective = ['$http', '$sce', '$timeout', '$compile', 'API_URL', 'TYPEAHEAD_MAX', function($http, $sce, $timeout, $compile, API_URL, TYPEAHEAD_MAX) {
+    var termFieldDirective = ['$http', '$timeout', '$compile', 'API_URL', 'TYPEAHEAD_MAX', function($http, $timeout, $compile, API_URL, TYPEAHEAD_MAX) {
 
         var $directiveElement;
-        var domId;
 
         return {
 
