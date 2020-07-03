@@ -38,7 +38,7 @@
                 <form class="advanced-search-fields" aria-describedby="simple-desc">
                     <div class="input-group input-group-lg mb-3 sdk-search__simplesearch">
                         <div class="input-group input-group-lg mb-3" ng-repeat="row in ctrl.simpleQuery">
-                            <input class="form-control" ng-model="row.term" placeholder="Navn, adresse eller fritekst" type="text" aria-label="Fritekst søgning" ng-keypress="ctrl.submitSearch($event)" />
+                            <input id="simple-search-field" class="form-control" ng-model="row.term" placeholder="Navn, adresse eller fritekst" type="text" aria-label="Fritekst søgning" ng-keypress="ctrl.submitSearch($event)" />
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit" ng-click="startNewSearch()" ng-disabled="!ctrl.canSearchSimple">Søg</button>
                             </div>
