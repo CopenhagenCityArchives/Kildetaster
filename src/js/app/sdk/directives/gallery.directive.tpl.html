@@ -4,9 +4,6 @@
         <div class="card-body">
 
             <div id="source-gallery" class="carousel slide" data-interval="false">
-                <ol ng-if="images.length > 1" class="carousel-indicators">
-                    <li ng-repeat="img in images" data-target="#source-gallery" data-slide-to="{{$index}}" ng-class="{active : $index == 0}"></li>
-                </ol>
                 <div class="carousel-inner">
                     <a ng-repeat="imageObj in imageObjects" class="carousel-item" ng-class="{active : $index == 0}" role="button" data-toggle="modal" data-target="#source-gallery-modal">
                         <zoom-image zoom-out="imageObj.zoomOutFn" zoom-in="imageObj.zoomInFn" full-page="imageObj.fullPageFn" class="d-block w-100" image="imageObj.imageUrl" index="$index"></zoom-image>
@@ -22,7 +19,11 @@
                     <span class="sr-only">Næste side af kilden</span>
                 </a>
             </div>
-
+            <div>
+                <ol ng-if="images.length > 1" class="carousel-indicators position-relative float-center mt-3">
+                    <li ng-repeat="img in images" data-target="#source-gallery" data-slide-to="{{$index}}" ng-class="{active : $index == 0}"></li>
+                </ol>
+            </div>
             <div id="toolbarDiv" class="text-right">
                 <button id="zoom-out-custom" type="button" ng-click="zoomOut()" class="btn btn-link"><feather class="medium-icon text-white" icon='zoom-out' style="color:white"></feather><span class="sr-only">Zoom ud</span></button>
                 <button id="zoom-in-custom"  type="button" ng-click="zoomIn()" class="btn btn-link"><feather class="medium-icon text-white" icon='zoom-in' style="color:white"></feather><span class="sr-only">Zoom ind</span></button>

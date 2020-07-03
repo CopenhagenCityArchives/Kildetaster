@@ -32,6 +32,9 @@ define([
                 $("#source-gallery").on('slid.bs.carousel', function () {
                     var index = $('.carousel-item.active').index();
                     $scope.activeImage = index;
+                    $(".carousel-indicators li.active").removeClass('active')
+                    $(".carousel-indicators li:nth-child("+ (index + 1) +")").addClass('active');
+
                 });
 
                 $scope.slideNext = function() {
