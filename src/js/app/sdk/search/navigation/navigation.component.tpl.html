@@ -6,8 +6,8 @@
                 <h1 ng-if="$ctrl.partOfSearch">Søg person</h1>
             </div>
 
-            <div class="col-lg-6">
-                <span ng-if="$ctrl.partOfSearch">Resultat {{ $ctrl.index }} af {{ $ctrl.numFound }}</span>
+            <div class="col-lg-6 search-config-text">
+                <p class="post-count" ng-if="$ctrl.partOfSearch">Viser {{ $ctrl.index | number }} ud af {{ $ctrl.numFound | number }} poster</p>
             </div>
 
             <div class="col-lg-2">
