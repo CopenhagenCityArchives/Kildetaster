@@ -36,6 +36,7 @@ module.exports = (env, argv) => {
             alias: {
                 'angular-ui-router/stateEvents': path.resolve(__dirname, 'node_modules/angular-ui-router/release/stateEvents'),
                 'angular-schema-form-bootstrap': path.resolve(__dirname, 'node_modules/angular-schema-form/dist/bootstrap-decorator'),
+                'angular-locale-da': path.resolve(__dirname, 'node_modules/angular-i18n/angular-locale_da-dk'),
                 'bootstrap-tooltip': path.resolve(__dirname, 'node_modules/bootstrap/js/src/tooltip'),
                 'bootstrap-carousel': path.resolve(__dirname, 'node_modules/bootstrap/js/src/carousel'),
                 'schemaForm': 'angular-schema-form',

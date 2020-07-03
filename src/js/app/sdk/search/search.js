@@ -1,6 +1,7 @@
 define([
 
     'angular',
+    'angular-locale-da',
 
     'moment',
 
@@ -80,6 +81,7 @@ define([
 ], function(
 
     ang,
+    localeDa,
 
     moment,
 

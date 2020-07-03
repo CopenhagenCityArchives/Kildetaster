@@ -22,6 +22,7 @@
     "angular-filter": "^0.5.8",
     "angular-flash-alert": "^1.1.1",
     "angular-google-analytics": "^1.1.8",
+    "angular-i18n": "^1.7.9",
     "angular-sanitize": "^1.6.10",
     "angular-schema-form": "^0.8.13",
     "angular-ui-bootstrap": "^1.2.5",
