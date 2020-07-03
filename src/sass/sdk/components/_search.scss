@@ -45,3 +45,8 @@
 .page-header {
     background-color: #FFEECC !important;
 }
+// hack to make bootstrap streched links not overlap whole page
+.search-result-row {
+    position: relative !important;
+    transform: scale(1); // this is a fix for chrome
+}
