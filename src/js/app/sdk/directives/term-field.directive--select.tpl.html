@@ -1,4 +1,4 @@
-<ui-select ng-model="data.term" ng-class="{'loading': loading}" search-enabled="false" append-to-body="false" ng-model-options="ngModelOptions" theme="bootstrap">
+<ui-select ng-attr-id="{{domId}}" ng-model="data.term" ng-class="{'loading': loading}" search-enabled="false" append-to-body="false" ng-model-options="ngModelOptions" theme="bootstrap">
 
     <ui-select-match placeholder="Vælg fra listen">
         <div ng-bind="$select.selected.label"></div>

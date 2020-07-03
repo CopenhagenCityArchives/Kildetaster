@@ -20,7 +20,7 @@ define([
             template: '<div></div>',
 
             link: function(scope, el, attrs, controller) {
-                domId = attrs.id;
+                scope.domId = attrs.id;
                 $directiveElement = angular.element(el);
 
                 scope.getTemplate = function getTemplate() {
@@ -46,7 +46,6 @@ define([
 
                 scope.compile = function() {
                     var $compiled = $compile(scope.getTemplate())(scope);
-                    $compiled.attr('id', domId);
                     $directiveElement.replaceWith($compiled);
                     $directiveElement = $compiled;
 
