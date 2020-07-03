@@ -118,7 +118,7 @@ define([
                 }
             });
             if (!freetextRowTooShort && freetextRowLongEnough) {
-                return "?wt=json&hl=on&hl.fl=erindring_document_text&hl.snippets=3&hl.simple.pre=<b>&hl.simple.post=</b>&hl.usePhraseHighligher=true&json.facet=" + JSON.stringify(facetConfig);
+                return "?wt=json&hl=on&hl.fl=erindring_document_text&hl.snippets=3&hl.simple.pre=<strong>&hl.simple.post=</strong>&hl.usePhraseHighligher=true&json.facet=" + JSON.stringify(facetConfig);
             }
             return "?wt=json&json.facet=" + JSON.stringify(facetConfig);
         }
