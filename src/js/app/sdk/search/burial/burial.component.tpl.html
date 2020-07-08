@@ -165,10 +165,33 @@
                 </tbody>
             </table>
 
+            <div ng-if="$ctrl.postErrors.length > 0">
+                <div>Denne post er fejlmeldt</div>
+                <a href ng-click="$ctrl.toggleErrorReports()">Læs mere</a>
+
+                <div class="" ng-repeat="error in $ctrl.postErrors"
+                    ng-if="$ctrl.showErrorReports">
+                    {{ error.label || 'Ukendt felt' }}: {{error.comment}}
+                </div>
+            </div>
+
+            <div>
+                <a href ng-click="showErrorReports = !showErrorReports">
+                    <feather class="medium-icon" icon='flag'></feather><span> Rapporter fejl</span>
+                </a>
+            </div>
+
+            <div class="mt-4" ng-show="showErrorReports">
+                <report-error data="$ctrl.data">
+                </report-error>
+            </div>
+        
         </div>
-    <div class="col-lg-6 order-lg-last">
-        <gallery images='$ctrl.images' data="$ctrl.data"></gallery>
-    </div>
+
+        <div class="col-lg-6 order-lg-last">
+            <gallery images='$ctrl.images' data="$ctrl.data"></gallery>
+        </div>
+
     </section>
 
 

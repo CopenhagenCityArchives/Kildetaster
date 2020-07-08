@@ -20,6 +20,7 @@ import userService from '../shared/services/user.service';
 import helpersService from '../shared/services/helpers.service';
 import scrollFocusService from '../shared/services/scrollFocus.service';
 
+import reportErrorDirective from './directives/report-error.directive';
 import useractivitiesDirective from './directives/useractivities/useractivities.directive';
 import errorsDirective from './directives/errors/errors.directive';
 import userStatisticsDirective from './directives/user-statistics.directive';
@@ -66,6 +67,7 @@ sdkApp.service('helpers', helpersService);
 sdkApp.service('scrollFocusService', scrollFocusService);
 
 sdkApp.directive('errors', errorsDirective);
+sdkApp.directive('reportError', reportErrorDirective);
 sdkApp.directive('useractivities', useractivitiesDirective);
 sdkApp.directive('userStatistics', userStatisticsDirective);
 sdkApp.directive('taskunitsList', taskunitsListDirective);

@@ -1,0 +1,97 @@
+<!--
+<div id="report-error" class="container post">
+
+    <label>Vælg hvilken oplysning du vil fejlmelde</label>
+    <select
+        class="error-reporting__select"
+        ng-model="selected"
+        ng-options="field.label for field in configData">
+    </select>
+
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <label>Kommentar (max. 250 tegn)</label>
+            <textarea
+                class="error-reporting__textarea"
+                ng-model="selectedComment"
+                maxlength="250">
+            </textarea>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <button
+                ng-disabled="!selected || !selectedComment"
+                class="btn btn-primary"
+                type="button"
+                ng-click="saveErrorReport()">Send
+            </button>
+        </div>
+    </div>
+
+</div>
+-->
+<!--
+<table class="table table-striped mb-5" aria-labelledby="Kommentar">
+    <caption class="sr-only">Rapporter fejl</caption>
+        <tbody>
+                <tr>
+                    <th scope="row">
+                        Vælg hvilken oplysning du vil fejlmelde
+                    </th>
+                    <td>
+                        <select
+                            class="error-reporting__select"
+                            ng-model="selected"
+                            ng-options="field.label for field in configData">
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        Kommentar (max. 250 tegn)
+                    </th>
+                    <td>
+                        <textarea
+                            class="error-reporting__textarea"
+                            ng-model="selectedComment"
+                            maxlength="250">
+                        </textarea>
+                        <button
+                            ng-disabled="!selected || !selectedComment"
+                            class="btn btn-primary"
+                            type="button"
+                            ng-click="saveErrorReport()">Send
+                        </button>
+                    </td>
+                </tr>
+        </tbody>
+</table>
+-->
+
+<div class="post">
+    <form>
+
+        <div class="form-group">
+            <label class="control-label" for="formSelectOption">Vælg hvilken oplysning du vil fejlmelde</label>
+            <select id="formSelectOption" class="form-control" ng-model="selected" ng-options="field.label for field in configData"></select>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="formTextField">Kommentar (max. 250 tegn)</label>
+            <textarea id="formTextField" class="form-control" ng-model="selectedComment" maxlength="250"></textarea>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary" ng-disabled="!selected || !selectedComment" type="button" ng-click="saveErrorReport()">
+                Send <span class="sr-only">Send fejlmedling</span>
+            </button>
+        </div>
+
+
+    </form>
+</div>
