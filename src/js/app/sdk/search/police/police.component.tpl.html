@@ -119,12 +119,17 @@
             </table>
 
             <div ng-if="$ctrl.postErrors.length > 0">
-                <div>Denne post er fejlmeldt</div>
-                <a href ng-click="$ctrl.toggleErrorReports()">Læs mere</a>
-                <table class="table table-striped table-hower mb-5" aria-labelledby="fejl-meldinger">
+                <div>
+                    <p>
+                        <strong>Denne post er fejlmeldt</strong>
+                        <a href ng-click="$ctrl.toggleErrorReports()"> Læs mere</a>
+                    </p>
+                </div>
+                
+                <table class="table table-striped table-hower mb-5" aria-labelledby="fejl-meldinger" ng-if="$ctrl.showErrorReports">
                     <caption class="sr-only">Liste over fejl-meldinger</caption>
                     <tbody>
-                        <tr ng-repeat="error in $ctrl.postErrors" ng-if="$ctrl.showErrorReports">
+                        <tr ng-repeat="error in $ctrl.postErrors">
                             <th scope="row">
                                 {{ error.label || 'Ukendt felt' }}
                             </th>
