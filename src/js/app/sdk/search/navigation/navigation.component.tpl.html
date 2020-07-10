@@ -40,7 +40,7 @@
                 </div>
             </div>
             <div class="col-lg-6 my-4">
-                <h2 class="mb-2">{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</h2>
+                <h2 class="mb-2" role="heading" aria-level="1">{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</h2>
                 <h2 ng-if="$ctrl.data.collection_id === 19">Efterretninger</h2>
                 <h3 ng-if="$ctrl.data.collection_info">{{$ctrl.data.collection_info}}</h3>
                 <h3 ng-if="$ctrl.data.collection_id === 19">Politiets efterretninger</h3>
