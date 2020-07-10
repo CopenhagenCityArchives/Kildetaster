@@ -4,7 +4,7 @@ define([
 
 ], function(Clipboard) {
 
-    var policeController = ['$state', function policeController($state) {
+    var policeController = ['$state', 'errorService', function policeController($state, errorService) {
 
         var that = this;
 
@@ -32,6 +32,18 @@ define([
             var url = $state.href('.', {postId: params.post_id});
             window.open(url,'_blank');
         }
+
+        this.refreshErrorReports = function refreshErrorReports() {
+            var config = {
+                id: this.data.id,
+                collection_id: this.data.collection_id,
+            };
+
+            errorService.getErrorReports(config).then(function (response) {
+                that.postErrors = response;
+            });
+        }
+
     }];
 
     return policeController;

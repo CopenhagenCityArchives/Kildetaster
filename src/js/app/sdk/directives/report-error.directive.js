@@ -8,6 +8,7 @@ define([
 
             scope: {
                 data: '=',
+                refresh: '=',
             },
 
             template: require('./report-error.directive.tpl.html'),
@@ -47,6 +48,7 @@ define([
                     // Save the error report
                     errorService.createErrorReport(reportData).then(function(response) {
                         console.log(response);
+                        $scope.refresh();
                     })
                     .catch(function(err) {
                         console.log('Failed saving error report: ', err);

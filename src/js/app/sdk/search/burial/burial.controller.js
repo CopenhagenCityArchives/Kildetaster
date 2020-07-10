@@ -4,7 +4,7 @@ define([
 
 ], function(Clipboard) {
 
-    var policeController = ['helpers', 'EDITOR_URL', '$scope', function policeController(helpers, EDITOR_URL, $scope) {
+    var policeController = ['helpers', 'EDITOR_URL', '$scope', 'errorService', function policeController(helpers, EDITOR_URL, $scope, errorService) {
 
         var that = this;
 
@@ -58,6 +58,20 @@ define([
                 container: document.getElementById('#permalink')});
             return clip;
         };
+
+        this.refreshErrorReports = function refreshErrorReports() {
+            var config = {
+                id: this.data.id,
+                collection_id: this.data.collection_id,
+
+                task_id: this.data.task_id,
+                post_id: this.data.post_id
+            };
+
+            errorService.getErrorReports(config).then(function (response) {
+                that.postErrors = response;
+            });
+        }
 
     }];
 
