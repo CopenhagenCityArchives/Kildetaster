@@ -11,6 +11,9 @@
       "MAIN_DOMAIN": "https://www.kbharkiv.dk",
       "ERROR_URL": "https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale",
       "PERMALINK_URL": "https://www.kbharkiv.dk/permalink",
+      "AUTH0_CLIENTID": "uNrqzxblFnPrzQWpqMMBiB8h0VppBesM",
+      "AUTH0_DOMAIN": "login.kbharkiv.dk",
+      "ANALYTICS_ACCOUNT": "UA-45125468-1",
       "TYPEAHEAD_MAX": 75
     }
   },
@@ -26,6 +29,9 @@
       "MAIN_DOMAIN": "https://www.kbharkiv.dk",
       "ERROR_URL": "https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale",
       "PERMALINK_URL": "https://www.kbharkiv.dk/permalink",
+      "AUTH0_CLIENTID": "uNrqzxblFnPrzQWpqMMBiB8h0VppBesM",
+      "AUTH0_DOMAIN": "login.kbharkiv.dk",
+      "ANALYTICS_ACCOUNT": "UA-45125468-1",
       "TYPEAHEAD_MAX": 75
     }
   },
@@ -41,6 +47,9 @@
       "MAIN_DOMAIN": "https://www.kbharkiv.dk",
       "ERROR_URL": "https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale",
       "PERMALINK_URL": "https://www.kbharkiv.dk/permalink",
+      "AUTH0_CLIENTID": "uNrqzxblFnPrzQWpqMMBiB8h0VppBesM",
+      "AUTH0_DOMAIN": "login.kbharkiv.dk",
+      "ANALYTICS_ACCOUNT": "UA-45125468-1",
       "TYPEAHEAD_MAX": 75
     }
   }

@@ -66,7 +66,7 @@ sharedApp.run(['$rootScope', 'TEXT', function ($rootScope, TEXT) {
     $rootScope.TEXT = TEXT;
 }]);
 
-sharedApp.config(['$httpProvider', 'AnalyticsProvider', 'angularAuth0Provider', '$stateProvider', '$locationProvider', '$sceDelegateProvider', function($httpProvider, AnalyticsProvider, angularAuth0Provider, $stateProvider, $locationProvider,$sceDelegateProvider) {
+sharedApp.config(['$httpProvider', 'AnalyticsProvider', 'angularAuth0Provider', '$locationProvider', '$sceDelegateProvider', function($httpProvider, AnalyticsProvider, angularAuth0Provider, $locationProvider,$sceDelegateProvider, AUTH0_CLIENTID, AUTH0_DOMAIN, ANALYTICS_ACCOUNT) {
     $httpProvider.interceptors.push('tokenFactory');
 
     //Let's allow resources from kbhkilder.dk
@@ -78,8 +78,8 @@ sharedApp.config(['$httpProvider', 'AnalyticsProvider', 'angularAuth0Provider', 
     ]);
 
     angularAuth0Provider.init({
-        clientID: 'uNrqzxblFnPrzQWpqMMBiB8h0VppBesM',
-        domain: 'kbharkiv.eu.auth0.com'
+        clientID: AUTH0_CLIENTID,
+        domain: AUTH0_DOMAIN
     });
 
     // Prevent default use of !# hash bang urls
@@ -91,7 +91,7 @@ sharedApp.config(['$httpProvider', 'AnalyticsProvider', 'angularAuth0Provider', 
     });
 
     // Add configuration code as desired
-    AnalyticsProvider.setAccount('UA-45125468-1'); //UU-XXXXXXX-X should be your tracking code
+    AnalyticsProvider.setAccount(ANALYTICS_ACCOUNT); //UU-XXXXXXX-X should be your tracking code
     AnalyticsProvider.trackPages(true);
     AnalyticsProvider.ignoreFirstPageLoad(true);
     AnalyticsProvider.startOffline(true);
