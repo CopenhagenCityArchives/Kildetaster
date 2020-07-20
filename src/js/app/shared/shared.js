@@ -66,7 +66,7 @@ sharedApp.run(['$rootScope', 'TEXT', function ($rootScope, TEXT) {
     $rootScope.TEXT = TEXT;
 }]);
 
-sharedApp.config(['$httpProvider', 'AnalyticsProvider', 'angularAuth0Provider', '$locationProvider', '$sceDelegateProvider', function($httpProvider, AnalyticsProvider, angularAuth0Provider, $locationProvider,$sceDelegateProvider, AUTH0_CLIENTID, AUTH0_DOMAIN, ANALYTICS_ACCOUNT) {
+sharedApp.config(['$httpProvider', 'AnalyticsProvider', 'angularAuth0Provider', '$locationProvider', '$sceDelegateProvider', 'AUTH0_CLIENTID', 'AUTH0_DOMAIN', 'ANALYTICS_ACCOUNT', function($httpProvider, AnalyticsProvider, angularAuth0Provider, $locationProvider,$sceDelegateProvider, AUTH0_CLIENTID, AUTH0_DOMAIN, ANALYTICS_ACCOUNT) {
     $httpProvider.interceptors.push('tokenFactory');
 
     //Let's allow resources from kbhkilder.dk
