@@ -15,6 +15,11 @@ before_install:
   - openssl aes-256-cbc -K $deploy_key_aes_key -iv $deploy_key_aes_iv
     -in deploy_key.enc -out ./deploy_key -d
   - chmod 600 ./deploy_key
+    # set up awscli packages
+    #- pip install awscli --upgrade --user
+    # set Elastic Beanstalk environmental variables
+    # See https://docs.aws.amazon.com/cli/latest/reference/elasticbeanstalk/update-environment.html#examples for a complete example
+    #- aws elasticbeanstalk update-environment --environment-name kbharkiv-production-4 --option-settings Namespace=aws:elasticbeanstalk:application:environment,OptionName=PARAM1,Value=ParamValue
 
 install:
   - npm install
