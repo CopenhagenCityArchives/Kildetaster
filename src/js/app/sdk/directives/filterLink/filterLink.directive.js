@@ -12,6 +12,7 @@ define([
             template: require('./filterLink.tpl.html'),
 
             scope: {
+                field: '=',
                 facet: '=',
                 bucket: '=',
                 removeFunc: '&'

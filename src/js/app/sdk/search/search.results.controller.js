@@ -2,21 +2,33 @@ define([
 
 
 ], function () {
-
-    var searchResultsController = /*@ngInject*/ function searchResultsController(
-        $q,
-        $timeout,
-        $scope,
-        $stateParams,
-        $state,
-        $anchorScroll,
-        $rootScope,
-        solrService,
-        searchService,
-        searchConfig,
-        $element,
-        Analytics
-    ) {
+    var searchResultsController = [
+        '$q',
+        '$timeout',
+        '$scope',
+        '$state',
+        '$anchorScroll',
+        '$location',
+        '$rootScope',
+        'solrService',
+        'searchService',
+        'searchConfig',
+        '$element',
+        'Analytics',
+        function searchResultsController(
+            $q,
+            $timeout,
+            $scope,
+            $state,
+            $anchorScroll,
+            $location,
+            $rootScope,
+            solrService,
+            searchService,
+            searchConfig,
+            $element,
+            Analytics
+        ) {
 
         var that = this;
 
@@ -62,7 +74,10 @@ define([
             return found;
         }
       
-        $scope.goToPost = function (result) {
+        $scope.goToPost = function(result, $index) {
+            // store index for restoring focus if navigating back to this page
+            $rootScope.searchResultRowIndex = $index;
+
             $state.go('search.page.result.post', {
                 postId: result.id
             });
@@ -90,10 +105,13 @@ define([
 
         $scope.$firstTabbable = null;
         $scope.$lastTabbable = null;
+        $scope.firstTabbableObserver = null;
         
         function expandFacetFocus(facet) {
-            
             var $offcanvas = angular.element($element).find(".facet__offcanvas");
+            if ($scope.firstTabbableObserver) {
+                $scope.firstTabbableObserver.disconnect();
+            }
 
             $offcanvas.off('keydown');
             $offcanvas.on('keydown', function(e) {
@@ -122,9 +140,15 @@ define([
                 }
             });
 
-            $timeout(function() {
-                $scope.$firstTabbable.focus()
+            $scope.firstTabbableObserver = new MutationObserver(function(mutations) {
+                for (let mut of mutations) {
+                    if (mut.type == 'attributes' && mut.attributeName == 'class' && !mut.target.classList.contains('d-none')) {
+                        $scope.$firstTabbable.focus();
+                        $scope.firstTabbableObserver.disconnect();
+                    }
+                }
             });
+            $scope.firstTabbableObserver.observe($scope.$firstTabbable[0], { attributes: true });
         }
 
         $scope.expandFacets = function() {
@@ -134,14 +158,18 @@ define([
             }
             $scope.allFacetsExpanded = true;
             $scope.facetsShown = true;
-            $timeout(function() {expandFacetFocus(that.facets[0])});
+            $timeout(function() {
+                expandFacetFocus(that.facets[0])
+            });
         }
 
         $scope.expandFacet = function(facet) {
             facet.enabled = true;
             facet.expanded = true;
             $scope.facetsShown = true;
-            $timeout(function() {expandFacetFocus(facet)});
+            $timeout(function() {
+                expandFacetFocus(facet)
+            });
         }
 
         $scope.collapseFacets = function() {
@@ -229,6 +257,8 @@ define([
         // TODO update to use that
         */
         $scope.doSearch = function doSearch(forceNew) {
+            var deferred = $q.defer();
+
             if (forceNew) {
                 solrService.clearSearchData();
             }
@@ -260,58 +290,61 @@ define([
                 that.page * that.postsPrPage,
                 that.postsPrPage
             )
-                .then(function (response) {
-                    that.results = response.response;
+            .then(function(response) {
+                that.results = response.response;
 
-                    //Reset page number and search again if no results are found on current page
-                    if (that.results && that.results.numFound == 0 && that.page > 1) {
-                        that.page = 1;
-                        $scope.doSearch(true);
-                    }
+                //Reset page number and search again if no results are found on current page
+                if (that.results && that.results.numFound == 0 && that.page > 1) {
+                    that.page = 1;
+                    $scope.doSearch(true);
+                }
 
-                    if(that.results && that.results.numFound == 0 && that.filterQueries.length > 0) {
-                        that.filterQueries = [];
-                        $scope.doSearch(true);
-                    }
+                if(that.results && that.results.numFound == 0 && that.filterQueries.length > 0) {
+                    that.filterQueries = [];
+                    $scope.doSearch(true);
+                }
 
-                    // process documents
-                    angular.forEach(that.results.docs, function (doc, index) {
-                        // Add highlighting to individual documents
-                        angular.forEach(response.highlighting, function (highlights, docId) {
-                            if (doc.id === docId) {
-                                doc.highlighting = highlights;
-                            }
-                        });
-                    });
-
-                    that.facetFields = [];
-                    angular.forEach(response.facets, function(value, key) {
-                        if(response.facets[key].buckets && response.facets[key].buckets.length > 0){
-                            this[key] = response.facets[key];
+                // process documents
+                angular.forEach(that.results.docs, function (doc, index) {
+                    // Add highlighting to individual documents
+                    angular.forEach(response.highlighting, function (highlights, docId) {
+                        if (doc.id === docId) {
+                            doc.highlighting = highlights;
                         }
-                    }, that.facetFields);
-
-                    // restore focus if we came from filtering
-                    if ($scope.restoreBucketFocus) {
-                        $timeout(function() {
-                            var selector = '#facet-bucket-' + $scope.restoreBucketFocus.facet.field + '-';
-                            if (typeof $scope.restoreBucketFocus.bucket.val == 'string') {
-                                selector += $scope.restoreBucketFocus.bucket.val.replace(' ', '-');
-                            } else {
-                                selector += $scope.restoreBucketFocus.bucket.val;
-                            }
-                            var restoreBucketElement = angular.element($element).find(selector);
-                            restoreBucketElement.focus();
-                        })
-                    }
-                    
-                }).catch(function (err) {
-                    console.log('Error in search:', err);
-                    that.error = true;
-                    //Error handling
-                }).finally(function () {
-                    that.searching = false;
+                    });
                 });
+
+                that.facetFields = [];
+                angular.forEach(response.facets, function(value, key) {
+                    if(response.facets[key].buckets && response.facets[key].buckets.length > 0){
+                        this[key] = response.facets[key];
+                    }
+                }, that.facetFields);
+
+                // restore focus if we came from filtering
+                if ($scope.restoreBucketFocus) {
+                    $timeout(function() {
+                        var selector = '#facet-bucket-' + $scope.restoreBucketFocus.facet.field + '-';
+                        if (typeof $scope.restoreBucketFocus.bucket.val == 'string') {
+                            selector += $scope.restoreBucketFocus.bucket.val.replace(' ', '-');
+                        } else {
+                            selector += $scope.restoreBucketFocus.bucket.val;
+                        }
+                        var restoreBucketElement = angular.element($element).find(selector);
+                        restoreBucketElement.focus();
+                    })
+                }
+
+                deferred.resolve();
+            })
+            .catch(function (err) {
+                console.log('Error in search:', err);
+                that.error = true;
+                deferred.reject();
+            })
+            .finally(function () {
+                that.searching = false;
+            });
 
             var thisSearch = {
                 queries: that.queries,
@@ -327,18 +360,29 @@ define([
             searchService.currentSearch = thisSearch;
 
             searchService.setSearch(thisSearch);
+
+            return deferred.promise;
         };
 
-        that.goToPage = function goToPage(page) {
+        that.goToResults = function goToResults() {
+            $location.hash('search-results');
+            $('#search-results > tbody > tr:first-child').focus();
+            $anchorScroll();
+        }
+
+        that.goToPage = function goToPage(page, button, element) {
             that.page = page;
+
+            if (button == 'page') {
+                $timeout(function() {
+                    element.find('.active > a').focus();
+                });
+            }
 
             // Store current page in the search service
             searchService.currentSearch.page = that.page;
 
             $scope.doSearch(true);
-
-            $anchorScroll('results-start');
-
             Analytics.trackEvent('person_search', 'go_to_result_page', 'go_to_result_page.'+ that.page);
         }
 
@@ -355,6 +399,10 @@ define([
         }
 
         that.init = function init() {
+            // retrieve search result row index for restoring focus, and unset
+            // it in $rootScope.
+            var restoreFocusRowIndex = $rootScope.searchResultRowIndex;
+            $rootScope.searchResultRowIndex = undefined;
 
             that.fieldIndex = searchConfig.fields;
             that.fields = Object.values(searchConfig.fields);
@@ -401,9 +449,8 @@ define([
 
                 //Trigger new search
                 $scope.doSearch(true);
-            }
-            // Entry into page that is already configured
-            else {
+            } else {
+                // Entry into page that is already configured
                 if (searchService.currentSearch.sortField && !searchService.currentSearch.sortField.collections.some(function(colId) {
                     return searchService.currentSearch.collections.indexOf(colId) != -1;
                 })) {
@@ -429,13 +476,28 @@ define([
                         that.collections[id].selected = true;
                     }
                 });
-                $scope.doSearch();
 
-                $anchorScroll('results-start');
+                var rowFocusIsSet = false;
+                $scope.doSearch()
+                .then(function() {
+                    if (restoreFocusRowIndex !== undefined) {
+                        $timeout(function() {
+                            rowFocusIsSet = true;
 
+                            $('#search-results > tbody > tr:nth-child('+ (restoreFocusRowIndex + 1) +')').focus();
+                        });
+                    }
+                });
+
+                $timeout(function() {
+                    if (!rowFocusIsSet) {
+                        $anchorScroll('search-results-wrapper');
+                        $('#search-results-wrapper').focus();
+                    }
+                })
             }
 
-            $timeout(function () {
+            $timeout(function() {
                 that.initialized = true;
             });
         };
@@ -469,7 +531,7 @@ define([
 
         that.init();
 
-    };
+    }];
 
     return searchResultsController;
 

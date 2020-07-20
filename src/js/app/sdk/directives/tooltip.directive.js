@@ -1,4 +1,4 @@
-define(['jquery'], function ($) {
+define(['jquery','bootstrap-tooltip'], function ($, bs) {
 
     return function() {
         return {

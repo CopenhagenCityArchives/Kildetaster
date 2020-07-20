@@ -3,7 +3,7 @@ define([
     'angular',
     'openseadragon',
     'openseadragonselection',
-    'openseadragon-filtering'
+    'openseadragon-filtering',
 
 ], function(ang, OpenSeadragon, osdSelection, filtering) {
 
@@ -18,14 +18,31 @@ define([
             restrict: 'E',
 
             scope: {
-                imageUrl: '='
+                image: '=',
+                index: '=',
+                zoomOut: '=',
+                zoomIn: '=',
+                fullPage: '=',
             },
 
-            controller: /*@ngInject*/ function ($scope, $compile, $templateCache, $element, $timeout) {
-                
+            controller: ['$scope', '$compile', '$templateCache', '$element', '$timeout', function($scope, $compile, $templateCache, $element, $timeout) {
+            
+
                 // Store current unique number on the scope
                 $scope.num = num;
+                
+                $scope.zoomOut = function() {
+                    viewer.viewport.zoomBy(0.9);
+                };
 
+                $scope.zoomIn = function() {
+                    viewer.viewport.zoomBy(1.1)
+                };
+
+                $scope.fullPage = function() {
+                    viewer.setFullScreen(true);
+                };
+                
                 var viewer;
 
                 //Prepare the template
@@ -34,60 +51,22 @@ define([
                 //Add template to the dom
                 angular.element($element).replaceWith(template);
 
-                var opts = angular.extend({}, {
-
-                    zoomInButton: "zoom-in",
-                    zoomOutButton: "zoom-out",
-                    homeButton: "home",
-                    fullPageButton: "full-page",
-                    nextButton: "next",
-                    previousButton: "previous",
-
-                    maxZoomPixelRatio: 4,
-
-                    gestureSettingsMouse: {
-                        scrollToZoom: true,
-                        clickToZoom: true,
-                        pinchToZoom: false
-
-                    },
-
-                    gestureSettingsTouch: {
-                        scrollToZoom: true,
-                        clickToZoom: true,
-                        pinchToZoom: true
-                    },
-
-                    //Prefix for image paths
-                    prefixUrl: '/resources/bower_components/openseadragon/built-openseadragon/openseadragon/images/',
-
-                    toggleButton: 'toggle-selection',
-
-                    navImages: {},
-
-                    debugMode: false,
-
-                    //The "zoom distance" per mouse scroll or touch pinch. Note: Setting this to 1.0 effectively disables the mouse-wheel zoom feature
-                    //(also see gestureSettings[Mouse|Touch|Pen].scrollToZoom}).
-                    //zoomPerScroll: 1.0
-
-                }, $scope.options);
-
+                // Customize error message
+                OpenSeadragon.setString('Errors.OpenFailed', 'Der opstod en fejl under åbning af billedet. Prøv igen senere!');
                 $timeout(function() {
-
                     //Initialize the viewer
-                    //viewer = OpenSeadragon(opts);
-                    viewer = OpenSeadragon({
 
+                    viewer = OpenSeadragon({
+                        
                         // Turn off default buttons on the viewer, as we dont need those
                         showNavigator: false,
                         showHomeControl: false,
                         showFullPageControl: true,
-
-                        zoomInButton: "zoom-in-" + $scope.num,
-                        zoomOutButton: "zoom-out-" + $scope.num,
+                        
+                        zoomInButton: "zoom-in",
+                        zoomOutButton: "zoom-out",
                         homeButton: "home",
-                        fullPageButton: "full-page-" + $scope.num,
+                        fullPageButton: "full-page-"+ $scope.num,
                         nextButton: "next",
                         previousButton: "previous",
 
@@ -105,20 +84,18 @@ define([
                             clickToZoom: true,
                             pinchToZoom: true
                         },
-
+                        
                         element: document.querySelector('#zoom-image-' + $scope.num),
-
                         tileSources: {
                             type: 'image',
-                            url: $scope.imageUrl
-                        },
+                            url: $scope.image
+                        }
                     });
-
                 });
 
                 // Increment the counter for other instances of the directive
                 num++;
-            }
+            }],
 
         }
     };

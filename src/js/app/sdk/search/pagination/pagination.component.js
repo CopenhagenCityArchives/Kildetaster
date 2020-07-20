@@ -7,9 +7,10 @@ define([
     return {
         bindings: {
             currentPage: '<',
-            results: '<',
+            numFound: '<',
             postsPrPage: '<',
-            goToPage: '&'
+            goToPageFn: '&',
+            label: '@'
         },
         template: require('./pagination.component.tpl.html'),
         controller: controller

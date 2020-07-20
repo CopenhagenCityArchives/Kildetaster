@@ -1,6 +1,7 @@
 define([
 
     'angular',
+    'angular-locale-da',
 
     'moment',
 
@@ -27,8 +28,6 @@ define([
 
     './search.controller',
     './search.results.controller',
-
-    './error-report/error-report.controller',
 
     '../directives/datapost-erindring.directive',
 
@@ -80,6 +79,7 @@ define([
 ], function(
 
     ang,
+    localeDa,
 
     moment,
 
@@ -106,8 +106,6 @@ define([
 
     searchController,
     searchResultsController,
-
-    errorReportController,
 
     datapostErindringDirective,
 
@@ -187,8 +185,6 @@ define([
 
     searchApp.controller('searchController', searchController);
     searchApp.controller('searchResultsController', searchResultsController);
-
-    searchApp.controller('errorReportController', errorReportController);
 
     // TODO remove when new version is done
     searchApp.directive('datapostErindring', datapostErindringDirective);

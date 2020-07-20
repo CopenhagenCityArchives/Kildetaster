@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var pageService = /*@ngInject*/ function pageService($http, $q, API_URL) {
+    var pageService = ['$http', '$q', 'API_URL', function pageService($http, $q, API_URL) {
 
         /**
         * Load all available page details
@@ -111,7 +111,7 @@ define([
 
         };
 
-    };
+    }];
 
     return pageService;
 

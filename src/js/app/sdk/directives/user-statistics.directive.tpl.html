@@ -17,12 +17,12 @@
 <div class="tab-content">
     <div class="tab-pane fade" ng-class="{ 'active': activeTab == 'day', 'show': activeTab == 'day' }" id="seneste-dogn" role="tabpanel" aria-labelledby="seneste-dogn-tab">
         <div ng-if="dayLoading" class="text-center w-100">
-            <svg class="large-icon spin" feather-icon icon="'loader'"></svg>
+            <feather class="large-icon spin" icon='loader'></feather>
             <div class="h4">Indlæser brugerstatistikker</div>
         </div>
         
         <div ng-if="dayError" class="alert alert-danger text-center w-100">
-            <svg class="large-icon" aria-hidden="true" feather-icon icon="'alert-octagon'"></svg>
+            <feather class="large-icon" aria-hidden="true" icon='alert-octagon'></feather>
             <div class="h4">En fejl opstod</div>
             <p class="small">Kunne ikke hente data. Prøv venligst igen senere.</p>
         </div>
@@ -53,12 +53,12 @@
     </div>
     <div class="tab-pane fade" ng-class="{ 'active': activeTab == 'week', 'show': activeTab == 'week' }" id="seneste-uge" role="tabpanel" aria-labelledby="seneste-uge-tab">
         <div ng-if="weekLoading" class="text-center w-100">
-            <svg class="large-icon spin" feather-icon icon="'loader'"></svg>
+            <feather class="large-icon spin" icon='loader'></feather>
             <div class="h4">Indlæser brugerstatistikker</div>
         </div>
         
         <div ng-if="weekError" class="alert alert-danger text-center w-100">
-            <svg class="large-icon" aria-hidden="true" feather-icon icon="'alert-octagon'"></svg>
+            <feather class="large-icon" aria-hidden="true" icon='alert-octagon'></feather>
             <div class="h4">En fejl opstod</div>
             <p class="small">Kunne ikke hente data. Prøv venligst igen senere.</p>
         </div>
@@ -89,12 +89,12 @@
     </div>
     <div class="tab-pane fade" ng-class="{ 'active': activeTab == 'ever', 'show': activeTab == 'ever' }" id="altid" role="tabpanel" aria-labelledby="altid-tab">
         <div ng-if="everLoading" class="text-center w-100">
-            <svg class="large-icon spin" feather-icon icon="'loader'"></svg>
+            <feather class="large-icon spin" icon='loader'></feather>
             <div class="h4">Indlæser brugerstatistikker</div>
         </div>
         
         <div ng-if="everError" class="alert alert-danger text-center w-100">
-            <svg class="large-icon" aria-hidden="true" feather-icon icon="'alert-octagon'"></svg>
+            <feather class="large-icon" aria-hidden="true" icon='alert-octagon'></feather>
             <div class="h4">En fejl opstod</div>
             <p class="small">Kunne ikke hente data. Prøv venligst igen senere.</p>
         </div>

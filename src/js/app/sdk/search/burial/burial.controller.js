@@ -1,6 +1,10 @@
-define([], function() {
+define([
 
-    var policeController = /* @ngInject */ function policeController(helpers, EDITOR_URL, $scope) {
+    'clipboard'
+
+], function(Clipboard) {
+
+    var policeController = ['helpers', 'EDITOR_URL', '$scope', 'errorService', function policeController(helpers, EDITOR_URL, $scope, errorService) {
 
         var that = this;
 
@@ -40,6 +44,7 @@ define([], function() {
             that.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id;
 
             that.imageUrl = helpers.getImageUrlByPostId(this.data.post_id);
+            that.images = [that.imageUrl];
 
             //Determine the editor link visibility based on wether or not the user can edit
             that.showEditorLink = allowedToEdit();
@@ -49,14 +54,26 @@ define([], function() {
         };
 
         this.copy = function() {
-            var copyText = document.querySelector("#permalink");
-            copyText.select();
-            document.execCommand("copy");
-            copyText.className = "input copied"
-            copyText.blur();
+            var clip = new Clipboard('#permalink_btn', {
+                container: document.getElementById('#permalink')});
+            return clip;
         };
 
-    };
+        this.refreshErrorReports = function refreshErrorReports() {
+            var config = {
+                id: this.data.id,
+                collection_id: this.data.collection_id,
+
+                task_id: this.data.task_id,
+                post_id: this.data.post_id
+            };
+
+            errorService.getErrorReports(config).then(function (response) {
+                that.postErrors = response;
+            });
+        }
+
+    }];
 
     return policeController;
 });

@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var entryService = /*@ngInject*/ function entryService($http, $q, $filter, API_URL, Flash) {
+    var entryService = ['$http', '$q', '$filter', 'API_URL', 'Flash', function entryService($http, $q, $filter, API_URL, Flash) {
 
         return {
 
@@ -47,7 +47,7 @@ define([
 
         };
 
-    };
+    }];
 
     return entryService;
 

@@ -1,5 +1,5 @@
 define([], function() {
-    var searchService = /*@ngInject*/ function searchService($q, $http, $location, SEARCH_CONFIG_URL) {
+    var searchService = ['$q', '$http', '$location', 'SEARCH_CONFIG_URL', function searchService($q, $http, $location, SEARCH_CONFIG_URL) {
 
         return {
             currentSearch: undefined,
@@ -222,7 +222,7 @@ define([], function() {
                 }
             }
         };
-    };
+    }];
 
     return searchService;
 });

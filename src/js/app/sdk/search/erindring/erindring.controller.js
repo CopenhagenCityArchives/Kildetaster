@@ -1,6 +1,10 @@
-define([], function() {
+define([
 
-    var erindringController = /*@ngInject*/ function erindringController(helpers, API_URL, EDITOR_URL) {
+    'clipboard'
+
+], function(Clipboard) {
+
+    var erindringController = ['helpers', 'API_URL', 'EDITOR_URL', function erindringController(helpers, API_URL, EDITOR_URL) {
 
         var that = this;
 
@@ -26,13 +30,12 @@ define([], function() {
         }
 
         this.copy = function() {
-            var copyText = document.querySelector("#permalink");
-            copyText.select();
-            document.execCommand("copy");
-            copyText.className = "input copied"
-            copyText.blur();
+            var clip = new Clipboard('#permalink_btn', {
+                container: document.getElementById('#permalink')
+            });
+            return clip;
         };
-    };
+    }];
 
     return erindringController;
 });

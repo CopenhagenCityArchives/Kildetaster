@@ -1,5 +1,6 @@
 define([], function () {
-    var taskunitsListDirective = /*@ngInject*/ function (taskService, pageService, EDITOR_URL) {
+    var taskunitsListDirective = ['taskService', 'pageService', 'EDITOR_URL', function(taskService, pageService, EDITOR_URL) {
+        var num = 0;
         return {
             restrict: 'E',
 
@@ -10,6 +11,7 @@ define([], function () {
             },
 
             link: function (scope, element, attr) {
+                scope.num = num;
                 scope.loading = true;
                 scope.units = [];
                 taskService.getUnits({
@@ -36,9 +38,11 @@ define([], function () {
                         }
                     });
                 };
+                // Increment the counter for other instances of the directive
+                num++;
             }
         }
-    }
+    }]
 
     return taskunitsListDirective;
 });

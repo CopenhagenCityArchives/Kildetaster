@@ -8,7 +8,7 @@ define([
 
     var schemaForm = angular.module('schemaForm');
 
-    schemaForm.controller('sfCustomArray', /*@ngInject*/  function($scope, $element, $timeout) {
+    schemaForm.controller('sfCustomArray', ['$scope', '$element', '$timeout', function($scope, $element, $timeout) {
 
         /**
         * Add item to array, proxy function to do custom logic when calling
@@ -63,9 +63,9 @@ define([
             }
 
         }
-    });
+    }]);
 
-    schemaForm.config(function(schemaFormDecoratorsProvider, sfBuilderProvider) {
+    schemaForm.config(['schemaFormDecoratorsProvider', 'sfBuilderProvider', function(schemaFormDecoratorsProvider, sfBuilderProvider) {
 
         //Define a custom decorator for array type constructs. We need to be able to change the html
         //The template is more or less the default one, exepct that we explicitly remove the 'Remove' button
@@ -73,11 +73,16 @@ define([
         schemaFormDecoratorsProvider.defineAddOn(
             'bootstrapDecorator', // Name of the decorator you want to add to.
             'array', // Form type that should render this add-on
-            'shared/schemaformAddon/customArray.addon.tpl.html', // Template name in $templateCache
+            'schemaFormCustomArray.tpl.html', // Template name in $templateCache
             sfBuilderProvider.stdBuilders // List of builder functions to apply.
         );
 
-    });
+    }]);
+
+    schemaForm.run(['$templateCache', function($templateCache) {
+        $templateCache.put('schemaFormCustomSelect.tpl.html', require('./customSelect.addon.tpl.html'));
+    }])
+
 
     return function() {};
 

@@ -1,155 +1,100 @@
-define([
+import ang from 'angular';
+import angularAuth0 from 'angular-auth0';
+import ngStorage from 'ngstorage';
+import AnalyticsProvider from 'angular-google-analytics';
+import uiRouter from 'angular-ui-router';
+import constants from '../../../../constants.json';
 
-    'angular',
-    'angular-auth0',
-    'ngstorage',
+import userDirective from './directives/user.directive';
+import imageViewerDirective from './directives/imageViewer.directive';
+import imageViewerOverlayDirective from './directives/imageViewerOverlay.directive';
+import stepOfDirective from './directives/stepOf.directive';
+import stepIndicatorDirective from './directives/stepIndicator.directive';
+import capitalizeFirstDirective from './directives/capitalizeFirst.directive';
+import stringifyArrayDirective from './directives/stringifyArray.directive';
+import shareLinkDirective from './directives/shareLink.directive';
+import handleStepsDirective from './directives/handleSteps.directive';
 
-    'angular-google-analytics',
+import stepService from './services/step.service';
+import taskService from './services/task.service';
+import pageService from './services/page.service';
+import userService from './services/user.service';
+import errorService from './services/error.service';
+import entryService from './services/entry.service';
+import postService from './services/post.service';
+import unitService from './services/unit.service';
+import tokenService from './services/token.service';
+import tokenFactory from './services/token.factory';
+import helpersService from './services/helpers.service';
+import callbackService from './services/callback.service';
 
-    'angular-ui-router',
-    '../../../../constants.json',
+import nameFromObjectFilter from './filters/nameFromObject.filter';
+import capitalizeFilter from './filters/capitalize.filter';
 
-    './directives/user.directive',
-    './directives/imageViewer.directive',
-    './directives/imageViewerOverlay.directive',
-    './directives/stepOf.directive',
-    './directives/stepIndicator.directive',
-    './directives/capitalizeFirst.directive',
-    './directives/stringifyArray.directive',
-    './directives/shareLink.directive',
+import textConstant from './constants/text.constant';
 
-    './directives/handleSteps.directive',
+var sharedApp = angular.module('shared', ['constants', 'ngStorage', 'ui.router','angular-google-analytics', 'auth0.auth0']);
 
-    './services/step.service',
-    './services/task.service',
-    './services/page.service',
-    './services/user.service',
+sharedApp.directive('imageViewer', imageViewerDirective);
+sharedApp.directive('imageViewerOverlay', imageViewerOverlayDirective);
+sharedApp.directive('stepOf', stepOfDirective);
+sharedApp.directive('stepIndicator', stepIndicatorDirective);
+sharedApp.directive('capitalizeFirst', capitalizeFirstDirective);
+sharedApp.directive('stringifyArray', stringifyArrayDirective);
+sharedApp.directive('shareLink', shareLinkDirective);
+sharedApp.directive('handleSteps', handleStepsDirective);
 
-    './services/error.service',
-    './services/entry.service',
+sharedApp.factory('stepService', stepService);
+sharedApp.factory('taskService', taskService);
+sharedApp.factory('pageService', pageService);
+sharedApp.factory('userService', userService);
+sharedApp.factory('errorService', errorService);
+sharedApp.factory('entryService', entryService);
+sharedApp.factory('postService', postService);
+sharedApp.factory('unitService', unitService);
+sharedApp.factory('tokenService', tokenService); 
+sharedApp.factory('tokenFactory', tokenFactory);
+sharedApp.factory('helpers', helpersService);
+sharedApp.factory('callbackService', callbackService);
 
-    './services/post.service',
+sharedApp.filter('nameFromObject', nameFromObjectFilter);
+sharedApp.filter('capitalize', capitalizeFilter);
 
-    './services/unit.service',
+sharedApp.constant('TEXT', textConstant);
 
-    './services/token.service',
-    './services/token.factory',
+sharedApp.run(['$rootScope', 'TEXT', function ($rootScope, TEXT) {
+    $rootScope.TEXT = TEXT;
+}]);
 
-    './services/helpers.service',
+sharedApp.config(['$httpProvider', 'AnalyticsProvider', 'angularAuth0Provider', '$stateProvider', '$locationProvider', '$sceDelegateProvider', function($httpProvider, AnalyticsProvider, angularAuth0Provider, $stateProvider, $locationProvider,$sceDelegateProvider) {
+    $httpProvider.interceptors.push('tokenFactory');
 
-    './filters/nameFromObject.filter',
-    './filters/capitalize.filter',
+    //Let's allow resources from kbhkilder.dk
+    $sceDelegateProvider.resourceUrlWhitelist([
+        'self',
+        'https://*.kbhkilder.dk/**',
+        'https://*.kbharkiv.dk/**',
+        'http://localhost:8080/**'
+    ]);
 
-    './constants/text.constant'
-
-], function(
-
-    ang,
-    angularAuth0,
-    ngStorage,
-    AnalyticsProvider,
-    uiRouter,
-    constants,
-
-    imageViewerDirective,
-    imageViewerOverlayDirective,
-    stepOfDirective,
-    stepIndicatorDirective,
-    capitalizeFirst,
-    stringifyArray,
-    shareLinkDirective,
-
-    handleStepsDirective,
-
-    stepService,
-    taskService,
-    pageService,
-    userService,
-
-    errorService,
-    entryService,
-
-    postService,
-    unitService,
-
-    tokenService,
-    tokenFactory,
-
-    helpersService,
-
-    nameFromObjectFilter,
-    capitalizeFilter,
-
-    textConstant
-
-    ) {
-
-    var sharedApp = angular.module('shared', ['constants', 'ngStorage', 'ui.router','angular-google-analytics', 'auth0.auth0']);
-
-    sharedApp.directive('imageViewer', imageViewerDirective);
-    sharedApp.directive('imageViewerOverlay', imageViewerOverlayDirective);
-    sharedApp.directive('stepOf', stepOfDirective);
-    sharedApp.directive('stepIndicator', stepIndicatorDirective);
-    sharedApp.directive('capitalizeFirst', capitalizeFirst);
-    sharedApp.directive('stringifyArray', stringifyArray);
-    sharedApp.directive('shareLink', shareLinkDirective);
-
-    sharedApp.directive('handleSteps', handleStepsDirective);
-
-    sharedApp.factory('stepService', stepService);
-    sharedApp.factory('taskService', taskService);
-    sharedApp.factory('pageService', pageService);
-    sharedApp.factory('userService', userService);
-    sharedApp.factory('errorService', errorService);
-    sharedApp.factory('entryService', entryService);
-
-    sharedApp.factory('postService', postService);
-    sharedApp.factory('unitService', unitService);
-
-    sharedApp.factory('tokenService', tokenService); 
-    sharedApp.factory('tokenFactory', tokenFactory);
-
-    sharedApp.factory('helpers', helpersService);
-
-    sharedApp.filter('nameFromObject', nameFromObjectFilter);
-    sharedApp.filter('capitalize', capitalizeFilter);
-
-    sharedApp.constant('TEXT', textConstant);
-
-    sharedApp.run(function ($rootScope, TEXT) {
-        $rootScope.TEXT = TEXT;
+    angularAuth0Provider.init({
+        clientID: 'uNrqzxblFnPrzQWpqMMBiB8h0VppBesM',
+        domain: 'kbharkiv.eu.auth0.com'
     });
 
-    sharedApp.config(/*ngInject*/ function($httpProvider, AnalyticsProvider, angularAuth0Provider, $stateProvider, $locationProvider,$sceDelegateProvider) {
-        $httpProvider.interceptors.push('tokenFactory');
- 
-        //Let's allow resources from kbhkilder.dk
-        $sceDelegateProvider.resourceUrlWhitelist([
-            'self',
-            'https://*.kbhkilder.dk/**',
-            'https://*.kbharkiv.dk/**'
-        ]);
-
-        angularAuth0Provider.init({
-            clientID: 'uNrqzxblFnPrzQWpqMMBiB8h0VppBesM',
-            domain: 'login.kbharkiv.dk'
-        });
-
-        // Prevent default use of !# hash bang urls
-        // @see https://stackoverflow.com/questions/41226122/url-hash-bang-prefix-instead-of-simple-hash-in-angular-1-6
-        $locationProvider.hashPrefix('');
-        $locationProvider.html5Mode({
-            enabled: true,
-            requireBase: true
-        });
-
-        // Add configuration code as desired
-        AnalyticsProvider.setAccount('UA-45125468-1'); //UU-XXXXXXX-X should be your tracking code
-        AnalyticsProvider.trackPages(true);
-        AnalyticsProvider.ignoreFirstPageLoad(true);
-        AnalyticsProvider.startOffline(true);
+    // Prevent default use of !# hash bang urls
+    // @see https://stackoverflow.com/questions/41226122/url-hash-bang-prefix-instead-of-simple-hash-in-angular-1-6
+    $locationProvider.hashPrefix('');
+    $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: true
     });
 
-    return sharedApp;
+    // Add configuration code as desired
+    AnalyticsProvider.setAccount('UA-45125468-1'); //UU-XXXXXXX-X should be your tracking code
+    AnalyticsProvider.trackPages(true);
+    AnalyticsProvider.ignoreFirstPageLoad(true);
+    AnalyticsProvider.startOffline(true);
+}]);
 
-});
+export default sharedApp;

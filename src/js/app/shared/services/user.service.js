@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var userService = /*@ngInject*/ function userService($q, $http, API_URL, tokenService) {
+    var userService = ['$q', '$http', 'API_URL', 'tokenService', function userService($q, $http, API_URL, tokenService) {
 
         return {
 
@@ -26,7 +26,7 @@ define([
                 }).then(function(response) {
                     return response.data;
                 }).catch(function(err) {
-                    console.log('err', err);
+                    console.error('Error getting users:', err);
 
                 });
             },
@@ -37,20 +37,26 @@ define([
             getUserActivities: function() {
                 var deferred = $q.defer();
 
-                tokenService.getUserData()
-                .then(function(userData){
-                    $http({
+                tokenService.getStoredToken()
+                .catch(function() {
+                    return tokenService.getUrlToken()
+                })
+                .catch(function(err) {
+                    console.log('could not get url token', err)
+                    return tokenService.getToken()
+                })
+                .then(function(tokenData) {
+                    return $http({
                         url: API_URL + '/useractivities',
                         method: 'GET',
-                        params: {user_id : userData.userId}
-                    }).then(function(response) {
-                        deferred.resolve(response.data);
-                    }).catch(function(err) {
-                        console.log('Error getting user activities', err);
-                        deferred.reject();
-                    });
-                }).catch(function(err){
-                    console.log('Error getting userData: ', err);
+                        params: {user_id : tokenData.user.userId}
+                    })
+                })
+                .then(function(response) {
+                    deferred.resolve(response.data);
+                })
+                .catch(function(err) {
+                    console.error('Error getting user activities:', err);
                     deferred.reject();
                 });
 
@@ -61,29 +67,38 @@ define([
                 allowEmptyResponse = allowEmptyResponse || false;
                 var deferred = $q.defer();
 
-                tokenService.getUserData(allowEmptyResponse)
-                .then(function(userData){
-                    if(allowEmptyResponse && userData == {}){
+                tokenService.getStoredToken()
+                .catch(function(err) {
+                    console.log('Could not get stored token', err)
+                    return tokenService.getUrlToken()
+                })
+                .catch(function(err) {
+                    console.log('Could not get url token', err)
+                    return tokenService.getToken(allowEmptyResponse)
+                })
+                .then(function(tokenData){ 
+                    var userData = tokenData.user;
+                    if (allowEmptyResponse && !userData){
                         deferred.resolve({});
+                    } else {
+                        $http({
+                            url: API_URL + '/users/' + userData.userId,
+                            method: 'GET',
+                            cache: true
+                        }).then(function(response) {
+                            response.data.user_id = response.data.id;
+                            deferred.resolve(response.data);
+                        }).catch(function(err) {
+                            if (allowEmptyResponse){
+                                deferred.resolve({});
+                            }
+                            console.error('Error getting user info', err);
+                            deferred.reject();
+                        });
                     }
-                    return $http({
-                        url: API_URL + '/users/' + userData.userId,
-                        method: 'GET',
-                        cache: true
-                    }).then(function(response) {
-                        response.data.user_id = response.data.id;
-                        deferred.resolve(response.data);
-                    }).catch(function(err) {
-                        if(allowEmptyResponse){
-                            console.log("Could not get user info, but empty response allowed. Returning {}");
-                            deferred.resolve({});
-                        }
-                        console.log('Error getting user info', err);
-                        deferred.reject();
-                    });
                 }).catch(function(err){
-                    console.log('Error getting userData', err);
-                    deferred.reject();
+                    console.error('Error getting userData', err);
+                    deferred.reject(error);
                 });
 
                 return deferred.promise;
@@ -107,7 +122,7 @@ define([
 
         };
 
-    };
+    }];
 
     return userService;
 

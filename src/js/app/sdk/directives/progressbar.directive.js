@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var progressbarDirective =  /*@ngInject*/ function() {
+    var progressbarDirective = function() {
 
         return {
             restrict: 'E',

@@ -1,34 +1,26 @@
-define([
+var progressbarDirective = [
+function userDirective() {
+    return {
 
-    'angular'
+        restrict: 'E',
+        replace: true,
 
-], function(ang) {
+        scope: {
+            pagesTotal: '=',
+            pagesDone: '='
+        },
 
-    var progressbarDirective = /*@ngInject*/ function userDirective() {
+        template: require('./progressbar.directive.tpl.html'),
+        
+        link: function(scope, element, attrs) {
 
-        return {
+            scope.percentage = 0;
 
-            restrict: 'E',
-            replace: true,
-
-            scope: {
-                pagesTotal: '=',
-                pagesDone: '='
-            },
-
-            template: require('./progressbar.directive.tpl.html'),
-            
-            link: function(scope, element, attrs) {
-
-                scope.percentage = 0;
-
-                scope.$watchGroup(['pagesDone', 'pagesTotal'], function(newValues) {
-                    scope.percentage = Math.round(parseInt(newValues[0]) / parseInt(newValues[1]) * 100);
-                });
-            }
-        };
+            scope.$watchGroup(['pagesDone', 'pagesTotal'], function(newValues) {
+                scope.percentage = Math.round(parseInt(newValues[0]) / parseInt(newValues[1]) * 100);
+            });
+        }
     };
+}];
 
-    return progressbarDirective;
-
-});
+export default progressbarDirective;

@@ -1,4 +1,32 @@
 .post {
+
+    tr {
+        border-bottom: 1px solid #d6d8dd;
+    }
+
+    th, td {
+        padding: 0.8rem;
+    }
+
+    .erindring-btn {
+        color: #000c2e !important; 
+        background-color: #fff;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .erindring-btn:focus {
+        outline-width: medium;
+        outline-style: solid;
+        outline-color: grey
+    }
+    
+    .btn-link:focus {
+        outline-width: medium;
+        outline-style: solid;
+        outline-color: grey
+    }
+
     #source-gallery-modal {
         .modal-dialog {
             max-width: 100%;
@@ -24,4 +52,9 @@
             opacity: 1;
         }
     }
+
+    .carousel-indicators {
+        margin-left: 0%
+    }
+
 }

@@ -4,7 +4,7 @@ define([
 
 ], function(ang) {
 
-    var stepOfDirective = /*@ngInject*/ function stepOfDirective() {
+    var stepOfDirective = [function stepOfDirective() {
 
         return {
 
@@ -21,7 +21,7 @@ define([
 
             }
         };
-    };
+    }];
 
     return stepOfDirective;
 

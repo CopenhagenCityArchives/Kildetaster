@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var solrService = /*@ngInject*/ function solrService($q, $http, SOLR_API_URL, searchService) {
+    var solrService = ['$q', '$http', 'SOLR_API_URL', 'searchService', function solrService($q, $http, SOLR_API_URL, searchService) {
 
         var that = this;
         /**
@@ -118,7 +118,7 @@ define([
                 }
             });
             if (!freetextRowTooShort && freetextRowLongEnough) {
-                return "?wt=json&hl=on&hl.fl=erindring_document_text&hl.snippets=3&hl.simple.pre=<b>&hl.simple.post=</b>&hl.usePhraseHighligher=true&json.facet=" + JSON.stringify(facetConfig);
+                return "?wt=json&hl=on&hl.fl=erindring_document_text&hl.snippets=3&hl.simple.pre=<strong>&hl.simple.post=</strong>&hl.usePhraseHighligher=true&json.facet=" + JSON.stringify(facetConfig);
             }
             return "?wt=json&json.facet=" + JSON.stringify(facetConfig);
         }
@@ -264,7 +264,7 @@ define([
 
         };
 
-    };
+    }];
 
     return solrService;
 

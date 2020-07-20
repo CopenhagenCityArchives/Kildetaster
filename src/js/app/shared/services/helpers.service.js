@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var helpersService = /*@ngInject*/ function helpersService(API_URL) {
+    var helpersService = ['API_URL', function helpersService(API_URL) {
 
         return {
 
@@ -114,7 +114,7 @@ define([
 
         };
 
-    };
+    }];
 
     return helpersService;
 

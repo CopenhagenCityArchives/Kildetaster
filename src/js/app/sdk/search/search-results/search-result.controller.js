@@ -1,5 +1,5 @@
 define([], function() {
-    var searchResultController = /*@ngInject*/ function searchResultController($scope, $state, $element, $compile) {
+    var searchResultController = ['$scope', '$state', '$element', '$compile', function searchResultController($scope, $state, $element, $compile) {
 
         var that = this;
 
@@ -56,6 +56,7 @@ define([], function() {
         this.formatDate = function(datestring) {
           return moment(datestring).format("LL");
         }
-    };
+    }];
+    
     return searchResultController;
 });

@@ -6,7 +6,8 @@ define([
 
     return {
         bindings: {
-            searchData: '<'
+            searchData: '<',
+            data: '<'
         },
         template: require('./navigation.component.tpl.html'),
         controller: controller

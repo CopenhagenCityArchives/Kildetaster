@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var searchConfig = /*@ngInject*/ function searchConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+    var searchConfig = ['$stateProvider', '$urlRouterProvider', '$locationProvider', '$httpProvider', function searchConfig($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
 
         // Prevent default use of !# hash bang urls
         // @see https://stackoverflow.com/questions/41226122/url-hash-bang-prefix-instead-of-simple-hash-in-angular-1-6
@@ -100,9 +100,7 @@ define([
                 },
 
                 resolve: {
-
-                    userData: ['userService', 'tokenService', '$q', function (userService, tokenService, $q) {
-
+                    userData: ['userService', function (userService) {
                         return userService.getUserInfo(true);
                     }],
 
@@ -114,8 +112,7 @@ define([
                         return solrService.getSearchData();
                     }],
 
-                    data: ['$q','$stateParams', '$transition$', 'solrService', 'searchService', function ($q, $stateParams, $transition$, solrService, searchService) {
-
+                    data: ['$q','$stateParams', 'solrService', 'searchService', function ($q, $stateParams, solrService, searchService) {
                         var deferred = $q.defer(),
                             docs = null,
                             highlighting = null;
@@ -192,7 +189,7 @@ define([
                     }]
                 }
             });
-    };
+    }];
 
     return searchConfig;
 

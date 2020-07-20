@@ -1,20 +1,50 @@
-<div class="search-navigation" ng-if="$ctrl.partOfSearch">
-    <div class="row">
-        <div class="col-md-3">
-            <a ui-sref="search.page.results">Tilbage til søgeresultater</a>
-        </div>
-
-        <div class="col-md-3">
-            <span>Resultat {{ $ctrl.index }} af {{ $ctrl.numFound }}</span>
-        </div>
-
-        <div class="col-md-3 offset3 text-right">
-            <div class="search-navigation__buttons">
-                <button class="button search-navigation__button" ng-click="$ctrl.prev()"
-                    ng-disabled="$ctrl.disablePrev()">Forrige</button>
-                <button class="button search-navigation__button" ng-click="$ctrl.next()"
-                    ng-disabled="$ctrl.disableNext()">Næste</button>
+<div id="nav-start"></div>
+<div class="page-header darken-on-scroll">
+    <div class="container-fluid">
+        <header class="row">
+            <div class="col-lg-4">
+                <h1 ng-if="$ctrl.partOfSearch">Søg person</h1>
             </div>
-        </div>
+
+            <div class="col-lg-6 search-config-text">
+                <p class="post-count" ng-if="$ctrl.partOfSearch">Viser nummer {{ $ctrl.index | number }} ud af {{ $ctrl.numFound | number }} poster</p>
+            </div>
+
+            <div class="col-lg-2">
+                <a id="jumpTo" class="sr-only sr-only-focusable float-lg-right" tabindex="0" ng-click="$ctrl.jumpTo()" ng-keypress="($event.keyCode === 13 || $event.keyCode === 32) && $ctrl.jumpTo()">Gå direkte til indhold</a>
+                <a ng-if="$ctrl.partOfSearch" ui-sref="search.page.results" class="btn btn-primary float-lg-right">Tilbage til søgeresultat</a>
+            </div>
+        </header>
+
     </div>
+</div>
+
+<div>
+    <nav class="container-fluid" aria-label="Brødkrummesti">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/"><feather class="medium-icon" icon='home'></feather><span class="sr-only">Hjem</span></a></li>
+            <li class="breadcrumb-item"><a ui-sref="search.page">Søg person</a></li>
+            <li class="breadcrumb-item"><a ui-sref="search.page.results">Søgeresultater</a></li>
+            <li ng-if="$ctrl.data.firstnames || $ctrl.data.lastname || $ctrl.data.birthname" class="breadcrumb-item active" aria-current="page" tabindex='-1'>{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</li>
+            <li ng-if="$ctrl.data.date" class="breadcrumb-item active" aria-current="page" tablindex='-1'>Efterretning: {{$ctrl.formatDate($ctrl.data.date)}} </li>
+        </ol>
+    </nav>       
+</div>
+
+<div class="container-fluid post">
+    <section class="row  mt-3">
+            <div ng-if="$ctrl.partOfSearch" class="col-lg-6 order-lg-last">
+                <div class="float-right">
+                    <a href="#" class="btn btn-primary mx-2" ng-click="$ctrl.prev()" ng-disabled="$ctrl.disablePrev()">Forrige</a>
+                    <a href="#" class="btn btn-primary mx-2" ng-click="$ctrl.next()" ng-disabled="$ctrl.disableNext()">Næste</a>
+                </div>
+            </div>
+            <div class="col-lg-6 my-4">
+                <h2 class="mb-2" role="heading" aria-level="1">{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</h2>
+                <h2 ng-if="$ctrl.data.collection_id === 19">Efterretninger</h2>
+                <h3 ng-if="$ctrl.data.collection_info">{{$ctrl.data.collection_info}}</h3>
+                <h3 ng-if="$ctrl.data.collection_id === 19">Politiets efterretninger</h3>
+                <h3 ng-if="$ctrl.data.collection_id === 18">Erindring</h3>
+            </div>
+    </section>
 </div>

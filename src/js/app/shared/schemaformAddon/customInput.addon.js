@@ -8,7 +8,7 @@ define([
 
     var schemaForm = angular.module('schemaForm');
 
-    schemaForm.controller('sfCustomInput', /*@ngInject*/  function($scope, $templateCache, $q, $http) {
+    schemaForm.controller('sfCustomInput', ['$scope', '$templateCache', '$q', '$http', function($scope, $templateCache, $q, $http) {
 
         $scope.options = [];
 
@@ -29,10 +29,10 @@ define([
             //Nothing yet
         };
 
-    });
+    }]);
 
 
-    schemaForm.directive('handleUnreadable', /*@ngInject*/ function($parse) {
+    schemaForm.directive('handleUnreadable', ['$parse', function($parse) {
 
         return {
 
@@ -55,9 +55,9 @@ define([
             }
 
         };
-    });
+    }]);
     
-    schemaForm.config( /*@ngInject*/ function(schemaFormProvider, schemaFormDecoratorsProvider, sfPathProvider) {
+    schemaForm.config( ['schemaFormProvider', 'schemaFormDecoratorsProvider', 'sfPathProvider', function(schemaFormProvider, schemaFormDecoratorsProvider, sfPathProvider) {
 
         var custominput = function(name, schema, options) {
 
@@ -94,15 +94,20 @@ define([
         schemaFormDecoratorsProvider.addMapping(
             'bootstrapDecorator',
             'custominput',
-            'shared/schemaformAddon/customInput.addon.tpl.html'
+            'schemaFormCustomInput.tpl.html'
         );
 
         schemaFormDecoratorsProvider.addMapping(
             'bootstrapDecorator',
             'number',
-            'shared/schemaformAddon/customInput.addon.tpl.html'
+            'schemaFormCustomInput.tpl.html'
         );
-    });
+    }]);
+
+    schemaForm.run(['$templateCache', function($templateCache) {
+        $templateCache.put('schemaFormCustomInput.tpl.html', require('./customInput.addon.tpl.html'));
+    }])
+
 
     return function() {};
 

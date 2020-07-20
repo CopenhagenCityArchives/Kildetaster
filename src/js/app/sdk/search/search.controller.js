@@ -3,19 +3,31 @@ define([
 
 ], function() {
 
-    var searchController = /*@ngInject*/ function searchController(
-        $q,
-        $timeout,
-        $scope,
-        $stateParams,
-        $state,
-        $rootScope,
-        $anchorScroll,
-        solrService,
-        searchService,
-        searchConfig,
-        Analytics
-    ) {
+    var searchController = [
+        '$q',
+        '$timeout',
+        '$scope',
+        '$stateParams',
+        '$state',
+        '$rootScope',
+        '$anchorScroll',
+        'solrService',
+        'searchService',
+        'searchConfig',
+        'Analytics',
+        function searchController(
+            $q,
+            $timeout,
+            $scope,
+            $stateParams,
+            $state,
+            $rootScope,
+            $anchorScroll,
+            solrService,
+            searchService,
+            searchConfig,
+            Analytics
+        ) {
 
         var that = this;
 
@@ -159,20 +171,19 @@ define([
         */
         that.addField = function addField(defaultFieldName, term, op) {
             // verify and set default field
-            if (!searchConfig.fields.hasOwnProperty(defaultFieldName)) {
-                return;
+            if (!searchConfig.fields.hasOwnProperty(defaultFieldName) || !$scope.fieldCollectionFilter(searchConfig.fields[defaultFieldName])) {
+                defaultFieldName = "freetext_store";
             }
 
             var field = searchConfig.fields[defaultFieldName];
 
             // verify
-            if (!searchConfig.types.hasOwnProperty(field.type) ||
-                (op && !searchConfig.types[field.type].operators.includes(op))) {
+            if (!searchConfig.types.hasOwnProperty(field.type)) {
                 return;
             }
 
             var operator;
-            if (op) {
+            if (op && searchConfig.types[field.type].operators.includes(op)) {
                 operator = searchConfig.operators[op];
             } else {
                 operator = searchConfig.operators[searchConfig.types[field.type].operators[0]];
@@ -404,7 +415,6 @@ define([
 
             // Clean entry
             if (!searchService.currentSearch && !searchService.urlParamsExist()) {
-
                 initSearchFields();
             }
             // entry from URL
@@ -435,9 +445,10 @@ define([
                     });
         
                     //Push the fields added into advanced query fields as standard
-                    that.queries.push(that.simpleQuery[0]);
-
-                } else if(urlSearch.queries.length === 1 && urlSearch.queries[0].field.name === "freetext_store" && Object.keys(that.collections).length === urlSearch.collections.length) {
+                    if (that.queries.length == 0) {
+                        that.queries.push(that.simpleQuery[0]);
+                    }
+                } else if (urlSearch.queries.length === 1 && urlSearch.queries[0].field.name === "freetext_store" && Object.keys(that.collections).length === urlSearch.collections.length) {
 
                     // Open simple search, and set default on advanced
                     that.addField('firstnames', '', 'eq');
@@ -512,6 +523,22 @@ define([
                         that.addField(item.field.name, item.term, item.operator.op);
                     });
 
+                    // set focus if there are any queries
+                    if (searchService.currentSearch.queries.length > 0) {
+                        $timeout(function() {
+                            if (searchService.currentSearch.queries[searchService.currentSearch.queries.length - 1].field.type == 'typeahead') {
+                                var term = $('#search-' + searchService.currentSearch.queries.length);
+                                var focusser = term.find('.ui-select-focusser');
+                                console.log(term, focusser);
+                                focusser.focus();
+
+                            } else {
+                                $('#search-' + searchService.currentSearch.queries.length).focus();
+
+                            }
+                        });
+                    }
+
                 } else if(searchService.currentSearch.queries.length === 1 && searchService.currentSearch.queries[0].field.name === "freetext_store" && Object.keys(that.collections).length === searchService.currentSearch.collections.length) {
 
                     // Open simple search, and set default on advanced
@@ -526,6 +553,9 @@ define([
                     // Set simple field
                     that.addSimple('freetext_store', searchService.currentSearch.queries[0].term, 'in_multivalued');
 
+                    $timeout(function() {
+                        $('#simple-search-field').focus();
+                    });
                 } else {
                     // Open advanced search, and set default on simple
                     that.addSimple('freetext_store', '', 'in_multivalued');
@@ -537,6 +567,9 @@ define([
                         that.addField(item.field.name, item.term, item.operator.op)
                     });
 
+                    $timeout(function() {
+                        $('#simple-search-field').focus();
+                    });
                 }
 
 
@@ -549,8 +582,6 @@ define([
                 that.postsPrPage = searchService.currentSearch.postsPrPage;
 
                 $anchorScroll('search-start');
-
-
             }
 
             $timeout(function() {
@@ -560,7 +591,7 @@ define([
 
         that.init();
 
-    };
+    }];
 
     return searchController;
 

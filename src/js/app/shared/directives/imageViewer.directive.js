@@ -14,7 +14,7 @@ define([
     /**
      * Based on https://github.com/MaitreDede/angular-openseadragon
      */
-    var openseadragonDirective = /*@ngInject*/ function openseadragonDirective($timeout, helpers) {
+    var openseadragonDirective = ['$timeout', 'helpers', function openseadragonDirective($timeout, helpers) {
 
         return {
 
@@ -25,7 +25,7 @@ define([
                 editArea: '='
             },
 
-            controller: /*@ngInject*/ function(RESOURCE_URL, $scope, $compile, $templateCache, $element, $rootScope, $timeout) {
+            controller: ['RESOURCE_URL', '$scope', '$compile', '$templateCache', '$element', '$rootScope', '$timeout', function(RESOURCE_URL, $scope, $compile, $templateCache, $element, $rootScope, $timeout) {
 
                 var
                     //Reference to the viewer instance
@@ -104,6 +104,9 @@ define([
                     //zoomPerScroll: 1.0
 
                 }, $scope.options);
+
+                // Customize error message
+                OpenSeadragon.setString('Errors.OpenFailed', 'Der opstod en fejl under åbning af billedet. Prøv igen senere!');
 
                 //Initialize the viewer
                 viewer = OpenSeadragon(opts);
@@ -520,9 +523,9 @@ define([
                     removeKeyTracker();
                     viewer.destroy();
                 });
-            }
+            }]
         };
-    };
+    }];
 
     return openseadragonDirective;
 

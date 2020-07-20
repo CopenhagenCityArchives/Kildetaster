@@ -5,7 +5,7 @@ define([
 
 ], function(ang, Clipboard) {
 
-    var shareLinkDirective = /*@ngInject*/ function shareLinkDirective(PERMALINK_URL) {
+    var shareLinkDirective = ['PERMALINK_URL', function shareLinkDirective(PERMALINK_URL) {
 
         return {
 
@@ -31,7 +31,7 @@ define([
 
             }
         };
-    };
+    }];
 
     return shareLinkDirective;
 

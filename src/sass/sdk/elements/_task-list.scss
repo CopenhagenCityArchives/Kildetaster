@@ -1,73 +1,9 @@
 .task-list {
-    display: table;
-
-    width: 100%;
-    padding: 0;
-
-    table-layout: fixed;
-
-    li {
-        display: table-row;
-    }
-
-    li.odd {
-        background-color: $gray;
-    }
-
-    &__header {
-        font-weight: bold;
-
-        display: table-cell;
-
-        padding: 6px 10px;
-        padding-bottom: 0;
-
-        border-bottom: 1px solid $gray-dark;
-    }
-
-    &__item {
-        display: table-cell;
-
-        padding: 6px 10px;
-
-        vertical-align: top;
-
-        > span {
-            display: block;
-        }
-
-        button {
-            margin-top: 8px;
-        }
-
-        .progress {
-            margin-left: -15px; // override column padding
-        }
-    }
-    &__header, &__item {
-        &:first-child {
-            width: 40%;
-        }
-    }
-
-    &__filter {
+    &_filter {
         overflow: hidden;
 
-        max-width: 150px;
+        width: 100%;
 
         text-overflow: ellipsis;
-    }
-
-    &__icon {
-        width: 20px !important;
-        height: 13px !important;
-    }
-
-    //Joomla overwrite
-    .row {
-        margin-left: 0;
-    }
-    [class*="span"] {
-        min-height: auto;
     }
 }

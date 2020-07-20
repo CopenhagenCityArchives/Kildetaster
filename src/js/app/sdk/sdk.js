@@ -9,9 +9,6 @@ import analyticsBootstrap from '../shared/analyticsBootstrap';
 import sharedApp from '../shared/shared';
 import searchApp from './search/search';
 
-import fritekstSearchController from './controllers/fritekst-search.controller';
-import useractivitiesDirective from './directives/useractivities/useractivities.directive';
-import errorsDirective from './directives/errors/errors.directive';
 
 import tokenService from '../shared/services/token.service';
 import tokenFactory from '../shared/services/token.factory';
@@ -21,7 +18,11 @@ import taskService from '../shared/services/task.service';
 import errorService from '../shared/services/error.service';
 import userService from '../shared/services/user.service';
 import helpersService from '../shared/services/helpers.service';
+import scrollFocusService from '../shared/services/scrollFocus.service';
 
+import reportErrorDirective from './directives/report-error.directive';
+import useractivitiesDirective from './directives/useractivities/useractivities.directive';
+import errorsDirective from './directives/errors/errors.directive';
 import userStatisticsDirective from './directives/user-statistics.directive';
 import taskunitsListDirective from './directives/taskunits-list.directive';
 import taskStatusDirective from './directives/task-status.directive';
@@ -29,9 +30,14 @@ import taskProgressPlotDirective from './directives/task-progress-plot.directive
 import progressbarDirective from './directives/progressbar.directive';
 import userDirective from '../shared/directives/user.directive';
 import shareLinkDirective from '../shared/directives/shareLink.directive';
+import galleryDirective from './directives/gallery.directive';
+import tooltipDirective from './directives/tooltip.directive';
+import focusDirective from './directives/focus.directive';
+import featherDirective from './directives/feather.directive';
+
 import constants from '../../../../constants.json';
 
-import featherIconDirective from './directives/feather-icon.directive';
+
 
 var sdkApp = angular.module('sdk', [
     'ui.bootstrap',
@@ -48,9 +54,7 @@ sdkApp.run(analyticsBootstrap.run);
 
 sdkApp.config(analyticsBootstrap.config);
 
-sdkApp.controller('fritekstSearchController', fritekstSearchController);
-sdkApp.directive('errors', errorsDirective);
-sdkApp.directive('useractivities', useractivitiesDirective);
+
 
 sdkApp.service('tokenService', tokenService);
 sdkApp.factory('tokenFactory', tokenFactory);
@@ -60,7 +64,11 @@ sdkApp.service('taskService', taskService);
 sdkApp.service('errorService', errorService);
 sdkApp.service('userService', userService);
 sdkApp.service('helpers', helpersService);
+sdkApp.service('scrollFocusService', scrollFocusService);
 
+sdkApp.directive('errors', errorsDirective);
+sdkApp.directive('reportError', reportErrorDirective);
+sdkApp.directive('useractivities', useractivitiesDirective);
 sdkApp.directive('userStatistics', userStatisticsDirective);
 sdkApp.directive('taskunitsList', taskunitsListDirective);
 sdkApp.directive('taskStatus', taskStatusDirective);
@@ -68,11 +76,15 @@ sdkApp.directive('taskProgressPlot', taskProgressPlotDirective);
 sdkApp.directive('progressBar', progressbarDirective);
 sdkApp.directive('user', userDirective);
 sdkApp.directive('shareLink', shareLinkDirective);
+sdkApp.directive('tooltip', tooltipDirective);
+sdkApp.directive('gallery', galleryDirective);
+sdkApp.directive('focus', focusDirective);
 
-sdkApp.directive('featherIcon', featherIconDirective);
+
+sdkApp.directive('feather', featherDirective);
 
 angular.element(document).ready(function() {
-    angular.bootstrap(angular.element('[data-sdk-app]'), ['sdk']);
+    angular.bootstrap(angular.element('[data-sdk-app]'), ['sdk'], { strictDi: true });
 });
 
 export default sdkApp;

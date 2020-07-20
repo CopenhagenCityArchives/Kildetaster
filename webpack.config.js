@@ -10,6 +10,10 @@ module.exports = (env, argv) => {
     let PUBLIC = argv.public ? argv.public : '/';
     let DEVSERVER = /webpack-dev-server/.test(argv['$0']);
 
+    console.log('Development:', DEV);
+    console.log('Constantset:', CONSTANTSET);
+    console.log('Public:', PUBLIC);
+
     var config = {
         // entrypoints
         entry: {
@@ -20,7 +24,7 @@ module.exports = (env, argv) => {
         // resulting bundles
         output: {
             filename: (pathData) => {
-                return pathData.chunk.name == 'sdk' ? '[name].js' : '[name].[hash].js'
+                return '[name].js'
             },
             path: path.resolve(__dirname, 'dist'),
             publicPath: PUBLIC
@@ -32,6 +36,9 @@ module.exports = (env, argv) => {
             alias: {
                 'angular-ui-router/stateEvents': path.resolve(__dirname, 'node_modules/angular-ui-router/release/stateEvents'),
                 'angular-schema-form-bootstrap': path.resolve(__dirname, 'node_modules/angular-schema-form/dist/bootstrap-decorator'),
+                'angular-locale-da': path.resolve(__dirname, 'node_modules/angular-i18n/angular-locale_da-dk'),
+                'bootstrap-tooltip': path.resolve(__dirname, 'node_modules/bootstrap/js/src/tooltip'),
+                'bootstrap-carousel': path.resolve(__dirname, 'node_modules/bootstrap/js/src/carousel'),
                 'schemaForm': 'angular-schema-form',
                 'openseadragon': require.resolve('openseadragon'), // override openseadragonselection dependency
             }
@@ -158,16 +165,18 @@ module.exports = (env, argv) => {
                 './dist/editor',
                 './dist/search',
                 './dist/sdk',
+                './dist/callback',
 
-                './devServer/wordpress-kbharkiv_files',
+                './devServer/wordpress_files',
                 './src/fonts'
             ],
             contentBasePublicPath: [
                 '/editor',
                 '/search',
                 '/sdk',
+                '/callback',
                 
-                '/resources/wordpress-kbharkiv_files',
+                '/resources/wordpress_files',
                 '/resources/fonts'
             ],
             historyApiFallback: {
@@ -185,7 +194,7 @@ module.exports = (env, argv) => {
 
             // CSS is extracted for production builds
             new MiniCssExtractPlugin({
-                moduleFilename: ({name}) => name == 'sdk' ? '[name].css' : '[name].[hash].css',
+                moduleFilename: ({name}) => '[name].css',
             }),
 
             // Production index
@@ -193,6 +202,12 @@ module.exports = (env, argv) => {
                 filename: 'index.html',
                 template: './src/html/index.html',
                 inject: false,
+            }),
+
+            new HtmlWebpackPlugin({
+                filename: 'callback/index.html',
+                template: './src/html/callback.html',
+                inject: false
             }),
 
             new webpack.ProvidePlugin({auth0: 'auth0-js'})
@@ -203,7 +218,7 @@ module.exports = (env, argv) => {
     if (DEVSERVER) {
         // development webpage for editor app
         config.plugins.push(new HtmlWebpackPlugin({
-            filename: 'editor/editor.html',
+            filename: 'editor/index.html',
             title: 'Editor',
             template: './devServer/editor.html',
             inject: false

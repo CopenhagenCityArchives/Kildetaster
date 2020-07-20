@@ -1,10 +1,10 @@
-<ui-select ng-model="data.term" ng-class="{'loading': loading}" search-enabled="false" append-to-body="false" ng-model-options="ngModelOptions" theme="bootstrap">
+<ui-select ng-attr-id="{{domId}}" ng-model="data.term" ng-class="{'loading': loading}" search-enabled="false" append-to-body="false" ng-model-options="ngModelOptions" theme="bootstrap">
 
     <ui-select-match placeholder="Vælg fra listen">
         <div ng-bind="$select.selected.label"></div>
     </ui-select-match>
 
-    <ui-select-choices repeat="option in data.field.enum track by $index">
+    <ui-select-choices repeat="option in data.field.enum track by $index" ng-class="{show: $select.open}">
         <div ng-bind-html="option.label | highlight: $select.search"></div>
     </ui-select-choices>
 </ui-select>

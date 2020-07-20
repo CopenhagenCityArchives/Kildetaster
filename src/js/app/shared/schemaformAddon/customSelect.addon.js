@@ -8,11 +8,11 @@ define([
 
     var schemaForm = angular.module('schemaForm');
 
-    schemaForm.controller('sfCustomSelect', /*@ngInject*/  function($scope, $templateCache) {
+    schemaForm.controller('sfCustomSelect', ['$scope', '$templateCache', function($scope, $templateCache) {
 
-    });
+    }]);
     
-    schemaForm.config( /*@ngInject*/ function(schemaFormProvider, schemaFormDecoratorsProvider, sfPathProvider) {
+    schemaForm.config( ['schemaFormProvider', 'schemaFormDecoratorsProvider', 'sfPathProvider', function(schemaFormProvider, schemaFormDecoratorsProvider, sfPathProvider) {
 
 
         var customselect = function(name, schema, options) {
@@ -32,10 +32,15 @@ define([
         schemaFormDecoratorsProvider.addMapping(
             'bootstrapDecorator',
             'customselect',
-            'shared/schemaformAddon/customSelect.addon.tpl.html'
+            'schemaFormCustomSelect.tpl.html'
         );
        
-    });
+    }]);
+    
+    schemaForm.run(['$templateCache', function($templateCache) {
+        $templateCache.put('schemaFormCustomSelect.tpl.html', require('./customSelect.addon.tpl.html'));
+    }])
+
 
     return function() {};
 

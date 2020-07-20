@@ -1,7 +1,7 @@
 define([
 
 ], function() {
-    var useractivitiesDirective = /*@ngInject*/ function (EDITOR_URL, userService, taskService, $window) {
+    var useractivitiesDirective = ['EDITOR_URL', 'userService', 'taskService', '$window', function(EDITOR_URL, userService, taskService, $window) {
         return {
             restrict: 'E',
 
@@ -38,7 +38,7 @@ define([
                 }
             }]
         }
-    }
+    }];
 
     return useractivitiesDirective;
 });

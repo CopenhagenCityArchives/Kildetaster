@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var termFieldDirective = /* @ngInject */ function() {
+    var termFieldDirective = function() {
         return {
 
             restrict: 'E',
@@ -15,7 +15,7 @@ define([
 
             template: require('./term-field.directive--date.tpl.html'),
 
-            controller: /* @ngInject */ function($scope) {
+            controller: ['$scope', function($scope) {
 
                 //Initial state of the datepicker
                 $scope.showDatePicker = false;
@@ -59,7 +59,7 @@ define([
                     $scope.data.tmpDate = new moment($scope.data.term).format('DD-MM-YYYY');
                 }
 
-            }
+            }]
 
         }
     };

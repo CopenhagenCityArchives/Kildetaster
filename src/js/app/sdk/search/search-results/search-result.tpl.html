@@ -46,6 +46,8 @@
     <h5 class="d-md-none">Kilde</h5>
     <h6>Begravelsesprotokol</h6>
     <p>{{data.unit_description}} s. {{data.page_number}}, lb. nr. {{data.burials.number}}</p>
+
+    <a aria-hidden="true" tabindex="-1" ui-sref="search.page.result.post({postId: result.id})" class="stretched-link"></a>
 </td>
 
 <!-- efterretning -->
@@ -70,6 +72,7 @@
         <h5>Politiets Efterretninger</h6>
         <p>Nr {{ data.number }}, {{ $ctrl.formatDate(data.date) }}</p>
     </div>
+    <a aria-hidden="true" tabindex="-1" ui-sref="search.page.result.post({postId: result.id})" class="stretched-link"></a>
 </td>
 
 
@@ -118,6 +121,7 @@
     <h5 class="d-md-none">Kilde</h5>
     <h6>Politiets Registerblade</h6>
     <p>Station {{ data.station }}, filmrulle {{ data.film }} nr {{ data.number }}</p>
+    <a aria-hidden="true" tabindex="-1" ui-sref="search.page.result.post({postId: result.id})" class="stretched-link"></a>
 </td>
 
 
@@ -149,6 +153,7 @@
         <span ng-if="data.writeMethod">, {{data.writeMethod}}</span>
         <span ng-if="data.containsPhotos">, indeholder fotos</span>
     </p>
+    <a aria-hidden="true" tabindex="-1" ui-sref="search.page.result.post({postId: result.id})" class="stretched-link"></a>
 </td>
 
 
@@ -173,6 +178,7 @@
     <h5 class="d-md-none">Kilde</h5>
     <h6>Skoleprotokoller</h6>
     <p>{{data.unit_description}} s. {{ data.page_number }}</p>
+    <a aria-hidden="true" tabindex="-1" ui-sref="search.page.result.post({postId: result.id})" class="stretched-link"></a>
 </td>
 
 <!-- fallback -->

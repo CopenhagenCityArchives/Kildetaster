@@ -9,12 +9,17 @@
     stroke-width: 2;
 }
 
-.feather.large-icon {
+.medium-icon > .feather {
+    width: 20px;
+    height: 20px;
+}
+
+.large-icon > .feather {
     width: 40px;
     height: 40px;
 }
 
-.feather.spin {
+.spin > .feather {
     -webkit-animation: spin 4s linear infinite;
     -moz-animation: spin 4s linear infinite;
     animation: spin 4s linear infinite;

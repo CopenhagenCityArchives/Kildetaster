@@ -1,11 +1,20 @@
 define([], function() {
     
-    var navigationController = /*@ngInject*/ function navigationController(
-        $state, 
-        $stateParams, 
-        searchService,
-        solrService
-    ) {
+    var navigationController = [
+        '$state', 
+        '$stateParams',
+        '$anchorScroll',
+        'searchService',
+        'solrService',
+        'scrollFocusService',
+        function navigationController(
+            $state, 
+            $stateParams,
+            $anchorScroll,
+            searchService,
+            solrService,
+            scrollFocusService,
+        ) {
 
         var that = this;
         
@@ -108,8 +117,20 @@ define([], function() {
                 });
             }
         };
+
+        this.formatDate = function(datestring) {
+            return moment(datestring).format("LL");
+          }
+
+        this.jumpTo = function() {
+            
+            scrollFocusService.scrollTo('post-content', 'permalink_btn');
+            //$anchorScroll('post-start');
+        }
        
         this.$onInit = function() {
+
+            $anchorScroll('nav-start');
 
             if (that.searchData) {
                 // Get the index in the current result data
@@ -127,10 +148,8 @@ define([], function() {
                 that.partOfSearch = that.searchData.response.numFound !== undefined;
           
             }
-            
-
         }
+    }];
 
-    }
     return navigationController;
 })

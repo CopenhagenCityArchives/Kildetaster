@@ -2,7 +2,7 @@ define([
 
 ], function() {
 
-    var capitalizeFirstDirective = /*@ngInject*/ function($parse) {
+    var capitalizeFirstDirective = ['$parse', function($parse) {
 
         return {
             require: 'ngModel',
@@ -42,7 +42,7 @@ define([
                 
             }
         };
-    };
+    }];
 
     capitalizeFirstDirective.$injet = ['$parse'];
 

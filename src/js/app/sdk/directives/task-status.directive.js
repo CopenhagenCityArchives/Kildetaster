@@ -1,6 +1,9 @@
 define([], function () {
 
-    var taskStatusDirective =  /*@ngInject*/ function (taskService) {
+    var taskStatusDirective =  ['taskService', function(taskService) {
+
+        // Counter for how many times the directive has been used, used to build unique id's
+        var num = 0;
         return {
             restrict: 'E',
 
@@ -11,6 +14,7 @@ define([], function () {
             },
 
             link: function (scope, element, attr) {
+                scope.num = num;
                 scope.unitsCount = 0;
                 scope.activeUnitsCount = 0;
                 scope.unitsDoneCount = 0;
@@ -43,9 +47,11 @@ define([], function () {
                         scope.unitsCount = response.length + inactiveResponse.length;
                     });
                 });
+                // Increment the counter for other instances of the directive
+                num++;
             }
         };
-    };
+    }];
 
     return taskStatusDirective;
 

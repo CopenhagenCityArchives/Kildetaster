@@ -4,7 +4,7 @@ define([
 
 ], function(ang) {
 
-    var progressbarDirective = /*@ngInject*/ function userDirective() {
+    var progressbarDirective = [function userDirective() {
 
         return {
 
@@ -27,7 +27,7 @@ define([
                 });
             }
         };
-    };
+    }];
 
     return progressbarDirective;
 

@@ -1,5 +1,5 @@
 define([], function () {
-    var searchResultRowDirective = /*@ngInject*/ function ($compile) {
+    var searchResultRowDirective = ['$compile', function($compile) {
         return {
             restrict: 'A',
             scope: {
@@ -35,7 +35,7 @@ define([], function () {
             }],
             template: require('./search-result.tpl.html')
         }
-    };
+    }];
 
     return searchResultRowDirective;
 });

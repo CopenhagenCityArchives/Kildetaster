@@ -1,4 +1,16 @@
 .facet {
+    .list-group-item {
+        &.ng-enter {
+            transition: opacity 350ms ease;
+
+            opacity: 0;
+
+            &.ng-enter-active {
+                opacity: 1;
+            }
+        }
+    }
+
     &__offcanvas {
         position: fixed;
         z-index: 1200;

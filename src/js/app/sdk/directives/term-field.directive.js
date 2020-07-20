@@ -2,9 +2,9 @@ define([
     'angular'
 ], function(angular) {
 
-    var termFieldDirective = /* @ngInject */ function($http, $sce, API_URL, TYPEAHEAD_MAX) {
+    var termFieldDirective = ['$http', '$timeout', '$compile', 'API_URL', 'TYPEAHEAD_MAX', function($http, $timeout, $compile, API_URL, TYPEAHEAD_MAX) {
 
-        var template = "";
+        var $directiveElement;
 
         return {
 
@@ -18,9 +18,48 @@ define([
 
             template: '<div></div>',
 
-            controller: /* @ngInject */ function($scope, $compile, $element) {
+            link: function(scope, el, attrs, controller) {
+                scope.domId = attrs.id;
+                $directiveElement = angular.element(el);
 
+                scope.getTemplate = function getTemplate() {
+                    switch (scope.type) {
+                        case 'typeahead':
+                            //Fields with enum are also identified as being of type typeahead, but we do not have a datasource for them
+                            //we there fore change the type for these fields, and handle them in a different template
+                            if (scope.data.field.enum && scope.data.field.enum.length > 0) {
+                                return require('./term-field.directive--select.tpl.html');
+                            }
+                            return require('./term-field.directive--typeahead.tpl.html');
+                        case 'date':
+                            scope.placeholder = 'dd-mm-åååå';
+                            return require('./term-field.directive--date.tpl.html');
+                        case 'string':
+                        case 'string_multivalued':
+                        case 'number':
+                        default:
+                            scope.placeholder = 'Søgeterm';
+                            return require('./term-field.directive--string.tpl.html');
+                    }
+                };
 
+                scope.compile = function() {
+                    var $compiled = $compile(scope.getTemplate())(scope);
+                    $directiveElement.replaceWith($compiled);
+                    $directiveElement = $compiled;
+
+                    // a dirty fix for bootstrap4 styling
+                    if (scope.type == 'typeahead') {
+                        $timeout(function() {
+                            $compiled.find('.btn-default').addClass('btn-outline-secondary')
+                        });
+                    }
+                };
+
+                scope.compile();
+            },
+
+            controller: ['$scope', function($scope) {
                 /**
                 * Local proxy function to handle sending function parameters
                 */
@@ -32,6 +71,7 @@ define([
                 $scope.ngModelOptions = {
                     updateOn: 'default'
                 };
+
 
                 //Options to show when rendered as a typeahead or select
                 $scope.options = [];
@@ -86,37 +126,14 @@ define([
 
                 };
 
-                /**
-                *
-                */
-                $scope.getTemplate = function getTemplate() {
-                    //Fields with enum are also identified as being of type typeahead, but we do not have a datasource for them
-                    //we there fore change the type for these fields, and handle them in a different template
-                    if ($scope.type === 'typeahead' && $scope.data.field.enum && $scope.data.field.enum.length > 0) {
-                        return require('./term-field.directive--select.tpl.html');
-                    }
-
-                    switch ($scope.type) {
-                        case 'typeahead':
-                            return require('./term-field.directive--' + $scope.type + '.tpl.html');
-                        case 'date':
-                            $scope.placeholder = 'dd-mm-åååå';
-                            return require('./term-field.directive--date.tpl.html');
-                        case 'string':
-                        case 'string_multivalued':
-                        case 'number':
-                        default:
-                            $scope.placeholder = 'Søgeterm';
-                            return require('./term-field.directive--string.tpl.html');
-                    }
-                }
-
-                angular.element($element).replaceWith($compile($scope.getTemplate())($scope));
-
-            }
+                // recompile when type is changed
+                $scope.$watch('type', function() {
+                    $scope.compile();
+                })
+            }]
 
         }
-    };
+    }];
 
     return termFieldDirective;
 

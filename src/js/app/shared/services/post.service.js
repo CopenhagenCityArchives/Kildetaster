@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var postService = /*@ngInject*/ function postService($http, API_URL, $q) {
+    var postService = ['$http', 'API_URL', '$q', function postService($http, API_URL, $q) {
 
         return {
 
@@ -101,7 +101,7 @@ define([
 
         };
 
-    };
+    }];
 
     return postService;
 

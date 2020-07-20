@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var directive = /*@ngInject*/ function(API_URL, $state, helpers, solrService) {
+    var directive = ['API_URL', '$state', 'helpers', 'solrService', function(API_URL, $state, helpers, solrService) {
 
         return {
             restrict: 'E',
@@ -144,7 +144,7 @@ define([
 
             }
         };
-    };
+    }];
 
     return directive;
 });

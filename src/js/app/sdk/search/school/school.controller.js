@@ -1,6 +1,6 @@
 define([], function () {
 
-    var schoolController = /*@ngInject*/ function schoolController(helpers, $scope) {
+    var schoolController = ['helpers', '$scope', function schoolController(helpers, $scope) {
 
         var that = this;
 
@@ -17,7 +17,7 @@ define([], function () {
             copyText.className = "input copied"
             copyText.blur();
         };
-    };
+    }];
 
     return schoolController;
 });

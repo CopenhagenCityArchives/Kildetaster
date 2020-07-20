@@ -3,7 +3,7 @@ define([
 
 ], function() {
 
-    var stepService = /*@ngInject*/ function stepService(Flash, $timeout, $q, $http, API_URL, $filter) {
+    var stepService = ['Flash', '$timeout', '$q', '$http', 'API_URL', '$filter', function stepService(Flash, $timeout, $q, $http, API_URL, $filter) {
 
         return {
 
@@ -37,7 +37,7 @@ define([
 
         };
 
-    };
+    }];
 
     return stepService;
 
