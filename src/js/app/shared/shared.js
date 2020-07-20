@@ -132,7 +132,7 @@ define([
 
         angularAuth0Provider.init({
             clientID: 'uNrqzxblFnPrzQWpqMMBiB8h0VppBesM',
-            domain: 'kbharkiv.eu.auth0.com'
+            domain: 'login.kbharkiv.dk'
         });
 
         // Prevent default use of !# hash bang urls
