@@ -28,19 +28,15 @@ define([
                     $scope.isSuperUser = response.super_user_tasks.length > 0;
         
                     //Get error reports for a given user
-                    errorService.getErrorReports({ relevant_user_id: $scope.userId })
-                    .then(function(response) {
-                        $scope.errorList = response;
-                    })
-                    .catch(function(err) {
-                        $scope.error = true;
-                    })
-                    .finally(function() {
-                        $scope.loading = false;
-                    });
+                    return errorService.getErrorReports({ relevant_user_id: $scope.userId });
+                })
+                .then(function(response) {
+                    $scope.errorList = response;
                 })
                 .catch(function(err) {
                     $scope.error = true;
+                })
+                .finally(function() {
                     $scope.loading = false;
                 });
         
