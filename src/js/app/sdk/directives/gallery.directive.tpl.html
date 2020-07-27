@@ -15,7 +15,7 @@
     </a>
 </div>
 
-<div>
+<div class="module-gallery"> 
     <ol ng-if="images.length > 1" class="carousel-indicators position-relative float-left mt-3">
         <li ng-repeat="img in images" data-target="#source-gallery" data-slide-to="{{$index}}" ng-class="{active : $index == 0}"></li>
     </ol>
