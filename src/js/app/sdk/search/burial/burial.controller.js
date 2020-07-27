@@ -1,20 +1,15 @@
-define([
-
-    'clipboard'
-
-], function(Clipboard) {
-
-    var policeController = ['helpers', 'EDITOR_URL', '$scope', 'errorService', function policeController(helpers, EDITOR_URL, $scope, errorService) {
+define(['clipboard'], function(Clipboard) {
+    var burialController = ['helpers', 'EDITOR_URL', '$scope', 'errorService', function(helpers, EDITOR_URL, $scope, errorService) {
 
         var that = this;
-
         $scope.isNumber = angular.isNumber;
 
         /**
          * Is the current logged in user allowed to edit?
          */
         function allowedToEdit() {
-
+            return  true;
+            
             var found = null;
 
             // If we do not have userdata and post data, do not allow editing
@@ -28,7 +23,6 @@ define([
             }
             // Or is the current logged in user a superuser for the task the post was from
             else {
-
                 found = that.userData.super_user_tasks.find(function(task) {
                     return task.tasks_id == that.data.task_id;
                 });
@@ -39,18 +33,17 @@ define([
             }
         }
 
-        this.$onInit = function() {
+        that.$onInit = function() {
+            $scope.data = that.data;
+            $scope.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id;
 
-            that.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id;
-
-            that.imageUrl = helpers.getImageUrlByPostId(this.data.post_id);
-            that.images = [that.imageUrl];
+            var imageUrl = helpers.getImageUrlByPostId(that.data.post_id);
+            $scope.images = [imageUrl];
 
             //Determine the editor link visibility based on wether or not the user can edit
-            that.showEditorLink = allowedToEdit();
+            $scope.showEditorLink = allowedToEdit();
 
-            that.editorUrl = EDITOR_URL + '#/task/' + that.data.task_id + '/page/' + that.data.page_id + '/post/' + that.data.post_id;
-
+            $scope.editorUrl = EDITOR_URL + '#/task/' + that.data.task_id + '/page/' + that.data.page_id + '/post/' + that.data.post_id;
         };
 
         this.copy = function() {
@@ -69,11 +62,10 @@ define([
             };
 
             errorService.getErrorReports(config).then(function (response) {
-                that.postErrors = response;
+                $scope.postErrors = response;
             });
         }
-
     }];
 
-    return policeController;
+    return burialController;
 });

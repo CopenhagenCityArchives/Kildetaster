@@ -3,19 +3,18 @@ define([
     'bootstrap-carousel',
 ], function($, bs) {
         
-    var galleryDirective = ['EDITOR_URL', function galleryDirective(EDITOR_URL) {
+    var galleryDirective = [function galleryDirective() {
         return {
             restrict: 'E',
 
             scope: {
-                images: '=',
-                data: '='
+                images: '='
             },
 
             template: require('./gallery.directive.tpl.html'),
             
             controller:  ['$scope', function($scope) {
-                
+
                 $scope.imageObjects = $scope.images.map(function(image) {
                     return {
                         zoomInFn: null,
@@ -25,7 +24,6 @@ define([
                     }
                 })
 
-                $scope.editorUrl = EDITOR_URL + '#/task/' + $scope.data.task_id + '/page/' + $scope.data.page_id + '/post/' + $scope.data.post_id;
                 $scope.arrayLength = $scope.images.length;
                 $scope.activeImage = 0;
 

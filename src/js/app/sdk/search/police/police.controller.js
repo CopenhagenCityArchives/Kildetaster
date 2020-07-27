@@ -4,19 +4,18 @@ define([
 
 ], function(Clipboard) {
 
-    var policeController = ['$state', 'errorService', function policeController($state, errorService) {
-
+    var policeController = ['$scope', '$state', 'errorService', function policeController($scope, $state, errorService) {
         var that = this;
 
-        this.$onInit = function() {
+        $scope.images = [];
 
-            that.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id;
+        this.$onInit = function() {
+            $scope.data = that.data;
+            $scope.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id;
             // Set up post information
-            that.imageFront = "http://politietsregisterblade.dk/registerblade/" + that.data.station + "/" + that.data.film + "/" + that.data.file_front + ".jpg";
-            that.images = [that.imageFront];
+            $scope.images.push("http://politietsregisterblade.dk/registerblade/" + that.data.station + "/" + that.data.film + "/" + that.data.file_front + ".jpg");
             if (that.data.file_back !== 'noback') {
-                that.imageBack = "http://politietsregisterblade.dk/registerblade/" + that.data.station + "/" + that.data.film + "/" + that.data.file_back + ".jpg";
-                that.images = [that.imageFront, that.imageBack];
+                $scope.images.push("http://politietsregisterblade.dk/registerblade/" + that.data.station + "/" + that.data.film + "/" + that.data.file_back + ".jpg");
             }
         };
 
@@ -28,7 +27,6 @@ define([
         };
 
         this.goToPost = function(params) {
-
             var url = $state.href('.', {postId: params.post_id});
             window.open(url,'_blank');
         }
@@ -40,7 +38,7 @@ define([
             };
 
             errorService.getErrorReports(config).then(function (response) {
-                that.postErrors = response;
+                $scope.postErrors = response;
             });
         }
 

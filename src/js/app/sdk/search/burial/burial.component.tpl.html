@@ -8,77 +8,77 @@
             <table class="table table-striped mb-5" aria-labelledby="data-personen">
                 <caption class="sr-only">Data om personen</caption>
                 <tbody>
-                    <tr ng-if="$ctrl.data.dateOfBirth">
+                    <tr ng-if="data.dateOfBirth">
                         <th scope="row">
                             Født
                         </th>
                         <td>
-                            {{$ctrl.data.dateOfBirth | date:'dd-MM-yyyy' }}
+                            {{data.dateOfBirth | date:'dd-MM-yyyy' }}
                         </td>
                     </tr>
-                    <tr ng-if="!$ctrl.data.dateOfBirth && isNumber($ctrl.data.yearOfBirth)">
+                    <tr ng-if="!data.dateOfBirth && isNumber(data.yearOfBirth)">
                         <th scope="row">
                             Anslået fødselsår
                         </th>
                         <td>
-                            {{$ctrl.data.yearOfBirth}}
+                            {{data.yearOfBirth}}
                         </td>
                     </tr>
-                    <tr ng-if="$ctrl.data.birthplace">   
+                    <tr ng-if="data.birthplace">   
                         <th scope="row">
                             Fødested
                         </th>
                         <td>
-                            {{$ctrl.data.birthplace}} <span ng-if="$ctrl.data.birthplace_free">({{$ctrl.data.birthplace_free}}) </span>
+                            {{data.birthplace}} <span ng-if="data.birthplace_free">({{data.birthplace_free}}) </span>
                         </td>
                     </tr>
-                    <tr ng-if="$ctrl.data.dateOfDeath">
+                    <tr ng-if="data.dateOfDeath">
                         <th scope="row">
                             Død
                         </th>
                         <td>
-                            <text-date prefix="" date="$ctrl.data.dateOfDeath"></text-date>
+                            <text-date prefix="" date="data.dateOfDeath"></text-date>
                         </td>
                     </tr>
-                    <tr ng-if="$ctrl.data.dateOfDeath">
+                    <tr ng-if="data.dateOfDeath">
                         <th scope="row">
                             Alder
                         </th>
                         <td>
-                            <text-age prefix="" years="$ctrl.data.ageYears" months="$ctrl.data.ageMonth"
-                            weeks="$ctrl.data.ageWeeks" days="$ctrl.data.ageDays" hours="$ctrl.data.ageHours">
+                            <text-age prefix="" years="data.ageYears" months="data.ageMonth"
+                            weeks="data.ageWeeks" days="data.ageDays" hours="data.ageHours">
                         </td>
                     </tr>
-                    <tr ng-if="$ctrl.data.sex">
+                    <tr ng-if="data.sex">
                         <th scope="row">
                             Køn
                         </th>
                         <td>
-                            {{ $ctrl.data.sex }}
+                            {{ data.sex }}
                         </td>
                     </tr>
-                    <tr ng-if="$ctrl.data.civilstatus">
+                    <tr ng-if="data.civilstatus">
                         <th scope="row">
                             Civilstand
                         </th>
                         <td>
-                            {{ $ctrl.data.civilstatus }}
+                            {{ data.civilstatus }}
                         </td>
                     </tr>
-                    <tr ng-if="$ctrl.data.positions">
+                    <tr ng-if="data.positions">
                         <th scope="row">
                             Erhverv
                         </th>
                         <td>
-                            <text-position positions="$ctrl.data.positions"></text-position>
+                            <text-position positions="data.positions"></text-position>
                         </td>
                     </tr>
-                    <tr ng-if="$ctrl.data.adressOutsideCph">
+                    <tr ng-if="data.adressOutsideCph">
                         <th scope="row">
                             Adresse
                         </th>
                         <td>
-                            {{$ctrl.data.adressOutsideCph}}
+                            {{data.adressOutsideCph}}
                         </td>
                     </tr>
                     <tr>
@@ -86,7 +86,7 @@
                             Adresse
                         </th>
                         <td>
-                            <text-address address="$ctrl.data.addresses"></text-address>
+                            <text-address address="data.addresses"></text-address>
                         </td>
                     </tr>
                     <tr>
@@ -95,7 +95,7 @@
                         </th>
                         <td>
                             <span id="permalink" class="mr-2">
-                                {{$ctrl.permalink}}
+                                {{permalink}}
                             </span>
                             <button ng-attr-id="permalink_btn" ng-click="$ctrl.copy();" class="btn btn-primary btn-sm float-right" ng-attr-data-clipboard-target="#permalink">Kopier <span class="sr-only"> permalink</span></button>
                         </td>
@@ -104,52 +104,52 @@
             </table>
 
             <table class="table table-striped mb-5" aria-labelledby="data-dødsfaldet/begravelsen">
-            <h4 id="data-dødsfaldet/begravelsen">Om dødsfaldet/begravelsen</h4>
+                <h4 id="data-dødsfaldet/begravelsen">Om dødsfaldet/begravelsen</h4>
                 <caption class="sr-only">Data om dødsfaldet/begravelsen</caption>
                 <tbody>
-                    <tr ng-if="$ctrl.data.deathcauses">
+                    <tr ng-if="data.deathcauses">
                         <th scope="col">Dødsårsager</th>
                         <td>
-                            <span ng-repeat="deathcause in $ctrl.data.deathcauses">{{deathcause.deathcause}}<span ng-if="!$last">, </span></span>
+                            <span ng-repeat="deathcause in data.deathcauses">{{deathcause.deathcause}}<span ng-if="!$last">, </span></span>
                         </td>
                     </tr>
 
-                    <tr ng-if="$ctrl.data.deathplace">
+                    <tr ng-if="data.deathplace">
                         <th scope="row">
                             Døds-/findested
                         </th>
                         <td>
-                            {{$ctrl.data.deathplace}}
+                            {{data.deathplace}}
                         </td>
                     </tr>
-                    <tr ng-if="$ctrl.data.burials.chapel">
+                    <tr ng-if="data.burials.chapel">
                         <th scope="row">
                             Fra (kapel)
                         </th>
                         <td>
-                            {{$ctrl.data.burials.chapel}}
+                            {{data.burials.chapel}}
                         </td>
                     </tr>
-                    <tr ng-if="$ctrl.data.burials.parish">
+                    <tr ng-if="data.burials.parish">
                         <th scope="row">
                             Sogn
                         </th>
                         <td>
-                            {{$ctrl.data.burials.parish}}
+                            {{data.burials.parish}}
                         </td>
                     </tr>
-                    <tr ng-if="$ctrl.data.burials.cemetary">
+                    <tr ng-if="data.burials.cemetary">
                         <th scope="row">
                             Til (kirkegård)
                         </th>
                         <td>
-                            {{$ctrl.data.burials.cemetary}}
+                            {{data.burials.cemetary}}
                         </td>
                     </tr>
                 </tbody>
             </table>
 
-            <table ng-if="$ctrl.data.comment" class="table table-striped mb-5" aria-labelledby="Kommentar">
+            <table ng-if="data.comment" class="table table-striped mb-5" aria-labelledby="Kommentar">
                 <caption class="sr-only">Data om postens kommentar</caption>
                 <thead>
                     <tr>
@@ -158,15 +158,15 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td  ng-bind-html="$ctrl.data.comment | linky:_blank">
-                            {{$ctrl.data.comment}}
+                        <td  ng-bind-html="data.comment | linky:_blank">
+                            {{data.comment}}
                         </td>
                     </tr>
                 </tbody>
             </table>
 
 
-            <div ng-if="$ctrl.postErrors.length > 0">
+            <div ng-if="postErrors.length > 0">
                 <div>
                     <p>
                         <strong>Denne post er fejlmeldt</strong>
@@ -174,10 +174,10 @@
                     </p>
                 </div>
 
-                <table class="table table-striped table-hower mb-5" aria-labelledby="fejl-meldinger"  ng-if="$ctrl.showErrorReports">
+                <table class="table table-striped table-hower mb-5" aria-labelledby="fejl-meldinger" ng-if="$ctrl.showErrorReports">
                     <caption class="sr-only">Liste over fejl-meldinger</caption>
                     <tbody>
-                        <tr scope="row" ng-repeat="error in $ctrl.postErrors">
+                        <tr scope="row" ng-repeat="error in postErrors">
                             <th>
                                 {{ error.label || 'Ukendt felt' }}
                             </th>
@@ -191,22 +191,55 @@
 
             <div>
                 <a href ng-click="showErrorReports = !showErrorReports">
-                    <feather class="medium-icon" icon='flag'></feather><span> Rapporter fejl</span>
+                    <span><feather class="medium-icon" icon='flag'></feather> Rapporter fejl</span>
                 </a>
             </div>
 
             <div class="mt-4" ng-show="showErrorReports">
-                <report-error data="$ctrl.data" refresh="$ctrl.refreshErrorReports">
+                <report-error data="data" refresh="$ctrl.refreshErrorReports">
                 </report-error>
             </div>
+        </div>
+
+        <div class="col-lg-6 order-first order-lg-last">
+            <h4>Kilden</h4>
+            <div class="card text-white mb-3">
+                <div class="card-body">
+                    <gallery images='images'></gallery>
+
+                    <div class="row">
+                        <div class="col">
+                            <button ng-if="data.kildeviser_url" href="{{data.kildeviser_url}}" target="_blank" class="btn btn-lg col erindring-btn">Vis i kildeviser</button>
+                        </div>
+                        <div class="col">
+                            <button ng-if="showEditorLink" href="{{editorUrl}}" target="_blank" class="btn btn-lg col erindring-btn">Vis i kildetaster</button>
+                        </div>
+                    </div>
         
+                    <h5>Om kilden</h5>
+                    <div class="row">
+                        <div class="col">
+                            {{ data.collection_info }} {{ data.unit_description }} s. {{ data.page_number }}
+                        </div>
+                    </div>
+        
+                    <div class="row">
+                        <div class="col">
+                            <h6>Om Indtastningen</h6>
+                            <p ng-if="data.created">Indtastet {{ data.created | date: 'dd-MM-yyyy HH:mm:ss' }} <span ng-if="data.user_name"> af {{ data.user_name }}</span></p>
+                            <p ng-if="data.last_update_user_name">Senest opdateret <span ng-if="data.updated">{{ data.updated | date: 'dd-MM-yyyy HH:mm:ss' }} </span> af {{ data.last_update_user_name }}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <h6>Løbenr.</h6>
+                            <p ng-if="data.burials.number">{{ data.burials.number }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="col-lg-6 order-lg-last">
-            <gallery images='$ctrl.images' data="$ctrl.data"></gallery>
-        </div>
-
     </section>
-
 
 </div>

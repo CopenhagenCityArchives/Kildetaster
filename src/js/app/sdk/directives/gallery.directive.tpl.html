@@ -1,85 +1,28 @@
-<div class="module-gallery post">
-    <h4>Kilden</h4>
-    <div class="card text-white mb-3">
-        <div class="card-body">
-
-            <div id="source-gallery" class="carousel slide" data-interval="false">
-                <div class="carousel-inner">
-                    <a ng-repeat="imageObj in imageObjects" class="carousel-item" ng-class="{active : $index == 0}" role="button" data-toggle="modal" data-target="#source-gallery-modal">
-                        <zoom-image zoom-out="imageObj.zoomOutFn" zoom-in="imageObj.zoomInFn" full-page="imageObj.fullPageFn" class="d-block w-100" image="imageObj.imageUrl" index="$index"></zoom-image>
-                    </a>
-                </div>
-                
-                <a ng-if="arrayLength > 1" id="previous" class="carousel-control-prev" role="button" ng-click="slidePrev()" tabindex="0" ng-keypress="($event.keyCode === 13 || $event.keyCode === 32) && slidePrev()">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Forrige side af kilden</span>
-                </a>
-                <a ng-if="arrayLength > 1" id="next" class="carousel-control-next" role="button" ng-click="slideNext()" tabindex="0" ng-keypress="($event.keyCode === 13 || $event.keyCode === 32) && slideNext()">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Næste side af kilden</span>
-                </a>
-            </div>
-            <div>
-                <ol ng-if="images.length > 1" class="carousel-indicators position-relative float-left mt-3">
-                    <li ng-repeat="img in images" data-target="#source-gallery" data-slide-to="{{$index}}" ng-class="{active : $index == 0}"></li>
-                </ol>
-            </div>
-            <div id="toolbarDiv" class="text-right">
-                <button id="zoom-out-custom" type="button" ng-click="zoomOut()" class="btn btn-link"><feather class="medium-icon text-white" icon='zoom-out' style="color:white"></feather><span class="sr-only">Zoom ud</span></button>
-                <button id="zoom-in-custom"  type="button" ng-click="zoomIn()" class="btn btn-link"><feather class="medium-icon text-white" icon='zoom-in' style="color:white"></feather><span class="sr-only">Zoom ind</span></button>
-                <button id="fullPage-custom" type="button" ng-click="fullPage()" class="btn btn-link"><feather class="medium-icon text-white" icon='maximize-2' style="color:white"></feather><span class="sr-only">Åbn galleriet i fuld skærm</span></button>
-            </div>
-
-            <!--Politiets registerblade-->
-            <div ng-if="data.collection_id == 17">
-                <h4>Om kilden</h4>
-                <p>Station {{data.station}}. Filmrulle {{data.film}}. Registerblad {{data.number}} (uniktid. {{data.registerblad_id}})</p>
-                <p ng-if="data.dateOfCompletion">Registerbladet er udfyldt: {{data.dateOfCompletion | date:'dd-MM-yyyy' }}</p>
-                <p ng-if="data.specialRemarks">Særlige bemærkninger: {{data.specialRemarks}}</p>
-
-                <div ng-if="data.last_changed">
-                    <h3>Om indtastningen</h3>
-                    <p>Senest ændret: {{data.last_changed}}</p>
-                    <p ng-if="data.registerblad_comment">Indtasters kommentar: {{data.registerblad_comment}}</p>
-                </div>
-                <h6>Løbenr.</h6>
-                <p>{{data.registerblad_id}}</p>
-            </div>
-    
-            <!--Begravelsesprotokoller-->
-            <div ng-if="data.collection_id == 1">
-                <div class="row">
-                    <div class="col">
-                        <button ng-if="data.kildeviser_url" href="{{data.kildeviser_url}}" target="_blank" class="btn btn-lg col erindring-btn">Vis i kildeviser</button>
-                    </div>
-                    <div class="col">
-                        <button ng-if="true" href="{{editorUrl}}" target="_blank" class="btn btn-lg col erindring-btn">Vis i kildetaster</button>
-                    </div>
-                </div>
-
-                <h4>Om kilden</h4>
-                <div class="row">
-                    <div class="col">
-                        <p>{{ data.collection_info }} {{ data.unit_description }} s. {{ data.page_number }}</p>
-                        <p ng-if="data.dateOfCompletion">Registerbladet er udfyldt: {{data.dateOfCompletion | date:'dd-MM-yyyy' }}</p>
-                    </div>
-
-                </div>
-
-                <div class="row">
-                    <div class="col-8">
-                        <h6>Om Indtastningen</h6>
-                        <p ng-if="data.created">Indtastet {{ data.created | date: 'dd-MM-yyyy HH:mm:ss' }} <span ng-if="data.user_name"> af {{ data.user_name }}</span></p>
-                        <p ng-if="data.last_update_user_name">Senest opdateret <span ng-if="data.updated">{{ data.updated | date: 'dd-MM-yyyy HH:mm:ss' }} </span> af {{ data.last_update_user_name }}</p>
-                    </div>
-                    <div class="col-4">
-                        <h6>Løbenr.</h6>
-                        <p ng-if="data.burials.number">{{ data.burials.number }}</p>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
+<div id="source-gallery" class="carousel slide" data-interval="false">
+    <div class="carousel-inner">
+        <a ng-repeat="imageObj in imageObjects" class="carousel-item" ng-class="{active : $index == 0}" role="button" data-toggle="modal" data-target="#source-gallery-modal">
+            <zoom-image zoom-out="imageObj.zoomOutFn" zoom-in="imageObj.zoomInFn" full-page="imageObj.fullPageFn" class="d-block w-100" image="imageObj.imageUrl" index="$index"></zoom-image>
+        </a>
     </div>
+    
+    <a ng-if="arrayLength > 1" id="previous" class="carousel-control-prev" role="button" ng-click="slidePrev()" tabindex="0" ng-keypress="($event.keyCode === 13 || $event.keyCode === 32) && slidePrev()">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Forrige side af kilden</span>
+    </a>
+    <a ng-if="arrayLength > 1" id="next" class="carousel-control-next" role="button" ng-click="slideNext()" tabindex="0" ng-keypress="($event.keyCode === 13 || $event.keyCode === 32) && slideNext()">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Næste side af kilden</span>
+    </a>
+</div>
+
+<div>
+    <ol ng-if="images.length > 1" class="carousel-indicators position-relative float-left mt-3">
+        <li ng-repeat="img in images" data-target="#source-gallery" data-slide-to="{{$index}}" ng-class="{active : $index == 0}"></li>
+    </ol>
+</div>
+
+<div id="toolbarDiv" class="text-right">
+    <button id="zoom-out-custom" type="button" ng-click="zoomOut()" class="btn btn-link"><feather class="medium-icon text-white" icon='zoom-out' style="color:white"></feather><span class="sr-only">Zoom ud</span></button>
+    <button id="zoom-in-custom"  type="button" ng-click="zoomIn()" class="btn btn-link"><feather class="medium-icon text-white" icon='zoom-in' style="color:white"></feather><span class="sr-only">Zoom ind</span></button>
+    <button id="fullPage-custom" type="button" ng-click="fullPage()" class="btn btn-link"><feather class="medium-icon text-white" icon='maximize-2' style="color:white"></feather><span class="sr-only">Åbn galleriet i fuld skærm</span></button>
 </div>
