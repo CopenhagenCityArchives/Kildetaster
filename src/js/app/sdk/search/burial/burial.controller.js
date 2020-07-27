@@ -20,7 +20,7 @@ define(['clipboard'], function(Clipboard) {
                 return true;
             }
             // Or is the current logged in user a superuser for the task the post was from
-            else {
+            else if (that.userData.super_user_tasks) {
                 found = that.userData.super_user_tasks.find(function(task) {
                     return task.tasks_id == that.data.task_id;
                 });
@@ -29,6 +29,8 @@ define(['clipboard'], function(Clipboard) {
                     return true;
                 }
             }
+
+            return false;
         }
 
         that.$onInit = function() {
