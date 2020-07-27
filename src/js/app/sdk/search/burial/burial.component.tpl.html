@@ -208,11 +208,12 @@
                     <gallery images='images'></gallery>
 
                     <div class="row">
-                        <div class="col">
-                            <button ng-if="data.kildeviser_url" href="{{data.kildeviser_url}}" target="_blank" class="btn btn-lg col erindring-btn">Vis i kildeviser</button>
+                        <div class="col" ng-if="data.kildeviser_url">
+                            <a ng-href="{{data.kildeviser_url}}" target="_blank" class="btn btn-post btn-lg btn-block">Vis i kildeviser</a>
                         </div>
-                        <div class="col">
-                            <button ng-if="showEditorLink" href="{{editorUrl}}" target="_blank" class="btn btn-lg col erindring-btn">Vis i kildetaster</button>
+
+                        <div class="col" ng-if="showEditorLink" >
+                            <a ng-href="{{editorUrl}}" target="_blank" class="btn btn-post btn-lg btn-block">Vis i kildetaster</a>
                         </div>
                     </div>
         

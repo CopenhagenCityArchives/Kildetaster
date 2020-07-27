@@ -8,8 +8,6 @@ define(['clipboard'], function(Clipboard) {
          * Is the current logged in user allowed to edit?
          */
         function allowedToEdit() {
-            return  true;
-            
             var found = null;
 
             // If we do not have userdata and post data, do not allow editing
