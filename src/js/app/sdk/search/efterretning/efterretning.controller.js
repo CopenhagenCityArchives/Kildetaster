@@ -3,7 +3,7 @@ define([], function() {
         var that = this;
 
         this.$onInit = function() {
-            $scope.data = data;
+            $scope.data = that.data;
             $scope.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id;
         };
 

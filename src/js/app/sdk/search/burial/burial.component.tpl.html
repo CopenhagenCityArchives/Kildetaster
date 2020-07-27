@@ -217,20 +217,20 @@
                     </div>
         
                     <h5>Om kilden</h5>
-                    <div class="row">
-                        <div class="col">
-                            {{ data.collection_info }} {{ data.unit_description }} s. {{ data.page_number }}
-                        </div>
-                    </div>
+                    <p>{{ data.collection_info }} {{ data.unit_description }} s. {{ data.page_number }}</p>
         
                     <div class="row">
-                        <div class="col">
-                            <h6>Om Indtastningen</h6>
-                            <p ng-if="data.created">Indtastet {{ data.created | date: 'dd-MM-yyyy HH:mm:ss' }} <span ng-if="data.user_name"> af {{ data.user_name }}</span></p>
-                            <p ng-if="data.last_update_user_name">Senest opdateret <span ng-if="data.updated">{{ data.updated | date: 'dd-MM-yyyy HH:mm:ss' }} </span> af {{ data.last_update_user_name }}</p>
+                        <div class="col" ng-if="data.created">
+                            <h6>Indtastet</h6>
+                            <p>{{ data.created | date: 'dd-MM-yyyy HH:mm:ss' }} af {{ data.user_name }}</p>
+                        </div>
+
+                        <div class="col" ng-if="data.last_update_user_name">
+                            <h6>Opdateret</h6>
+                            <p><span ng-if="data.updated">{{ data.updated | date: 'dd-MM-yyyy HH:mm:ss' }} </span> af {{ data.last_update_user_name }}</p>
                         </div>
                     </div>
-                    
+
                     <div class="row">
                         <div class="col">
                             <h6>Løbenr.</h6>

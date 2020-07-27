@@ -132,14 +132,20 @@
                                 <a ng-if="data.transcribed" ng-href="{{$ctrl.getTranscribedAssetHref()}}" target="_blank" class="btn btn-block erindring-btn">Renskrift</a>
                             </div>
                         </div>
+
+                        <h5>Om kilden</h5>
                         <div class="row">
                             <div class="col">
-                                <h4>Om kilden</h4>
-                                <p>Omfang: {{data.extent}}<span ng-if="data.writeMethod">, {{data.writeMethod}}</span></p>
-                                <p ng-if="data.dateOfCompletion">Registerbladet er udfyldt: {{data.dateOfCompletion | date:'dd-MM-yyyy' }}</p>
-                                <p ng-if="data.specialRemarks">Særlige bemærkninger: {{data.specialRemarks}}</p>
+                                <h6>Omfang</h6>
+                                <p>{{data.extent}}</p>
+                            </div>
+                            
+                            <div class="col" ng-if="data.writeMethod">
+                                <h6>Metode</h6>
+                                <p>{{data.writeMethod}}</p>
                             </div>
                         </div>
+
                         <div class="row">
                             <div class="col">
                                 <h6>Afleveret i arkivet</h6>
