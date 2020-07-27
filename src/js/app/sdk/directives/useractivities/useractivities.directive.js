@@ -20,17 +20,19 @@ define([
                     response.forEach(function (task) {
                         $scope.tasks[task.id] = task;
                     });
-                    userService.getUserActivities().then(function (response) {
-                        $scope.activities = response.filter(function (activity) {
-                            return activity.task_unit_pages_done < activity.unit_pages;
-                        });
-                    })
-                    .catch(function() {
-                        $scope.error = true;
-                    })
-                    .finally(function () {
-                        $scope.loading = false;
+
+                    return userService.getUserActivities();
+                })
+                .then(function (response) {
+                    $scope.activities = response.filter(function (activity) {
+                        return activity.task_unit_pages_done < activity.unit_pages;
                     });
+                })
+                .catch(function() {
+                    $scope.error = true;
+                })
+                .finally(function () {
+                    $scope.loading = false;
                 });
 
                 $scope.goToEditor = function(activity) {
