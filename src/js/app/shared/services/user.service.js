@@ -91,9 +91,10 @@ define([
                         }).catch(function(err) {
                             if (allowEmptyResponse){
                                 deferred.resolve({});
+                            } else {
+                                console.error('Error getting user info', err);
+                                deferred.reject(err);
                             }
-                            console.error('Error getting user info', err);
-                            deferred.reject();
                         });
                     }
                 }).catch(function(err){
