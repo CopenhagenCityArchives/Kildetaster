@@ -5,7 +5,7 @@
     <section class="row">
         <div class="col-lg-6">
             <h4 id="data-personen">Personen</h4>
-            <table class="table table-striped mb-5" aria-labelledby="data-personen">
+            <table class="table-responsive d-sm-table table-striped mb-5" aria-labelledby="data-personen">
                 <caption class="sr-only">Data om personen</caption>
                 <tbody>
                     <tr>
@@ -56,7 +56,7 @@
 
             <div ng-if="data.addresses">
                 <h4 id="data-adresser">Adresser</h4>
-                <table class="table table-striped mb-5" aria-labelledby="data-adresser">
+                <table class="table-responsive d-sm-table table-striped mb-5" aria-labelledby="data-adresser">
                     <caption class="sr-only">Data om adresser</caption>
                     <thead>
                         <tr>
@@ -78,7 +78,7 @@
             </div>
 
             <h4 id="data-andre-personer" ng-if="data.spouses.length > 0 || data.children.length > 0 || data.parent">Andre personer</h4>
-            <table role="navigation" class="table table-striped table-hover mb-5" aria-labelledby="data-andre-personer" ng-if="data.spouses.length > 0 || data.children.length > 0 || data.parent">
+            <table role="navigation" class="table-responsive d-sm-table table-striped table-hover mb-5" aria-labelledby="data-andre-personer" ng-if="data.spouses.length > 0 || data.children.length > 0 || data.parent">
                 <caption class="sr-only">Data om andre personer</caption>
                 <thead>
                     <tr>
@@ -125,7 +125,7 @@
                     </p>
                 </div>
                 
-                <table class="table table-striped table-hower mb-5" aria-labelledby="fejl-meldinger" ng-if="$ctrl.showErrorReports">
+                <table class="table-responsive d-sm-table table-striped table-hower mb-5" aria-labelledby="fejl-meldinger" ng-if="$ctrl.showErrorReports">
                     <caption class="sr-only">Liste over fejl-meldinger</caption>
                     <tbody>
                         <tr ng-repeat="error in postErrors">

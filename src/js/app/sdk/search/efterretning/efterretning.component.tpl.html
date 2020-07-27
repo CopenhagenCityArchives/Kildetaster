@@ -6,7 +6,7 @@
 
         <div class="col-lg-6">
          <h4>Link</h4>
-            <table class="table table-striped" aria-labelledby="data-Efterretningen">
+            <table class="table-responsive d-sm-table table-striped" aria-labelledby="data-Efterretningen">
                 <caption class="sr-only">Data om Efterretningen</caption>
                 <tbody>
                     <tr>
@@ -24,7 +24,7 @@
             </table>
 
             <h4 id="data-sogekontekst" ng-if="data.highlighting.erindring_document_text">Søgekontekst</h4>
-            <table role="list" class="table table-striped" aria-labelledby="data-sogekontekst" ng-if="data.highlighting.erindring_document_text">
+            <table role="list" class="table-responsive d-sm-table table-striped" aria-labelledby="data-sogekontekst" ng-if="data.highlighting.erindring_document_text">
                 <caption class="sr-only">Teksten markeret med fed er det eller de ord, søgemaskinen har fundet</caption>
                 <tbody>
                     <tr ng-repeat="highlight in data.highlighting.erindring_document_text">

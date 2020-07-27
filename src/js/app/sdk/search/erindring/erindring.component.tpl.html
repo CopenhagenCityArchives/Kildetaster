@@ -6,7 +6,7 @@
 
         <div class="col-lg-6">
             <h4>Personen</h4>
-            <table class="table table-striped mb-5" aria-labelledby="data-erindringen">
+            <table class="table-responsive d-sm-table table-striped mb-5" aria-labelledby="data-erindringen">
                 <caption class="sr-only">Data om erindringen</caption>
                 <tbody>
                     <tr ng-if="data.period">
@@ -56,8 +56,8 @@
                 </tbody>
             </table>
 
-            <h4 id="data-erhverv" ng-if="data.position || data.position_parent ||data.position_spouse"0>Erhverv</h4>
-            <table class="table table-striped mb-5" aria-labelledby="data-erhverv" ng-if="data.position || data.position_parent ||data.position_spouse" >
+            <h4 id="data-erhverv" ng-if="data.position || data.position_parent || data.position_spouse"0>Erhverv</h4>
+            <table class="table-responsive d-sm-table table-striped mb-5" aria-labelledby="data-erhverv" ng-if="data.position || data.position_parent || data.position_spouse" >
                 <caption class="sr-only">Data om Erhverv</caption>
                  <tbody>
                     <tr ng-if="data.position">
@@ -88,7 +88,7 @@
             </table>
 
             <h4 id="data-sogekontekst" ng-if="data.highlighting.erindring_document_text">Søgekontekst</h4>
-            <table role="list" class="table table-striped mb-5" aria-labelledby="data-sogekontekst" ng-if="data.highlighting.erindring_document_text">
+            <table role="list" class="table-responsive d-sm-table table-striped mb-5" aria-labelledby="data-sogekontekst" ng-if="data.highlighting.erindring_document_text">
                 <caption class="sr-only">Teksten markeret med fed er det eller de ord, søgemaskinen har fundet</caption>
                 <tbody>
                     <tr ng-repeat="highlight in data.highlighting.erindring_document_text">
@@ -101,7 +101,7 @@
 
             <div ng-if="data.keywords && data.keywords.length > 0">
                 <h4 id="data-erindringen-omhandler">Erindringen omhandler</h4>
-                <table role="list" class="table table-striped mb-5" aria-labelledby="Erindringen omhandler">
+                <table role="list" class="table-responsive d-sm-table table-striped mb-5" aria-labelledby="Erindringen omhandler">
                     <caption class="sr-only">Erindringen omhandler</caption>
                     <tbody>
                         <tr>

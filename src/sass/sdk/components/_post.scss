@@ -8,6 +8,11 @@
         padding: 0.8rem;
     }
 
+    td {
+        word-break: break-word;
+        overflow-wrap: break-word;
+    }
+
     .erindring-btn {
         color: #000c2e !important; 
         background-color: #fff;
