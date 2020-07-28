@@ -1,13 +1,12 @@
 define([], function () {
-    var userStatisticsDirective = ['userService', function(userService) {
+    var userStatisticsDirective = function(limit) { return ['userService', function(userService) {
         return {
             restrict: 'E',
             template: require('./user-statistics.directive.tpl.html'),
-            scope: {
-                limit: '<?'
-            },
+            scope: {},
             
             link: function($scope) {
+                $scope.loading = true;
                 $scope.loading = true;
                 $scope.error = false;
 
@@ -24,6 +23,8 @@ define([], function () {
                 $scope.everLoading = true;
 
                 $scope.activeTab = 'day';
+
+                $scope.limit = limit;
                 
                 var dayTimestamp = Math.floor(new Date().getTime() / 1000) - 24 * 60 * 60;
                 var weekTimestamp = Math.floor(new Date().getTime() / 1000) - 7 * 24 * 60 * 60;
@@ -64,7 +65,7 @@ define([], function () {
                 
             }
         };
-    }];
+    }]};
 
     return userStatisticsDirective;
 });

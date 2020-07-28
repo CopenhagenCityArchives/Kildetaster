@@ -37,8 +37,6 @@ import featherDirective from './directives/feather.directive';
 
 import constants from '../../../../constants.json';
 
-
-
 var sdkApp = angular.module('sdk', [
     'ui.bootstrap',
     'search',
@@ -69,7 +67,8 @@ sdkApp.service('scrollFocusService', scrollFocusService);
 sdkApp.directive('errors', errorsDirective);
 sdkApp.directive('reportError', reportErrorDirective);
 sdkApp.directive('useractivities', useractivitiesDirective);
-sdkApp.directive('userStatistics', userStatisticsDirective);
+sdkApp.directive('userStatisticsMyPage', userStatisticsDirective(5));
+sdkApp.directive('userStatisticsOverview', userStatisticsDirective(undefined));
 sdkApp.directive('taskunitsList', taskunitsListDirective);
 sdkApp.directive('taskStatus', taskStatusDirective);
 sdkApp.directive('taskProgressPlot', taskProgressPlotDirective);
