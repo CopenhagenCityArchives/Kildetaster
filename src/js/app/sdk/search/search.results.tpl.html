@@ -71,21 +71,30 @@
 
         <div class="float-lg-right">
             <section class="sort d-flex align-items-center justify-content-lg-end">
+
                 <form class="items-per-page form-inline mr-2" aria-labelledby="sort-by-label">
-                    <div class="form-group">
-                        <label for="sort-by" id="sort-by-label" class="mr-3">Sorter efter<span class="sr-only"> det valgte felt, straks når det vælges</span></label>
-                        <select
-                            class="form-control"
-                            id="sort-by"
-                            ng-model="ctrl.sortField"
-                            ng-options="field as field.view_name for (fieldName, field) in ctrl.fields | filter:{searchable:true, sortable:true} | filter:ctrl.fieldCollectionFilter">
-                        </select>
+
+                    <div class="form-row">
+                        <label for="sort-by" id="sort-by-label" class="col-sm-3 col-form-label">Sorter efter<span class="sr-only"> det valgte felt, straks når det vælges</span></label>
+                        <div class="col-9 col-sm-6">
+                            <select
+                                class="form-control w-100"
+                                id="sort-by"
+                                ng-model="ctrl.sortField"
+                                ng-options="field as field.view_name for (fieldName, field) in ctrl.fields | filter:{searchable:true, sortable:true} | filter:ctrl.fieldCollectionFilter">
+                            </select>
+                        </div>
+
+                        <div class="col-3">
+                            <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false"
+                                autocomplete="off" ng-click="ctrl.toggleSortDirection()">
+                                <feather icon="{{ ctrl.sortDirection == 'desc' ? 'arrow-up' : 'arrow-down' }}"></feather>
+                            </button>
+                        </div>
                     </div>
+
                 </form>
-                <button type="button" class="btn btn-outline-secondary" data-toggle="button" aria-pressed="false"
-                    autocomplete="off" ng-click="ctrl.toggleSortDirection()">
-                    <feather icon="{{ ctrl.sortDirection == 'desc' ? 'arrow-up' : 'arrow-down' }}"></feather>
-                </button>
+                
             </section>
 
             <pagination
