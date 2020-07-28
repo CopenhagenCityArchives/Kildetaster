@@ -3,7 +3,9 @@ define([], function () {
         return {
             restrict: 'E',
             template: require('./user-statistics.directive.tpl.html'),
-            scope: {},
+            scope: {
+                limit: '<?'
+            },
             
             link: function($scope) {
                 $scope.loading = true;

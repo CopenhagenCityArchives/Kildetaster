@@ -37,7 +37,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="stat in day | limitTo : 5 : 0">
+                <tr ng-repeat="stat in day | limitTo : limit : 0">
                     <td>
                         {{ $index + 1}}
                     </td>
@@ -73,7 +73,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="stat in week | limitTo : 5 : 0">
+                <tr ng-repeat="stat in week | limitTo : limit : 0">
                     <td>
                         {{ $index + 1}}
                     </td>
@@ -108,7 +108,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="stat in ever | limitTo : 5 : 0">
+                <tr ng-repeat="stat in ever | limitTo : limit : 0">
                     <td>
                         {{ $index + 1}}
                     </td>
