@@ -30,6 +30,18 @@
     background-color: #ffffff;
     background-clip: padding-box;
 }
+
+.ui-select-match-text {
+    text-overflow: clip;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 90%;
+}
+.ui-select-toggle > .btn-link {
+    position: absolute;
+    right: 5px;
+}
+
 .search-type {
     .list-group-item {
         svg {
