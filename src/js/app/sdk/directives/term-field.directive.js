@@ -126,8 +126,8 @@ define([
 
                 };
 
-                // recompile when type is changed
-                $scope.$watch('type', function() {
+                // recompile when the field is changed
+                $scope.$watch('data.field', function() {
                     $scope.compile();
                 })
             }]
