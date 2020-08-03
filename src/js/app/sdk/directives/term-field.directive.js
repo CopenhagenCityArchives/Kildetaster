@@ -76,24 +76,20 @@ define([
                 //Options to show when rendered as a typeahead or select
                 $scope.options = [];
 
-                //$scope.lastTerm = undefined;
-                // $scope.lastField = undefined;
-
                 //Default placeholder
                 $scope.placeholder = 'Søgeterm';
 
                 /**
-                *
+                * Get the typeahead data.
                 */
                 $scope.getData = function getData(field, term) {
-                    // If we have an enum
+                    // If we have an enum, return the enum list
                     if ($scope.type === 'typeahead' && $scope.data.field.enum && $scope.data.field.enum.length > 0) {
                         return field.enum;
                     }
 
-                    //If we do not get any data source, do nothing
+                    //If we do not get any data source, return an empty list
                     if (!field.datasource) {
-                        //Just return an empty array
                         return [];
                     }
 
@@ -104,9 +100,11 @@ define([
                     $scope.loading = true;
 
                     var datasourceUrl = field.datasource.url + encodeURIComponent(term);
+                    // prepend API_URL, if datasource is not an absolute URL
                     if (!datasourceUrl.startsWith('http')) {
                         datasourceUrl = API_URL + '/' + datasourceUrl;
                     }
+
                     return $http({
                         url: datasourceUrl,
                         method: 'GET',
@@ -123,7 +121,6 @@ define([
                         //Done loading
                         $scope.loading = false;
                     });
-
                 };
 
                 // recompile when the field is changed
