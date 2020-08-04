@@ -2,6 +2,7 @@ var callbackService = ['$location', 'CALLBACK_URL', function($location, CALLBACK
     return {
         getCallbackUrl() {
             var url = $location.absUrl();
+            return url;
 
             if (url.indexOf('?') != -1) {
                 url = url.replace('?', '?AUTH_PARAMS&')
