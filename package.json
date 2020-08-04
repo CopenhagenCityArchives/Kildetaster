@@ -36,7 +36,7 @@
     "moment": "^2.18.1",
     "ngstorage": "^0.3.10",
     "openseadragon": "^2.4.2",
-    "openseadragon-filtering": "github:usnistgov/OpenSeadragonFiltering",
+    "openseadragon-filtering": "git+https://github.com/usnistgov/OpenSeadragonFiltering.git",
     "openseadragonselection": "^1.8.0",
     "popper.js": "^1.12.9",
     "request": "<=2.81.0",
