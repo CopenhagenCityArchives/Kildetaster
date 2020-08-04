@@ -20,7 +20,7 @@
   "development": {
     "constants": {
       "EDITOR_URL": "https://kildetaster.kbharkiv.dk",
-      "CALLBACK_URL": "https://kildetaster.kbharkiv.dk/callback/",
+      "CALLBACK_URL": "https://new.kbharkiv.dk/",
       "RESOURCE_URL": "https://www.kbhkilder.dk/software/kildetaster-development/resources/",
       "API_URL": "https://www.kbhkilder.dk/1508/experimental",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
