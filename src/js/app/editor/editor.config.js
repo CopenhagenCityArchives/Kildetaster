@@ -131,6 +131,9 @@ export default ["$stateProvider", "$urlRouterProvider", '$locationProvider', fun
                 }
             },
             resolve: {
+                userData: ['tokenService', function(tokenService) {
+                    return tokenService.getUser();
+                }],
 
                 postData: ['$stateParams', '$q', 'entryService', 'postService', 'errorService', function($stateParams, $q, entryService, postService, errorService) {
 

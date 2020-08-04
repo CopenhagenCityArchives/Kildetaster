@@ -1,5 +1,5 @@
-var updateFieldsController = ['$uibModal', '$rootScope', '$sessionStorage', '$scope', '$state', '$timeout', 'PERMALINK_URL', 'taskData', 'postData', 'stepService', 'entryService', 'errorService', 'helpers',
-    function updateFieldsController($uibModal, $rootScope, $sessionStorage, $scope, $state, $timeout, PERMALINK_URL, taskData, postData, stepService, entryService, errorService, helpers) {
+var updateFieldsController = ['$uibModal', '$rootScope', '$scope', '$state', '$timeout', 'PERMALINK_URL', 'taskData', 'userData', 'postData', 'stepService', 'entryService', 'errorService', 'helpers',
+    function updateFieldsController($uibModal, $rootScope, $scope, $state, $timeout, PERMALINK_URL, taskData, userData, postData, stepService, entryService, errorService, helpers) {
 
     $scope.values = postData.entryData;
 
@@ -85,7 +85,7 @@ var updateFieldsController = ['$uibModal', '$rootScope', '$sessionStorage', '$sc
         $scope.toggleEditExistingValue(key, id);
     }
 
-    $scope.userId = $sessionStorage.tokenData.user_id;
+    $scope.userId = userData['https://kbharkiv.dk/claims/apacs_user_id'];
 
     //Default settings for angular-schema-forms
     $scope.sfDefaults = {
