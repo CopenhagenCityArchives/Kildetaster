@@ -9,20 +9,20 @@ define([
             controller: ['$scope', function($scope) {
                 $scope.loading = true;
                 $scope.error = false;
+
                 $scope.errorList = [];
-                $scope.userId = null;
                 $scope.isSuperUser = false;
         
                 //Object to store selections from dropdown filters
                 $scope.filtered = { label: null };
         
                 //The config object to use for filtereing the errorList
-                $scope.selectedFilter = {};
+                $scope.selectedFilter = null;
         
                 userService.getUserInfo()
                 .then(function(response) {
                     //Store the users userId
-                    $scope.userId = response.user_id;
+                    $scope.userId = response.id;
         
                     //Determine if the user is a superuser of any task (arary contains something)
                     $scope.isSuperUser = response.super_user_tasks.length > 0;
@@ -30,33 +30,36 @@ define([
                     //Get error reports for a given user
                     return errorService.getErrorReports({ relevant_user_id: $scope.userId });
                 })
-                .then(function(response) {
-                    $scope.errorList = response;
-                })
-                .catch(function(err) {
-                    $scope.error = true;
-                })
-                .finally(function() {
-                    $scope.loading = false;
-                });
-        
-                $scope.$watch('errorList', function(newval) {
+                .then(function(errorList) {
+                    $scope.errorList = errorList;
+
                     if ($scope.isSuperUser === true) {
-                        $scope.userList = helpers.uniqueBy(newval, function(item) {
+                        $scope.userList = helpers.uniqueBy(errorList, function(item) {
                             return item.username
                         });
         
-                        $scope.fieldList = helpers.uniqueBy(newval, function(item) {
+                        $scope.fieldList = helpers.uniqueBy(errorList, function(item) {
                             if (item.label === undefined) {
                                 item.label = 'Ikke angivet';
                             }
                             return item.label;
-                        })
+                        });
                     }
+
+                    $scope.selectedFilter = {};
+                    $scope.$apply();
+                })
+                .catch(function(err) {
+                    $scope.error = true;
+                    console.log("errors error", err);
+                    $scope.$apply();
+                })
+                .finally(function() {
+                    $scope.loading = false;
+                    $scope.$apply();
                 });
         
                 $scope.dropdownChanged = function(prop, value) {
-    
                     $scope.selectedFilter = {};
         
                     if (prop && value !== null) {

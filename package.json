@@ -14,6 +14,7 @@
   "configs": "Interface/configs",
   "html": "Interface/html",
   "dependencies": {
+    "@auth0/auth0-spa-js": "^1.11.0",
     "@openseadragon-imaging/openseadragon-imaginghelper": "^2.1.1",
     "@openseadragon-imaging/openseadragon-viewerinputhook": "^2.1.0",
     "angular": "^1.6.10",

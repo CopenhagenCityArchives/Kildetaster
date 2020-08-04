@@ -16,14 +16,15 @@ define([
                 $scope.activities = [];
                 $scope.tasks = [];
         
-                taskService.getTasks().then(function (response) {
-                    response.forEach(function (task) {
+                taskService.getTasks()
+                .then(function (response) {
+                    response.forEach(function(task) {
                         $scope.tasks[task.id] = task;
                     });
 
                     return userService.getUserActivities();
                 })
-                .then(function (response) {
+                .then(function(response) {
                     $scope.activities = response.filter(function (activity) {
                         return activity.task_unit_pages_done < activity.unit_pages;
                     });

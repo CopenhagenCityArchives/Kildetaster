@@ -6,14 +6,6 @@ define([
     var userService = ['$q', '$http', 'API_URL', 'tokenService', function userService($q, $http, API_URL, tokenService) {
 
         return {
-
-            /**
-             * Lookup a specific task
-             * @param {object} the id of the task to look up
-             *   With either a taskId or an unitId
-             *
-             * @return {promise} That resolves with the data for the task
-             */
             getUsers: function getUsers(unitId, taskId) {
 
                 return $http({
@@ -27,7 +19,6 @@ define([
                     return response.data;
                 }).catch(function(err) {
                     console.error('Error getting users:', err);
-
                 });
             },
 
@@ -35,74 +26,52 @@ define([
             *
             */
             getUserActivities: function() {
-                var deferred = $q.defer();
-
-                tokenService.getStoredToken()
-                .catch(function() {
-                    return tokenService.getUrlToken()
-                })
+                return tokenService.getUser()
                 .catch(function(err) {
-                    console.log('could not get url token', err)
-                    return tokenService.getToken()
+                    return tokenService.login()
+                    .then(function() {
+                        return tokenService.getUser();
+                    })
                 })
-                .then(function(tokenData) {
+                .then(function(user) {
+                    var apacs_user_id = user['https://kbharkiv.dk/claims/apacs_user_id'];
                     return $http({
                         url: API_URL + '/useractivities',
                         method: 'GET',
-                        params: {user_id : tokenData.user.userId}
+                        params: {user_id : apacs_user_id}
                     })
                 })
                 .then(function(response) {
-                    deferred.resolve(response.data);
-                })
-                .catch(function(err) {
-                    console.error('Error getting user activities:', err);
-                    deferred.reject();
+                    return $q.resolve(response.data);
                 });
-
-                return deferred.promise;
             },
 
             getUserInfo: function(allowEmptyResponse) {
-                allowEmptyResponse = allowEmptyResponse || false;
-                var deferred = $q.defer();
-
-                tokenService.getStoredToken()
+                return tokenService.getUser()
                 .catch(function(err) {
-                    console.log('Could not get stored token', err)
-                    return tokenService.getUrlToken()
+                    return tokenService.login()
+                    .then(function() {
+                        return tokenService.getUser();
+                    })
+                })
+                .then(function(user) {
+                    console.log("got user", user);
+                    return $http({
+                        url: API_URL + '/users/' + user['https://kbharkiv.dk/claims/apacs_user_id'],
+                        method: 'GET',
+                        cache: true
+                    })
+                })
+                .then(function(response) {
+                    return $q.resolve(response.data);
                 })
                 .catch(function(err) {
-                    console.log('Could not get url token', err)
-                    return tokenService.getToken(allowEmptyResponse)
-                })
-                .then(function(tokenData){ 
-                    var userData = tokenData.user;
-                    if (allowEmptyResponse && !userData){
-                        deferred.resolve({});
+                    if (allowEmptyResponse) {
+                        return $q.resolve({});
                     } else {
-                        $http({
-                            url: API_URL + '/users/' + userData.userId,
-                            method: 'GET',
-                            cache: true
-                        }).then(function(response) {
-                            response.data.user_id = response.data.id;
-                            deferred.resolve(response.data);
-                        }).catch(function(err) {
-                            if (allowEmptyResponse){
-                                deferred.resolve({});
-                            } else {
-                                console.error('Error getting user info', err);
-                                deferred.reject(err);
-                            }
-                        });
+                        return $q.reject(err);
                     }
-                }).catch(function(err){
-                    console.error('Error getting userData', err);
-                    deferred.reject(error);
                 });
-
-                return deferred.promise;
             },
 
             getUserStatistics: function(since) {

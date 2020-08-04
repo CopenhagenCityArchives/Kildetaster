@@ -23,7 +23,13 @@ export default ["$stateProvider", "$urlRouterProvider", '$locationProvider', fun
 
             resolve: {
                 userData: ['tokenService', function (tokenService) {
-                    return tokenService.getUserData();
+                    return tokenService.getUser()
+                    .catch(function(err) {
+                        return tokenService.login()
+                        .then(function() {
+                            return tokenService.getUser()
+                        })
+                    });
                 }],
 
                 /**

@@ -1,3 +1,4 @@
+
 <table class="table table-striped table-hover" ng-if="!loading && errorList.length > 0 && isSuperUser">
     <thead>
         <tr>
@@ -88,7 +89,7 @@
     <div class="h4">Indlæser fejlmeldinger</div>
 </div>
 
-<div ng-if="errorList.length == 0 && !loading && !error" class="alert alert-info text-center w-100">
+<div ng-if="!error && errorList.length == 0 && !loading" class="alert alert-info text-center w-100">
     <feather class="large-icon" aria-hidden="true" icon='alert-octagon'></feather>
     <div class="h4">Ingen fejlmeldinger</div>
     <p class="small">Der er ingen der har fejlmeldt dine indtastninger.</p>

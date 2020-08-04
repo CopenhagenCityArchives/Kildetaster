@@ -7,35 +7,12 @@
     </head>
     <body>
         <script type="text/javascript">
-            var auth_param_prefix = "auth_";
-            var hash = window.location.hash;
-            var hash_index = hash.indexOf('#access_token=');
-
-            if (hash_index == -1) {
-                console.error('No access token found.');
-            } else {
-                var search = window.location.search;
-                var url_index = search.indexOf('url=');
-
-                if (url_index == -1) {
-                    console.error('No URL found.');
-                } else {
-                    var auth_params = hash.substring(hash_index + 1);
-                    // add prefix to all auth params so they can be stripped later
-                    auth_params = auth_param_prefix + auth_params.replace(/&/g, '&' + auth_param_prefix);
-                    
-                    // retrieve return url and insert auth params
-                    var url = search.substring(url_index+4);
-                    if (url.indexOf('&') != -1) {
-                        url = url.split('&')[0];
-                    }
-                    url = decodeURIComponent(url);
-                    url = url.replace('AUTH_PARAMS', auth_params);
-
-                    // return to spa
-                    window.location.href = url;
-                }
-            }
+            var search = new URLSearchParams(window.location.search);
+            var url = search.get('url');
+            var code = encodeURIComponent(search.get('code'));
+            var state = encodeURIComponent(search.get('state'));
+            
+            window.location.href = url.replace('AUTH_PARAMS', `code=${code}&state=${state}`)
         </script>
     </body>
 </html>

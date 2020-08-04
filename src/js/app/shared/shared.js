@@ -66,7 +66,7 @@ sharedApp.run(['$rootScope', 'TEXT', function ($rootScope, TEXT) {
     $rootScope.TEXT = TEXT;
 }]);
 
-sharedApp.config(['$httpProvider', 'AnalyticsProvider', 'angularAuth0Provider', '$locationProvider', '$sceDelegateProvider', 'AUTH0_CLIENTID', 'AUTH0_DOMAIN', 'ANALYTICS_ACCOUNT', function($httpProvider, AnalyticsProvider, angularAuth0Provider, $locationProvider,$sceDelegateProvider, AUTH0_CLIENTID, AUTH0_DOMAIN, ANALYTICS_ACCOUNT) {
+sharedApp.config(['$httpProvider', 'AnalyticsProvider', '$locationProvider', '$sceDelegateProvider', 'ANALYTICS_ACCOUNT', function($httpProvider, AnalyticsProvider, $locationProvider,$sceDelegateProvider, ANALYTICS_ACCOUNT) {
     $httpProvider.interceptors.push('tokenFactory');
 
     //Let's allow resources from kbhkilder.dk
@@ -76,11 +76,6 @@ sharedApp.config(['$httpProvider', 'AnalyticsProvider', 'angularAuth0Provider', 
         'https://*.kbharkiv.dk/**',
         'http://localhost:8080/**'
     ]);
-
-    angularAuth0Provider.init({
-        clientID: AUTH0_CLIENTID,
-        domain: AUTH0_DOMAIN
-    });
 
     // Prevent default use of !# hash bang urls
     // @see https://stackoverflow.com/questions/41226122/url-hash-bang-prefix-instead-of-simple-hash-in-angular-1-6
