@@ -40,7 +40,7 @@ define([
             },
 
             getUserInfo: function(allowEmptyResponse) {
-                return authService.getUser()
+                return authService.getUser(allowEmptyResponse)
                 .then(function(user) {
                     return $http({
                         url: API_URL + '/users/' + user['https://kbharkiv.dk/claims/apacs_user_id'],

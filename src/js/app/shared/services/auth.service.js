@@ -9,7 +9,7 @@ var authService = ['$q', 'callbackService', 'AUTH0_CLIENTID', 'AUTH0_DOMAIN', fu
     });
 
     return {
-        getUser() {
+        getUser(allowEmpty) {
             var r = Math.floor(Math.random() * 100);
 
             console.log(r, "1. handleRedirectCallback");
@@ -27,6 +27,10 @@ var authService = ['$q', 'callbackService', 'AUTH0_CLIENTID', 'AUTH0_DOMAIN', fu
                 });
             })
             .catch(function(err) {
+                if (allowEmpty) {
+                    return $q.resolve({});
+                }
+                
                 console.log(r, "3b. loginWithRedirect ()", err)
                 auth0.loginWithRedirect({
                     redirect_uri: callbackService.getCallbackUrl()
