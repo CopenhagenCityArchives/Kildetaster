@@ -28,6 +28,7 @@ define([
                 return authService.getUser()
                 .then(function(user) {
                     var apacs_user_id = user['https://kbharkiv.dk/claims/apacs_user_id'];
+                    console.log(user);
                     return $http({
                         url: API_URL + '/useractivities',
                         method: 'GET',

@@ -1,11 +1,13 @@
 import { Auth0Client } from '@auth0/auth0-spa-js';
+import { Management } from 'auth0-js';
 
 var authService = ['$q', 'callbackService', 'AUTH0_CLIENTID', 'AUTH0_DOMAIN', function authService($q, callbackService, AUTH0_CLIENTID, AUTH0_DOMAIN) {
 
     const auth0 = new Auth0Client({
         client_id: AUTH0_CLIENTID,
         domain: AUTH0_DOMAIN,
-        redirect_uri: callbackService.getCallbackUrl()
+        redirect_uri: callbackService.getCallbackUrl(),
+        scope: 'openid email profile update:users read:users'
     });
 
     return {
@@ -42,6 +44,32 @@ var authService = ['$q', 'callbackService', 'AUTH0_CLIENTID', 'AUTH0_DOMAIN', fu
 
         getToken() {
             return auth0.getTokenSilently();
+        },
+
+        updateUser(userAttributes) {
+            var that = this;
+            var deferred = $q.defer();
+
+            auth0.getIdTokenClaims()
+            .then(function(idToken) {
+                var management = new Management({
+                    domain: AUTH0_DOMAIN,
+                    token: idToken.__raw
+                });
+
+                management.patchUserAttributes(idToken.sub, userAttributes, function(err) {
+                    if (err) {
+                        deferred.reject(err);
+                    } else {
+                        deferred.resolve();
+                    }
+                });
+            })
+            .catch(function(err) {
+                deferred.reject(err);
+            });
+
+            return deferred.promise;
         }
     };
 
