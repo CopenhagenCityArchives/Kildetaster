@@ -18,7 +18,7 @@ define([
     '../../shared/services/solr.service',
     '../../shared/services/error.service',
     '../../shared/services/helpers.service',
-    '../../shared/services/token.service',
+    '../../shared/services/auth.service',
     '../../shared/services/user.service',
 
     '../../shared/services/token.factory',
@@ -96,7 +96,7 @@ define([
     solrService,
     errorService,
     helpersService,
-    tokenService,
+    authService,
     userService,
 
     tokenFactory,
@@ -178,7 +178,7 @@ define([
     searchApp.service('solrService', solrService);
     searchApp.service('errorService', errorService);
     searchApp.service('helpers', helpersService);
-    searchApp.service('tokenService', tokenService);
+    searchApp.service('authService', authService);
     searchApp.service('userService', userService);
 
     searchApp.factory('tokenFactory', tokenFactory);

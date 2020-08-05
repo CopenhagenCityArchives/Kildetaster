@@ -10,7 +10,7 @@ import sharedApp from '../shared/shared';
 import searchApp from './search/search';
 
 
-import tokenService from '../shared/services/token.service';
+import authService from '../shared/services/auth.service';
 import tokenFactory from '../shared/services/token.factory';
 
 import pageService from '../shared/services/page.service';
@@ -54,7 +54,7 @@ sdkApp.config(analyticsBootstrap.config);
 
 
 
-sdkApp.service('tokenService', tokenService);
+sdkApp.service('authService', authService);
 sdkApp.factory('tokenFactory', tokenFactory);
 
 sdkApp.service('pageService', pageService);

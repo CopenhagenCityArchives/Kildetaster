@@ -22,12 +22,12 @@ export default ["$stateProvider", "$urlRouterProvider", '$locationProvider', fun
             },
 
             resolve: {
-                userData: ['tokenService', function (tokenService) {
-                    return tokenService.getUser()
+                userData: ['authService', function (authService) {
+                    return authService.getUser()
                     .catch(function(err) {
-                        return tokenService.login()
+                        return authService.login()
                         .then(function() {
-                            return tokenService.getUser()
+                            return authService.getUser()
                         })
                     });
                 }],
@@ -131,8 +131,8 @@ export default ["$stateProvider", "$urlRouterProvider", '$locationProvider', fun
                 }
             },
             resolve: {
-                userData: ['tokenService', function(tokenService) {
-                    return tokenService.getUser();
+                userData: ['authService', function(authService) {
+                    return authService.getUser();
                 }],
 
                 postData: ['$stateParams', '$q', 'entryService', 'postService', 'errorService', function($stateParams, $q, entryService, postService, errorService) {

@@ -33,7 +33,7 @@ define([
                 .then(function(errorList) {
                     $scope.errorList = errorList;
 
-                    if ($scope.isSuperUser === true) {
+                    if (errorList && $scope.isSuperUser === true) {
                         $scope.userList = helpers.uniqueBy(errorList, function(item) {
                             return item.username
                         });

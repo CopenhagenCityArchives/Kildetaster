@@ -3,11 +3,10 @@ define([
 
 ], function() {
 
-    var userService = ['$q', '$http', 'API_URL', 'tokenService', function userService($q, $http, API_URL, tokenService) {
+    var userService = ['$q', '$http', 'API_URL', 'authService', function userService($q, $http, API_URL, authService) {
 
         return {
             getUsers: function getUsers(unitId, taskId) {
-
                 return $http({
                     url: API_URL + '/activeusers',
                     method: 'GET',
@@ -26,13 +25,7 @@ define([
             *
             */
             getUserActivities: function() {
-                return tokenService.getUser()
-                .catch(function(err) {
-                    return tokenService.login()
-                    .then(function() {
-                        return tokenService.getUser();
-                    })
-                })
+                return authService.getUser()
                 .then(function(user) {
                     var apacs_user_id = user['https://kbharkiv.dk/claims/apacs_user_id'];
                     return $http({
@@ -47,15 +40,8 @@ define([
             },
 
             getUserInfo: function(allowEmptyResponse) {
-                return tokenService.getUser()
-                .catch(function(err) {
-                    return tokenService.login()
-                    .then(function() {
-                        return tokenService.getUser();
-                    })
-                })
+                return authService.getUser()
                 .then(function(user) {
-                    console.log("got user", user);
                     return $http({
                         url: API_URL + '/users/' + user['https://kbharkiv.dk/claims/apacs_user_id'],
                         method: 'GET',
