@@ -16,9 +16,9 @@
 </ul>
 <div class="tab-content">
     <div class="tab-pane fade" ng-class="{ 'active': activeTab == 'day', 'show': activeTab == 'day' }" id="seneste-dogn" role="tabpanel" aria-labelledby="seneste-dogn-tab">
-        <div ng-if="dayLoading" class="text-center w-100">
+        <div ng-if="dayLoading" class="alert alert-info text-center w-100">
             <feather class="large-icon spin" icon='loader'></feather>
-            <div class="h4">Indlæser brugerstatistikker</div>
+            <div class="h4">Indlæser døgnets brugerstatistikker</div>
         </div>
         
         <div ng-if="dayError" class="alert alert-danger text-center w-100">
@@ -26,8 +26,14 @@
             <div class="h4">En fejl opstod</div>
             <p class="small">Kunne ikke hente data. Prøv venligst igen senere.</p>
         </div>
+
+        <div ng-if="!dayLoading && !dayError && !day.length" class="alert alert-info text-center w-100">
+            <feather class="large-icon" aria-hidden="true" icon='alert-octagon'></feather>
+            <div class="h4">Ingen indtastninger fundet</div>
+            <p class="small">Ingen har indtastet i dag - du kan være den første!</p>
+        </div>
         
-        <table ng-if="!dayLoading && !dayError" class="table table-striped" aria-labelledby="seneste-dogn-tab">
+        <table ng-if="!dayLoading && !dayError && day.length" class="table table-striped" aria-labelledby="seneste-dogn-tab">
             <caption class="sr-only">Top 5 indtastere det seneste døgn</caption>
             <thead>
                 <tr>
@@ -52,9 +58,9 @@
         </table>
     </div>
     <div class="tab-pane fade" ng-class="{ 'active': activeTab == 'week', 'show': activeTab == 'week' }" id="seneste-uge" role="tabpanel" aria-labelledby="seneste-uge-tab">
-        <div ng-if="weekLoading" class="text-center w-100">
+        <div ng-if="weekLoading" class="alert alert-info text-center w-100">
             <feather class="large-icon spin" icon='loader'></feather>
-            <div class="h4">Indlæser brugerstatistikker</div>
+            <div class="h4">Indlæser ugens brugerstatistikker</div>
         </div>
         
         <div ng-if="weekError" class="alert alert-danger text-center w-100">
@@ -62,8 +68,14 @@
             <div class="h4">En fejl opstod</div>
             <p class="small">Kunne ikke hente data. Prøv venligst igen senere.</p>
         </div>
+        
+        <div ng-if="!weekLoading && !weekError && !week.length" class="alert alert-info text-center w-100">
+            <feather class="large-icon" aria-hidden="true" icon='alert-octagon'></feather>
+            <div class="h4">Ingen indtastninger fundet</div>
+            <p class="small">Ingen har indtastet i denne uge - du kan være den første!</p>
+        </div>
 
-        <table ng-if="!weekLoading && !weekError" class="table table-striped" aria-labelledby="seneste-uge-tab">
+        <table ng-if="!weekLoading && !weekError && week.length" class="table table-striped" aria-labelledby="seneste-uge-tab">
             <caption class="sr-only">Top 5 indtastere den seneste uge</caption>
             <thead>
                 <tr>
@@ -88,9 +100,9 @@
         </table>
     </div>
     <div class="tab-pane fade" ng-class="{ 'active': activeTab == 'ever', 'show': activeTab == 'ever' }" id="altid" role="tabpanel" aria-labelledby="altid-tab">
-        <div ng-if="everLoading" class="text-center w-100">
+        <div ng-if="everLoading" class="alert alert-info text-center w-100">
             <feather class="large-icon spin" icon='loader'></feather>
-            <div class="h4">Indlæser brugerstatistikker</div>
+            <div class="h4">Indlæser alle brugerstatistikker</div>
         </div>
         
         <div ng-if="everError" class="alert alert-danger text-center w-100">
@@ -98,6 +110,13 @@
             <div class="h4">En fejl opstod</div>
             <p class="small">Kunne ikke hente data. Prøv venligst igen senere.</p>
         </div>
+       
+        <div ng-if="!everLoading && !everError && !ever.length" class="alert alert-info text-center w-100">
+            <feather class="large-icon" aria-hidden="true" icon='alert-octagon'></feather>
+            <div class="h4">Ingen indtastninger fundet</div>
+            <p class="small">Ingen har indtastet - du kan være den første!</p>
+        </div>
+        
         <table ng-if="!everLoading && !everError" class="table table-striped" aria-labelledby="altid-tab">
             <caption class="sr-only">Top 5 indtastere for altid</caption>
             <thead>
