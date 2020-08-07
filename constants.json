@@ -1,5 +1,24 @@
 {
-  "prototype": {
+  "local": {
+    "constants": {
+      "EDITOR_URL": "http://localhost:8080/editor/",
+      "CALLBACK_URL": "http://localhost:8080/callback/",
+      "RESOURCE_URL": "http://localhost:8080/",
+      "API_URL": "http://localhost:8181",
+      "SOLR_API_URL": "https://localhost:8989/solr/apacs_core/select",
+      "SEARCH_CONFIG_URL": "https://localhost:8181/searchconfig",
+      "ERROR_REPORT_CONFIG_URL": "https://localhost:8181/errorreportconfig",
+      "MAIN_DOMAIN": "https://localhost:8080/",
+      "ERROR_URL": "https://localhost:8080/",
+      "PERMALINK_URL": "https://www.kbharkiv.dk/permalink",
+      "AUTH0_CLIENTID": "yuNDUJBWXoqWZICkoGQgsGOd8EnewZB5",
+      "AUTH0_DOMAIN": "login.kbharkiv.dk",
+      "AUTH0_AUDIENCE": "https://www.kbhkilder.dk/api",
+      "ANALYTICS_ACCOUNT": "UA-45125468-1",
+      "TYPEAHEAD_MAX": 75
+    }
+  },
+  "local_remote_backend": {
     "constants": {
       "EDITOR_URL": "http://localhost:8080/editor/",
       "CALLBACK_URL": "http://localhost:8080/callback/",
@@ -13,6 +32,7 @@
       "PERMALINK_URL": "https://www.kbharkiv.dk/permalink",
       "AUTH0_CLIENTID": "yuNDUJBWXoqWZICkoGQgsGOd8EnewZB5",
       "AUTH0_DOMAIN": "login.kbharkiv.dk",
+      "AUTH0_AUDIENCE": "https://www.kbhkilder.dk/api",
       "ANALYTICS_ACCOUNT": "UA-45125468-1",
       "TYPEAHEAD_MAX": 75
     }
@@ -31,6 +51,7 @@
       "PERMALINK_URL": "https://www.kbharkiv.dk/permalink",
       "AUTH0_CLIENTID": "yuNDUJBWXoqWZICkoGQgsGOd8EnewZB5",
       "AUTH0_DOMAIN": "login.kbharkiv.dk",
+      "AUTH0_AUDIENCE": "https://www.kbhkilder.dk/api",
       "ANALYTICS_ACCOUNT": "UA-45125468-1",
       "TYPEAHEAD_MAX": 75
     }
@@ -49,6 +70,7 @@
       "PERMALINK_URL": "https://www.kbharkiv.dk/permalink",
       "AUTH0_CLIENTID": "yuNDUJBWXoqWZICkoGQgsGOd8EnewZB5",
       "AUTH0_DOMAIN": "login.kbharkiv.dk",
+      "AUTH0_AUDIENCE": "https://www.kbhkilder.dk/api",
       "ANALYTICS_ACCOUNT": "UA-45125468-1",
       "TYPEAHEAD_MAX": 75
     }
