@@ -1,13 +1,14 @@
 import { Auth0Client } from '@auth0/auth0-spa-js';
 import { Management } from 'auth0-js';
 
-var authService = ['$q', 'callbackService', 'AUTH0_CLIENTID', 'AUTH0_DOMAIN', function authService($q, callbackService, AUTH0_CLIENTID, AUTH0_DOMAIN) {
+var authService = ['$q', 'callbackService', 'AUTH0_CLIENTID', 'AUTH0_DOMAIN', 'AUTH0_AUDIENCE', function authService($q, callbackService, AUTH0_CLIENTID, AUTH0_DOMAIN, AUTH0_AUDIENCE) {
 
     const auth0 = new Auth0Client({
         client_id: AUTH0_CLIENTID,
         domain: AUTH0_DOMAIN,
+        audience: AUTH0_AUDIENCE,
         redirect_uri: callbackService.getCallbackUrl(),
-        scope: 'openid email profile update:users read:users'
+        scope: 'openid email profile'
     });
 
     return {
@@ -47,7 +48,6 @@ var authService = ['$q', 'callbackService', 'AUTH0_CLIENTID', 'AUTH0_DOMAIN', fu
         },
 
         updateUser(userAttributes) {
-            var that = this;
             var deferred = $q.defer();
 
             auth0.getIdTokenClaims()
