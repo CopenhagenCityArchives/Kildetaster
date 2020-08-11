@@ -14,17 +14,17 @@
         </div>
     </div>
 
-    <div class="form-group" ng-class="{'has-error': username.error}">
-        <label for="edit-profile-username-input">Brugernavn</label>
+    <div class="form-group" ng-class="{'has-error': nickname.error}">
+        <label for="edit-profile-nickname-input">Brugernavn</label>
         <div class="input-group">
-            <input type="text" class="form-control" id="edit-profile-username-input" placeholder="Skriv brugernavn" ng-model="username.value" ng-disabled="!username.editing"></input>
+            <input type="text" class="form-control" id="edit-profile-nickname-input" placeholder="Skriv brugernavn" ng-model="nickname.value" ng-disabled="!nickname.editing"></input>
             <div class="input-group-append">
-                <button class="btn btn-primary" ng-if="!username.editing && !username.updating" ng-click="edit(username)">Ret</button>
+                <button class="btn btn-primary" ng-if="!nickname.editing && !nickname.updating" ng-click="edit(nickname)">Ret</button>
                 
-                <button class="btn btn-info" ng-if="username.editing && !username.updating" ng-click="cancel(username)">Annuller</button>
-                <button class="btn btn-primary" ng-if="username.editing && !username.updating" ng-click="save(username)">Gem</button>
+                <button class="btn btn-info" ng-if="nickname.editing && !nickname.updating" ng-click="cancel(nickname)">Annuller</button>
+                <button class="btn btn-primary" ng-if="nickname.editing && !nickname.updating" ng-click="save(nickname)">Gem</button>
 
-                <feather class="btn btn-info small-icon spin" icon='loader' ng-if="username.updating"></feather>
+                <feather class="btn btn-info small-icon spin" icon='loader' ng-if="nickname.updating"></feather>
             </div>
         </div>
     </div>

@@ -23,14 +23,6 @@ export default [function () {
                 error: false
             };
 
-            $scope.password = {
-                name: 'password',
-                value: undefined,
-                editing: false,
-                updating: false,
-                error: false
-            };
-
             $scope.edit = function(field) {
                 if (field.editing) {
                     return;
@@ -51,17 +43,19 @@ export default [function () {
 
             $scope.save = function(field) {
                 var attr = {};
+                attr[field.name] = field.value;
                 field.updating = true;
                 userService.updateUserProfile(attr)
                 .then(function() {
-                    attr[field.name] = field.value;
                     field.error = false;
                 })
                 .catch(function(err) {
                     field.error = true;
+                    $scope.$apply();
                 })
                 .finally(function() {
                     field.updating = false;
+                    $scope.$apply();
                 })
             }
 
