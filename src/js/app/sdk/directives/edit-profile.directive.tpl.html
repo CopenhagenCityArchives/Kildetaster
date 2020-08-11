@@ -1,26 +1,30 @@
 <form ng-if="!loading && !error">
-    <div class="form-group">
+    <div class="form-group" ng-class="{'has-error': email.error}">
         <label for="edit-profile-email-input">E-mailadresse</label>
         <div class="input-group">
             <input type="email" class="form-control" id="edit-profile-email-input" placeholder="Skriv e-mailadresse" ng-model="email.value" ng-disabled="!email.editing"></input>
             <div class="input-group-append">
-                <button class="btn btn-primary" ng-if="!email.editing" ng-click="edit(email)">Ret</button>
+                <button class="btn btn-primary" ng-if="!email.editing && !email.updating" ng-click="edit(email)">Ret</button>
                 
-                <button class="btn btn-info" ng-if="email.editing" ng-click="cancel(email)">Annuller</button>
-                <button class="btn btn-primary" ng-if="email.editing" ng-click="save(email)">Gem</button>
+                <button class="btn btn-info" ng-if="email.editing && !email.updating" ng-click="cancel(email)">Annuller</button>
+                <button class="btn btn-primary" ng-if="email.editing && !email.updating" ng-click="save(email)">Gem</button>
+
+                <feather class="btn btn-info small-icon spin" icon='loader' ng-if="email.updating"></feather>
             </div>
         </div>
     </div>
 
-    <div class="form-group">
-        <label for="edit-profile-email-input">Brugernavn</label>
+    <div class="form-group" ng-class="{'has-error': username.error}">
+        <label for="edit-profile-username-input">Brugernavn</label>
         <div class="input-group">
-            <input type="text" class="form-control" id="edit-profile-nickname-input" placeholder="Skriv brugernavn" ng-model="nickname.value" ng-disabled="!nickname.editing"></input>
+            <input type="text" class="form-control" id="edit-profile-username-input" placeholder="Skriv brugernavn" ng-model="username.value" ng-disabled="!username.editing"></input>
             <div class="input-group-append">
-                <button class="btn btn-info" ng-if="!nickname.editing" ng-click="edit(nickname)">Ret</button>
+                <button class="btn btn-primary" ng-if="!username.editing && !username.updating" ng-click="edit(username)">Ret</button>
                 
-                <button class="btn btn-info" ng-if="nickname.editing" ng-click="cancel(nickname)">Annuller</button>
-                <button class="btn btn-info" ng-if="nickname.editing" ng-click="save(nickname)">Gem</button>
+                <button class="btn btn-info" ng-if="username.editing && !username.updating" ng-click="cancel(username)">Annuller</button>
+                <button class="btn btn-primary" ng-if="username.editing && !username.updating" ng-click="save(username)">Gem</button>
+
+                <feather class="btn btn-info small-icon spin" icon='loader' ng-if="username.updating"></feather>
             </div>
         </div>
     </div>

@@ -3,26 +3,32 @@ export default [function () {
         restrict: 'E',
         scope: {},
         template: require('./edit-profile.directive.tpl.html'),
-        controller: ['$scope', 'authService', function ($scope, authService) {
+        controller: ['$scope', 'userService', 'authService', function ($scope, userService, authService) {
             $scope.loading = true;
             $scope.error = false;
 
             $scope.email = {
                 name: 'email',
                 value: undefined,
-                editing: false
+                editing: false,
+                updating: false,
+                error: false
             };
 
             $scope.nickname = {
                 name: 'nickname',
                 value: undefined,
-                editing: false
+                editing: false,
+                updating: false,
+                error: false
             };
 
             $scope.password = {
                 name: 'password',
                 value: undefined,
-                editing: false
+                editing: false,
+                updating: false,
+                error: false
             };
 
             $scope.edit = function(field) {
@@ -45,13 +51,17 @@ export default [function () {
 
             $scope.save = function(field) {
                 var attr = {};
-                attr[field.name] = field.value;
-                authService.updateUser(attr)
+                field.updating = true;
+                userService.updateUserProfile(attr)
                 .then(function() {
-                    console.log("updated!");
+                    attr[field.name] = field.value;
+                    field.error = false;
                 })
                 .catch(function(err) {
-                    console.error("did not update", err);
+                    field.error = true;
+                })
+                .finally(function() {
+                    field.updating = false;
                 })
             }
 

@@ -6,6 +6,17 @@ define([
     var userService = ['$q', '$http', 'API_URL', 'authService', function userService($q, $http, API_URL, authService) {
 
         return {
+            updateUserProfile: function updateUser(profilePatch) {
+                return authService.getToken()
+                .then(function(token) {
+                    return $http({
+                        url: API_URL + '/user',
+                        method: 'PATCH',
+                        data: profilePatch
+                    })
+                });
+            },
+
             getUsers: function getUsers(unitId, taskId) {
                 return $http({
                     url: API_URL + '/activeusers',
