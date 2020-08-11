@@ -44,6 +44,7 @@ export default [function () {
             $scope.save = function(field) {
                 var attr = {};
                 attr[field.name] = field.value;
+                field.editing = false;
                 field.updating = true;
                 userService.updateUserProfile(attr)
                 .then(function() {
@@ -51,6 +52,7 @@ export default [function () {
                 })
                 .catch(function(err) {
                     field.error = true;
+                    field.value = field.oldValue;
                     $scope.$apply();
                 })
                 .finally(function() {
