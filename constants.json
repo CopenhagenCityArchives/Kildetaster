@@ -61,7 +61,7 @@
       "EDITOR_URL": "https://kildetaster.kbharkiv.dk",
       "CALLBACK_URL": "https://new.kbharkiv.dk/",
       "RESOURCE_URL": "https://kildetaster.kbharkiv.dk/resources/",
-      "API_URL": "https://www.kbhkilder.dk/api",
+      "API_URL": "https://api-dev-auth0.kbharkiv.dk",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
       "SEARCH_CONFIG_URL": "https://www.kbhkilder.dk/api/searchconfig",
       "ERROR_REPORT_CONFIG_URL": "https://www.kbhkilder.dk/api/errorreportconfig",
