@@ -8,7 +8,7 @@ export default [function() {
             label: '@'
         },
         template: require('./edit-profile-form.directive.tpl.html'),
-        controller: ['$scope', '$timeout', 'userService', 'authService', function ($scope, $timeout, userService, authService) {
+        controller: ['$element', '$scope', '$timeout', 'userService', 'authService', function ($element, $scope, $timeout, userService, authService) {
             $scope.loading = true;
             $scope.error = false;            
             $scope.editing = false;
@@ -25,24 +25,24 @@ export default [function() {
             }
 
             $scope.edit = function() {
-                if (!$scope.editing) {
-                    $scope.editing = true;
-                    $scope.oldValue = $scope.value;
-                }
+                $scope.editing = true;
+                $scope.oldValue = $scope.value;
+
+                $timeout(function() {
+                    $element.find('#edit-profile-' + $scope.field + '-input').focus();
+                });
             }
 
             $scope.cancel = function() {
-                if ($scope.editing) {
-                    $scope.editing = false;
-                    $scope.value = $scope.oldValue;
-                }
+                $scope.editing = false;
+                $scope.value = $scope.oldValue;
+
+                $timeout(function() {
+                    $element.find('#' + $scope.field + '-edit-btn').focus();
+                });
             }
 
             $scope.save = function() {
-                if (!$scope.editing) {
-                    return;
-                }
-
                 var attr = {};
                 attr[$scope.field] = $scope.value;
 
@@ -55,13 +55,14 @@ export default [function() {
                     $scope.success = true;
                     $scope.oldValue = $scope.value;
                 })
-                .catch(function(err) {
+                .catch(function() {
                     $scope.error = true;
                     $scope.value = $scope.oldValue;
                 })
                 .finally(function() {
                     $timeout(function() {
                         $scope.updating = false;
+                        $element.find('#' + $scope.field + '-edit-btn').focus();
                     });
                 })
             }
