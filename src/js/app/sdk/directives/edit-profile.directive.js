@@ -93,7 +93,6 @@ export default [function () {
                 userService.updateUserProfile(profile)
                 .then(function(result) {
                     $scope.user = result.data;
-                    $scope.editing = false;
                     field.successText = field.getSuccessText();
                 })
                 .catch(function(err) {
