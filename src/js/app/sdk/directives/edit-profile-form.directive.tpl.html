@@ -37,5 +37,8 @@
                 </feather>
             </div>
         </div>
+
+        <small class="form-text text-success" ng-if="successMessage">{{ successMessage }}</small>
+        <small class="form-text text-danger" ng-if="errorMessage">{{ errorMessage }}</small>
     </div>
 </form>

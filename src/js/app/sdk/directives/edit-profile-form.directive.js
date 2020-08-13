@@ -5,7 +5,9 @@ export default [function() {
             field: '@',
             inputType: '@',
             placeholder: '@',
-            label: '@'
+            label: '@',
+            errorCallback: '&',
+            successCallback: '&'
         },
         template: require('./edit-profile-form.directive.tpl.html'),
         controller: ['$element', '$scope', '$timeout', 'userService', 'authService', function ($element, $scope, $timeout, userService, authService) {
@@ -51,12 +53,14 @@ export default [function() {
                 $scope.error = false;
 
                 userService.updateUserProfile(attr)
-                .then(function() {
+                .then(function(val) {
                     $scope.oldValue = $scope.value;
+                    $scope.successMessage = $scope.successCallback()(val);
                 })
-                .catch(function() {
+                .catch(function(err) {
                     $scope.error = true;
                     $scope.value = $scope.oldValue;
+                    $scope.errorMessage = $scope.errorCallback()(err);
                 })
                 .finally(function() {
                     $scope.state = "default";

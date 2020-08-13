@@ -1,6 +1,6 @@
-<edit-profile-form input-type='text' field='email' label='E-mailadresse' placeholder='Skriv e-mailadresse'></edit-profile-form>
+<edit-profile-form input-type='text' field='email' label='E-mailadresse' success-callback="emailSuccess" error-callback="emailError" placeholder='Skriv e-mailadresse'></edit-profile-form>
 
-<edit-profile-form input-type='text' field='nickname' label='Brugernavn' placeholder='Skriv brugernavn'></edit-profile-form>
+<edit-profile-form input-type='text' field='nickname' label='Brugernavn' success-callback="nicknameSuccess" error-callback="nicknameError" placeholder='Skriv brugernavn'></edit-profile-form>
 
 <button type="button" class="btn btn-link" ng-click="editPassword = !editPassword">Rediger dit kodeord</button>
 
@@ -33,12 +33,13 @@
             <feather icon="loader" class="spin"></feather>
         </div>
     </div>
+
+    <small class="form-text text-success" ng-if="passwordChanged">
+        Dit kodeord blev opdateret!
+    </small>
+    
+    <small class="form-text text-danger" ng-if="passwordError">
+        Dit kodeord blev ikke opdateret.
+    </small>
 </form>
 
-<div class="text-success" ng-if="passwordChanged">
-    Dit kodeord blev opdateret!
-</div>
-
-<div class="text-danger" ng-if="passwordError">
-    Dit kodeord blev ikke opdateret.
-</div>

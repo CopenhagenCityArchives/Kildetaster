@@ -10,6 +10,23 @@ export default [function () {
             $scope.passwordChanged = false;
             $scope.passwordError = false;
             $scope.passwordUpdating = false;
+
+            $scope.emailSuccess = function() {
+                return 'Din e-mail er opdateret!';
+            }
+            $scope.emailError = function() {
+                return 'Din e-mail blev ikke opdateret.';
+            }
+            $scope.nicknameSuccess = function() {
+                return 'Dit brugernavn blev opdateret!';
+            }
+            $scope.nicknameError = function(err) {
+                if (err.status == 400 && err.statusText == 'Username Exists') {
+                    return 'Brugernavnet er optaget.';
+                } else {
+                    return 'Dit brugernavn blev ikke opdateret.';
+                }
+            }
             
             $scope.submitPassword = function(event) {
                 $scope.passwordChanged = false;
