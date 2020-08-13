@@ -21,7 +21,7 @@ export default [function () {
                 return 'Dit brugernavn blev opdateret!';
             }
             $scope.nicknameError = function(err) {
-                if (err.status == 400 && err.statusText == 'Username Exists') {
+                if (err.status == 400 && err.data && err.data.message == 'Username already exists') {
                     return 'Brugernavnet er optaget.';
                 } else {
                     return 'Dit brugernavn blev ikke opdateret.';
