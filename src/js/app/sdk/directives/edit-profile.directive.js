@@ -12,9 +12,9 @@ export default [function () {
             $scope.passwordUpdating = false;
             
             $scope.submitPassword = function(event) {
-                this.passwordChanged = false;
-                this.passwordError = false;
-                this.passwordUpdating = true;
+                $scope.passwordChanged = false;
+                $scope.passwordError = false;
+                $scope.passwordUpdating = true;
 
                 if (event.target.checkValidity()) {
                     userService.updateUserProfile({'password': this.passwordValue})
@@ -32,11 +32,14 @@ export default [function () {
             }
 
             $scope.checkRepeat = function() {
-                var elem = $element.find('#edit-profile-input-password-2')[0];
+                var elem1 = $element.find('#edit-profile-input-password-1')[0];
+                var elem2 = $element.find('#edit-profile-input-password-2')[0];
                 if (this.passwordRepeatValue && this.passwordValue == this.passwordRepeatValue) {
-                    elem.setCustomValidity("");
+                    elem1.setCustomValidity("");
+                    elem2.setCustomValidity("");
                 } else {
-                    elem.setCustomValidity("De to kodeord skal være ens.");
+                    elem1.setCustomValidity("De to kodeord skal være ens.");
+                    elem2.setCustomValidity("De to kodeord skal være ens.");
                 }
             }
         }]
