@@ -26,18 +26,20 @@ export default [function() {
 
             $scope.edit = function() {
                 $scope.oldValue = $scope.value;
+                $scope.state = "editing";
+
                 $timeout(function() {
-                    $scope.state = "editing";
-                    $element.find('#edit-profile-' + $scope.field + '-input').focus();
+                    var elem = $element.find('#edit-profile-input-' + $scope.field);
+                    elem.focus();
                 });
             }
 
             $scope.cancel = function() {
                 $scope.value = $scope.oldValue;
+                $scope.state = "default";
 
                 $timeout(function() {
-                    $scope.state = "default";
-                    $element.find('#' + $scope.field + '-edit-btn').focus();
+                    $element.find('#edit-profile-edit-button-' + $scope.field).focus();
                 });
             }
 
@@ -57,8 +59,9 @@ export default [function() {
                     $scope.value = $scope.oldValue;
                 })
                 .finally(function() {
+                    $scope.state = "default";
+
                     $timeout(function() {
-                        $scope.state = "default";
                         $element.find('#' + $scope.field + '-edit-btn').focus();
                     });
                 })
