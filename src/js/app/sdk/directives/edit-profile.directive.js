@@ -89,6 +89,8 @@ export default [function () {
                     return;
                 }
                 field.saving = true;
+                field.errorText = null;
+                field.successText = null;
 
                 userService.updateUserProfile(profile)
                 .then(function(result) {
