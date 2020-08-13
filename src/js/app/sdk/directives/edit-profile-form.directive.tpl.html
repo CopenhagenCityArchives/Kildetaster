@@ -4,10 +4,10 @@
         <div class="input-group">
             <input ng-attr-type="{{ input-type }}" class="form-control" ng-attr-id="edit-profile-{{ field }}-input" ng-attribute-placeholder="{{ placeholder }}" ng-model="value" ng-disabled="!editing"></input>
             <div class="input-group-append">
-                <button ng-attr-id="{{ field }}-edit-btn" class="btn btn-primary" ng-if="!editing && !updating && !loading" ng-disabled="loading" ng-click="edit()">Ret</button>
+                <button type="button" ng-attr-id="{{ field }}-edit-btn" class="btn btn-primary" ng-if="!editing && !updating && !loading" ng-disabled="loading" ng-click="edit()">Ret</button>
                 
-                <button class="btn btn-primary" ng-if="editing" ng-click="save()">Gem</button>
-                <button class="btn btn-info" ng-if="editing" ng-click="cancel()">Annuller</button>
+                <button type="button" class="btn btn-primary" ng-if="editing" ng-click="save()">Gem</button>
+                <button type="button" class="btn btn-info" ng-if="editing" ng-click="cancel()">Annuller</button>
 
                 <feather class="btn btn-info small-icon spin" icon='loader' ng-if="updating || loading"></feather>
             </div>
