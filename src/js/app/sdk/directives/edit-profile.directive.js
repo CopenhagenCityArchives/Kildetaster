@@ -5,83 +5,109 @@ export default [function () {
         template: require('./edit-profile.directive.tpl.html'),
         controller: ['$scope', '$element', '$timeout', 'authService', 'userService', function($scope, $element, $timeout, authService, userService) {
             $scope.user = null;
-
             $scope.loading = true;
-            $scope.saving = false;
             $scope.editing = false;
-            $scope.errorSaving = null;
-            $scope.successSaving = null;
 
-            $scope.nickname = null;
-            $scope.email = null;
-            $scope.emailRepeat = null;
-            $scope.password = null;
-            $scope.passwordRepeat = null;
+            $scope.nickname = {
+                name: 'nickname',
+                value: null,
+                saving: false,
+                errorText: null,
+                successText: null,
+                getErrorText(err) {
+                    if (err && err.data && err.data.message == 'Username already exists') {
+                        return "Brugernavnet fandtes allerede.";
+                    } else {
+                        return "Brugernavnet blev ikke opdateret.";
+
+                    }
+                },
+                getSuccessText() {
+                    return "Brugernavnet blev opdateret!";
+                }
+            };
+
+            $scope.email = {
+                name: 'email',
+                value: null,
+                repeat: null,
+                saving: false,
+                errorText: null,
+                successText: null,
+                getErrorText(err) {
+                    return "E-mailadressen blev ikke opdateret.";
+                },
+                getSuccessText() {
+                    return "E-mailadressen blev opdateret!";
+                }
+            };
+
+            $scope.password = {
+                name: 'password',
+                value: null,
+                repeat: null,
+                saving: false,
+                errorText: null,
+                successText: null,
+                getErrorText(err) {
+                    return "Kodeordet blev ikke opdateret.";
+                },
+                getSuccessText() {
+                    return "Kodeordet blev opdateret!";
+                }
+            };
 
             $scope.edit = function() {
                 $scope.editing = true;
 
-                $scope.nickname = $scope.user.nickname;
-                $scope.email = $scope.user.email;
-                $scope.emailRepeat = $scope.user.email;
-                $scope.errorSaving = "";
-                $scope.successSaving = "";
+                $scope.nickname.value = $scope.user.nickname;
+                $scope.email.value = $scope.user.email;
+                $scope.email.repeat = $scope.user.email;
+                $scope.password.value = null;
+                $scope.password.repeat = null;
+                $scope.nickname.successText = null;
+                $scope.nickname.errorText = null;
+                $scope.email.successText = null;
+                $scope.email.errorText = null;
+                $scope.password.successText = null;
+                $scope.password.errorText = null;
             }
 
             $scope.cancel = function() {
                 $scope.editing = false;
-                $scope.errorSaving = "";
-                $scope.successSaving = "";
             }
 
-            $scope.submit = function() {
-                if (!$element.find('form')[0].checkValidity()) {
+            $scope.submit = function(event, field, comparison) {
+                if (!event.target.checkValidity()) {
                     return;
                 }
 
                 var profile = {};
-                if (this.nickname && this.nickname != this.user.nickname) {
-                    profile.nickname = this.nickname;
-                }
-                if (this.password) {
-                    profile.password = this.password;
-                }
-                if (this.email && this.email != this.user.email) {
-                    profile.email = this.email;
-                }
-                if (!profile.nickname && !profile.password && !profile.email) {
+                if (field.value != comparison) {
+                    profile[field.name] = field.value;
+                } else {
                     return;
                 }
-
-
-                $scope.errorSaving = "";
-                $scope.successSaving = "";
-                this.saving = true;
+                field.saving = true;
 
                 userService.updateUserProfile(profile)
                 .then(function(result) {
                     $scope.user = result.data;
-                    $scope.successSaving = "Brugeroplysningerne blev gemt!";
-                    $scope.password = null;
-                    $scope.passwordRepeat = null;
+                    $scope.editing = false;
+                    field.successText = field.getSuccessText();
                 })
                 .catch(function(err) {
-                    if (err.status == 400 && err.data && err.data.message == 'Username already exists') {
-                        $scope.errorSaving = "Brugeroplysninger blev ikke gemt. Brugernavnet er optaget."
-                    } else {
-                        $scope.errorSaving = "Brugeroplysninger blev ikke gemt."
-                    }
+                    field.errorText = field.getErrorText(err);
                 })
                 .finally(function() {
                     $scope.$apply(function() {
-                        $scope.editing = false;
-                        $scope.saving = false;
+                        field.saving = false;
                     });
                 })
             }
 
             $scope.checkEmailRepeat = function() {
-                if (this.email != this.emailRepeat) {
+                if (this.email.value != this.email.repeat) {
                     $element.find('#edit-profile-email')[0].setCustomValidity('De to e-mailadresser skal være ens.');
                     $element.find('#edit-profile-email-repeat')[0].setCustomValidity('De to e-mailadresser skal være ens.');
                 } else {
@@ -91,7 +117,7 @@ export default [function () {
             }
 
             $scope.checkPasswordRepeat = function() {
-                if ((this.password || this.passwordRepeat) && this.password != this.passwordRepeat) {
+                if ((this.password.value || this.password.repeat) && this.password.value != this.password.repeat) {
                     $element.find('#edit-profile-password')[0].setCustomValidity('De to kodeord skal være ens.');
                     $element.find('#edit-profile-password-repeat')[0].setCustomValidity('De to kodeord skal være ens.');
                 } else {
