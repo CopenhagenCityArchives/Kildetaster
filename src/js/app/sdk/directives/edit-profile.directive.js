@@ -42,7 +42,6 @@ export default [function () {
                         $scope.passwordError = true;
                     })
                     .finally(function() {
-                        $scope.editPassword = false;
                         $scope.passwordUpdating = false;
                     })
                 }
