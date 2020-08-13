@@ -13,7 +13,8 @@
             class="form-control"
             placeholder="Indtast kodeord"
             required
-            ng-model="passwordValue">
+            ng-model="passwordValue"
+            ng-change="checkRepeat()">
     </div>
     <div class="form-row mb-3">
         <label for="edit-profile-input-password-2">Gentag kodeord</label>
