@@ -1,19 +1,45 @@
 <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item">
-        <a class="nav-link" ng-class="{ 'active': activeTab == 'day' }" id="seneste-dogn-tab" data-toggle="tab" href role="tab" ng-click="activeTab = 'day'" 
-            aria-controls="seneste-dogn" aria-selected="true"><span class="sr-only">Top 5 indtastere det </span>Seneste
-            døgn</a>
+        <a class="nav-link"
+           ng-class="{ 'active': activeTab == 'day' }"
+           id="seneste-dogn-tab"
+           data-toggle="tab"
+           href
+           role="tab"
+           ng-click="activeTab = 'day'" 
+           aria-controls="seneste-dogn"
+           aria-selected="true">
+           <span class="sr-only">Top 5 indtastere det </span>Seneste døgn
+        </a>
     </li>
+
     <li class="nav-item">
-        <a class="nav-link" ng-class="{ 'active': activeTab == 'week' }" id="seneste-uge-tab" data-toggle="tab" href role="tab" ng-click="activeTab = 'week'"
-            aria-controls="seneste-uge" aria-selected="false"><span class="sr-only">Top 5 indtastere den </span>Seneste
-            uge</a>
+        <a class="nav-link"
+           ng-class="{ 'active': activeTab == 'week' }"
+           id="seneste-uge-tab"
+           data-toggle="tab"
+           href role="tab"
+           ng-click="activeTab = 'week'"
+           aria-controls="seneste-uge"
+           aria-selected="false">
+           <span class="sr-only">Top 5 indtastere den </span>Seneste uge
+        </a>
     </li>
+
     <li class="nav-item">
-        <a class="nav-link" ng-class="{ 'active': activeTab == 'ever' }" id="altid-tab" data-toggle="tab" href role="tab" aria-controls="altid" ng-click="activeTab = 'ever'" 
-            aria-selected="false"><span class="sr-only">Top 5 indtastere for </span>Altid</a>
+        <a class="nav-link"
+           ng-class="{ 'active': activeTab == 'ever' }"
+           id="altid-tab"
+           data-toggle="tab"
+           href role="tab"
+           aria-controls="altid"
+           ng-click="activeTab = 'ever'" 
+           aria-selected="false">
+           <span class="sr-only">Top 5 indtastere for </span>Altid
+        </a>
     </li>
 </ul>
+
 <div class="tab-content">
     <div class="tab-pane fade" ng-class="{ 'active': activeTab == 'day', 'show': activeTab == 'day' }" id="seneste-dogn" role="tabpanel" aria-labelledby="seneste-dogn-tab">
         <div ng-if="dayLoading" class="alert alert-info text-center w-100">
@@ -36,7 +62,7 @@
         <table ng-if="!dayLoading && !dayError && day.length" class="table table-striped" aria-labelledby="seneste-dogn-tab">
             <caption class="sr-only">Top 5 indtastere det seneste døgn</caption>
             <thead>
-                <tr>
+                <tr class="d-none d-md-table-row">
                     <th scope="col">#</th>
                     <th scope="col">Bruger</th>
                     <th scope="col">Antal</th>
@@ -45,18 +71,22 @@
             <tbody>
                 <tr ng-repeat="stat in day | limitTo : limit : 0">
                     <td>
+                        <div class="h5 d-md-none">#</div>
                         {{ $index + 1}}
                     </td>
                     <td>
+                        <div class="h5 d-md-none">Bruger</div>
                         {{ stat.username }}
                     </td>
                     <td>
+                        <div class="h5 d-md-none">Antal</div>
                         {{ stat.count | number }}
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
+
     <div class="tab-pane fade" ng-class="{ 'active': activeTab == 'week', 'show': activeTab == 'week' }" id="seneste-uge" role="tabpanel" aria-labelledby="seneste-uge-tab">
         <div ng-if="weekLoading" class="alert alert-info text-center w-100">
             <feather class="large-icon spin" icon='loader'></feather>
@@ -78,7 +108,7 @@
         <table ng-if="!weekLoading && !weekError && week.length" class="table table-striped" aria-labelledby="seneste-uge-tab">
             <caption class="sr-only">Top 5 indtastere den seneste uge</caption>
             <thead>
-                <tr>
+                <tr class="d-none d-md-table-row">
                     <th scope="col">#</th>
                     <th scope="col">Bruger</th>
                     <th scope="col">Antal</th>
@@ -87,12 +117,15 @@
             <tbody>
                 <tr ng-repeat="stat in week | limitTo : limit : 0">
                     <td>
+                        <div class="h5 d-md-none">#</div>
                         {{ $index + 1}}
                     </td>
                     <td>
+                        <div class="h5 d-md-none">Bruger</div>
                         {{ stat.username }}
                     </td>
                     <td>
+                        <div class="h5 d-md-none">Antal</div>
                         {{ stat.count | number }}
                     </td>
                 </tr>
@@ -120,7 +153,7 @@
         <table ng-if="!everLoading && !everError" class="table table-striped" aria-labelledby="altid-tab">
             <caption class="sr-only">Top 5 indtastere for altid</caption>
             <thead>
-                <tr>
+                <tr class="d-none d-md-table-row">
                     <th scope="col">#</th>
                     <th scope="col">Bruger</th>
                     <th scope="col">Antal</th>
@@ -129,12 +162,15 @@
             <tbody>
                 <tr ng-repeat="stat in ever | limitTo : limit : 0">
                     <td>
+                        <div class="h5 d-md-none">#</div>
                         {{ $index + 1}}
                     </td>
                     <td>
+                        <div class="h5 d-md-none">Bruger</div>
                         {{ stat.username }}
                     </td>
                     <td>
+                        <div class="h5 d-md-none">Antal</div>
                         {{ stat.count | number }}
                     </td>
                 </tr>

@@ -1,7 +1,7 @@
 
 <table class="table table-striped table-hover" ng-if="!loading && errorList.length > 0 && isSuperUser">
     <thead>
-        <tr>
+        <tr class="d-none d-md-table-row">
             <th scope="col">#</th>
             <th scope="col">Kilde</th>
             <th scope="col">
@@ -26,15 +26,19 @@
     <tbody>
         <tr tabindex="0" ng-repeat="error in errorList | filter: selectedFilter" style="cursor: pointer;" ng-click="goToEditor(error)">
             <td>
+                <div class="h5 d-md-none">#</div>
                 {{ $index }}
             </td>
             <td>
+                <div class="h5 d-md-none">Kilde</div>
                 {{error.unit_description}}
             </td>
             <td>
+                <div class="h5 d-md-none">Bruger</div>
                 {{error.username}}
             </td>
             <td>
+                <div class="h5 d-md-none">Felter</div>
                 {{error.label}}
             </td>
             <td>
@@ -48,7 +52,7 @@
 <table class="table table-striped table-hover" ng-if="!loading && !isSuperUser && errorList.length > 0">
     <caption class="sr-only">Mine fejlmeldinger</caption>
     <thead>
-        <tr>
+        <tr class="d-none d-md-table-row">
             <th scope="col">#</th>
             <th scope="col">Kilde</th>
             <th scope="col">Felt</th>
@@ -59,15 +63,19 @@
     <tbody>
         <tr tabindex="0" ng-repeat="error in errorList" style="cursor: pointer;" ng-click="goToEditor(error)">
             <td>
+                <div class="h5 d-md-none">#</div>
                 {{ $index }}
             </td>
             <td>
+                <div class="h5 d-md-none">Kilde</div>
                 {{error.unit_description}}
             </td>
             <td>
+                <div class="h5 d-md-none">Felt</div>
                 {{error.label || error.entity_name_gui}}
             </td>
             <td>
+                <div class="h5 d-md-none">Overgår til superbruger</div>
                 <div ng-if="error.superUserTime">{{error.superUserTime | date:'dd-MM-yyyy HH:mm:ss'}}</div>
             </td>
             <td>
