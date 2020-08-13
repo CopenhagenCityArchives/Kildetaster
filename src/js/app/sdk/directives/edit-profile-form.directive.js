@@ -25,19 +25,18 @@ export default [function() {
             }
 
             $scope.edit = function() {
-                $scope.editing = true;
                 $scope.oldValue = $scope.value;
-
                 $timeout(function() {
+                    $scope.editing = true;
                     $element.find('#edit-profile-' + $scope.field + '-input').focus();
                 });
             }
 
             $scope.cancel = function() {
-                $scope.editing = false;
                 $scope.value = $scope.oldValue;
 
                 $timeout(function() {
+                    $scope.editing = false;
                     $element.find('#' + $scope.field + '-edit-btn').focus();
                 });
             }
