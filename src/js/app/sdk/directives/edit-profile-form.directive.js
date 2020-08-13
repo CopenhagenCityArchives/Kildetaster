@@ -46,6 +46,10 @@ export default [function() {
             }
 
             $scope.save = function() {
+                if ($scope.value == $scope.oldValue) {
+                    return;
+                }
+                
                 var attr = {};
                 attr[$scope.field] = $scope.value;
 
