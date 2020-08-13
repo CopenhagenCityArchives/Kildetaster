@@ -9,25 +9,25 @@ export default [function() {
         },
         template: require('./edit-profile-form.directive.tpl.html'),
         controller: ['$element', '$scope', '$timeout', 'userService', 'authService', function ($element, $scope, $timeout, userService, authService) {
-            $scope.loading = true;
-            $scope.error = false;            
-            $scope.editing = false;
-            $scope.updating = false;
-
+            $scope.error = false;
+            $scope.state = "loading";
             $scope.value = undefined;
 
             $scope.submit = function() {
-                if (!$scope.editing && !$scope.updating) {
-                    $scope.edit();
-                } else if ($scope.editing) {
-                    $scope.save();
+                switch ($scope.state) {
+                    case "default":
+                        $scope.edit();
+                        break;
+                    case "editing":
+                        $scope.save();
+                        break;
                 }
             }
 
             $scope.edit = function() {
                 $scope.oldValue = $scope.value;
                 $timeout(function() {
-                    $scope.editing = true;
+                    $scope.state = "editing";
                     $element.find('#edit-profile-' + $scope.field + '-input').focus();
                 });
             }
@@ -36,7 +36,7 @@ export default [function() {
                 $scope.value = $scope.oldValue;
 
                 $timeout(function() {
-                    $scope.editing = false;
+                    $scope.state = "default";
                     $element.find('#' + $scope.field + '-edit-btn').focus();
                 });
             }
@@ -45,13 +45,11 @@ export default [function() {
                 var attr = {};
                 attr[$scope.field] = $scope.value;
 
-                $scope.editing = false;
-                $scope.updating = true;
+                $scope.state = "loading";
                 $scope.error = false;
 
                 userService.updateUserProfile(attr)
                 .then(function() {
-                    $scope.success = true;
                     $scope.oldValue = $scope.value;
                 })
                 .catch(function() {
@@ -60,7 +58,7 @@ export default [function() {
                 })
                 .finally(function() {
                     $timeout(function() {
-                        $scope.updating = false;
+                        $scope.state = "default";
                         $element.find('#' + $scope.field + '-edit-btn').focus();
                     });
                 })
@@ -75,7 +73,7 @@ export default [function() {
             })
             .finally(function () {
                 $timeout(function() {
-                    $scope.loading = false;
+                    $scope.state = "default";
                 });
             })
         }]

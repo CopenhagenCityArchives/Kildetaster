@@ -2,14 +2,39 @@
     <div class="form-group" ng-class="{'has-error': email.error}">
         <label ng-attr-for="edit-profile-{{ field }}-input">{{ label }}</label>
         <div class="input-group">
-            <input ng-attr-type="{{ input-type }}" class="form-control" ng-attr-id="edit-profile-{{ field }}-input" ng-attribute-placeholder="{{ placeholder }}" ng-model="value" ng-disabled="!editing"></input>
-            <div class="input-group-append">
-                <button type="button" ng-attr-id="{{ field }}-edit-btn" class="btn btn-primary" ng-if="!editing && !updating && !loading" ng-disabled="loading" ng-click="edit()">Ret</button>
-                
-                <button type="button" class="btn btn-primary" ng-if="editing" ng-click="save()">Gem</button>
-                <button type="button" class="btn btn-info" ng-if="editing" ng-click="cancel()">Annuller</button>
+            <input
+                ng-attr-type="{{ input-type }}"
+                ng-attr-id="edit-profile-{{ field }}-input"
+                ng-attr-placeholder="{{ placeholder }}"
+                ng-model="value"
+                ng-disabled="state != 'editing'"
+                class="form-control">
+            </input>
 
-                <feather class="btn btn-info small-icon spin" icon='loader' ng-if="updating || loading"></feather>
+            <div class="input-group-append" ng-switch="state">
+                <button
+                    ng-switch-when="default"
+                    ng-attr-id="{{ field }}-edit-btn"
+                    ng-click="edit()"
+                    type="button"
+                    class="btn btn-primary">Ret</button>
+                
+                <button
+                    ng-switch-when="editing"
+                    ng-click="save()"
+                    type="button"
+                    class="btn btn-primary">Gem</button>
+                <button
+                    ng-switch-when="editing"
+                    ng-click="cancel()"
+                    type="button"
+                    class="btn btn-info">Annuller</button>
+
+                <feather
+                    ng-switch-when="loading"
+                    class="btn btn-info small-icon spin"
+                    icon='loader'>
+                </feather>
             </div>
         </div>
     </div>
