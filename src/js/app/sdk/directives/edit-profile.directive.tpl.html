@@ -1,45 +1,82 @@
-<edit-profile-form input-type='text' field='email' label='E-mailadresse' success-callback="emailSuccess" error-callback="emailError" placeholder='Skriv e-mailadresse'></edit-profile-form>
-
-<edit-profile-form input-type='text' field='nickname' label='Brugernavn' success-callback="nicknameSuccess" error-callback="nicknameError" placeholder='Skriv brugernavn'></edit-profile-form>
-
-<button type="button" class="btn btn-link" ng-click="editPassword = !editPassword">Rediger dit kodeord</button>
-
-<form id="edit-profile-password-form" ng-submit="submitPassword($event)" ng-if="editPassword">
-    <div class="form-row mb-3">
-        <label for="edit-profile-input-password-1">Kodeord</label>
-        <input
-            type="password"
-            id="edit-profile-input-password-1"
-            class="form-control"
-            placeholder="Indtast kodeord"
-            required
-            ng-model="passwordValue"
-            ng-change="checkRepeat()">
-    </div>
-    <div class="form-row mb-3">
-        <label for="edit-profile-input-password-2">Gentag kodeord</label>
-        <input
-            type="password"
-            id="edit-profile-input-password-2"
-            class="form-control"
-            placeholder="Gentag kodeord"
-            required
-            ng-model="passwordRepeatValue"
-            ng-change="checkRepeat()">
-    </div>
-    <div class="form-row">
-        <button type="submit" class="btn btn-primary" ng-if="!passwordUpdating">Gem</button>
-        <div class="btn btn-primary" ng-if="passwordUpdating">
-            <feather icon="loader" class="spin"></feather>
+<div class="row">
+    <div class="col-md-2">
+        <img ng-hide="!user" ng-src="{{ user.picture }}">
+        <div ng-hide="user">
+            <feather icon='loader' class="spin large-icon" style="position: relative; left: 30px; top: 30px"></feather>
         </div>
     </div>
 
-    <small class="form-text text-success" ng-if="passwordChanged">
-        Dit kodeord blev opdateret!
-    </small>
-    
-    <small class="form-text text-danger" ng-if="passwordError">
-        Dit kodeord blev ikke opdateret.
-    </small>
-</form>
+    <div class="col-md-10" ng-hide="editing">
+        <div class="row">
+            <div class="col-md-4">
+                <strong>Brugernavn</strong>
+            </div>
+            <div class="col-md-8">
+                {{ user.nickname }}
+            </div>
+        </div>
 
+        <div class="row">
+            <div class="col-md-4">
+                <strong>E-mail</strong>
+            </div>
+            <div class="col-md-8">
+                {{ user.email }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md">
+                <button type="button" class="btn btn-primary" ng-click="edit()" ng-disabled="loading">Rediger</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-10" ng-hide="!editing" ng-submit="submit()">
+        <form>
+            <div class="form-row">
+                <div class="col-md mb-3">
+                    <label for="edit-profile-username">Nyt brugernavn</label>
+                    <input type="text" class="form-control" id="edit-profile-username" placeholder="Indtast nyt brugernavn" ng-model="nickname" ng-disable="saving">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="edit-profile-username">Ny e-mailadresse</label>
+                    <input type="email" class="form-control" id="edit-profile-email" placeholder="Indtast ny e-mailadresse" ng-change="checkEmailRepeat()" ng-model="email" ng-disable="saving">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="edit-profile-username">Gentag e-mailadresse</label>
+                    <input type="email" class="form-control" id="edit-profile-email-repeat" placeholder="Gentag ny e-mailadresse" ng-change="checkEmailRepeat()" ng-model="emailRepeat" ng-disable="saving">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-md-6 mb-3">
+                    <label for="edit-profile-username">Nyt kodeord</label>
+                    <input type="password" class="form-control" id="edit-profile-password" placeholder="Indtast nyt kodeord" ng-change="checkPasswordRepeat()" ng-model="password" ng-disable="saving">
+                </div>
+
+                <div class="col-md-6 mb-3">
+                    <label for="edit-profile-username">Gentag kodeord</label>
+                    <input type="password" class="form-control" id="edit-profile-password-repeat" placeholder="Gentag nyt kodeord" ng-change="checkPasswordRepeat()" ng-model="passwordRepeat" ng-disable="saving">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary" ng-disable="saving">
+                <span ng-if="!saving">Gem</span>
+                <feather ng-if="saving" icon='loader' class='spin'></feather>
+            </button>
+            <button type="button" class="btn btn-secondary" ng-click="cancel()" ng-disable="saving">Annuller</button>
+        </form>   
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md">
+        <small ng-if="successSaving" class="form-text text-success">{{ successSaving }}</small>
+        <small ng-if="errorSaving" class="form-text text-danger">{{ errorSaving }}</small>
+    </div>
+</div>
