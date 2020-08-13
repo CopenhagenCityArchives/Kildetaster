@@ -51,6 +51,8 @@ export default [function() {
 
                 $scope.state = "loading";
                 $scope.error = false;
+                $scope.successMessage = undefined;
+                $scope.errorMessage = undefined;
 
                 userService.updateUserProfile(attr)
                 .then(function(val) {
