@@ -9,15 +9,12 @@ define([
 
         return {
 
-            //For each request the interceptor will set the bearer token header.
+            // If authorization is requested, the bearer token will be set
             request: function ($config) {
-                if ($config.url.startsWith(API_URL)) {
+                if ($config.authorizeRequest) {
                     return authService.getToken()
                     .then(function(token) {
                         $config.headers['Authorization'] = 'Bearer ' + token;
-                        return $q.resolve($config);
-                    })
-                    .catch(function() {
                         return $q.resolve($config);
                     });
                 } else {

@@ -282,7 +282,8 @@ function wizardController($uibModal, $state, $timeout, $http, $scope, $rootScope
         $http({
             method: 'POST',
             url: API_URL + '/entries/',
-            data: postData
+            data: postData,
+            authorizeRequest: true
         }).then(function(response) {
             deferred.resolve(response);
 

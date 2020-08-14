@@ -29,7 +29,8 @@ define([
                 $http({
                     url: API_URL + '/errorreports',
                     method: 'POST',
-                    data: params
+                    data: params,
+                    authorizeRequest: true
                 })
                 .then(function(response) {
                     deferred.resolve(response.data);

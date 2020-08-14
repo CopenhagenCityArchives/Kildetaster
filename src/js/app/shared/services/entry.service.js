@@ -31,7 +31,8 @@ define([
                 $http({
                     url: API_URL + '/entries/' + entryId,
                     method: 'PUT',
-                    data: data
+                    data: data,
+                    authorizeRequest: true
                 })
                 .then(function(response) {
                     deferred.resolve(response.data);
