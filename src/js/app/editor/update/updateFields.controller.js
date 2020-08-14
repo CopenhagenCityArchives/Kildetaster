@@ -61,6 +61,7 @@ var updateFieldsController = ['$uibModal', '$rootScope', '$scope', '$state', '$t
 
         //If we have a key from an object type, it will contain a dot, to indicate the object and the property on that object
         var split = key.split('.');
+        var subkey;
 
         if (split[0] === $scope.mainProperty) {
             split.shift();
