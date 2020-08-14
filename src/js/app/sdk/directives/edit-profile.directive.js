@@ -14,6 +14,14 @@ export default [function () {
                 saving: false,
                 errorText: null,
                 successText: null,
+                getProfile() {
+                    if (this.value == $scope.user.nickname) {
+                        return null;
+                    }
+                    return {
+                        nickname: this.value
+                    };
+                },
                 getErrorText(err) {
                     if (err && err.data && err.data.message == 'Username already exists') {
                         return "Brugernavnet fandtes allerede.";
@@ -39,6 +47,15 @@ export default [function () {
                 },
                 getSuccessText() {
                     return "E-mailadressen blev opdateret!";
+                },
+                getProfile() {
+                    if (this.value == $scope.user.email) {
+                        return null;
+                    }
+
+                    return {
+                        email: this.value
+                    }
                 },
                 validate() {
                     if (this.value != this.repeat) {
@@ -69,6 +86,11 @@ export default [function () {
                 getSuccessText() {
                     return "Kodeordet blev opdateret!";
                 },
+                getProfile() {
+                    return {
+                        password: this.value
+                    }
+                },
                 validate() {
                     if ((this.value || this.repeat) && this.value != this.repeat) {
                         $element.find('#edit-profile-password')[0].setCustomValidity('De to kodeord skal være ens.');
@@ -94,7 +116,7 @@ export default [function () {
                     input.setCustomValidity('');
                 });
                 $element.find('#edit-profile-password-form')[0].reset();
-                
+
                 $scope.editing = true;
                 $scope.nickname.value = $scope.user.nickname;
                 $scope.email.value = $scope.user.email;
@@ -113,7 +135,7 @@ export default [function () {
                 $scope.editing = false;
             }
 
-            $scope.submit = function(event, field, comparison) {
+            $scope.submit = function(event, field) {
                 if (!event.target.checkValidity()) {
                     return;
                 }
@@ -122,12 +144,11 @@ export default [function () {
                     return;
                 }
 
-                var profile = {};
-                if (field.value != comparison) {
-                    profile[field.name] = field.value;
-                } else {
+                var profile = field.getProfile();
+                if (profile == null) {
                     return;
                 }
+
                 field.saving = true;
                 field.errorText = null;
                 field.successText = null;
@@ -141,10 +162,8 @@ export default [function () {
                     field.errorText = field.getErrorText(err);
                 })
                 .finally(function() {
-                    $scope.$apply(function() {
-                        field.saving = false;
-                    });
-                })
+                    field.saving = false;
+            })
             }
 
             authService.getUser()

@@ -33,7 +33,7 @@
     </div>
 
     <div class="col-sm-10" ng-hide="!editing">
-        <form ng-submit="submit($event, nickname, user.nickname)" class="form-row">
+        <form ng-submit="submit($event, nickname)" class="form-row">
             <div class="col-sm">
                 <label for="edit-profile-username">Nyt brugernavn</label>
                 <div class="input-group">
@@ -53,7 +53,7 @@
             </div>
         </div>
 
-        <form ng-submit="submit($event, email, user.email)" class="form-row">
+        <form ng-submit="submit($event, email)" class="form-row">
             <div class="col-sm-6">
                 <label for="edit-profile-email">Ny e-mailadresse</label>
                 <input type="email" class="form-control" id="edit-profile-email" placeholder="Indtast ny e-mailadresse" ng-change="email.check()" ng-model="email.value" ng-disable="email.saving" required>
