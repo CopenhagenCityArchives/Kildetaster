@@ -86,7 +86,7 @@ var updateFieldsController = ['$uibModal', '$rootScope', '$scope', '$state', '$t
         $scope.toggleEditExistingValue(key, id);
     }
 
-    $scope.userId = userData['https://kbharkiv.dk/claims/apacs_user_id'];
+    $scope.userId = userData.apacs_user_id;
 
     //Default settings for angular-schema-forms
     $scope.sfDefaults = {

@@ -1,11 +1,11 @@
-var updateFieldsDoneController = ['$scope', '$sessionStorage', '$state', 'PERMALINK_URL', 'taskData', 'postData', 'errorService',
-function updateFieldsDoneController($scope, $sessionStorage, $state, PERMALINK_URL, taskData, postData, errorService) {
+var updateFieldsDoneController = ['$scope', '$state', 'PERMALINK_URL', 'userData', 'taskData', 'postData', 'errorService',
+function updateFieldsDoneController($scope, $state, PERMALINK_URL, userData, taskData, postData, errorService) {
 
     //Build a direct link to this post
     $scope.shareLink = PERMALINK_URL + '/post/' + postData.entryData.solr_id;
 
     $scope.nextErrorReport = null;
-    $scope.userId = $sessionStorage.tokenData.user_id;
+    $scope.userId = userData.apacs_user_id;
 
     $scope.nextErrorReport = null;
     $scope.hasMoreErrors = null;

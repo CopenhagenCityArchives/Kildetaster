@@ -36,12 +36,10 @@ define([
             getUserActivities: function() {
                 return authService.getUser()
                 .then(function(user) {
-                    var apacs_user_id = user['https://kbharkiv.dk/claims/apacs_user_id'];
-                    console.log(user);
                     return $http({
                         url: API_URL + '/useractivities',
                         method: 'GET',
-                        params: {user_id : apacs_user_id}
+                        params: {user_id : user.apacs_user_id}
                     })
                 })
                 .then(function(response) {
@@ -57,7 +55,7 @@ define([
                     }
 
                     return $http({
-                        url: API_URL + '/users/' + user['https://kbharkiv.dk/claims/apacs_user_id'],
+                        url: API_URL + '/users/' + user.apacs_user_id,
                         method: 'GET',
                         cache: true
                     })
