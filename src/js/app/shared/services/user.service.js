@@ -52,6 +52,10 @@ define([
             getUserInfo: function(allowEmptyResponse) {
                 return authService.getUser(allowEmptyResponse)
                 .then(function(user) {
+                    if (!user) {
+                        return $q.reject();
+                    }
+
                     return $http({
                         url: API_URL + '/users/' + user['https://kbharkiv.dk/claims/apacs_user_id'],
                         method: 'GET',
