@@ -37,7 +37,7 @@
             <div class="col-md">
                 <label for="edit-profile-username">Nyt brugernavn</label>
                 <div class="input-group">
-                    <input type="text" class="form-control" id="edit-profile-username" placeholder="Indtast nyt brugernavn" ng-model="nickname.value" ng-disable="nickname.saving">
+                    <input type="text" class="form-control" id="edit-profile-username" placeholder="Indtast nyt brugernavn" ng-model="nickname.value" ng-disable="nickname.saving" required>
 
                     <button type="submit" class="btn btn-primary input-group-append" ng-disable="nickname.saving">
                         <span ng-if="!nickname.saving">Gem</span>
@@ -56,13 +56,13 @@
         <form ng-submit="submit($event, email, user.email)" class="form-row">
             <div class="col-md-6">
                 <label for="edit-profile-email">Ny e-mailadresse</label>
-                <input type="email" class="form-control" id="edit-profile-email" placeholder="Indtast ny e-mailadresse" ng-change="checkEmailRepeat()" ng-model="email.value" ng-disable="email.saving">
+                <input type="email" class="form-control" id="edit-profile-email" placeholder="Indtast ny e-mailadresse" ng-change="email.check()" ng-model="email.value" ng-disable="email.saving" required>
             </div>
 
             <div class="col-md-6">
                 <label for="edit-profile-email">Gentag e-mailadresse</label>
                 <div class="input-group">
-                    <input type="email" class="form-control" id="edit-profile-email-repeat" placeholder="Gentag ny e-mailadresse" ng-change="checkEmailRepeat()" ng-model="email.repeat" ng-disable="email.saving">
+                    <input type="email" class="form-control" id="edit-profile-email-repeat" placeholder="Gentag ny e-mailadresse" ng-change="email.check()" ng-model="email.repeat" ng-disable="email.saving" required>
 
                     <button type="submit" class="btn btn-primary input-group-append" ng-disable="email.saving">
                         <span ng-if="!email.saving">Gem</span>
@@ -79,16 +79,16 @@
             </div>
         </div>
 
-        <form ng-submit="submit($event, password)" class="form-row">
+        <form id="edit-profile-password-form" ng-submit="submit($event, password)" class="form-row">
             <div class="col-md-6">
                 <label for="edit-profile-username">Nyt kodeord</label>
-                <input type="password" class="form-control" id="edit-profile-password" placeholder="Indtast nyt kodeord" ng-change="checkPasswordRepeat()" ng-model="password.value" ng-disable="password.saving">
+                <input type="password" class="form-control" id="edit-profile-password" placeholder="Indtast nyt kodeord" ng-change="password.check()" ng-model="password.value" ng-disable="password.saving" required>
             </div>
 
             <div class="col-md-6">
                 <label for="edit-profile-username">Gentag kodeord</label>
                 <div class="input-group">
-                    <input type="password" class="form-control" id="edit-profile-password-repeat" placeholder="Gentag nyt kodeord" ng-change="checkPasswordRepeat()" ng-model="password.repeat" ng-disable="password.saving">
+                    <input type="password" class="form-control" id="edit-profile-password-repeat" placeholder="Gentag nyt kodeord" ng-change="password.check()" ng-model="password.repeat" ng-disable="password.saving" required>
                 
                     <button type="submit" class="btn btn-primary input-group-append" ng-disable="password.saving">
                         <span ng-if="!savingpassword.savingPassword">Gem</span>

@@ -34,11 +34,25 @@ export default [function () {
                 saving: false,
                 errorText: null,
                 successText: null,
-                getErrorText(err) {
+                getErrorText() {
                     return "E-mailadressen blev ikke opdateret.";
                 },
                 getSuccessText() {
                     return "E-mailadressen blev opdateret!";
+                },
+                validate() {
+                    if (this.value != this.repeat) {
+                        $element.find('#edit-profile-email')[0].setCustomValidity('De to e-mailadresser skal være ens.');
+                        $element.find('#edit-profile-email-repeat')[0].setCustomValidity('De to e-mailadresser skal være ens.');
+                        return false;
+                    } else {
+                        $element.find('#edit-profile-email')[0].setCustomValidity('');
+                        $element.find('#edit-profile-email-repeat')[0].setCustomValidity('');
+                        return true;
+                    }
+                },
+                check() {
+                    this.validate();
                 }
             };
 
@@ -49,17 +63,39 @@ export default [function () {
                 saving: false,
                 errorText: null,
                 successText: null,
-                getErrorText(err) {
+                getErrorText() {
                     return "Kodeordet blev ikke opdateret.";
                 },
                 getSuccessText() {
                     return "Kodeordet blev opdateret!";
+                },
+                validate() {
+                    if ((this.value || this.repeat) && this.value != this.repeat) {
+                        $element.find('#edit-profile-password')[0].setCustomValidity('De to kodeord skal være ens.');
+                        $element.find('#edit-profile-password-repeat')[0].setCustomValidity('De to kodeord skal være ens.');
+                        return false;
+                    } else if (!this.value && !this.repeat) {
+                        $element.find('#edit-profile-password')[0].setCustomValidity('');
+                        $element.find('#edit-profile-password-repeat')[0].setCustomValidity('');
+                        return false;
+                    } else {
+                        $element.find('#edit-profile-password')[0].setCustomValidity('');
+                        $element.find('#edit-profile-password-repeat')[0].setCustomValidity('');
+                        return true;
+                    }
+                },
+                check() {
+                    this.validate();
                 }
             };
 
             $scope.edit = function() {
+                $element.find('input').each(function(_, input) {
+                    input.setCustomValidity('');
+                });
+                $element.find('#edit-profile-password-form')[0].reset();
+                
                 $scope.editing = true;
-
                 $scope.nickname.value = $scope.user.nickname;
                 $scope.email.value = $scope.user.email;
                 $scope.email.repeat = $scope.user.email;
@@ -79,6 +115,10 @@ export default [function () {
 
             $scope.submit = function(event, field, comparison) {
                 if (!event.target.checkValidity()) {
+                    return;
+                }
+
+                if (field.validate && !field.validate()) {
                     return;
                 }
 
@@ -107,27 +147,6 @@ export default [function () {
                 })
             }
 
-            $scope.checkEmailRepeat = function() {
-                if (this.email.value != this.email.repeat) {
-                    $element.find('#edit-profile-email')[0].setCustomValidity('De to e-mailadresser skal være ens.');
-                    $element.find('#edit-profile-email-repeat')[0].setCustomValidity('De to e-mailadresser skal være ens.');
-                } else {
-                    $element.find('#edit-profile-email')[0].setCustomValidity('');
-                    $element.find('#edit-profile-email-repeat')[0].setCustomValidity('');
-                }
-            }
-
-            $scope.checkPasswordRepeat = function() {
-                if ((this.password.value || this.password.repeat) && this.password.value != this.password.repeat) {
-                    $element.find('#edit-profile-password')[0].setCustomValidity('De to kodeord skal være ens.');
-                    $element.find('#edit-profile-password-repeat')[0].setCustomValidity('De to kodeord skal være ens.');
-                } else {
-                    $element.find('#edit-profile-password')[0].setCustomValidity('');
-                    $element.find('#edit-profile-password-repeat')[0].setCustomValidity('');
-                }
-            }
-            
-            
             authService.getUser()
             .then(function (user) {
                 $scope.user = user;
