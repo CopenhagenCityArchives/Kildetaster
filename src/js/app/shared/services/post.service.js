@@ -42,10 +42,11 @@ define([
                 var deferred = $q.defer();
 
                 $http({
-                    method: "post",
+                    method: "POST",
                     url: API_URL + '/posts/',
                     params: {task_id: taskId},
-                    data: data
+                    data: data,
+                    authorizeRequest: true
                 })
                 .then(function(response) {
                     deferred.resolve(response);
@@ -82,10 +83,11 @@ define([
                 var deferred = $q.defer();
 
                 $http({
-                    method: "patch",
+                    method: "PATCH",
                     url: API_URL + '/posts/' + postId,
                     params: {task_id: taskId},
-                    data: data
+                    data: data,
+                    authorizeRequest: true
                 })
                 .then(function(response) {
                     deferred.resolve(response);

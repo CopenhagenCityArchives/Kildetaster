@@ -79,7 +79,8 @@ define([
                 $http({
                     url: API_URL + '/errorreports',
                     method: 'PATCH',
-                    data: params
+                    data: params,
+                    authorizeRequest: true
                 })
                 .then(function(response) {
 

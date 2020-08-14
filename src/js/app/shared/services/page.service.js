@@ -97,7 +97,8 @@ define([
                     params: params,
                     data: {
                         "is_done": 1
-                    }
+                    },
+                    authorizeRequest: true
                 })
                 .then(function(response) {
                     return response.data;

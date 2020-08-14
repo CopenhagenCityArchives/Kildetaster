@@ -7,14 +7,12 @@ define([
 
         return {
             updateUserProfile: function updateUser(profilePatch) {
-                return authService.getToken()
-                .then(function(token) {
-                    return $http({
-                        url: API_URL + '/user',
-                        method: 'PATCH',
-                        data: profilePatch
-                    })
-                });
+                return $http({
+                    url: API_URL + '/user',
+                    method: 'PATCH',
+                    data: profilePatch,
+                    authorizeRequest: true
+                })
             },
 
             getUsers: function getUsers(unitId, taskId) {
