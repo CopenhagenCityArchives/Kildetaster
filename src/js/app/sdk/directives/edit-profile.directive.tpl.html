@@ -1,40 +1,40 @@
 <div class="row">
-    <div class="col-md-2">
+    <div class="col-sm-2">
         <img ng-hide="!user" ng-src="{{ user.picture }}">
         <div ng-hide="user">
             <feather icon='loader' class="spin large-icon" style="position: relative; left: 30px; top: 30px"></feather>
         </div>
     </div>
 
-    <div class="col-md-10" ng-hide="editing">
+    <div class="col-sm-10" ng-hide="editing">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-sm-4">
                 <strong>Brugernavn</strong>
             </div>
-            <div class="col-md-8">
+            <div class="col-sm-8">
                 {{ user.nickname }}
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-sm-4">
                 <strong>E-mail</strong>
             </div>
-            <div class="col-md-8">
+            <div class="col-sm-8">
                 {{ user.email }}
             </div>
         </div>
         
         <div class="row">
-            <div class="col-md-auto">
+            <div class="col-sm-auto">
                 <button type="button" class="btn btn-primary" ng-click="edit()" ng-disabled="loading">Rediger</button>
             </div>
         </div>
     </div>
 
-    <div class="col-md-10" ng-hide="!editing">
+    <div class="col-sm-10" ng-hide="!editing">
         <form ng-submit="submit($event, nickname, user.nickname)" class="form-row">
-            <div class="col-md">
+            <div class="col-sm">
                 <label for="edit-profile-username">Nyt brugernavn</label>
                 <div class="input-group">
                     <input type="text" class="form-control" id="edit-profile-username" placeholder="Indtast nyt brugernavn" ng-model="nickname.value" ng-disable="nickname.saving" required>
@@ -47,19 +47,19 @@
             </div>
         </form>
         <div class="form-row mb-3">
-            <div class="col-md">
+            <div class="col-sm">
                 <small class="form-text text-danger" ng-if="nickname.errorText">{{ nickname.errorText }}</small>
                 <small class="form-text text-success" ng-if="nickname.successText">{{ nickname.successText }}</small>
             </div>
         </div>
 
         <form ng-submit="submit($event, email, user.email)" class="form-row">
-            <div class="col-md-6">
+            <div class="col-sm-6">
                 <label for="edit-profile-email">Ny e-mailadresse</label>
                 <input type="email" class="form-control" id="edit-profile-email" placeholder="Indtast ny e-mailadresse" ng-change="email.check()" ng-model="email.value" ng-disable="email.saving" required>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-sm-6">
                 <label for="edit-profile-email">Gentag e-mailadresse</label>
                 <div class="input-group">
                     <input type="email" class="form-control" id="edit-profile-email-repeat" placeholder="Gentag ny e-mailadresse" ng-change="email.check()" ng-model="email.repeat" ng-disable="email.saving" required>
@@ -73,19 +73,19 @@
         </form>
 
         <div class="form-row mb-3">
-            <div class="col-md">
+            <div class="col-sm">
                 <small class="form-text text-danger" ng-if="email.errorText">{{ email.errorText }}</small>
                 <small class="form-text text-success" ng-if="email.successText">{{ email.successText }}</small>
             </div>
         </div>
 
         <form id="edit-profile-password-form" ng-submit="submit($event, password)" class="form-row">
-            <div class="col-md-6">
+            <div class="col-sm-6">
                 <label for="edit-profile-username">Nyt kodeord</label>
                 <input type="password" class="form-control" id="edit-profile-password" placeholder="Indtast nyt kodeord" ng-change="password.check()" ng-model="password.value" ng-disable="password.saving" required>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-sm-6">
                 <label for="edit-profile-username">Gentag kodeord</label>
                 <div class="input-group">
                     <input type="password" class="form-control" id="edit-profile-password-repeat" placeholder="Gentag nyt kodeord" ng-change="password.check()" ng-model="password.repeat" ng-disable="password.saving" required>
@@ -98,7 +98,7 @@
             </div>
         </form>
         <div class="form-row mb-3">
-            <div class="col-md">
+            <div class="col-sm">
                 <small class="form-text text-danger" ng-if="password.errorText">{{ password.errorText }}</small>
                 <small class="form-text text-success" ng-if="password.successText">{{ password.successText }}</small>
             </div>
