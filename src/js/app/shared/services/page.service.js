@@ -9,14 +9,13 @@ define([
         * Load all available page details
         */
         function getPageData(params) {
-            
             var endPoint = API_URL + '/pages';
 
             return $http({
                 method: 'GET',
-
                 url: endPoint,
-                params: params
+                params: params,
+                authorizeRequest: true
             }).then(function(response) {
                 return response.data;
             });
@@ -31,7 +30,6 @@ define([
             * @return {promise} That resolves with the data for the project
             */
             getPageById: function getPage(id, taskId) {
-
                 var deferred = $q.defer();
                 getPageData({
                     page_id: id,
