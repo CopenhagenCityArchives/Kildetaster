@@ -80,7 +80,7 @@ define([
     }]);
 
     schemaForm.run(['$templateCache', function($templateCache) {
-        $templateCache.put('schemaFormCustomSelect.tpl.html', require('./customSelect.addon.tpl.html'));
+        $templateCache.put('schemaFormCustomArray.tpl.html', require('./customArray.addon.tpl.html'));
     }])
 
 
