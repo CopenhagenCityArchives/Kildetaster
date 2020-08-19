@@ -56,14 +56,14 @@ To run the development server, execute the following:
 npm start
 ```
 
-A webserver is then started at `http://localhost:8080`, under which the following 
+A webserver is then started at `http://localhost:9000`, under which the following 
 pages can be visited:
 
-- `http://localhost:8080/sdk/` contains the various SDK plugins.
+- `http://localhost:9000/sdk/` contains the various SDK plugins.
 
-- `http://localhost:8080/search/` contains the search.
+- `http://localhost:9000/search/` contains the search.
 
-- `http://localhost:8080/editor/task/<TASKID>/page/<PAGEID>/post/<POSTID>`
+- `http://localhost:9000/editor/task/<TASKID>/page/<PAGEID>/post/<POSTID>`
   contains the editor. Note that you need to fillout `TASKID`, `PAGEID` and `POSTID`.
 
 Remember that arguments can be passed to webpack, like so:

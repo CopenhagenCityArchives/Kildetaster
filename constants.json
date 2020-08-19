@@ -1,15 +1,15 @@
 {
   "local": {
     "constants": {
-      "EDITOR_URL": "http://localhost:8080/editor/",
-      "CALLBACK_URL": "http://localhost:8080/callback/",
-      "RESOURCE_URL": "http://localhost:8080/",
+      "EDITOR_URL": "http://localhost:9000/editor/",
+      "CALLBACK_URL": "http://localhost:9000/callback/",
+      "RESOURCE_URL": "http://localhost:9000/",
       "API_URL": "http://localhost:8080",
       "SOLR_API_URL": "https://localhost:8989/solr/apacs_core/select",
       "SEARCH_CONFIG_URL": "https://localhost:8181/searchconfig",
       "ERROR_REPORT_CONFIG_URL": "https://localhost:8181/errorreportconfig",
-      "MAIN_DOMAIN": "https://localhost:8080/",
-      "ERROR_URL": "https://localhost:8080/",
+      "MAIN_DOMAIN": "https://localhost:9000/",
+      "ERROR_URL": "https://localhost:9000/",
       "PERMALINK_URL": "https://www.kbharkiv.dk/permalink",
       "AUTH0_CLIENTID": "yuNDUJBWXoqWZICkoGQgsGOd8EnewZB5",
       "AUTH0_DOMAIN": "login.kbharkiv.dk",
@@ -20,9 +20,9 @@
   },
   "local_remote_backend": {
     "constants": {
-      "EDITOR_URL": "http://localhost:8080/editor/",
-      "CALLBACK_URL": "http://localhost:8080/callback/",
-      "RESOURCE_URL": "http://localhost:8080/",
+      "EDITOR_URL": "http://localhost:9000/editor/",
+      "CALLBACK_URL": "http://localhost:9000/callback/",
+      "RESOURCE_URL": "http://localhost:9000/",
       "API_URL": "http://api-dev-auth0.kbharkiv.dk",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
       "SEARCH_CONFIG_URL": "http://api-dev-auth0.kbharkiv.dk/searchconfig",

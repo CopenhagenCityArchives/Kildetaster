@@ -186,7 +186,8 @@ module.exports = (env, argv) => {
                     { from: /^\/search/, to: '/search/index.html' },
                 ]
             },
-            writeToDisk: true
+            writeToDisk: true,
+            port: 9000
         },
 
         plugins: [
