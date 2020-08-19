@@ -12,45 +12,37 @@ export default ['taskService', '$timeout', function(taskService, $timeout) {
 
         link: function (scope, element, attr) {
             scope.num = num;
-            scope.unitsCount = 0;
-            scope.activeUnitsCount = 0;
-            scope.unitsDoneCount = 0;
-            scope.unitsDoingCount = 0;
+            scope.count = 0;
+            scope.activeCount = 0;
+            scope.doneCount = 0;
             scope.loading = true;
 
             taskService.getTask(scope.taskId)
-                .then(function (response) {
-                    scope.task = response;
-                });
+            .then(function (response) {
+                scope.task = response;
+            });
 
             taskService.getUnits({
-                task_id: scope.taskId
+                task_id: scope.taskId         
             })
             .then(function (response) {
-                // open/active units count
-                scope.activeUnitsCount = response.length;
-
-                // compute done and doing counts
+                // compute done and active counts
                 response.forEach(function(unit) {
                     if (unit.pages_done == unit.pages)
-                        scope.unitsDoneCount++;
+                        scope.doneCount++;
                     else if (unit.pages_done > 0)
-                        scope.unitsDoingCount++;
+                        scope.activeCount++;
                 });
 
-                // also get inactive to compute total count
-                return taskService.getUnits({
-                    task_id: scope.taskId,
-                    index_active: 0
-                })
+                scope.count = response.length;
             })
-            .then(function (inactiveResponse) {
-                scope.unitsCount = scope.unitsDoneCount + scope.unitsDoingCount + inactiveResponse.length;
+            .then(function (response) {
+                scope.count += response.length;
             })
-            .finally(function() {
+            .finally(function () {
                 scope.loading = false;
             });
-            
+
             // Increment the counter for other instances of the directive
             num++;
         }

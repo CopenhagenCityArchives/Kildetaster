@@ -15,7 +15,8 @@ define([], function () {
                 scope.loading = true;
                 scope.units = [];
                 taskService.getUnits({
-                    task_id: scope.taskId
+                    task_id: scope.taskId,
+                    index_active: 1,
                 }).then(function (response) {
                     scope.units = response.filter(function (unit) {
                         return unit.pages_done < unit.pages;
