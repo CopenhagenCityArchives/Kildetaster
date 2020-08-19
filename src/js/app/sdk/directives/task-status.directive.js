@@ -36,9 +36,6 @@ export default ['taskService', '$timeout', function(taskService, $timeout) {
 
                 scope.count = response.length;
             })
-            .then(function (response) {
-                scope.count += response.length;
-            })
             .finally(function () {
                 scope.loading = false;
             });
