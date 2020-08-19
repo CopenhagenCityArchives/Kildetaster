@@ -3,6 +3,7 @@ define(['clipboard'], function(Clipboard) {
 
         var that = this;
         $scope.isNumber = angular.isNumber;
+        this.showErrorReports = false;
 
         /**
          * Is the current logged in user allowed to edit?
@@ -53,6 +54,7 @@ define(['clipboard'], function(Clipboard) {
         };
 
         this.refreshErrorReports = function refreshErrorReports() {
+            that.hideErrorReporting();
             var config = {
                 id: this.data.id,
                 collection_id: this.data.collection_id,
@@ -64,7 +66,12 @@ define(['clipboard'], function(Clipboard) {
             errorService.getErrorReports(config).then(function (response) {
                 $scope.postErrors = response;
             });
-        }
+        };
+
+        this.hideErrorReporting = function hideErrorReporting() {
+            this.showErrorReports = false;
+        };
+
     }];
 
     return burialController;

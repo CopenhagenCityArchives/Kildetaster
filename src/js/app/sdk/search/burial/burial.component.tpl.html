@@ -190,15 +190,16 @@
             </div>
 
             <div>
-                <a href ng-click="showErrorReports = !showErrorReports">
+                <a href ng-click="$ctrl.showErrorReports = !$ctrl.showErrorReports">
                     <span><feather class="medium-icon" icon='flag'></feather> Rapporter fejl</span>
                 </a>
             </div>
 
-            <div class="mt-4" ng-show="showErrorReports">
+            <div class="mt-4" ng-show="$ctrl.showErrorReports">
                 <report-error data="data" refresh="$ctrl.refreshErrorReports">
                 </report-error>
             </div>
+            
         </div>
 
         <div class="col-lg-6 order-first order-lg-last">

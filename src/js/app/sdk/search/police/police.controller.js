@@ -8,6 +8,7 @@ define([
         var that = this;
 
         $scope.images = [];
+        this.showErrorReports = false;
 
         this.$onInit = function() {
             $scope.data = that.data;
@@ -32,6 +33,7 @@ define([
         }
 
         this.refreshErrorReports = function refreshErrorReports() {
+            that.hideErrorReporting();
             var config = {
                 id: this.data.id,
                 collection_id: this.data.collection_id,
@@ -41,6 +43,10 @@ define([
                 $scope.postErrors = response;
             });
         }
+
+        this.hideErrorReporting = function hideErrorReporting() {
+            this.showErrorReports = false;
+        };
 
     }];
 

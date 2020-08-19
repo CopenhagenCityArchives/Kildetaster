@@ -141,12 +141,12 @@
             </div>
 
             <div>
-                <a href ng-click="showErrorReports = !showErrorReports">
+                <a href ng-click="$ctrl.showErrorReports = !$ctrl.showErrorReports">
                     <feather class="medium-icon" icon='flag'></feather><span> Rapporter fejl</span>
                 </a>
             </div>
 
-            <div class="mt-4" ng-show="showErrorReports">
+            <div class="mt-4" ng-show="$ctrl.showErrorReports">
                 <report-error data="data" refresh="$ctrl.refreshErrorReports">
                 </report-error>
             </div>

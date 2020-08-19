@@ -28,7 +28,6 @@ define([
                 }                
         
                 $scope.saveErrorReport = function saveErrorReport() {
-
                     var reportData = {
                         id: $scope.data.id,
         
