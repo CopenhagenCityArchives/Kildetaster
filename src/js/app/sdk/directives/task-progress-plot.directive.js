@@ -16,49 +16,28 @@ define([], function () {
                 var yearRegex = new RegExp(scope.yearPattern.replace(/_s/g, "^").replace(/_d/g, "\\d"));
                 scope.decades = {};
 
-                // add inactive units in the task
                 taskService.getUnits({
-                    task_id: scope.taskId,
-                    index_active: 0
-                }).then(function (response) {
-                     // add active units in the task
-                    taskService.getUnits({
-                        task_id: scope.taskId,
-                        index_active: 1
-                    }).then(function (activeResponse) {
-                        response.forEach(function(unit) {
-                            var result = yearRegex.exec(unit.description);
-                            if (result && result.length == 2) {
-                                var year = parseInt(result[1]);
-                                var decade = Math.floor(year / 10) * 10;
-                                if (!scope.decades[decade]) {
-                                    scope.decades[decade] = [unit];
-                                }
-                                else {
-                                    scope.decades[decade].push(unit);
-                                }
+                    task_id: scope.taskId
+                })
+                .then(function (response) {
+                    response.forEach(function(unit) {
+                        var result = yearRegex.exec(unit.description);
+                        if (result && result.length == 2) {
+                            var year = parseInt(result[1]);
+                            var decade = Math.floor(year / 10) * 10;
+                            if (!scope.decades[decade]) {
+                                scope.decades[decade] = [unit];
                             }
-                        });
-                        
-                        activeResponse.forEach(function(unit) {
-                            var result = yearRegex.exec(unit.description);
-                            if (result && result.length == 2) {
-                                var year = parseInt(result[1]);
-                                var decade = Math.floor(year / 10) * 10;
-                                if (!scope.decades[decade]) {
-                                    scope.decades[decade] = [unit];
-                                }
-                                else {
-                                    scope.decades[decade].push(unit);
-                                }
+                            else {
+                                scope.decades[decade].push(unit);
                             }
-                        });
+                        }
+                    });
 
-                        // Ensure sorting of units within decades
-                        Object.keys(scope.decades).forEach(function (decade) {
-                            scope.decades[decade].sort(function(unitA, unitB) {
-                                return unitA.description > unitB.description ? 1 : - 1;
-                            });
+                    // Ensure sorting of units within decades
+                    Object.keys(scope.decades).forEach(function (decade) {
+                        scope.decades[decade].sort(function(unitA, unitB) {
+                            return unitA.description > unitB.description ? 1 : - 1;
                         });
                     });
                 });
