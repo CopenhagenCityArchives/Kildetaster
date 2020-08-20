@@ -30,7 +30,7 @@ export default ['taskService', '$timeout', function(taskService, $timeout) {
                 response.forEach(function(unit) {
                     if (unit.pages_done == unit.pages)
                         scope.doneCount++;
-                    else if (unit.pages_done > 0)
+                    else if (unit.pages_done > 0 && unit.index_active == 1)
                         scope.activeCount++;
                 });
 
