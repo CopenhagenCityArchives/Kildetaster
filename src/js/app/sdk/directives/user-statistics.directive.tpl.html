@@ -63,14 +63,14 @@
             <caption class="sr-only">Top 5 indtastere det seneste døgn</caption>
             <thead>
                 <tr class="d-none d-md-table-row">
-                    <th scope="col">#</th>
+                    <th class="fit" scope="col">#</th>
                     <th scope="col">Bruger</th>
                     <th scope="col">Antal</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="stat in day | limitTo : limit : 0">
-                    <td>
+                    <td class="fit">
                         <div class="h5 d-md-none">#</div>
                         {{ $index + 1}}
                     </td>
@@ -109,14 +109,14 @@
             <caption class="sr-only">Top 5 indtastere den seneste uge</caption>
             <thead>
                 <tr class="d-none d-md-table-row">
-                    <th scope="col">#</th>
+                    <th class="fit" scope="col">#</th>
                     <th scope="col">Bruger</th>
                     <th scope="col">Antal</th>
                 </tr>
             </thead>
             <tbody>
                 <tr ng-repeat="stat in week | limitTo : limit : 0">
-                    <td>
+                    <td class="fit">
                         <div class="h5 d-md-none">#</div>
                         {{ $index + 1}}
                     </td>
@@ -154,7 +154,7 @@
             <caption class="sr-only">Top 5 indtastere for altid</caption>
             <thead>
                 <tr class="d-none d-md-table-row">
-                    <th scope="col">#</th>
+                    <th class="fit" scope="col">#</th>
                     <th scope="col">Bruger</th>
                     <th scope="col">Antal</th>
                 </tr>
@@ -162,7 +162,7 @@
             <tbody>
                 <tr ng-repeat="stat in ever | limitTo : limit : 0">
                     <td>
-                        <div class="h5 d-md-none">#</div>
+                        <div class="fit" class="h5 d-md-none">#</div>
                         {{ $index + 1}}
                     </td>
                     <td>
