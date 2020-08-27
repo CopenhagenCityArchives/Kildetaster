@@ -1,12 +1,13 @@
 <div class="row">
-    <div class="col-sm-2">
-        <img ng-hide="!user" ng-src="{{ user.picture }}">
-        <div ng-hide="user">
+    <div class="col-sm-4">
+        <img ng-hide="!user || editing" ng-src="{{ user.picture }}">
+        <img ng-hide="!editing" ng-src="{{ picture.value }}">
+        <div ng-hide="user" class="w-100">
             <feather icon='loader' class="spin large-icon" style="position: relative; left: 30px; top: 30px"></feather>
         </div>
     </div>
 
-    <div class="col-sm-10" ng-hide="editing">
+    <div class="col-sm-8" ng-hide="editing">
         <div class="row">
             <div class="col-sm-4">
                 <strong>Brugernavn</strong>
@@ -32,7 +33,7 @@
         </div>
     </div>
 
-    <div class="col-sm-10" ng-hide="!editing">
+    <div class="col-sm-8" ng-hide="!editing">
         <form ng-submit="submit($event, nickname)" class="form-row">
             <div class="col-sm">
                 <label for="edit-profile-username">Nyt brugernavn</label>
@@ -77,6 +78,32 @@
             <div class="col-sm">
                 <small class="form-text text-danger" ng-if="email.errorText">{{ email.errorText }}</small>
                 <small class="form-text text-success" ng-if="email.successText">{{ email.successText }}</small>
+            </div>
+        </div>
+        
+        <form id="edit-profile-picture-form" ng-submit="submit($event, picture)" class="form-row">
+            <div class="col-sm">
+                <label>Profilbillede</label>
+                <div class="input-group">
+                    <div class="custom-file">
+                        <input class="custom-file-input" type="file" id="edit-profile-picture" accept=".jpg,.png,.gif" onchange="angular.element(this).scope().picture.onChange(this.files)" required>
+                        <label class="custom-file-label" for="edit-profile-picture">
+                            <span ng-if="!picture.file" class="text-muted">Vælg et profilbillede fra din computer</span>
+                            <span ng-if="picture.file">{{ picture.file.name }}</span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary input-group-append" ng-disable="picture.saving">
+                        <span ng-if="!picture.saving">Gem</span>
+                        <feather ng-if="picture.saving" icon='loader' class='spin'></feather>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <div class="form-row mb-3">
+            <div class="col-sm">
+                <small class="form-text text-danger" ng-if="picture.errorText">{{ picture.errorText }}</small>
+                <small class="form-text text-success" ng-if="picture.successText">{{ picture.successText }}</small>
             </div>
         </div>
 
