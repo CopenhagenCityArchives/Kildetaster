@@ -12,7 +12,7 @@
         </li>
         <li class="page-item" ng-repeat="page in $ctrl.pagination"
             ng-class="{ 'active': $ctrl.currentPage === page.page }">
-            <a class="page-link" href ng-click="$ctrl.goToPage(page.page)" aria-current="page">{{ page.label | number }}</a>
+            <a class="page-link" href ng-click="$ctrl.goToPage(page.page)" ng-attr-aria-current="{{ $ctrl.currentPage == page.page ? 'page' : 'false' }}">{{ page.label | number }}</a>
         </li>
         <li ng-if="$ctrl.currentPage < $ctrl.total - 3" class="page-item disabled">
             <div class="page-link"> — </div>
