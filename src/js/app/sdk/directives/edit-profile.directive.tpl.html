@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-4">
-        <img ng-hide="!user || editing" ng-src="{{ user.picture }}">
-        <img ng-hide="!editing" ng-src="{{ picture.value }}">
+        <img ng-hide="!user || editing" ng-src="{{ user.picture }}" alt="Profilbillede">
+        <img ng-hide="!editing" ng-src="{{ picture.value }}" alt="Profilbillede">
         <div ng-hide="user" class="w-100">
             <feather icon='loader' class="spin large-icon" style="position: relative; left: 30px; top: 30px"></feather>
         </div>
@@ -49,7 +49,8 @@
             </div>
         </form>
         <div class="form-row mb-3">
-            <div class="col-sm">
+            <div class="col-sm" role="status">
+                <span class="sr-only" ng-if="nickname.errorText || nickname.successText">Brugernavn opdaterings-status:</span>
                 <small class="form-text text-danger" ng-if="nickname.errorText">{{ nickname.errorText }}</small>
                 <small class="form-text text-success" ng-if="nickname.successText">{{ nickname.successText }}</small>
             </div>
@@ -62,7 +63,7 @@
             </div>
 
             <div class="col-sm-6">
-                <label for="edit-profile-email">Gentag e-mailadresse</label>
+                <label for="edit-profile-email-repeat">Gentag e-mailadresse</label>
                 <div class="input-group">
                     <input type="email" class="form-control" id="edit-profile-email-repeat" placeholder="Gentag ny e-mailadresse" ng-change="email.check()" ng-model="email.repeat" ng-disable="email.saving" required>
 
@@ -75,7 +76,8 @@
         </form>
 
         <div class="form-row mb-3">
-            <div class="col-sm">
+            <div class="col-sm" role="status">
+                <span class="sr-only" ng-if="email.errorText || email.successText">E-mail opdaterings-status:</span>
                 <small class="form-text text-danger" ng-if="email.errorText">{{ email.errorText }}</small>
                 <small class="form-text text-success" ng-if="email.successText">{{ email.successText }}</small>
             </div>
@@ -101,7 +103,8 @@
         </form>
 
         <div class="form-row mb-3">
-            <div class="col-sm">
+            <div class="col-sm" role="status">
+                <span class="sr-only" ng-if="picture.errorText || picture.successText">Profilbillede opdaterings-status:</span>
                 <small class="form-text text-danger" ng-if="picture.errorText">{{ picture.errorText }}</small>
                 <small class="form-text text-success" ng-if="picture.successText">{{ picture.successText }}</small>
             </div>
@@ -109,12 +112,12 @@
 
         <form id="edit-profile-password-form" ng-submit="submit($event, password)" class="form-row">
             <div class="col-sm-6">
-                <label for="edit-profile-username">Nyt kodeord</label>
+                <label for="edit-profile-password">Nyt kodeord</label>
                 <input type="password" class="form-control" id="edit-profile-password" placeholder="Indtast nyt kodeord" ng-change="password.check()" ng-model="password.value" ng-disable="password.saving" required>
             </div>
 
             <div class="col-sm-6">
-                <label for="edit-profile-username">Gentag kodeord</label>
+                <label for="edit-profile-password-repeat">Gentag kodeord</label>
                 <div class="input-group">
                     <input type="password" class="form-control" id="edit-profile-password-repeat" placeholder="Gentag nyt kodeord" ng-change="password.check()" ng-model="password.repeat" ng-disable="password.saving" required>
                 
@@ -126,7 +129,8 @@
             </div>
         </form>
         <div class="form-row mb-3">
-            <div class="col-sm">
+            <div class="col-sm" role="status">
+                <span class="sr-only" ng-if="password.errorText || password.successText">Kodeord opdaterings-status:</span>
                 <small class="form-text text-danger" ng-if="password.errorText">{{ password.errorText }}</small>
                 <small class="form-text text-success" ng-if="password.successText">{{ password.successText }}</small>
             </div>
