@@ -22,23 +22,11 @@ var app = angular.module('APACSDatasourceEditor', [
  */
 app.config(['$routeProvider', function($routeProvider) {
     $routeProvider
-        // Home
-        //  .when("/", {templateUrl: "partials/home.html", controller: "PageCtrl"})
-        // Pages*/
         .when("/", {
             template: require("../partials/main.tpl.html"),
             controller: "EditorController"
         })
-        /*
-           .when("/about", {templateUrl: "partials/about.html", controller: "PageCtrl"})
-           .when("/faq", {templateUrl: "partials/faq.html", controller: "PageCtrl"})
-           .when("/pricing", {templateUrl: "partials/pricing.html", controller: "PageCtrl"})
-           .when("/services", {templateUrl: "partials/services.html", controller: "PageCtrl"})
-           .when("/contact", {templateUrl: "partials/contact.html", controller: "PageCtrl"})
-           // Blog
-           .when("/blog", {templateUrl: "partials/blog.html", controller: "BlogCtrl"})
-           .when("/blog/post", {templateUrl: "partials/blog_item.html", controller: "BlogCtrl"})
-           // else 404*/
+
         .otherwise("/404", {
             template: require("../partials/404.tpl.html"),
             controller: "PageCtrl"
@@ -72,9 +60,6 @@ app.config(function($httpProvider) {
 app.constant('DeleteAPI', 'https://www.kbhkilder.dk/1508/public_beta/posts');
 app.constant('PageAPI', 'https://www.kbhkilder.dk/api/taskspages');
 app.constant('API', 'https://www.kbhkilder.dk/api/datasource');
-//app.constant('API', 'http://localhost:8080/datasource');
-//app.constant('PageAPI', 'http://localhost:8080/taskspages');
-//app.constant('DeleteAPI', 'http://localhost:8080/posts');
 
 
 app.service('PagesService', ['$http', '$q', 'PageAPI', function($http, $q, PageAPI) {
@@ -147,7 +132,6 @@ app.service('Datasource', ['$http', '$q', 'API', 'DeleteAPI', function($http, $q
         }).then(
             function(resdata, status, headers) {
                 deferred.resolve(resdata, status, headers);
-                //console.log(resdata);
             },
             function(resdata, status, headers) {
                 deferred.reject(resdata, status, headers);
@@ -162,7 +146,6 @@ app.service('Datasource', ['$http', '$q', 'API', 'DeleteAPI', function($http, $q
         $http.get(API).then(
             function(resdata, status, headers) {
                 deferred.resolve(resdata);
-                //console.log(resdata);
             },
             function(resdata, status, headers) {
                 deferred.reject(null);
@@ -217,8 +200,6 @@ app.service('TokenService', ['$sessionStorage', '$http', '$q', '$location', func
         } : {
             'Content-Type': 'text/plain'
         };
-        //console.log(headers);
-        //console.log($location.protocol() + "://" + $location.host(), MAINDOMAIN);
         //Should be able to send as json and object, see mail from Bo
         $http({
                 method: 'POST',
@@ -256,7 +237,6 @@ app.service('TokenService', ['$sessionStorage', '$http', '$q', '$location', func
                             tokenData: 'test'
                         });
                     }
-                    //            window.location.href = MAINDOMAIN + '/min-side';
                 }
 
             })
