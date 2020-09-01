@@ -4,13 +4,19 @@ import ngStorage from 'ngstorage';
 import ngSanitize from 'angular-sanitize';
 import uiSelect from 'ui-select';
 
+import { Auth0Client } from '@auth0/auth0-spa-js';
+
+import constants from '../../constants.json';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'ui-select/dist/select.css';
 
 
 /**
  * Main AngularJS Web Application
  */
 var app = angular.module('APACSDatasourceEditor', [
+    'constants',
     'ngSanitize',
     'ngRoute',
     'ui.select',
@@ -33,22 +39,14 @@ app.config(['$routeProvider', function($routeProvider) {
         });
 }]);
 
-app.factory('httpRequestInterceptor', ['$sessionStorage', function($sessionStorage) {
+app.factory('httpRequestInterceptor', ['TokenService', function(TokenService) {
     return {
         request: function($config) {
-            if ($config.url == "https://www.kbharkiv.dk/index.php") {
-                return $config;
-            }
-            if ($sessionStorage.tokenData) {
-                //Fetch token from cookie
-                var token = $sessionStorage.tokenData.access_token;
-
-                //set authorization header
+            return TokenService.get()
+            .then(function(token) {
                 $config.headers['Authorization'] = 'Bearer ' + token;
-            } else {
-                console.log('could not get token');
-            }
-            return $config;
+                return $config;
+            });
         }
     };
 }]);
@@ -187,10 +185,27 @@ app.service('Datasource', ['$http', '$q', 'API', 'DeleteAPI', function($http, $q
     return pubs;
 }]);
 
-app.service('TokenService', ['$sessionStorage', '$http', '$q', '$location', function($sessionStorage, $http, $q, $location) {
-    var pubs = {};
+app.service('TokenService', ['$location', 'AUTH0_CLIENTID', 'AUTH0_DOMAIN', 'AUTH0_AUDIENCE', function($location, AUTH0_CLIENTID, AUTH0_DOMAIN, AUTH0_AUDIENCE) {
+    var pubs = {
+        auth0: new Auth0Client({
+            client_id: AUTH0_CLIENTID,
+            domain: AUTH0_DOMAIN,
+            audience: AUTH0_AUDIENCE,
+            redirect_uri: $location.absUrl(),
+            scope: 'openid email profile'
+        })
+    };
+
+    pubs.login = function() {
+        return pubs.auth0.handleRedirectCallback()
+            .catch(function() {
+                return pubs.auth0.loginWithRedirect();
+            })
+    }
 
     pubs.get = function() {
+        return pubs.auth0.getTokenSilently();
+
         var deferred = $q.defer();
 
         var MAINDOMAIN = 'https://www.kbharkiv.dk';
@@ -272,7 +287,6 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
     scope.model.loginStatus = false;
     //Feedback Values for user
     scope.model.history = [];
-
     //RET EKSISTERENDE VÆRDI
 
     //Watches the 'Ret eksisternde værdier' inputfield
@@ -488,19 +502,16 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
     };
 
     var init = function() {
-
-        TokenService.get().then(function() {
-            scope.model.loginStatus = $sessionStorage.tokenData !== undefined;
-        });
-        scope.model.status = 'Henter lister';
-        Datasource.getList().then(function(data) {
+        TokenService.login().then(function() {
+            scope.model.loginStatus = true;
+            scope.model.status = 'Henter lister';
+            return Datasource.getList()
+        }).then(function(data) {
             scope.model.datasources = data.data;
             scope.model.selected_datasource = null;
             scope.model.history = [];
-            console.log(data);
             scope.model.status = "";
         });
-        console.log();
     };
 
     init();

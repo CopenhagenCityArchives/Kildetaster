@@ -6,6 +6,7 @@
     <meta name="description" content="Værktøj til dannelse af filer vedrørende arkiveringsversioner og deres produktion">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <%= htmlWebpackPlugin.tags.headTags.filter(tag => tag.attributes.src.indexOf('datasource') != -1) %>
     
     <style>
         .status_error{
@@ -19,9 +20,15 @@
         .separator{
             margin-top:30px;
         }
+
+        .ui-select-match > span {
+            border: 1px solid lightgray !important;
+        }
+
+        ul.ui-select-choices {
+            display: block !important;
+        }
     </style>
-    
-    <%= htmlWebpackPlugin.tags.headTags.filter(tag => tag.attributes.src.indexOf('datasource') != -1) %>
 </head>
 <body ng-app="APACSDatasourceEditor">
     <div ng-view></div>
