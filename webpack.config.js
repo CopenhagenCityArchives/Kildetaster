@@ -220,7 +220,7 @@ module.exports = (env, argv) => {
             }),
 
             new HtmlWebpackPlugin({
-                filename: '/datalister/index.html',
+                filename: 'datalister/index.html',
                 title: 'Datalister',
                 template: './datasource-editor/index.html',
                 inject: false
