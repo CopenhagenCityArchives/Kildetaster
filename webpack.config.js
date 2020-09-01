@@ -18,7 +18,8 @@ module.exports = (env, argv) => {
         // entrypoints
         entry: {
             editor: './src/js/main.js',
-            sdk: './src/js/sdk-main.js'
+            sdk: './src/js/sdk-main.js',
+            datasource: './datasource-editor/js/main.js'
         },
 
         // resulting bundles
@@ -152,6 +153,12 @@ module.exports = (env, argv) => {
                             outputPath: 'images/'
                         }
                     }
+                },
+
+                // Directly imported css
+                {
+                    test: /\.css$/,
+                    use: ['style-loader', 'css-loader']
                 }
             ]
         },
@@ -184,10 +191,11 @@ module.exports = (env, argv) => {
                     { from: /^\/sdk/, to: '/sdk/index.html' },
                     { from: /^\/editor/, to: '/editor/index.html' },
                     { from: /^\/search/, to: '/search/index.html' },
-                ]
+                    { from: /^\/datalister/, to: '/datasource.html'}
+                ]   
             },
             writeToDisk: true,
-            port: 9000
+            port: 9000  
         },
 
         plugins: [
@@ -208,6 +216,13 @@ module.exports = (env, argv) => {
             new HtmlWebpackPlugin({
                 filename: 'callback/index.html',
                 template: './src/html/callback.html',
+                inject: false
+            }),
+
+            new HtmlWebpackPlugin({
+                filename: 'datasource.html',
+                title: 'Datalister',
+                template: './datasource-editor/index.html',
                 inject: false
             }),
 

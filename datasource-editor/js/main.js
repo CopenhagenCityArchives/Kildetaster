@@ -1,3 +1,12 @@
+import angular from 'angular';
+import ngRoute from 'angular-route';
+import ngStorage from 'ngstorage';
+import ngSanitize from 'angular-sanitize';
+import uiSelect from 'ui-select';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 /**
  * Main AngularJS Web Application
  */
@@ -5,8 +14,7 @@ var app = angular.module('APACSDatasourceEditor', [
     'ngSanitize',
     'ngRoute',
     'ui.select',
-    'ngStorage',
-    'templates-task'
+    'ngStorage'
 ]);
 
 /**
@@ -18,7 +26,7 @@ app.config(['$routeProvider', function($routeProvider) {
         //  .when("/", {templateUrl: "partials/home.html", controller: "PageCtrl"})
         // Pages*/
         .when("/", {
-            templateUrl: "partials/main.html",
+            template: require("../partials/main.tpl.html"),
             controller: "EditorController"
         })
         /*
@@ -32,7 +40,7 @@ app.config(['$routeProvider', function($routeProvider) {
            .when("/blog/post", {templateUrl: "partials/blog_item.html", controller: "BlogCtrl"})
            // else 404*/
         .otherwise("/404", {
-            templateUrl: "partials/404.html",
+            template: require("../partials/404.tpl.html"),
             controller: "PageCtrl"
         });
 }]);
