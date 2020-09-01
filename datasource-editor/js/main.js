@@ -60,13 +60,13 @@ app.constant('PageAPI', 'https://www.kbhkilder.dk/api/taskspages');
 app.constant('API', 'https://www.kbhkilder.dk/api/datasource');
 
 
-app.service('PagesService', ['$http', '$q', 'PageAPI', function($http, $q, PageAPI) {
+app.service('PagesService', ['$http', '$q', 'API_URL', function($http, $q, API_URL) {
     var pubs = {};
 
     pubs.unlock = function(taskId, pageId) {
         var deferred = $q.defer();
 
-        $http.patch(PageAPI + '?task_id=' + taskId + '&page_id=' + pageId, {
+        $http.patch(API_URL + '/taskspages?task_id=' + taskId + '&page_id=' + pageId, {
             'is_done': 0
         }).then(
             function(data, status, headers) {
@@ -84,13 +84,13 @@ app.service('PagesService', ['$http', '$q', 'PageAPI', function($http, $q, PageA
 }]);
 
 //Loading and saving files
-app.service('Datasource', ['$http', '$q', 'API', 'DeleteAPI', function($http, $q, API, DeleteAPI) {
+app.service('Datasource', ['$http', '$q', 'API_URL', function($http, $q, API_URL) {
     var pubs = {};
 
     pubs.getValuesByQuery = function(datasourceId, query) {
         var deferred = $q.defer();
 
-        $http.get(API + "/" + datasourceId + "?q=" + query).then(
+        $http.get(API_URL + "/datasource/" + datasourceId + "?q=" + query).then(
             function(data, status, headers) {
                 deferred.resolve(data);
             },
@@ -104,7 +104,7 @@ app.service('Datasource', ['$http', '$q', 'API', 'DeleteAPI', function($http, $q
 
     pubs.create = function(datasourceId, value) {
         var deferred = $q.defer();
-        $http.post(API + "/" + datasourceId, {
+        $http.post(API_URL + "/datasource/" + datasourceId, {
             value: value
         }).then(
             function(resdata, status, headers) {
@@ -122,7 +122,7 @@ app.service('Datasource', ['$http', '$q', 'API', 'DeleteAPI', function($http, $q
     pubs.update = function(datasourceId, valueId, newValue, oldValue, json) {
         var deferred = $q.defer();
         console.log(json);
-        $http.patch(API + "/" + datasourceId, {
+        $http.patch(API_URL + "/datasource/" + datasourceId, {
             id: valueId,
             value: newValue,
             oldValue: oldValue,
@@ -141,7 +141,7 @@ app.service('Datasource', ['$http', '$q', 'API', 'DeleteAPI', function($http, $q
 
     pubs.getList = function() {
         var deferred = $q.defer();
-        $http.get(API).then(
+        $http.get(API_URL + '/datasource/').then(
             function(resdata, status, headers) {
                 deferred.resolve(resdata);
             },
@@ -155,7 +155,7 @@ app.service('Datasource', ['$http', '$q', 'API', 'DeleteAPI', function($http, $q
     //Get post for deletion, so user can verify the found post
     pubs.getPost = function(postId) {
         var deferred = $q.defer();
-        $http.get(DeleteAPI + "/" + postId).then(
+        $http.get(API_URL + "/posts/" + postId).then(
             function(resdata, status, headers) {
                 deferred.resolve(resdata);
                 console.log('getPost: ' + resdata);
@@ -169,7 +169,7 @@ app.service('Datasource', ['$http', '$q', 'API', 'DeleteAPI', function($http, $q
     //Makes the delete API call.
     pubs.deletePost = function(postId) {
         var deferred = $q.defer();
-        $http.delete(DeleteAPI + "/" + postId).then(
+        $http.delete(API_URL + "/posts/" + postId).then(
             function(resdata, status, headers) {
                 deferred.resolve(resdata);
                 console.log('deletePost: ' + resdata);
@@ -205,61 +205,6 @@ app.service('TokenService', ['$location', 'AUTH0_CLIENTID', 'AUTH0_DOMAIN', 'AUT
 
     pubs.get = function() {
         return pubs.auth0.getTokenSilently();
-
-        var deferred = $q.defer();
-
-        var MAINDOMAIN = 'https://www.kbharkiv.dk';
-
-        var headers = $location.protocol() + "://" + $location.host() == MAINDOMAIN ? {
-            'Content-Type': 'application/json'
-        } : {
-            'Content-Type': 'text/plain'
-        };
-        //Should be able to send as json and object, see mail from Bo
-        $http({
-                method: 'POST',
-
-                url: MAINDOMAIN + '/index.php',
-                headers: headers,
-                transformRequest: angular.identity,
-                params: {
-                    option: 'authorize',
-                    response_type: 'token',
-                    client_id: 'kbhkilder',
-                    api: 'oauth2'
-                },
-                data: JSON.stringify({
-                    authorized: 1,
-                    state: 'kildetaster'
-                })
-            })
-            .then(function(response) {
-
-                //We got data back from the request, we are loggeld in and can save to sessionStorage
-                if (typeof response.data === 'object') {
-                    //console.log('tokenData', response.data);
-                    $sessionStorage.tokenData = response.data;
-
-                    deferred.resolve({
-                        tokenData: response.data
-                    });
-                }
-                //We are not logged in, point users to min-side
-                else {
-                    if ($location.host() == 'localhost') {
-                        $sessionStorage.tokenData = 'test';
-                        deferred.resolve({
-                            tokenData: 'test'
-                        });
-                    }
-                }
-
-            })
-            .catch(function(err) {
-                console.log('err', err);
-            });
-
-        return deferred.promise;
     };
 
     return pubs;
