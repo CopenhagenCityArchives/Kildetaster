@@ -158,7 +158,10 @@ module.exports = (env, argv) => {
                 // Directly imported css (bootstrap in datasource editor)
                 {
                     test: /\.css$/,
-                    use: ['style-loader', 'css-loader']
+                    use: [
+                        DEV ? 'style-loader' : MiniCssExtractPlugin.loader,
+                        'css-loader'
+                    ]
                 }
             ]
         },
