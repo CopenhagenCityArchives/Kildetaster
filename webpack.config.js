@@ -191,7 +191,7 @@ module.exports = (env, argv) => {
                     { from: /^\/sdk/, to: '/sdk/index.html' },
                     { from: /^\/editor/, to: '/editor/index.html' },
                     { from: /^\/search/, to: '/search/index.html' },
-                    { from: /^\/datasource/, to: '/datasource.html'}
+                    { from: /^\/datalister/, to: '/datalister/index.html'}
                 ]   
             },
             writeToDisk: true,
@@ -220,7 +220,7 @@ module.exports = (env, argv) => {
             }),
 
             new HtmlWebpackPlugin({
-                filename: 'datasource.html',
+                filename: '/datalister/index.html',
                 title: 'Datalister',
                 template: './datasource-editor/index.html',
                 inject: false
