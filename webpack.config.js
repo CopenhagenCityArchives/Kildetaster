@@ -155,7 +155,7 @@ module.exports = (env, argv) => {
                     }
                 },
 
-                // Directly imported css
+                // Directly imported css (bootstrap in datasource editor)
                 {
                     test: /\.css$/,
                     use: ['style-loader', 'css-loader']
@@ -191,7 +191,7 @@ module.exports = (env, argv) => {
                     { from: /^\/sdk/, to: '/sdk/index.html' },
                     { from: /^\/editor/, to: '/editor/index.html' },
                     { from: /^\/search/, to: '/search/index.html' },
-                    { from: /^\/datalister/, to: '/datasource.html'}
+                    { from: /^\/datasource/, to: '/datasource.html'}
                 ]   
             },
             writeToDisk: true,
