@@ -29,7 +29,7 @@
         }
     </style>
 </head>
-<body ng-app="APACSDatasourceEditor">
+<body ng-app="APACSDatasourceEditor" ng-strict-di="true">
     <div ng-view></div>
     <%= htmlWebpackPlugin.tags.bodyTags.filter(tag => tag.attributes.src.indexOf('datasource') != -1) %>
 </body>

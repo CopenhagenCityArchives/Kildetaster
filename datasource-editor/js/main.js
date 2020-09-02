@@ -51,9 +51,9 @@ app.factory('httpRequestInterceptor', ['TokenService', function(TokenService) {
     };
 }]);
 
-app.config(function($httpProvider) {
+app.config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('httpRequestInterceptor');
-});
+}]);
 
 app.constant('DeleteAPI', 'https://www.kbhkilder.dk/1508/public_beta/posts');
 app.constant('PageAPI', 'https://www.kbhkilder.dk/api/taskspages');
