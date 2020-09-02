@@ -23,7 +23,7 @@
     <!-- CSS -->
     <%=
         htmlWebpackPlugin.tags.headTags
-           .filter(tag => tag.attributes.href.startsWith('editor') != -1)
+           .filter(tag => tag.attributes.href.indexOf('editor') != -1)
     %>
 </head>
 <!--[if IE 9]>    <body class="ie9"> <![endif]-->
