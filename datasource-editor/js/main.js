@@ -456,6 +456,7 @@ app.controller('EditorController', ['$scope', '$location', '$sessionStorage', 'D
             scope.model.selected_datasource = null;
             scope.model.history = [];
             scope.model.status = "";
+            scope.$apply();
         });
     };
 
