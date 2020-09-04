@@ -14,7 +14,7 @@ import capitalizeFirstDirective from './directives/capitalizeFirst.directive';
 import stringifyArrayDirective from './directives/stringifyArray.directive';
 import shareLinkDirective from './directives/shareLink.directive';
 import handleStepsDirective from './directives/handleSteps.directive';
-import progressBarDirective from './directives/progressBar.directive';
+import progressBarDirective from './directives/progressbar.directive';
 
 import stepService from './services/step.service';
 import taskService from './services/task.service';
