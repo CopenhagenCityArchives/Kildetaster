@@ -10,7 +10,7 @@ function() {
             pagesDone: '='
         },
 
-        template: require('./progressBar.directive.tpl.html'),
+        template: require('./progressbar.directive.tpl.html'),
         
         link: function(scope, element, attrs) {
 
