@@ -14,7 +14,7 @@ import capitalizeFirstDirective from './directives/capitalizeFirst.directive';
 import stringifyArrayDirective from './directives/stringifyArray.directive';
 import shareLinkDirective from './directives/shareLink.directive';
 import handleStepsDirective from './directives/handleSteps.directive';
-import progressBarDirective from './directives/progressbar.directive';
+import taskProgressBarDirective from './directives/taskProgressBar.directive';
 
 import stepService from './services/step.service';
 import taskService from './services/task.service';
@@ -47,7 +47,7 @@ sharedApp.directive('shareLink', shareLinkDirective);
 sharedApp.directive('handleSteps', handleStepsDirective);
 sharedApp.directive('user', userDirective);
 sharedApp.directive('feather', featherDirective);
-sharedApp.directive('progressBar', progressBarDirective);
+sharedApp.directive('taskProgressBar', taskProgressBarDirective);
 
 sharedApp.factory('stepService', stepService);
 sharedApp.factory('taskService', taskService);
