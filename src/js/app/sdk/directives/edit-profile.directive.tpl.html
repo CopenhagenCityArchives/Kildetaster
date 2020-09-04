@@ -1,7 +1,6 @@
 <div class="row">
     <div class="col-sm-4">
-        <img ng-hide="!user || editing" ng-src="{{ user.picture }}" alt="Profilbillede">
-        <img ng-hide="!editing" ng-src="{{ picture.value }}" alt="Profilbillede">
+        <img ng-hide="!user" ng-src="{{ user.picture }}" alt="Profilbillede">
         <div ng-hide="user" class="w-100">
             <feather icon='loader' class="spin large-icon" style="position: relative; left: 30px; top: 30px"></feather>
         </div>
@@ -48,65 +47,12 @@
                 <small class="text-muted">Dit brugernavn vises ved de kilder du indtaster, samt på statistik og oversigter over deltagelse.</small>
             </div>
         </form>
+        
         <div class="form-row mb-3">
             <div class="col-sm" role="status">
                 <span class="sr-only" ng-if="nickname.errorText || nickname.successText">Brugernavn opdaterings-status:</span>
                 <small class="form-text text-danger" ng-if="nickname.errorText">{{ nickname.errorText }}</small>
                 <small class="form-text text-success" ng-if="nickname.successText">{{ nickname.successText }}</small>
-            </div>
-        </div>
-
-        <form ng-submit="submit($event, email)" class="form-row">
-            <div class="col-sm-6">
-                <label for="edit-profile-email">Ny e-mailadresse</label>
-                <input type="email" class="form-control" id="edit-profile-email" placeholder="Indtast ny e-mailadresse" ng-change="email.check()" ng-model="email.value" ng-disable="email.saving" required>
-            </div>
-
-            <div class="col-sm-6">
-                <label for="edit-profile-email-repeat">Gentag e-mailadresse</label>
-                <div class="input-group">
-                    <input type="email" class="form-control" id="edit-profile-email-repeat" placeholder="Gentag ny e-mailadresse" ng-change="email.check()" ng-model="email.repeat" ng-disable="email.saving" required>
-
-                    <button type="submit" class="btn btn-primary input-group-append" ng-disable="email.saving">
-                        <span ng-if="!email.saving">Gem</span>
-                        <feather ng-if="email.saving" icon='loader' class='spin'></feather>
-                    </button>
-                </div>
-            </div>
-        </form>
-
-        <div class="form-row mb-3">
-            <div class="col-sm" role="status">
-                <span class="sr-only" ng-if="email.errorText || email.successText">E-mail opdaterings-status:</span>
-                <small class="form-text text-danger" ng-if="email.errorText">{{ email.errorText }}</small>
-                <small class="form-text text-success" ng-if="email.successText">{{ email.successText }}</small>
-            </div>
-        </div>
-        
-        <form id="edit-profile-picture-form" ng-submit="submit($event, picture)" class="form-row">
-            <div class="col-sm">
-                <label>Profilbillede</label>
-                <div class="input-group">
-                    <div class="custom-file">
-                        <input class="custom-file-input" type="file" id="edit-profile-picture" accept=".jpg,.png,.gif" onchange="angular.element(this).scope().picture.onChange(this.files)" required>
-                        <label class="custom-file-label" for="edit-profile-picture">
-                            <span ng-if="!picture.file" class="text-muted">Vælg et profilbillede fra din computer</span>
-                            <span ng-if="picture.file">{{ picture.file.name }}</span>
-                        </label>
-                    </div>
-                    <button type="submit" class="btn btn-primary input-group-append" ng-disable="picture.saving">
-                        <span ng-if="!picture.saving">Gem</span>
-                        <feather ng-if="picture.saving" icon='loader' class='spin'></feather>
-                    </button>
-                </div>
-            </div>
-        </form>
-
-        <div class="form-row mb-3">
-            <div class="col-sm" role="status">
-                <span class="sr-only" ng-if="picture.errorText || picture.successText">Profilbillede opdaterings-status:</span>
-                <small class="form-text text-danger" ng-if="picture.errorText">{{ picture.errorText }}</small>
-                <small class="form-text text-success" ng-if="picture.successText">{{ picture.successText }}</small>
             </div>
         </div>
 
