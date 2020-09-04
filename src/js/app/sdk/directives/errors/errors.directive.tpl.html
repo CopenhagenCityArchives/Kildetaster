@@ -8,7 +8,8 @@
                 <div>Bruger</div>
                 <select class="task-list_filter" ng-model="filtered.username"
                     ng-options="name as name for name in userList"
-                    ng-change="dropdownChanged('username', filtered.username)">
+                    ng-change="dropdownChanged('username', filtered.username)"
+                    aria-label="Filtrér fejl efter bruger">
                     <option value="">Alle</option>
                 </select>
             </th>
@@ -16,7 +17,8 @@
                 <div>Felter</div>
                 <select class="task-list_filter" ng-model="filtered.label"
                     ng-options="field as field for field in fieldList"
-                    ng-change="dropdownChanged('label', filtered.label)">
+                    ng-change="dropdownChanged('label', filtered.label)"
+                    aria-label="Filtrér fejl efter felt">
                     <option value="">Alle</option>
                 </select>
             </th>

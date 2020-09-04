@@ -8,56 +8,6 @@ export default [function () {
             $scope.loading = true;
             $scope.editing = false;
 
-            $scope.picture = {
-                name: 'picture',
-                value: null,
-                saving: false,
-                errorText: null,
-                successText: null,
-                file: null,
-                getProfile() {
-                    return {
-                        picture: this.value
-                    };
-                },
-                getErrorText(err) {
-                    return "Profilbilledet kunne ikke opdateres.";
-                },
-                getSuccessText() {
-                    return "Profilbilledet blev opdateret."
-                },
-                onChange(files) {
-                    $element.find('#edit-profile-picture')[0].setCustomValidity('');
-                    if (files.length == 1) {
-                        this.file = files[0]
-                        var reader = new FileReader();
-                        reader.addEventListener("load", function() {
-                            $timeout(function() {
-                                $scope.picture.value = reader.result;
-                            });
-                        });
-                        reader.readAsDataURL(files[0]);
-                    }
-                },
-                validate() {
-                    if (!this.file.type.startsWith('image')) {
-                        $element.find('#edit-profile-picture')[0].setCustomValidity('Det skal være en billedfil.');
-                        return false;
-                    }
-
-                    if (this.file.size > 2000000) {
-                        $element.find('#edit-profile-picture')[0].setCustomValidity('Billedet må ikke fylde mere end 2 megabyte');
-                        return false;
-                    }
-
-                    $element.find('#edit-profile-picture')[0].setCustomValidity('');
-                    return true;
-                },
-                check() {
-                    this.validate();
-                }
-            };
-
             $scope.nickname = {
                 name: 'nickname',
                 value: null,
@@ -82,44 +32,6 @@ export default [function () {
                 },
                 getSuccessText() {
                     return "Brugernavnet blev opdateret. Du skal logge ud og logge ind igen, før du kan se ændringen på forum.";
-                }
-            };
-
-            $scope.email = {
-                name: 'email',
-                value: null,
-                repeat: null,
-                saving: false,
-                errorText: null,
-                successText: null,
-                getErrorText() {
-                    return "E-mailadressen blev ikke opdateret.";
-                },
-                getSuccessText() {
-                    return "E-mailadressen blev opdateret!";
-                },
-                getProfile() {
-                    if (this.value == $scope.user.email) {
-                        return null;
-                    }
-
-                    return {
-                        email: this.value
-                    }
-                },
-                validate() {
-                    if (this.value != this.repeat) {
-                        $element.find('#edit-profile-email')[0].setCustomValidity('De to e-mailadresser skal være ens.');
-                        $element.find('#edit-profile-email-repeat')[0].setCustomValidity('De to e-mailadresser skal være ens.');
-                        return false;
-                    } else {
-                        $element.find('#edit-profile-email')[0].setCustomValidity('');
-                        $element.find('#edit-profile-email-repeat')[0].setCustomValidity('');
-                        return true;
-                    }
-                },
-                check() {
-                    this.validate();
                 }
             };
 
@@ -169,17 +81,12 @@ export default [function () {
 
                 $scope.editing = true;
                 $scope.nickname.value = $scope.user.nickname;
-                $scope.email.value = $scope.user.email;
-                $scope.email.repeat = $scope.user.email;
                 $scope.password.value = null;
                 $scope.password.repeat = null;
                 $scope.nickname.successText = null;
                 $scope.nickname.errorText = null;
-                $scope.email.successText = null;
-                $scope.email.errorText = null;
                 $scope.password.successText = null;
                 $scope.password.errorText = null;
-                $scope.picture.value = $scope.user.picture;
             }
 
             $scope.cancel = function() {

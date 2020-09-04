@@ -23,7 +23,7 @@
       "EDITOR_URL": "http://localhost:9000/editor/",
       "CALLBACK_URL": "http://localhost:9000/callback/",
       "RESOURCE_URL": "http://localhost:9000/",
-      "API_URL": "http://api-dev-auth0.kbharkiv.dk",
+      "API_URL": "https://api-dev-auth0.kbharkiv.dk",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
       "SEARCH_CONFIG_URL": "http://api-dev-auth0.kbharkiv.dk/searchconfig",
       "ERROR_REPORT_CONFIG_URL": "https://www.kbhkilder.dk/1508/experimental/errorreportconfig",

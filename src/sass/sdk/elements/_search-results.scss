@@ -1,23 +1,13 @@
+td {
+  display: block;
+}
+
+@media screen and (min-width: 768px) {
   td {
-    display: block;
+    display: table-cell;
   }
-  
-  @media screen and (min-width: 768px) {
-    td {
-      display: table-cell;
-    }
-  }
-  
-  thead th {
-    position: sticky;
-    top: 0;
-    border-top: 0;
-    background-color: white;
-  }
-  
-  .pagination {
-    margin-bottom: 0;
-  }
-  
-  
-  
+}
+
+.pagination {
+  margin-bottom: 0;
+}

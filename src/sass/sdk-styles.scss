@@ -33,9 +33,9 @@
     @import "./sdk/elements/task-progress-plot";
     @import "./sdk/elements/task-status";
     @import "./sdk/elements/user-statistics";
-    @import "./sdk/feather";
     @import "./sdk/table";
 
+    @import "./elements/feather";
     @import "./elements/loading-spinner";
 
     [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {

@@ -23,7 +23,7 @@
                     <select name="mySelect" id="mySelect" class="form-control"
                         ng-options="option.name for option in model.datasources track by option.id"
                         ng-model="model.selected_datasource"
-                        ng-disabled="model.status == 'Henter lister'">
+                        ng-disabled="model.datasources.length == 0">
                     </select>
                 </form>
             </div>
