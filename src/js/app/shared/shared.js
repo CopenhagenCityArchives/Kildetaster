@@ -31,6 +31,7 @@ import callbackService from './services/callback.service';
 import nameFromObjectFilter from './filters/nameFromObject.filter';
 import capitalizeFilter from './filters/capitalize.filter';
 
+import featherDirective from './directives/feather.directive';
 import textConstant from './constants/text.constant';
 
 var sharedApp = angular.module('shared', ['constants', 'ngStorage', 'ui.router','angular-google-analytics', 'auth0.auth0']);
@@ -43,6 +44,8 @@ sharedApp.directive('capitalizeFirst', capitalizeFirstDirective);
 sharedApp.directive('stringifyArray', stringifyArrayDirective);
 sharedApp.directive('shareLink', shareLinkDirective);
 sharedApp.directive('handleSteps', handleStepsDirective);
+sharedApp.directive('user', userDirective);
+sharedApp.directive('feather', featherDirective);
 
 sharedApp.factory('stepService', stepService);
 sharedApp.factory('taskService', taskService);
