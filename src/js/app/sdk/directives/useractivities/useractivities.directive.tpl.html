@@ -16,8 +16,8 @@
     <p class="small">Du skal have indtastet noget, før det vises her.</p>
 </div>
 
-<table role="navigation" class="table table-striped table-hover" aria-labelledby="data-mine-indtastninger" ng-if="!loading && !error && activities.length > 0">
-    <caption class="sr-only">Mine indtastninger</caption>
+<table role="navigation" class="table table-striped table-hover" aria-labelledby="useractivities-caption" ng-if="!loading && !error && activities.length > 0">
+    <caption class="sr-only" id="useractivities-caption">Mine indtastninger</caption>
     <thead>
         <tr class="d-none d-md-table-row">
             <th scope="col">Protokol / kilde</th>
