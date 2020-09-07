@@ -40,7 +40,7 @@
   "development": {
     "constants": {
       "EDITOR_URL": "https://kildetaster.kbharkiv.dk",
-      "CALLBACK_URL": "https://new.kbharkiv.dk/",
+      "CALLBACK_URL": "https://static.kbharkiv.dk/kildetaster/callback",
       "RESOURCE_URL": "https://www.kbhkilder.dk/software/kildetaster-development/resources/",
       "API_URL": "https://www.kbhkilder.dk/1508/experimental",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
@@ -59,8 +59,8 @@
   "production": {
     "constants": {
       "EDITOR_URL": "https://kildetaster.kbharkiv.dk",
-      "CALLBACK_URL": "https://new.kbharkiv.dk/",
-      "RESOURCE_URL": "https://kildetaster.kbharkiv.dk/resources/",
+      "CALLBACK_URL": "https://static.kbharkiv.dk/kildetaster/callback/",
+      "RESOURCE_URL": "https://static.kbharkiv.dk/kildetaster/resources/",
       "API_URL": "https://api-dev-auth0.kbharkiv.dk",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
       "SEARCH_CONFIG_URL": "https://www.kbhkilder.dk/api/searchconfig",
