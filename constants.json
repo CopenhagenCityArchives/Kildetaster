@@ -25,7 +25,7 @@
       "RESOURCE_URL": "http://localhost:9000/",
       "API_URL": "https://api-dev-auth0.kbharkiv.dk",
       "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
-      "SEARCH_CONFIG_URL": "http://api-dev-auth0.kbharkiv.dk/searchconfig",
+      "SEARCH_CONFIG_URL": "https://api-dev-auth0.kbharkiv.dk/searchconfig",
       "ERROR_REPORT_CONFIG_URL": "https://www.kbhkilder.dk/1508/experimental/errorreportconfig",
       "MAIN_DOMAIN": "https://www.kbharkiv.dk",
       "ERROR_URL": "https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale",
