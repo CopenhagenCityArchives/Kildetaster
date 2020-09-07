@@ -22,14 +22,8 @@ export default ["$stateProvider", "$urlRouterProvider", '$locationProvider', fun
             },
 
             resolve: {
-                userData: ['authService', function (authService) {
-                    return authService.getUser()
-                    .catch(function(err) {
-                        return authService.login()
-                        .then(function() {
-                            return authService.getUser()
-                        })
-                    });
+                userData: ['authService', '$location', function (authService, $location) {
+                    return authService.getUser(false, $location.absUrl());
                 }],
 
                 /**
