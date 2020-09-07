@@ -16,26 +16,34 @@ var authService = ['$q', 'callbackService', 'AUTH0_CLIENTID', 'AUTH0_DOMAIN', 'A
             .then(function() {
                 return auth0.getUser();
             })
-            .catch(function(err) {
-                return auth0.getTokenSilently()
+            .catch(function() {
+                return auth0.getTokenSilently({
+                    redirect_uri: callbackService.getCallbackUrl(true)
+                })
                 .then(function() {
                     return auth0.getUser()
                 });
             })
             .catch(function() {
                 if (allowEmpty) {
-                    return $q.resolve({});
+                    return $q.resolve(null);
                 }
                 
                 auth0.loginWithRedirect({
-                    redirect_uri: callbackService.getCallbackUrl()
+                    redirect_uri: callbackService.getCallbackUrl(true)
                 });
 
                 return $q.resolve({});
             })
             .then(function(user) {
-                user.apacs_user_id = user['https://kbharkiv.dk/claims/apacs_user_id'];
-                return $q.resolve(user);
+                if (user && user['https://kbharkiv.dk/claims/apacs_user_id']) {
+                    user.apacs_user_id = user['https://kbharkiv.dk/claims/apacs_user_id'];
+                    return $q.resolve(user);
+                } else if (allowEmpty) {
+                    return $q.resolve(null);
+                } else {
+                     $q.reject();
+                }
             });
         },
 
