@@ -14,9 +14,9 @@ define([
             $scope.data = that.data;
             $scope.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id;
             // Set up post information
-            $scope.images.push("http://politietsregisterblade.dk/registerblade/" + that.data.station + "/" + that.data.film + "/" + that.data.file_front + ".jpg");
+            $scope.images.push("https://politietsregisterblade.dk/registerblade/" + that.data.station + "/" + that.data.film + "/" + that.data.file_front + ".jpg");
             if (that.data.file_back !== 'noback') {
-                $scope.images.push("http://politietsregisterblade.dk/registerblade/" + that.data.station + "/" + that.data.film + "/" + that.data.file_back + ".jpg");
+                $scope.images.push("https://politietsregisterblade.dk/registerblade/" + that.data.station + "/" + that.data.film + "/" + that.data.file_back + ".jpg");
             }
         };
 
