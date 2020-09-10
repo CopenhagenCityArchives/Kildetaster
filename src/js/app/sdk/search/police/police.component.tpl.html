@@ -40,6 +40,14 @@
                             <span ng-repeat="position in data.positions">{{position.position}}<span ng-if="!$last">, </span></span>
                         </td>
                     </tr>
+                    <tr ng-if="data.birthplace">
+                        <th scope="row">
+                            Fødested
+                        </th>
+                        <td>
+                            {{data.birthplace}}
+                        </td>
+                    </tr>
                     <tr>
                         <th scope="row">
                             Permalink
