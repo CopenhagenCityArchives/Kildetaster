@@ -61,7 +61,8 @@ define([
                         // Turn off default buttons on the viewer, as we dont need those
                         showNavigator: false,
                         showHomeControl: false,
-                        showFullPageControl: true,
+                        showFullPageControl: false,
+                        showZoomControl: false,
                         
                         zoomInButton: "zoom-in",
                         zoomOutButton: "zoom-out",
