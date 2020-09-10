@@ -30,10 +30,11 @@ deploy:
     bucket: static.kbharkiv.dk
     cache_control: 'no-cache'
     local_dir: ./dist
-    upload_dir: kildetaster
+    upload_dir: ${DEPLOY_DIR}
     acl: public_read
     region: eu-west-1
     on:
       repo: CopenhagenCityArchives/Kildetaster
-      branch: new-site
+      all_branches: true
+      condition: $S3_DEPLOY = 'true'
     skip_cleanup: true
