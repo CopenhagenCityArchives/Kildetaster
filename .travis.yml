@@ -15,11 +15,6 @@ before_install:
   - openssl aes-256-cbc -K $deploy_key_aes_key -iv $deploy_key_aes_iv
     -in deploy_key.enc -out ./deploy_key -d
   - chmod 600 ./deploy_key
-    # set up awscli packages
-    #- pip install awscli --upgrade --user
-    # set Elastic Beanstalk environmental variables
-    # See https://docs.aws.amazon.com/cli/latest/reference/elasticbeanstalk/update-environment.html#examples for a complete example
-    #- aws elasticbeanstalk update-environment --environment-name kbharkiv-production-4 --option-settings Namespace=aws:elasticbeanstalk:application:environment,OptionName=PARAM1,Value=ParamValue
 
 install:
   - npm install
@@ -28,22 +23,6 @@ script:
   - npm run build -- --mode=${BUILD_MODE} --constants=${BUILD_CONSTANTS} --public=${PUBLIC_PATH}
 
 deploy:
-  - provider: script
-    script: sshpass -p${KBHKILDER_SSH_PASSWORD} scp -o LogLevel=Verbose -o StrictHostKeyChecking=no -r ./dist/* ${KBHKILDER_SSH_USER}@${KBHKILDER_SSH_HOST}:${KBHKILDER_SSH_PATH}
-    skip_cleanup: true
-    edge: false
-    on:
-      all_branches: true
-      condition: $TRAVIS_BRANCH =~ ^(master|development|new-site)$
-     
-  - provider: script
-    script: scp -i ./deploy_key -o LogLevel=Verbose -o StrictHostKeyChecking=no -P ${KBHARKIV_SSH_PORT} ./dist/index.html ${KBHARKIV_SSH_USER}@${KBHARKIV_SSH_HOST}:${KBHARKIV_SSH_PATH}
-    skip_cleanup: true
-    edge: false
-    on:
-      all_branches: true
-      condition: "$TRAVIS_BRANCH =~ ^(master|development|new-site)$"
-
   - provider: s3
     access_key_id: AKIAUDN3ZT2NDNDMRLJD
     secret_access_key:
