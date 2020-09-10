@@ -63,9 +63,16 @@ define([
 
                 opts = angular.extend({}, {
 
+                    // Turn off default buttons on the viewer, as we dont need those
+                    showNavigator: false,
+                    showHomeControl: false,
+                    showFullPageControl: false,
+                    showZoomControl: false,
+
                     element: angular.element('.target')[0],
 
                     showNavigator:  true,
+
                     navigatorId: 'editor__navigator',
 
                     zoomInButton: "zoom-in",
