@@ -17,7 +17,7 @@
     "@auth0/auth0-spa-js": "^1.11.0",
     "@openseadragon-imaging/openseadragon-imaginghelper": "^2.1.1",
     "@openseadragon-imaging/openseadragon-viewerinputhook": "^2.1.0",
-    "angular": "^1.6.10",
+    "angular": "^1.8.0",
     "angular-animate": "^1.6.10",
     "angular-auth0": "^3.0.6",
     "angular-filter": "^0.5.8",
