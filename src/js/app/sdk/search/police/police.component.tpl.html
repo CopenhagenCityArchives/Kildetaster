@@ -48,6 +48,14 @@
                             {{data.birthplace}}
                         </td>
                     </tr>
+                    <tr ng-if="data.person_comment">
+                        <th scope="row">
+                            Kommentar
+                        </th>
+                        <td>
+                            <span ng-bind-html="data.registerblad_comment | linky:_blank"></span>
+                        </td>
+                    </tr>
                     <tr>
                         <th scope="row">
                             Permalink
@@ -64,7 +72,7 @@
 
             <div ng-if="data.addresses">
                 <h4 id="data-adresser">Adresser</h4>
-                <table class="table-responsive d-sm-table table-striped mb-5" aria-labelledby="data-adresser">
+                <table class="table-responsive d-sm-table mb-5" aria-labelledby="data-adresser">
                     <caption class="sr-only">Data om adresser</caption>
                     <thead>
                         <tr>
@@ -72,14 +80,18 @@
                             <th scope="col">Adresse</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr ng-repeat="address in data.addresses">
+                    <tbody ng-repeat="address in data.addresses" ng-class="$even ? 'table-light' : 'table-secoundary' ">
+                        <tr>
                             <td>
                                 {{address.address_date | date: 'dd-MM-yyyy'}}
                             </td>
                             <td>
                                 <text-address-police address="address" date="true"></text-address-police>
                             </td>
+                        </tr>
+                        <tr ng-if="address.adr_comment">
+                            <td></td>
+                            <td><span class="font-weight-bold">Kommentar:</span> <span ng-bind-html="address.adr_comment | linky:_blank"></span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -196,7 +208,17 @@
                             <p>{{data.dateOfCompletion | date:'dd-MM-yyyy' }}</p>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div ng-if="data.registerblad_comment" class="col">
+                            <h6>Indtasters kommentar til registerbladet</h6>
+                            <span ng-bind-html="data.registerblad_comment | linky:_blank"><span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
+
         </div>
+        
     </section>
