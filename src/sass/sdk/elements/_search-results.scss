@@ -11,3 +11,9 @@ td {
 .pagination {
   margin-bottom: 0;
 }
+
+.search-results {
+  & h6 {
+    margin-bottom: 0;
+  }
+}
