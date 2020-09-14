@@ -55,9 +55,9 @@ app.config(['$httpProvider', function($httpProvider) {
     $httpProvider.interceptors.push('httpRequestInterceptor');
 }]);
 
-app.constant('DeleteAPI', 'https://www.kbhkilder.dk/1508/public_beta/posts');
-app.constant('PageAPI', 'https://www.kbhkilder.dk/api/taskspages');
-app.constant('API', 'https://www.kbhkilder.dk/api/datasource');
+app.constant('DeleteAPI', 'https://api.kbharkiv.dk/posts');
+app.constant('PageAPI', 'https://api.kbharkiv.dk/taskspages');
+app.constant('API', 'https://api.kbharkiv.dk/datasource');
 
 
 app.service('PagesService', ['$http', '$q', 'API_URL', function($http, $q, API_URL) {
