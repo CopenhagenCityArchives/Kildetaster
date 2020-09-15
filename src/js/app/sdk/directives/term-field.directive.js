@@ -111,7 +111,7 @@ define([
                         cache: false
                     }).then(function(response) {
                         var arr = response.data.map(function(item) {
-                            return { label: item[field.datasource.field], value: item[field.datasource.field] };
+                            return { label: item[field.datasource.field.toLowerCase()], value: item[field.datasource.field.toLowerCase()] };
                         });
 
                         //Only show a set number of hits
