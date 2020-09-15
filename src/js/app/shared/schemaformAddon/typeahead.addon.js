@@ -47,7 +47,7 @@ define([
             }).then(function(response) {
 
                 var arr = response.data.map(function(item) {
-                    return item[propertyName];
+                    return item[propertyName.toLowerCase()];
                 });
 
                 //Only show a set number of hits
