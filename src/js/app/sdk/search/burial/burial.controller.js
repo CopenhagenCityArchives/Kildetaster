@@ -35,6 +35,7 @@ define(['clipboard'], function(Clipboard) {
         }
 
         that.$onInit = function() {
+            $scope.that = that;
             $scope.data = that.data;
             $scope.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id;
 

@@ -11,6 +11,8 @@ define([
         this.showErrorReports = false;
 
         this.$onInit = function() {
+            console.log("that", that);
+            $scope.that = that;
             $scope.data = that.data;
             $scope.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id;
             // Set up post information

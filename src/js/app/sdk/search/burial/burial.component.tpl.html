@@ -1,7 +1,6 @@
 <div id="post-content" class="container-fluid post">
 
     <div class="clearfix"></div>
-
     <section class="row">
         <div class="col-lg-6">
             <h4 id="data-personen">Personen</h4>
@@ -166,7 +165,7 @@
             </table>
 
 
-            <div ng-if="postErrors.length > 0">
+            <div ng-if="that.postErrors.length > 0">
                 <div>
                     <p>
                         <strong>Denne post er fejlmeldt</strong>
@@ -177,7 +176,7 @@
                 <table class="table-responsive d-sm-table table-striped table-hower mb-5" aria-labelledby="fejl-meldinger" ng-if="$ctrl.showErrorReports">
                     <caption class="sr-only">Liste over fejl-meldinger</caption>
                     <tbody>
-                        <tr scope="row" ng-repeat="error in postErrors">
+                        <tr scope="row" ng-repeat="error in that.postErrors">
                             <th>
                                 {{ error.label || 'Ukendt felt' }}
                             </th>
