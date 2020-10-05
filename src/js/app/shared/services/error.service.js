@@ -30,7 +30,7 @@ define([
                     url: API_URL + '/errorreports',
                     method: 'POST',
                     data: params,
-                    authorizeRequest: true
+                    // authorizeRequest: true
                 })
                 .then(function(response) {
                     deferred.resolve(response.data);
