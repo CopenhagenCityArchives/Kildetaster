@@ -3,6 +3,10 @@
     <h5 class="d-md-none">Navn</h5>
     <h4>{{ data.firstnames }} {{ data.lastname }}</h4>
 
+    <text-date prefix="Født" date="data.dateOfBirth"></text-date>
+    <div ng-if="!data.dateOfBirth && data.ageYears && data.yearOfDeath">
+        <strong>Født:</strong> {{ data.yearOfDeath - data.ageYears }}
+    </div>    
     <text-date prefix="Død" date="data.dateOfDeath"></text-date>
     <text-age years="data.ageYears" months="data.ageMonth" weeks="data.ageWeeks" days="data.ageDays"
         hours="data.ageHours"></text-age>
