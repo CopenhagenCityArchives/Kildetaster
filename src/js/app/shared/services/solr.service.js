@@ -33,11 +33,21 @@ define([
 
             switch (op) {
                 case "eq":
-                    term = "\"" + term + "\"";
+                    if (type == 'date') {
+                        var date = term.substring(0, 10);
+                        term = `[${term} TO ${date}T23:59:59.999Z]`
+                    } else {
+                        term = "\"" + term + "\"";
+                    }
                     break;
                 case "neq":
                     field = "-" + field;
-                    term = "\"" + term + "\"";
+                    if (type == 'date') {
+                        var date = term.substring(0, 10);
+                        term = `[${term} TO ${date}T23:59:59.999Z]`
+                    } else {
+                        term = "\"" + term + "\"";
+                    }
                     break;
                 case "starts":
                     term = term + "*";
