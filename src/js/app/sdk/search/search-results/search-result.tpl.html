@@ -1,7 +1,7 @@
 <!-- burials -->
 <td ng-if="type == 'burial'">
     <h5 class="d-md-none">Navn</h5>
-    <h4>{{ data.firstnames }} {{ data.lastname }}</h4>
+    <h4>{{ data.firstnames }} {{ data.lastname }}<span ng-if="data.birthname">, født {{data.birthname}}</span></h4>
 
     <text-date prefix="Født" date="data.dateOfBirth"></text-date>
     <div ng-if="!data.dateOfBirth && data.ageYears && data.yearOfDeath">
@@ -83,7 +83,7 @@
 <!-- police -->
 <td ng-if="type == 'police'">
     <h5 class="d-md-none">Navn</h5>
-    <h4>{{ data.firstnames }} {{ data.lastname }}</h4>
+    <h4>{{ data.firstnames }} {{ data.lastname }}<span ng-if="data.birthname">, født {{data.birthname}}</span></h4>
     <h6>Persontype</h6>
     <p>{{ data.person_type_text }}</p>
     <span ng-if="data.birthplace"><strong>Fødested:</strong> {{data.birthplace}}</span>
