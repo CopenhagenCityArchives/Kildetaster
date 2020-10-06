@@ -62,3 +62,10 @@
     position: relative !important;
     transform: scale(1); // this is a fix for chrome
 }
+
+
+@media (max-width: 991.98px) {
+    .search-result-column {
+        width: 100% !important;
+    }
+}
