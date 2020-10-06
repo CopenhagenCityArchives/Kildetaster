@@ -27,7 +27,7 @@
     <h6 ng-if="data.deathcauses.length > 0">Dødsårsag:</h6>
     <ul ng-if="data.deathcauses.length > 0">
         <li ng-repeat="deathcause in data.deathcauses">
-            <p>{{ deathcause.deathcause }}</p>
+            {{ deathcause.deathcause }}
         </li>
     </ul>
 
