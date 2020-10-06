@@ -24,7 +24,7 @@
         <li class="breadcrumb-item"><a href="/"><feather class="medium-icon" icon='home'></feather><span class="sr-only">Hjem</span></a></li>
         <li class="breadcrumb-item"><a ui-sref="search.page">Søg person</a></li>
         <li class="breadcrumb-item"><a ui-sref="search.page.results">Søgeresultater</a></li>
-        <li ng-if="$ctrl.data.firstnames || $ctrl.data.lastname || $ctrl.data.birthname" class="breadcrumb-item active" aria-current="page" tabindex='-1'>{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}} {{$ctrl.data.birthname}}</li>
+        <li ng-if="$ctrl.data.firstnames || $ctrl.data.lastname || $ctrl.data.birthname" class="breadcrumb-item active" aria-current="page" tabindex='-1'><span>{{$ctrl.data.firstnames}} {{$ctrl.data.lastname}}</span><span ng-if="$ctrl.data.birthname">, født {{$ctrl.data.birthname}}</span></li>
         <li ng-if="$ctrl.data.date" class="breadcrumb-item active" aria-current="page" tablindex='-1'>Efterretning: {{$ctrl.formatDate($ctrl.data.date)}} </li>
     </ol>
 </nav>       
