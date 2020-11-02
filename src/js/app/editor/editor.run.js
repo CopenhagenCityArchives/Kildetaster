@@ -1,12 +1,15 @@
-export default ['$state', '$transitions', function editorRun($state, $transitions) {
-    //Track all changes in state in order to track event with Google Analytics
+export default ['$state', '$transitions', 'Analytics', function editorRun($state, $transitions, Analytics) {
+
     $transitions.onStart({ }, function(trans) {
+        //Track all changes in state in order to track event with Google Analytics
+        Analytics.trackPage(trans.to().name);
+
         //The state should redirect, so we append stepId, to force the first step to be the default value
         if (trans.params().redirectTo) {
             event.preventDefault();
             params.stepId = 1;
             $state.go(trans.params().redirectTo, params);
-        }             
+        }        
     });
 
     /**
