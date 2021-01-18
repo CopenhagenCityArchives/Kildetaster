@@ -5,6 +5,10 @@ define(['clipboard'], function(Clipboard) {
         this.$onInit = function() {
             $scope.data = that.data;
             $scope.permalink = "https://kbharkiv.dk/permalink/post/" + that.data.id;
+
+            var filename = that.data.filename;
+            var extension = filename.substring(filename.lastIndexOf('.')+1, filename.length)
+            $scope.fileExtension = extension;
         };
 
         this.getAssetHref = function() {
