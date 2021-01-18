@@ -1,0 +1,16 @@
+<a href ng-if="$ctrl.isDone()" ng-click="$ctrl.goToNextAvailablePage()">
+    {{TEXT.PAGE_NEXTAVAILABLE}}
+</a>
+
+<div class="page-details">
+    <div>
+        <a href ng-click="$ctrl.prevPage()">&lt;</a>
+        {{$ctrl.pageNumber}} / {{$ctrl.totalPages}}
+        <a href ng-click="$ctrl.nextPage()">&gt;</a>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label">{{TEXT.PAGE_GOTO}}</label>
+        <input type="text" class="form-control" value="" ng-model="$ctrl.goToPageId" ng-keypress="$ctrl.goToPage($event)">
+    </div>
+</div>

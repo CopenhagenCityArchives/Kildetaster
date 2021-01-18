@@ -1,0 +1,18 @@
+<a class="sr-only sr-only-focusable" href="{{'#open-protocols-' + num }}">Spring status over</a>
+<div class="row status-stats task-status">
+        <div class="col">
+            <span class="h1" ng-if="!loading">{{ count }}</span>
+            <feather icon='loader' class='large-icon spin' ng-if="loading"></feather>
+            <span class="h4">Protokoller i alt</span>
+        </div>
+        <div class="col">
+            <span class="h1" ng-if="!loading">{{ doneCount }}</span>
+            <feather icon='loader' class='large-icon spin' ng-if="loading"></feather>
+            <span class="h4">Færdige protokoller</span>
+        </div>
+        <div class="col">
+            <span class="h1" ng-if="!loading">{{ activeCount }}</span>
+            <feather icon='loader' class='large-icon spin' ng-if="loading"></feather>
+            <span class="h4">Aktive protokoller</span>
+        </div>
+</div>

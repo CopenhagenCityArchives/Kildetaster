@@ -1,0 +1,78 @@
+{
+  "local": {
+    "constants": {
+      "EDITOR_URL": "http://localhost:9000/editor/",
+      "CALLBACK_URL": "http://localhost:9000/callback/",
+      "RESOURCE_URL": "http://localhost:9000/",
+      "API_URL": "http://localhost:8080",
+      "SOLR_API_URL": "https://localhost:8989/solr/apacs_core/select",
+      "SEARCH_CONFIG_URL": "https://localhost:8181/searchconfig",
+      "ERROR_REPORT_CONFIG_URL": "https://localhost:8181/errorreportconfig",
+      "MAIN_DOMAIN": "https://localhost:9000/",
+      "ERROR_URL": "https://localhost:9000/",
+      "PERMALINK_URL": "https://kbharkiv.dk/permalink",
+      "AUTH0_CLIENTID": "uNrqzxblFnPrzQWpqMMBiB8h0VppBesM",
+      "AUTH0_DOMAIN": "login.kbharkiv.dk",
+      "AUTH0_AUDIENCE": "https://www.kbhkilder.dk/api",
+      "ANALYTICS_ACCOUNT": "UA-45125468-1",
+      "TYPEAHEAD_MAX": 75
+    }
+  },
+  "local_remote_backend": {
+    "constants": {
+      "EDITOR_URL": "http://localhost:9000/editor/",
+      "CALLBACK_URL": "http://localhost:9000/callback/",
+      "RESOURCE_URL": "http://localhost:9000/",
+      "API_URL": "https://api.kbharkiv.dk",
+      "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
+      "SEARCH_CONFIG_URL": "https://api.kbharkiv.dk/searchconfig",
+      "ERROR_REPORT_CONFIG_URL": "https://api.kbharkiv.dk/errorreportconfig",
+      "MAIN_DOMAIN": "https://www.kbharkiv.dk",
+      "ERROR_URL": "https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale",
+      "PERMALINK_URL": "https://kbharkiv.dk/permalink",
+      "AUTH0_CLIENTID": "uNrqzxblFnPrzQWpqMMBiB8h0VppBesM",
+      "AUTH0_DOMAIN": "login.kbharkiv.dk",
+      "AUTH0_AUDIENCE": "https://www.kbhkilder.dk/api",
+      "ANALYTICS_ACCOUNT": "UA-45125468-1",
+      "TYPEAHEAD_MAX": 75
+    }
+  },
+  "development": {
+    "constants": {
+      "EDITOR_URL": "https://kildetaster.kbharkiv.dk",
+      "CALLBACK_URL": "https://static.kbharkiv.dk/kildetaster/callback",
+      "RESOURCE_URL": "https://www.kbhkilder.dk/software/kildetaster-development/resources/",
+      "API_URL": "https://api.kbharkiv.dk",
+      "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
+      "SEARCH_CONFIG_URL": "https://api.kbharkiv.dk/searchconfig",
+      "ERROR_REPORT_CONFIG_URL": "https://api.kbharkiv.dk/errorreportconfig",
+      "MAIN_DOMAIN": "https://www.kbharkiv.dk",
+      "ERROR_URL": "https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale",
+      "PERMALINK_URL": "https://kbharkiv.dk/permalink",
+      "AUTH0_CLIENTID": "uNrqzxblFnPrzQWpqMMBiB8h0VppBesM",
+      "AUTH0_DOMAIN": "login.kbharkiv.dk",
+      "AUTH0_AUDIENCE": "https://www.kbhkilder.dk/api",
+      "ANALYTICS_ACCOUNT": "UA-45125468-1",
+      "TYPEAHEAD_MAX": 75
+    }
+  },
+  "production": {
+    "constants": {
+      "EDITOR_URL": "https://kildetaster.kbharkiv.dk",
+      "CALLBACK_URL": "https://static.kbharkiv.dk/kildetaster/callback/",
+      "RESOURCE_URL": "https://static.kbharkiv.dk/kildetaster/resources/",
+      "API_URL": "https://api.kbharkiv.dk",
+      "SOLR_API_URL": "https://aws.kbhkilder.dk/solr/apacs_core/select",
+      "SEARCH_CONFIG_URL": "https://api.kbharkiv.dk/searchconfig",
+      "ERROR_REPORT_CONFIG_URL": "https://api.kbharkiv.dk/errorreportconfig",
+      "MAIN_DOMAIN": "https://www.kbharkiv.dk",
+      "ERROR_URL": "https://www.kbharkiv.dk/deltag/indtast-data-fra-arkivmateriale",
+      "PERMALINK_URL": "https://kbharkiv.dk/permalink",
+      "AUTH0_CLIENTID": "uNrqzxblFnPrzQWpqMMBiB8h0VppBesM",
+      "AUTH0_DOMAIN": "login.kbharkiv.dk",
+      "AUTH0_AUDIENCE": "https://www.kbhkilder.dk/api",
+      "ANALYTICS_ACCOUNT": "UA-45125468-1",
+      "TYPEAHEAD_MAX": 75
+    }
+  }
+}

@@ -1,0 +1,223 @@
+<div id="post-content" class="container-fluid post">
+
+    <div class="clearfix"></div>
+    <section class="row">
+        <div class="col-lg-6">
+            <h4 id="data-personen">Personen</h4>
+            <table class="table-responsive d-sm-table table-striped mb-5" aria-labelledby="data-personen">
+                <caption class="sr-only">Data om personen</caption>
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            Persontype
+                        </th>
+                        <td>
+                            {{data.person_type_text}}
+                        </td>
+                    </tr>
+                    <tr ng-if="data.dateOfBirth">
+                        <th scope="row">
+                            Født
+                        </th>
+                        <td>
+                            {{data.dateOfBirth | date:'dd-MM-yyyy' }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            Køn
+                        </th>
+                        <td>
+                            <text-gender type="data.sex"></text-gender>
+                        </td>
+                    </tr>
+                    <tr ng-if="data.positions.length > 0">
+                        <th scope="row">
+                            Erhverv
+                        </th>
+                        <td>
+                            <span ng-repeat="position in data.positions">{{position.position}}<span ng-if="!$last">, </span></span>
+                        </td>
+                    </tr>
+                    <tr ng-if="data.birthplace">
+                        <th scope="row">
+                            Fødested
+                        </th>
+                        <td>
+                            {{data.birthplace}}
+                        </td>
+                    </tr>
+                    <tr ng-if="data.person_comment">
+                        <th scope="row">
+                            Kommentar
+                        </th>
+                        <td>
+                            <span ng-bind-html="data.person_comment | linky:_blank"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            Permalink
+                        </th>
+                        <td>
+                            <span id="permalink" class="mr-2">
+                                {{permalink}}
+                            </span>
+                            <button ng-attr-id="permalink_btn" ng-click="$ctrl.copy();" class="btn btn-primary btn-sm float-right" ng-attr-data-clipboard-target="#permalink">Kopier <span class="sr-only"> permalink</span></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div ng-if="data.addresses">
+                <h4 id="data-adresser">Adresser</h4>
+                <table class="table-responsive d-sm-table mb-5" aria-labelledby="data-adresser">
+                    <caption class="sr-only">Data om adresser</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Dato</th>
+                            <th scope="col">Adresse</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="address in data.addresses" ng-class="$even ? 'table-light' : 'table-secoundary' ">
+                        <tr>
+                            <td>
+                                {{address.address_date | date: 'dd-MM-yyyy'}}
+                            </td>
+                            <td>
+                                <text-address-police address="address" date="true"></text-address-police>
+                            </td>
+                        </tr>
+                        <tr ng-if="address.adr_comment">
+                            <td></td>
+                            <td><span class="font-weight-bold">Kommentar:</span> <span ng-bind-html="address.adr_comment | linky:_blank"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 id="data-andre-personer" ng-if="data.spouses.length > 0 || data.children.length > 0 || data.parent">Andre personer</h4>
+            <table role="navigation" class="table-responsive d-table table-striped table-hover mb-5" aria-labelledby="data-andre-personer" ng-if="data.spouses.length > 0 || data.children.length > 0 || data.parent">
+                <caption class="sr-only">Data om andre personer</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Titel</th>
+                        <th scope="col">Navn</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr tabindex="0" role="button" ng-if="data.parent" ui-sref="search.page.result.post({postId:data.parent.post_id})" ng-click="$ctrl.goToPost(data.parent)" ng-keydown="($event.keyCode === 13 || $event.keyCode === 32) && $ctrl.goToPost(data.parent)">
+                        <td>
+                            Forælder
+                        </td>
+                        <td>
+                            {{data.parent.firstnames}} {{data.parent.lastname}}
+                            <feather icon='arrow-right-circle'></feather>
+                        </td>
+                    </tr>
+                    <tr tabindex="0" role="button" ng-repeat="spouse in data.spouses" ng-click="$ctrl.goToPost(spouse)" ng-keydown="($event.keyCode === 13 || $event.keyCode === 32) && $ctrl.goToPost(spouse)">
+                        <td>
+                            Ægtefælle
+                        </td>
+                        <td>
+                            {{spouse.firstnames}} {{spouse.lastname}}
+                            <feather icon='arrow-right-circle'></feather>
+                        </td>
+                    </tr>
+                    <tr tabindex="0" role="button" ng-repeat="child in data.children" ng-click="$ctrl.goToPost(child)" ng-keydown="($event.keyCode === 13 || $event.keyCode === 32) && $ctrl.goToPost(child)">
+                        <td>
+                            Barn
+                        </td>
+                        <td>
+                            {{child.firstnames}} {{child.lastname}}
+                            <feather icon='arrow-right-circle'></feather>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div ng-if="that.postErrors.length > 0">
+                <div>
+                    <p>
+                        <strong>Denne post er fejlmeldt</strong>
+                        <a href ng-click="$ctrl.toggleErrorReports()"> Læs mere</a>
+                    </p>
+                </div>
+                
+                <table class="table-responsive d-sm-table table-striped table-hower mb-5" aria-labelledby="fejl-meldinger" ng-if="$ctrl.showErrorReports">
+                    <caption class="sr-only">Liste over fejl-meldinger</caption>
+                    <tbody>
+                        <tr ng-repeat="error in that.postErrors">
+                            <th scope="row">
+                                {{ error.label || 'Ukendt felt' }}
+                            </th>
+                            <td>
+                                {{error.comment}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <a href ng-click="$ctrl.showErrorReports = !$ctrl.showErrorReports">
+                    <feather class="medium-icon" icon='flag'></feather><span> Rapporter fejl</span>
+                </a>
+            </div>
+
+            <div class="mt-4" ng-show="$ctrl.showErrorReports">
+                <report-error data="data" refresh="$ctrl.refreshErrorReports">
+                </report-error>
+            </div>
+        </div>
+
+        <div class="col-lg-6 order-first order-lg-last">
+            <h4>Kilden</h4>
+            <div class="card text-white mb-3">
+                <div class="card-body">
+                    <gallery images='images'></gallery>
+        
+                    <h5>Om kilden</h5>
+                    <div class="row">
+                        <div class="col">
+                            <p>{{ data.collection_info }}. Station {{data.station}}. Filmrulle {{data.film}}. Registerblad {{data.number}} (unikt id. {{data.registerblad_id}})</p>
+                        </div>
+                    </div>
+
+                    <div class="row" ng-if="data.last_changed">
+                        <div class="col">
+                            <h6>Senest ændret</h6>
+                            <p>{{data.last_changed}}</p>
+                        </div>
+
+                        <div class="col" ng-if="data.registerblad_comment">
+                            <h6>Indtasters kommentar</h6>
+                            <p>{{data.registerblad_comment}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div ng-if="data.specialRemarks" class="col">
+                            <h6>Særlige bemærkninger</h6>
+                            <p>{{data.specialRemarks}}</p>
+                        </div>
+
+                        <div class="col" ng-if="data.dateOfCompletion">
+                            <h6>Udfyldt</h6>
+                            <p>{{data.dateOfCompletion | date:'dd-MM-yyyy' }}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div ng-if="data.registerblad_comment" class="col">
+                            <h6>Indtasters kommentar til registerbladet</h6>
+                            <span ng-bind-html="data.registerblad_comment | linky:_blank"><span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        
+    </section>

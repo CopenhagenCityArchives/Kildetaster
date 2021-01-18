@@ -1,0 +1,90 @@
+.step-indicator {
+    position: absolute;
+    top: 0;
+    left: 18px;
+
+    width: 60px;
+    height: 100%;
+
+    background-color: $gray;
+
+    &.disabled {
+        a:hover {
+            cursor: not-allowed;
+        }
+
+        //Dim the 'tabs' if the indicator is set as disabled
+        .step-indicator__item {
+            opacity: 0.4;
+        }
+    }
+
+    &__item {
+        line-height: 61px;
+
+        position: relative;
+
+        display: block;
+
+        height: 60px;
+        margin-bottom: 1px;
+
+        text-align: center;
+
+        color: $gray-text;
+        border-bottom: $light-gray;
+
+        &:hover, &:focus {
+            text-decoration: none;
+
+            outline: none;
+        }
+
+        &.filled {
+            background-color: $dark-gray;
+            &:before {
+                @include border-radius(50%);
+
+                line-height: 29px;
+
+                position: absolute;
+                top: 50%;
+                left: -15px;
+
+                display: block;
+
+                width: 25px;
+                height: 25px;
+
+                content: url("../images/checkmark.svg");
+                transform: translateY(-50%);
+
+                color: $white;
+                background-color: $dark-blue;
+            }
+        }
+
+        &.current {
+            color: $white;
+            background-color: $green;
+
+            &:after {
+                position: absolute;
+                top: 50%;
+                right: -5px;
+
+                display: block;
+
+                width: 0;
+                height: 0;
+
+                content: "";
+                transform: translateY(-50%);
+
+                border-top: 10px solid transparent;
+                border-bottom: 10px solid transparent;
+                border-left: 10px solid $green;
+            }
+        }
+    }
+}

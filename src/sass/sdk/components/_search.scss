@@ -1,0 +1,71 @@
+.advanced-search-fields {
+    .form-row {
+        padding: 1rem 0;
+
+        border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .btn-icon {
+        margin-top: 0.5rem;
+
+        @media (min-width: 768px) {
+            margin-top: 2rem;
+        }
+    }
+}
+.term-field {
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+
+    display: block;
+
+    width: 100%;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+
+    color: #495057;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    background-color: #ffffff;
+    background-clip: padding-box;
+}
+
+.ui-select-match-text {
+    text-overflow: clip;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 90%;
+}
+.ui-select-toggle > .btn-link {
+    position: absolute;
+    right: 5px;
+}
+
+.search-type {
+    .list-group-item {
+        svg {
+            transition: transform 200ms ease;
+        }
+
+        &[aria-expanded="true"] svg {
+            transform: rotate(180deg);
+        }
+    }
+}
+// override wordpress theme page header color
+.page-header {
+    background-color: #FFEECC !important;
+}
+// hack to make bootstrap streched links not overlap whole page
+.search-result-row {
+    position: relative !important;
+    transform: scale(1); // this is a fix for chrome
+}
+
+
+@media (max-width: 991.98px) {
+    .search-result-column {
+        width: 100% !important;
+    }
+}

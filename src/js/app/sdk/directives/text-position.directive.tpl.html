@@ -1,0 +1,3 @@
+<div ng-repeat="position in positions">
+    <span ng-if="position.relationtype && position.relationtype !== 'Eget erhverv'">{{position.relationtype}}, </span>{{position.position}}<span ng-if="position.workplace">, {{position.workplace}}</span><span ng-if="!$last">, </span>
+</div>

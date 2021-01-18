@@ -1,0 +1,22 @@
+<div class="post">
+    <form>
+
+        <div class="form-group">
+            <label class="control-label" for="formSelectOption">Vælg hvilken oplysning du vil fejlmelde</label>
+            <select id="formSelectOption" class="form-control" ng-model="selected" ng-options="field.label for field in configData"></select>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label" for="formTextField">Kommentar (max. 250 tegn)</label>
+            <textarea id="formTextField" class="form-control" ng-model="selectedComment" maxlength="250"></textarea>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary" ng-disabled="!selected || !selectedComment" type="button" ng-click="saveErrorReport()">
+                Send <span class="sr-only">Send fejlmedling</span>
+            </button>
+        </div>
+
+
+    </form>
+</div>

@@ -1,0 +1,87 @@
+<div class="row">
+    <div class="col-sm-4">
+        <img ng-hide="!user" ng-src="{{ user.picture }}" alt="Profilbillede">
+        <div ng-hide="user" class="w-100">
+            <feather icon='loader' class="spin large-icon" style="position: relative; left: 30px; top: 30px"></feather>
+        </div>
+    </div>
+
+    <div class="col-sm-8" ng-hide="editing">
+        <div class="row">
+            <div class="col-sm-4">
+                <strong>Brugernavn</strong>
+            </div>
+            <div class="col-sm-8">
+                {{ user.nickname }}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <strong>E-mail</strong>
+            </div>
+            <div class="col-sm-8">
+                {{ user.email }}
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-sm-auto">
+                <button type="button" class="btn btn-primary" ng-click="edit()" ng-disabled="loading">Rediger</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-8" ng-hide="!editing">
+        <form ng-submit="submit($event, nickname)" class="form-row">
+            <div class="col-sm">
+                <label for="edit-profile-username">Nyt brugernavn</label>
+                <div class="input-group">
+                    <input type="text" class="form-control" id="edit-profile-username" placeholder="Indtast nyt brugernavn" ng-model="nickname.value" ng-disable="nickname.saving" required>
+
+                    <button type="submit" class="btn btn-primary input-group-append" ng-disable="nickname.saving">
+                        <span ng-if="!nickname.saving">Gem</span>
+                        <feather ng-if="nickname.saving" icon='loader' class='spin'></feather>
+                    </button>
+                </div>
+                <small class="text-muted">Dit brugernavn vises ved de kilder du indtaster, samt på statistik og oversigter over deltagelse.</small>
+            </div>
+        </form>
+        
+        <div class="form-row mb-3">
+            <div class="col-sm" role="status">
+                <span class="sr-only" ng-if="nickname.errorText || nickname.successText">Brugernavn opdaterings-status:</span>
+                <small class="form-text text-danger" ng-if="nickname.errorText">{{ nickname.errorText }}</small>
+                <small class="form-text text-success" ng-if="nickname.successText">{{ nickname.successText }}</small>
+            </div>
+        </div>
+
+        <form id="edit-profile-password-form" ng-submit="submit($event, password)" class="form-row">
+            <div class="col-sm-6">
+                <label for="edit-profile-password">Nyt kodeord</label>
+                <input type="password" class="form-control" id="edit-profile-password" placeholder="Indtast nyt kodeord" ng-change="password.check()" ng-model="password.value" ng-disable="password.saving" required>
+            </div>
+
+            <div class="col-sm-6">
+                <label for="edit-profile-password-repeat">Gentag kodeord</label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="edit-profile-password-repeat" placeholder="Gentag nyt kodeord" ng-change="password.check()" ng-model="password.repeat" ng-disable="password.saving" required>
+                
+                    <button type="submit" class="btn btn-primary input-group-append" ng-disable="password.saving">
+                        <span ng-if="!savingpassword.savingPassword">Gem</span>
+                        <feather ng-if="password.saving" icon='loader' class='spin'></feather>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <div class="form-row mb-3">
+            <div class="col-sm" role="status">
+                <span class="sr-only" ng-if="password.errorText || password.successText">Kodeord opdaterings-status:</span>
+                <small class="form-text text-danger" ng-if="password.errorText">{{ password.errorText }}</small>
+                <small class="form-text text-success" ng-if="password.successText">{{ password.successText }}</small>
+            </div>
+        </div>
+            
+        <button type="button" class="btn btn-secondary" ng-click="cancel()" ng-disable="saving">Ok</button>  
+    </div>
+</div>

@@ -1,36 +1,40 @@
 language: node_js
 
 node_js:
-  - "11.9"
+- '11.9'
 
 cache:
-  - npm
+- npm
 
 addons:
   apt:
     packages:
     - sshpass
+    
+before_install:
+  - openssl aes-256-cbc -K $deploy_key_aes_key -iv $deploy_key_aes_iv
+    -in deploy_key.enc -out ./deploy_key -d
+  - chmod 600 ./deploy_key
 
 install:
   - npm install
-  - npm install -g grunt-cli
-  - npm install -g bower
-  - bower install
-  - if [ "$TRAVIS_BRANCH" = "development" ]; then grunt dev; fi
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then grunt build; fi
-  - if [ "$TRAVIS_BRANCH" = "public-beta" ]; then grunt dev_public_beta; fi
+
+script:
+  - npm run build -- --mode=${BUILD_MODE} --constants=${BUILD_CONSTANTS} --public=${PUBLIC_PATH}
 
 deploy:
-    # deploy develop to the staging environment
-  - provider: script
-    script: sshpass -p${KBHKILDER_SSH_PASSWORD} scp -o LogLevel=Verbose -o StrictHostKeyChecking=no -r ./kbh/resources/ ${KBHKILDER_SSH_USER}@${KBHKILDER_SSH_HOST}:${KBHKILDER_SSH_PATH}
-    skip_cleanup: true
+  - provider: s3
+    access_key_id: AKIAUDN3ZT2NDNDMRLJD
+    secret_access_key:
+      secure: fqxvfYDNQxIBXTYblNVPBlXd1S21pod9dLuN04iwOqjmyGQ3i0zdsoAetvfmzdUI/eMwlGLYquRtM0bbVC70O+8XYeQarpE0luKZpJhMh0wOGaqaqKlLFzfase82EXCvu8kfeQ7N0Mzaa3X2m3sYiXlFDMoaaLNqqFxLOHi/RWw5V452nzvNamGh9duYRvvvY0FXrLhVbK56LQ8A0Ooh9uAikq2sDsJkhEgSYvjeGkGJ9lkhOE/fxg01A57w0MI28s/Z8xqqxwb3dvQidU5GBVUD/Pwg5tKnGnSmiWRFAXZ0QrzuAX4+0su8XT3/yiOtH1trwAMVQzrFoECQmeU3PahcsK0p4UJXchtR0pHIvcTbHoXBowYa7pYvz/nTzqA95wTIfbGNZ8AYA4WA6zG6JTbgwvj0Xub9uf9iAtoiw9UQXD/zpoGabUfjhOuevKB2fEaRgneXcL7ivGcjTMGQuuUZ5pxhpgmE4BdIacLoMKtXK7Q7QyjvILWj5teabDSSd4Wa0/sezhKSrlS7bejEXiVaQ079mtXWaotVj1Mm4cn2OmfDOyhzdasEB0iaJGsfxssXr7dB0rtXrcWwsMrEZvKfqzQCFWll6rK5MRMspYsqlji8Y/c1tIZcaIHmGgOQ+jZegDHGebZ7xxpPUhdcw75PZRwSTbpSu5jy8dwTYUs=
+    bucket: static.kbharkiv.dk
+    cache_control: 'no-cache'
+    local_dir: ./dist
+    upload_dir: ${DEPLOY_DIR}
+    acl: public_read
+    region: eu-west-1
     on:
+      repo: CopenhagenCityArchives/Kildetaster
       all_branches: true
-      condition: $TRAVIS_BRANCH =~ ^(master|development|public-beta)$
-  - provider: script
-    script: SSHPASS=${KBHARKIV_SSH_PASSWORD} sshpass -e scp -o LogLevel=Verbose -o StrictHostKeyChecking=no ./kbh/index.html ${KBHARKIV_SSH_USER}@${KBHARKIV_SSH_HOST}:${KBHARKIV_SSH_PATH}
+      condition: $S3_DEPLOY = 'true'
     skip_cleanup: true
-    on:
-      all_branches: true
-      condition: $TRAVIS_BRANCH =~ ^(master|development|public-beta)$

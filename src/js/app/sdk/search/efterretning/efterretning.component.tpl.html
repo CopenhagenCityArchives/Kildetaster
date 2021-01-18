@@ -1,0 +1,70 @@
+<div id="post-content" class="container-fluid post">
+
+    <div class="clearfix"></div>
+
+    <section class="row">
+
+        <div class="col-lg-6">
+         <h4>Link</h4>
+            <table class="table-responsive d-sm-table table-striped" aria-labelledby="data-Efterretningen">
+                <caption class="sr-only">Data om Efterretningen</caption>
+                <tbody>
+                    <tr>
+                        <th scope="row">
+                            Permalink
+                        </th>
+                        <td>
+                            <span id="permalink" class="mr-2">
+                                {{permalink}}
+                            </span>
+                            <button ng-attr-id="permalink_btn" ng-click="$ctrl.copy();" class="btn btn-primary btn-sm float-right" ng-attr-data-clipboard-target="#permalink">Kopier <span class="sr-only"> permalink</span></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 id="data-sogekontekst" ng-if="data.highlighting.erindring_document_text">Søgekontekst</h4>
+            <table role="list" class="table-responsive d-sm-table table-striped" aria-labelledby="data-sogekontekst" ng-if="data.highlighting.erindring_document_text">
+                <caption class="sr-only">Teksten markeret med fed er det eller de ord, søgemaskinen har fundet</caption>
+                <tbody>
+                    <tr ng-repeat="highlight in data.highlighting.erindring_document_text">
+                        <td role="listitem">
+                            &hellip;<span ng-bind-html="highlight"></span>&hellip;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-lg-6">
+            <h4>Kilden</h4>
+            <div class="card text-white mb-3">
+                <div class="card-body d-block w-100">
+                    <div class="row">
+                        <div class="col">
+                            <a ng-href="{{$ctrl.getAssetHref()}}" target="_blank" class="btn btn-block btn-post">Hent efterretning som pdf</a>
+                            <a ng-if="data.transcribed" ng-href="{{$ctrl.getTranscribedAssetHref()}}" target="_blank"class="btn btn-block btn-post">Renskrift</a>
+                        </div>
+                    </div>
+
+                    <h5>Om kilden</h5>
+                    <p>Nummer {{ data.number }}<span ng-if="data.date">, {{ $ctrl.formatDate(data.date) }}.</span></p>
+                    
+                    <div class="row">
+                        <div class="col">
+                            <h6>DATO</h6>
+                            <p>{{$ctrl.formatDate(data.date)}}</p>
+                        </div>
+                        <div class="col">
+                            <h6>NR.</h6>
+                            <p>{{data.number}}</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+</div>

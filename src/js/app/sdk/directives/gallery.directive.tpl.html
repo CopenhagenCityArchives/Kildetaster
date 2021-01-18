@@ -1,0 +1,28 @@
+<div id="source-gallery" class="carousel slide" data-interval="false">
+    <div class="carousel-inner">
+        <a ng-repeat="imageObj in imageObjects" class="carousel-item" ng-class="{active : $index == 0}" role="button" data-toggle="modal" data-target="#source-gallery-modal">
+            <zoom-image zoom-out="imageObj.zoomOutFn" zoom-in="imageObj.zoomInFn" full-page="imageObj.fullPageFn" class="d-block w-100" image="imageObj.imageUrl" index="$index"></zoom-image>
+        </a>
+    </div>
+    
+    <a ng-if="arrayLength > 1" id="previous" class="carousel-control-prev" role="button" ng-click="slidePrev()" tabindex="0" ng-keypress="($event.keyCode === 13 || $event.keyCode === 32) && slidePrev()">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Forrige side af kilden</span>
+    </a>
+    <a ng-if="arrayLength > 1" id="next" class="carousel-control-next" role="button" ng-click="slideNext()" tabindex="0" ng-keypress="($event.keyCode === 13 || $event.keyCode === 32) && slideNext()">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Næste side af kilden</span>
+    </a>
+</div>
+
+<div class="module-gallery"> 
+    <ol ng-if="images.length > 1" class="carousel-indicators position-relative float-left mt-3">
+        <li ng-repeat="img in images" data-target="#source-gallery" data-slide-to="{{$index}}" ng-class="{active : $index == 0}"></li>
+    </ol>
+</div>
+
+<div id="toolbarDiv" class="text-right">
+    <button id="zoom-out-custom" type="button" ng-click="zoomOut()" class="btn btn-link"><feather class="medium-icon text-white" icon='zoom-out' style="color:white"></feather><span class="sr-only">Zoom ud</span></button>
+    <button id="zoom-in-custom"  type="button" ng-click="zoomIn()" class="btn btn-link"><feather class="medium-icon text-white" icon='zoom-in' style="color:white"></feather><span class="sr-only">Zoom ind</span></button>
+    <button id="fullPage-custom" type="button" ng-click="fullPage()" class="btn btn-link"><feather class="medium-icon text-white" icon='maximize-2' style="color:white"></feather><span class="sr-only">Åbn galleriet i fuld skærm</span></button>
+</div>

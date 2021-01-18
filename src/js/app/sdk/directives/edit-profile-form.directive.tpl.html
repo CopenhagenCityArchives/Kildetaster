@@ -1,0 +1,44 @@
+<form ng-submit="submit()" ng-keyup="state == 'editing' && $event.keyCode == 27 && cancel()">
+    <div class="form-group" ng-class="{'has-error': email.error}">
+        <label ng-attr-for="edit-profile-{{ field }}-input">{{ label }}</label>
+        <div class="input-group">
+            <input
+                ng-attr-type="{{ input-type }}"
+                ng-attr-id="edit-profile-input-{{ field }}"
+                ng-attr-placeholder="{{ placeholder }}"
+                ng-model="value"
+                ng-disabled="state != 'editing'"
+                class="form-control">
+            </input>
+
+            <div class="input-group-append" ng-switch="state">
+                <button
+                    ng-switch-when="default"
+                    ng-attr-id="edit-profile-edit-button-{{ field }}"
+                    ng-click="edit()"
+                    type="button"
+                    class="btn btn-primary">Ret</button>
+                
+                <button
+                    ng-switch-when="editing"
+                    ng-click="save()"
+                    type="button"
+                    class="btn btn-primary">Gem</button>
+                <button
+                    ng-switch-when="editing"
+                    ng-click="cancel()"
+                    type="button"
+                    class="btn btn-info">Annuller</button>
+
+                <feather
+                    ng-switch-when="loading"
+                    class="btn btn-info small-icon spin"
+                    icon='loader'>
+                </feather>
+            </div>
+        </div>
+
+        <small class="form-text text-success" ng-if="successMessage">{{ successMessage }}</small>
+        <small class="form-text text-danger" ng-if="errorMessage">{{ errorMessage }}</small>
+    </div>
+</form>

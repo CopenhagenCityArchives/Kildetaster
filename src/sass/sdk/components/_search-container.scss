@@ -1,0 +1,42 @@
+.search-container {
+    & .ng-enter {
+        transition: opacity 150ms ease;
+
+        opacity: 0;
+        &.ng-enter-active {
+            opacity: 1;
+        }
+    }
+
+    & .ng-leave:not(.page-item) {
+        transition: opacity 150ms ease;
+
+        opacity: 1;
+        &.ng-leave-active {
+            opacity: 0;
+        }
+    }
+
+    &.ng-enter {
+        transition: opacity 400ms ease;
+
+        opacity: 0;
+        &.ng-enter-active {
+            opacity: 1;
+        }
+    }
+
+    &.searching {
+        transition: opacity 400ms ease;
+        opacity: 0.3;
+    }
+
+    & .page-item > .page-link {
+        margin: 0px;
+    }
+
+    & .page-item:not(.active) > .page-link:not(:hover) {
+        background-color: transparent !important;
+        border-color: transparent !important;
+    }   
+}

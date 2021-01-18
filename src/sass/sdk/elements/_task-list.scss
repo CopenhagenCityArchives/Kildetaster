@@ -1,0 +1,9 @@
+.task-list {
+    &_filter {
+        overflow: hidden;
+
+        width: 100%;
+
+        text-overflow: ellipsis;
+    }
+}

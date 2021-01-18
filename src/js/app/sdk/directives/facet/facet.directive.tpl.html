@@ -1,0 +1,16 @@
+<div class="facet list-group list-group-flush">
+    <button type="button" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+        ng-attr-id="facet-bucket-{{field.name}}-{{cleanBucketValueForId(bucket.val)}}"
+        ng-repeat="bucket in buckets | limitTo : bucketsLimit : 0"
+        ng-class="{active: isBucketInFilterQueries(facet, bucket)}"
+        ng-click="callAddFilter(facet, bucket)">
+        <span ng-if="facet.type == 'range'">{{bucket.val}}-{{bucket.val+facet.gap}}</span>
+        <span ng-if="facet.type == 'terms'">{{bucket.val}}</span>
+        <span class="badge badge-pill" ng-class="{'badge-primary': !isBucketInFilterQueries(facet, bucket), 'badge-secondary': isBucketInFilterQueries(facet, bucket)}">{{bucket.count}}</span>
+    </button>
+</div>
+
+<button type="button" class="list-group-item list-group-item-action list-group-item-secondary" ng-if="buckets.length > bucketsLimit" ng-click="increaseBucketsLimit()">
+    <feather icon='plus'></feather>
+    Vis flere<span class='sr-only'>filterværdier</span>
+</button>

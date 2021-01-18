@@ -1,0 +1,55 @@
+.sdk-icon {
+    display: inline-block;
+
+    width: 23px;
+    height: 23px;
+
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+
+    &.delete {
+        background-image: url("../images/icon_delete.svg");
+    }
+
+    &.report-error {
+        width: 26px;
+
+        background-image: url("../images/icon_report_error.svg");
+    }
+
+    &.close {
+        width: 10px;
+
+        opacity: 1; //overwrite default Joomla styling
+        background-image: url("../images/icon_close.svg");
+    }
+
+    &.close-dark {
+        width: 10px;
+
+        opacity: 1; //overwrite default Joomla styling
+        background-image: url("../images/icon_close_dark.svg");
+    }
+
+    &.pencil {
+        width: 10px;
+        height: 10px;
+
+        background-image: url("../images/icon_pencil.svg");
+    }
+
+    &.green-checkmark {
+        width: 39px;
+        height: 32px;
+
+        background-image: url("../images/icon_green_checkmark.svg");
+    }
+
+    &.arrow {
+        width: 12px;
+        height: 9px;
+
+        background-image: url("../images/icon_arrow.svg");
+    }
+}

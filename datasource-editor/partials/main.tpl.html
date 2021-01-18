@@ -1,0 +1,140 @@
+<div class="container" ng-if="!model.loginStatus">
+    <div class="col-md-4">
+        <p><span class="badge badge-warning">Du er IKKE logget ind</span></p>
+        <p>Du skal være superbruger og være logget ind for at kunne tilgå denne side. Klik <a target="_blank"
+                href="http://www.kbharkiv.dk/log-in">her</a> for at logge ind.</p>
+    </div>
+
+</div>
+<div class="container" ng-if="model.loginStatus">
+    <div class="row">
+        <div class="col-md-12">
+
+            <h2 class="text-center">Datalister</h2>
+            <p ng-if="model.loginStatus"><span class="badge badge-success">Du er logget ind</span></p>
+            <p>Her kan du oprette nye og rette eksisterende værdier i Københavns Stadsarkivs datalister.</p>
+            <p>Bemærk at listerne ved indtastning og rettelser opdateres med det samme. Ved visning af søgeresultater
+                opdateres værdierne efter et døgn.</p>
+            <p>Hvis du vil <b>slette</b> værdier skal du skrive til Jeppe på jeppec@kff.kk.dk</p>
+
+            <div class="separator">
+                <h4>Vælg liste</h4>
+                <form name="myForm">
+                    <select name="mySelect" id="mySelect" class="form-control"
+                        ng-options="option.name for option in model.datasources track by option.id"
+                        ng-model="model.selected_datasource"
+                        ng-disabled="model.datasources.length == 0">
+                    </select>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 separator">
+            <h3>Ret eksisterende værdier</h3>
+            <h4>Eksisterende værdi</h4>
+            <ui-select ng-model="model.selectedValue" theme="bootstrap"
+                ng-disabled="!model.selected_datasource.valueField" reset-search-input="true" style="width: 400px;"
+                title="Indtast en værdi">
+                <ui-select-match placeholder="Indtast en værdi">
+                    {{$select.selected[model.selected_datasource.valueField]}}
+                </ui-select-match>
+
+                <ui-select-choices repeat="address in model.values track by $index"
+                    refresh="getValuesByQuery($select.search)" refresh-delay="250" minimum-input-length="3">
+                    <div ng-bind-html="address[model.selected_datasource.valueField] | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select>
+            
+            <h4>Ny værdi</h4>
+            <input value="indtast værdi" ng-model="model.changeValue" class="form-control" style="width: 400px;"
+                ng-disabled="model.canCreateValue"></input>
+            <p ng-hide="model.canUpdateValue">Indtast en ny værdi for at gemme</p>
+            <p ng-hide="!model.canUpdateValue">Værdien
+                <b>{{model.selectedValue[model.selected_datasource.valueField]}}</b> vil blive ændret til
+                <b>{{model.changeValue}}</b></p>
+            <input type="button" value="Gem værdi" class="btn btn-default" ng-disabled="!model.canUpdateValue"
+                ng-click="save()"></input>
+        </div>
+
+
+        <div class="col-md-6 separator">
+            <h3>Opret nye værdier</h3>
+            <h4>Ny værdi</h4>
+            <input value="indtast værdi" ng-model="model.newValue" class="form-control" style="width: 400px;"
+                ng-disabled="model.canUpdateValue"></input>
+            <p ng-hide="model.canCreateValue">Indtast en ny værdi for at gemme</p>
+            <p ng-hide="!model.canCreateValue">Værdien <b>{{model.newValue}}</b> vil blive oprettet i listen</p>
+            <input type="button" value="Gem værdi" class="btn btn-default" ng-disabled="!model.canCreateValue"
+                ng-click="save()"></input>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 separator">
+            <h3>Lås side op</h3>
+            <div style="display: table;">
+                <p style="display:table-cell">
+                    <label for="side-id" style="display: table-cell;">Side-Id:</label>
+                    <input id="side-id" value="indtast side-id" ng-model="model.pageId" class="form-control"
+                        style="display: table-cell;"></input>
+                </p>
+                <p style="display:table-cell">
+                    <label for="task-id" style="display: table-cell;">Task-Id:</label>
+                    <input id="task-id" value="indtast task-id" ng-model="model.taskId" class="form-control"
+                        style="display: table-cell;"></input>
+                </p>
+            </div>
+            <p ng-hide="model.hasPageId">Indtast et side-id (<b>ikke</b> side-tal) og task-id for at låse en side op.
+                </br> Både Side-id'et og task-id'et findes i URL'en til siden.</p>
+            <p ng-hide="!model.hasPageId">Siden <b>{{model.pageId}}-{{model.taskId}}</b> vil blive låst op</p>
+            <input type="button" value="Lås side op" class="btn btn-default" ng-disabled="!model.hasPageId"
+                ng-click="unlockPage()"></input>
+        </div>
+    </div>
+
+    <!-- New Delete functionallity -->
+
+    <div class="row">
+        <div class="col-md-6 separator">
+            <h3>Slet Post</h3>
+
+            <h4>Post-id</h4>
+            <input value="indtast post-id" ng-model="model.deleteValue" class="form-control"
+                style="width: 400px;"></input>
+            <p>Indtast et post-id, som kan findes i URL'en i kildetasteren.</p>
+            <input type="button" value="Find post" class="btn btn-default" ng-disabled="!model.canDeletePost"
+                ng-click="getDelete()"></input>
+        </div>
+
+        <div ng-hide="model.foundPost==''" class="col-md-6 separator">
+            <p>Fornavn: {{model.foundPost.firstnames}}</p>
+            <p>Efternavn: {{model.foundPost.lastname}}</p>
+            <p>Født: {{model.foundPost.yearOfBirth}}</p>
+            <p>Død: {{model.foundPost.dateOfDeath}}</p>
+            <input type="button" value="SLET POST" class="btn btn-default" ng-disabled="!model.canDeletePost"
+                ng-click="delete()"></input>
+
+        </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <h4 ng-hide="model.status!==''" style="color:green;" class="text-center">&nbsp;</h4>
+            <h4 ng-hide="model.status==''"
+                ng-class="{status_success: model.statusType == 'success', status_error: model.statusType == 'error'}"
+                class="text-center">{{model.status}}</h4>
+            <p>&nbsp;</p>
+            <h4 class="text-center" ng-hide="model.history.length == 0">Historik</h4>
+            <div ng-repeat="x in model.history">
+                <div ng-if="x.deletedPost">Du slettede post med id: <b>{{x.deletedPost}}</b></div>
+                <div ng-if="x.pageId">Du låste siden <b>{{x.pageId}}-{{x.taskId}}</b> op</div>
+                <div ng-if="!x.oldValue && x.newValue">Du tilføjede værdien <b>{{x.newValue}}</b></div>
+                <div ng-if="x.oldValue && !x.newValue">Du ændrede værdien <b>{{x.oldValue}}</b> til
+                    <b>{{x.newValue}}</b></div>
+            </div>
+        </div>
+    </div>
+</div>

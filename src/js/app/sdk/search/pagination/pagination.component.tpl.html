@@ -1,0 +1,28 @@
+<nav class="nav-pagination" aria-label="{{ $ctrl.label }}">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" ng-class="{'disabled': $ctrl.currentPage === 0}" href ng-click="$ctrl.prev()">
+                <span class="sr-only">Tilbage</span>
+                <feather icon='arrow-left'></feather>
+            </a>
+        </li>
+        <li ng-if="$ctrl.currentPage > 2" class="page-item"><a class="page-link" href ng-click="$ctrl.goToPage(0)">1</a></li>
+        <li ng-if="$ctrl.currentPage > 2" class="page-item disabled">
+            <div class="page-link"> — </div>
+        </li>
+        <li class="page-item" ng-repeat="page in $ctrl.pagination"
+            ng-class="{ 'active': $ctrl.currentPage === page.page }">
+            <a class="page-link" href ng-click="$ctrl.goToPage(page.page)" ng-attr-aria-current="{{ $ctrl.currentPage == page.page ? 'page' : 'false' }}">{{ page.label | number }}</a>
+        </li>
+        <li ng-if="$ctrl.currentPage < $ctrl.total - 3" class="page-item disabled">
+            <div class="page-link"> — </div>
+        </li>
+        <li ng-if="$ctrl.currentPage < $ctrl.total - 3" class="page-item"><a class="page-link" href ng-click="$ctrl.goToPage($ctrl.total - 1)">{{ $ctrl.total | number }}</a></li>
+        <li class="page-item">
+            <a class="page-link" href ng-click="$ctrl.next()">
+                <span class="sr-only">Frem</span>
+                <feather icon='arrow-right'></feather>
+            </a>
+        </li>
+    </ul>
+</nav>

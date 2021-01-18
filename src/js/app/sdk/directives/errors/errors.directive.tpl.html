@@ -1,0 +1,107 @@
+
+<table class="table table-striped table-hover" ng-if="!loading && errorList.length > 0 && isSuperUser">
+    <thead>
+        <tr class="d-none d-md-table-row">
+            <th class="fit" scope="col">#</th>
+            <th scope="col">Kilde</th>
+            <th scope="col">
+                <div>Bruger</div>
+                <select class="task-list_filter" ng-model="filtered.username"
+                    ng-options="name as name for name in userList"
+                    ng-change="dropdownChanged('username', filtered.username)"
+                    aria-label="Filtrér fejl efter bruger">
+                    <option value="">Alle</option>
+                </select>
+            </th>
+            <th scope="col">
+                <div>Felter</div>
+                <select class="task-list_filter" ng-model="filtered.label"
+                    ng-options="field as field for field in fieldList"
+                    ng-change="dropdownChanged('label', filtered.label)"
+                    aria-label="Filtrér fejl efter felt">
+                    <option value="">Alle</option>
+                </select>
+            </th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr tabindex="0" ng-repeat="error in errorList | filter: selectedFilter" style="cursor: pointer;" ng-click="goToEditor(error)">
+            <td class="fit">
+                <div class="h5 d-md-none">#</div>
+                {{ $index + 1 }}
+            </td>
+            <td>
+                <div class="h5 d-md-none">Kilde</div>
+                {{error.unit_description}}
+            </td>
+            <td>
+                <div class="h5 d-md-none">Bruger</div>
+                {{error.username}}
+            </td>
+            <td>
+                <div class="h5 d-md-none">Felter</div>
+                {{error.label}}
+            </td>
+            <td>
+                <feather icon='arrow-right-circle'></feather>
+                <div ng-if="error.corrected">{{error.corrected.date}}</div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="table table-striped table-hover" ng-if="!loading && !isSuperUser && errorList.length > 0">
+    <caption class="sr-only">Mine fejlmeldinger</caption>
+    <thead>
+        <tr class="d-none d-md-table-row">
+            <th class="fit" scope="col">#</th>
+            <th scope="col">Kilde</th>
+            <th scope="col">Felt</th>
+            <th scope="col">Overgår til superbruger</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr tabindex="0" ng-repeat="error in errorList" style="cursor: pointer;" ng-click="goToEditor(error)">
+            <td class="fit">
+                <div class="h5 d-md-none">#</div>
+                {{ $index + 1 }}
+            </td>
+            <td>
+                <div class="h5 d-md-none">Kilde</div>
+                {{error.unit_description}}
+            </td>
+            <td>
+                <div class="h5 d-md-none">Felt</div>
+                {{error.label || error.entity_name_gui}}
+            </td>
+            <td>
+                <div class="h5 d-md-none">Overgår til superbruger</div>
+                <div ng-if="error.superUserTime">{{error.superUserTime | date:'dd-MM-yyyy HH:mm:ss'}}</div>
+            </td>
+            <td>
+                <feather icon='arrow-right-circle'></feather>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+
+<div ng-if="error" class="alert alert-danger text-center w-100">
+    <feather class="large-icon" aria-hidden="true" icon='alert-octagon'></feather>
+    <div class="h4">En fejl opstod</div>
+    <p class="small">Kunne ikke hente dine fejlmeldinger, prøv venligst igen senere.</p>
+</div>
+
+<div ng-if="loading" class="alert alert-info text-center w-100">
+    <feather class="large-icon spin" aria-hidden="true" icon='loader'></feather>
+    <div class="h4">Indlæser fejlmeldinger</div>
+</div>
+
+<div ng-if="!error && errorList.length == 0 && !loading" class="alert alert-info text-center w-100">
+    <feather class="large-icon" aria-hidden="true" icon='alert-octagon'></feather>
+    <div class="h4">Ingen fejlmeldinger</div>
+    <p class="small">Der er ingen der har fejlmeldt dine indtastninger.</p>
+    <a href="#" class="btn btn-primary">Meld en fejl</a>
+</div>

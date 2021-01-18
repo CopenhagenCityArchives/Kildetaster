@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <%= htmlWebpackPlugin.tags.headTags.filter(tag => tag.attributes.href.indexOf('datasource') != -1) %>
+    
+    <style>
+        .status_error{
+            color: red;
+        }
+    
+        .status_success{
+            color:green;
+        }
+    
+        .separator{
+            margin-top:30px;
+        }
+
+        .ui-select-match > span {
+            border: 1px solid lightgray !important;
+        }
+
+        ul.ui-select-choices {
+            display: block !important;
+        }
+    </style>
+</head>
+<body ng-app="APACSDatasourceEditor" ng-strict-di="true">
+    <div ng-view></div>
+    <%= htmlWebpackPlugin.tags.bodyTags.filter(tag => tag.attributes.src.indexOf('datasource') != -1) %>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!-- burials -->
+<td ng-if="type == 'burial'">
+    <h5 class="d-md-none">Navn</h5>
+    <h4>{{ data.firstnames }} {{ data.lastname }}<span ng-if="data.birthname">, født {{data.birthname}}</span></h4>
+
+    <text-date prefix="Født" date="data.dateOfBirth"></text-date>
+    <div ng-if="!data.dateOfBirth && data.ageYears && data.yearOfDeath">
+        <strong>Født:</strong> {{ data.yearOfDeath - data.ageYears }}
+    </div>    
+    <text-date prefix="Død" date="data.dateOfDeath"></text-date>
+    <text-age years="data.ageYears" months="data.ageMonth" weeks="data.ageWeeks" days="data.ageDays"
+        hours="data.ageHours"></text-age>
+    
+    <h6 ng-if="data.positions.length > 0" class="mt-3">Erhverv:</h6>
+    <text-position positions="data.positions"></text-position>
+</td>
+
+<td ng-if="type == 'burial'">
+    <h5 class="d-md-none">Adresse(r)</h5>
+    <text-address address="data.addresses"></text-address>
+
+    <span ng-if="data.adressOutsideCph">
+        {{data.adressOutsideCph}}
+    </span>
+</td>
+
+<td ng-if="type == 'burial'">
+    <h5 class="d-md-none">Andre oplysninger</h5>
+    <h6 ng-if="data.deathcauses.length > 0">Dødsårsag:</h6>
+    <ul ng-if="data.deathcauses.length > 0">
+        <li ng-repeat="deathcause in data.deathcauses">
+            {{ deathcause.deathcause }}
+        </li>
+    </ul>
+
+    <h6 ng-if="data.deathplace">Døds-/findested</h6>
+    <p ng-if="data.deathplace">{{data.deathplace}}</p>
+
+
+    <h6 ng-if="data.burials.parish">Sogn</h6>
+    <p ng-if="data.burials.parish">
+        {{data.burials.parish}}
+    </p>
+
+    <h6 ng-if="data.burials.cemetary">Kirkegård</h6>
+    <p ng-if="data.burials.cemetary">
+        {{data.burials.cemetary}}
+    </p>
+</td>
+
+<td ng-if="type == 'burial'">
+    <h5 class="d-md-none">Kilde</h5>
+    <h6>Begravelsesprotokol</h6>
+    <p>{{data.unit_description}} s. {{data.page_number}}, lb. nr. {{data.burials.number}}</p>
+
+    <a aria-hidden="true" tabindex="-1" ui-sref="search.page.result.post({postId: result.id})" class="stretched-link"></a>
+</td>
+
+<!-- efterretning -->
+<td ng-if="type == 'efterretning'">
+    <h5 class="d-md-none">Navn</h5>
+</td>
+
+<td ng-if="type == 'efterretning'">
+    <h5 class="d-md-none">Adresse(r)</h5>
+</td>
+
+<td ng-if="type == 'efterretning'">
+    <h5 class="d-md-none">Andre oplysninger</h5>
+    <h6 ng-if="highlighting.erindring_document_text">Fundet i kontekst</h6>
+    <p ng-repeat="highlight in highlighting.erindring_document_text | limitTo: 2">
+        &hellip;<span ng-bind-html="highlight"></span>&hellip;
+    </p>
+</td>
+
+<td ng-if="type == 'efterretning'">
+    <h5 class="d-md-none">Kilde</h5>
+        <h5>Politiets Efterretninger</h6>
+        <p>Nr {{ data.number }}, {{ $ctrl.formatDate(data.date) }}</p>
+    </div>
+    <a aria-hidden="true" tabindex="-1" ui-sref="search.page.result.post({postId: result.id})" class="stretched-link"></a>
+</td>
+
+
+<!-- police -->
+<td ng-if="type == 'police'">
+    <h5 class="d-md-none">Navn</h5>
+    <h4>{{ data.firstnames }} {{ data.lastname }}<span ng-if="data.birthname">, født {{data.birthname}}</span></h4>
+    <h6>Persontype</h6>
+    <p>{{ data.person_type_text }}</p>
+    <span ng-if="data.birthplace"><strong>Fødested:</strong> {{data.birthplace}}</span>
+    <text-date prefix="Født" date="data.dateOfBirth"></text-date>
+  
+    <h6 ng-if="data.positions.length > 0" class="mt-3">Erhverv:</h6>
+    <text-position positions="data.positions"></text-position>
+</td>
+<td ng-if="type == 'police'">
+    <h5 class="d-md-none">Adresse(r)</h5>
+    <ul ng-if="data.addresses.length > 0">
+        <li ng-repeat="address in data.addresses |limitTo:5">
+            <text-address ng-if="!address.frameldt" address="address" date="false">
+            </text-address>
+            <span class="text-muted" ng-if="address.frameldt">Frameldt</span>
+        </li>
+    </ul>
+</td>
+<td ng-if="type == 'police'">
+    <h5 class="d-md-none">Andre oplysninger</h5>
+    <h6 ng-if="data.spouses.length > 0">Ægtefælle</h6>
+    <ul ng-if="data.spouses.length > 0">
+        <li ng-repeat="spouse in data.spouses">
+            {{ spouse.firstnames }} {{ spouse.lastname }}
+        </li>
+    </ul>
+
+    <h6 ng-if="data.children.length > 0">Børn</h6>
+    <ul ng-if="data.children.length > 0">
+        <li ng-repeat="child in data.children">
+            {{ child.firstnames }} {{ child.lastname }}
+        </li>
+    </ul>
+
+    <h6 ng-if="data.parent">Forælder</h6>
+    <p ng-if="data.parent">
+        {{ data.parent.firstnames }} {{ data.parent.lastname }}
+    </p>
+</td>
+<td ng-if="type == 'police'">
+    <h5 class="d-md-none">Kilde</h5>
+    <h6>Politiets Registerblade</h6>
+    <p>Station {{ data.station }}, filmrulle {{ data.film }} nr {{ data.number }}</p>
+    <a aria-hidden="true" tabindex="-1" ui-sref="search.page.result.post({postId: result.id})" class="stretched-link"></a>
+</td>
+
+
+<!-- erindring -->
+<td ng-if="type == 'erindring'">
+    <h5 class="d-md-none">Navn</h5>
+    <h4>{{ data.firstnames }} {{ data.lastname }}</h4>
+    <p>Født {{ data.yearOfBirth }}</p>
+    <p ng-if="data.description">
+        {{data.description | limitTo: 160}}{{data.description.length > 200 ? '&hellip;' : ''}}</p>
+</td>
+<td ng-if="type == 'erindring'">
+    <h5 class="d-md-none">Adresse(r)</h5>
+</td>
+<td ng-if="type == 'erindring'">
+    <h5 class="d-md-none">Andre oplysninger</h5>
+    <h6 ng-if="highlighting.erindring_document_text">Fundet i kontekst</h6>
+    <p ng-repeat="highlight in highlighting.erindring_document_text | limitTo: 2">
+        &hellip;<span ng-bind-html="highlight"></span>&hellip;
+    </p>
+</td>
+<td ng-if="type == 'erindring'">
+    <h5 class="d-md-none">Kilde</h5>
+    <h6>Erindringer</h6>
+    <p>Nr {{data.erindring_number}}
+        <span ng-if="data.collectedYear">, afleveret til arkivet i {{data.collectedYear}}</span>
+        <span ng-if="data.writtenYear">, modtaget i {{data.writtenYear}}</span>
+        <span ng-if="data.extent">, omfanger {{data.extent}}</span>
+        <span ng-if="data.writeMethod">, {{data.writeMethod}}</span>
+        <span ng-if="data.containsPhotos">, indeholder fotos</span>
+    </p>
+    <a aria-hidden="true" tabindex="-1" ui-sref="search.page.result.post({postId: result.id})" class="stretched-link"></a>
+</td>
+
+
+<!-- school -->
+<td ng-if="type == 'school'">
+    <h5 class="d-md-none">Navn</h5>
+    <h4>{{ data.firstnames }} {{ data.lastname }}</h4>
+    <text-date prefix="Født" date="data.dateOfBirth"></text-date>
+    <text-age years="data.ageYears"></text-age>
+</td>
+<td ng-if="type == 'school'">
+    <h5 class="d-md-none">Adresse(r)</h5>
+</td>
+<td ng-if="type == 'school'">
+    <h5 class="d-md-none">Andre oplysninger</h5>
+    <h6 ng-if="!data.dateOfEntry && data.collected_year">Indskrivningsår</h6>
+    <p ng-if="!data.dateOfEntry && data.collected_year">{{data.collected_year}}</p>
+    <h6 ng-if="data.dateOfEntry">Indskrivningsdato</h6>
+    <p ng-if="data.dateOfEntry">{{ $ctrl.formatDate(data.dateOfEntry) }}</p>
+</td>
+<td ng-if="type == 'school'">
+    <h5 class="d-md-none">Kilde</h5>
+    <h6>Skoleprotokoller</h6>
+    <p>{{data.unit_description}} s. {{ data.page_number }}</p>
+    <a aria-hidden="true" tabindex="-1" ui-sref="search.page.result.post({postId: result.id})" class="stretched-link"></a>
+</td>
+
+<!-- fallback -->
+<td ng-if="!type">
+    n/a
+</td>
+<td ng-if="!type">
+    n/a
+</td>
+<td ng-if="!type">
+    n/a
+</td>
+<td ng-if="!type">
+    n/a
+</td>

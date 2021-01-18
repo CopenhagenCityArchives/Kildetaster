@@ -1,0 +1,246 @@
+<div id="post-content" class="container-fluid post">
+
+    <div class="clearfix"></div>
+    <section class="row">
+        <div class="col-lg-6">
+            <h4 id="data-personen">Personen</h4>
+            <table class="table-responsive d-sm-table table-striped mb-5" aria-labelledby="data-personen">
+                <caption class="sr-only">Data om personen</caption>
+                <tbody>
+                    <tr ng-if="data.dateOfBirth">
+                        <th scope="row">
+                            Født
+                        </th>
+                        <td>
+                            {{data.dateOfBirth | date:'dd-MM-yyyy' }}
+                        </td>
+                    </tr>
+                    <tr ng-if="!data.dateOfBirth && isNumber(data.yearOfBirth)">
+                        <th scope="row">
+                            Anslået fødselsår
+                        </th>
+                        <td>
+                            {{data.yearOfBirth}}
+                        </td>
+                    </tr>
+                    <tr ng-if="data.birthplace">   
+                        <th scope="row">
+                            Fødested
+                        </th>
+                        <td>
+                            {{data.birthplace}} <span ng-if="data.birthplace_free">({{data.birthplace_free}}) </span>
+                        </td>
+                    </tr>
+                    <tr ng-if="data.dateOfDeath">
+                        <th scope="row">
+                            Død
+                        </th>
+                        <td>
+                            <text-date prefix="" date="data.dateOfDeath"></text-date>
+                        </td>
+                    </tr>
+                    <tr ng-if="data.dateOfDeath">
+                        <th scope="row">
+                            Alder
+                        </th>
+                        <td>
+                            <text-age prefix="" years="data.ageYears" months="data.ageMonth"
+                            weeks="data.ageWeeks" days="data.ageDays" hours="data.ageHours">
+                        </td>
+                    </tr>
+                    <tr ng-if="data.sex">
+                        <th scope="row">
+                            Køn
+                        </th>
+                        <td>
+                            {{ data.sex }}
+                        </td>
+                    </tr>
+                    <tr ng-if="data.civilstatus">
+                        <th scope="row">
+                            Civilstand
+                        </th>
+                        <td>
+                            {{ data.civilstatus }}
+                        </td>
+                    </tr>
+                    <tr ng-if="data.positions">
+                        <th scope="row">
+                            Erhverv
+                        </th>
+                        <td>
+                            <text-position positions="data.positions"></text-position>
+                        </td>
+                    </tr>
+                    <tr ng-if="data.adressOutsideCph">
+                        <th scope="row">
+                            Adresse
+                        </th>
+                        <td>
+                            {{data.adressOutsideCph}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            Adresse
+                        </th>
+                        <td>
+                            <text-address address="data.addresses"></text-address>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            Permalink
+                        </th>
+                        <td>
+                            <span id="permalink" class="mr-2">
+                                {{permalink}}
+                            </span>
+                            <button ng-attr-id="permalink_btn" ng-click="$ctrl.copy();" class="btn btn-primary btn-sm float-right" ng-attr-data-clipboard-target="#permalink">Kopier <span class="sr-only"> permalink</span></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table class="table-responsive d-sm-table table-striped mb-5" aria-labelledby="data-dødsfaldet/begravelsen">
+                <h4 id="data-dødsfaldet/begravelsen">Om dødsfaldet/begravelsen</h4>
+                <caption class="sr-only">Data om dødsfaldet/begravelsen</caption>
+                <tbody>
+                    <tr ng-if="data.deathcauses">
+                        <th scope="col">Dødsårsager</th>
+                        <td>
+                            <span ng-repeat="deathcause in data.deathcauses">{{deathcause.deathcause}}<span ng-if="!$last">, </span></span>
+                        </td>
+                    </tr>
+
+                    <tr ng-if="data.deathplace">
+                        <th scope="row">
+                            Døds-/findested
+                        </th>
+                        <td>
+                            {{data.deathplace}}
+                        </td>
+                    </tr>
+                    <tr ng-if="data.burials.chapel">
+                        <th scope="row">
+                            Fra (kapel)
+                        </th>
+                        <td>
+                            {{data.burials.chapel}}
+                        </td>
+                    </tr>
+                    <tr ng-if="data.burials.parish">
+                        <th scope="row">
+                            Sogn
+                        </th>
+                        <td>
+                            {{data.burials.parish}}
+                        </td>
+                    </tr>
+                    <tr ng-if="data.burials.cemetary">
+                        <th scope="row">
+                            Til (kirkegård)
+                        </th>
+                        <td>
+                            {{data.burials.cemetary}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <table ng-if="data.comment" class="table-responsive d-sm-table table-striped mb-5" aria-labelledby="Kommentar">
+                <caption class="sr-only">Data om postens kommentar</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Kommentar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td  ng-bind-html="data.comment | linky:_blank">
+                            {{data.comment}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            <div ng-if="that.postErrors.length > 0">
+                <div>
+                    <p>
+                        <strong>Denne post er fejlmeldt</strong>
+                        <a href ng-click="$ctrl.toggleErrorReports()"> Læs mere</a>
+                    </p>
+                </div>
+
+                <table class="table-responsive d-sm-table table-striped table-hower mb-5" aria-labelledby="fejl-meldinger" ng-if="$ctrl.showErrorReports">
+                    <caption class="sr-only">Liste over fejl-meldinger</caption>
+                    <tbody>
+                        <tr scope="row" ng-repeat="error in that.postErrors">
+                            <th>
+                                {{ error.label || 'Ukendt felt' }}
+                            </th>
+                            <td> 
+                                {{error.comment}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <a href ng-click="$ctrl.showErrorReports = !$ctrl.showErrorReports">
+                    <span><feather class="medium-icon" icon='flag'></feather> Rapporter fejl</span>
+                </a>
+            </div>
+
+            <div class="mt-4" ng-show="$ctrl.showErrorReports">
+                <report-error data="data" refresh="$ctrl.refreshErrorReports">
+                </report-error>
+            </div>
+            
+        </div>
+
+        <div class="col-lg-6 order-first order-lg-last">
+            <h4>Kilden</h4>
+            <div class="card text-white mb-3">
+                <div class="card-body">
+                    <gallery images='images'></gallery>
+
+                    <div class="row">
+                        <div class="col" ng-if="data.kildeviser_url">
+                            <a ng-href="{{data.kildeviser_url}}" target="_blank" class="btn btn-post btn-lg btn-block">Vis i kildeviser</a>
+                        </div>
+
+                        <div class="col" ng-if="showEditorLink" >
+                            <a ng-href="{{editorUrl}}" target="_blank" class="btn btn-post btn-lg btn-block">Vis i kildetaster</a>
+                        </div>
+                    </div>
+        
+                    <h5>Om kilden</h5>
+                    <p>{{ data.collection_info }} {{ data.unit_description }} s. {{ data.page_number }}</p>
+        
+                    <div class="row">
+                        <div class="col" ng-if="data.created">
+                            <h6>Indtastet</h6>
+                            <p>{{ data.created | date: 'dd-MM-yyyy HH:mm:ss' }} af {{ data.user_name }}</p>
+                        </div>
+
+                        <div class="col" ng-if="data.last_update_user_name">
+                            <h6>Opdateret</h6>
+                            <p><span ng-if="data.updated">{{ data.updated | date: 'dd-MM-yyyy HH:mm:ss' }} </span> af {{ data.last_update_user_name }}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <h6>Løbenr.</h6>
+                            <p ng-if="data.burials.number">{{ data.burials.number }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>

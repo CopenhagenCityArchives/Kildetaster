@@ -1,0 +1,165 @@
+<div id="post-content" class="container-fluid post">
+
+    <div class="clearfix"></div>
+
+    <section class="row">
+
+        <div class="col-lg-6">
+            <h4>Personen</h4>
+            <table class="table-responsive d-sm-table table-striped mb-5" aria-labelledby="data-erindringen">
+                <caption class="sr-only">Data om erindringen</caption>
+                <tbody>
+                    <tr ng-if="data.period">
+                        <th scope="row">
+                            Omhandler årene
+                        </th>
+                        <td>
+                            {{data.period}}
+                        </td>
+                    </tr>
+                    <tr ng-if="data.yearOfBirth">
+                        <th scope="row">
+                            Født
+                        </th>
+                        <td>
+                            {{data.yearOfBirth}}
+                            {{data.dateOfBirth | date:'dd-MM-yyyy'}}
+                        </td>
+                    </tr>
+                    <tr ng-if="data.sex">
+                        <th scope="row">
+                            Køn
+                        </th>
+                        <td>
+                            {{data.sex}}
+                        </td>
+                    </tr>
+                    <tr ng-if="data.civilstatus">
+                        <th scope="row">
+                            Civilstatus
+                        </th>
+                        <td>
+                            {{data.civilstatus}}
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">
+                            Permalink
+                        </th>
+                        <td>
+                            <span id="permalink" class="mr-2">
+                                {{permalink}}
+                            </span>
+                            <button ng-attr-id="permalink_btn" ng-click="$ctrl.copy();" class="btn btn-primary btn-sm float-right" ng-attr-data-clipboard-target="#permalink">Kopier <span class="sr-only"> permalink</span></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 id="data-erhverv" ng-if="data.position || data.position_parent || data.position_spouse"0>Erhverv</h4>
+            <table class="table-responsive d-sm-table table-striped mb-5" aria-labelledby="data-erhverv" ng-if="data.position || data.position_parent || data.position_spouse" >
+                <caption class="sr-only">Data om Erhverv</caption>
+                 <tbody>
+                    <tr ng-if="data.position">
+                        <th>
+                            Erhverv
+                        </th>
+                        <td>
+                            {{data.position}}
+                        </td>
+                    </tr>
+                    <tr ng-if="data.position_parent">
+                        <th>
+                            Forældres erhverv
+                        </th>
+                        <td>
+                            {{data.position_parent}}
+                        </td>
+                    </tr>
+                    <tr ng-if="data.position_spouse">
+                        <th>
+                            Ægtefælles erhverv
+                        </th>
+                        <td>
+                            {{data.position_spouse}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4 id="data-sogekontekst" ng-if="data.highlighting.erindring_document_text">Søgekontekst</h4>
+            <table role="list" class="table-responsive d-sm-table table-striped mb-5" aria-labelledby="data-sogekontekst" ng-if="data.highlighting.erindring_document_text">
+                <caption class="sr-only">Teksten markeret med fed er det eller de ord, søgemaskinen har fundet</caption>
+                <tbody>
+                    <tr ng-repeat="highlight in data.highlighting.erindring_document_text">
+                        <td role="listitem">
+                            &hellip;<span ng-bind-html="highlight"></span>&hellip;
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div ng-if="data.keywords && data.keywords.length > 0">
+                <h4 id="data-erindringen-omhandler">Erindringen omhandler</h4>
+                <table role="list" class="table-responsive d-sm-table table-striped mb-5" aria-labelledby="Erindringen omhandler">
+                    <caption class="sr-only">Erindringen omhandler</caption>
+                    <tbody>
+                        <tr>
+                            <td role="listitem">
+                                <p><span ng-repeat="keyword in data.keywords track by $index">{{keyword}}{{ $last ? '' : ', ' }}</span></p>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div ng-if="data.description">
+                <h4 id="data-beskrivelse">Beskrivelse</h4>
+                <p>
+                    {{data.description}}
+
+                </p>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <h4>Kilden</h4>
+                <div class="card text-white mb-3">
+                    <div class="card-body d-block w-100">
+                        <div class="row">
+                            <div class="col">
+                                <a ng-href="{{$ctrl.getAssetHref()}}" target="_blank" class="btn btn-block btn-post">Hent erindring som pdf</a>
+                                <a ng-if="data.transcribed" ng-href="{{$ctrl.getTranscribedAssetHref()}}" target="_blank" class="btn btn-block btn-post">Renskrift</a>
+                            </div>
+                        </div>
+
+                        <h5>Om kilden</h5>
+                        <div class="row">
+                            <div class="col">
+                                <h6>Omfang</h6>
+                                <p>{{data.extent}}</p>
+                            </div>
+                            
+                            <div class="col" ng-if="data.writeMethod">
+                                <h6>Metode</h6>
+                                <p>{{data.writeMethod}}</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <h6>Afleveret i arkivet</h6>
+                                <p>{{data.collectedYear}}</p>
+                            </div>
+                            <div class="col">
+                                <h6>nr.</h6>
+                                <p>{{data.erindring_number}}</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+        </div>
+
+    </section>
+</div>
