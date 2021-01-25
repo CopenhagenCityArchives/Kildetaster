@@ -1,7 +1,6 @@
 <div id="post-content" class="container-fluid post">
 
     <div class="clearfix"></div>
-
     <section class="row">
 
         <div class="col-lg-6">
@@ -117,48 +116,62 @@
                 <h4 id="data-beskrivelse">Beskrivelse</h4>
                 <p>
                     {{data.description}}
-
                 </p>
             </div>
         </div>
 
         <div class="col-lg-6">
             <h4>Kilden</h4>
-                <div class="card text-white mb-3">
-                    <div class="card-body d-block w-100">
-                        <div class="row">
-                            <div class="col">
-                                <a ng-href="{{$ctrl.getAssetHref()}}" target="_blank" class="btn btn-block btn-post">Hent erindring som pdf</a>
-                                <a ng-if="data.transcribed" ng-href="{{$ctrl.getTranscribedAssetHref()}}" target="_blank" class="btn btn-block btn-post">Renskrift</a>
-                            </div>
+            <div class="card text-white mb-3">
+                <div ng-switch on ="fileExtension" class="card-body d-block w-100">
+                    <div ng-switch-when='mp4' class="row">
+                        <div class="col">
+                            <video width="100%" height="100%" controls>
+                                <source src="{{$ctrl.getAssetHref()}}" type="video/mp4">
+                            </video>
                         </div>
-
-                        <h5>Om kilden</h5>
-                        <div class="row">
-                            <div class="col">
-                                <h6>Omfang</h6>
-                                <p>{{data.extent}}</p>
-                            </div>
-                            
-                            <div class="col" ng-if="data.writeMethod">
-                                <h6>Metode</h6>
-                                <p>{{data.writeMethod}}</p>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <h6>Afleveret i arkivet</h6>
-                                <p>{{data.collectedYear}}</p>
-                            </div>
-                            <div class="col">
-                                <h6>nr.</h6>
-                                <p>{{data.erindring_number}}</p>
-                            </div>
-                        </div>
-
                     </div>
+                    <div ng-switch-when='mp3' class="row">
+                        <div class="col">
+                            <audio style="width: 100%;" controls>
+                                <source src="{{$ctrl.getAssetHref()}}" type="audio/mp3">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                    </div>
+                    <div ng-switch-default class="row">
+                        <div class="col">
+                            <a ng-href="{{$ctrl.getAssetHref()}}" target="_blank" class="btn btn-block btn-post">Hent erindring som pdf</a>
+                            <a ng-if="data.transcribed" ng-href="{{$ctrl.getTranscribedAssetHref()}}" target="_blank" class="btn btn-block btn-post">Renskrift</a>
+                        </div>
+                    </div>
+
+                    <h5>Om kilden</h5>
+                    <div class="row">
+                        <div class="col">
+                            <h6>Omfang</h6>
+                            <p>{{data.extent}}</p>
+                        </div>
+                        
+                        <div class="col" ng-if="data.writeMethod">
+                            <h6>Metode</h6>
+                            <p>{{data.writeMethod}}</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <h6>Afleveret i arkivet</h6>
+                            <p>{{data.collectedYear}}</p>
+                        </div>
+                        <div class="col">
+                            <h6>nr.</h6>
+                            <p>{{data.erindring_number}}</p>
+                        </div>
+                    </div>
+
                 </div>
+            </div>
         </div>
 
     </section>
