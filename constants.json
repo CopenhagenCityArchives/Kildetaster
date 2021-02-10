@@ -37,6 +37,25 @@
       "TYPEAHEAD_MAX": 75
     }
   },
+  "beta": {
+    "constants": {
+      "EDITOR_URL": "https://static.kbharkiv.dk/kildetaster-beta/editor/",
+      "CALLBACK_URL": "https://static.kbharkiv.dk/kildetaster-beta/callback/",
+      "RESOURCE_URL": "https://static.kbharkiv.dk/kildetaster-beta/",
+      "API_URL": "https://apacs-dev-jens2.eba-6is4ehyu.eu-west-1.elasticbeanstalk.com/",
+      "SOLR_API_URL": "http://apacs-dev-jens2.eba-6is4ehyu.eu-west-1.elasticbeanstalk.com:8989/solr/apacs_core/select",
+      "SEARCH_CONFIG_URL": "https://apacs-dev-jens2.eba-6is4ehyu.eu-west-1.elasticbeanstalk.com/searchconfig",
+      "ERROR_REPORT_CONFIG_URL": "https://apacs-dev-jens2.eba-6is4ehyu.eu-west-1.elasticbeanstalk.com/errorreportconfig",
+      "MAIN_DOMAIN": "https://www.kbharkiv.dk",
+      "ERROR_URL": "https://www.kbharkiv.dk",
+      "PERMALINK_URL": "https://kbharkiv.dk/permalink",
+      "AUTH0_CLIENTID": "uNrqzxblFnPrzQWpqMMBiB8h0VppBesM",
+      "AUTH0_DOMAIN": "login.kbharkiv.dk",
+      "AUTH0_AUDIENCE": "https://www.kbhkilder.dk/api",
+      "ANALYTICS_ACCOUNT": "UA-45125468-1",
+      "TYPEAHEAD_MAX": 75
+    }
+  },
   "development": {
     "constants": {
       "EDITOR_URL": "https://kildetaster.kbharkiv.dk",
