@@ -20,12 +20,12 @@ define([
             formElement.unreadable = !formElement.unreadable;
         };
 
-        $scope.getData = function getData(datasource, term, propertyName) {
+        $scope.getData = function getData(codeAllowNewValue, datasource_id, term, propertyName) {
 
             $scope.options = [];
 
             //If we do not get any datasourece or a term to search for, do nothing
-            if (!datasource || !term) {
+            if (!datasource_id || !term) {
                 //Just return an empty array
                 return [];
             }
@@ -36,10 +36,7 @@ define([
 
             //Indicate that we are about to load new options
             $scope.loading = true;
-            var datasourceUrl = datasource + encodeURIComponent(term);
-            if (!datasourceUrl.startsWith('http')) {
-                datasourceUrl = API_URL + '/' + datasourceUrl;
-            }
+            var datasourceUrl = API_URL + '/datasource/' + datasource_id + '/?q=' + encodeURIComponent(term);
             return $http({
                 url: datasourceUrl,
                 method: 'GET',
@@ -52,6 +49,12 @@ define([
 
                 //Only show a set number of hits
                 $scope.options = arr.slice(0, TYPEAHEAD_MAX);
+
+                // If new values are allowed and the term is not exactly any existing option,
+                // push it onto the options array
+                if (codeAllowNewValue && $scope.options.filter(function(val) { return val == term }).length == 0) {
+                    $scope.options.unshift(term)
+                }
 
             }).finally(function() {
                 //Done loading
