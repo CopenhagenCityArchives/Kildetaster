@@ -95,7 +95,7 @@
 
                         <a tabindex="-1" href ng-click="toggleEditExistingValue(field.toggleKey)">
                             <span class="summary-item">
-                                <span class="summary-item__label">{{field.schema.properties[field.realKey].title}}</span>
+                                <span class="summary-item__label">{{field.schema.title}}</span>
                                 <span class="summary-item__field">{{lookupFieldValue(field.key)}}
                                     <span class="icon icon__edit"></span>
                                  </span>
@@ -109,9 +109,6 @@
                             </div>
 
                             <div class="col-sm-12 text-right">
-                                <button ng-if="lookupFieldValue(field.key) && field.schema.isRequired !== 1" tabindex="1" title="Sletter værdien og feltet" type="button" class="btn btn-default" ng-click="removeFieldValue(field.key)">
-                                    {{TEXT.BUTTON.DELETE}}
-                                </button>
                                 <button type="button" class="btn btn-default" ng-click="closeEditField()">
                                     {{TEXT.BUTTON.OK}}
                                 </button>
