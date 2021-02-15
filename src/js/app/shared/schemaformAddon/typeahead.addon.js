@@ -20,12 +20,12 @@ define([
             formElement.unreadable = !formElement.unreadable;
         };
 
-        $scope.getData = function getData(codeAllowNewValue, datasource_id, term, propertyName) {
+        $scope.getData = function getData(codeAllowNewValue, datasources_id, term, propertyName) {
 
             $scope.options = [];
 
             //If we do not get any datasourece or a term to search for, do nothing
-            if (!datasource_id || !term) {
+            if (!datasources_id || !term) {
                 //Just return an empty array
                 return [];
             }
@@ -36,7 +36,7 @@ define([
 
             //Indicate that we are about to load new options
             $scope.loading = true;
-            var datasourceUrl = API_URL + '/datasource/' + datasource_id + '/?q=' + encodeURIComponent(term);
+            var datasourceUrl = API_URL + '/datasource/' + datasources_id + '/?q=' + encodeURIComponent(term);
             return $http({
                 url: datasourceUrl,
                 method: 'GET',

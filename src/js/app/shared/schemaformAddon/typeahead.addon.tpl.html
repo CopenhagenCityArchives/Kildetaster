@@ -19,7 +19,7 @@
         <!-- minimum-input-length is set to 0, and is handled in the getData function instead, if we let ui-select
             handle the limit, it will not clear/reset the options correctly -->
         <ui-select-choices
-            repeat="option in options track by $index" refresh="getData(form.schema.codeAllowNewValue === 1, form.schema.datasource_id, $select.search, form.schema.datasourceValueField)"
+            repeat="option in options track by $index" refresh="getData(form.schema.codeAllowNewValue === 1, form.schema.datasources_id, $select.search, form.schema.datasourceValueField)"
             refresh-delay="0"
             minimum-input-length="2">
             <div ng-bind-html="option | highlight: $select.search"></div>
