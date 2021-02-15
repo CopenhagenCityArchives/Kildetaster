@@ -29,8 +29,6 @@ define([
     './search.controller',
     './search.results.controller',
 
-    '../directives/datapost-erindring.directive',
-
     '../directives/postfield.directive',
     '../directives/postCategory.directive',
     '../directives/zoom-image.directive',
@@ -106,8 +104,6 @@ define([
 
     searchController,
     searchResultsController,
-
-    datapostErindringDirective,
 
     postfieldDirective,
     postCategoryDirective,
@@ -185,9 +181,6 @@ define([
 
     searchApp.controller('searchController', searchController);
     searchApp.controller('searchResultsController', searchResultsController);
-
-    // TODO remove when new version is done
-    searchApp.directive('datapostErindring', datapostErindringDirective);
 
     searchApp.directive('postField', postfieldDirective);
     searchApp.directive('postCategory', postCategoryDirective);
