@@ -13,7 +13,7 @@ define([
 
             scope: {
                 current: '=',
-                total: '=',
+                steps: '=',
                 goToStep: '=',
                 disabled: '='
             },
@@ -21,11 +21,6 @@ define([
             template: require('./stepIndicator.directive.tpl.html'),
             
             link: function(scope, element, attrs) {
-
-                scope.steps = function(total) {
-                    return new Array(total);
-                };
-
                 scope.isCurrent = function(index) {
                     return (index + 1) === scope.current;
                 };

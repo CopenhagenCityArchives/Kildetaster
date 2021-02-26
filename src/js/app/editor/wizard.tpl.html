@@ -1,12 +1,11 @@
-<step-indicator total="numSteps" current="currentStep" go-to-step="goToStep" disabled="entrySaved"></step-indicator>
+<step-indicator steps="steps" current="currentStep" go-to-step="goToStep" disabled="entrySaved"></step-indicator>
 
 <section handle-steps prev="prevStep" next="nextStep" ng-init="init()">
 
     <div class="row" ng-show="!isResult()">
 
         <div class="col-sm-12">
-            <h2>{{currentStepData.name}}</h2>
-            <p>{{currentStepData.description}}</p>
+            <h2>{{currentStepData.description}}</h2>
 
             <form id="step-form" name="stepForm" sf-schema="schema" sf-form="currentStepData.fields" sf-model="values" sf-options="sfDefaults"></form>
 
@@ -116,7 +115,7 @@
                         </div>
                     </span>
 
-                    <ul class="list-unstyled field-list__sublist" ng-if="field.schema.type== 'array'">
+                    <ul class="list-unstyled field-list__sublist" ng-if="field.schema.type == 'array'">
 
                         <li>
                             <a href tabindex="-1" ng-click="toggleEditExistingValue(field.toggleKey)">

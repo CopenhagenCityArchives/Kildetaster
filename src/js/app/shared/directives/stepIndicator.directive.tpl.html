@@ -4,7 +4,7 @@
         class="step-indicator__item"
         ng-click="go($index + 1)"
         ng-class="{ filled: hasPrevious($index), current: isCurrent($index)}" 
-        ng-repeat="step in steps(total) track by $index">
-        {{$index + 1}}
+        ng-repeat="step in steps track by $index">
+        {{step.name ? step.name : $index + 1}}
     </a>
 </div>

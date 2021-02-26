@@ -8,11 +8,6 @@ define([
         return {
 
             getData: function getData(taskId) {
-
-                var resultStep = {
-                    "title": "Udfyldt"
-                };
-
                 var jsonSource = API_URL + '/taskschema/';
 
                 return $http({
@@ -21,14 +16,13 @@ define([
                         task_id: taskId
                     }
                 })
-
                 .then(function(response) {
-
-                    response.data.steps.push(resultStep);
-
+                    // If any step contains a name property, add the last step with a name
+                    response.data.steps.push(response.data.steps.filter(function(step) {
+                        return step.name
+                    }).length == 0 ? { } : { name: 'Gem' });
                     return response.data;
                 })
-
                 .catch(function(err) {
                     Flash.create('danger', 'stepService:getData: Could not get step data');
                     return [];
