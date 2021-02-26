@@ -156,7 +156,7 @@ var updateFieldsController = ['$uibModal', '$rootScope', '$scope', '$state', '$t
         if (!field.isEditing) {
             // Toggle on: If the field is not being edited, set the edit status and copy the value from
             // the model with a deep copy into the temporary edit values.
-            field.editValue = getValue(angular.isString(field.key) ? field.key.split('.') : field.key, $scope.values, true)
+            field.editValue = angular.copy(getValue(angular.isString(field.key) ? field.key.split('.') : field.key, $scope.values, true))
             field.isEditing = true;
         } else {
             // Toggle off: If the field is being edited, set is as not being edited, and delete the temporary 
