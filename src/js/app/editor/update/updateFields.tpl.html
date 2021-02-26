@@ -43,30 +43,30 @@
             <ul class="list-unstyled field-list" ng-repeat="field in summaryFields">
 
                 <li class="field-list__item" ng-if="field.schema.type === 'string' || field.schema.type === 'number' || field.schema.type === 'date'">
-                    <a tabindex="0" href class="no-underline" ng-click="toggleEditExistingValue(field.key, values[mainProperty].id)">
+                    <a tabindex="0" href class="no-underline" ng-click="toggleEdit(field)">
                         <span class="summary-item">
                             <span class="summary-item__label">{{field.schema.title}}</span>
-                            <span class="summary-item__field">{{lookupFieldValue(field.key)}}
+                            <span class="summary-item__field">{{lookupFieldValue(field)}}
                                 <span class="icon icon__edit" ng-if="hasErrorReported[field.key].deleted !== 0"></span>
                              </span>
                         </span>
                     </a>
 
-                    <div class="row update-schema-form" ng-if="isEditing(field.key + values[mainProperty].id)">
+                    <div class="row update-schema-form" ng-if="field.isEditing">
 
                         <div class="col-sm-12">
-                            <form name="singleFieldForm" sf-schema="schema" sf-form="[field.key]" sf-model="valueCopy[field.key]" sf-options="sfDefaults" ng-submit="updateValues(field.key, values[mainProperty].id); $event.preventDefault();"></form>
+                            <form name="singleFieldForm" sf-schema="schema" sf-form="[field]" sf-model="field.editValue" sf-options="sfDefaults" ng-submit="acceptEdit(field); $event.preventDefault();"></form>
                         </div>
 
                         <div class="col-sm-12 text-right">
 
                             <button
-                                ng-if="lookupFieldValue(field.key) && field.schema.isRequired !== 1"
+                                ng-if="lookupFieldValue(field) && field.schema.isRequired !== 1"
                                 tabindex="0"
                                 title="Sletter værdien og feltet"
                                 type="button"
                                 class="btn btn-default"
-                                ng-click="removeFieldValue(field.key, values[mainProperty].id)">
+                                ng-click="removeFieldValue(field)">
                                 {{TEXT.BUTTON.DELETE}}
                             </button>
                             <button
@@ -75,7 +75,7 @@
                                 title="Opdaterer værdien og sletter fejlrapporten"
                                 type="button"
                                 class="btn btn-default"
-                                ng-click="updateValues(field.key, values[mainProperty].id)">
+                                ng-click="acceptEdit(field)">
                                  {{TEXT.BUTTON.EDIT}}
                             </button>
                             <button
@@ -83,7 +83,7 @@
                                 title="Luk, uden at ændre"
                                 type="button"
                                 class="btn btn-default"
-                                ng-click="toggleEditExistingValue(field.key, values[mainProperty].id)">
+                                ng-click="toggleEdit(field)">
                                 {{TEXT.BUTTON.CANCEL}}
                             </button>
                         </div>
@@ -92,29 +92,29 @@
 
                 <li class="field-list__item" ng-if="field.schema.type === 'object'">
 
-                    <a tabindex="0" href ng-click="toggleEditExistingValue(field.key)">
+                    <a tabindex="0" href ng-click="toggleEdit(field)">
                         <span class="summary-item">
-                            <span class="summary-item__label">{{field.schema.properties[field.realKey].title}}</span>
-                            <span class="summary-item__field">{{lookupFieldValue(field.key)}}
+                            <span class="summary-item__label">{{field.schema.title}}</span>
+                            <span class="summary-item__field">{{getObjectStringRepresentation(lookupFieldValue(field), field.schema)}}
                                 <span class="icon icon__edit"></span>
                              </span>
                         </span>
                     </a>
 
-                    <div class="row update-schema-form" ng-if="isEditing(field.key)">
+                    <div class="row update-schema-form" ng-if="field.isEditing">
 
                         <div class="col-sm-12">
-                            <form name="singleFieldForm" sf-schema="schema" sf-form="[field.key]" sf-options="sfDefaults" sf-model="valueCopy[field.key]" ng-submit="updateValues(field.key); $event.preventDefault();"></form>
+                            <form name="singleFieldForm" sf-schema="schema" sf-form="[field]" sf-options="sfDefaults" sf-model="field.editValue" ng-submit="acceptEdit(field); $event.preventDefault();"></form>
                         </div>
 
                         <div class="col-sm-12 text-right">
                             <button
-                                ng-if="lookupFieldValue(field.key)"
+                                ng-if="lookupFieldValue(field)"
                                 tabindex="0"
                                 title="Sletter værdien og feltet"
                                 type="button"
                                 class="btn btn-default"
-                                ng-click="removeFieldValue(field.key)">
+                                ng-click="removeFieldValue(field)">
                                 {{TEXT.BUTTON.DELETE}}
                             </button>
                             <button
@@ -123,7 +123,7 @@
                                 title="Opdaterer værdien"
                                 type="button"
                                 class="btn btn-default"
-                                ng-click="updateValues(field.key)">
+                                ng-click="acceptEdit(field)">
                                 Ret
                             </button>
                             <button
@@ -131,7 +131,7 @@
                                 title="Luk, uden at ændre"
                                 type="button"
                                 class="btn btn-default"
-                                ng-click="toggleEditExistingValue(field.key)">
+                                ng-click="toggleEdit(field)">
                                 {{TEXT.BUTTON.CANCEL}}
                             </button>
                         </div>
@@ -141,7 +141,7 @@
 
                 <li class="field-list__item" ng-if="field.schema.type === 'array'">
 
-                    <a href tabindex="0" class="no-underline" ng-click="toggleEditExistingValue(field.key)">
+                    <a href tabindex="0" class="no-underline" ng-click="toggleEdit(field)">
                         <span class="summary-item__label">{{field.schema.title}}</span>
                         <span class="icon icon__edit" ng-if="!hasErrorReported[field.key].length > 0"></span>
                     </a>
@@ -153,17 +153,17 @@
                             <span>
 
                                 <ul class="list-unstyled">
-                                    <li ng-repeat="row in lookupFieldValue(field.key)">
-                                        <a tabindex="0" href ng-click="toggleEditExistingValue(field.key)">
-                                            {{getTextFromArrayField(row, field.schema.items.properties)}}
+                                    <li ng-repeat="row in lookupFieldValue(field)">
+                                        <a tabindex="0" href ng-click="toggleEdit(field)">
+                                            {{getObjectStringRepresentation(row, field.schema.items)}}
                                         </a>
                                     </li>
                                 </ul>
 
-                                <div class="row update-schema-form" ng-if="isEditing(field.key)">
+                                <div class="row update-schema-form" ng-if="field.isEditing">
 
                                     <div class="col-sm-12">
-                                        <form name="singleFieldForm" sf-schema="schema" sf-form="[field.key]" sf-model="valueCopy[field.key]" sf-options="sfDefaults" ng-submit="updateValues(field.key); $event.preventDefault();"></form>
+                                        <form name="singleFieldForm" sf-schema="schema" sf-form="[field]" sf-model="field.editValue" sf-options="sfDefaults" ng-submit="acceptEdit(field); $event.preventDefault();"></form>
                                     </div>
 
                                     <div class="col-sm-12 text-right">
@@ -174,7 +174,7 @@
                                             title="Opdaterer værdien og sletter fejlrapporten"
                                             type="button"
                                             class="btn btn-default"
-                                            ng-click="updateValues(field.key)">
+                                            ng-click="acceptEdit(field)">
                                             Ret
                                         </button>
                                         <button
@@ -182,7 +182,7 @@
                                             title="Luk, uden at ændre"
                                             type="button"
                                             class="btn btn-default"
-                                            ng-click="toggleEditExistingValue(field.key)">
+                                            ng-click="toggleEdit(field)">
                                             {{TEXT.BUTTON.CANCEL}}
                                         </button>
                                     </div>

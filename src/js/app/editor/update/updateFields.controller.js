@@ -8,12 +8,6 @@ var updateFieldsController = ['$uibModal', '$rootScope', '$scope', '$state', '$t
 
     $rootScope.$broadcast('zoom-to-post', { postId: postData.postId });
 
-    //Store information about what fields are currently being edited (open)
-    $scope.editingFields = {};
-
-    //A store for copies of the values. used to let users change the field as they want, but only after they accept the change do we copy it to the actual data
-    $scope.valueCopy = {};
-
     //Build a direct link to this post
     $scope.shareLink = PERMALINK_URL + '/post/' + taskData.collection_id + '-' + postData.entryData.concrete_entries_id;
 
@@ -35,10 +29,8 @@ var updateFieldsController = ['$uibModal', '$rootScope', '$scope', '$state', '$t
     * Delete a value from the value object
     * ie. the user does not think the saved value should be there at all
     */
-    $scope.removeFieldValue = function removeFieldValue(key, id) {
-        id = id || '';
-
-        var split = key.split('.');
+    $scope.removeFieldValue = function removeFieldValue(field) {
+        var split = field.key.split('.');
         if (split[0] === $scope.mainProperty) {
             split.shift();
         }
@@ -50,40 +42,66 @@ var updateFieldsController = ['$uibModal', '$rootScope', '$scope', '$state', '$t
             $scope.values[$scope.mainProperty][split[0]] = $scope.values[$scope.mainProperty][split[0]].constructor === Array ? [] : null;
         }
 
-        $scope.toggleEditExistingValue(key, id);
+        $scope.toggleEdit(key, id);
+
     }
 
     /**
+     * Put a value into the correct place in the given model.
+     * 
+     * @param {array} keySegments The parts of the key.
+     * @param {object} model The value model for the schema.
+     * @param {any} value The value to be inserted into the model.
+     */
+    function putValue(keySegments, model, value) {
+        if (keySegments.length > 1) {
+            let nextKey = angular.copy(keySegments)
+            nextKey.shift()
+            putValue(nextKey, model[keySegments[0]], value)
+        } else if (keySegments.length == 1) {
+            model[keySegments[0]] = value
+        }
+    }
+
+    /**
+     * Get a value from the correct place in the given model.
+     * 
+     * @param {array} keySegments The parts of the key.
+     * @param {object} model The value model to put the value into.
+     * @param {boolean} fullStructure Whether to return the full structure, eg. { keyPart1: { keyPart2: value } }
+     */
+    function getValue(keySegments, model, fullStructure) {
+        if (keySegments.length > 1) {
+            let nextKey = angular.copy(keySegments)
+            nextKey.shift()
+            if (fullStructure) {
+                let struc = {}
+                struc[keySegments[0]] = getValue(nextKey, model[keySegments[0]], fullStructure)
+                return struc
+            } else {
+                return getValue(nextKey, model[keySegments[0]], fullStructure)
+            }
+        } else if (keySegments.length == 1) {
+            if (fullStructure) {
+                let struc = {}
+                struc[keySegments[0]] = model[keySegments[0]]
+                return struc
+            } else {
+                return model[keySegments[0]]
+            }
+        }
+    }
+
+    /**
+    * Accept the edits made in a summary field.
+    * 
     * Copy the temporary value when editing a field to the actual values object
     */
-    $scope.updateValues = function updateValues(key, id) {
-        id = id || '';
-
-        //If we have a key from an object type, it will contain a dot, to indicate the object and the property on that object
-        var split = key.split('.');
-        var subkey;
-
-        if (split[0] === $scope.mainProperty) {
-            split.shift();
-            subkey = split.join('.');
-        }
-
-        //The length will be more than one if we had a dot in the name
-        if (split.length > 1) {
-            //If the secondary element is not set set it
-            if(!$scope.values[$scope.mainProperty][split[0]]){
-                $scope.values[$scope.mainProperty][split[0]] = {};
-            }
-
-            $scope.values[$scope.mainProperty][split[0]][split[1]] = $scope.valueCopy[$scope.mainProperty + '.' + subkey][$scope.mainProperty][split[0]][split[1]];
-
-        }
-        //Otherwise just use the key (single and array type fields  )
-        else {
-            $scope.values[$scope.mainProperty][subkey] = $scope.valueCopy[key][$scope.mainProperty][subkey];
-        }
-
-        $scope.toggleEditExistingValue(key, id);
+    $scope.acceptEdit = function acceptEdit(field) {
+        let key = angular.isString(field.key) ? field.key.split('.') : field.key
+        let value = getValue(key, field.editValue, false)
+        putValue(key, $scope.values, value)
+        $scope.toggleEdit(field);
     }
 
     $scope.userId = userData.apacs_user_id;
@@ -92,7 +110,7 @@ var updateFieldsController = ['$uibModal', '$rootScope', '$scope', '$state', '$t
     $scope.sfDefaults = {
         formDefaults: {
             feedback: false,
-            supressPropertyTitles: true,
+            supressPropertyTitles: false,
             disableSuccessState: true,
             ngModelOptions: {},
             //Default value for array add action
@@ -134,27 +152,18 @@ var updateFieldsController = ['$uibModal', '$rootScope', '$scope', '$state', '$t
     /**
      * Toggle wether or not we should show edit field for a given field config
      */
-    $scope.toggleEditExistingValue = function toggleEditExistingValue(value, id) {
-
-        id = id || '';
-
-        if ($scope.editingFields[value + id] === undefined || $scope.editingFields[value + id] === false ) {
-            $scope.valueCopy[value] = $.extend(true, {}, $scope.values);
-            $scope.editingFields[value + id] = true;
+    $scope.toggleEdit = function toggleEdit(field) {
+        if (!field.isEditing) {
+            // Toggle on: If the field is not being edited, set the edit status and copy the value from
+            // the model with a deep copy into the temporary edit values.
+            field.editValue = getValue(angular.isString(field.key) ? field.key.split('.') : field.key, $scope.values, true)
+            field.isEditing = true;
+        } else {
+            // Toggle off: If the field is being edited, set is as not being edited, and delete the temporary 
+            // edit value.
+            field.editValue = null
+            field.isEditing = false;
         }
-        else {
-            delete $scope.valueCopy[value + id];
-            $scope.editingFields[value + id] = false;
-            //cleanup
-        }
-
-    };
-
-    /**
-     * Ask if a given field is currently being edited
-     */
-    $scope.isEditing = function isEditing(field) {
-        return $scope.editingFields[field];
     };
 
     /**
@@ -166,18 +175,36 @@ var updateFieldsController = ['$uibModal', '$rootScope', '$scope', '$state', '$t
     *
     * @return {string} The string represenation of all values, seperated by comma
     */
-    $scope.getTextFromArrayField = function(data, prop) {
+    $scope.getObjectStringRepresentation = function(data, schema) {
         //array to hold the values of all subproperties
         var arr = [];
 
-        for (var subprop in prop) {
+        for (var subpropKey in schema.properties) {
             //If we have a value for the property, add it to the array
             //If a given field was not filled, it will exist, but have a null value. In that case, it should not be used
             //to build the string
-            if (data[subprop]) {
-                arr.push(data[subprop]);
-            }
-
+            //For boolean values, we still want to see false values
+            let subprop = schema.properties[subpropKey]
+            if (data[subpropKey] || (subprop.type == "boolean" && data[subpropKey] === false)) {
+                if (subprop.type == "boolean") {
+                    // for boolean values, we also write the field name
+                    arr.push(subprop.formName + " (" + (data[subpropKey] ? 'Ja' : 'Nej') + ")")
+                } else if (subprop.type == "object") {
+                    let subRepresentation = $scope.getObjectStringRepresentation(data[subpropKey], subprop.items)
+                    if (subRepresentation) {
+                        arr.push(subRepresentation)
+                    }
+                } else if (subprop.type == "array" && data[subpropKey]) {
+                    for (let item of data[subpropKey]) {
+                        let subRepresentation = $scope.getObjectStringRepresentation(item, subprop.items)
+                        if (subRepresentation) {
+                            arr.push(subRepresentation)
+                        }
+                    }
+                } else {
+                    arr.push(data[subpropKey]);
+                }
+            } 
         }
 
         //Join all values, seperate by comma
@@ -236,8 +263,8 @@ var updateFieldsController = ['$uibModal', '$rootScope', '$scope', '$state', '$t
             });
     };
 
-    $scope.lookupFieldValue = function lookupFieldValue(key) {
-        return helpers.lookupFieldValue(key, $scope.values);
+    $scope.lookupFieldValue = function lookupFieldValue(field) {
+        return helpers.lookupFieldValue(field.key, $scope.values);
     };
 
     /**

@@ -61,12 +61,9 @@ define([
             * @return The value found, or an empty string if none were found
             */
             lookupFieldValue: function lookupFieldValue(key, values) {
+                let split = !angular.isArray(key) ? key.split('.') : key
 
-                if (!angular.isArray(key)) {
-                    key = key.split('.');
-                }
-
-                var value = key.reduce(function(accumulator, currentValue) {
+                let value = split.reduce(function(accumulator, currentValue) {
                     //Only continue if we have a value
                     if (accumulator[currentValue] || accumulator[currentValue] === 0) {
                         return accumulator[currentValue];
@@ -76,40 +73,42 @@ define([
                 }, values);
 
                 return value;
-
             },
 
             /**
             * Parse stepData, and return the needed data to render a Summary
             */
-            prepareSummaryData: function prepareSummaryData(stepData, schema, mainProperty) {
+            prepareSummaryData: function prepareSummaryData(steps, schema) {
+                let summaryData = [];
 
-                var arr = [],
-                    stepCopy = angular.copy(stepData);
-
-                //Build array for the summary rendering, working on a copy
-                stepCopy.forEach(function(stepData) {
-
-                    if (stepData.fields && stepData.fields.length > 0) {
-
-                        var stepFields = stepData.fields.forEach(function(field) {
-
-                            var key = field.key.split('.');
-
-                            field.schema = schema.properties[mainProperty].properties[key[1]];
-
-                            //The last key part
-                            field.realKey = key[key.length - 1];
-                            field.toggleKey = field.key.replace(/\./g, '-');
-
-                            arr.push(field);
-
-                        });
+                for (let step of angular.copy(steps)) {
+                    if (!step.fields) {
+                        continue;
                     }
 
-                });
+                    for (let field of step.fields) {
+                        let fieldSchema = schema;
+                        for (let keySegment of field.key.split('.')) {
+                            fieldSchema = fieldSchema.properties[keySegment];
+                        }
+                        
+                        field.schema = fieldSchema;
+                        field.isEditing = false;
 
-                return arr;
+                        //The last key part
+                        let key = field.key.split('.');
+                        field.realKey = key[key.length - 1];
+                        field.toggleKey = field.key.replace(/\./g, '-');
+
+                        field.key.split = function(delim) {
+                            this.toString().split(delim)
+                        }
+
+                        summaryData.push(field);
+                    }
+                }
+
+                return summaryData;
             }
 
         };
