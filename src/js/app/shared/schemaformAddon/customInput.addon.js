@@ -85,10 +85,22 @@ define([
             }
         };
 
+        var customdate = function(name, schema, options) {
+            if (schema.type === 'string' && schema.format === 'date') {
+                var f = schemaFormProvider.stdFormObj(name, schema, options);
+                f.key = options.path;
+                f.type = 'custominput';
+                options.lookup[sfPathProvider.stringify(options.path)] = f;
+                return f;
+            }
+        }
+
         // Put it first in the list of functions
+        schemaFormProvider.defaults.string.unshift(customdate);
         schemaFormProvider.defaults.string.unshift(custominput);
                 
         schemaFormProvider.defaults.number.unshift(customnumber);
+
 
 
         schemaFormDecoratorsProvider.addMapping(
@@ -100,6 +112,12 @@ define([
         schemaFormDecoratorsProvider.addMapping(
             'bootstrapDecorator',
             'number',
+            'schemaFormCustomInput.tpl.html'
+        );
+
+        schemaFormDecoratorsProvider.addMapping(
+            'bootstrapDecorator',
+            'date',
             'schemaFormCustomInput.tpl.html'
         );
     }]);

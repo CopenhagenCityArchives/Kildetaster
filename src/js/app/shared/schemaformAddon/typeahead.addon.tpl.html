@@ -9,10 +9,11 @@
 
     <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle()}" for="{{form.key.slice(-1)[0]}}">
         {{form.title}}
+        <span class="required" ng-if="form.schema.isRequired === 1">*</span>
         <span class="icon icon__help" uib-tooltip="{{form.description}}" tooltip-placement="top" tooltip-append-to-body="true"></span>
     </label>
 
-    <ui-select ng-model="$$value$$" ng-class="{'loading': loading}" reset-search-input="false" append-to-body="false" ng-model-options="ngModelOptions" theme="bootstrap">
+    <ui-select ng-model="$$value$$" ng-class="{'loading': loading}" reset-search-input="false" append-to-body="false" ng-model-options="ngModelOptions" theme="bootstrap" schema-validate="form">
         <ui-select-match>
             <div style="height: 40px;line-height: 40px" ng-bind="$select.selected"></div>
         </ui-select-match>
