@@ -109,10 +109,53 @@ define([
                 }
 
                 return summaryData;
+            },
+
+            /**
+            * Build a string, representing the value of an array of fields
+            * Will not take fields with null value / no value into account
+            *
+            * @param data {object}
+            * @param prop {string}
+            *
+            * @return {string} The string represenation of all values, seperated by comma
+            */
+            getObjectStringRepresentation: function(data, schema) {
+                //array to hold the values of all subproperties
+                var arr = [];
+
+                for (var subpropKey in schema.properties) {
+                    //If we have a value for the property, add it to the array
+                    //If a given field was not filled, it will exist, but have a null value. In that case, it should not be used
+                    //to build the string
+                    //For boolean values, we still want to see false values
+                    let subprop = schema.properties[subpropKey]
+                    if (data[subpropKey] || (subprop.type == "boolean" && data[subpropKey] === false)) {
+                        if (subprop.type == "boolean") {
+                            // for boolean values, we also write the field name
+                            arr.push(subprop.formName + " (" + (data[subpropKey] ? 'Ja' : 'Nej') + ")")
+                        } else if (subprop.type == "object") {
+                            let subRepresentation = this.getObjectStringRepresentation(data[subpropKey], subprop.items)
+                            if (subRepresentation) {
+                                arr.push(subRepresentation)
+                            }
+                        } else if (subprop.type == "array" && data[subpropKey]) {
+                            for (let item of data[subpropKey]) {
+                                let subRepresentation = this.getObjectStringRepresentation(item, subprop.items)
+                                if (subRepresentation) {
+                                    arr.push(subRepresentation)
+                                }
+                            }
+                        } else {
+                            arr.push(data[subpropKey]);
+                        }
+                    } 
+                }
+
+                //Join all values, seperate by comma
+                return arr.join(', ');
             }
-
         };
-
     }];
 
     return helpersService;

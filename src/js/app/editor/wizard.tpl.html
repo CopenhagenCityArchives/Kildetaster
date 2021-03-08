@@ -95,7 +95,7 @@
                         <a tabindex="-1" href ng-click="toggleEditExistingValue(field.toggleKey)">
                             <span class="summary-item">
                                 <span class="summary-item__label">{{field.schema.title}}</span>
-                                <span class="summary-item__field">{{lookupFieldValue(field.key)}}
+                                <span class="summary-item__field">{{getObjectStringRepresentation(lookupFieldValue(field.key), field.schema)}}
                                     <span class="icon icon__edit"></span>
                                  </span>
                             </span>
@@ -145,8 +145,16 @@
 
                                 <a href tabindex="-1" ng-click="toggleEditExistingValue(subkey + $parent.$index)">
                                     <!-- HARDCODED TEST FOR PERSONS_ID, A FIELD THAT IS ONLY ON TASK 1!! -->
-                                    <span ng-if="subkey !== 'id' && subkey !== 'persons_id'">
-                                        {{value}}
+                                    <span ng-if="subkey !== 'id' && subkey !== 'persons_id'" ng-switch="field.schema.items.properties[subkey].type">
+                                        <span ng-switch-when="array" ng-repeat="subval in value">
+                                            {{ getObjectStringRepresentation(subval, field.schema.items.properties[subkey].items) }}
+                                        </span>
+                                        <span ng-switch-when="boolean">
+                                            {{ value ? 'Ja' : 'Nej' }}
+                                        </span>
+                                        <span ng-switch-default>
+                                            {{ value }}
+                                        </span>
                                         <span class="icon icon__edit"></span>
                                         <span class="glyphicon glyphicon-exclamation-sign icon__error" ng-if="lookupErrorReport(field.realKey, mainProperty, subkey, val.id) !== undefined"></span>
                                     </span>

@@ -324,6 +324,10 @@ function wizardController($uibModal, $state, $timeout, $http, $scope, $rootScope
         return deferred.promise;
     };
 
+    $scope.getObjectStringRepresentation = function(data, schema) {
+        return helpers.getObjectStringRepresentation(data, schema)
+    };
+
     /**
      * Move to next step
      */
