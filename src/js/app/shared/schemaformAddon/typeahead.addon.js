@@ -66,7 +66,9 @@ define([
 
                 // If new values are allowed and the term is not exactly any existing option,
                 // push it onto the options array
-                if (codeAllowNewValue && $scope.options.filter(function(val) { return val == term }).length == 0 && term.length > 0) {
+                if (codeAllowNewValue && $scope.options.filter(function(val) {
+                    return val.toLowerCase() == term.trim().toLowerCase()
+                }).length == 0 && term.length > 0) {
                     $scope.options.unshift(term)
                 }
 
