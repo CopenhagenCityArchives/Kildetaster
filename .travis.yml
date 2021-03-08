@@ -20,7 +20,7 @@ install:
   - npm install
 
 script:
-  - npm run build -- --mode=${BUILD_MODE} --constants=${BUILD_CONSTANTS} --public=${PUBLIC_PATH}
+  - npm run build -- --mode=${BUILD_MODE} --constants=${BUILD_CONSTANTS} --public=${PUBLIC_PATH} --page sdk,search
 
 deploy:
   - provider: s3

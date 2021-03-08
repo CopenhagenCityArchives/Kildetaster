@@ -9,10 +9,13 @@ module.exports = (env, argv) => {
     let CONSTANTSET = argv.constants ? argv.constants : 'development';
     let PUBLIC = argv.public ? argv.public : '/';
     let DEVSERVER = /webpack-dev-server/.test(argv['$0']);
+    let PAGE_SDK = /sdk/.test(argv.page)
+    let PAGE_SEARCH = /search/.test(argv.page)
 
     console.log('Development:', DEV);
     console.log('Constantset:', CONSTANTSET);
     console.log('Public:', PUBLIC);
+    console.log('Pages:', 'SDK =', PAGE_SDK || DEVSERVER, 'SEARCH =', PAGE_SEARCH || DEVSERVER)
 
     var config = {
         // entrypoints
@@ -242,7 +245,9 @@ module.exports = (env, argv) => {
             template: './devServer/editor.html',
             inject: false
         }));
+    }
 
+    if (DEVSERVER || PAGE_SDK) {
         // development webpage for sdk components and directives
         config.plugins.push(new HtmlWebpackPlugin({
             filename: 'sdk/index.html',
@@ -250,7 +255,9 @@ module.exports = (env, argv) => {
             template: './devServer/sdk.html',
             inject: false
         }));
+    }
 
+    if (DEVSERVER || PAGE_SEARCH) {
         // development webpage for search app
         config.plugins.push(new HtmlWebpackPlugin({
             filename: 'search/index.html',
