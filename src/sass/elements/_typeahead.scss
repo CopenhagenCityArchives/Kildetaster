@@ -7,6 +7,15 @@
     max-height: 200px;
 }
 
+/* Override animation transition for typeahead so options do not show up
+ * several times due to animation time being slower than angular adding new
+ * elements to the DOM
+ */
+.typeahead_addon .ng-enter {
+    transition: none !important;
+    opacity: 1 !important;
+}
+
 .ui-select-container.loading:after {
     position: absolute;
     z-index: 10;

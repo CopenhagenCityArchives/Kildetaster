@@ -1,11 +1,12 @@
 <div
-    class="form-group dynamic-form schema-form-{{form.type}} {{form.htmlClass}}"
+    class="typeahead_addon form-group dynamic-form schema-form-{{form.type}} {{form.htmlClass}}"
     ng-controller="sfTypeahead"
     ng-class="{
         'has-error': form.disableErrorState !== true && hasError(),
         'has-success': form.disableSuccessState !== true && hasSuccess(),
         'has-feedback': form.feedback !== false
-    }">
+    }"
+    ng-init="init(form)">
 
     <label class="control-label {{form.labelHtmlClass}}" ng-class="{'sr-only': !showTitle()}" for="{{form.key.slice(-1)[0]}}">
         {{form.title}}
@@ -13,16 +14,17 @@
         <span class="icon icon__help" uib-tooltip="{{form.description}}" tooltip-placement="top" tooltip-append-to-body="true"></span>
     </label>
 
-    <ui-select ng-model="$$value$$" ng-class="{'loading': loading}" reset-search-input="false" append-to-body="false" ng-model-options="ngModelOptions" theme="bootstrap" schema-validate="form">
+    <ui-select ng-model="$$value$$" ng-class="{'loading': loading}" reset-search-input="false" append-to-body="false" ng-model-options="ngModelOptions" theme="bootstrap" ng-click="populate($select.search)" schema-validate="form">
         <ui-select-match>
             <div style="height: 40px;line-height: 40px" ng-bind="$select.selected"></div>
         </ui-select-match>
         <!-- minimum-input-length is set to 0, and is handled in the getData function instead, if we let ui-select
             handle the limit, it will not clear/reset the options correctly -->
         <ui-select-choices
-            repeat="option in options track by $index" refresh="getData(form.schema.codeAllowNewValue === 1, form.schema.datasources_id, $select.search, form.schema.datasourceValueField)"
+            repeat="option in options track by $index"
+            refresh="getData($select.search)"
             refresh-delay="0"
-            minimum-input-length="2">
+            minimum-input-length="{{minimumInputLength}}">
             <div ng-bind-html="option | highlight: $select.search"></div>
         </ui-select-choices>
         <ui-select-no-choice>

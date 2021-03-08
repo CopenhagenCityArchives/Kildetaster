@@ -7,8 +7,9 @@ define([
     var schemaForm = angular.module('schemaForm');
 
     schemaForm.controller('sfTypeahead', ['$scope', 'API_URL', '$http', 'TYPEAHEAD_MAX', function($scope, API_URL, $http, TYPEAHEAD_MAX) {
-
+        let that = this;
         $scope.options = [];
+        $scope.minimumInputLength = 2
 
         //Custom model options for this element, nessesary to overwrite the default angular-schema-form options to
         //only update on blur. The typeahead should update instantly, while typing
@@ -16,22 +17,35 @@ define([
             updateOn: 'default'
         };
 
+        $scope.getMinimumInputLength = function() {
+            return $scope.minimumInputLength
+        }
+
+        $scope.init = function(form) {
+            that.form = form;
+
+            // check if schema for the field contains minimumInputLength, otherwise fallback to default 2
+            $scope.minimumInputLength = typeof form.schema.minimumInputLength == 'number' ? form.schema.minimumInputLength : 2
+        }
+
         $scope.toggleUnreadable = function toggleUnreadable(formElement) {
             formElement.unreadable = !formElement.unreadable;
         };
 
-        $scope.getData = function getData(codeAllowNewValue, datasources_id, term, propertyName) {
+        $scope.getData = function getData(term) {
+            let codeAllowNewValue = that.form.schema.codeAllowNewValue
+            let datasources_id = that.form.schema.datasources_id
+            let propertyName = that.form.schema.datasourceValueField
 
             $scope.options = [];
 
             //If we do not get any datasourece or a term to search for, do nothing
-            if (!datasources_id || !term) {
-                //Just return an empty array
-                return [];
+            if (!datasources_id || typeof term !== 'string') {
+                return
             }
 
-            if (term.length < 2) {
-                return [];
+            if (term.length < $scope.minimumInputLength) {
+                return
             }
 
             //Indicate that we are about to load new options
@@ -52,7 +66,7 @@ define([
 
                 // If new values are allowed and the term is not exactly any existing option,
                 // push it onto the options array
-                if (codeAllowNewValue && $scope.options.filter(function(val) { return val == term }).length == 0) {
+                if (codeAllowNewValue && $scope.options.filter(function(val) { return val == term }).length == 0 && term.length > 0) {
                     $scope.options.unshift(term)
                 }
 
@@ -62,6 +76,14 @@ define([
             });
 
         };
+
+        $scope.populate = function(term) {
+            if ($scope.options && $scope.options.length > 0 || $scope.minimumInputLength > term.length) {
+                return
+            }
+
+            $scope.getData(term)
+        }
 
     }]);
 
