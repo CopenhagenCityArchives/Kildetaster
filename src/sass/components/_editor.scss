@@ -39,6 +39,14 @@
     }
 
     /**
+     * Styling for large textareas in the angular-schema-form forms
+     * The class is set as fieldHtmlClass in the steps section of the task configuration
+     */
+    & textarea.large-textarea {
+        height: 300px
+    }
+
+    /**
     * The navigatoroverview box, custom styled
     */
     #editor__navigator {
